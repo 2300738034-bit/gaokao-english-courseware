@@ -34,6 +34,11 @@ window.CATALOG = {
           title: "词与句课件",
           file: "courseware/词与句课件.html",
           added: "2026-09-16"
+        },
+        {
+          title: "冠词课件",
+          file: "courseware/冠词课件.html",
+          added: "2026-09-16"
         }
       ]
     },

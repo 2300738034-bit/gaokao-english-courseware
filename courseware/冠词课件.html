@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高考英语语法 · 第2节 冠词</title>
+<style>
+  :root{
+    --ink:#1e293b;
+    --muted:#64748b;
+    --line:#e2e8f0;
+    --bg:#f4f6fb;
+    --paper:#ffffff;
+    --brand:#1e3a8a;
+    --brand-2:#2563eb;
+    --gold:#f59e0b;
+    --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:var(--font);
+    color:var(--ink);
+    background:var(--bg);
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ===== 舞台 ===== */
+  #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:64px 48px 96px}
+
+  .slide{
+    position:absolute;
+    width:min(1180px,100%);
+    max-height:100%;
+    background:var(--paper);
+    border-radius:20px;
+    box-shadow:0 24px 60px -24px rgba(15,23,42,.35), 0 0 0 1px rgba(15,23,42,.04);
+    padding:48px 56px;
+    opacity:0;
+    transform:translateX(40px);
+    pointer-events:none;
+    transition:opacity .45s ease, transform .45s ease;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+  .slide.active{opacity:1;transform:translateX(0);pointer-events:auto}
+  .slide.prev{transform:translateX(-40px)}
+
+  /* 入场动画 */
+  .slide .anim{opacity:0;transform:translateY(14px)}
+  .slide.active .anim{
+    opacity:1;transform:none;
+    transition:opacity .5s ease, transform .5s ease;
+    transition-delay:calc(var(--i,0)*70ms + 60ms);
+  }
+
+  /* ===== 页头 ===== */
+  .head{display:flex;align-items:center;gap:14px;margin-bottom:24px}
+  .part-badge{
+    font-size:13px;font-weight:700;letter-spacing:.06em;
+    color:#fff;background:var(--pc,#2563eb);
+    padding:6px 14px;border-radius:99px;white-space:nowrap;
+  }
+  .head h2{font-size:30px;font-weight:800;letter-spacing:.01em;color:var(--ink)}
+  .head .en{font-size:15px;color:var(--muted);font-weight:600;margin-left:auto;white-space:nowrap}
+
+  /* ===== 封面 ===== */
+  .slide.cover{
+    background:
+      radial-gradient(900px 500px at 85% -10%, rgba(59,130,246,.35), transparent 60%),
+      radial-gradient(700px 500px at -10% 110%, rgba(245,158,11,.22), transparent 55%),
+      linear-gradient(135deg,#0f2a5f 0%,#1e3a8a 55%,#274b9f 100%);
+    color:#fff;
+    justify-content:center;
+  }
+  .cover .brand-line{position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#f59e0b,#fbbf24,#2563eb,#7c3aed)}
+  .cover .tag{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#dbeafe;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);padding:7px 16px;border-radius:99px;margin-bottom:26px}
+  .cover h1{font-size:58px;font-weight:900;line-height:1.18;letter-spacing:.01em}
+  .cover h1 .hl{color:#fbbf24}
+  .cover .sub{margin-top:20px;font-size:20px;color:#cbd5e1;font-weight:500}
+  .cover .meta{margin-top:40px;display:flex;gap:26px;font-size:14px;color:#93c5fd;font-weight:600}
+  .cover .meta b{color:#fff}
+
+  /* ===== 卡片 & 列表 ===== */
+  .grid{display:grid;gap:16px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .g5{grid-template-columns:repeat(5,1fr)}
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:16px;
+    padding:20px 22px;position:relative;overflow:hidden;
+  }
+  .card .num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:34px;height:34px;border-radius:10px;font-size:16px;font-weight:800;
+    color:#fff;background:var(--pc,#2563eb);margin-bottom:12px;
+  }
+  .card h4{font-size:20px;font-weight:800;margin-bottom:6px}
+  .card .cn{font-size:14px;color:var(--muted);font-weight:600}
+  .card .frm{font-size:19px;font-weight:800;color:var(--pc,#2563eb);margin-top:10px;letter-spacing:.02em}
+  .card .eg{font-size:14px;color:#475569;margin-top:10px;line-height:1.7;word-break:break-word}
+  .card .eg b{color:#1e3a8a;font-weight:800}
+
+  /* 高亮关键词 */
+  .key{color:var(--brand-2);font-weight:800}
+  .gold{color:#b45309;font-weight:800}
+  .red{color:#dc2626;font-weight:800}
+
+  /* 例句区 */
+  .ex{
+    background:#f8fafc;border:1px solid var(--line);border-radius:14px;
+    padding:16px 20px;margin-top:8px;
+  }
+  .ex + .ex{margin-top:14px}
+  .ex .lead{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:12px}
+
+  .cn-tran{font-size:15px;color:var(--muted);margin-top:10px;font-weight:500}
+  .cn-tran b{color:var(--ink)}
+
+  /* 重点框 */
+  .note{
+    display:flex;gap:12px;align-items:flex-start;
+    background:#fffbeb;border:1px solid #fde68a;border-left:4px solid #f59e0b;
+    border-radius:12px;padding:14px 18px;margin-top:16px;font-size:15.5px;line-height:1.6;
+  }
+  .note .ico{font-size:18px;line-height:1.4}
+  .note b{color:#92400e}
+
+  .tip{
+    display:flex;gap:10px;align-items:flex-start;
+    background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #2563eb;
+    border-radius:12px;padding:12px 16px;margin-top:14px;font-size:14.5px;line-height:1.6;color:#1e3a8a;
+  }
+  .tip b{color:#1e3a8a}
+
+  /* 易错点框 */
+  .warn{
+    display:flex;gap:10px;align-items:flex-start;
+    background:#fef2f2;border:1px solid #fecaca;border-left:4px solid #dc2626;
+    border-radius:12px;padding:12px 16px;margin-top:14px;font-size:14.5px;line-height:1.6;color:#7f1d1d;
+  }
+  .warn b{color:#991b1b}
+
+  /* 两栏 */
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .cols .ex{margin-top:0}
+
+  /* 表 */
+  table{width:100%;border-collapse:collapse;font-size:15.5px}
+  th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:13px;letter-spacing:.06em;color:var(--muted);background:#f8fafc;font-weight:700}
+  td .en{font-weight:700}
+  td .cn{color:var(--muted);font-size:13.5px}
+  td .big{font-weight:800;font-size:16px}
+
+  .pill{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:#eef2ff;color:#3730a3;margin-right:6px}
+
+  /* 短语列表 */
+  .ph-list{display:grid;grid-template-columns:1fr 1fr;gap:6px 18px;font-size:14.5px;line-height:1.6}
+  .ph-list .ph{display:flex;justify-content:space-between;gap:8px;padding:5px 0;border-bottom:1px dashed #eef2f7}
+  .ph-list .ph .en{font-weight:700;color:#1e3a8a;white-space:nowrap}
+  .ph-list .ph .cn{color:var(--muted)}
+
+  /* 练习题 */
+  .q{background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 16px;margin-top:9px}
+  .q .qtxt{font-size:15px;line-height:1.65;color:#334155}
+  .q .qtxt b{color:var(--ink)}
+  .q .blank{display:inline-block;min-width:42px;text-align:center;color:#b91c1c;font-weight:800;border-bottom:2px solid #dc2626;margin:0 2px}
+  .q .err{color:#dc2626;font-weight:800;text-decoration:underline wavy #f87171}
+  .q .reveal{margin-top:7px}
+
+  /* ===== 真题折叠 ===== */
+  .reveal{margin-top:10px;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .reveal summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:9px 14px;font-size:13.5px;font-weight:700;color:var(--brand-2);background:#f8fafc;user-select:none}
+  .reveal summary::-webkit-details-marker{display:none}
+  .reveal summary .caret{display:inline-block;transition:transform .2s;font-size:11px}
+  .reveal[open] summary .caret{transform:rotate(90deg)}
+  .reveal .ans{padding:10px 14px 12px;border-top:1px dashed var(--line);font-size:14.5px}
+  .reveal .ans .en{font-weight:800;color:#1e3a8a;line-height:1.6}
+  .reveal .ans .mark{margin-top:4px;font-size:13px;color:#64748b;line-height:1.55}
+  .reveal .ans .mark b{color:#b45309}
+  .q .reveal{margin-top:7px}
+  .q .reveal summary{padding:7px 12px;font-size:12.5px}
+  .q .reveal .ans{padding:8px 12px 10px;font-size:13.5px}
+
+  /* 小结 */
+  .sum-block{border:1px solid var(--line);border-radius:16px;padding:20px 22px;background:#fff}
+  .sum-block h4{font-size:16px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .sum-block .dot{width:10px;height:10px;border-radius:3px;background:var(--pc,#2563eb)}
+  .sum-block ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+  .sum-block li{font-size:14.5px;color:#334155;line-height:1.5}
+  .sum-block li b{color:var(--ink)}
+
+  .motto{
+    margin-top:22px;text-align:center;font-size:20px;font-weight:800;color:var(--brand);
+    background:#eff6ff;border-radius:14px;padding:18px;
+  }
+  .motto span{color:#dc2626}
+
+  /* ===== 导航 ===== */
+  #nav{
+    position:fixed;left:50%;bottom:26px;transform:translateX(-50%);
+    display:flex;align-items:center;gap:14px;z-index:50;
+    background:rgba(255,255,255,.86);backdrop-filter:blur(10px);
+    border:1px solid var(--line);border-radius:99px;padding:9px 12px;
+    box-shadow:0 10px 30px -12px rgba(15,23,42,.3);
+  }
+  #nav button{
+    border:none;background:#fff;border:1px solid var(--line);
+    width:40px;height:40px;border-radius:50%;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;color:#334155;
+    transition:.15s;
+  }
+  #nav button:hover:not(:disabled){background:#eff6ff;border-color:#bfdbfe;color:#2563eb}
+  #nav button:disabled{opacity:.35;cursor:default}
+  #nav .counter{font-size:14px;font-weight:700;color:#334155;min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
+  #nav .counter b{color:#2563eb;font-size:16px}
+  #progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#2563eb,#7c3aed);z-index:60;width:0;transition:width .35s ease}
+  #hint{position:fixed;left:50%;transform:translateX(-50%);bottom:4px;font-size:12px;color:#94a3b8;z-index:40;white-space:nowrap}
+
+  /* ===== 响应式 ===== */
+  @media (max-width:900px){
+    #stage{padding:20px 16px 90px}
+    .slide{padding:28px 24px;border-radius:14px}
+    .g2,.g3,.g4,.g5,.cols,.ph-list{grid-template-columns:1fr}
+    .head h2{font-size:22px}
+    .cover h1{font-size:36px}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<div id="stage">
+
+  <!-- 1 封面 -->
+  <section class="slide cover active">
+    <div class="brand-line"></div>
+    <div class="anim" style="--i:0">
+      <span class="tag">高考英语 · 核心语法精讲</span>
+    </div>
+    <h1 class="anim" style="--i:1">冠词 <span class="hl">·</span> 特指与泛指</h1>
+    <p class="sub anim" style="--i:2">定冠词 the · 不定冠词 a/an · 固定短语 · 真题实战 —— 一对一精讲</p>
+    <div class="meta anim" style="--i:3">
+      <span>主讲：<b>杨老师</b></span>
+      <span>对象：<b>高三</b></span>
+      <span>板块：<b>冠词 · 固定短语 · 真题</b></span>
+    </div>
+  </section>
+
+  <!-- 2 目录 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#64748b">CONTENTS</span><h2>本节内容</h2><span class="en">Roadmap</span></div>
+    <div class="grid g4" style="margin-top:8px">
+      <div class="card anim" style="--i:1;--pc:#2563eb"><span class="num">01</span><h4>冠词基础</h4><div class="cn">the 特指 · a/an 泛指 · 零冠词</div></div>
+      <div class="card anim" style="--i:2;--pc:#0d9488"><span class="num">02</span><h4>固定短语中的冠词</h4><div class="cn">考点1 · 带 the / 不带冠词</div></div>
+      <div class="card anim" style="--i:3;--pc:#7c3aed"><span class="num">03</span><h4>有无冠词意义迥异</h4><div class="cn">考点2 · in hospital 等</div></div>
+      <div class="card anim" style="--i:4;--pc:#ea580c"><span class="num">04</span><h4>抽象名词具体化</h4><div class="cn">考点3 · a success / a must</div></div>
+    </div>
+    <div class="note anim" style="--i:5;margin-top:26px">
+      <span class="ico">🎯</span>
+      <div>一句话抓住主线：<b>the 管“特指”</b>，<b>a/an 管“泛指”</b>；判断时先问自己——<b>这个名词是“那个”还是“一个”？</b>再用固定搭配和读音规则收口。</div>
+    </div>
+  </section>
+
+  <!-- 3 a/an/the 总览 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#2563eb">考点 · 冠词基础</span><h2>定冠词 · 不定冠词 · 零冠词</h2><span class="en">a / an / the / Ø</span></div>
+    <div class="grid g3" style="margin-top:8px">
+      <div class="card anim" style="--i:1;--pc:#2563eb">
+        <span class="num">the</span><h4>定冠词</h4>
+        <div class="cn">表“特指”——双方都知道的那个</div>
+        <div class="eg">The plum trees are <b>the</b> first to flower.<br>梅花是<b>最先</b>开花的。</div>
+      </div>
+      <div class="card anim" style="--i:2;--pc:#0d9488">
+        <span class="num">a / an</span><h4>不定冠词</h4>
+        <div class="cn">表“泛指”——不特定的“一个”</div>
+        <div class="eg">Mount Huangshan is <b>a</b> must to visit!<br>黄山是<b>一个</b>必游之地！</div>
+      </div>
+      <div class="card anim" style="--i:3;--pc:#64748b">
+        <span class="num">Ø</span><h4>零冠词</h4>
+        <div class="cn">某些情况下不用冠词</div>
+        <div class="eg">play <b>football</b>（球类不加 the）<br>by <b>plane</b>（交通方式不加 the）</div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:4;margin-top:22px">
+      <span>💡</span>
+      <div><b>一句话记忆：</b>the = “那个”（特指），a/an = “一个”（泛指）。翻译 / 语法填空里先判断是<b>特指</b>还是<b>泛指</b>，再考虑固定搭配。</div>
+    </div>
+    <div class="note anim" style="--i:5">
+      <span class="ico">🔑</span>
+      <div><b>定冠词 the 的常见“特指”信号：</b>上文提过、谈话双方都知道、独一无二的事物、序数词（the first）、最高级（the best）、乐器（play the piano）。</div>
+    </div>
+  </section>
+
+  <!-- 4 a/an 读音规则 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#2563eb">考点 · 冠词基础</span><h2>a 还是 an？——看“读音”不看“字母”</h2><span class="en">a vs an</span></div>
+    <p class="anim" style="--i:1;font-size:16px;color:#334155">判断标准是<b class="key">单词开头读音</b>（音素），而不是拼写字母：<b class="red">元音音素</b>开头用 <b>an</b>，<b class="key">辅音音素</b>开头用 <b>a</b>。</p>
+    <div style="margin-top:16px">
+      <table class="anim" style="--i:2">
+        <thead><tr><th style="width:50%">用 an（元音音素开头）</th><th>用 a（辅音音素开头）</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="en">an hour</span> 一小时 · <span class="en">an honest boy</span> 诚实的孩子 · <span class="en">an honor</span> 一种荣誉<br><span class="cn">h 不发音，实际以元音开头</span></td>
+            <td><span class="en">a useful book</span> · <span class="en">a university</span> · <span class="en">a European</span> · <span class="en">a one-eyed man</span><br><span class="cn">元音字母开头，但读音是 /ju:/ 或 /w/（辅音）</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="warn anim" style="--i:3">
+      <span>⚠️</span>
+      <div><b>高考易错点：</b>hour / honest / honor 虽以字母 h 开头，读音却以元音开头 → 用 <b>an</b>；useful / university / united / European / one-eyed 虽以元音字母开头，读音却是辅音 → 用 <b>a</b>。<b>盯读音，别盯字母。</b></div>
+    </div>
+    <div class="tip anim" style="--i:4">
+      <span>🎯</span>
+      <div>真题直击（全国卷改错）：Each cafe will have a different theme and <b>an → a</b> unique style.（unique 读 /ju:/，辅音开头，用 a）</div>
+    </div>
+  </section>
+
+  <!-- 5 考点1 带the短语 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#0d9488">考点 1 · 固定短语中的冠词</span><h2>常考带 the 的短语</h2><span class="en">Fixed Phrases with “the”</span></div>
+    <div class="ph-list anim" style="--i:1;margin-top:6px">
+      <div class="ph"><span class="en">in the middle of</span><span class="cn">在……中间</span></div>
+      <div class="ph"><span class="en">at the age of</span><span class="cn">在……岁时</span></div>
+      <div class="ph"><span class="en">at the foot of</span><span class="cn">在……脚下</span></div>
+      <div class="ph"><span class="en">on the way to</span><span class="cn">在去……的路上</span></div>
+      <div class="ph"><span class="en">in the habit of</span><span class="cn">有……的习惯</span></div>
+      <div class="ph"><span class="en">on the right / left</span><span class="cn">在右边 / 左边</span></div>
+      <div class="ph"><span class="en">at the same time</span><span class="cn">同时</span></div>
+      <div class="ph"><span class="en">at the top / bottom of</span><span class="cn">在……顶部 / 底部</span></div>
+      <div class="ph"><span class="en">at the beginning / end of</span><span class="cn">在……开始 / 结束时</span></div>
+      <div class="ph"><span class="en">in the morning / afternoon / evening</span><span class="cn">在上午 / 下午 / 晚上</span></div>
+      <div class="ph"><span class="en">by the way</span><span class="cn">顺便问一下</span></div>
+      <div class="ph"><span class="en">in the form of</span><span class="cn">以……的形式</span></div>
+      <div class="ph"><span class="en">with the help of</span><span class="cn">在……的帮助下</span></div>
+      <div class="ph"><span class="en">with the development of</span><span class="cn">随着……的发展</span></div>
+    </div>
+    <div class="note anim" style="--i:2">
+      <span class="ico">🔑</span>
+      <div><b>记忆抓手：</b>这些短语里的 the 是<b>“钉死”</b>的，不能省、不能换。写作翻译里 <b>with the development of…</b>、<b>in the habit of…</b> 是高频套话，写错一处就扣分。</div>
+    </div>
+  </section>
+
+  <!-- 6 考点1 不带冠词 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#0d9488">考点 1 · 固定短语中的冠词</span><h2>常考不带冠词的短语</h2><span class="en">Fixed Phrases without Article</span></div>
+    <div class="ph-list anim" style="--i:1;margin-top:6px">
+      <div class="ph"><span class="en">at college</span><span class="cn">在上大学</span></div>
+      <div class="ph"><span class="en">at home</span><span class="cn">在家</span></div>
+      <div class="ph"><span class="en">in advance</span><span class="cn">预先，提前</span></div>
+      <div class="ph"><span class="en">lose weight</span><span class="cn">减肥</span></div>
+      <div class="ph"><span class="en">at peace / war</span><span class="cn">处于和平 / 战争状态</span></div>
+      <div class="ph"><span class="en">in good condition</span><span class="cn">情况良好</span></div>
+      <div class="ph"><span class="en">on business</span><span class="cn">因公出差</span></div>
+      <div class="ph"><span class="en">in addition</span><span class="cn">此外，另外</span></div>
+      <div class="ph"><span class="en">in good order</span><span class="cn">有条不紊</span></div>
+      <div class="ph"><span class="en">in place of</span><span class="cn">取代</span></div>
+      <div class="ph"><span class="en">pay attention to</span><span class="cn">注意</span></div>
+    </div>
+    <div class="note anim" style="--i:2">
+      <span class="ico">🎯</span>
+      <div><b>“球类 / 乐器”口诀：</b>球类前<b>不加</b> the（play <b>football</b>），乐器前<b>要加</b> the（play <b>the piano</b>）。这是语法填空和改错的高频点。</div>
+    </div>
+  </section>
+
+  <!-- 7 考点2 有无冠词意义迥异 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7c3aed">考点 2 · 有无冠词</span><h2>有无 the，意思大不同</h2><span class="en">with / without “the”</span></div>
+    <div style="margin-top:6px">
+      <table class="anim" style="--i:1">
+        <thead><tr><th style="width:26%">无冠词</th><th style="width:22%">释义</th><th style="width:30%">加 the</th><th>释义</th></tr></thead>
+        <tbody>
+          <tr><td class="big" style="color:#0d9488">in hospital</td><td class="cn">在住院</td><td class="big" style="color:#7c3aed">in the hospital</td><td class="cn">在医院</td></tr>
+          <tr><td class="big" style="color:#0d9488">in charge of</td><td class="cn">掌管（主动）</td><td class="big" style="color:#7c3aed">in the charge of</td><td class="cn">由……掌管（被动）</td></tr>
+          <tr><td class="big" style="color:#0d9488">in front of</td><td class="cn">在……（外部）前面</td><td class="big" style="color:#7c3aed">in the front of</td><td class="cn">在……（内部）前面</td></tr>
+          <tr><td class="big" style="color:#0d9488">in possession of</td><td class="cn">占有</td><td class="big" style="color:#7c3aed">in the possession of</td><td class="cn">被……占有</td></tr>
+          <tr><td class="big" style="color:#0d9488">out of question</td><td class="cn">毫无疑问</td><td class="big" style="color:#7c3aed">out of the question</td><td class="cn">不可能</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="warn anim" style="--i:2">
+      <span>⚠️</span>
+      <div><b>重点对比：</b>in <b>the</b> front of（在内部前部）vs in front of（在外部前方）——the car 是“坐在车里前排”，the building 是“楼前面”。一个 the 之差，位置完全不同。</div>
+    </div>
+  </section>
+
+  <!-- 8 考点3 抽象名词具体化 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#ea580c">考点 3 · 抽象名词具体化</span><h2>抽象名词前加 a，表示“一种 / 一个”</h2><span class="en">Concretized Abstract Nouns</span></div>
+    <p class="anim" style="--i:1;font-size:16px;color:#334155">某些<b class="key">抽象名词</b>前加 <b class="red">a/an</b>，就“具体化”成<b>可数的人或事物</b>，译为“<b>一个 / 一种 / 一件……</b>”。</p>
+    <div class="ex anim" style="--i:2;margin-top:16px">
+      <div class="lead">例句</div>
+      <div style="font-size:16.5px;line-height:2">
+        <div>He is <b class="red">a success</b> as a teacher but <b class="red">a failure</b> as a father.</div>
+        <div class="cn-tran" style="margin-top:0">他作为教师很成功，作为父亲却是个失败者。（success / failure 具体化为“成功的人 / 失败的人”）</div>
+      </div>
+    </div>
+    <div class="ex anim" style="--i:3">
+      <div class="lead">例句</div>
+      <div style="font-size:16.5px;line-height:2">
+        <div><b class="red">A good knowledge</b> of English is <b class="red">a must</b> in modern society.</div>
+        <div class="cn-tran" style="margin-top:0">良好的英语知识在现代社会是必备条件。（a must = 一件必备的事）</div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:4">
+      <span>🎯</span>
+      <div><b>高频词：</b>a success / a failure / a must / a wonder（奇迹）/ a pleasure / a pity / a shame / a knowledge of…。真题里“Mount Huangshan is <b>a must</b>”正是此考点。</div>
+    </div>
+  </section>
+
+  <!-- 9 真题 语法填空 1-5 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#dc2626">实战 · 上海卷语法填空</span><h2>真题实战 ①（1–5）</h2><span class="en">Fill in the blanks</span></div>
+    <div class="anim" style="--i:1">
+      <div class="q">
+        <div class="qtxt"><b>1.</b> It took us about 3 hours to go all <span class="blank">____</span> way around the Xi'an City Wall.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">the</div><div class="mark">固定搭配 <b>all the way</b>（一路，全程）。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>2.</b> Due to <span class="blank">____</span> growing popularity of environmentally-related travel, various types of trips are now being classified as ecotourism.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">the</div><div class="mark">特指“环保旅行日益增长的受欢迎程度”，后接 of 短语限定 → <b>the</b>。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>3.</b> While you're in China, Mount Huangshan is <span class="blank">____</span> must to visit!</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">a</div><div class="mark"><b>抽象名词具体化</b>：a must = 一件必做的事（考点3）。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>4.</b> <span class="blank">____</span> Lincolns enlarged the house to a full two stories in 1856 to meet the needs of their growing family.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">The</div><div class="mark"><b>the + 姓氏复数</b> = 一家人（林肯一家）。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>5.</b> The plum trees are <span class="blank">____</span> first to flower even as the snow is melting.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">the</div><div class="mark">序数词前用 <b>the</b>（the first）。</div></div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 真题 语法填空 6-10 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#dc2626">实战 · 上海卷语法填空</span><h2>真题实战 ②（6–10）</h2><span class="en">Fill in the blanks</span></div>
+    <div class="anim" style="--i:1">
+      <div class="q">
+        <div class="qtxt"><b>6.</b> This style of farming lasted for quite a long time. Then, with <span class="blank">____</span> rise of science, changes began.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">the</div><div class="mark">特指“科学的兴起”，of 短语限定 → <b>the</b>。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>7.</b> When we got a call saying she was short-listed, we thought it was <span class="blank">____</span> joke.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">a</div><div class="mark">泛指“一个玩笑”。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>8.</b> Corn production has jumped nearly 125 percent over <span class="blank">____</span> past 25 years, while rice has increased only 7 percent.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">the</div><div class="mark">固定表达 <b>the past 25 years</b>（过去 25 年）。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>9.</b> Unexpectedly, I'm face-to-face with the gorilla, who begins screaming at <span class="blank">____</span> top of her lungs.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">the</div><div class="mark">固定短语 <b>at the top of</b>（在……顶部）。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>10.</b> As <span class="blank">____</span> result, people will eat more food to try to make up for that something missing.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">a</div><div class="mark">固定短语 <b>as a result</b>（结果，因此）。</div></div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 真题 语法填空 11-15 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#dc2626">实战 · 上海卷语法填空</span><h2>真题实战 ③（11–15）</h2><span class="en">Fill in the blanks</span></div>
+    <div class="anim" style="--i:1">
+      <div class="q">
+        <div class="qtxt"><b>11.</b> This included digging up the road, laying the track and then building a strong roof over <span class="blank">____</span> top.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">the</div><div class="mark">特指“顶部”，上文已交代 → <b>the top</b>。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>12.</b> Instead, she is earning $6,500 a day as <span class="blank">____</span> model in New York.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">a</div><div class="mark">泛指“一名模特”。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>13.</b> For Pahlsson, the ring's return was <span class="blank">____</span> wonder.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">a</div><div class="mark"><b>抽象名词具体化</b>：a wonder = 一件奇迹。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>14.</b> The nursery team switches him every few days with his sister so that while one is being bottle-fed, <span class="blank">____</span> other is with mom.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">the</div><div class="mark">固定结构 <b>one… the other…</b>（一个……另一个……）。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>15.</b> Give your body and brain a rest by stepping outside for <span class="blank">____</span> while, exercising, or doing something you enjoy.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">a</div><div class="mark">固定短语 <b>for a while</b>（一会儿）。</div></div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 真题 改错 1-10 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#dc2626">实战 · 全国卷改错</span><h2>真题实战 ④（1–10）</h2><span class="en">Error Correction</span></div>
+    <div class="anim" style="--i:1">
+      <div class="q"><div class="qtxt"><b>1.</b> …put the tomatoes and the beaten eggs into <span class="err">pan</span> together.</div><details class="reveal"><summary><span class="caret">▸</span> 改正</summary><div class="ans"><div class="en">pan → the pan</div></div></details></div>
+      <div class="q"><div class="qtxt"><b>2.</b> …my dad has to have <span class="err">the bowl</span> of egg soup…</div><details class="reveal"><summary><span class="caret">▸</span> 改正</summary><div class="ans"><div class="en">the bowl → a bowl</div></div></details></div>
+      <div class="q"><div class="qtxt"><b>3.</b> Suddenly <span class="err">football</span> fell just in front of me but almost hit me.</div><details class="reveal"><summary><span class="caret">▸</span> 改正</summary><div class="ans"><div class="en">football → a football</div></div></details></div>
+      <div class="q"><div class="qtxt"><b>4.</b> Each of my cafes will have a different theme and <span class="err">an unique</span> style.</div><details class="reveal"><summary><span class="caret">▸</span> 改正</summary><div class="ans"><div class="en">an unique → a unique</div><div class="mark">unique 读 /juː/，辅音开头。</div></div></details></div>
+      <div class="q"><div class="qtxt"><b>5.</b> It is generally accepted that <span class="err">the boy</span> must learn to stand up and fight like a man.</div><details class="reveal"><summary><span class="caret">▸</span> 改正</summary><div class="ans"><div class="en">the boy → a boy</div><div class="mark">泛指“男孩”。</div></div></details></div>
+      <div class="q"><div class="qtxt"><b>6.</b> As he reached <span class="err">front door</span>, Jack saw a strange sight.</div><details class="reveal"><summary><span class="caret">▸</span> 改正</summary><div class="ans"><div class="en">front door → the front door</div></div></details></div>
+      <div class="q"><div class="qtxt"><b>7.</b> Take your time — it's just <span class="err">short distance</span> from here to the restaurant.</div><details class="reveal"><summary><span class="caret">▸</span> 改正</summary><div class="ans"><div class="en">short distance → a short distance</div></div></details></div>
+      <div class="q"><div class="qtxt"><b>8.</b> Experts think that <span class="err">a recently</span> discovered painting may be a Picasso.</div><details class="reveal"><summary><span class="caret">▸</span> 改正</summary><div class="ans"><div class="en">a recently → the recently</div><div class="mark">特指那幅刚被发现的画。</div></div></details></div>
+      <div class="q"><div class="qtxt"><b>9.</b> …told us, "<span class="err">The fifth</span> of pupils here go on to study at Oxford…"</div><details class="reveal"><summary><span class="caret">▸</span> 改正</summary><div class="ans"><div class="en">The fifth → A fifth</div><div class="mark">表分数“五分之一”用 a fifth。</div></div></details></div>
+      <div class="q"><div class="qtxt"><b>10.</b> …a smile is usually <span class="err">an strong</span> sign of a friendly attitude.</div><details class="reveal"><summary><span class="caret">▸</span> 改正</summary><div class="ans"><div class="en">an strong → a strong</div></div></details></div>
+    </div>
+  </section>
+
+  <!-- 13 真题 改错 11-20 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#dc2626">实战 · 全国卷改错</span><h2>真题实战 ⑤（11–20）</h2><span class="en">Error Correction</span></div>
+    <div class="anim" style="--i:1">
+      <div class="q"><div class="qtxt"><b>11.</b> As is known to all, <span class="err">People's Republic</span> of China is the biggest developing country…</div><details class="reveal"><summary><span class="caret">▸</span> 改正</summary><div class="ans"><div class="en">People's → the People's</div><div class="mark">专有名词须加 the。</div></div></details></div>
+      <div class="q"><div class="qtxt"><b>12.</b> …he will also get paid <span class="err">by a week</span>.</div><details class="reveal"><summary><span class="caret">▸</span> 改正</summary><div class="ans"><div class="en">by a week → by the week</div><div class="mark">“按周计”用 by the week。</div></div></details></div>
+      <div class="q"><div class="qtxt"><b>13.</b> I have visited many cities since <span class="err">the September</span> 2006.</div><details class="reveal"><summary><span class="caret">▸</span> 改正</summary><div class="ans"><div class="en">the September → September</div><div class="mark">月份前不加 the。</div></div></details></div>
+      <div class="q"><div class="qtxt"><b>14.</b> We all know that <span class="err">the man</span> is the most developed animal in the world.</div><details class="reveal"><summary><span class="caret">▸</span> 改正</summary><div class="ans"><div class="en">the man → man</div><div class="mark">man 泛指“人类”不加冠词。</div></div></details></div>
+      <div class="q"><div class="qtxt"><b>15.</b> I came by <span class="err">the plane</span> and I had a lovely journey.</div><details class="reveal"><summary><span class="caret">▸</span> 改正</summary><div class="ans"><div class="en">the plane → plane</div><div class="mark">by + 交通工具，不加 the。</div></div></details></div>
+      <div class="q"><div class="qtxt"><b>16.</b> What <span class="err">good time</span> we had last night!</div><details class="reveal"><summary><span class="caret">▸</span> 改正</summary><div class="ans"><div class="en">good time → a good time</div><div class="mark">What a good time！感叹句。</div></div></details></div>
+      <div class="q"><div class="qtxt"><b>17.</b> We have a music class <span class="err">once week</span>.</div><details class="reveal"><summary><span class="caret">▸</span> 改正</summary><div class="ans"><div class="en">once week → once a week</div></div></details></div>
+      <div class="q"><div class="qtxt"><b>18.</b> <span class="err">What pity</span> it is that you won't be back before I leave!</div><details class="reveal"><summary><span class="caret">▸</span> 改正</summary><div class="ans"><div class="en">What pity → What a pity</div></div></details></div>
+      <div class="q"><div class="qtxt"><b>19.</b> It's said that the Americans landed on <span class="err">moon</span> in 1969.</div><details class="reveal"><summary><span class="caret">▸</span> 改正</summary><div class="ans"><div class="en">on moon → on the moon</div><div class="mark">独一无二天体加 the。</div></div></details></div>
+      <div class="q"><div class="qtxt"><b>20.</b> …I went to <span class="err">countryside</span> with my father to visit my grandparents.</div><details class="reveal"><summary><span class="caret">▸</span> 改正</summary><div class="ans"><div class="en">countryside → the countryside</div></div></details></div>
+    </div>
+  </section>
+
+  <!-- 14 复盘 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#dc2626">实战 · 复盘</span><h2>冠词高考六大规律</h2><span class="en">Six Rules</span></div>
+    <div class="grid g3" style="margin-top:8px">
+      <div class="card anim" style="--i:1;--pc:#2563eb"><span class="num">1</span><h4>a/an 看读音</h4><div class="eg">an <b>hour</b> / a <b>useful</b> book（盯音素，不盯字母）</div></div>
+      <div class="card anim" style="--i:2;--pc:#0d9488"><span class="num">2</span><h4>the 表特指</h4><div class="eg">上文提到 / 唯一 / 序数词 / 最高级 / 乐器</div></div>
+      <div class="card anim" style="--i:3;--pc:#64748b"><span class="num">3</span><h4>零冠词</h4><div class="eg">球类、三餐、学科、月份、by + 交通工具</div></div>
+      <div class="card anim" style="--i:4;--pc:#7c3aed"><span class="num">4</span><h4>the + 姓氏复数</h4><div class="eg">the <b>Lincolns</b> = 林肯一家</div></div>
+      <div class="card anim" style="--i:5;--pc:#ea580c"><span class="num">5</span><h4>固定短语</h4><div class="eg">as <b>a</b> result / at <b>the</b> top of / all <b>the</b> way</div></div>
+      <div class="card anim" style="--i:6;--pc:#b45309"><span class="num">6</span><h4>抽象名词具体化</h4><div class="eg"><b>a</b> success / <b>a</b> must / <b>a</b> wonder</div></div>
+    </div>
+    <div class="note anim" style="--i:7">
+      <span class="ico">🎯</span>
+      <div><b>做题顺序：</b>① 先判<b>特指还是泛指</b>（the / a / an）；② 再查<b>读音</b>定 a/an；③ 最后看是否<b>固定搭配</b>或<b>抽象名词具体化</b>。</div>
+    </div>
+  </section>
+
+  <!-- 15 小结 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#64748b">SUMMARY</span><h2>本节小结</h2><span class="en">Recap</span></div>
+    <div class="grid g4" style="margin-top:8px">
+      <div class="sum-block anim" style="--i:1;--pc:#2563eb">
+        <h4><span class="dot"></span>冠词基础</h4>
+        <ul>
+          <li><b>the</b> 特指 · <b>a/an</b> 泛指</li>
+          <li><b>零冠词</b>：球类 / 三餐 / 交通</li>
+          <li>a/an 看<b>读音</b>，不看字母</li>
+        </ul>
+      </div>
+      <div class="sum-block anim" style="--i:2;--pc:#0d9488">
+        <h4><span class="dot"></span>固定短语</h4>
+        <ul>
+          <li>带 the：<b>in the habit of</b> 等</li>
+          <li>不带：<b>in advance</b> 等</li>
+          <li>play <b>football</b> / play <b>the piano</b></li>
+        </ul>
+      </div>
+      <div class="sum-block anim" style="--i:3;--pc:#7c3aed">
+        <h4><span class="dot"></span>有无冠词迥异</h4>
+        <ul>
+          <li>in hospital 住院 / in <b>the</b> hospital 在医院</li>
+          <li>in charge of 掌管 / in <b>the</b> charge of 被掌管</li>
+          <li>out of <b>the</b> question 不可能</li>
+        </ul>
+      </div>
+      <div class="sum-block anim" style="--i:4;--pc:#ea580c">
+        <h4><span class="dot"></span>抽象名词具体化</h4>
+        <ul>
+          <li><b>a</b> success / <b>a</b> failure</li>
+          <li><b>a</b> must / <b>a</b> wonder</li>
+          <li>译为“一个 / 一件……”</li>
+        </ul>
+      </div>
+    </div>
+    <div class="motto anim" style="--i:5">
+      先判特指泛指 · 再定 a / an / the —— <span>冠词虽小，失分不少</span>
+    </div>
+  </section>
+
+</div>
+
+<div id="nav">
+  <button id="prev" aria-label="上一页" title="上一页 (←)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="counter"><b id="cur">1</b> / <span id="total">15</span></div>
+  <button id="next" aria-label="下一页" title="下一页 (→)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <button id="fs" aria-label="全屏" title="全屏 (F)" style="border:none;background:transparent;width:34px">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+  </button>
+</div>
+<div id="hint">← → 翻页 · F 全屏 · 空格下一页</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  const curEl = document.getElementById('cur');
+  const totalEl = document.getElementById('total');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const fsBtn = document.getElementById('fs');
+  const progress = document.getElementById('progress');
+  let idx = 0;
+  totalEl.textContent = total;
+
+  function render(){
+    slides.forEach((s,i)=>{
+      s.classList.toggle('active', i===idx);
+      s.classList.toggle('prev', i<idx);
+    });
+    curEl.textContent = idx+1;
+    progress.style.width = ((idx+1)/total*100) + '%';
+    prevBtn.disabled = idx===0;
+    nextBtn.disabled = idx===total-1;
+  }
+  function go(n){
+    idx = Math.max(0, Math.min(total-1, n));
+    render();
+  }
+  prevBtn.addEventListener('click', ()=>go(idx-1));
+  nextBtn.addEventListener('click', ()=>go(idx+1));
+  document.addEventListener('keydown', (e)=>{
+    if(e.key==='ArrowRight' || e.key===' ' || e.key==='PageDown'){ e.preventDefault(); go(idx+1); }
+    else if(e.key==='ArrowLeft' || e.key==='PageUp'){ e.preventDefault(); go(idx-1); }
+    else if(e.key==='Home'){ go(0); }
+    else if(e.key==='End'){ go(total-1); }
+    else if(e.key==='f' || e.key==='F'){
+      if(document.fullscreenElement){ document.exitFullscreen(); }
+      else { document.documentElement.requestFullscreen(); }
+    }
+  });
+  fsBtn.addEventListener('click', ()=>{
+    if(document.fullscreenElement){ document.exitFullscreen(); }
+    else { document.documentElement.requestFullscreen(); }
+  });
+  // 触屏滑动
+  let touchX=null;
+  document.addEventListener('touchstart', e=>{ touchX=e.touches[0].clientX; });
+  document.addEventListener('touchend', e=>{
+    if(touchX===null) return;
+    const dx=e.changedTouches[0].clientX-touchX;
+    if(Math.abs(dx)>50){ dx<0?go(idx+1):go(idx-1); }
+    touchX=null;
+  });
+  render();
+</script>
+</body>
+</html>
