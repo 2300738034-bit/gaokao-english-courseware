@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高考英语语法 · 第1节 词与句</title>
+<style>
+  :root{
+    --ink:#1e293b;
+    --muted:#64748b;
+    --line:#e2e8f0;
+    --bg:#f4f6fb;
+    --paper:#ffffff;
+    --brand:#1e3a8a;
+    --brand-2:#2563eb;
+    --gold:#f59e0b;
+    --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:var(--font);
+    color:var(--ink);
+    background:var(--bg);
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ===== 舞台 ===== */
+  #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:64px 48px 96px}
+
+  .slide{
+    position:absolute;
+    width:min(1180px,100%);
+    max-height:100%;
+    background:var(--paper);
+    border-radius:20px;
+    box-shadow:0 24px 60px -24px rgba(15,23,42,.35), 0 0 0 1px rgba(15,23,42,.04);
+    padding:48px 56px;
+    opacity:0;
+    transform:translateX(40px);
+    pointer-events:none;
+    transition:opacity .45s ease, transform .45s ease;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+  .slide.active{opacity:1;transform:translateX(0);pointer-events:auto}
+  .slide.prev{transform:translateX(-40px)}
+
+  /* 入场动画 */
+  .slide .anim{opacity:0;transform:translateY(14px)}
+  .slide.active .anim{
+    opacity:1;transform:none;
+    transition:opacity .5s ease, transform .5s ease;
+    transition-delay:calc(var(--i,0)*70ms + 60ms);
+  }
+
+  /* ===== 页头 ===== */
+  .head{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+  .part-badge{
+    font-size:13px;font-weight:700;letter-spacing:.06em;
+    color:#fff;background:var(--pc,#2563eb);
+    padding:6px 14px;border-radius:99px;white-space:nowrap;
+  }
+  .head h2{font-size:30px;font-weight:800;letter-spacing:.01em;color:var(--ink)}
+  .head .en{font-size:15px;color:var(--muted);font-weight:600;margin-left:auto;white-space:nowrap}
+
+  .kicker{font-size:13px;font-weight:700;letter-spacing:.14em;color:var(--brand-2);text-transform:uppercase;margin-bottom:8px}
+
+  /* ===== 封面 ===== */
+  .slide.cover{
+    background:
+      radial-gradient(900px 500px at 85% -10%, rgba(59,130,246,.35), transparent 60%),
+      radial-gradient(700px 500px at -10% 110%, rgba(245,158,11,.22), transparent 55%),
+      linear-gradient(135deg,#0f2a5f 0%,#1e3a8a 55%,#274b9f 100%);
+    color:#fff;
+    justify-content:center;
+  }
+  .cover .brand-line{position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#f59e0b,#fbbf24,#2563eb,#7c3aed)}
+  .cover .tag{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#dbeafe;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);padding:7px 16px;border-radius:99px;margin-bottom:26px}
+  .cover h1{font-size:58px;font-weight:900;line-height:1.18;letter-spacing:.01em}
+  .cover h1 .hl{color:#fbbf24}
+  .cover .sub{margin-top:20px;font-size:20px;color:#cbd5e1;font-weight:500}
+  .cover .meta{margin-top:40px;display:flex;gap:26px;font-size:14px;color:#93c5fd;font-weight:600}
+  .cover .meta b{color:#fff}
+
+  /* ===== 卡片 & 列表 ===== */
+  .grid{display:grid;gap:16px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .g5{grid-template-columns:repeat(5,1fr)}
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:16px;
+    padding:20px 22px;position:relative;overflow:hidden;
+  }
+  .card .num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:34px;height:34px;border-radius:10px;font-size:16px;font-weight:800;
+    color:#fff;background:var(--pc,#2563eb);margin-bottom:12px;
+  }
+  .card h4{font-size:20px;font-weight:800;margin-bottom:6px}
+  .card .cn{font-size:14px;color:var(--muted);font-weight:600}
+  .card .frm{font-size:19px;font-weight:800;color:var(--pc,#2563eb);margin-top:10px;letter-spacing:.02em}
+  .card .eg{font-size:13.5px;color:#64748b;margin-top:8px;line-height:1.6;word-break:break-all}
+  .card .eg b{color:#334155;font-weight:700}
+  .card .tagrow{margin-top:10px}
+
+  /* 高亮关键词 */
+  .key{color:var(--brand-2);font-weight:800}
+  .gold{color:#b45309;font-weight:800}
+  .red{color:#dc2626;font-weight:800}
+
+  /* 例句区 */
+  .ex{
+    background:#f8fafc;border:1px solid var(--line);border-radius:14px;
+    padding:16px 20px;margin-top:8px;
+  }
+  .ex + .ex{margin-top:14px}
+  .ex .lead{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:12px}
+
+  .sen{display:flex;flex-wrap:wrap;align-items:flex-end;gap:2px 2px;font-size:0}
+  .tok{display:inline-flex;flex-direction:column;align-items:center;margin:0 2px 4px}
+  .tok .tag{
+    font-size:11px;line-height:1;font-weight:700;color:#fff;background:var(--c,#64748b);
+    padding:3px 8px;border-radius:99px;white-space:nowrap;
+  }
+  .tok .w{font-size:21px;font-weight:800;color:var(--c,#1e293b);margin-top:5px;letter-spacing:.01em}
+  .sen .punc{font-size:21px;font-weight:700;color:var(--ink);margin:0 2px 2px}
+  .sen .plain{font-size:21px;font-weight:700;color:var(--ink);margin:0 2px 2px}
+
+  .cn-tran{font-size:15px;color:var(--muted);margin-top:10px;font-weight:500}
+  .cn-tran b{color:var(--ink)}
+
+  /* 转换箭头 */
+  .arrow{display:inline-flex;align-items:center;gap:6px;color:var(--brand-2);font-weight:800;font-size:16px;margin:0 8px}
+  .arrow svg{flex:none}
+
+  /* 重点框 */
+  .note{
+    display:flex;gap:12px;align-items:flex-start;
+    background:#fffbeb;border:1px solid #fde68a;border-left:4px solid #f59e0b;
+    border-radius:12px;padding:14px 18px;margin-top:16px;font-size:15.5px;line-height:1.6;
+  }
+  .note .ico{font-size:18px;line-height:1.4}
+  .note b{color:#92400e}
+
+  .tip{
+    display:flex;gap:10px;align-items:flex-start;
+    background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #2563eb;
+    border-radius:12px;padding:12px 16px;margin-top:14px;font-size:14.5px;line-height:1.6;color:#1e3a8a;
+  }
+  .tip b{color:#1e3a8a}
+
+  /* 易错点框 */
+  .warn{
+    display:flex;gap:10px;align-items:flex-start;
+    background:#fef2f2;border:1px solid #fecaca;border-left:4px solid #dc2626;
+    border-radius:12px;padding:12px 16px;margin-top:14px;font-size:14.5px;line-height:1.6;color:#7f1d1d;
+  }
+  .warn b{color:#991b1b}
+
+  /* 成分颜色 */
+  .c-s{--c:#2563eb}.c-v{--c:#dc2626}.c-o{--c:#059669}.c-io{--c:#0d9488}
+  .c-do{--c:#d97706}.c-oc{--c:#7c3aed}.c-p{--c:#ea580c}.c-lv{--c:#64748b}.c-adv{--c:#e11d48}
+  .c-attr{--c:#0ea5e9}.c-app{--c:#b45309}
+
+  /* 两栏例句 */
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .cols .ex{margin-top:0}
+
+  /* 表 */
+  table{width:100%;border-collapse:collapse;font-size:15.5px}
+  th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:13px;letter-spacing:.06em;color:var(--muted);background:#f8fafc;font-weight:700}
+  td .en{font-weight:700}
+  td .cn{color:var(--muted);font-size:13.5px}
+
+  .pill{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:#eef2ff;color:#3730a3;margin-right:6px}
+
+  /* 词类色块 */
+  .pos-badge{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:800;color:#fff;padding:3px 10px;border-radius:99px}
+
+  /* 小结 */
+  .sum-block{border:1px solid var(--line);border-radius:16px;padding:20px 22px;background:#fff}
+  .sum-block h4{font-size:16px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .sum-block .dot{width:10px;height:10px;border-radius:3px;background:var(--pc,#2563eb)}
+  .sum-block ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+  .sum-block li{font-size:14.5px;color:#334155;line-height:1.5}
+  .sum-block li b{color:var(--ink)}
+
+  .motto{
+    margin-top:22px;text-align:center;font-size:20px;font-weight:800;color:var(--brand);
+    background:#eff6ff;border-radius:14px;padding:18px;
+  }
+  .motto span{color:#dc2626}
+
+  /* ===== 真题折叠 ===== */
+  .reveal{margin-top:10px;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .reveal summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:11px 16px;font-size:14px;font-weight:700;color:var(--brand-2);background:#f8fafc;user-select:none}
+  .reveal summary::-webkit-details-marker{display:none}
+  .reveal summary .caret{display:inline-block;transition:transform .2s;font-size:12px}
+  .reveal[open] summary .caret{transform:rotate(90deg)}
+  .reveal .ans{padding:14px 16px 16px;border-top:1px dashed var(--line);font-size:16px}
+  .reveal .ans .en{font-weight:700;color:#1e3a8a;line-height:1.6}
+  .reveal .ans .mark{margin-top:8px;font-size:13.5px;color:#64748b;line-height:1.6}
+  .reveal .ans .mark b{color:#b45309}
+
+  /* ===== 导航 ===== */
+  #nav{
+    position:fixed;left:50%;bottom:26px;transform:translateX(-50%);
+    display:flex;align-items:center;gap:14px;z-index:50;
+    background:rgba(255,255,255,.86);backdrop-filter:blur(10px);
+    border:1px solid var(--line);border-radius:99px;padding:9px 12px;
+    box-shadow:0 10px 30px -12px rgba(15,23,42,.3);
+  }
+  #nav button{
+    border:none;background:#fff;border:1px solid var(--line);
+    width:40px;height:40px;border-radius:50%;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;color:#334155;
+    transition:.15s;
+  }
+  #nav button:hover:not(:disabled){background:#eff6ff;border-color:#bfdbfe;color:#2563eb}
+  #nav button:disabled{opacity:.35;cursor:default}
+  #nav .counter{font-size:14px;font-weight:700;color:#334155;min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
+  #nav .counter b{color:#2563eb;font-size:16px}
+  #progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#2563eb,#7c3aed);z-index:60;width:0;transition:width .35s ease}
+  #hint{position:fixed;left:50%;transform:translateX(-50%);bottom:4px;font-size:12px;color:#94a3b8;z-index:40;white-space:nowrap}
+
+  /* ===== 响应式 ===== */
+  @media (max-width:900px){
+    #stage{padding:20px 16px 90px}
+    .slide{padding:28px 24px;border-radius:14px}
+    .g2,.g3,.g4,.g5,.cols{grid-template-columns:1fr 1fr}
+    .g5{grid-template-columns:1fr 1fr 1fr}
+    .head h2{font-size:22px}
+    .cover h1{font-size:36px}
+    .tok .w{font-size:17px}.sen .punc,.sen .plain{font-size:17px}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<div id="stage">
+
+  <!-- 1 封面 -->
+  <section class="slide cover active">
+    <div class="brand-line"></div>
+    <div class="anim" style="--i:0">
+      <span class="tag">高考英语 · 核心语法精讲</span>
+    </div>
+    <h1 class="anim" style="--i:1">词与句 <span class="hl">·</span> 语法基石</h1>
+    <p class="sub anim" style="--i:2">词的分类 · 句子成分 · 基本句型 · 插入语 —— 一对一精讲</p>
+    <div class="meta anim" style="--i:3">
+      <span>主讲：<b>杨老师</b></span>
+      <span>对象：<b>高三</b></span>
+      <span>板块：<b>词法 · 句法基础</b></span>
+    </div>
+  </section>
+
+  <!-- 2 目录 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#64748b">CONTENTS</span><h2>本节内容</h2><span class="en">Roadmap</span></div>
+    <div class="grid g4" style="margin-top:8px">
+      <div class="card anim" style="--i:1;--pc:#2563eb"><span class="num">01</span><h4>词的分类</h4><div class="cn">十大词类 · 词性决定成分</div></div>
+      <div class="card anim" style="--i:2;--pc:#0d9488"><span class="num">02</span><h4>句子成分</h4><div class="cn">主谓宾表 · 定状补同位</div></div>
+      <div class="card anim" style="--i:3;--pc:#7c3aed"><span class="num">03</span><h4>基本句型</h4><div class="cn">五大句型 · 转换 · 扩大</div></div>
+      <div class="card anim" style="--i:4;--pc:#ea580c"><span class="num">04</span><h4>插入语</h4><div class="cn">态度看法 · 独立成分</div></div>
+    </div>
+    <div class="note anim" style="--i:5;margin-top:26px">
+      <span class="ico">🎯</span>
+      <div>一句话抓住主线：<b>先认“词”</b>（它是什么词性），<b>再看“句”</b>（它在句中当什么成分），最后<b>搭“骨架”</b>（五种基本句型）。所有翻译、写作、长难句，都建立在这条线上。</div>
+    </div>
+  </section>
+
+  <!-- 3 考点1 十大词类 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#2563eb">考点 1 · 词的分类</span><h2>英语十大词类</h2><span class="en">Ten Parts of Speech</span></div>
+    <div class="grid g5" style="margin-top:8px">
+      <div class="card anim" style="--i:1;--pc:#2563eb"><h4>名词 <span style="font-size:13px;color:#64748b">n.</span></h4><div class="eg">表示人、事物、地点或抽象概念。例：<b>boy, house, morning</b></div></div>
+      <div class="card anim" style="--i:2;--pc:#0ea5e9"><h4>代词 <span style="font-size:13px;color:#64748b">pron.</span></h4><div class="eg">代替名词。例：<b>who, she, yours, it</b></div></div>
+      <div class="card anim" style="--i:3;--pc:#7c3aed"><h4>形容词 <span style="font-size:13px;color:#64748b">adj.</span></h4><div class="eg">表示性质或特征。例：<b>good, right, white</b></div></div>
+      <div class="card anim" style="--i:4;--pc:#0d9488"><h4>数词 <span style="font-size:13px;color:#64748b">num.</span></h4><div class="eg">表示数目或顺序。例：<b>one, two, first, second</b></div></div>
+      <div class="card anim" style="--i:5;--pc:#dc2626"><h4>动词 <span style="font-size:13px;color:#64748b">v.</span></h4><div class="eg">表示动作或状态。例：<b>am, have, see, compare</b></div></div>
+      <div class="card anim" style="--i:6;--pc:#e11d48"><h4>副词 <span style="font-size:13px;color:#64748b">adv.</span></h4><div class="eg">说明时间、地点、程度等。例：<b>now, very, quietly</b></div></div>
+      <div class="card anim" style="--i:7;--pc:#d97706"><h4>冠词 <span style="font-size:13px;color:#64748b">art.</span></h4><div class="eg">帮助说明名词。例：<b>a, an, the</b></div></div>
+      <div class="card anim" style="--i:8;--pc:#ea580c"><h4>介词 <span style="font-size:13px;color:#64748b">prep.</span></h4><div class="eg">表示名词与其他成分的关系。例：<b>in, on, from, above</b></div></div>
+      <div class="card anim" style="--i:9;--pc:#059669"><h4>连词 <span style="font-size:13px;color:#64748b">conj.</span></h4><div class="eg">连接词、短语或句子。例：<b>and, but, before, when</b></div></div>
+      <div class="card anim" style="--i:10;--pc:#64748b"><h4>感叹词 <span style="font-size:13px;color:#94a3b8">interj.</span></h4><div class="eg">表示喜怒哀乐。例：<b>oh, well, hi, hello</b></div></div>
+    </div>
+    <div class="tip anim" style="--i:11;margin-top:20px">
+      <span>💡</span>
+      <div>构成句子的两大“支柱词组”是<b>名词词组</b>（充当主语）和<b>动词词组</b>（充当谓语）——记词类，最终是为了看懂它们在句中<b>干什么活</b>。</div>
+    </div>
+  </section>
+
+  <!-- 4 考点1 词类决定成分 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#2563eb">考点 1 · 词的分类</span><h2>词性 → 决定它在句中当什么成分</h2><span class="en">Word Class → Function</span></div>
+    <div style="margin-top:6px">
+      <table class="anim" style="--i:1">
+        <thead><tr><th style="width:20%">词类</th><th style="width:30%">常作成分</th><th>例</th></tr></thead>
+        <tbody>
+          <tr><td><span class="pos-badge" style="background:#2563eb">名词</span></td><td>主语 / 宾语 / 表语</td><td><span class="en">Shanghai</span> is a big city.（主语）</td></tr>
+          <tr><td><span class="pos-badge" style="background:#dc2626">动词</span></td><td>谓语</td><td>He <span class="en">runs</span> fast.（谓语）</td></tr>
+          <tr><td><span class="pos-badge" style="background:#7c3aed">形容词</span></td><td>定语 / 表语</td><td>a <span class="en">big</span> city（定语）· The city is <span class="en">big</span>.（表语）</td></tr>
+          <tr><td><span class="pos-badge" style="background:#e11d48">副词</span></td><td>状语</td><td>He runs <span class="en">fast</span>.（状语）</td></tr>
+          <tr><td><span class="pos-badge" style="background:#0ea5e9">代词</span></td><td>主语 / 宾语 / 定语</td><td><span class="en">He</span> / <span class="en">my</span> pencil</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="warn anim" style="--i:2">
+      <span>⚠️</span>
+      <div><b>高考易错点 · 一词多词性：</b>同一个词在不同语境里词性不同。如 <b>water</b> 作名词“水”、作动词“浇水”；<b>light</b> 可作名词“光”、形容词“轻的”、动词“点燃”。判断词性，<b>必须看它在句中的位置与作用</b>，不能死记。</div>
+    </div>
+    <div class="note anim" style="--i:3">
+      <span class="ico">🔑</span>
+      <div><b>答题抓手：</b>语法填空、选词填空里常考“给词根填词形”——先判断该空需要<b>什么词性</b>（看成分），再变化词形，一击即中。</div>
+    </div>
+  </section>
+
+  <!-- 5 考点2 成分总览 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#0d9488">考点 2 · 句子成分</span><h2>句子的八大成分</h2><span class="en">Eight Components</span></div>
+    <div class="grid g4" style="margin-top:8px">
+      <div class="card anim" style="--i:1;--pc:#2563eb"><span class="num">主</span><h4>主语</h4><div class="cn">句子的主体 · 动作发出者</div></div>
+      <div class="card anim" style="--i:2;--pc:#dc2626"><span class="num">谓</span><h4>谓语</h4><div class="cn">说明主语的动作或状态</div></div>
+      <div class="card anim" style="--i:3;--pc:#059669"><span class="num">宾</span><h4>宾语</h4><div class="cn">动作的对象 / 承受者</div></div>
+      <div class="card anim" style="--i:4;--pc:#ea580c"><span class="num">表</span><h4>表语</h4><div class="cn">说明主语身份与状态</div></div>
+      <div class="card anim" style="--i:5;--pc:#0ea5e9"><span class="num">定</span><h4>定语</h4><div class="cn">修饰、限定名词</div></div>
+      <div class="card anim" style="--i:6;--pc:#e11d48"><span class="num">状</span><h4>状语</h4><div class="cn">修饰动词 / 形容词 / 句子</div></div>
+      <div class="card anim" style="--i:7;--pc:#7c3aed"><span class="num">补</span><h4>补语</h4><div class="cn">补充说明宾语 / 主语</div></div>
+      <div class="card anim" style="--i:8;--pc:#b45309"><span class="num">同</span><h4>同位语</h4><div class="cn">解释说明同一事物</div></div>
+    </div>
+    <div class="note anim" style="--i:9;margin-top:22px">
+      <span class="ico">🧭</span>
+      <div><b>主、谓、宾、表</b>是<b>主干</b>成分；<b>定、状、补、同位</b>是<b>枝叶</b>成分。此外句子还可带<b>独立成分</b>（呼语、感叹语等），与全句无语法关系。分清成分，才能看懂长难句。</div>
+    </div>
+  </section>
+
+  <!-- 6 成分详解 主谓宾表 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#0d9488">考点 2 · 句子成分</span><h2>主干成分：主 · 谓 · 宾 · 表</h2><span class="en">Core Components</span></div>
+    <div style="margin-top:4px">
+      <table class="anim" style="--i:1">
+        <thead><tr><th style="width:14%">成分</th><th style="width:34%">作用</th><th>例句</th></tr></thead>
+        <tbody>
+          <tr><td><span class="pos-badge" style="background:#2563eb">主语</span></td><td>句中所说的人或事物，回答“谁 / 什么”</td><td><span class="en">Tom</span> is my best friend. <span class="cn">汤姆是我最好的朋友。</span></td></tr>
+          <tr><td><span class="pos-badge" style="background:#dc2626">谓语</span></td><td>说明主语的动作或状态，回答“做什么”</td><td>My brother <span class="en">does</span> his homework. <span class="cn">我弟弟做作业。</span></td></tr>
+          <tr><td><span class="pos-badge" style="background:#ea580c">表语</span></td><td>系动词之后，说明主语身份或特征</td><td>My name <span class="en">is</span> John Smith. <span class="cn">我叫约翰·史密斯。</span></td></tr>
+          <tr><td><span class="pos-badge" style="background:#059669">宾语</span></td><td>及物动词的对象或结果</td><td>He can spell <span class="en">the word</span>. <span class="cn">他能拼写这个单词。</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note anim" style="--i:2">
+      <span class="ico">🔑</span>
+      <div><b>双宾语：</b>有些及物动词带两个宾语——指人的叫<b>间接宾语</b>（在前），指物的叫<b>直接宾语</b>（在后）。<br>例：He wrote <b>me</b> <span style="color:#94a3b8">(间宾)</span> <b>a letter</b> <span style="color:#94a3b8">(直宾)</span>. ＝ He wrote a letter <b>to me</b>.</div>
+    </div>
+  </section>
+
+  <!-- 7 成分详解 定状补同位 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#0d9488">考点 2 · 句子成分</span><h2>枝叶成分：定 · 状 · 补 · 同位</h2><span class="en">Modifiers &amp; Complements</span></div>
+    <div style="margin-top:4px">
+      <table class="anim" style="--i:1">
+        <thead><tr><th style="width:18%">成分</th><th style="width:32%">作用</th><th>例句</th></tr></thead>
+        <tbody>
+          <tr><td><span class="pos-badge" style="background:#0ea5e9">定语</span></td><td>修饰名词 / 代词</td><td>Shanghai is a <span class="en">big</span> city. <span class="cn">上海是个大城市。</span></td></tr>
+          <tr><td><span class="pos-badge" style="background:#e11d48">状语</span></td><td>修饰动词 / 形容词 / 副词</td><td>The boy paints <span class="en">beautifully</span>. <span class="cn">男孩画得好看。</span></td></tr>
+          <tr><td><span class="pos-badge" style="background:#7c3aed">宾语补足语</span></td><td>说明宾语“怎么样 / 干什么”</td><td>They keep the classroom <span class="en">clean</span>. <span class="cn">他们保持教室干净。</span></td></tr>
+          <tr><td><span class="pos-badge" style="background:#b45309">同位语</span></td><td>跟在名词后，进一步说明</td><td>Where is your classmate <span class="en">Tom</span>? <span class="cn">你同学汤姆在哪？</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tip anim" style="--i:2">
+      <span>💡</span>
+      <div><b>独立成分：</b>与全句无语法的成分。如感叹语 <b>Oh</b>, it is Xiaoming.；呼语 <b>John</b>, where are you? 阅读中一眼扫过即可，不影响主干。</div>
+    </div>
+  </section>
+
+  <!-- 8 五大句型总览 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7c3aed">考点 3 · 基本句型</span><h2>英语五种基本句型</h2><span class="en">Five Sentence Patterns</span></div>
+    <div class="grid g5" style="margin-top:8px">
+      <div class="card anim" style="--i:1;--pc:#2563eb"><span class="num">1</span><h4>主 + 谓</h4><div class="frm">S + V</div><div class="cn">不及物动词</div></div>
+      <div class="card anim" style="--i:2;--pc:#059669"><span class="num">2</span><h4>主 + 谓 + 宾</h4><div class="frm">S + V + O</div><div class="cn">及物动词</div></div>
+      <div class="card anim" style="--i:3;--pc:#0d9488"><span class="num">3</span><h4>主 + 谓 + 间宾 + 直宾</h4><div class="frm">S + V + IO + DO</div><div class="cn">双宾语动词</div></div>
+      <div class="card anim" style="--i:4;--pc:#7c3aed"><span class="num">4</span><h4>主 + 谓 + 宾 + 宾补</h4><div class="frm">S + V + O + OC</div><div class="cn">复合宾语</div></div>
+      <div class="card anim" style="--i:5;--pc:#ea580c"><span class="num">5</span><h4>主 + 系 + 表</h4><div class="frm">S + V + P</div><div class="cn">系动词</div></div>
+    </div>
+    <div class="note anim" style="--i:6;margin-top:24px">
+      <span class="ico">🎯</span>
+      <div><b>高考核心：</b>任何英语句子，无论多长多复杂，主干都逃不出这<b>五种结构</b>。翻译题“先定句型再下笔”、写作“先搭骨架再填充”，全靠它。</div>
+    </div>
+  </section>
+
+  <!-- 9 句型1+2 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7c3aed">句型 1 / 2</span><h2>主 + 谓（S+V）&nbsp;&nbsp;与&nbsp;&nbsp;主 + 谓 + 宾（S+V+O）</h2><span class="en">S+V · S+V+O</span></div>
+    <div class="cols" style="margin-top:6px">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">① 主 + 谓（不及物动词，无宾语）</div>
+        <div class="sen">
+          <span class="tok"><span class="tag c-s">主语</span><span class="w c-s">John</span></span>
+          <span class="tok"><span class="tag c-v">谓语</span><span class="w c-v">came</span></span>
+          <span class="punc">.</span>
+        </div>
+        <div class="cn-tran">约翰<b>来了</b>。</div>
+        <div class="sen" style="margin-top:12px">
+          <span class="tok"><span class="tag c-s">主语</span><span class="w c-s">He</span></span>
+          <span class="tok"><span class="tag c-v">谓语</span><span class="w c-v">lives</span></span>
+          <span class="tok"><span class="tag c-adv">状语</span><span class="w c-adv">in Shanghai</span></span>
+          <span class="punc">.</span>
+        </div>
+        <div class="cn-tran">他住在上海。<b>（有时需补状语才完整）</b></div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">② 主 + 谓 + 宾（及物动词）</div>
+        <div class="sen">
+          <span class="tok"><span class="tag c-s">主语</span><span class="w c-s">John</span></span>
+          <span class="tok"><span class="tag c-v">谓语</span><span class="w c-v">likes</span></span>
+          <span class="tok"><span class="tag c-o">宾语</span><span class="w c-o">apples</span></span>
+          <span class="punc">.</span>
+        </div>
+        <div class="cn-tran">约翰喜欢苹果。</div>
+        <div class="sen" style="margin-top:12px">
+          <span class="tok"><span class="tag c-s">主语</span><span class="w c-s">She</span></span>
+          <span class="tok"><span class="tag c-v">谓语</span><span class="w c-v">has found</span></span>
+          <span class="tok"><span class="tag c-o">宾语</span><span class="w c-o">her lost watch</span></span>
+          <span class="punc">.</span>
+        </div>
+        <div class="cn-tran">她找到了丢失的手表。</div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:3">
+      <span>💡</span>
+      <div>区分关键在<b>动词是否及物</b>：<b>live / go / arrive</b> 等不及物动词后不加宾语；<b>like / make / find</b> 等及物动词后<b>必须有宾语</b>。</div>
+    </div>
+  </section>
+
+  <!-- 10 句型3 双宾语 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7c3aed">句型 3 / 5</span><h2>主 + 谓 + 间宾 + 直宾</h2><span class="en">S + V + IO + DO</span></div>
+    <p class="anim" style="--i:1;font-size:16px;color:#334155">谓语后跟<b class="key">两个宾语</b>：<b class="gold">间接宾语</b>（多指“人”）+ <b class="gold">直接宾语</b>（多指“物”）。</p>
+    <div class="ex anim" style="--i:2;margin-top:18px">
+      <div class="lead">例句 1</div>
+      <div class="sen">
+        <span class="tok"><span class="tag c-s">主语</span><span class="w c-s">John</span></span>
+        <span class="tok"><span class="tag c-v">谓语</span><span class="w c-v">gave</span></span>
+        <span class="tok"><span class="tag c-io">间宾</span><span class="w c-io">Mary</span></span>
+        <span class="tok"><span class="tag c-do">直宾</span><span class="w c-do">books</span></span>
+        <span class="punc">.</span>
+      </div>
+      <div class="cn-tran">约翰给了玛丽一些书。</div>
+      <div style="margin-top:12px;font-size:16.5px;display:flex;flex-wrap:wrap;align-items:center">
+        <span style="color:var(--muted);font-weight:600">= </span>
+        <span class="plain">John</span><span class="plain">gave</span><span class="plain" style="color:#d97706">books</span>
+        <span class="arrow"><b>to</b></span><span class="plain" style="color:#0d9488">Mary</span><span class="punc">.</span>
+      </div>
+    </div>
+    <div class="ex anim" style="--i:3">
+      <div class="lead">例句 2</div>
+      <div class="sen">
+        <span class="tok"><span class="tag c-s">主语</span><span class="w c-s">I</span></span>
+        <span class="tok"><span class="tag c-v">谓语</span><span class="w c-v">bought</span></span>
+        <span class="tok"><span class="tag c-io">间宾</span><span class="w c-io">him</span></span>
+        <span class="tok"><span class="tag c-do">直宾</span><span class="w c-do">a novel</span></span>
+        <span class="punc">.</span>
+      </div>
+      <div class="cn-tran">我给他买了一本小说。</div>
+      <div style="margin-top:12px;font-size:16.5px;display:flex;flex-wrap:wrap;align-items:center">
+        <span style="color:var(--muted);font-weight:600">= </span>
+        <span class="plain">I</span><span class="plain">bought</span><span class="plain" style="color:#d97706">a novel</span>
+        <span class="arrow"><b>for</b></span><span class="plain" style="color:#0d9488">him</span><span class="punc">.</span>
+      </div>
+    </div>
+    <div class="note anim" style="--i:4">
+      <span class="ico">🔑</span>
+      <div><b>双宾语转换口诀：</b>介词用 <b>to</b> 还是 <b>for</b>，看动词含义——“给 / 递 / 送”类多用 <b>to</b>（give / send / show / tell）；“为某人做”类多用 <b>for</b>（buy / make / cook）。</div>
+    </div>
+  </section>
+
+  <!-- 11 句型4 宾补 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7c3aed">句型 4 / 5</span><h2>主 + 谓 + 宾 + 宾补</h2><span class="en">S + V + O + OC</span></div>
+    <p class="anim" style="--i:1;font-size:16px;color:#334155">宾语之后再加一个成分，<b>补充说明宾语</b>的状态、身份或特征。</p>
+    <div class="note anim" style="--i:2;margin-top:16px">
+      <span class="ico">⭐</span>
+      <div><b>核心规律：</b>宾语和宾补之间存在<b>逻辑上的“主谓关系”</b>——把“宾语 + 宾补”连起来，就是一个隐含的小句子。</div>
+    </div>
+    <div class="ex anim" style="--i:3">
+      <div class="lead">例句 1</div>
+      <div class="sen">
+        <span class="tok"><span class="tag c-s">主语</span><span class="w c-s">John</span></span>
+        <span class="tok"><span class="tag c-v">谓语</span><span class="w c-v">makes</span></span>
+        <span class="tok"><span class="tag c-o">宾语</span><span class="w c-o">Mary</span></span>
+        <span class="tok"><span class="tag c-oc">宾补</span><span class="w c-oc">angry</span></span>
+        <span class="punc">.</span>
+      </div>
+      <div class="cn-tran">约翰让玛丽很生气。<span style="margin-left:8px">→ 验证：<b>Mary is angry.</b>（玛丽很生气）</span></div>
+    </div>
+    <div class="ex anim" style="--i:4">
+      <div class="lead">例句 2</div>
+      <div class="sen">
+        <span class="tok"><span class="tag c-s">主语</span><span class="w c-s">They</span></span>
+        <span class="tok"><span class="tag c-v">谓语</span><span class="w c-v">have elected</span></span>
+        <span class="tok"><span class="tag c-o">宾语</span><span class="w c-o">him</span></span>
+        <span class="tok"><span class="tag c-oc">宾补</span><span class="w c-oc">president</span></span>
+        <span class="punc">.</span>
+      </div>
+      <div class="cn-tran">他们选他当总统。<span style="margin-left:8px">→ 验证：<b>He is president.</b>（他是总统）</span></div>
+    </div>
+  </section>
+
+  <!-- 12 句型5 系表 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7c3aed">句型 5 / 5</span><h2>主 + 系 + 表（S + V + P）</h2><span class="en">Subject + Link Verb + Predicative</span></div>
+    <div class="grid g2" style="margin-top:8px">
+      <div class="anim" style="--i:1">
+        <div class="card" style="height:100%">
+          <h4>表语</h4>
+          <p style="font-size:14.5px;color:#334155;line-height:1.7">表明主语的<b>身份、状态、特征</b>。例：John is <b>happy</b> / <b>an engineer</b>.</p>
+        </div>
+      </div>
+      <div class="anim" style="--i:2">
+        <div class="card" style="height:100%">
+          <h4>系动词</h4>
+          <p style="font-size:14.5px;color:#334155;line-height:1.7">如同<b>“桥梁”</b>，连接主语和表语。例：This material <b>feels</b> good.（手感很好）</p>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:16px" class="anim" style="--i:3">
+      <table>
+        <thead><tr><th style="width:26%">系动词类型</th><th>例句</th></tr></thead>
+        <tbody>
+          <tr><td><span class="pill">Be 动词</span></td><td><span class="en">Dinner is at six o'clock.</span> <span class="cn">晚饭 6 点开。</span></td></tr>
+          <tr><td><span class="pill">感官动词</span></td><td><span class="en">This material feels good.</span> <span class="cn">这种材料手感很好。</span></td></tr>
+          <tr><td><span class="pill">变化类</span></td><td><span class="en">The leaf will turn yellow in autumn.</span> <span class="cn">秋天叶子会变黄。</span></td></tr>
+          <tr><td><span class="pill">保持类</span></td><td><span class="en">The window remains open.</span> <span class="cn">窗户一直开着。</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tip anim" style="--i:4">
+      <span>💡</span>
+      <div>常见系动词：be、感官类（look / smell / taste / sound / feel）、变化类（become / get / turn / grow）、保持类（keep / remain / stay）。</div>
+    </div>
+  </section>
+
+  <!-- 13 句型转换 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7c3aed">考点 3 · 基本句型</span><h2>基本句型的转换</h2><span class="en">Transformations</span></div>
+    <p class="anim" style="--i:1;font-size:16px;color:#334155">五种句型都是<b>陈述句、肯定句、主动句</b>，千变万化的句子正是由它们<b>转换</b>而来。</p>
+    <div class="grid g2" style="margin-top:16px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">① 陈述句 → 疑问句</div>
+        <div style="font-size:16px;line-height:1.9">He has some paperbacks.<br><span style="color:#64748b;font-weight:700">→ </span><span class="key">Does</span> he have <span class="key">any</span> paperbacks?<br><br>She has been waiting.<br><span style="color:#64748b;font-weight:700">→ </span><span class="key">What</span> has she been doing?</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">② 肯定句 → 否定句</div>
+        <div style="font-size:16px;line-height:1.9">He smokes a pipe.<br><span style="color:#64748b;font-weight:700">→ </span>He <span class="key">does not</span> smoke a pipe.<br><br>否定词位置：<b class="gold">no</b> 放在被否定名词前（John has <b>no</b> sister.）；<b class="gold">neither/nor</b> 表“两者都不”。</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">③ 主动句 → 被动句</div>
+        <div style="font-size:16px;line-height:1.9">They built a house.<br><span style="color:#64748b;font-weight:700">→ </span>A house <span class="key">was built</span> by them.<br><br>He gave me a book.<br><span style="color:#64748b;font-weight:700">→ </span>I <span class="key">was given</span> a book.</div>
+      </div>
+      <div class="ex anim" style="--i:5">
+        <div class="lead">④ There be 结构（表“存在”）</div>
+        <div style="font-size:16px;line-height:1.9">There <span class="key">is</span> a book on the desk.<br>There <span class="key">seems to be</span> no doubt about it.<br>There <span class="key">comes</span> the ambulance.（救护车来了）</div>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:6">
+      <span>⚠️</span>
+      <div><b>易错：</b>There be 结构中谓语动词必须与<b>主语</b>保持“数”的一致（There <b>is</b> a book / There <b>are</b> tractors），而不是与 there 一致。</div>
+    </div>
+  </section>
+
+  <!-- 14 句型扩大 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7c3aed">考点 3 · 基本句型</span><h2>基本句型的扩大</h2><span class="en">Expansion</span></div>
+    <div class="grid g2" style="margin-top:8px">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">① 增加修饰语（定语 / 状语）</div>
+        <div style="font-size:15.5px;line-height:1.9">
+          <span class="en">A <b style="color:#2563eb">beautiful</b> vase is for sale.</span><br><span class="cn">一只漂亮的花瓶正在出售。</span><br>
+          <span class="en">The man <b style="color:#2563eb">smoking a pipe</b> is Mr. Smith.</span><br><span class="cn">正在抽烟斗的那个人是史密斯先生。</span><br>
+          <span class="en">The man got <b style="color:#e11d48">violently</b> angry.</span><br><span class="cn">那个男人大发雷霆。</span>
+        </div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">② 用从句充当成分</div>
+        <div style="font-size:15.5px;line-height:1.9">
+          <span class="en"><b style="color:#7c3aed">What he told me</b> has nothing to do with it.</span><br><span class="cn">他告诉我的与此无关。（主语从句）</span><br>
+          <span class="en"><b style="color:#7c3aed">Whether they will come</b> depends on the weather.</span><br><span class="cn">他们来不来取决于天气。（主语从句）</span><br>
+          <span class="en">Everybody could see <b style="color:#7c3aed">(that) Tom was an intelligent boy</b>.</span><br><span class="cn">大家都看得出来汤姆很聪明。（宾语从句）</span>
+        </div>
+      </div>
+    </div>
+    <div class="note anim" style="--i:3">
+      <span class="ico">🧩</span>
+      <div><b>看懂长难句的钥匙：</b>遇到复杂句，先“<b>砍掉</b>”修饰语和从句，找出<b>主干</b>（谁 + 干什么），再把枝叶一层层加回去。主干一定符合五种基本句型之一。</div>
+    </div>
+  </section>
+
+  <!-- 15 插入语 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#ea580c">考点 4 · 插入语</span><h2>插入语</h2><span class="en">Parenthetical Elements</span></div>
+    <p class="anim" style="--i:1;font-size:16px;color:#334155">表示说话人的<b class="key">态度、看法</b>，或用来<b class="key">解释说明</b>；常用逗号与句子隔开，可居<b>句首、句中或句尾</b>。</p>
+    <div style="margin-top:14px">
+      <table class="anim" style="--i:2">
+        <thead><tr><th style="width:26%">形式</th><th>例句</th></tr></thead>
+        <tbody>
+          <tr><td><span class="pill">单词</span></td><td><span class="en">Frankly</span>, Tom is a hardworking boy. <span class="cn">坦白说，汤姆是个勤奋的男孩。</span></td></tr>
+          <tr><td><span class="pill">短语</span></td><td><span class="en">To be honest</span>, I really don't think much of him. <span class="cn">说实话，我不太看好他。</span></td></tr>
+          <tr><td><span class="pill">and + 副词</span></td><td>It has been said, <span class="en">and truly</span>, that no pains, no gains. <span class="cn">人们常说，而且确实如此：不劳无获。</span></td></tr>
+          <tr><td><span class="pill">and + what 从句</span></td><td>My boss did not support us, <span class="en">and what was worse</span>, did not pay us at all. <span class="cn">更糟的是，一分钱没付。</span></td></tr>
+          <tr><td><span class="pill">独立分句</span></td><td>This book — <span class="en">my teacher has recommended it to me</span> — is one of the best-sellers.</td></tr>
+          <tr><td><span class="pill">状语从句</span></td><td><span class="en">As far as I know</span>, he is reliable. <span class="cn">据我所知，他是可靠的。</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note anim" style="--i:3">
+      <span class="ico">🎯</span>
+      <div><b>应试价值：</b>阅读长难句中，<b>去掉插入语</b>后主干立刻清晰；写作/翻译中，用 <b>Frankly / To be honest / in a sense</b> 等可提升表达的地道感。</div>
+    </div>
+  </section>
+
+  <!-- 16 真题 52-53 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#dc2626">实战 · 2025 上海卷翻译</span><h2>真题链接 ①</h2><span class="en">Translation · 52–53</span></div>
+    <div class="ex anim" style="--i:1">
+      <div class="lead">真题 52 · 中译英 · 提示词 <span class="pill" style="background:#fef2f2;color:#b91c1c">cloth</span></div>
+      <div style="font-size:17.5px;font-weight:600">这块布料轻薄又速干，最适合做运动装。</div>
+      <details class="reveal">
+        <summary><span class="caret">▸</span> 点击查看参考答案与解析</summary>
+        <div class="ans">
+          <div class="en">This cloth is light, thin and quick-drying, making it perfect for sportswear.</div>
+          <div class="mark"><b>句型</b>：主系表（S+V+P）。<b>词类</b>：quick-drying 合成形容词作表语。<b>扩大</b>：making… 现在分词作<b>结果状语</b>。</div>
+        </div>
+      </details>
+    </div>
+    <div class="ex anim" style="--i:2">
+      <div class="lead">真题 53 · 中译英 · 提示词 <span class="pill" style="background:#fef2f2;color:#b91c1c">equal</span></div>
+      <div style="font-size:17.5px;font-weight:600">他回答得吞吞吐吐，从某种意义上说，就是婉拒你的邀请。</div>
+      <details class="reveal">
+        <summary><span class="caret">▸</span> 点击查看参考答案与解析</summary>
+        <div class="ans">
+          <div class="en">He speaks hesitantly and, in a sense, it's equal to politely declining / turning down your invitation.</div>
+          <div class="mark"><b>句型</b>：主谓 + 主系表（be equal to）。<b>词类</b>：hesitantly / politely 副词作状语。<b>插入语</b>：<b>in a sense</b>（呼应考点 4）。</div>
+        </div>
+      </details>
+    </div>
+    <div class="tip anim" style="--i:3">
+      <span>✍️</span>
+      <div>上海卷翻译<b>先定句型、再填词</b>：52 是“主语 + 系 + 表”，53 是“主谓 + 主系表”两个短句并列。</div>
+    </div>
+  </section>
+
+  <!-- 17 真题 54-55 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#dc2626">实战 · 2025 上海卷翻译</span><h2>真题链接 ②</h2><span class="en">Translation · 54–55</span></div>
+    <div class="ex anim" style="--i:1">
+      <div class="lead">真题 54 · 中译英 · 提示词 <span class="pill" style="background:#fef2f2;color:#b91c1c">by</span></div>
+      <div style="font-size:17.5px;font-weight:600">水果采摘让游客身心放松，也帮助果农增加了至少三分之二的销量，一举两得。</div>
+      <details class="reveal">
+        <summary><span class="caret">▸</span> 点击查看参考答案与解析</summary>
+        <div class="ans">
+          <div class="en">Fruit picking helps tourists relax body and mind and boosts farmers' sales by at least two-thirds, achieving two goals with one action.</div>
+          <div class="mark"><b>句型</b>：主谓宾 + 宾补（helps tourists <b>relax</b> → SVOC）+ 主谓宾（boosts…）。<b>词类</b>：picking 动名词作主语；relax 为不带 to 的不定式作宾补。by + 分数表“增幅”。</div>
+        </div>
+      </details>
+    </div>
+    <div class="ex anim" style="--i:2">
+      <div class="lead">真题 55 · 中译英 · 提示词 <span class="pill" style="background:#fef2f2;color:#b91c1c">However</span></div>
+      <div style="font-size:17.5px;font-weight:600">无论压力多大，这位天才运动员都能稳定发挥，在各大赛事中摘金夺银，为国争光。</div>
+      <details class="reveal">
+        <summary><span class="caret">▸</span> 点击查看参考答案与解析</summary>
+        <div class="ans">
+          <div class="en">However great the pressure is, this talented athlete can always perform steadily, winning gold and silver medals in various competitions to honor the country.</div>
+          <div class="mark"><b>句型</b>：However 引导让步状语从句（扩大）+ 主谓（athlete can perform）。<b>词类</b>：steadily 副词作状语；talented 形容词作定语。<b>扩大</b>：winning… 分词作状语，to honor… 不定式作目的状语。</div>
+        </div>
+      </details>
+    </div>
+    <div class="tip anim" style="--i:3">
+      <span>✍️</span>
+      <div>54 抓“<b>宾补</b>”结构（help sb. do）；55 抓“<b>However + 形/副 + 主谓</b>”让步从句，都是高频句型。</div>
+    </div>
+  </section>
+
+  <!-- 18 真题复盘 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#dc2626">实战 · 复盘</span><h2>四道真题，串起全部考点</h2><span class="en">Exam Review</span></div>
+    <div style="margin-top:4px">
+      <table class="anim" style="--i:1">
+        <thead><tr><th style="width:12%">真题</th><th style="width:34%">基本句型</th><th>词类 / 成分考点</th></tr></thead>
+        <tbody>
+          <tr><td><b>52</b></td><td>主系表（S+V+P）</td><td>quick-drying 形容词作表语；making… 分词作状语</td></tr>
+          <tr><td><b>53</b></td><td>主谓 + 主系表</td><td>hesitantly / politely 副词；<b>in a sense</b> 插入语</td></tr>
+          <tr><td><b>54</b></td><td>主谓宾 + 宾补（SVOC）</td><td>picking 动名词作主语；relax 不带 to 的不定式作宾补</td></tr>
+          <tr><td><b>55</b></td><td>让步状语从句 + 主谓</td><td>However 引导从句；steadily 副词；talented 形容词作定语</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note anim" style="--i:2">
+      <span class="ico">🎯</span>
+      <div><b>结论：</b>所谓“翻译难”“写作难”，难的不是单词，而是<b>句型 + 成分 + 词类</b>的综合运用。这一节学完，你就有了拆解任何句子的<b>底层坐标</b>。</div>
+    </div>
+  </section>
+
+  <!-- 19 小结 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#64748b">SUMMARY</span><h2>本节小结</h2><span class="en">Recap</span></div>
+    <div class="grid g4" style="margin-top:8px">
+      <div class="sum-block anim" style="--i:1;--pc:#2563eb">
+        <h4><span class="dot"></span>词的分类</h4>
+        <ul>
+          <li><b>十大词类</b>：名代形数动副冠介连感</li>
+          <li><b>词性决定成分</b></li>
+          <li>易错：一词多词性，看位置</li>
+        </ul>
+      </div>
+      <div class="sum-block anim" style="--i:2;--pc:#0d9488">
+        <h4><span class="dot"></span>句子成分</h4>
+        <ul>
+          <li>主干：<b>主、谓、宾、表</b></li>
+          <li>枝叶：<b>定、状、补、同位</b></li>
+          <li>另：独立成分</li>
+        </ul>
+      </div>
+      <div class="sum-block anim" style="--i:3;--pc:#7c3aed">
+        <h4><span class="dot"></span>五大基本句型</h4>
+        <ul>
+          <li><b>S+V</b> · <b>S+V+O</b></li>
+          <li><b>S+V+IO+DO</b></li>
+          <li><b>S+V+O+OC</b>（逻辑主谓）</li>
+          <li><b>S+V+P</b>（系表）</li>
+          <li>转换 + 扩大</li>
+        </ul>
+      </div>
+      <div class="sum-block anim" style="--i:4;--pc:#ea580c">
+        <h4><span class="dot"></span>插入语</h4>
+        <ul>
+          <li>表态度 / 看法</li>
+          <li>居句首 / 句中 / 句尾</li>
+          <li>删掉它 → 主干更清晰</li>
+        </ul>
+      </div>
+    </div>
+    <div class="motto anim" style="--i:5">
+      认词性 · 看成分 · 搭骨架 —— <span>任何句子都逃不出五种基本句型</span>
+    </div>
+  </section>
+
+</div>
+
+<div id="nav">
+  <button id="prev" aria-label="上一页" title="上一页 (←)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="counter"><b id="cur">1</b> / <span id="total">19</span></div>
+  <button id="next" aria-label="下一页" title="下一页 (→)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <button id="fs" aria-label="全屏" title="全屏 (F)" style="border:none;background:transparent;width:34px">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+  </button>
+</div>
+<div id="hint">← → 翻页 · F 全屏 · 空格下一页</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  const curEl = document.getElementById('cur');
+  const totalEl = document.getElementById('total');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const fsBtn = document.getElementById('fs');
+  const progress = document.getElementById('progress');
+  let idx = 0;
+  totalEl.textContent = total;
+
+  function render(){
+    slides.forEach((s,i)=>{
+      s.classList.toggle('active', i===idx);
+      s.classList.toggle('prev', i<idx);
+    });
+    curEl.textContent = idx+1;
+    progress.style.width = ((idx+1)/total*100) + '%';
+    prevBtn.disabled = idx===0;
+    nextBtn.disabled = idx===total-1;
+  }
+  function go(n){
+    idx = Math.max(0, Math.min(total-1, n));
+    render();
+  }
+  prevBtn.addEventListener('click', ()=>go(idx-1));
+  nextBtn.addEventListener('click', ()=>go(idx+1));
+  document.addEventListener('keydown', (e)=>{
+    if(e.key==='ArrowRight' || e.key===' ' || e.key==='PageDown'){ e.preventDefault(); go(idx+1); }
+    else if(e.key==='ArrowLeft' || e.key==='PageUp'){ e.preventDefault(); go(idx-1); }
+    else if(e.key==='Home'){ go(0); }
+    else if(e.key==='End'){ go(total-1); }
+    else if(e.key==='f' || e.key==='F'){
+      if(document.fullscreenElement){ document.exitFullscreen(); }
+      else { document.documentElement.requestFullscreen(); }
+    }
+  });
+  fsBtn.addEventListener('click', ()=>{
+    if(document.fullscreenElement){ document.exitFullscreen(); }
+    else { document.documentElement.requestFullscreen(); }
+  });
+  // 触屏滑动
+  let touchX=null;
+  document.addEventListener('touchstart', e=>{ touchX=e.touches[0].clientX; });
+  document.addEventListener('touchend', e=>{
+    if(touchX===null) return;
+    const dx=e.changedTouches[0].clientX-touchX;
+    if(Math.abs(dx)>50){ dx<0?go(idx+1):go(idx-1); }
+    touchX=null;
+  });
+  render();
+</script>
+</body>
+</html>

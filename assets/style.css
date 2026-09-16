@@ -1,0 +1,213 @@
+/* ============================================================
+   高考英语·课件集 —— 莫兰迪配色
+   ============================================================ */
+
+:root {
+  --bg: #f1eee8;          /* 米灰底 */
+  --card: #ffffff;
+  --ink: #46423c;         /* 暖灰正文 */
+  --ink-soft: #938b80;    /* 次级文字 */
+  --line: #e4ded3;
+  --shadow: 0 10px 30px -14px rgba(70, 66, 60, .20);
+  --shadow-hover: 0 20px 42px -18px rgba(70, 66, 60, .30);
+  --radius: 18px;
+}
+
+/* 六本书各自的莫兰迪主题色 */
+.c-rose  { --accent: #c9a9a3; --accent-soft: #f3e9e6; --accent-deep: #98776f; }
+.c-sage  { --accent: #a9bca8; --accent-soft: #e9f0e6; --accent-deep: #7d9279; }
+.c-blue  { --accent: #a7b6c2; --accent-soft: #e7eef2; --accent-deep: #7c8c99; }
+.c-lilac { --accent: #b3aac0; --accent-soft: #ede8f1; --accent-deep: #877c96; }
+.c-clay  { --accent: #cbaa93; --accent-soft: #f3e7de; --accent-deep: #a07f67; }
+.c-mist  { --accent: #9aadb4; --accent-soft: #e4ebee; --accent-deep: #6f858d; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC",
+               "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+#app {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 56px 24px 64px;
+}
+
+/* ===== 页头 ===== */
+.site-header { text-align: center; margin-bottom: 42px; }
+
+.site-title {
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: 3px;
+}
+
+.site-subtitle {
+  margin-top: 12px;
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: var(--ink-soft);
+}
+
+.site-title::after {
+  content: "";
+  display: block;
+  width: 46px;
+  height: 3px;
+  margin: 16px auto 0;
+  border-radius: 2px;
+  background: #c9a9a3;
+}
+
+.section-label {
+  text-align: center;
+  font-size: 13px;
+  letter-spacing: 4px;
+  color: var(--ink-soft);
+  margin-bottom: 20px;
+}
+
+.back {
+  display: block;
+  text-align: left;
+  margin-bottom: 18px;
+  font-size: 14px;
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: color .2s ease;
+}
+.back:hover { color: var(--ink); }
+
+/* ===== 首页：六本书卡片 ===== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 22px;
+}
+
+.book-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 30px 26px 26px;
+  background: var(--accent-soft);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--ink);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.book-card::after {
+  content: "";
+  position: absolute;
+  right: -30px;
+  bottom: -30px;
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: .16;
+}
+
+.book-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.book-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 5px rgba(255, 255, 255, .55);
+}
+
+.book-name {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.book-count {
+  font-size: 13px;
+  color: var(--accent-deep);
+}
+
+/* ===== 分类页：课件列表 ===== */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.cw-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 22px 26px 22px 20px;
+  background: var(--card);
+  border-radius: 14px;
+  text-decoration: none;
+  color: var(--ink);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.cw-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.cw-bar {
+  width: 6px;
+  align-self: stretch;
+  border-radius: 3px;
+  background: var(--accent);
+  flex: none;
+}
+
+.cw-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.cw-title { font-size: 17px; font-weight: 600; }
+
+.cw-date { font-size: 13px; color: var(--ink-soft); }
+
+.cw-open {
+  font-size: 14px;
+  color: var(--accent-deep);
+  white-space: nowrap;
+}
+
+.empty {
+  text-align: center;
+  padding: 64px 0;
+  color: var(--ink-soft);
+  font-size: 15px;
+}
+
+/* ===== 页脚 ===== */
+.site-footer {
+  text-align: center;
+  margin-top: 46px;
+  font-size: 13px;
+  color: var(--ink-soft);
+  letter-spacing: 1px;
+}
