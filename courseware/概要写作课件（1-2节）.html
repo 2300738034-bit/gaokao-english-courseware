@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高考英语 · 概要写作 解题指导</title>
+<style>
+  :root{
+    --ink:#1e293b;
+    --muted:#64748b;
+    --line:#e2e8f0;
+    --bg:#f4f6fb;
+    --paper:#ffffff;
+    --brand:#1e3a8a;
+    --brand-2:#2563eb;
+    --gold:#f59e0b;
+    --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:var(--font);
+    color:var(--ink);
+    background:var(--bg);
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ===== 舞台 ===== */
+  #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:56px 44px 96px}
+
+  .slide{
+    position:absolute;
+    width:min(1220px,100%);
+    max-height:100%;
+    background:var(--paper);
+    border-radius:20px;
+    box-shadow:0 24px 60px -24px rgba(15,23,42,.35), 0 0 0 1px rgba(15,23,42,.04);
+    padding:42px 52px;
+    opacity:0;
+    transform:translateX(40px);
+    pointer-events:none;
+    transition:opacity .45s ease, transform .45s ease;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+  .slide.active{opacity:1;transform:translateX(0);pointer-events:auto}
+  .slide.prev{transform:translateX(-40px)}
+
+  .slide .anim{opacity:0;transform:translateY(14px)}
+  .slide.active .anim{
+    opacity:1;transform:none;
+    transition:opacity .5s ease, transform .5s ease;
+    transition-delay:calc(var(--i,0)*70ms + 60ms);
+  }
+
+  /* ===== 页头 ===== */
+  .head{display:flex;align-items:center;gap:14px;margin-bottom:22px;flex:none}
+  .part-badge{
+    font-size:12.5px;font-weight:700;letter-spacing:.05em;
+    color:#fff;background:var(--pc,#2563eb);
+    padding:6px 13px;border-radius:99px;white-space:nowrap;
+  }
+  .head h2{font-size:28px;font-weight:800;letter-spacing:.01em;color:var(--ink)}
+  .head .en{font-size:14px;color:var(--muted);font-weight:600;margin-left:auto;white-space:nowrap}
+
+  .kicker{font-size:13px;font-weight:700;letter-spacing:.14em;color:var(--brand-2);text-transform:uppercase;margin-bottom:8px}
+
+  /* ===== 封面 ===== */
+  .slide.cover{
+    background:
+      radial-gradient(900px 500px at 85% -10%, rgba(59,130,246,.35), transparent 60%),
+      radial-gradient(700px 500px at -10% 110%, rgba(245,158,11,.22), transparent 55%),
+      linear-gradient(135deg,#0f2a5f 0%,#1e3a8a 55%,#274b9f 100%);
+    color:#fff;
+    justify-content:center;
+  }
+  .cover .brand-line{position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#f59e0b,#fbbf24,#2563eb,#7c3aed)}
+  .cover .tag{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#dbeafe;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);padding:7px 16px;border-radius:99px;margin-bottom:26px}
+  .cover h1{font-size:56px;font-weight:900;line-height:1.16;letter-spacing:.01em}
+  .cover h1 .hl{color:#fbbf24}
+  .cover .sub{margin-top:20px;font-size:20px;color:#cbd5e1;font-weight:500}
+  .cover .meta{margin-top:40px;display:flex;gap:26px;font-size:14px;color:#93c5fd;font-weight:600}
+  .cover .meta b{color:#fff}
+
+  /* ===== 卡片 & 列表 ===== */
+  .grid{display:grid;gap:14px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .g6{grid-template-columns:repeat(3,1fr)}
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:16px;
+    padding:18px 20px;position:relative;overflow:hidden;
+  }
+  .card .num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:32px;height:32px;border-radius:10px;font-size:15px;font-weight:800;
+    color:#fff;background:var(--pc,#2563eb);margin-bottom:10px;
+  }
+  .card h4{font-size:19px;font-weight:800;margin-bottom:5px}
+  .card .cn{font-size:13.5px;color:var(--muted);font-weight:600;line-height:1.55}
+  .card .frm{font-size:17px;font-weight:800;color:var(--pc,#2563eb);margin-top:9px;letter-spacing:.02em}
+
+  .key{color:var(--brand-2);font-weight:800}
+  .gold{color:#b45309;font-weight:800}
+  .red{color:#dc2626;font-weight:800}
+
+  /* 例句区 */
+  .ex{background:#f8fafc;border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-top:8px}
+  .ex + .ex{margin-top:12px}
+  .ex .lead{font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:10px}
+
+  .cn-tran{font-size:15px;color:var(--muted);margin-top:8px;font-weight:500}
+  .cn-tran b{color:var(--ink)}
+
+  /* 重点框 */
+  .note{
+    display:flex;gap:12px;align-items:flex-start;
+    background:#fffbeb;border:1px solid #fde68a;border-left:4px solid #f59e0b;
+    border-radius:12px;padding:13px 16px;margin-top:14px;font-size:15px;line-height:1.6;
+  }
+  .note .ico{font-size:18px;line-height:1.4}
+  .note b{color:#92400e}
+
+  .tip{
+    display:flex;gap:10px;align-items:flex-start;
+    background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #2563eb;
+    border-radius:12px;padding:11px 15px;margin-top:12px;font-size:14px;line-height:1.6;color:#1e3a8a;
+  }
+  .tip b{color:#1e3a8a}
+
+  /* ===== 点击揭示 ===== */
+  .rv{margin-top:10px;border:1px dashed #cbd5e1;border-radius:12px;overflow:hidden;background:#fff}
+  .rv-trigger{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    padding:10px 15px;cursor:pointer;user-select:none;background:#f8fafc;transition:.15s;
+  }
+  .rv-trigger:hover{background:#eff6ff}
+  .rv-label{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.02em;transition:.15s}
+  .rv.on .rv-label{color:var(--brand-2)}
+  .rv-plus{font-size:19px;color:var(--brand-2);transition:transform .3s;font-weight:700;line-height:1;flex:none}
+  .rv.on .rv-plus{transform:rotate(45deg)}
+  .rv-body{max-height:0;opacity:0;overflow:hidden;transition:max-height .5s ease, opacity .35s ease;padding:0 15px}
+  .rv.on .rv-body{max-height:600px;opacity:1;padding:13px 15px}
+  .rv-body .sum{font-size:15.5px;font-weight:700;color:var(--brand);line-height:1.6}
+  .rv-body .how{font-size:12.5px;color:#2563eb;margin-top:6px;line-height:1.55;font-weight:600}
+  .rv-body .how b{color:#1e40af;font-weight:800}
+  .rv.gold-on .rv-trigger{background:#fffbeb}
+  .rv.gold-on.on{border-color:#f59e0b;background:#fffdf5}
+  .rv.gold-on .rv-body .sum{color:#92400e}
+
+  /* 目录跳转卡 */
+  .jump{cursor:pointer;transition:.18s;border:1px solid var(--line)}
+  .jump:hover{transform:translateY(-4px);box-shadow:0 16px 34px -18px rgba(15,23,42,.4);border-color:var(--pc,#2563eb)}
+  .jump .go{position:absolute;right:14px;top:14px;font-size:12px;font-weight:700;color:var(--pc,#2563eb);opacity:0;transition:.18s}
+  .jump:hover .go{opacity:1}
+
+  /* 原文圈划 */
+  .mk{
+    display:flex;gap:10px;align-items:flex-start;padding:9px 12px;
+    border-left:3px solid var(--pc,#2563eb);background:#fff;border-radius:8px;
+    margin-top:8px;font-size:14px;line-height:1.55;color:#334155;
+  }
+  .mk + .mk{margin-top:7px}
+  .mk .mtag{
+    flex:none;font-size:11px;font-weight:800;color:#fff;background:var(--pc,#2563eb);
+    padding:2px 8px;border-radius:99px;margin-top:1px;white-space:nowrap;
+  }
+  .mk b{color:var(--ink)}
+  .mk .en-note{color:var(--muted);font-size:12.5px}
+  .mk.sec{background:#f8fafc;border-left-color:var(--muted);color:var(--muted)}
+  .mk .why{display:block;font-size:12px;color:#059669;margin-top:4px;line-height:1.55;font-weight:600}
+  .mk .why b{color:#065f46;font-weight:800}
+  .passage .why-inline{font-size:12px;color:#059669;line-height:1.55;margin-top:7px;font-weight:600}
+  .passage .why-inline b{color:#065f46;font-weight:800}
+
+  /* 例题对照两栏 */
+  .ex-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;min-height:0}
+  .ex-col{display:flex;flex-direction:column;min-height:0}
+  .ex-box{background:#f8fafc;border:1px solid var(--line);border-radius:14px;padding:14px 16px;overflow-y:auto}
+  .ex-box .lead{font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:10px}
+
+  /* 原文全文（叙述类） */
+  .passage{background:#f8fafc;border:1px solid var(--line);border-radius:14px;padding:16px 20px;overflow-y:auto}
+  .passage p{font-size:14.5px;line-height:1.7;color:#334155}
+  .passage p + p{margin-top:10px}
+  .passage b{color:var(--brand-2);background:#dbeafe;padding:0 3px;border-radius:3px}
+  .passage .sec-tag{
+    display:inline-block;font-size:11.5px;font-weight:800;color:#fff;
+    padding:3px 10px;border-radius:99px;margin-bottom:6px;
+  }
+
+  /* 结构表 */
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{padding:10px 13px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.5}
+  th{font-size:12.5px;letter-spacing:.05em;color:var(--muted);background:#f8fafc;font-weight:700}
+  td .en{font-weight:700}
+  td .cn{color:var(--muted);font-size:13px}
+
+  .pill{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:#eef2ff;color:#3730a3;margin-right:5px}
+
+  /* 步骤 */
+  .step{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed var(--line)}
+  .step:last-child{border-bottom:none}
+  .step .sn{flex:none;width:26px;height:26px;border-radius:50%;background:var(--pc,#2563eb);color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+  .step .st{font-size:14.5px;line-height:1.55;color:#334155}
+  .step .st b{color:var(--ink)}
+
+  /* 小结 */
+  .sum-block{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:#fff}
+  .sum-block h4{font-size:15.5px;font-weight:800;margin-bottom:11px;display:flex;align-items:center;gap:8px}
+  .sum-block .dot{width:10px;height:10px;border-radius:3px;background:var(--pc,#2563eb)}
+  .sum-block ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .sum-block li{font-size:13.8px;color:#334155;line-height:1.5}
+  .sum-block li b{color:var(--ink)}
+
+  .motto{
+    margin-top:18px;text-align:center;font-size:20px;font-weight:800;color:var(--brand);
+    background:#eff6ff;border-radius:14px;padding:18px;
+  }
+  .motto span{color:#dc2626}
+
+  /* 导航 */
+  #nav{
+    position:fixed;left:50%;bottom:26px;transform:translateX(-50%);
+    display:flex;align-items:center;gap:12px;z-index:50;
+    background:rgba(255,255,255,.86);backdrop-filter:blur(10px);
+    border:1px solid var(--line);border-radius:99px;padding:9px 12px;
+    box-shadow:0 10px 30px -12px rgba(15,23,42,.3);
+  }
+  #nav button{
+    border:none;background:#fff;border:1px solid var(--line);
+    width:40px;height:40px;border-radius:50%;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;color:#334155;
+    transition:.15s;
+  }
+  #nav button:hover:not(:disabled){background:#eff6ff;border-color:#bfdbfe;color:#2563eb}
+  #nav button:disabled{opacity:.35;cursor:default}
+  #nav .counter{font-size:14px;font-weight:700;color:#334155;min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
+  #nav .counter b{color:#2563eb;font-size:16px}
+  #progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#2563eb,#7c3aed);z-index:60;width:0;transition:width .35s ease}
+  #hint{position:fixed;left:50%;transform:translateX(-50%);bottom:4px;font-size:12px;color:#94a3b8;z-index:40;white-space:nowrap}
+
+  @media (max-width:900px){
+    #stage{padding:20px 16px 90px}
+    .slide{padding:26px 22px;border-radius:14px}
+    .g2,.g3,.g4,.g6,.ex-grid{grid-template-columns:1fr 1fr}
+    .head h2{font-size:22px}
+    .cover h1{font-size:36px}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<div id="stage">
+
+  <!-- 1 封面 -->
+  <section class="slide cover active">
+    <div class="brand-line"></div>
+    <div class="anim" style="--i:0"><span class="tag">上海高考英语 · 新题型精讲</span></div>
+    <h1 class="anim" style="--i:1">概要写作 <span class="hl">Summary</span><br>解题指导</h1>
+    <p class="sub anim" style="--i:2">读懂 · 圈划 · 概括 · 写精 —— 从结构到语言的完整方法</p>
+    <div class="meta anim" style="--i:3">
+      <span>主讲：<b>杨老师</b></span>
+      <span>对象：<b>高三</b></span>
+      <span>分值：<b>10 分</b></span>
+      <span>题型：<b>读写结合</b></span>
+    </div>
+  </section>
+
+  <!-- 2 目录 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#64748b">CONTENTS</span><h2>本节内容 · 目录</h2><span class="en">Roadmap · 点击卡片跳转</span></div>
+    <div class="grid g3" style="margin-top:6px">
+      <div class="card jump anim" style="--i:1;--pc:#2563eb" onclick="go(2)"><span class="num">01</span><h4>概述</h4><div class="cn">题型定位 · 两大步 · 六大要点 · 评分标准</div><span class="go">进入 →</span></div>
+      <div class="card jump anim" style="--i:2;--pc:#475569" onclick="go(7)"><span class="num">02</span><h4>两类文章总览</h4><div class="cn">叙述类 vs 论说类</div><span class="go">进入 →</span></div>
+      <div class="card jump anim" style="--i:3;--pc:#059669" onclick="go(8)"><span class="num">03</span><h4>叙述类文章</h4><div class="cn">情节五阶段 · 5W1H</div><span class="go">进入 →</span></div>
+      <div class="card jump anim" style="--i:4;--pc:#7c3aed" onclick="go(13)"><span class="num">04</span><h4>论说类文章</h4><div class="cn">六种亚型 · 结构套路</div><span class="go">进入 →</span></div>
+      <div class="card jump anim" style="--i:5;--pc:#d97706" onclick="go(28)"><span class="num">05</span><h4>语言分析</h4><div class="cn">六大加工技巧</div><span class="go">进入 →</span></div>
+      <div class="card jump anim" style="--i:6;--pc:#ea580c" onclick="go(33)"><span class="num">06</span><h4>实战演练</h4><div class="cn">当堂练习 · 参考概括</div><span class="go">进入 →</span></div>
+    </div>
+    <div class="note anim" style="--i:7;margin-top:22px">
+      <span class="ico">🎯</span>
+      <div>一条主线：<b>先读懂（圈划主次信息）</b> → <b>再写精（用自己的话压缩整合）</b>。全课围绕「叙述类」「论说类」两大文本结构 + 「语言加工」六招展开。</div>
+    </div>
+  </section>
+
+  <!-- ===== PART 01 概述 ===== -->
+  <!-- 3 什么是概要写作 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#2563eb">PART 01 · 概述</span><h2>什么是概要写作</h2><span class="en">What is Summary Writing</span></div>
+    <div class="grid g3" style="margin-top:6px">
+      <div class="card anim" style="--i:1;--pc:#2563eb"><span class="num">读</span><h4>读懂文章</h4><div class="cn">300 词左右原文，掌握内容结构、段间句间逻辑，领会主旨与意图</div></div>
+      <div class="card anim" style="--i:2;--pc:#059669"><span class="num">写</span><h4>写出概要</h4><div class="cn">60 词以内，用简明语言确切表述原文重要内容</div></div>
+      <div class="card anim" style="--i:3;--pc:#dc2626"><span class="num">禁</span><h4>两大禁区</h4><div class="cn">不加主观评论和解释；不照抄原文原句</div></div>
+    </div>
+    <div class="tip anim" style="--i:4;margin-top:18px">
+      <span>💡</span>
+      <div>概要写作 = <b>读（筛选关键信息）</b> + <b>写（高度概括表达）</b>，最终文本要既「<b>概</b>」也「<b>要</b>」——既概括，又抓住要点。</div>
+    </div>
+    <div class="note anim" style="--i:5">
+      <span class="ico">📌</span>
+      <div>上海卷 2017 年起一年两考新增题型，<b>卷面分值 10 分</b>，同时考查阅读能力与语言表达能力，是读写结合的「综合题」。</div>
+    </div>
+  </section>
+
+  <!-- 4 两大步 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#2563eb">PART 01 · 概述</span><h2>写概要的两大步</h2><span class="en">Two Steps</span></div>
+    <div class="grid g2" style="margin-top:6px">
+      <div class="card anim" style="--i:1;--pc:#2563eb">
+        <span class="num">①</span><h4>读：阅读与圈划</h4>
+        <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
+          <div class="step"><span class="sn" style="background:#2563eb">1</span><span class="st"><b>第一遍略读</b>（半分钟）：圈划<b>结构信号词</b>与<b>逻辑信号词</b></span></div>
+          <div class="step"><span class="sn" style="background:#2563eb">2</span><span class="st"><b>第二遍细读</b>（两分钟）：区分<b>主次信息</b>，圈划论据与叙事关键节点</span></div>
+          <div class="step"><span class="sn" style="background:#2563eb">3</span><span class="st">不同词句用<b>不同记号</b>，便于下一步动笔</span></div>
+        </div>
+      </div>
+      <div class="card anim" style="--i:2;--pc:#059669">
+        <span class="num">②</span><h4>写：整合与表达</h4>
+        <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
+          <div class="step"><span class="sn" style="background:#059669">4</span><span class="st">用<b>句式转换 / 同义替换 / 词性转换 / 句子整合 / 长句缩短</b>整合信息</span></div>
+          <div class="step"><span class="sn" style="background:#059669">5</span><span class="st">用<b>连接词</b>让结构更紧凑</span></div>
+          <div class="step"><span class="sn" style="background:#059669">6</span><span class="st"><b>认真检查</b>：语言准确、语义连贯</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="motto anim" style="--i:3">先「读」圈重点，再「写」精压缩 —— <span>两遍读 + 五招写</span></div>
+  </section>
+
+  <!-- 5 六大要点 上 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#2563eb">PART 01 · 概述</span><h2>六大要点（上）</h2><span class="en">Key Points 1-3</span></div>
+    <div class="ex anim" style="--i:1">
+      <div class="lead">要点 1 · 时间与习惯</div>
+      <div class="cn-tran" style="margin-top:0;font-size:15px">略读<b>半分钟内</b>、细读<b>两分钟内</b>完成；平时养成<b>边读边圈划</b>的习惯，培养对<b>逻辑信号词</b>的敏感度，并能迅速判断<b>代词的指代对象</b>。</div>
+    </div>
+    <div class="ex anim" style="--i:2">
+      <div class="lead">要点 2 · 主次信息</div>
+      <div class="cn-tran" style="margin-top:0;font-size:15px">按<b>原文顺序</b>总结；主要信息常有<b>拓展句 / 例子</b>深入分析，次要信息篇幅少。注意：<b>not… instead of…</b> 结构中信息一般非重点，而 <b>Instead / However</b> 之后要重视；<b>例子</b>要按篇幅酌情判断是否保留。</div>
+    </div>
+    <div class="ex anim" style="--i:3">
+      <div class="lead">要点 3 · 用自己的话</div>
+      <div class="cn-tran" style="margin-top:0;font-size:15px"><b>不引用原句</b>；核心名词<b>保留</b>，阐释性、描述性文字用<b>同义替换 / 句型转换</b>加工处理。</div>
+    </div>
+  </section>
+
+  <!-- 6 六大要点 下 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#2563eb">PART 01 · 概述</span><h2>六大要点（下）</h2><span class="en">Key Points 4-6</span></div>
+    <div class="ex anim" style="--i:1">
+      <div class="lead">要点 4 · 最短连接词</div>
+      <div class="cn-tran" style="margin-top:0;font-size:15px">尽量用 <b>but / then / thus / yet / though</b>；少用 <b>at the same time / in the first place / because of these / on the other hand</b> 等长连接词；可用<b>分号</b>代替连接词。</div>
+    </div>
+    <div class="ex anim" style="--i:2">
+      <div class="lead">要点 5 · 重视标题</div>
+      <div class="cn-tran" style="margin-top:0;font-size:15px">文章<b>标题</b>通常提纲挈领地表达中心意思，<b>必须重视</b>其提供的信息。</div>
+    </div>
+    <div class="ex anim" style="--i:3">
+      <div class="lead">要点 6 · 并列结构</div>
+      <div class="cn-tran" style="margin-top:0;font-size:15px"><b>并列结构</b>引出的信息<b>同等重要</b>，不可偏颇一方。</div>
+    </div>
+    <div class="tip anim" style="--i:4">
+      <span>💡</span>
+      <div>记忆口诀：<b>限时读 · 分主次 · 自写话 · 短连接 · 重标题 · 并列全</b></div>
+    </div>
+  </section>
+
+  <!-- 7 评分标准 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#2563eb">PART 01 · 概述</span><h2>评分标准</h2><span class="en">Scoring Criteria</span></div>
+    <div class="grid g2" style="margin-top:6px">
+      <div class="card anim" style="--i:1;--pc:#2563eb">
+        <h4>内容（五档 A–E）</h4>
+        <div style="margin-top:8px;display:flex;flex-direction:column;gap:6px">
+          <div class="step"><span class="sn" style="background:#059669">A</span><span class="st">准确<b>全面</b>概括主旨，<b>涵盖主要信息</b></span></div>
+          <div class="step"><span class="sn" style="background:#0d9488">B</span><span class="st">准确概括，但遗漏<b>个别</b>主要信息</span></div>
+          <div class="step"><span class="sn" style="background:#d97706">C</span><span class="st">概括主旨，但遗漏<b>部分</b>主要信息</span></div>
+          <div class="step"><span class="sn" style="background:#ea580c">D</span><span class="st">未能准确概括，遗漏<b>较多</b>或留<b>过多细节</b></span></div>
+          <div class="step"><span class="sn" style="background:#dc2626">E</span><span class="st"><b>几乎不能</b>概括主旨，未涉及有意义信息</span></div>
+        </div>
+      </div>
+      <div class="card anim" style="--i:2;--pc:#7c3aed">
+        <h4>语言（五档 A–E）</h4>
+        <div style="margin-top:8px;display:flex;flex-direction:column;gap:6px">
+          <div class="step"><span class="sn" style="background:#059669">A</span><span class="st">用自己的语言<b>连贯、正确</b>表述</span></div>
+          <div class="step"><span class="sn" style="background:#0d9488">B</span><span class="st">较连贯正确，有<b>个别</b>语言错误</span></div>
+          <div class="step"><span class="sn" style="background:#d97706">C</span><span class="st">连贯性<b>较差</b>，有少量<b>不影响表意</b>的错误</span></div>
+          <div class="step"><span class="sn" style="background:#ea580c">D</span><span class="st">连贯性差，<b>严重语言错误较多</b></span></div>
+          <div class="step"><span class="sn" style="background:#dc2626">E</span><span class="st"><b>几乎不能</b>连贯正确表述</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="note anim" style="--i:3">
+      <span class="ico">🎯</span>
+      <div>得分 = <b>内容全面</b>（不漏主要信息） × <b>语言地道</b>（自己的话、连贯正确）。两者都要冲 A 档。</div>
+    </div>
+  </section>
+
+  <!-- ===== PART 02 两类总览 ===== -->
+  <!-- 8 两类文章 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#475569">PART 02 · 分类总览</span><h2>两类文章</h2><span class="en">Two Text Types</span></div>
+    <div class="grid g2" style="margin-top:6px">
+      <div class="card anim" style="--i:1;--pc:#059669">
+        <span class="num">A</span><h4>叙述类文章</h4><div class="frm" style="color:#059669">Narrative</div>
+        <div class="cn" style="margin-top:8px">讲述一个<b>故事</b>，按<b>情节发展</b>推进，涵盖 <b>5W1H</b>（Who / What / When / Where / Why / How）。</div>
+      </div>
+      <div class="card anim" style="--i:2;--pc:#7c3aed">
+        <span class="num">B</span><h4>论说类文章</h4><div class="frm" style="color:#7c3aed">Argumentative</div>
+        <div class="cn" style="margin-top:8px">围绕<b>观点 / 现象 / 问题 / 研究 / 建议</b>展开，分<b>六种亚型</b>，各有固定结构套路。</div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:3;margin-top:16px">
+      <span>💡</span>
+      <div>拿到文章先「<b>定性</b>」：是<b>叙事</b>还是<b>论说</b>？再套用对应的<b>结构模板</b>去圈划，事半功倍。</div>
+    </div>
+  </section>
+
+  <!-- ===== PART 03 叙述类 ===== -->
+  <!-- 9 情节五阶段 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#059669">PART 03 · 叙述类文章</span><h2>情节发展的五个阶段</h2><span class="en">Five-stage Plot</span></div>
+    <div class="grid g3" style="margin-top:6px">
+      <div class="card anim" style="--i:1;--pc:#2563eb"><span class="num">①</span><h4>引入</h4><div class="cn">Exposition · 故事开端，交代背景（时间、地点、人物、矛盾）</div></div>
+      <div class="card anim" style="--i:2;--pc:#0d9488"><span class="num">②</span><h4>发展</h4><div class="cn">Rising action · 矛盾冲突不断变化发展的过程</div></div>
+      <div class="card anim" style="--i:3;--pc:#dc2626"><span class="num">③</span><h4>高潮</h4><div class="cn">Climax · 冲突的转折点，故事最紧张的部分</div></div>
+      <div class="card anim" style="--i:4;--pc:#d97706"><span class="num">④</span><h4>结局</h4><div class="cn">Falling action · 故事发展结局，矛盾的最终解决</div></div>
+      <div class="card anim" style="--i:5;--pc:#7c3aed"><span class="num">⑤</span><h4>尾声</h4><div class="cn">Resolution · 结局的影响与作者的总结、思考</div></div>
+      <div class="card anim" style="--i:6;--pc:#059669"><span class="num">自检</span><h4>5W1H</h4><div class="cn">Who · What · When · Where · Why · How</div></div>
+    </div>
+    <div class="note anim" style="--i:7">
+      <span class="ico">🔑</span>
+      <div>「<b>尾声</b>」并非情节发展的<b>必要部分</b>，并非所有叙述类文章都具备。前四阶段是主干。</div>
+    </div>
+  </section>
+
+  <!-- 10 叙述类写作步骤 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#059669">PART 03 · 叙述类文章</span><h2>叙述类 · 写作四步</h2><span class="en">Four Steps</span></div>
+    <div class="card anim" style="--i:1;margin-top:6px">
+      <div class="step"><span class="sn">1</span><span class="st">按<b>情节发展阶段</b>，把文本分成 <b>四到五个部分</b></span></div>
+      <div class="step"><span class="sn">2</span><span class="st"><b>圈划</b>符合该部分功能、推动情节发展的<b>主要内容</b>，每部分用<b>一句话</b>总结</span></div>
+      <div class="step"><span class="sn">3</span><span class="st">用<b>精炼的语言</b>连接、润色每个部分的概述句</span></div>
+      <div class="step"><span class="sn">4</span><span class="st"><b>认真检查</b>，自检标准：<b>5W1H</b>（Who / What / When / Where / Why / How）</span></div>
+    </div>
+    <div class="tip anim" style="--i:2">
+      <span>💡</span>
+      <div>核心是「<b>一句话概括一个阶段</b>」，最后把五句话用连接词串起来就是概要。</div>
+    </div>
+  </section>
+
+  <!-- 11 叙述类例题 原文上 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#059669">PART 03 · 叙述类 · 例题</span><h2>例题精读（上）· 圈划关键信息</h2><span class="en">Meet the Member Who Quit Sugar</span></div>
+    <div class="passage anim" style="--i:1">
+      <p><span class="sec-tag" style="background:#2563eb">① 引入 · Exposition</span><br>
+      <b>When I was 15, I weighed 100 kg.</b> I was a size 20+ and hated the way I looked. I was a serial big eater and quite depressed. <b>I would sit in front of the fridge, eat something, move to the cupboard, eat a packet of chips and move back to the fridge.</b> It was a heartbreaking cycle of hate and food. I didn't feel confident, pretty, or worthwhile. Shopping made me cry, I avoided mirrors, and my social life came to an end. I actually lost friends because they told me I was antisocial.</p>
+      <div class="why-inline">▸ 为何提炼：<b>交代背景与困境（who/what + 矛盾）</b>——开篇即点明「谁、什么处境」；坐冰箱前吃、躲镜子、失友等是<b>具体描写（次要信息）</b>，可压缩省略。</div>
+      <p><span class="sec-tag" style="background:#0d9488">② 发展 · Rising action</span><br>
+      But then, I turned my life around. <b>I quit sugar. It started with my mum. She staged an intervention that made me cry.</b> She put me onto a diet that mostly aimed to schedule meals, and — to my shock horror — cut out all processed sugar. <b>It was so hard at first.</b> I remember the shame of sneaking chocolate and candies when the three o'clock hunger hits.</p>
+      <div class="why-inline">▸ 为何提炼：<b>推动情节的关键转折</b>——「妈妈介入、要求戒糖」改变故事走向；偷吃巧克力、嘴馋等是<b>次要细节</b>，不写入。</div>
+    </div>
+    <div class="tip anim" style="--i:2">
+      <span>💡</span>
+      <div><b>高亮</b>为圈划的「主要信息」，其余为次要细节（可压缩或省略）。阅读时先给文章<b>分段</b>，再逐段抓关键。</div>
+    </div>
+  </section>
+
+  <!-- 12 叙述类例题 原文下 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#059669">PART 03 · 叙述类 · 例题</span><h2>例题精读（下）· 圈划关键信息</h2><span class="en">Meet the Member Who Quit Sugar</span></div>
+    <div class="passage anim" style="--i:1">
+      <p><span class="sec-tag" style="background:#dc2626">③ 高潮 · Climax</span><br>
+      <b>But the weeks kept coming and it just got easier. I stopped eating sugar, and I stopped loving it; simple as that.</b> I substituted chips and biscuits for fruit and nuts, and had cup-of-soups after school. <b>I also had more energy</b>, having a 20-minute walk with my dog into my everyday routine; I began to love that personal time.</p>
+      <div class="why-inline">▸ 为何提炼：<b>矛盾转化的结果</b>——「逐渐适应健康饮食」是转折后的核心状态；吃水果坚果、遛狗等<b>具体做法（次要）</b>，用「健康饮食」一词概括即可。</div>
+      <p><span class="sec-tag" style="background:#d97706">④ 结局 · Falling action</span><br>
+      <b>Now I'm 17, turning 18, and I weigh 70 kg.</b> I still struggle with my weight, but this is where I sit naturally, and <b>I am very proud of myself. I never thought I would be confident enough to wear dresses or skirts, and take leadership roles</b> to put myself out there and develop my social skills.</p>
+      <div class="why-inline">▸ 为何提炼：<b>结局（结果）</b>——「体重下降、重获自信」是冲突的最终解决；穿裙子、担任领导等是<b>例证（次要）</b>，可省略。</div>
+      <p><span class="sec-tag" style="background:#7c3aed">⑤ 尾声 · Resolution</span><br>
+      I could never have done it without the support of my friends and family, and I urge everyone who wants to change their diet — quitting sugar or otherwise — <b>to share their decision with people. Develop a support network, online or offline</b>, which can offer you advice or pick you up when you're down. Your body will thank you, and you will thank yourself too.</p>
+      <div class="why-inline">▸ 为何提炼：<b>作者的建议/总结</b>——「采取行动、寻求支持」是尾声的主旨句；感谢亲友等是<b>次要展开</b>，不写入。</div>
+    </div>
+    <div class="note anim" style="--i:2">
+      <span class="ico">📏</span>
+      <div>原文 <b>446 词</b>，最终概要仅 <b>59 词</b>。压缩的关键：<b>每阶段只留一句话</b>，删掉细节描写与例子。</div>
+    </div>
+  </section>
+
+  <!-- 13 叙述类例题 概括范文 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#059669">PART 03 · 叙述类 · 例题</span><h2>概括句对照 · 点击揭示</h2><span class="en">Summary Sentence by Sentence</span></div>
+    <div class="grid g2" style="margin-top:6px">
+      <div class="ex-col anim" style="--i:1">
+        <div class="ex-box">
+          <div class="lead">概括句（点击逐条显示 + 转写逻辑）</div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">① 引入 · 概括句</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">Before quitting sugar, she was low-spirited about her overweight.</div><div class="how">▸ 转写：<b>信息概括</b>（weighed 100 kg / size 20+ / depressed → low-spirited about her overweight）+ <b>句式转换</b>（Before quitting sugar 时间状语前置）</div></div></div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">② 发展 · 概括句</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">Then her mom stepped in and required her to follow a diet to quit sugar.</div><div class="how">▸ 转写：<b>信息概括</b>（staged an intervention + put me onto a diet → stepped in, required a diet）+ <b>连接词</b> then 表时间顺序</div></div></div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">③ 高潮 · 概括句</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">Despite initial discomfort, she was gradually used to eating and living healthily.</div><div class="how">▸ 转写：<b>句式转换</b>（It was so hard at first → Despite initial discomfort 介词短语）+ <b>信息概括</b>（substituted chips… → eating and living healthily）</div></div></div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">④ 结局 · 概括句</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">With her weight lost, she has felt better and regained confidence.</div><div class="how">▸ 转写：<b>信息概括</b>（70 kg / proud / confident → weight lost, felt better, regained confidence）+ <b>句式转换</b>（with 介词短语）</div></div></div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">⑤ 尾声 · 概括句</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">To do this right, we need to take action and seek support.</div><div class="how">▸ 转写：<b>信息概括</b>（share the decision + support network → take action and seek support）+ <b>句式转换</b>（不定式 to do this right 表目的）</div></div></div>
+        </div>
+      </div>
+      <div class="ex-col anim" style="--i:2">
+        <div class="ex-box">
+          <div class="lead">合成范文（点击显示）</div>
+          <div class="rv gold-on" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">Possible version · 59 words</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">Before quitting sugar, she was low-spirited about her overweight. Then her mom stepped in and required her to follow a diet to quit sugar. Despite initial discomfort, she was gradually used to eating and living healthily. With her weight lost, she has felt better and regained confidence. To do this right, we need to take action and seek support.</div></div></div>
+          <div class="tip" style="margin-top:14px">
+            <span>💡</span>
+            <div>五句话 = 五个阶段，用 <b>then / despite / with / to do</b> 等连接词串起，顺序与原文一致。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PART 04 论说类 ===== -->
+  <!-- 14 六种亚型总览 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7c3aed">PART 04 · 论说类文章</span><h2>论说类 · 六种亚型</h2><span class="en">Six Sub-types</span></div>
+    <div class="grid g3" style="margin-top:6px">
+      <div class="card jump anim" style="--i:1;--pc:#2563eb" onclick="go(14)"><span class="num">1</span><h4>现象分析型</h4><div class="cn">呈现现象 → 分析说明 → 评论</div><span class="go">→</span></div>
+      <div class="card jump anim" style="--i:2;--pc:#0d9488" onclick="go(16)"><span class="num">2</span><h4>因果关系型</h4><div class="cn">呈现现象 → 原因 → 总结</div><span class="go">→</span></div>
+      <div class="card jump anim" style="--i:3;--pc:#ea580c" onclick="go(20)"><span class="num">3</span><h4>问题解决型</h4><div class="cn">呈现问题 → 原因反应 → 方案</div><span class="go">→</span></div>
+      <div class="card jump anim" style="--i:4;--pc:#d97706" onclick="go(22)"><span class="num">4</span><h4>观点论证型</h4><div class="cn">观点 → 分论点 → 总结</div><span class="go">→</span></div>
+      <div class="card jump anim" style="--i:5;--pc:#0891b2" onclick="go(24)"><span class="num">5</span><h4>研究报告型</h4><div class="cn">研究成果 → 研究过程 → 评论</div><span class="go">→</span></div>
+      <div class="card jump anim" style="--i:6;--pc:#e11d48" onclick="go(26)"><span class="num">6</span><h4>建议忠告型</h4><div class="cn">问题 → 建议忠告 → 总结</div><span class="go">→</span></div>
+    </div>
+    <div class="note anim" style="--i:7;margin-top:20px">
+      <span class="ico">🧭</span>
+      <div>六种亚型的共同套路：<b>抓「主题句」+「支持性细节」</b>，<b>具体例子和数据一般不写入</b>，但<b>总结性的展开说明要保留</b>。</div>
+    </div>
+  </section>
+
+  <!-- 15 现象分析型 结构步骤 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#2563eb">论说类 1/6 · 现象分析型</span><h2>现象分析型 · 结构与步骤</h2><span class="en">Phenomenon Analysis</span></div>
+    <div class="anim" style="--i:1">
+      <table>
+        <thead><tr><th style="width:16%">文本结构</th><th style="width:34%">内容要点</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td><b>第一部分 · 呈现现象</b></td><td>现象的具体表现</td><td class="cn">点明「什么现象」</td></tr>
+          <tr><td><b>第二部分 · 分析说明</b></td><td>主题句 + 支持性细节（方式、影响等）</td><td class="cn">具体例子和数据<b>不写入</b>；<b>总结性的展开说明要写</b></td></tr>
+          <tr><td><b>第三部分 · 评论</b></td><td>积极 / 负面 / 谨慎的评论</td><td class="cn">如与前文重复可不写；可能不出现</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card anim" style="--i:2;margin-top:14px">
+      <div class="lead" style="font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:8px">写作步骤</div>
+      <div class="step"><span class="sn">1</span><span class="st">按基本结构把文本分为<b>三个部分</b></span></div>
+      <div class="step"><span class="sn">2</span><span class="st"><b>圈划</b>各部分内容要点</span></div>
+      <div class="step"><span class="sn">3</span><span class="st">撰写概要：<b>现象关键信息 + 分析主题句与细节 + 评论</b></span></div>
+      <div class="step"><span class="sn">4</span><span class="st">精炼连接润色，<b>检查</b>：现象表现 + 主题句 + 支持细节关键词</span></div>
+    </div>
+  </section>
+
+  <!-- 16 现象分析型 例题 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#2563eb">论说类 1/6 · 例题</span><h2>Gene Therapy</h2><span class="en">现象分析型</span></div>
+    <div class="ex-grid anim" style="--i:1">
+      <div class="ex-col">
+        <div class="ex-box">
+          <div class="lead">原文 · 圈划关键信息（含为何提炼）</div>
+          <div class="mk" style="--pc:#2563eb"><span class="mtag">① 现象</span><div><b>Scientists are seeing that gene therapy is revolutionizing the treatment of disease.</b><span class="why">▸ 为何：<b>全文核心主旨句</b>，点明「基因治疗革新疾病治疗」这一现象——概括的第一句必选。</span></div></div>
+          <div class="mk" style="--pc:#2563eb"><span class="mtag">② 现象</span><div><b>In gene therapy, healthy genes are introduced into defective cells to prevent or cure disease.</b><span class="why">▸ 为何：对现象的<b>定义性说明</b>（healthy genes→defective cells），核心名词须保留。</span></div></div>
+          <div class="mk" style="--pc:#0d9488"><span class="mtag">③ 主题句</span><div><b>While much of the research is in the beginning stages, some successes point to the real benefit of the therapy.</b><span class="why">▸ 为何：<b>第二部分的主题句</b>，概括「研究尚在初期、但已见成效」——统领后文细节。</span></div></div>
+          <div class="mk" style="--pc:#0d9488"><span class="mtag">④ 细节1</span><div>In Italy, doctors have treated one genetic disease... <b>children now lead a relatively normal life.</b><span class="why">▸ 为何：支持主题句的<b>实例结论</b>（儿童→正常生活）；具体治疗过程为<b>次要</b>，省略。</span></div></div>
+          <div class="mk" style="--pc:#0d9488"><span class="mtag">⑤ 细节2</span><div>Those treated showed <b>a 23.1 percent improvement</b> when tested six months later. <span class="en-note">（数据·次要，不写）</span><span class="why">▸ 为何：<b>具体数据</b>，属次要信息，<b>不写入</b>概要。</span></div></div>
+          <div class="mk" style="--pc:#dc2626"><span class="mtag">⑥ 评论</span><div>Researchers hope every genetic disease will have gene therapy as its treatment. <b>But more research is needed to assure its safety.</b><span class="why">▸ 为何：<b>第三部分的评论/结论</b>（谨慎态度），作为概要的收尾句。</span></div></div>
+        </div>
+      </div>
+      <div class="ex-col">
+        <div class="ex-box">
+          <div class="lead">概括 · 点击揭示（含转写逻辑）</div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">第一部分 · 现象</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">Gene therapy is changing the treatment of disease revolutionarily.</div><div class="how">▸ 转写：<b>词性转换</b>（revolutionizing v → revolutionarily adv）+ <b>句子整合</b>（非谓语短语作定语，合并①②两句）</div></div></div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">第二部分 · 分析</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">By inserting healthy genes into faulty cells, it benefits both children and older patients.</div><div class="how">▸ 转写：<b>同义替换</b>（be introduced into → insert into；defective → faulty；beginning stages → initial phases）+ <b>信息概括</b>（意大利儿童 + 老年患者 → both children and older patients）</div></div></div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">第三部分 · 评论</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">However, more research should be done to ensure it's safe.</div><div class="how">▸ 转写：<b>句式转换</b>（被动 needed → 主动 should be done）+ <b>同义替换</b>（assure → ensure；safety → safe）+ <b>连接词</b> However 表转折</div></div></div>
+          <div class="rv gold-on" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">合成范文 · 54 words</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">Gene therapy, intended to prevent or cure disease by inserting healthy genes into faulty cells, is changing the treatment of disease revolutionarily. Though still in the initial phases, gene therapy has benefited both children and older patients with genetic disease by improving their conditions. However, more research should be done to ensure it's safe.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 17 因果关系型 结构步骤 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#0d9488">论说类 2/6 · 因果关系型</span><h2>因果关系型 · 结构与步骤</h2><span class="en">Cause & Effect</span></div>
+    <div class="anim" style="--i:1">
+      <table>
+        <thead><tr><th style="width:16%">文本结构</th><th style="width:34%">内容要点</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td><b>第一部分 · 呈现现象</b></td><td>现象的具体表现 + 引出「原因」</td><td class="cn">「Why」是核心</td></tr>
+          <tr><td><b>第二部分 · 原因</b></td><td>每个原因的主题句 + 支持性细节</td><td class="cn">一般<b>两到三个原因</b>，并具体展开</td></tr>
+          <tr><td><b>第三部分 · 总结</b></td><td>对全文内容的总结</td><td class="cn">可能不出现在文本中</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card anim" style="--i:2;margin-top:14px">
+      <div class="lead" style="font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:8px">写作步骤</div>
+      <div class="step"><span class="sn">1</span><span class="st">按基本结构把文本分为<b>两到三个部分</b></span></div>
+      <div class="step"><span class="sn">2</span><span class="st"><b>圈划</b>各部分内容要点</span></div>
+      <div class="step"><span class="sn">3</span><span class="st">撰写概要：<b>现象 + 引出原因 → 每个原因主题句与细节 → 总结</b></span></div>
+      <div class="step"><span class="sn">4</span><span class="st">连接润色，<b>检查</b>：现象主题句 + 每个原因的主题句与展开</span></div>
+    </div>
+  </section>
+
+  <!-- 18 因果例题1 Shyness -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#0d9488">论说类 2/6 · 例题 1</span><h2>Shyness</h2><span class="en">因果关系型</span></div>
+    <div class="ex-grid anim" style="--i:1">
+      <div class="ex-col">
+        <div class="ex-box">
+          <div class="lead">原文 · 圈划关键信息（含为何提炼）</div>
+          <div class="mk" style="--pc:#0d9488"><span class="mtag">① 现象</span><div><b>Shyness is a universal phenomenon.</b> Social scientists are exploring <b>its environmental causes</b>.<span class="why">▸ 为何：<b>主旨句 + 引出原因</b>，统领全文三个环境原因——是概括首句，三个原因都要点到。</span></div></div>
+          <div class="mk" style="--pc:#2563eb"><span class="mtag">② 原因1</span><div><b>The first environmental cause of shyness may be a child's home and family life.</b> Children grow up in <b>smaller families, with working parents</b>, lacking socializing experience.<span class="why">▸ 为何：<b>原因1 的主题句</b>；smaller families / working parents 是解释「如何产生」的关键词，须保留。</span></div></div>
+          <div class="mk" style="--pc:#2563eb"><span class="mtag">③ 原因2</span><div><b>A second environmental cause of shyness may be one's culture.</b> In Japan, <b>failure is entirely blamed on the person</b>, so Japanese learn not to take risks in public.<span class="why">▸ 为何：<b>原因2 的主题句</b>；「失败归咎个人」是解释文化的关键；57% 等数据<b>次要</b>，不写。</span></div></div>
+          <div class="mk" style="--pc:#2563eb"><span class="mtag">④ 原因3</span><div><b>Technology may also play a role.</b> Watching TV, playing video games and surfing the Web have <b>replaced social interaction</b>.<span class="why">▸ 为何：<b>原因3 的主题句</b>；「科技替代社交」是核心；电视/游戏/银行机器等例证<b>次要</b>。</span></div></div>
+        </div>
+      </div>
+      <div class="ex-col">
+        <div class="ex-box">
+          <div class="lead">概括 · 点击揭示（含转写逻辑）</div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">现象 + 引出原因</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">Shyness is common and it has environmental causes, including home and family life, culture and technology.</div><div class="how">▸ 转写：<b>同义替换</b>（universal → common）+ <b>信息概括</b>（三个原因压缩成 including… 并列列举）</div></div></div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">原因 1 · 家庭</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">Firstly, with smaller families and working parents, children lack social interactions.</div><div class="how">▸ 转写：<b>句式转换</b>（grow up in smaller families → with 介词短语）+ <b>词性转换</b>（lack n → lack v）+ <b>同义替换</b>（socializing experience → social interactions）</div></div></div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">原因 2 · 文化</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">Secondly, blaming failure on individuals causes people in some cultures to be shy in public.</div><div class="how">▸ 转写：<b>句式转换</b>（被动 blamed on the person → 主动 blaming failure on individuals）+ <b>同义替换</b>（person → individual）+ <b>信息概括</b>（Japanese → people in some cultures）</div></div></div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">原因 3 · 科技</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">Finally, with the development of technology, people have fewer opportunities to socialize in person.</div><div class="how">▸ 转写：<b>信息概括</b>（TV / video games / Web → the development of technology）+ <b>同义替换</b>（replaced social interaction → fewer opportunities to socialize in person）</div></div></div>
+          <div class="rv gold-on" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">合成范文 · 56 words</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">Shyness is common and it has environmental causes, including home and family life, culture and technology. Firstly, with smaller families and working parents, children lack social interactions. Secondly, blaming failure on individuals causes people in some cultures to be shy in public. Finally, with the development of technology, people have fewer opportunities to socialize in person.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 19 因果例题2 Rote -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#0d9488">论说类 2/6 · 例题 2</span><h2>Learning by Rote in the Digital Age</h2><span class="en">因果关系型</span></div>
+    <div class="ex-grid anim" style="--i:1">
+      <div class="ex-col">
+        <div class="ex-box">
+          <div class="lead">原文 · 圈划关键信息（含为何提炼）</div>
+          <div class="mk" style="--pc:#0d9488"><span class="mtag">① 现象</span><div><b>The decline of rote learning has been quickened by technology.</b> But now there are <b>voices for a need to return to rote learning</b>.<span class="why">▸ 为何：<b>现象 + 引出原因</b>，点明「死记硬背被技术削弱、但价值被重新发现」——含转折，是概括首句的核心。</span></div></div>
+          <div class="mk" style="--pc:#2563eb"><span class="mtag">② 原因1</span><div><b>Memorizing key data is essential to learning any skill.</b> Without memorizing these foundation elements, <b>you cannot progress to a deeper understanding</b>.<span class="why">▸ 为何：<b>原因1 的主题句</b>，说明死记硬背的价值（打基础）；医生/律师是例证，<b>次要</b>。</span></div></div>
+          <div class="mk" style="--pc:#2563eb"><span class="mtag">③ 原因2</span><div><b>Mobile learning can help bring this style of learning back to life</b> by making it more convenient and fun, and <b>keep us motivated</b>.<span class="why">▸ 为何：<b>原因2 的主题句</b>，技术反哺死记硬背（更便捷有趣）；flashcards/drills 是具体手段，<b>次要</b>。</span></div></div>
+          <div class="mk" style="--pc:#059669"><span class="mtag">④ 总结</span><div>Once you've acquired the essentials by rote learning, <b>you will find it easier to go deeper</b> in the application of knowledge.<span class="why">▸ 为何：<b>总结句</b>，呼应原因1（掌握基础→深入应用）；内容与原因1重复时可不单独写。</span></div></div>
+        </div>
+      </div>
+      <div class="ex-col">
+        <div class="ex-box">
+          <div class="lead">概括 · 点击揭示（含转写逻辑）</div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">现象 + 引出原因</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">Rote learning means mechanical memorization. Although technology makes it less needed, its value is being rediscovered.</div><div class="how">▸ 转写：<b>句子整合</b>（三个简单句 → 让步状语从句 although）+ <b>句式转换</b>（被动 quickened by technology → 主动 technology makes）+ <b>同义替换</b>（decline → less needed；voices for a need to return → rediscover；essential → value）</div></div></div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">原因 1 · 基础</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">Rote learning helps people acquire basic knowledge, laying a foundation for further understanding.</div><div class="how">▸ 转写：<b>句式转换</b>（现在分词 laying a foundation 作伴随状语）+ <b>同义替换</b>（memorize foundation elements → acquire basic knowledge；deeper → further）</div></div></div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">原因 2 · 移动学习</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">Technology makes mobile learning possible, which motivates learners and makes memorization more interesting and individualized.</div><div class="how">▸ 转写：<b>句式转换</b>（which 定语从句连接）+ <b>同义替换</b>（convenient and fun → interesting；individual study → individualized）</div></div></div>
+          <div class="rv gold-on" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">合成范文 · 49 words</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">Rote learning means mechanical memorization. Although technology makes it less needed, its value is being rediscovered. Rote learning helps people acquire basic knowledge, laying a foundation for further understanding. In fact, technology makes mobile learning possible, which motivates learners in rote learning and makes memorization more interesting and individualized.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 20 因果例题3 Laugh -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#0d9488">论说类 2/6 · 例题 3</span><h2>To Laugh Is Human Nature</h2><span class="en">因果关系型</span></div>
+    <div class="ex-grid anim" style="--i:1">
+      <div class="ex-col">
+        <div class="ex-box">
+          <div class="lead">原文 · 圈划关键信息（含为何提炼）</div>
+          <div class="mk" style="--pc:#0d9488"><span class="mtag">① 现象</span><div><b>We are able to laugh at birth.</b> Babies begin to laugh at three to four months. What scientists are interested in is <b>why we laugh</b>.<span class="why">▸ 为何：<b>现象 + 引出原因</b>，点明「人生来会笑、科学家探究为何」——设问引出全文。</span></div></div>
+          <div class="mk" style="--pc:#2563eb"><span class="mtag">② 原因1</span><div><b>Laughter makes us feel connected with one another</b>, giving us a sense of trust and comfort.<span class="why">▸ 为何：<b>原因1 的主题句</b>，笑带来连接与信任——直接点原因，须保留。</span></div></div>
+          <div class="mk" style="--pc:#2563eb"><span class="mtag">③ 原因2</span><div><b>Laughter is a social signal</b> — people are 20 times more likely to laugh when with others; <b>wanting to be accepted</b> is part of human nature.<span class="why">▸ 为何：<b>原因2 的主题句</b>；「20 倍」是<b>数据（次要）</b>，但「群体中更易笑、渴望被接纳」是结论，保留。</span></div></div>
+          <div class="mk" style="--pc:#2563eb"><span class="mtag">④ 原因3</span><div><b>Laughter contributed to our survival</b> — sharing laughter led to <b>greater cooperation</b>, increasing our chances to survive.<span class="why">▸ 为何：<b>原因3 的主题句</b>，笑促进合作、利于生存的深层原因。</span></div></div>
+        </div>
+      </div>
+      <div class="ex-col">
+        <div class="ex-box">
+          <div class="lead">概括 · 点击揭示（含转写逻辑）</div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">现象 + 引出原因</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">Scientists think humans are born with the ability to laugh, but why do we laugh?</div><div class="how">▸ 转写：<b>句式转换</b>（陈述 → 设问 why do we laugh?）+ <b>同义替换</b>（able to laugh at birth → born with the ability to laugh）</div></div></div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">原因 1 · 连接</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">We laugh to feel closer to one another.</div><div class="how">▸ 转写：<b>信息概括</b>（connected / trust / comfort → feel closer）+ <b>句式转换</b>（不定式 to feel closer 表目的）</div></div></div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">原因 2 · 认同</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">Laughter helps us to be recognized, so we laugh more in groups than when alone.</div><div class="how">▸ 转写：<b>信息概括</b>（20× + accepted → laugh more in groups）+ <b>同义替换</b>（wanting to be accepted → helps us to be recognized）+ <b>连接词</b> so 表因果</div></div></div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">原因 3 · 生存</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">Laughter also evolved from a more basic need to survive, as it promoted cooperation, enabling humans to survive better.</div><div class="how">▸ 转写：<b>信息概括</b>（ancestors / hunt / eat → evolved from a basic need to survive）+ <b>句式转换</b>（as 原因状语从句 + enabling 分词作结果状语）</div></div></div>
+          <div class="rv gold-on" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">合成范文 · 57 words</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">Scientists think humans are born with the ability to laugh, but why do we laugh? We laugh to feel closer to one another. Laughter helps us to be recognized, so we laugh more in groups than when alone. Laughter also evolved from a more basic need to survive as it promoted cooperation, enabling humans to survive better.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 21 问题解决型 结构步骤 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#ea580c">论说类 3/6 · 问题解决型</span><h2>问题解决型 · 结构与步骤</h2><span class="en">Problem & Solution</span></div>
+    <div class="anim" style="--i:1">
+      <table>
+        <thead><tr><th style="width:16%">文本结构</th><th style="width:34%">内容要点</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td><b>第一部分 · 呈现问题</b></td><td>问题的具体内容</td><td class="cn">「什么问题」</td></tr>
+          <tr><td><b>第二部分 · 分析原因 / 反应</b></td><td>原因或反应的具体内容及展开</td><td class="cn">人们为何犹豫、为何产生问题</td></tr>
+          <tr><td><b>第三部分 · 解决方案</b></td><td>方案具体内容 + 展开说明的主题句与细节</td><td class="cn">「怎么解决」</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card anim" style="--i:2;margin-top:14px">
+      <div class="lead" style="font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:8px">写作步骤</div>
+      <div class="step"><span class="sn">1</span><span class="st">按基本结构把文本分为<b>三个部分</b></span></div>
+      <div class="step"><span class="sn">2</span><span class="st"><b>圈划</b>各部分内容要点</span></div>
+      <div class="step"><span class="sn">3</span><span class="st">撰写概要：<b>问题关键信息 + 原因反应 + 解决方案</b></span></div>
+      <div class="step"><span class="sn">4</span><span class="st">连接润色，<b>检查</b>：每部分主题句 + 展开说明关键信息</span></div>
+    </div>
+  </section>
+
+  <!-- 22 问题解决例题 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#ea580c">论说类 3/6 · 例题</span><h2>Intervene Properly</h2><span class="en">问题解决型</span></div>
+    <div class="ex-grid anim" style="--i:1">
+      <div class="ex-col">
+        <div class="ex-box">
+          <div class="lead">原文 · 圈划关键信息（含为何提炼）</div>
+          <div class="mk" style="--pc:#dc2626"><span class="mtag">① 问题</span><div><b>A tired parent loses it — and a child suffers.</b> We'd like to help, but <b>we hesitate</b> — will we embarrass and offend the parent?<span class="why">▸ 为何：<b>问题的具体内容</b>（孩子受虐、旁观者犹豫）——概括首句，交代「什么问题」。</span></div></div>
+          <div class="mk" style="--pc:#d97706"><span class="mtag">② 反应</span><div>There is a common assumption that <b>intervening is rude and critical</b>. But it needn't be.<span class="why">▸ 为何：<b>人们犹豫的原因/顾虑</b>（误以为干涉=粗鲁批评），是承上启下的关键。</span></div></div>
+          <div class="mk" style="--pc:#059669"><span class="mtag">③ 方案</span><div>Intervention can be <b>helpful and caring</b>, not hurtful criticism. <b>Children are too helpless and inexperienced to stand up for themselves</b>, so we have an obligation to step in.<span class="why">▸ 为何：<b>解决方案主题句</b>（善意干涉）+ 理由（孩子无力自保）；具体问句「How dare you…」是例证，<b>次要</b>。</span></div></div>
+          <div class="mk" style="--pc:#059669"><span class="mtag">④ 展开</span><div>Intervention can have a <b>lifelong effect</b> — many adults still recall the time a stranger stepped in, which <b>gave them hope</b>.<span class="why">▸ 为何：<b>方案的展开说明</b>（长期影响、带来希望），是第二个支持理由。</span></div></div>
+        </div>
+      </div>
+      <div class="ex-col">
+        <div class="ex-box">
+          <div class="lead">概括 · 点击揭示（含转写逻辑）</div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">问题 + 反应</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">We may hesitate to help children abused by parents in public to avoid possible embarrassment and offense.</div><div class="how">▸ 转写：<b>长句缩短</b>（并列句 → 简单句）+ <b>句式转换</b>（疑问句 → 不定式 to avoid）+ <b>词性转换</b>（embarrass → embarrassment；offend → offense）</div></div></div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">方案 1</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">However, intervention can be helpful and caring.</div><div class="how">▸ 转写：<b>信息概括</b>（a world of difference between hurtful criticism and helpful intervention → helpful and caring）+ <b>连接词</b> However 表转折</div></div></div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">方案 2</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">We are obliged to intervene because children are not strong and old enough for self-protection.</div><div class="how">▸ 转写：<b>同义替换</b>（helpless and inexperienced → not strong and old enough）+ <b>句式转换</b>（have an obligation → are obliged）+ <b>连接词</b> because 表原因</div></div></div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">方案 3</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">Besides, our intervention may bring hope and have a lifelong impact on their future.</div><div class="how">▸ 转写：<b>信息概括</b>（counseling adults recall… → bring hope）+ <b>同义替换</b>（lifelong effect → lifelong impact）+ <b>连接词</b> Besides 表递进</div></div></div>
+          <div class="rv gold-on" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">合成范文 · 53 words</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">We may hesitate to help children abused by parents in public to avoid possible embarrassment and offense. However, intervention can be helpful and caring. We are obliged to intervene because children are not strong and old enough for self-protection. Besides, our intervention may bring hope and have a lifelong impact on their future.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 23 观点论证型 结构步骤 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#d97706">论说类 4/6 · 观点论证型</span><h2>观点论证型 · 结构与步骤</h2><span class="en">Argumentation</span></div>
+    <div class="anim" style="--i:1">
+      <table>
+        <thead><tr><th style="width:16%">文本结构</th><th style="width:34%">内容要点</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td><b>第一部分 · 观点</b></td><td>观点的具体内容</td><td class="cn">一句话点明立场</td></tr>
+          <tr><td><b>第二部分 · 分论点</b></td><td>每个分论点的主题句 + 支持性细节</td><td class="cn">例子和数据<b>不写入</b>；<b>总结性的展开说明要写</b></td></tr>
+          <tr><td><b>第三部分 · 总结</b></td><td>重申观点 + 评论 / 希望 / 建议</td><td class="cn">可能不出现在文本中</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card anim" style="--i:2;margin-top:14px">
+      <div class="lead" style="font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:8px">写作步骤</div>
+      <div class="step"><span class="sn">1</span><span class="st">按基本结构把文本分为<b>两到三个部分</b></span></div>
+      <div class="step"><span class="sn">2</span><span class="st"><b>圈划</b>各部分内容要点</span></div>
+      <div class="step"><span class="sn">3</span><span class="st">撰写概要：<b>一句话总结观点 + 每个分论点主题句与细节 + 总结</b></span></div>
+      <div class="step"><span class="sn">4</span><span class="st">连接润色，<b>检查</b>：观点 + 分论点具体内容及展开</span></div>
+    </div>
+  </section>
+
+  <!-- 24 观点论证例题 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#d97706">论说类 4/6 · 例题</span><h2>Four-day Workweek</h2><span class="en">观点论证型</span></div>
+    <div class="ex-grid anim" style="--i:1">
+      <div class="ex-col">
+        <div class="ex-box">
+          <div class="lead">原文 · 圈划关键信息（含为何提炼）</div>
+          <div class="mk" style="--pc:#d97706"><span class="mtag">① 观点</span><div>A law allowing <b>a four-day workweek for 80% of normal pay</b> would <b>benefit the economy, companies and employees</b>.<span class="why">▸ 为何：<b>全文核心观点</b>，点明「三个受益层次」（企业/国家/个人）——是概括的总起句。</span></div></div>
+          <div class="mk" style="--pc:#2563eb"><span class="mtag">② 分论点1</span><div><b>The shortened workweek would increase company profits</b> — employees feel more rested and alert, making fewer costly errors.<span class="why">▸ 为何：<b>分论点1 的主题句</b>（企业受益）；80% 工资等数字是<b>次要</b>，不写。</span></div></div>
+          <div class="mk" style="--pc:#2563eb"><span class="mtag">③ 分论点2</span><div>For the country, it would <b>reduce unemployment rates</b> — some workload would shift to new employees.<span class="why">▸ 为何：<b>分论点2 的主题句</b>（国家受益，降低失业率）。</span></div></div>
+          <div class="mk" style="--pc:#2563eb"><span class="mtag">④ 分论点3</span><div>It would be <b>better for individual employees</b> — more free time to <b>improve the quality of their lives</b>.<span class="why">▸ 为何：<b>分论点3 的主题句</b>（个人受益，生活质量提升）。</span></div></div>
+        </div>
+      </div>
+      <div class="ex-col">
+        <div class="ex-box">
+          <div class="lead">概括 · 点击揭示（含转写逻辑）</div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">观点</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">Working four days a week with less pay would be beneficial at three levels.</div><div class="how">▸ 转写：<b>信息概括</b>（economy / companies / employees → beneficial at three levels）+ <b>同义替换</b>（80% of normal pay → with less pay）</div></div></div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">分论点 1 · 企业</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">First, companies increase profits by hiring more alert employees without increasing pay-related costs.</div><div class="how">▸ 转写：<b>信息概括</b>（rested / alert / fewer errors → more alert employees）+ <b>同义替换</b>（without additional pay → without increasing pay-related costs）+ <b>连接词</b> First</div></div></div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">分论点 2 · 国家</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">Second, the country would have lower unemployment rates with more people at work.</div><div class="how">▸ 转写：<b>同义替换</b>（workload shifted to others → more people at work）+ <b>连接词</b> Second</div></div></div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">分论点 3 · 个人</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">Moreover, employees would have a better quality of life by fruitfully spending more free time.</div><div class="how">▸ 转写：<b>信息概括</b>（families / private interests / leisure → fruitfully spending more free time）+ <b>同义替换</b>（improve the quality of their lives → have a better quality of life）+ <b>连接词</b> Moreover</div></div></div>
+          <div class="rv gold-on" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">合成范文 · 55 words</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">Working four days a week with less pay would be beneficial at three levels. First, companies increase profits by hiring more alert employees without increasing pay-related costs. Second, the country would have lower unemployment rates with more people at work. Moreover, employees would have a better quality of life by fruitfully spending more free time.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 25 研究报告型 结构步骤 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#0891b2">论说类 5/6 · 研究报告型</span><h2>研究报告型 · 结构与步骤</h2><span class="en">Research Report</span></div>
+    <div class="anim" style="--i:1">
+      <table>
+        <thead><tr><th style="width:16%">文本结构</th><th style="width:34%">内容要点</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td><b>第一部分 · 研究成果</b></td><td>结论 + 研究来源（谁/哪里）+ 时长 + 领域</td><td class="cn">部分基本信息可能出现在第二部分</td></tr>
+          <tr><td><b>第二部分 · 研究过程</b></td><td>研究方式（实验/测试等）+ 对象及数量 + 结果</td><td class="cn">「怎么做 + 发现什么」</td></tr>
+          <tr><td><b>第三部分 · 评论</b></td><td>研究的意义、影响、评论</td><td class="cn">积极 / 负面 / 谨慎</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card anim" style="--i:2;margin-top:14px">
+      <div class="lead" style="font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:8px">写作步骤</div>
+      <div class="step"><span class="sn">1</span><span class="st">按基本结构把文本分为<b>三个部分</b></span></div>
+      <div class="step"><span class="sn">2</span><span class="st"><b>圈划</b>各部分内容要点</span></div>
+      <div class="step"><span class="sn">3</span><span class="st">撰写概要：<b>研究成果基本信息 + 研究过程 + 意义/影响/评论</b></span></div>
+      <div class="step"><span class="sn">4</span><span class="st">连接润色，<b>检查</b>：研究基本信息 + 成果 + 过程 + 意义影响</span></div>
+    </div>
+  </section>
+
+  <!-- 26 研究报告例题 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#0891b2">论说类 5/6 · 例题</span><h2>Why Too Much Running Is Bad for Your Health</h2><span class="en">研究报告型</span></div>
+    <div class="ex-grid anim" style="--i:1">
+      <div class="ex-col">
+        <div class="ex-box">
+          <div class="lead">原文 · 圈划关键信息（含为何提炼）</div>
+          <div class="mk" style="--pc:#0891b2"><span class="mtag">① 成果</span><div><b>Marathons can be bad for your health</b> — 80 per cent of competitors suffer <b>kidney injury</b> because of dehydration.<span class="why">▸ 为何：<b>研究成果（结论）</b>，研究的核心发现——是概括首句必选。</span></div></div>
+          <div class="mk" style="--pc:#0891b2"><span class="mtag">② 来源</span><div>A team led by Professor Chirag Parikh, <b>of Yale University</b>, studied a group in <b>the 2015 Hartford Marathon</b>.<span class="why">▸ 为何：<b>研究来源基本信息</b>（谁 / 哪里），概要须交代研究主体。</span></div></div>
+          <div class="mk" style="--pc:#2563eb"><span class="mtag">③ 过程</span><div>They <b>collected blood and urine samples</b> and found that <b>82% of runners showed Stage 1 Acute Kidney Injury</b> soon after the race.<span class="why">▸ 为何：<b>研究方式与结果</b>（怎么做 + 发现什么）；82% 是数据，但其结论「肾功能受损」须保留。</span></div></div>
+          <div class="mk" style="--pc:#2563eb"><span class="mtag">④ 原因</span><div>Potential causes: <b>sustained rise in body temperature, dehydration, or decreased blood flow</b> to the kidneys.<span class="why">▸ 为何：<b>研究结果的潜在原因</b>，解释「为何受伤」，是研究报告型的要点之一。</span></div></div>
+          <div class="mk" style="--pc:#0d9488"><span class="mtag">⑤ 意义</span><div>The study <b>raises questions about the effects of repeated activity over time</b>, especially in warm climates.<span class="why">▸ 为何：<b>研究的意义/评论</b>（谨慎态度），作为概要的收尾句。</span></div></div>
+        </div>
+      </div>
+      <div class="ex-col">
+        <div class="ex-box">
+          <div class="lead">概括 · 点击揭示（含转写逻辑）</div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">成果 + 来源</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">Researchers of Yale University found marathon might cause kidney injury.</div><div class="how">▸ 转写：<b>句子整合</b>（①②合并，来源作主语）+ <b>同义替换</b>（can be bad for your health → might cause kidney injury）</div></div></div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">过程</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">The analysis of blood and urine samples shows most runners' kidneys can't filter waste very well within two days after the race.</div><div class="how">▸ 转写：<b>信息概括</b>（blood/urine/markers/82% AKI → most runners' kidneys can't filter waste well）+ <b>同义替换</b>（soon after → within two days）</div></div></div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">原因</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">Rising body temperature, water loss, or slower blood flow may account for the problem.</div><div class="how">▸ 转写：<b>同义替换</b>（sustained rise in body temperature → rising body temperature；dehydration → water loss；decreased blood flow → slower blood flow）</div></div></div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">意义</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">The finding raises concern about excessive vigorous activities in warm days.</div><div class="how">▸ 转写：<b>同义替换</b>（raises questions → raises concern）+ <b>信息概括</b>（repeated activity over time in warm climates → excessive vigorous activities in warm days）</div></div></div>
+          <div class="rv gold-on" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">合成范文 · 57 words</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">Researchers of Yale University found marathon might cause kidney injury. The analysis of blood and urine samples shows most runners' kidneys can't filter waste very well within two days after the race. Rising body temperature, water loss, or slower blood flow may account for the problem. The finding raises concern about excessive vigorous activities in warm days.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 27 建议忠告型 结构步骤 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#e11d48">论说类 6/6 · 建议忠告型</span><h2>建议忠告型 · 结构与步骤</h2><span class="en">Advice</span></div>
+    <div class="anim" style="--i:1">
+      <table>
+        <thead><tr><th style="width:16%">文本结构</th><th style="width:34%">内容要点</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td><b>第一部分 · 问题</b></td><td>问题的具体内容 + 引出「建议忠告」</td><td class="cn">「现状 / 困境」</td></tr>
+          <tr><td><b>第二部分 · 建议忠告</b></td><td>每个建议的主题句 + 支持性细节</td><td class="cn">一般<b>两到三个建议</b>，并具体展开</td></tr>
+          <tr><td><b>第三部分 · 总结</b></td><td>对全文内容的总结</td><td class="cn">可能不出现在文本中</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card anim" style="--i:2;margin-top:14px">
+      <div class="lead" style="font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:8px">写作步骤</div>
+      <div class="step"><span class="sn">1</span><span class="st">按基本结构把文本分为<b>两到三个部分</b></span></div>
+      <div class="step"><span class="sn">2</span><span class="st"><b>圈划</b>各部分内容要点</span></div>
+      <div class="step"><span class="sn">3</span><span class="st">撰写概要：<b>问题 + 引出建议 → 每个建议主题句与细节 → 总结</b></span></div>
+      <div class="step"><span class="sn">4</span><span class="st">连接润色，<b>检查</b>：每部分主题句 + 每个建议的主题句与展开</span></div>
+    </div>
+  </section>
+
+  <!-- 28 建议忠告例题 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#e11d48">论说类 6/6 · 例题</span><h2>Becoming an Attractive Employee</h2><span class="en">建议忠告型</span></div>
+    <div class="ex-grid anim" style="--i:1">
+      <div class="ex-col">
+        <div class="ex-box">
+          <div class="lead">原文 · 圈划关键信息（含为何提炼）</div>
+          <div class="mk" style="--pc:#dc2626"><span class="mtag">① 问题</span><div>The 2008 financial crisis created <b>an unstable job market</b>. Job seekers must <b>make themselves as attractive as possible</b> to employers.<span class="why">▸ 为何：<b>问题的具体内容</b>（求职困境）+ 引出建议——概括首句，点明「怎么吸引雇主」。</span></div></div>
+          <div class="mk" style="--pc:#2563eb"><span class="mtag">② 建议1</span><div><b>Information technology skills will play an increasing role.</b> Young people should emphasize these skills when applying.<span class="why">▸ 为何：<b>建议1 的主题句</b>（信息技术技能）；「在信息时代长大」是展开，<b>次要</b>。</span></div></div>
+          <div class="mk" style="--pc:#2563eb"><span class="mtag">③ 建议2</span><div>Another attractive quality is <b>experience</b> — list activities that involved <b>teamwork and goal-driven responsibilities</b>.<span class="why">▸ 为何：<b>建议2 的主题句</b>（经验）+ 关键细节（团队合作、目标导向）；社团/志愿者是例证，<b>次要</b>。</span></div></div>
+          <div class="mk" style="--pc:#2563eb"><span class="mtag">④ 建议3</span><div>Finally, a great <b>attitude</b> — don't be overconfident; ask <b>"What would be expected of me as an employee?"</b><span class="why">▸ 为何：<b>建议3 的主题句</b>（态度），以「考虑雇主的期望」为核心。</span></div></div>
+        </div>
+      </div>
+      <div class="ex-col">
+        <div class="ex-box">
+          <div class="lead">概括 · 点击揭示（含转写逻辑）</div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">问题</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">How can young people attract their future employers?</div><div class="how">▸ 转写：<b>句式转换</b>（陈述 → 设问 How can…?）+ <b>信息概括</b>（unstable job market / make themselves attractive → attract their future employers）</div></div></div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">建议 1 · 技能</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">First, they need to demonstrate their knowledge and skills in information technology.</div><div class="how">▸ 转写：<b>同义替换</b>（emphasize these skills → demonstrate their knowledge and skills）+ <b>连接词</b> First</div></div></div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">建议 2 · 经验</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">Second, they should include in their resumes the experiences that reflect they are cooperative and goal-oriented.</div><div class="how">▸ 转写：<b>同义替换</b>（teamwork → cooperative；goal-driven → goal-oriented）+ <b>信息概括</b>（club / volunteer 等 → experiences）+ <b>连接词</b> Second</div></div></div>
+          <div class="rv" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">建议 3 · 态度</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">Finally, they need to adopt a proper attitude, that is, taking future employers' expectations into consideration.</div><div class="how">▸ 转写：<b>信息概括</b>（overconfident / "What would be expected of me" → a proper attitude, taking expectations into consideration）+ <b>连接词</b> Finally</div></div></div>
+          <div class="rv gold-on" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">合成范文 · 52 words</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">How can young people attract their future employers? First, they need to demonstrate their knowledge and skills in information technology. Second, they should include in their resumes the experiences that reflect they are cooperative and goal-oriented. Finally, they need to adopt a proper attitude, that is, taking future employers' expectations into consideration.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PART 05 语言分析 ===== -->
+  <!-- 29 六大技巧总览 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#d97706">PART 05 · 语言分析</span><h2>语言加工 · 六大技巧</h2><span class="en">Six Techniques</span></div>
+    <div class="grid g3" style="margin-top:6px">
+      <div class="card anim" style="--i:1;--pc:#2563eb"><span class="num">1</span><h4>句式转换</h4><div class="cn">改被动为主动、长句改短语、疑问改陈述等</div></div>
+      <div class="card anim" style="--i:2;--pc:#059669"><span class="num">2</span><h4>同义替换</h4><div class="cn">用近义词、更简的词替换原词</div></div>
+      <div class="card anim" style="--i:3;--pc:#0d9488"><span class="num">3</span><h4>词性转换</h4><div class="cn">名词 / 动词 / 形容词 / 副词互转</div></div>
+      <div class="card anim" style="--i:4;--pc:#7c3aed"><span class="num">4</span><h4>句子整合</h4><div class="cn">多个简单句合为一句（非谓语 / 从句）</div></div>
+      <div class="card anim" style="--i:5;--pc:#ea580c"><span class="num">5</span><h4>长句缩短</h4><div class="cn">删掉修饰，只留主干</div></div>
+      <div class="card anim" style="--i:6;--pc:#dc2626"><span class="num">6</span><h4>信息概括</h4><div class="cn">把零散细节概括成上位词 / 副词</div></div>
+    </div>
+    <div class="note anim" style="--i:7;margin-top:18px">
+      <span class="ico">🧩</span>
+      <div>六大技巧常<b>组合使用</b>：先<b>圈划主要信息</b>，再对句子做<b>句式转换、同义替换、词性转换、句子整合、长句缩短、信息概括</b>加工。下面 8 组例句逐一拆解。</div>
+    </div>
+  </section>
+
+  <!-- 30 语言分析 1-2 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#d97706">PART 05 · 语言分析</span><h2>例句精析 1–2</h2><span class="en">Language Analysis</span></div>
+    <div class="ex anim" style="--i:1">
+      <div class="lead">例 1 · Meet the Member Who Quit Sugar</div>
+      <div class="cn-tran" style="margin-top:0"><span class="en" style="font-weight:700;color:#334155">It was so <b style="color:#dc2626">hard</b> at first. But the weeks kept coming and it just got easier…</span></div>
+      <div class="cn-tran" style="margin-top:6px;color:var(--brand)">→ Despite <b>initial</b> <b>discomfort</b>, she was gradually used to <b>eating and living healthily</b>.</div>
+      <div class="cn-tran" style="margin-top:8px">① 句式转换（介词短语 despite）② 同义替换 hard→discomfort、at first→initial ③ 信息概括（零散细节→eat and live healthily）</div>
+    </div>
+    <div class="ex anim" style="--i:2">
+      <div class="lead">例 2 · Gene Therapy</div>
+      <div class="cn-tran" style="margin-top:0"><span class="en" style="font-weight:700;color:#334155">Scientists are seeing that gene therapy is <b style="color:#dc2626">revolutionizing</b>… <b style="color:#dc2626">introduced into</b> <b style="color:#dc2626">defective</b> cells…</span></div>
+      <div class="cn-tran" style="margin-top:6px;color:var(--brand)">→ Gene therapy, intended to prevent or cure disease by <b>inserting</b> healthy genes into <b>faulty</b> cells, is changing the treatment of disease <b>revolutionarily</b>.</div>
+      <div class="cn-tran" style="margin-top:8px">① 句子整合 + 句式转换（过去分词作定语）② 同义替换 be introduced into→insert into、defective→faulty ③ 词性转换 revolutionize(v)→revolutionarily(adv)</div>
+    </div>
+  </section>
+
+  <!-- 31 语言分析 3-4 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#d97706">PART 05 · 语言分析</span><h2>例句精析 3–4</h2><span class="en">Language Analysis</span></div>
+    <div class="ex anim" style="--i:1">
+      <div class="lead">例 3 · Shyness（原因1）</div>
+      <div class="cn-tran" style="margin-top:0"><span class="en" style="font-weight:700;color:#334155">Today's children are <b style="color:#dc2626">growing up</b> in smaller families… <b style="color:#dc2626">because of their lack of</b> social skills…</span></div>
+      <div class="cn-tran" style="margin-top:6px;color:var(--brand)">→ Firstly, with smaller families and working parents, children <b>lack</b> social interactions.</div>
+      <div class="cn-tran" style="margin-top:8px">① 句子整合 + 句式转换（with 介词短语）② 同义替换 parents work full time→working parents ③ 词性转换 lack(n)→lack(v)</div>
+    </div>
+    <div class="ex anim" style="--i:2">
+      <div class="lead">例 4 · Shyness（原因2）</div>
+      <div class="cn-tran" style="margin-top:0"><span class="en" style="font-weight:700;color:#334155">…failure is entirely <b style="color:#7c3aed">blamed on the person</b>. Therefore, Japanese learn not to take risks in public…</span></div>
+      <div class="cn-tran" style="margin-top:6px;color:var(--brand)">→ Secondly, blaming failure on individuals causes people in some cultures to be shy in public.</div>
+      <div class="cn-tran" style="margin-top:8px">① 句子整合（动名词作主语）② 句式转换（被动→主动）③ 同义替换 person→individual</div>
+    </div>
+  </section>
+
+  <!-- 32 语言分析 5-6 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#d97706">PART 05 · 语言分析</span><h2>例句精析 5–6</h2><span class="en">Language Analysis</span></div>
+    <div class="ex anim" style="--i:1">
+      <div class="lead">例 5 · Learning by Rote</div>
+      <div class="cn-tran" style="margin-top:0"><span class="en" style="font-weight:700;color:#334155">The <b style="color:#dc2626">decline</b> of rote learning… But now there are <b style="color:#dc2626">voices for a need to return</b>… memorizing key data is <b style="color:#dc2626">essential</b>…</span></div>
+      <div class="cn-tran" style="margin-top:6px;color:var(--brand)">→ Although technology makes it <b>less needed</b>, its <b>value</b> is being <b>rediscovered</b>.</div>
+      <div class="cn-tran" style="margin-top:8px">① 句子整合（让步状语从句）② 句式转换（改主动）③ 同义替换 decline→less needed、essential→value、voices for return→rediscover</div>
+    </div>
+    <div class="ex anim" style="--i:2">
+      <div class="lead">例 6 · Learning by Rote（深入）</div>
+      <div class="cn-tran" style="margin-top:0"><span class="en" style="font-weight:700;color:#334155">…without <b style="color:#dc2626">memorizing these foundation elements</b>, you cannot progress to a <b style="color:#dc2626">deeper</b> understanding…</span></div>
+      <div class="cn-tran" style="margin-top:6px;color:var(--brand)">→ Rote learning helps people <b>acquire basic knowledge</b>, laying a foundation for <b>further</b> understanding.</div>
+      <div class="cn-tran" style="margin-top:8px">① 句式转换（现在分词作伴随状语）② 同义替换 memorize foundation elements→acquire basic knowledge、deeper→further</div>
+    </div>
+  </section>
+
+  <!-- 33 语言分析 7-8 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#d97706">PART 05 · 语言分析</span><h2>例句精析 7–8</h2><span class="en">Language Analysis</span></div>
+    <div class="ex anim" style="--i:1">
+      <div class="lead">例 7 · Intervene Properly</div>
+      <div class="cn-tran" style="margin-top:0"><span class="en" style="font-weight:700;color:#334155">We'd like to help, but we hesitate. …will we <b style="color:#dc2626">embarrass and offend</b> the parent…?</span></div>
+      <div class="cn-tran" style="margin-top:6px;color:var(--brand)">→ We may hesitate to help children abused by parents in public to avoid possible <b>embarrassment and offense</b>.</div>
+      <div class="cn-tran" style="margin-top:8px">① 长句缩短（并列句→简单句）② 句式转换（疑问句→不定式 to avoid）③ 词性转换 embarrass→embarrassment、offend→offense</div>
+    </div>
+    <div class="ex anim" style="--i:2">
+      <div class="lead">例 8 · Four-day Workweek</div>
+      <div class="cn-tran" style="margin-top:0"><span class="en" style="font-weight:700;color:#334155">…could <b style="color:#dc2626">improve the quality of their lives</b> by spending the extra time with their families, pursuing private interests, or enjoying leisure activities.</span></div>
+      <div class="cn-tran" style="margin-top:6px;color:var(--brand)">→ Finally, employees would <b>have a better quality of life</b> by <b>fruitfully</b> spending more free time.</div>
+      <div class="cn-tran" style="margin-top:8px">① 信息概括（三种方式→副词 fruitfully）② 同义替换 improve the quality of life→have a better quality of life</div>
+    </div>
+  </section>
+
+  <!-- ===== PART 06 实战演练 ===== -->
+  <!-- 34 实战演练 练习 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#ea580c">PART 06 · 实战演练</span><h2>Exercise 1 · 当堂练习</h2><span class="en">An Unforgettable Experience</span></div>
+    <div class="passage anim" style="--i:1">
+      <p>It was a hot Sunday morning. John was sitting on a bus. Sitting in front of him was a girl in red. At one stop, an old man got on and walked straight towards them. "I will give my seat to him if he stands beside me," John thought to himself. But he stopped beside the girl in red. <b>She stood up immediately and helped him into her seat.</b> The old man thanked her and she said with a smile, "My pleasure."</p>
+      <p>The bus went on smoothly. <b>Suddenly, the driver skidded to a stop to avoid a cyclist, and the girl in red fell heavily onto the floor.</b> John dashed over to help her up. But, to his great surprise, <b>he saw a wooden stick where her left leg should have been.</b> A handicapped girl who desperately needed a seat herself gave her seat to the old man!</p>
+      <p>"Your leg!" murmured John. "Oh, it's okay. It's been a part of me for a long time." She smiled as if nothing had happened. "Please take my seat," John said and reached out to let her sit down.</p>
+      <p>For the rest of the journey, John could think of nothing but the girl's <b>consideration, confidence, and courage</b>.</p>
+    </div>
+    <div class="tip anim" style="--i:2">
+      <span>✍️</span>
+      <div>这是<b>叙述类</b>文章。请按<b>情节五阶段</b>圈划关键信息（高亮可作参考），用自己的话写一篇 <b>60 词内</b>概要，再翻到下一页对照参考。</div>
+    </div>
+  </section>
+
+  <!-- 35 实战演练 参考 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#ea580c">PART 06 · 实战演练</span><h2>Exercise 1 · 参考概括</h2><span class="en">Reference Summary</span></div>
+    <div class="ex-grid anim" style="--i:1">
+      <div class="ex-col">
+        <div class="ex-box">
+          <div class="lead">情节五阶段 · 圈划</div>
+          <div class="mk" style="--pc:#2563eb"><span class="mtag">① 引入</span><span>On a hot Sunday morning, a girl in red on a bus <b>gave her seat to an old man</b>.</span></div>
+          <div class="mk" style="--pc:#0d9488"><span class="mtag">② 发展</span><span>The bus <b>braked suddenly</b>, and the girl <b>fell heavily</b>.</span></div>
+          <div class="mk" style="--pc:#dc2626"><span class="mtag">③ 高潮</span><span>John discovered <b>she had a wooden leg</b> — a handicapped girl had offered her seat.</span></div>
+          <div class="mk" style="--pc:#d97706"><span class="mtag">④ 结局</span><span>She smiled calmly, and <b>John gave her his seat</b>.</span></div>
+          <div class="mk" style="--pc:#7c3aed"><span class="mtag">⑤ 尾声</span><span>John would always remember her <b>consideration, confidence and courage</b>.</span></div>
+        </div>
+      </div>
+      <div class="ex-col">
+        <div class="ex-box">
+          <div class="lead">参考范文 · 点击显示</div>
+          <div class="rv gold-on" onclick="this.classList.toggle('on')"><div class="rv-trigger"><span class="rv-label">Reference · about 60 words</span><span class="rv-plus">＋</span></div><div class="rv-body"><div class="sum">On a hot morning, a girl in red on a bus gave her seat to an old man. When the bus braked suddenly, she fell, and John discovered she had a wooden leg — a handicapped girl had offered her seat. She smiled calmly, and John gave her his seat. Deeply moved, John would always remember her consideration, confidence and courage.</div></div></div>
+          <div class="tip" style="margin-top:14px">
+            <span>✅</span>
+            <div>自检：<b>5W1H</b> 是否齐全？是否<b>只留每阶段一句话</b>？是否用了<b>自己的话</b>（gave her seat / braked suddenly / wooden leg）？</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 36 小结口诀 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#64748b">SUMMARY</span><h2>全课小结</h2><span class="en">Recap</span></div>
+    <div class="grid g4" style="margin-top:6px">
+      <div class="sum-block anim" style="--i:1;--pc:#2563eb">
+        <h4><span class="dot"></span>读：两大步</h4>
+        <ul><li><b>略读</b>圈结构/逻辑信号词</li><li><b>细读</b>分主次、圈关键</li><li>限时：略读半分钟、细读两分钟</li></ul>
+      </div>
+      <div class="sum-block anim" style="--i:2;--pc:#059669">
+        <h4><span class="dot"></span>叙述类</h4>
+        <ul><li>情节<b>五阶段</b>：引入/发展/高潮/结局/尾声</li><li>每阶段<b>一句话</b></li><li>自检 <b>5W1H</b></li></ul>
+      </div>
+      <div class="sum-block anim" style="--i:3;--pc:#7c3aed">
+        <h4><span class="dot"></span>论说类</h4>
+        <ul><li><b>六种亚型</b>结构套路</li><li>抓<b>主题句</b> + 支持细节</li><li>例子数据不写、总结性展开要写</li></ul>
+      </div>
+      <div class="sum-block anim" style="--i:4;--pc:#d97706">
+        <h4><span class="dot"></span>写：六大技巧</h4>
+        <ul><li>句式转换 · 同义替换 · 词性转换</li><li>句子整合 · 长句缩短 · 信息概括</li><li>最短连接词 + 分号</li></ul>
+      </div>
+    </div>
+    <div class="motto anim" style="--i:5">
+      先读懂，再写精 —— <span>不照抄原句 · 不加评论 · 不超字数</span>
+    </div>
+  </section>
+
+</div>
+
+<div id="nav">
+  <button id="home" aria-label="目录" title="回到目录">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+  </button>
+  <button id="prev" aria-label="上一页" title="上一页 (←)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="counter"><b id="cur">1</b> / <span id="total">36</span></div>
+  <button id="next" aria-label="下一页" title="下一页 (→)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <button id="fs" aria-label="全屏" title="全屏 (F)" style="border:none;background:transparent;width:34px">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+  </button>
+</div>
+<div id="hint">← → 翻页 · 空格下一页 · F 全屏 · 点击「＋」揭示答案</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  const curEl = document.getElementById('cur');
+  const totalEl = document.getElementById('total');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const homeBtn = document.getElementById('home');
+  const fsBtn = document.getElementById('fs');
+  const progress = document.getElementById('progress');
+  let idx = 0;
+  totalEl.textContent = total;
+
+  function render(){
+    slides.forEach((s,i)=>{
+      s.classList.toggle('active', i===idx);
+      s.classList.toggle('prev', i<idx);
+    });
+    curEl.textContent = idx+1;
+    progress.style.width = ((idx+1)/total*100) + '%';
+    prevBtn.disabled = idx===0;
+    nextBtn.disabled = idx===total-1;
+  }
+  function go(n){
+    idx = Math.max(0, Math.min(total-1, n));
+    render();
+  }
+  prevBtn.addEventListener('click', ()=>go(idx-1));
+  nextBtn.addEventListener('click', ()=>go(idx+1));
+  homeBtn.addEventListener('click', ()=>go(1));
+  document.addEventListener('keydown', (e)=>{
+    if(e.key==='ArrowRight' || e.key===' ' || e.key==='PageDown'){ e.preventDefault(); go(idx+1); }
+    else if(e.key==='ArrowLeft' || e.key==='PageUp'){ e.preventDefault(); go(idx-1); }
+    else if(e.key==='Home'){ go(0); }
+    else if(e.key==='End'){ go(total-1); }
+    else if(e.key==='f' || e.key==='F'){
+      if(document.fullscreenElement){ document.exitFullscreen(); }
+      else { document.documentElement.requestFullscreen(); }
+    }
+  });
+  fsBtn.addEventListener('click', ()=>{
+    if(document.fullscreenElement){ document.exitFullscreen(); }
+    else { document.documentElement.requestFullscreen(); }
+  });
+  // 触屏滑动
+  let touchX=null;
+  document.addEventListener('touchstart', e=>{ touchX=e.touches[0].clientX; });
+  document.addEventListener('touchend', e=>{
+    if(touchX===null) return;
+    const dx=e.changedTouches[0].clientX-touchX;
+    if(Math.abs(dx)>50){ dx<0?go(idx+1):go(idx-1); }
+    touchX=null;
+  });
+  render();
+</script>
+</body></html>

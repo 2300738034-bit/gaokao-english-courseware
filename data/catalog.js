@@ -23,7 +23,13 @@ window.CATALOG = {
       id: "gaiyao",
       name: "高考英语概要写作专项训练",
       color: "blue",
-      coursewares: []
+      coursewares: [
+        {
+          title: "概要写作课件（1-2节）",
+          file: "courseware/概要写作课件（1-2节）.html",
+          added: "2026-09-16"
+        }
+      ]
     },
     {
       id: "yufa",
