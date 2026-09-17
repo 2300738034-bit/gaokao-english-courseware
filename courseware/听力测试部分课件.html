@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高考英语 · 听力测试部分 题型技巧详解</title>
+<style>
+  :root{
+    --ink:#453f37;
+    --muted:#8b8477;
+    --line:#e1dacb;
+    --bg:#eae4d9;
+    --paper:#faf7f1;
+    --brand:#83917c;
+    --brand-2:#7c90a1;
+    --gold:#b4a075;
+    --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:var(--font);
+    color:var(--ink);
+    background:var(--bg);
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:56px 44px 92px}
+
+  .slide{
+    position:absolute;
+    width:min(1200px,100%);
+    max-height:100%;
+    background:var(--paper);
+    border-radius:20px;
+    box-shadow:0 24px 60px -24px rgba(80,72,60,.32), 0 0 0 1px rgba(80,72,60,.05);
+    padding:44px 52px;
+    opacity:0;
+    transform:translateX(40px);
+    pointer-events:none;
+    transition:opacity .45s ease, transform .45s ease;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+  .slide.active{opacity:1;transform:translateX(0);pointer-events:auto}
+  .slide.prev{transform:translateX(-40px)}
+
+  .slide .anim{opacity:0;transform:translateY(14px)}
+  .slide.active .anim{
+    opacity:1;transform:none;
+    transition:opacity .5s ease, transform .5s ease;
+    transition-delay:calc(var(--i,0)*70ms + 60ms);
+  }
+
+  .head{display:flex;align-items:center;gap:14px;margin-bottom:20px;flex:0 0 auto}
+  .part-badge{
+    font-size:13px;font-weight:700;letter-spacing:.06em;
+    color:#fff;background:var(--pc,#83917c);
+    padding:6px 14px;border-radius:99px;white-space:nowrap;
+  }
+  .head h2{font-size:26px;font-weight:800;letter-spacing:.01em;color:var(--ink)}
+  .head .en{font-size:14px;color:var(--muted);font-weight:600;margin-left:auto;white-space:nowrap}
+
+  /* ===== 封面 ===== */
+  .slide.cover{
+    background:
+      radial-gradient(900px 500px at 85% -10%, rgba(124,144,161,.5), transparent 60%),
+      radial-gradient(700px 500px at -10% 110%, rgba(180,160,117,.4), transparent 55%),
+      linear-gradient(135deg,#53604f 0%,#5e6e66 55%,#6e7f82 100%);
+    color:#fff;
+    justify-content:center;
+  }
+  .cover .brand-line{position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#b4a075,#c9b58d,#83917c,#7c90a1,#9a8fae)}
+  .cover .tag{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#e7e0d2;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);padding:7px 16px;border-radius:99px;margin-bottom:26px}
+  .cover h1{font-size:52px;font-weight:900;line-height:1.18;letter-spacing:.01em}
+  .cover h1 .hl{color:#c9b58d}
+  .cover .sub{margin-top:20px;font-size:18px;color:#e0d9ca;font-weight:500;line-height:1.6;max-width:780px}
+  .cover .meta{margin-top:40px;display:flex;gap:26px;font-size:14px;color:#c4cdd3;font-weight:600}
+  .cover .meta b{color:#fff}
+
+  /* ===== 卡片 & 网格 ===== */
+  .grid{display:grid;gap:14px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:16px;
+    padding:18px 20px;position:relative;overflow:hidden;
+  }
+  .card .num{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-width:34px;height:34px;border-radius:10px;font-size:15px;font-weight:800;
+    color:#fff;background:var(--pc,#83917c);margin-bottom:10px;padding:0 8px;
+  }
+  .card h4{font-size:19px;font-weight:800;margin-bottom:5px}
+  .card .cn{font-size:13.5px;color:var(--muted);font-weight:600}
+  .card .eg{font-size:14px;color:#5c564c;margin-top:9px;line-height:1.7;word-break:break-word}
+  .card .eg b{color:#53604f;font-weight:800}
+
+  .key{color:var(--brand-2);font-weight:800}
+  .gold{color:#8a7440;font-weight:800}
+  .red{color:#b05f4d;font-weight:800}
+
+  /* 提示框 */
+  .note{
+    display:flex;gap:12px;align-items:flex-start;
+    background:#f3eee2;border:1px solid #d9cbac;border-left:4px solid #b4a075;
+    border-radius:12px;padding:13px 17px;margin-top:14px;font-size:14.5px;line-height:1.62;
+  }
+  .note .ico{font-size:17px;line-height:1.4}
+  .note b{color:#6f5d33}
+
+  .tip{
+    display:flex;gap:10px;align-items:flex-start;
+    background:#eef1ea;border:1px solid #cdd7c6;border-left:4px solid #83917c;
+    border-radius:12px;padding:11px 15px;margin-top:12px;font-size:13.8px;line-height:1.6;color:#3f4a3c;
+  }
+  .tip b{color:#3f4a3c}
+
+  .warn{
+    display:flex;gap:10px;align-items:flex-start;
+    background:#f2e8e3;border:1px solid #e0c4b9;border-left:4px solid #b0725e;
+    border-radius:12px;padding:11px 15px;margin-top:12px;font-size:13.8px;line-height:1.6;color:#7a4232;
+  }
+  .warn b{color:#8a4a39}
+
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+  /* 段落正文 */
+  .para{font-size:14.5px;line-height:1.78;color:#4c463c;margin-top:10px}
+  .para b{color:var(--ink)}
+  .para .en{color:var(--brand-2);font-weight:700}
+
+  /* ===== 题型总览 ===== */
+  .type-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+  .type-item{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-size:14px}
+  .type-item .tno{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:8px;background:var(--pc,#83917c);color:#fff;font-weight:800;font-size:13px;flex:0 0 auto}
+  .type-item .tname{font-weight:700}
+  .type-item .tdesc{font-size:12.5px;color:var(--muted);margin-left:auto}
+
+  /* ===== 真题 ===== */
+  .exam{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 20px;margin-top:10px}
+  .exam .exam-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+  .exam .exam-head .tag{font-size:12.5px;font-weight:800;color:#fff;background:var(--pc,#b0725e);padding:4px 12px;border-radius:99px}
+  .exam .exam-head .src{font-size:12px;color:var(--muted);font-weight:600;margin-left:auto;text-align:right}
+  .opts{margin-top:8px;font-size:14.3px;line-height:1.85;color:#4c463c}
+  .opts .o{display:block;padding-left:2px}
+  .opts .o b{color:var(--ink);font-weight:800}
+  .opts.inline .o{display:inline-block;margin-right:22px}
+
+  /* 听力原文 */
+  .script{background:#f6f3ec;border:1px dashed #d6ccb4;border-radius:12px;padding:12px 16px;margin-top:12px;max-height:300px;overflow:auto}
+  .script .lead{font-size:12px;font-weight:800;color:var(--muted);letter-spacing:.06em;margin-bottom:8px}
+  .script p{font-size:14px;line-height:1.72;color:#4c463c;margin:2px 0}
+  .script p b{color:var(--brand-2);font-weight:700}
+  .script .qline{color:#6f5d33;font-weight:700}
+
+  /* 答案折叠 */
+  .reveal{margin-top:12px;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .reveal summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:9px 14px;font-size:13.5px;font-weight:700;color:#53604f;background:#f6f3ec;user-select:none}
+  .reveal summary::-webkit-details-marker{display:none}
+  .reveal summary .caret{display:inline-block;transition:transform .2s;font-size:11px}
+  .reveal[open] summary .caret{transform:rotate(90deg)}
+  .reveal .ans{padding:10px 14px 12px;border-top:1px dashed var(--line);font-size:13.8px;line-height:1.72;color:#4c463c}
+  .reveal .ans .en{font-weight:800;color:#53604f}
+  .reveal .ans b{color:#6f5d33}
+  .exam .reveal{margin-top:10px}
+  .exam .reveal summary{padding:7px 12px;font-size:12.5px}
+  .exam .reveal .ans{padding:8px 12px 10px;font-size:13.3px}
+
+  /* 技巧点拨卡片 */
+  .tech{background:#fff;border:1px solid var(--line);border-left:4px solid var(--pc,#83917c);border-radius:12px;padding:13px 17px;margin-top:10px}
+  .tech .lead{font-size:12.5px;font-weight:800;color:var(--pc,#83917c);letter-spacing:.05em;margin-bottom:8px}
+  .tech p{font-size:13.8px;line-height:1.7;color:#4c463c}
+  .tech p b{color:var(--ink)}
+
+  /* ===== 词汇表 ===== */
+  .vocab{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .vocab.g3{grid-template-columns:repeat(3,1fr)}
+  .vcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+  .vcard h5{font-size:13px;font-weight:800;color:var(--pc,#83917c);margin-bottom:10px;letter-spacing:.02em;display:flex;align-items:center;gap:7px}
+  .vcard h5::before{content:"";width:8px;height:8px;border-radius:3px;background:var(--pc,#83917c)}
+  .vcard .words{display:flex;flex-wrap:wrap;gap:6px}
+  .vcard .w{font-size:13px;background:#f4f1ea;border:1px solid #e8e2d4;color:#4c463c;padding:3px 10px;border-radius:99px;font-weight:600;line-height:1.4}
+  .vcard .w .cn{color:var(--muted);font-weight:500;font-size:12px}
+  .vcard.pair .w{display:inline-flex;align-items:baseline;gap:4px}
+
+  /* 议论文三模式 */
+  .mode{border:1px solid var(--line);border-radius:12px;background:#fff;padding:11px 14px;margin-top:8px}
+  .mode .m-h{font-size:13px;font-weight:800;color:var(--pc,#83917c);margin-bottom:4px}
+  .mode p{font-size:13px;line-height:1.62;color:#4c463c}
+  .mode p b{color:var(--ink)}
+
+  .sum-block{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:#fff}
+  .sum-block h4{font-size:15.5px;font-weight:800;margin-bottom:11px;display:flex;align-items:center;gap:8px}
+  .sum-block .dot{width:10px;height:10px;border-radius:3px;background:var(--pc,#83917c)}
+  .sum-block ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .sum-block li{font-size:13.5px;color:#4c463c;line-height:1.5}
+  .sum-block li b{color:var(--ink)}
+
+  .motto{
+    margin-top:20px;text-align:center;font-size:20px;font-weight:800;color:#53604f;
+    background:#eef1ea;border-radius:14px;padding:17px;
+  }
+  .motto span{color:#b05f4d}
+
+  /* ===== 目录 ===== */
+  .toc{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
+  .toc-part{border:1px solid var(--line);border-radius:14px;background:#fff;padding:12px 16px}
+  .toc-part .p-h{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+  .toc-part .p-no{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:26px;border-radius:8px;background:var(--pc,#83917c);color:#fff;font-weight:800;font-size:12px;padding:0 7px}
+  .toc-part .p-t{font-weight:800;font-size:14.5px;color:var(--ink)}
+  .toc-part .p-en{font-size:11px;color:var(--muted);font-weight:700;margin-left:auto;letter-spacing:.03em;white-space:nowrap}
+  .toc-list{list-style:none;display:flex;flex-direction:column;gap:2px}
+  .toc-item{display:flex;align-items:center;gap:8px;font-size:13px;color:#4c463c;padding:4px 8px;border-radius:8px;cursor:pointer;transition:background .12s;line-height:1.35}
+  .toc-item:hover{background:#f0ede4}
+  .toc-item .dot{width:5px;height:5px;border-radius:2px;background:var(--pc,#83917c);flex:0 0 auto}
+  .toc-item b{color:var(--ink)}
+  .toc-item .pg{margin-left:auto;font-size:11px;color:var(--muted);font-weight:700;white-space:nowrap}
+
+  /* ===== 导航 ===== */
+  #nav{
+    position:fixed;left:50%;bottom:24px;transform:translateX(-50%);
+    display:flex;align-items:center;gap:14px;z-index:50;
+    background:rgba(250,247,241,.92);backdrop-filter:blur(10px);
+    border:1px solid var(--line);border-radius:99px;padding:9px 12px;
+    box-shadow:0 10px 30px -12px rgba(80,72,60,.3);
+  }
+  #nav button{
+    border:none;background:#fff;border:1px solid var(--line);
+    width:40px;height:40px;border-radius:50%;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;color:#4c463c;
+    transition:.15s;
+  }
+  #nav button:hover:not(:disabled){background:#eef1ea;border-color:#cdd7c6;color:#53604f}
+  #nav button:disabled{opacity:.35;cursor:default}
+  #nav .counter{font-size:14px;font-weight:700;color:#4c463c;min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
+  #nav .counter b{color:#53604f;font-size:16px}
+  #nav .toc-btn{width:auto;height:40px;border-radius:99px;padding:0 16px;gap:6px;
+    font-size:14px;font-weight:700;color:#fff;background:var(--brand);border-color:transparent;letter-spacing:1px}
+  #nav .toc-btn:hover{background:#6f7d68;color:#fff}
+  #progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#83917c,#7c90a1);z-index:60;width:0;transition:width .35s ease}
+  #hint{position:fixed;left:50%;transform:translateX(-50%);bottom:2px;font-size:12px;color:#a49c8c;z-index:40;white-space:nowrap}
+
+  @media (max-width:900px){
+    #stage{padding:18px 14px 88px}
+    .slide{padding:24px 22px;border-radius:14px}
+    .g2,.g3,.cols,.vocab,.type-list,.toc{grid-template-columns:1fr}
+    .head h2{font-size:21px}
+    .cover h1{font-size:32px}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<div id="stage">
+
+  <!-- 1 封面 -->
+  <section class="slide cover active">
+    <div class="brand-line"></div>
+    <div class="anim" style="--i:0"><span class="tag">高考英语 · 听力专项</span></div>
+    <h1 class="anim" style="--i:1">听力测试部分 <span class="hl">·</span> 题型技巧详解</h1>
+    <p class="sub anim" style="--i:2">新高考听力概述 · 应试技巧（预判） · 短对话六大题型 · 短文理解（记叙 / 说明 / 议论） · 长对话 · 高频分类词汇 —— 一对一精讲</p>
+    <div class="meta anim" style="--i:3">
+      <span>主讲：<b>杨老师</b></span>
+      <span>对象：<b>高三</b></span>
+      <span>板块：<b>新高考英语听力与口试 · 听力测试部分</b></span>
+    </div>
+  </section>
+
+  <!-- 2 目录 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8b8477">CONTENTS</span><h2>本节目录</h2><span class="en">Roadmap</span></div>
+    <div class="toc" style="margin-top:2px">
+      <div class="toc-part anim" style="--i:1;--pc:#8b8477">
+        <div class="p-h"><span class="p-no">Part 1</span><span class="p-t">新高考听力概述</span><span class="p-en">第3–5页</span></div>
+        <ul class="toc-list">
+          <li class="toc-item" onclick="go(2)"><span class="dot"></span><b>新高考背景下的听力</b><span class="pg">第3页</span></li>
+          <li class="toc-item" onclick="go(3)"><span class="dot"></span>三大问题：音 · 词汇 · 题型<span class="pg">第4页</span></li>
+          <li class="toc-item" onclick="go(4)"><span class="dot"></span>预判三策略：联想 / 比较 / 揣摩<span class="pg">第5页</span></li>
+        </ul>
+      </div>
+      <div class="toc-part anim" style="--i:2;--pc:#83917c">
+        <div class="p-h"><span class="p-no">Part 2</span><span class="p-t">Section A 短对话</span><span class="p-en">第6–17页</span></div>
+        <ul class="toc-list">
+          <li class="toc-item" onclick="go(5)"><span class="dot"></span><b>六大题型总览 + 考试说明</b><span class="pg">第6页</span></li>
+          <li class="toc-item" onclick="go(6)"><span class="dot"></span>① 数字计算题<span class="pg">第7页</span></li>
+          <li class="toc-item" onclick="go(8)"><span class="dot"></span>② 地点判断题<span class="pg">第9页</span></li>
+          <li class="toc-item" onclick="go(12)"><span class="dot"></span>③ 职业与人物关系题<span class="pg">第13页</span></li>
+          <li class="toc-item" onclick="go(14)"><span class="dot"></span>④ 态度与评价题<span class="pg">第15页</span></li>
+          <li class="toc-item" onclick="go(15)"><span class="dot"></span>⑤ 行为与去向题<span class="pg">第16页</span></li>
+          <li class="toc-item" onclick="go(16)"><span class="dot"></span>⑥ 推断与意图题<span class="pg">第17页</span></li>
+          <li class="toc-item" onclick="go(9)"><span class="dot"></span>场所词汇表（上 / 中 / 下）<span class="pg">第10页</span></li>
+          <li class="toc-item" onclick="go(13)"><span class="dot"></span>人物关系 · 职业词汇<span class="pg">第14页</span></li>
+        </ul>
+      </div>
+      <div class="toc-part anim" style="--i:3;--pc:#7c90a1">
+        <div class="p-h"><span class="p-no">Part 3</span><span class="p-t">Section B 短文理解</span><span class="p-en">第18–25页</span></div>
+        <ul class="toc-list">
+          <li class="toc-item" onclick="go(17)"><span class="dot"></span><b>题型概述 + 考试说明</b><span class="pg">第18页</span></li>
+          <li class="toc-item" onclick="go(18)"><span class="dot"></span>记叙文（司机）<span class="pg">第19页</span></li>
+          <li class="toc-item" onclick="go(20)"><span class="dot"></span>说明文（窄船）<span class="pg">第21页</span></li>
+          <li class="toc-item" onclick="go(22)"><span class="dot"></span>议论文（辩论与记忆）<span class="pg">第23页</span></li>
+        </ul>
+      </div>
+      <div class="toc-part anim" style="--i:4;--pc:#be9a92">
+        <div class="p-h"><span class="p-no">Part 4</span><span class="p-t">长对话</span><span class="p-en">第26–30页</span></div>
+        <ul class="toc-list">
+          <li class="toc-item" onclick="go(25)"><span class="dot"></span><b>题型概述 · 答题三步</b><span class="pg">第26页</span></li>
+          <li class="toc-item" onclick="go(26)"><span class="dot"></span>错误 / 正确答案判定<span class="pg">第27页</span></li>
+          <li class="toc-item" onclick="go(27)"><span class="dot"></span>三大易错点<span class="pg">第28页</span></li>
+          <li class="toc-item" onclick="go(28)"><span class="dot"></span>综合例题（Laura）<span class="pg">第29页</span></li>
+        </ul>
+      </div>
+      <div class="toc-part anim" style="--i:5;--pc:#9a8fae">
+        <div class="p-h"><span class="p-no">Part 5</span><span class="p-t">高频分类词汇</span><span class="p-en">第31–33页</span></div>
+        <ul class="toc-list">
+          <li class="toc-item" onclick="go(30)"><span class="dot"></span>星期 · 月份 · 人名<span class="pg">第31页</span></li>
+          <li class="toc-item" onclick="go(31)"><span class="dot"></span>国家人民 · 城市<span class="pg">第32页</span></li>
+          <li class="toc-item" onclick="go(32)"><span class="dot"></span>大洲大洋 · 科目 · 天气<span class="pg">第33页</span></li>
+        </ul>
+      </div>
+      <div class="toc-part anim" style="--i:6;--pc:#b4a075">
+        <div class="p-h"><span class="p-no">Part 6</span><span class="p-t">小结</span><span class="p-en">第34页</span></div>
+        <ul class="toc-list">
+          <li class="toc-item" onclick="go(33)"><span class="dot"></span><b>本节小结</b><span class="pg">第34页</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:7;margin-top:12px">
+      <span>👆</span>
+      <div><b>点击任意条目</b>即可跳转到对应页面。主线：听力拿分靠 <b>预判 + 抓关键词 + 辨音</b>——先看<b>题干选项</b>预测考点，再<b>锁定关键词、排除干扰</b>。</div>
+    </div>
+  </section>
+
+  <!-- 3 新高考听力概述 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8b8477">Part 1 · 概述</span><h2>新高考背景下的听力</h2><span class="en">Overview</span></div>
+    <div class="grid g2" style="margin-top:4px">
+      <div class="card anim" style="--i:1;--pc:#8b8477">
+        <span class="num">2025</span><h4>听力与听说测试合并</h4>
+        <div class="eg">自 <b>2025 年春季高考</b>开始，上海高考外语考试实施<b>听力与听说测试合并</b>。原高考外语笔试部分的「听力理解」<b>并入听说测试</b>，外语科目考试总时长不变。</div>
+      </div>
+      <div class="card anim" style="--i:2;--pc:#b4a075">
+        <span class="num">机考</span><h4>由纸笔卷转为机考卷</h4>
+        <div class="eg">此次调整最大的变化是听力由<b>纸笔卷转为机考卷</b>，对<b>操作的规范性、处置的及时性</b>等都提出了更高要求。</div>
+      </div>
+    </div>
+    <div class="ex" style="margin-top:14px;background:#f6f3ec;border:1px solid var(--line);border-radius:14px;padding:15px 18px">
+      <div class="lead anim" style="--i:3;font-size:12.5px;font-weight:800;color:var(--muted);letter-spacing:.05em;margin-bottom:9px">题型沿革</div>
+      <p class="para anim" style="--i:4;margin-top:0">2017 年，上海高考英语听力由原先<b>三部分</b>——短对话、短文理解、长对话填词（一般一组 2 人，共 7 组对话）——变为现在的<b>两部分：短对话 + 短文理解和长对话</b>，题型均为<b>四选一</b>单选。其中第二部分可能由<b>三段录音</b>组成。</p>
+    </div>
+    <div class="tip anim" style="--i:5">
+      <span>💡</span>
+      <div><b>备考方向：</b>平时应多注重<b>语言基础知识</b>积累，注意<b>连读、失爆、清浊辅音</b>等发音规律，同时注重<b>文化背景</b>积累，体会不同场景中事件的前因后果推断、隐含意义判断。</div>
+    </div>
+  </section>
+
+  <!-- 4 应试技巧综述 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b4a075">Part 1 · 应试技巧</span><h2>听力分数提不高的三大原因</h2><span class="en">Three Problems</span></div>
+    <div class="grid g3" style="margin-top:6px">
+      <div class="card anim" style="--i:1;--pc:#83917c">
+        <span class="num">音</span><h4>音的问题</h4>
+        <div class="eg">听力是通过<b>耳朵</b>而非眼睛进行，听辨语音是最基础、最本质的问题，包括<b>升调、降调、连读、弱读、失爆</b>等。</div>
+      </div>
+      <div class="card anim" style="--i:2;--pc:#7c90a1">
+        <span class="num">词</span><h4>词汇的问题</h4>
+        <div class="eg">每个单词都听懂、都认识，却不知道句子什么意思——说明对<b>词汇的理解</b>还存在问题。</div>
+      </div>
+      <div class="card anim" style="--i:3;--pc:#9a8fae">
+        <span class="num">题</span><h4>题型的问题</h4>
+        <div class="eg">对不同题型没有套路意识，将在下文<b>分题型详解</b>逐一解决。</div>
+      </div>
+    </div>
+    <div class="ex" style="margin-top:14px;background:#f6f3ec;border:1px solid var(--line);border-radius:14px;padding:15px 18px">
+      <div class="lead" style="font-size:12.5px;font-weight:800;color:var(--muted);letter-spacing:.05em;margin-bottom:9px">词汇问题表现在三个方面</div>
+      <div class="grid g3" style="margin-top:0">
+        <div class="anim" style="--i:4">
+          <div class="tech" style="--pc:#83917c;margin-top:0;height:100%"><div class="lead">① 书面语 ≠ 口语</div><p>口语词汇偏短小，句式也没书面语那么复杂。</p></div>
+        </div>
+        <div class="anim" style="--i:5">
+          <div class="tech" style="--pc:#7c90a1;margin-top:0;height:100%"><div class="lead">② 单词 ≠ 习语</div><p>习语有固定含义，非字面叠加。如 <b>break a leg</b> 不是「断一条腿」，而是<b>祝对方成功</b>。</p></div>
+        </div>
+        <div class="anim" style="--i:6">
+          <div class="tech" style="--pc:#9a8fae;margin-top:0;height:100%"><div class="lead">③ 偏词 ≠ 常用词</div><p>类似 11 选 10 里的「熟词生义」，听力里也可能出现，如 <b>wind up</b> 本意「上发条」，句中常表<b>完成、结束</b>。</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 预判策略 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b4a075">Part 1 · 预判</span><h2>听前预判：三种提高预判效果的方法</h2><span class="en">Prediction</span></div>
+    <p class="para anim" style="--i:1">所谓<b>预判</b>，就是在<b>听音前</b>根据卷面信息预测听音重点、做好预听工作；在<b>听音过程中</b>根据关联词预测。比如：选项中<b>都是时间</b>→ 该题问某一时刻；选项中<b>都是地点</b>→ 问对话发生的场景。</p>
+    <div class="grid g3" style="margin-top:14px">
+      <div class="card anim" style="--i:2;--pc:#83917c">
+        <span class="num">①</span><h4>联想预判</h4>
+        <div class="eg">看到 <b>restaurant</b> 就联想 <b>waiter / order / menu</b>；长对话和段落语篇可通过几个选择项猜出<b>全文主题</b>甚至细节。</div>
+      </div>
+      <div class="card anim" style="--i:3;--pc:#7c90a1">
+        <span class="num">②</span><h4>比较预判</h4>
+        <div class="eg">看到选项里出现 <b>thirteen / thirty</b>、<b>fourteen / forty</b> 等音近词，即可猜到本题考查<b>辨音能力</b>。</div>
+      </div>
+      <div class="card anim" style="--i:4;--pc:#9a8fae">
+        <span class="num">③</span><h4>揣摩预判</h4>
+        <div class="eg">听力只放一遍，可能没听懂原义；可从<b>出题人角度</b>判断：原文关键词极可能被<b>改写</b>，原文原句很可能<b>不是正确项</b>。</div>
+      </div>
+    </div>
+    <div class="note anim" style="--i:5">
+      <span class="ico">🔑</span>
+      <div><b>预判就是「带着问题听」：</b>先扫<b>题干 + 选项</b>锁定考点类型（时间 / 地点 / 人物 / 态度 / 行为 / 推断），再在听音时有针对性地抓<b>关键词、数字、转折、语气</b>。</div>
+    </div>
+  </section>
+
+  <!-- 6 Section A 总览 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#83917c">Part 2 · Section A</span><h2>短对话 · 六大题型</h2><span class="en">Short Conversations</span></div>
+    <div class="type-list anim" style="--i:1">
+      <div class="type-item" style="--pc:#83917c"><span class="tno">1</span><span class="tname">数字计算题</span><span class="tdesc">时间 · 价格 · 运算</span></div>
+      <div class="type-item" style="--pc:#7c90a1"><span class="tno">2</span><span class="tname">地点判断题</span><span class="tdesc">场景 · 场所词汇</span></div>
+      <div class="type-item" style="--pc:#9a8fae"><span class="tno">3</span><span class="tname">职业与人物关系题</span><span class="tdesc">身份 · 关系词汇</span></div>
+      <div class="type-item" style="--pc:#be9a92"><span class="tno">4</span><span class="tname">态度与评价题</span><span class="tdesc">语气 · 表态词</span></div>
+      <div class="type-item" style="--pc:#b4a075"><span class="tno">5</span><span class="tname">行为与去向题</span><span class="tdesc">动作 · 先后</span></div>
+      <div class="type-item" style="--pc:#7e8e86"><span class="tno">6</span><span class="tname">推断与意图题</span><span class="tdesc">隐含 · 意图</span></div>
+    </div>
+    <div class="ex" style="margin-top:14px;background:#f6f3ec;border:1px solid var(--line);border-radius:14px;padding:15px 18px">
+      <div class="lead" style="font-size:12.5px;font-weight:800;color:var(--muted);letter-spacing:.05em;margin-bottom:9px">Directions · 考试说明</div>
+      <p class="para anim" style="--i:2;margin-top:0">In Section A, you will hear <b>ten short conversations</b> between two speakers. At the end of each conversation, <b>a question will be asked</b> about what was said. The conversations and the question will be spoken <b>only once</b>. After you hear a conversation and the question about it, <b>read the four possible answers</b> on your paper, and decide which one is the <b>best answer</b> to the question you have heard.</p>
+      <p class="para anim" style="--i:3">这部分由 <b>10 个简短对话</b>组成，所有内容<b>只读一遍</b>。虽然题干千变万化，但我们仍可从中总结出题型规律。</p>
+    </div>
+  </section>
+
+  <!-- 7 数字计算题 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#83917c">题型 1 · 数字计算</span><h2>数字计算题</h2><span class="en">Number &amp; Calculation</span></div>
+    <div class="exam anim" style="--i:1;--pc:#83917c">
+      <div class="exam-head"><span class="tag">真题复现</span></div>
+      <div class="opts inline">
+        <span class="o"><b>A.</b> $200.</span>
+        <span class="o"><b>B.</b> $400.</span>
+        <span class="o"><b>C.</b> $250.</span>
+        <span class="o"><b>D.</b> $500.</span>
+      </div>
+      <div class="script">
+        <div class="lead">听力原文</div>
+        <p><b>M:</b> How much did you pay for your new stereo, Joan?</p>
+        <p><b>W:</b> I got a great deal on it. They wanted 500 dollars for it at a shop downtown but I found it online for half that price.</p>
+        <p class="qline">Q: How much did the woman pay for the stereo?</p>
+      </div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案 + 解析</summary><div class="ans"><div class="en">C（$250）</div>考生没听懂 <b>stereo</b> 没关系，只要理解它是一个物品即可。抓住关键信息 <b>$500、half</b>，做简单运算即可：500 ÷ 2 = <b>$250</b>。</div></details>
+    </div>
+    <div class="tech anim" style="--i:2;--pc:#83917c">
+      <div class="lead">技巧点拨</div>
+      <p>这类题主要检测<b>时间、价格、运算、电话号码</b>等。除对数字十分敏感外，还需注意<b>近似意思的表达</b>，如：<b>two hours and a half behind schedule = to be delayed for two hours and a half = two and a half hours late</b>。要排除<b>同音词 / 近音词</b>干扰，如 <b>nine thirty</b>（9:30）与 <b>nine thirteen</b>（9:13）。</p>
+    </div>
+  </section>
+
+  <!-- 8 数字计算题·技巧 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#83917c">题型 1 · 数字计算</span><h2>数字题高频词汇</h2><span class="en">Key Words</span></div>
+    <p class="para anim" style="--i:1">要听清楚数字<b>及它们之间的关系</b>。就<b>时间题</b>而言，在把握时间表达法的基础上，先听清<b>时间与事件的关系</b>（关注与时间有关的<b>副词</b>和<b>倍数关系</b>），尤其注意时间上的<b>提前和推后</b>，再正确换算。</p>
+    <div class="grid g2" style="margin-top:12px">
+      <div class="card anim" style="--i:2;--pc:#83917c">
+        <span class="num">A</span><h4>时间关系词</h4>
+        <div class="eg"><b>more / less</b> · <b>late / early</b> · <b>fast / slow</b> · <b>before / after</b></div>
+      </div>
+      <div class="card anim" style="--i:3;--pc:#7c90a1">
+        <span class="num">B</span><h4>引起数字变化的动词</h4>
+        <div class="eg"><b>half / double</b> · <b>miss / postpone</b> · <b>increase / add</b> · <b>decrease</b> —— 加减关系由它们决定。</div>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:4">
+      <span>⚠️</span>
+      <div><b>辨音陷阱：</b>抓住<b>近似音、同音词</b>的干扰，例如 <b>nine thirty</b> 表 9:30，而 <b>nine thirteen</b> 表 9:13；<b>thirteen / thirty</b>、<b>fourteen / forty</b> 常被用来设坑。</div>
+    </div>
+    <div class="note anim" style="--i:5">
+      <span class="ico">🔑</span>
+      <div><b>做题顺序：</b>① 先听清<b>原始数字</b>；② 再抓<b>修饰数字的动词 / 副词</b>（double、half、late、early）；③ 最后做<b>加减乘除</b>得出答案。</div>
+    </div>
+  </section>
+
+  <!-- 9 地点判断题 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7c90a1">题型 2 · 地点判断</span><h2>地点判断题</h2><span class="en">Place / Location</span></div>
+    <div class="exam anim" style="--i:1;--pc:#7c90a1">
+      <div class="exam-head"><span class="tag">真题复现</span></div>
+      <div class="opts inline">
+        <span class="o"><b>A.</b> In a bookstore.</span>
+        <span class="o"><b>B.</b> In a grocery store.</span>
+        <span class="o"><b>C.</b> In a department store.</span>
+        <span class="o"><b>D.</b> In a stationery store.</span>
+      </div>
+      <div class="script">
+        <div class="lead">听力原文</div>
+        <p><b>W:</b> I must have your receipt for this shirt in order to exchange it.</p>
+        <p><b>M:</b> OK. Here it is.</p>
+        <p class="qline">Q: Where does the conversation most likely take place?</p>
+      </div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案 + 解析</summary><div class="ans"><div class="en">C（In a department store）</div>对话中听到 <b>receipt（收据）、shirt（衬衫）、exchange（换货）</b>及营业员说的 <b>Here it is.</b>，可推断双方在<b>买卖东西</b>，故选 C。</div></details>
+    </div>
+    <div class="tech anim" style="--i:2;--pc:#7c90a1">
+      <div class="lead">技巧点拨</div>
+      <p>抓住对话中的<b>关键词语</b>，但有些词并非明确表示、而是<b>暗示</b>地点。要熟悉与 <b>school / library / restaurant / hospital / hotel / store / supermarket / station / street / home / office / bank</b> 等场所相关的词汇与短语。</p>
+    </div>
+  </section>
+
+  <!-- 10 地点词汇① -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7c90a1">题型 2 · 地点词汇 ①</span><h2>场所高频词汇（上）</h2><span class="en">Place Vocabulary</span></div>
+    <div class="vocab g3" style="margin-top:6px">
+      <div class="vcard anim" style="--i:1;--pc:#7c90a1">
+        <h5>旅馆 · 餐厅</h5>
+        <div class="words">
+          <span class="w">book a bed</span><span class="w">go Dutch</span><span class="w">tip</span><span class="w">soup</span><span class="w">menu</span><span class="w">pay the bill</span><span class="w">beef</span><span class="w">dumpling</span><span class="w">soft drink</span><span class="w">steak</span><span class="w">main dish</span><span class="w">waiter</span><span class="w">waitress</span><span class="w">wine</span><span class="w">salad</span><span class="w">order</span><span class="w">fast food shop</span><span class="w">reception desk</span><span class="w">restaurant</span><span class="w">a single room</span><span class="w">a double room</span><span class="w">check in</span><span class="w">check out</span>
+        </div>
+      </div>
+      <div class="vcard anim" style="--i:2;--pc:#83917c">
+        <h5>商场 · 超市</h5>
+        <div class="words">
+          <span class="w">do some shopping</span><span class="w">salesman</span><span class="w">saleswoman</span><span class="w">shopping cart</span><span class="w">price tag</span><span class="w">fashion</span><span class="w">men's suit</span><span class="w">department store</span><span class="w">supermarket</span><span class="w">on sale</span><span class="w">check-out counter</span><span class="w">size</span><span class="w">color</span><span class="w">T-shirt</span><span class="w">shirt</span><span class="w">sweater</span><span class="w">shoes</span><span class="w">trousers</span><span class="w">jacket</span><span class="w">shop</span><span class="w">shop assistant</span><span class="w">try on</span><span class="w">style</span>
+        </div>
+      </div>
+      <div class="vcard anim" style="--i:3;--pc:#9a8fae">
+        <h5>银行 · 邮局</h5>
+        <div class="words">
+          <span class="w">bank</span><span class="w">money</span><span class="w">bank officer</span><span class="w">check</span><span class="w">interest</span><span class="w">credit card</span><span class="w">mail</span><span class="w">postage</span><span class="w">envelop</span><span class="w">stamp</span><span class="w">cash</span><span class="w">post office</span><span class="w">airmail</span><span class="w">package</span><span class="w">letter</span><span class="w">savings account</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 地点词汇② -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7c90a1">题型 2 · 地点词汇 ②</span><h2>场所高频词汇（中）</h2><span class="en">Place Vocabulary</span></div>
+    <div class="vocab g3" style="margin-top:6px">
+      <div class="vcard anim" style="--i:1;--pc:#83917c">
+        <h5>学校</h5>
+        <div class="words">
+          <span class="w">homework</span><span class="w">exam</span><span class="w">test</span><span class="w">mid-term</span><span class="w">final examination</span><span class="w">marks</span><span class="w">textbook</span><span class="w">playground</span><span class="w">department</span><span class="w">Bachelor's degree</span><span class="w">Master's degree</span><span class="w">Doctor's degree</span><span class="w">campus</span><span class="w">lecture</span><span class="w">dormitory</span><span class="w">semester</span><span class="w">term</span><span class="w">dining hall</span><span class="w">swimming-pool</span><span class="w">foreign language</span><span class="w">gym / gymnasium</span>
+        </div>
+      </div>
+      <div class="vcard anim" style="--i:2;--pc:#be9a92">
+        <h5>家庭</h5>
+        <div class="words">
+          <span class="w">housewife</span><span class="w">bedroom</span><span class="w">kitchen</span><span class="w">waiting-room</span><span class="w">dining-room</span><span class="w">sofa</span><span class="w">chair</span><span class="w">table</span><span class="w">dressing-table</span><span class="w">cupboard</span><span class="w">furniture</span>
+        </div>
+      </div>
+      <div class="vcard anim" style="--i:3;--pc:#b4a075">
+        <h5>机场 · 车站（交通）</h5>
+        <div class="words">
+          <span class="w">luggage</span><span class="w">baggage</span><span class="w">airline</span><span class="w">airport</span><span class="w">passport</span><span class="w">check</span><span class="w">railway / train station</span><span class="w">express train</span><span class="w">platform</span><span class="w">sleeping car</span><span class="w">seat belt</span><span class="w">take off</span><span class="w">land</span><span class="w">boarding card</span><span class="w">Gate 1</span><span class="w">flight number</span><span class="w">nonstop flight</span><span class="w">arrival time</span><span class="w">conductor</span><span class="w">ticket office</span><span class="w">plane</span><span class="w">passenger</span><span class="w">warning light</span><span class="w">road sign</span><span class="w">motorway</span><span class="w">one-way</span><span class="w">round-trip</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 地点词汇③ -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7c90a1">题型 2 · 地点词汇 ③</span><h2>场所高频词汇（下）</h2><span class="en">Place Vocabulary</span></div>
+    <div class="vocab g3" style="margin-top:6px">
+      <div class="vcard anim" style="--i:1;--pc:#83917c">
+        <h5>图书馆 · 阅览室</h5>
+        <div class="words">
+          <span class="w">library</span><span class="w">reading-room</span><span class="w">renew</span><span class="w">bookshelf</span><span class="w">novel</span><span class="w">story-book</span><span class="w">picture-book</span><span class="w">fine</span><span class="w">newspaper</span><span class="w">magazine</span><span class="w">reference book</span>
+        </div>
+      </div>
+      <div class="vcard anim" style="--i:2;--pc:#9a8fae">
+        <h5>办公室</h5>
+        <div class="words">
+          <span class="w">typewriter</span><span class="w">copy</span><span class="w">make a phone call</span><span class="w">arrange an appointment</span><span class="w">secretary</span><span class="w">manager</span>
+        </div>
+      </div>
+      <div class="vcard anim" style="--i:3;--pc:#b0725e">
+        <h5>医院</h5>
+        <div class="words">
+          <span class="w">pain</span><span class="w">cough</span><span class="w">fever</span><span class="w">headache</span><span class="w">stomachache</span><span class="w">temperature</span><span class="w">heart</span><span class="w">lung</span><span class="w">blood pressure</span><span class="w">take medicine</span><span class="w">pills</span><span class="w">toothache</span>
+        </div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:4">
+      <span>💡</span>
+      <div><b>记忆抓手：</b>记地点词按<b>「一个场所一撮词」</b>归类，听音时听到其中任何一个「触发词」（如 <b>receipt / menu / boarding card / prescribe</b>）就能立刻锁定场景。</div>
+    </div>
+  </section>
+
+  <!-- 13 职业与人物关系题 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#9a8fae">题型 3 · 职业与关系</span><h2>职业与人物关系题</h2><span class="en">Occupation &amp; Relationship</span></div>
+    <div class="exam anim" style="--i:1;--pc:#9a8fae">
+      <div class="exam-head"><span class="tag">真题复现</span><span class="src">2018 年度崇明区一模试卷</span></div>
+      <div class="opts inline">
+        <span class="o"><b>A.</b> A journalist.</span>
+        <span class="o"><b>B.</b> An electrician.</span>
+        <span class="o"><b>C.</b> A salesman.</span>
+        <span class="o"><b>D.</b> An operator.</span>
+      </div>
+      <div class="script">
+        <div class="lead">听力原文</div>
+        <p><b>W:</b> This is Mrs. Anderson. There's no power in my house. Could you come over and fix it?</p>
+        <p><b>M:</b> Don't worry madam. I'll be there in a minute.</p>
+        <p class="qline">Q: What's the probable occupation of the man?</p>
+      </div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案 + 解析</summary><div class="ans"><div class="en">B（An electrician）</div>听到 <b>power in my house（家里断电）</b>及 <b>fix it（修理）</b>，说明家里断电；男士用 <b>madam</b> 等尊称，说明双方关系较远（非家人），故是<b>电工</b>。</div></details>
+    </div>
+    <div class="tech anim" style="--i:2;--pc:#9a8fae">
+      <div class="lead">技巧点拨</div>
+      <p>判断人物关系主要看<b>内容、语气、行为和态度</b>，尤其<b>语气</b>。若男士回答 <b>Sorry darling, I will ask for some help.</b> 则可判断是<b>男朋友 / 丈夫</b>；还要留意是否用<b>敬语</b>。专用词汇也能暗示身份：听到 <b>dentist / prescribe / pill</b> → 与医生有关；<b>selling season</b> → 销售员；<b>waitress</b> 会谈 <b>menu / food / order / wine</b>；<b>policeman</b> 会说 <b>tickets / driving license / lights</b>。</p>
+    </div>
+  </section>
+
+  <!-- 14 人物关系+职业词汇 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#9a8fae">题型 3 · 词汇</span><h2>人物关系 &amp; 职业常用词</h2><span class="en">People Vocabulary</span></div>
+    <div class="vocab" style="margin-top:6px">
+      <div class="vcard anim" style="--i:1;--pc:#9a8fae">
+        <h5>表示人物关系</h5>
+        <div class="words">
+          <span class="w">father</span><span class="w">mother</span><span class="w">son</span><span class="w">daughter</span><span class="w">brother</span><span class="w">sister</span><span class="w">grandfather</span><span class="w">grandmother</span><span class="w">nephew</span><span class="w">niece</span><span class="w">cousin</span><span class="w">grandchildren</span><span class="w">grandson</span><span class="w">uncle</span><span class="w">aunt</span><span class="w">teacher</span><span class="w">student</span><span class="w">friend</span><span class="w">enemy</span><span class="w">husband</span><span class="w">wife</span><span class="w">neighbor</span><span class="w">girlfriend</span><span class="w">boyfriend</span><span class="w">classmate</span><span class="w">workmate</span><span class="w">boss</span>
+        </div>
+      </div>
+      <div class="vcard anim" style="--i:2;--pc:#83917c">
+        <h5>表示职业</h5>
+        <div class="words">
+          <span class="w">student</span><span class="w">teacher</span><span class="w">worker</span><span class="w">engineer<span class="cn">工程师</span></span><span class="w">doctor</span><span class="w">nurse</span><span class="w">professor<span class="cn">教授</span></span><span class="w">actor</span><span class="w">actress</span><span class="w">waiter</span><span class="w">waitress</span><span class="w">player</span><span class="w">film-maker director<span class="cn">导演</span></span><span class="w">tailor<span class="cn">裁缝</span></span><span class="w">cleaner</span><span class="w">writer</span><span class="w">singer</span><span class="w">dancer</span><span class="w">conductor<span class="cn">售票员</span></span><span class="w">salesman</span><span class="w">saleswoman</span><span class="w">sailor<span class="cn">水手</span></span><span class="w">dentist<span class="cn">牙医</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:3">
+      <span>💡</span>
+      <div><b>考法提示：</b>职业题常通过<b>场景专用词</b>反推身份（如 <b>prescribe 开药方 → 医生</b>），关系题常通过<b>称呼 / 语气 / 敬语</b>反推亲疏（如 <b>madam → 陌生人</b>，<b>darling → 恋人 / 家人</b>）。</div>
+    </div>
+  </section>
+
+  <!-- 15 态度与评价题 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#be9a92">题型 4 · 态度评价</span><h2>态度与评价题</h2><span class="en">Attitude &amp; Evaluation</span></div>
+    <div class="exam anim" style="--i:1;--pc:#be9a92">
+      <div class="exam-head"><span class="tag">真题复现</span><span class="src">2017 年普通高等学校招生全国统一考试（6 月）</span></div>
+      <div class="opts">
+        <span class="o"><b>A.</b> They like reading today's paper.</span>
+        <span class="o"><b>B.</b> They are interested in today's paper.</span>
+        <span class="o"><b>C.</b> They found nothing interesting in today's paper.</span>
+        <span class="o"><b>D.</b> They have no idea what the paper is about.</span>
+      </div>
+      <div class="script">
+        <div class="lead">听力原文</div>
+        <p><b>M:</b> Just look at today's paper. Nothing but accidents or gossip.</p>
+        <p><b>W:</b> Right. Nothing is worth reading.</p>
+        <p class="qline">Q: What is the speaker's attitude towards today's paper?</p>
+      </div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案 + 解析</summary><div class="ans"><div class="en">C</div>女士说报纸除了<b>事故和小道消息</b>没有别的内容、很无聊；男士说 <b>Right</b> 表示肯定，并重复 <b>Nothing is worth reading</b>，故两人都觉得<b>没什么可读的</b>。</div></details>
+    </div>
+    <div class="tech anim" style="--i:2;--pc:#be9a92">
+      <div class="lead">技巧点拨</div>
+      <p>判断双方对谈及事物的态度：<b>赞赏 / 反对 / 关心 / 厌恶 / 喜欢</b>。注意<b>第二个人的用词</b>——他 / 她往往先<b>肯定或否定</b>第一个人，常用 <b>right / but / really（升调）</b>，再进一步说明。其次要<b>确认代词</b>是 <b>it / he / she / they</b>，弄清考查的是男士、女士，还是双方<b>共同</b>的态度。</p>
+    </div>
+  </section>
+
+  <!-- 16 行为与去向题 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b4a075">题型 5 · 行为去向</span><h2>行为与去向题</h2><span class="en">Action &amp; Intention</span></div>
+    <div class="exam anim" style="--i:1;--pc:#b4a075">
+      <div class="exam-head"><span class="tag">真题复现</span></div>
+      <div class="opts inline">
+        <span class="o"><b>A.</b> Feed the dog.</span>
+        <span class="o"><b>B.</b> Clean the dog's house.</span>
+        <span class="o"><b>C.</b> Give the dog a bath.</span>
+        <span class="o"><b>D.</b> Find something to eat.</span>
+      </div>
+      <div class="script">
+        <div class="lead">听力原文</div>
+        <p><b>M:</b> Before feeding the dog, I'm going to clear up its house.</p>
+        <p><b>W:</b> It's about time. Look at the mess! It smells terrible.</p>
+        <p class="qline">Q: What is the man most probably going to do first?</p>
+      </div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案 + 解析</summary><div class="ans"><div class="en">B（Clean the dog's house）</div>男士开头说的 <b>before</b> 是解题关键：<b>before feeding the dog</b>（喂狗之前），他要先 <b>clear up its house（清理狗窝）</b>；女士的回答 <b>It's about time</b> 是对男士的肯定。</div></details>
+    </div>
+    <div class="tech anim" style="--i:2;--pc:#b4a075">
+      <div class="lead">技巧点拨</div>
+      <p>注意说话人谈及<b>过去、现在与未来</b>的行动。谈话中常涉及<b>多个行动</b>，重点应放在<b>所做的事及对谈话者的影响</b>，判断说话者<b>想干什么、不想干什么</b>，从而做出选择。<b>before / after / first / then</b> 等先后顺序词是关键线索。</p>
+    </div>
+  </section>
+
+  <!-- 17 推断与意图题 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7e8e86">题型 6 · 推断意图</span><h2>推断与意图题</h2><span class="en">Inference</span></div>
+    <div class="exam anim" style="--i:1;--pc:#7e8e86">
+      <div class="exam-head"><span class="tag">真题复现</span></div>
+      <div class="opts">
+        <span class="o"><b>A.</b> She wished she had gone to sleep earlier.</span>
+        <span class="o"><b>B.</b> She missed the beginning of the program.</span>
+        <span class="o"><b>C.</b> She fell asleep before the program ended.</span>
+        <span class="o"><b>D.</b> She was awakened in time to see the program.</span>
+      </div>
+      <div class="script">
+        <div class="lead">听力原文</div>
+        <p><b>M:</b> I really enjoyed that TV special about dolphins last night, did you get home in time to see it?</p>
+        <p><b>W:</b> Well, yes. But I wish I could have stayed awake long enough to see the whole thing.</p>
+        <p class="qline">Question: What does the woman mean?</p>
+      </div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案 + 解析</summary><div class="ans"><div class="en">C（She fell asleep before the program ended）</div>别被开头的 <b>Well, yes</b> 蒙蔽。真正的信号在<b>弱读的 but</b> 之后：虚拟语气 <b>I wish I could have stayed awake</b>（真希望自己一直醒着），说明女士<b>没有看完</b>就睡着了。</div></details>
+    </div>
+    <div class="tech anim" style="--i:2;--pc:#7e8e86">
+      <div class="lead">技巧点拨</div>
+      <p>对话中<b>没有直接给答案</b>，要拿细节做前提进行<b>逻辑推理</b>或<b>归纳</b>。题目常是 <b>What can be inferred from the conversation? / What does the man/woman imply?</b>。此时要<b>加倍注意第二个人的话</b>——这类题多是「第一个人开启话题 → 第二个人提供信息 → 提问」的模式，逻辑关系多在第二个人话里。还要注意<b>虚拟语气、升降调</b>找线索。</p>
+    </div>
+  </section>
+
+  <!-- 18 Section B 总览 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7c90a1">Part 3 · Section B</span><h2>短文理解 · 三种文体</h2><span class="en">Passages</span></div>
+    <div class="ex" style="background:#f6f3ec;border:1px solid var(--line);border-radius:14px;padding:14px 18px">
+      <div class="lead" style="font-size:12.5px;font-weight:800;color:var(--muted);letter-spacing:.05em;margin-bottom:9px">Directions · 考试说明</div>
+      <p class="para anim" style="--i:1;margin-top:0">In Section B, you will hear <b>several longer conversations and short passages</b>, and you will be asked several questions on each. The conversations and the passages will be read <b>twice</b>, but the questions will be spoken <b>only once</b>. Read the four possible answers and decide which one is the <b>best answer</b>.</p>
+    </div>
+    <p class="para anim" style="--i:2">这部分由<b>两篇文章</b>组成，每篇<b>读两遍</b>，每篇后三个问题、每个问题只读一遍。短文理解<b>信息量大、选材广</b>，每小题 <b>1.5 分</b>。选材多为<b>常识、社会问题、科技发展、人物传记与故事</b>，体裁分<b>记叙文、议论文、说明文、新闻</b>等，句子结构和长度远大于短对话。</p>
+    <div class="grid g3" style="margin-top:12px">
+      <div class="card anim" style="--i:3;--pc:#83917c"><span class="num">1</span><h4>记叙文</h4><div class="eg">记人叙事，以<b>一般过去时</b>为主，六要素。</div></div>
+      <div class="card anim" style="--i:4;--pc:#7c90a1"><span class="num">2</span><h4>说明文</h4><div class="eg">介绍解释，多用<b>现在时</b>，客观描述。</div></div>
+      <div class="card anim" style="--i:5;--pc:#9a8fae"><span class="num">3</span><h4>议论文</h4><div class="eg">论点 · 论据 · 论证，说服听众。</div></div>
+    </div>
+    <div class="tip anim" style="--i:6">
+      <span>💡</span>
+      <div><b>先看题干定类型：</b>如 <b>Questions 11 through 13 are based on the following talk / introduction</b>，明确文章是讲话类还是介绍类；再判断问的是<b>细节题 / 主旨题 / 推理判断题</b>——主旨题多关注<b>开头结尾</b>。</div>
+    </div>
+  </section>
+
+  <!-- 19 记叙文·真题 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#83917c">Part 3 · 记叙文</span><h2>记叙文 · 真题（司机）</h2><span class="en">Narrative</span></div>
+    <div class="exam anim" style="--i:1;--pc:#83917c">
+      <div class="exam-head"><span class="tag">真题复现</span><span class="src">Questions 11–13 based on the following passage</span></div>
+      <div class="opts">
+        <span class="o"><b>11. A.</b> He regards it as an ideal job and is afraid of losing it.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;B.</b> He likes this job and does it professionally.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;C.</b> It is a job looked down upon by other people.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;D.</b> It is not his dream job when he spends much time waiting.</span>
+        <span class="o"><b>12. A.</b> Check fuel, water and brakes.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;B.</b> Check oil, brakes and tyres.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;C.</b> Check the water levels, brakes and lights.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;D.</b> Check the safety and clean the car.</span>
+        <span class="o"><b>13. A.</b> He is well-organized with good driving skills and politeness.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;B.</b> He is waiting patiently outside, opening the door for passengers and making the car safe.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;C.</b> He neither eats snacks, nor watches television in the car.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;D.</b> He shouldn't get angry and always keep calm.</span>
+      </div>
+      <div class="script" style="max-height:230px">
+        <div class="lead">听力原文</div>
+        <p>My name is Franco Zhang, and I'm a professional driver. If you think driving rich and famous people around to luxury places is a dream job, you are wrong. There is much more to being professional than just driving around. Your passenger could be a businessman, politician, film star or a pop idol. A driver must never be distracted by the status of a passenger, but must concentrate on being on time and polite, and being a perfect driver. We are often seen waiting outside, and we often appear to be eating snacks and watching in-car television. Of course, much time of our day is spent in preparation and waiting, and only a small amount of time is actually spent driving. We have to plan our day, including times and routes and journeys, so we have to think ahead. The driver must make sure that the car is clean, tidy and safe. Any problems would mean trouble, and perhaps the loss of your job. I have to check the oil, brakes and water levels daily. I also check the tires and lights regularly. We always have to be polite, even if we are angry at the way someone has spoken to us. Being polite means remaining calm, opening the door for the passengers, and keeping the car clean, safe, and fueled. We provide so much more than taxi service. We drive our passengers with a high degree of skill, safety and planning.</p>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:2"><span>🎧</span><div>听完后请先在心里作答 <b>11 / 12 / 13</b>，再看下一页的<b>答案 + 解析</b>。</div></div>
+  </section>
+
+  <!-- 20 记叙文·解析+技巧 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#83917c">Part 3 · 记叙文</span><h2>记叙文 · 解析与技巧</h2><span class="en">Narrative Analysis</span></div>
+    <div class="exam anim" style="--i:1;--pc:#83917c">
+      <div class="exam-head"><span class="tag">答案 + 解析</span></div>
+      <details class="reveal" open><summary><span class="caret">▸</span> 11. From the way he talks, what does the speaker think of his job?</summary><div class="ans"><div class="en">B</div>听前由题干 <b>regard / like / look down on</b> 预判考态度；听到 <b>I'm a professional driver. Being polite means remaining calm, opening the door...</b> 可知他<b>专业地对待这份工作</b>。</div></details>
+      <details class="reveal"><summary><span class="caret">▸</span> 12. What is true about the speaker's daily car maintenance?</summary><div class="ans"><div class="en">A</div>由题干 <b>maintenance（保养）</b> 定位原文：<b>I have to check the oil, brakes and water levels daily. I also check the tires and lights regularly.</b> → 检查油、刹车、水位。</div></details>
+      <details class="reveal"><summary><span class="caret">▸</span> 13. What are the characteristics of a qualified driver?</summary><div class="ans"><div class="en">A</div>四个选项方向不一致，需<b>边听边做笔记</b>：A 旁标「职业素养」、B 旁标「等人时做的事」… 本题综合判断为 A。</div></details>
+    </div>
+    <div class="tech anim" style="--i:2;--pc:#83917c">
+      <div class="lead">技巧点拨 · 记叙文</div>
+      <p>记叙文以<b>记人、叙事</b>为主（幽默故事、童话、历史、传记、新闻），语言以<b>一般过去时</b>为主，多用<b>动态动词</b>和<b>直接引语</b>。听时要把握三点：① <b>结构</b>（时间 / 空间顺序，理清脉络）；② <b>写作目的</b>（就事论事还是讲道理）；③ <b>六要素</b>（事件、人物、时间、地点、原因、结果）。</p>
+    </div>
+  </section>
+
+  <!-- 21 说明文·真题 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7c90a1">Part 3 · 说明文</span><h2>说明文 · 真题（窄船）</h2><span class="en">Expository</span></div>
+    <div class="exam anim" style="--i:1;--pc:#7c90a1">
+      <div class="exam-head"><span class="tag">真题复现</span><span class="src">Questions 11–13 based on the following passage</span></div>
+      <div class="opts">
+        <span class="o"><b>11. A.</b> Most canals were not wide enough for the boats.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;B.</b> Other means of transportation became accessible.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;C.</b> The boats were no longer considered fashionable.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;D.</b> They learned the boats were bad for the environment.</span>
+        <span class="o"><b>12. A.</b> Some people get frustrated with their speed.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;B.</b> They are mainly used for transportation.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;C.</b> People can have easy access to them.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;D.</b> A license is needed to operate them.</span>
+        <span class="o"><b>13. A.</b> The changing role of narrow boats.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;B.</b> The uniqueness of the design of narrow boats.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;C.</b> The importance of narrow boats in the 18th century.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;D.</b> The reason why British people say hello to strangers.</span>
+      </div>
+      <div class="script" style="max-height:230px">
+        <div class="lead">听力原文</div>
+        <p>Do you know anything about narrow boats in Britain? The boats are those you see in the British canals which are truly narrow, about two metres wide. They are, however, long enough to have bedrooms, kitchens and bathrooms, where people can live for weeks at a time. These days, more and more people are spending their vacations on narrow boats. We can trace the origin of the boats to the beginning of the Industrial Revolution. In the mid eighteenth century, British people constructed many canals all over the island of Great Britain. The canals were narrow, and the boats had to be narrow too. The boats were used to transport coal, iron and steel. After railroads became common, narrow boats went out of fashion and were forgotten, only the canals remained. Why are the boats so popular today? First, as there are canals all over Britain, narrow boats can be easily accessed. People do not have to travel far or rush to an airport to start their vacations. Second, the boats are safe and easy to steer. Even though they have engines now, they sail just a little faster than walking speed, so no license is required. Finally, the slow pace makes the voyage fun. People on board enjoy saying hello to other boaters when they pass each other. Since most of the canals are for leisure use, nobody is in a hurry. In this way, British people can refresh themselves and forget about their busy life. What used to carry iron and steel now provides a slow, peaceful experience.</p>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:2"><span>🎧</span><div>先作答 <b>11 / 12 / 13</b>，再看下一页<b>答案 + 解析</b>。</div></div>
+  </section>
+
+  <!-- 22 说明文·解析+技巧 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7c90a1">Part 3 · 说明文</span><h2>说明文 · 解析与技巧</h2><span class="en">Expository Analysis</span></div>
+    <div class="exam anim" style="--i:1;--pc:#7c90a1">
+      <div class="exam-head"><span class="tag">答案 + 解析</span></div>
+      <details class="reveal" open><summary><span class="caret">▸</span> 11. Why did people once stop using narrow boats?</summary><div class="ans"><div class="en">B</div>听到 <b>After railroads became common, narrow boats went out of fashion...</b>，可知是<b>铁路</b>改变了船的作用；原文的「铁路」被替换为「上位概念」<b>其他交通工具</b>。</div></details>
+      <details class="reveal"><summary><span class="caret">▸</span> 12. What is true of modern narrow boats?</summary><div class="ans"><div class="en">C</div>听到 <b>narrow boats can be easily accessed</b>，对应选项 C 的 <b>have easy access to</b>（同义替换）。</div></details>
+      <details class="reveal"><summary><span class="caret">▸</span> 13. What is the passage mainly about?</summary><div class="ans"><div class="en">A</div>文章按说明顺序：先讲船的<b>现在作用</b>→ 再讲<b>历史</b>（以前运货）→ 最后讲<b>现在的好处</b>，主旨是「窄船角色的变化」。</div></details>
+    </div>
+    <div class="tech anim" style="--i:2;--pc:#7c90a1">
+      <div class="lead">技巧点拨 · 说明文</div>
+      <p>说明文介绍事物的<b>特征、本质、性能、状态、用途、原理</b>。语言特征：① 多用<b>现在时态</b>；② <b>客观描述</b>，多用<b>被动语态</b>（<b>It is said that...</b> 替代 I think that...）、<b>权威引用</b>（<b>according to sb.</b> 替代 in my opinion）；③ <b>遣词简练平实</b>，不加议论。听时要弄清<b>说明顺序</b>：时间、空间、逻辑（因果）、认识顺序（由浅入深、由现象到本质）。</p>
+    </div>
+  </section>
+
+  <!-- 23 议论文·真题 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#9a8fae">Part 3 · 议论文</span><h2>议论文 · 真题（辩论与记忆）</h2><span class="en">Argumentative</span></div>
+    <div class="exam anim" style="--i:1;--pc:#9a8fae">
+      <div class="exam-head"><span class="tag">真题复现</span><span class="src">Questions 14–16 based on the following speech</span></div>
+      <div class="opts">
+        <span class="o"><b>14. A.</b> It can increase the rate of learning and the likelihood of remembering.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;B.</b> It can help gather related information.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;C.</b> The information can be easily recalled during an actual debate.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;D.</b> It makes remembering information difficult.</span>
+        <span class="o"><b>15. A.</b> Reading and thinking alone.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;B.</b> Talking about a movie to friends.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;C.</b> Writing down what they've read.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;D.</b> Read the information loudly.</span>
+        <span class="o"><b>16. A.</b> Related information is put together logically.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;B.</b> All the information is put together.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;C.</b> Information is related and can be recalled.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;D.</b> You can recall any information anytime.</span>
+      </div>
+      <div class="script" style="max-height:210px">
+        <div class="lead">听力原文</div>
+        <p>Some people believe that spending quiet hours reading and thinking in a library is the best way to prepare for a debate contest. Most memory experts, however, would recommend preparing with team members. Doing so increases the rate of learning and the likelihood of remembering. When members of a debate team prepare together, they learn facts and master issues faster and more effectively than each individual could alone.</p>
+        <p>"Communication is essential to the ability to remember well," says a well-known psychologist. He has found that isolating yourself is about the worst thing you can do if you want to remember information. In other words, when you talk with others, whether it is to describe a movie or complain about a difficult chapter in a textbook, you are actually strengthening your memory. The human memory works like a filing system. For a filing system to be effective, information has to be put in a logical place inside a folder that includes related information.</p>
+        <p>When the members of a debate team practise by using facts in support of an argument, they are exactly gathering related pieces of information into a single mental folder. And during an actual debate, when the pressure is on, they will be more easily recalled than those memorized as isolated pieces of information.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 24 议论文·解析 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#9a8fae">Part 3 · 议论文</span><h2>议论文 · 解析</h2><span class="en">Argumentative Analysis</span></div>
+    <div class="exam anim" style="--i:1;--pc:#9a8fae">
+      <div class="exam-head"><span class="tag">答案 + 解析</span></div>
+      <details class="reveal" open><summary><span class="caret">▸</span> 14. What do memory experts think of reading quietly in debate preparation?</summary><div class="ans"><div class="en">D</div>抓住 <b>however</b>：专家<b>不认同</b>默默记忆。<b>讨论可加强记忆，反之默默记忆使记忆变难</b>，故 D。</div></details>
+      <details class="reveal"><summary><span class="caret">▸</span> 15. In which situation are people most likely to improve memory?</summary><div class="ans"><div class="en">B</div>听到 <b>when you talk with others... describe a movie or complain about a difficult chapter...</b>，结合主旨「<b>交流方便记忆</b>」，选 B（向朋友谈论电影）。</div></details>
+      <details class="reveal"><summary><span class="caret">▸</span> 16. In what way does human memory work like a filing system?</summary><div class="ans"><div class="en">A</div>选项接近，抓住不同点：A「related, logically」、B「All, together」、C「related, can be recalled」、D「recall, anytime」。原文 <b>information has to be put in a logical place inside a folder that includes related information</b> → A。</div></details>
+    </div>
+    <div class="note anim" style="--i:2">
+      <span class="ico">🔑</span>
+      <div><b>议论文三要素：</b><b>论点</b>（作者观点）· <b>论据</b>（证明论点的依据）· <b>论证</b>（用论据证明论点的过程）。结构上一般由<b>序论（what）→ 本论（why）→ 结论（how）</b>三部分构成。</div>
+    </div>
+  </section>
+
+  <!-- 25 议论文·技巧 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#9a8fae">Part 3 · 议论文</span><h2>议论文 · 三种结构模式</h2><span class="en">Argument Patterns</span></div>
+    <div class="anim" style="--i:1">
+      <div class="mode" style="--pc:#83917c">
+        <div class="m-h">模式一 · 层层递进</div>
+        <p><b>引言段（提出观点）→ 正方论点 1 → 正方论点 2 → 正方论点 3 → 结论段</b>。论点<b>由弱到强</b>排列，最强论点放最后以示强调。</p>
+      </div>
+      <div class="mode" style="--pc:#7c90a1">
+        <div class="m-h">模式二 · 先驳后立</div>
+        <p><b>引言段（提出观点）→ 反面意见（反方 + 作者反驳）→ 正方论点 1 / 2 / 3 → 结论段</b>。开头先驳对立观点，再陈述己方论点。</p>
+      </div>
+      <div class="mode" style="--pc:#9a8fae">
+        <div class="m-h">模式三 · 边驳边立</div>
+        <p><b>引言段 → 反方观点 1 + 反驳、反方观点 2 + 反驳、反方观点 3 + 反驳 → 结论段</b>。每一部分都先抛反方观点再反驳。</p>
+      </div>
+    </div>
+    <div class="tech anim" style="--i:2;--pc:#9a8fae">
+      <div class="lead">议论文语言特点 · 演讲文体</div>
+      <p>议论文语言<b>客观、抽象、概括</b>，准确且合乎逻辑，多用 <b>since / now that / therefore / in that case / so / It follows that... / even if...</b> 等<b>辩论、推理类连接词</b>。演讲文体（<b>speech / talk / lecture</b>）近年高频：先<b>称呼语</b>（ladies and gentlemen / fellow students），再<b>开门见山提出论题</b>（最生动的是<b>举例法</b>），接着<b>客观论证</b>（举例 / 因果 / 对比），最后<b>得出结论</b>。</p>
+    </div>
+  </section>
+
+  <!-- 26 长对话·总览 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#be9a92">Part 4 · 长对话</span><h2>长对话 · 题型概述</h2><span class="en">Long Conversations</span></div>
+    <p class="para anim" style="--i:1">长对话由<b>一段或两段较长对话</b>组成，通常<b>读两遍</b>。涉及范围广：<b>求职面试、个人履历、预订房间、饭店订座、预订机票、预约演出</b>等日常小事，考查考生对<b>细节</b>的反馈和<b>辨音</b>能力。</p>
+    <div class="grid g3" style="margin-top:14px">
+      <div class="card anim" style="--i:2;--pc:#83917c">
+        <span class="num">1</span><h4>听前浏览选项</h4>
+        <div class="eg">预测主题与可能听到的词汇；把<b>关键词、短语</b>画线，联想其<b>同义词、近义词</b>。</div>
+      </div>
+      <div class="card anim" style="--i:3;--pc:#7c90a1">
+        <span class="num">2</span><h4>听中做笔记</h4>
+        <div class="eg">在选项旁记<b>人名、地名、数据、事实</b>，用关键词或短语做简要提纲，减轻记忆负担。</div>
+      </div>
+      <div class="card anim" style="--i:4;--pc:#9a8fae">
+        <span class="num">3</span><h4>做完要复盘</h4>
+        <div class="eg">不仅看是否答对，还要弄懂<b>其他选项为何错</b>，并与录音原文比对。</div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:5">
+      <span>💡</span>
+      <div><b>选项性质判定：</b>答案选项可能是<b>直接 / 间接支持</b>（正确），<b>直接 / 间接矛盾</b>（错误），或<b>根本未提及</b>（错误）。</div>
+    </div>
+  </section>
+
+  <!-- 27 长对话·答案判定 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#be9a92">Part 4 · 长对话</span><h2>错误答案 &amp; 正确答案的判定</h2><span class="en">Judging Answers</span></div>
+    <div class="grid g2" style="margin-top:6px">
+      <div class="card anim" style="--i:1;--pc:#b0725e">
+        <span class="num">✗</span><h4>错误答案的三种情况</h4>
+        <div class="eg">
+          <b>① 逻辑不符</b>：选项与录音内容逻辑不符或没有意义。<br>
+          <b>② 直接矛盾</b>：与录音内容完全相反（或几乎一样但非 100% 相同）。<br>
+          <b>③ 间接矛盾 / 未提及</b>：听出某些信息使该选项不正确，或录音根本没提。
+        </div>
+      </div>
+      <div class="card anim" style="--i:2;--pc:#83917c">
+        <span class="num">✓</span><h4>正确答案的两种情况</h4>
+        <div class="eg">
+          <b>① 直接支持</b>：录音内容直接支持该答案。<br>
+          <b>② 间接支持</b>：某部分录音让你觉得它正确；常用<b>同义词 / 类似表达</b>改写，或在说话者的<b>表单、摘要、定义</b>中找到。
+        </div>
+      </div>
+    </div>
+    <div class="exam anim" style="--i:3;--pc:#be9a92">
+      <div class="exam-head"><span class="tag">典型例题</span></div>
+      <div class="opts inline">
+        <span class="o"><b>A.</b> couples with children</span>
+        <span class="o"><b>B.</b> people who are physically fit</span>
+        <span class="o"><b>C.</b> single people</span>
+        <span class="o"><b>D.</b> retired people</span>
+      </div>
+      <div class="script">
+        <div class="lead">听力原文</div>
+        <p>This is a great tour for young, professional people who want to get away from the rat race for a while and do something totally different. We usually only accept people who are mid-30s or younger. It's not really suitable for families, though, as there's quite a bit of climbing involved and we walk or ride bikes for several hours each day. You should be in shape and ready for a bit of a challenge physically. It doesn't really matter if you're part of a couple or not. We can arrange for you to share a room.</p>
+        <p class="qline">Question: Which group of people does the travel agent think the tour is most suitable for?</p>
+      </div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案 + 解析</summary><div class="ans"><div class="en">B（people who are physically fit）</div>① D「retired people」与「30 岁左右、年轻」<b>不符</b>；② A「couples with children」与「不适合家庭」<b>直接矛盾</b>；③ C「single people」是<b>间接矛盾</b>——「不携伴也可以」说明单身、有伴都可，并非「最适合单身者」。而 <b>be in shape / challenge physically</b> 直接支持 B。</div></details>
+    </div>
+  </section>
+
+  <!-- 28 长对话·常见错误 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#be9a92">Part 4 · 长对话</span><h2>长对话 · 三大易错点</h2><span class="en">Common Mistakes</span></div>
+    <div class="grid g3" style="margin-top:6px">
+      <div class="card anim" style="--i:1;--pc:#b0725e"><span class="num">①</span><h4>过度预测</h4><div class="eg">看了选项就以为知道答案、不再细听；或一听到「疑似」对的答案就停止注意后续内容。</div></div>
+      <div class="card anim" style="--i:2;--pc:#b4a075"><span class="num">②</span><h4>没读全选项</h4><div class="eg">务必读完<b>所有</b>选项，尤其选项较长时；注意答案关键词常用<b>同义词</b>替代。</div></div>
+      <div class="card anim" style="--i:3;--pc:#7e8e86"><span class="num">③</span><h4>漏听修饰词</h4><div class="eg">注意 <b>only / always / never / un- / over / under / before / after / non-</b> 等会<b>限制范围</b>的词，及 <b>women / men 替代 people</b> 的情况。</div></div>
+    </div>
+    <div class="exam anim" style="--i:4;--pc:#be9a92">
+      <div class="exam-head"><span class="tag">典型例题</span></div>
+      <div class="opts inline">
+        <span class="o"><b>A.</b> He likes to do a lot of exercises when he is on vacation.</span>
+        <span class="o"><b>B.</b> He is a young professional under the age of 35.</span>
+        <span class="o"><b>C.</b> He doesn't have any children.</span>
+        <span class="o"><b>D.</b> He seldom goes rock climbing.</span>
+      </div>
+      <div class="script">
+        <div class="lead">听力原文</div>
+        <p>This is a great tour for young, professional people who want to get away from the rat race for a while and do something totally different. We usually only accept people who are mid-30s or younger. It's not really suitable for families, though, as there's quite a bit of climbing involved and we walk or ride bikes for several hours each day. You should be in shape and ready for a bit of a challenge physically. It doesn't really matter if you're part of a couple or not. We can arrange for you to share a room.</p>
+        <p><b>Ian:</b> Hmmm... Well, I've never tried rock climbing before but it sounds fun and it'll be good to keep fit while on holidays. The main advantage for me is that I'll be with people like me. I don't want to get stuck on a tour with a group of retired people. What would we talk about?</p>
+        <p class="qline">Question: Why does Ian decide to go on the 14-day adventure tour of New Zealand?</p>
+      </div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案 + 解析</summary><div class="ans"><div class="en">B（He is a young professional under the age of 35）</div>录音虽<b>没有直接说出</b>，但 Ian 自己（<b>with people like me</b>）和旅行社代理的叙述（<b>mid-30s or younger</b>）都表明他属于「35 岁以下的年轻职业人士」——这是<b>间接支持</b>的答案。</div></details>
+    </div>
+  </section>
+
+  <!-- 29 长对话·Laura题 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#be9a92">Part 4 · 长对话</span><h2>长对话 · 综合例题（Laura）</h2><span class="en">Practice</span></div>
+    <div class="exam anim" style="--i:1;--pc:#be9a92">
+      <div class="exam-head"><span class="tag">典型例题</span><span class="src">Questions 17–20</span></div>
+      <div class="opts">
+        <span class="o"><b>17. A.</b> Her work life is very busy.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;B.</b> She needs to be in a different environment.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;C.</b> She wants to go shopping.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;D.</b> She is available recently.</span>
+        <span class="o"><b>18. A.</b> a warm place.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;B.</b> a place with snow.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;C.</b> a new place.</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;D.</b> a humid environment.</span>
+        <span class="o"><b>19. A.</b> 5 weeks</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;B.</b> 4 weeks</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;C.</b> 3 weeks</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;D.</b> 2 weeks</span>
+        <span class="o"><b>20. A.</b> alone</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;B.</b> with one or two friends</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;C.</b> with a relative</span>
+        <span class="o"><b>&nbsp;&nbsp;&nbsp;&nbsp;D.</b> in a group</span>
+      </div>
+      <div class="script" style="max-height:250px">
+        <div class="lead">听力原文</div>
+        <p><b>M:</b> Good morning, Laura. How are you?</p>
+        <p><b>W:</b> I'm well, thanks. Thank you for meeting with me on such short notice. I just really need a total change of scene!</p>
+        <p><b>M:</b> It's easy to get stuck in a rut, isn't it? A holiday can work wonders. Did you have any ideas of where you'd like to go and what style of holiday you'd like?</p>
+        <p><b>W:</b> Well, I was thinking of an island holiday or maybe somewhere in Asia. Sometimes it's nice to go somewhere warm. I don't want to do a skiing holiday. I think the main point is that I go somewhere I haven't been before.</p>
+        <p><b>M:</b> That can be true but it also depends on the tour. Do you know how long you'd like to go for?</p>
+        <p><b>W:</b> Ideally, I'd take a month but I think 14 days is more realistic. At least I don't have to worry about coordinating with friends and relatives since I'm going by myself.</p>
+        <p><b>M:</b> I can easily put something together for that timeframe. Oh, we have a new package to the Cook Islands.</p>
+        <p><b>W:</b> Well, I've heard that the Cook Islands are beautiful. I think I'd like to go there. Thanks a lot.</p>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:2"><span>🎧</span><div>先作答 <b>17 / 18 / 19 / 20</b>，再看下一页<b>答案 + 解析</b>。</div></div>
+  </section>
+
+  <!-- 30 长对话·Laura解析 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#be9a92">Part 4 · 长对话</span><h2>长对话 · Laura 解析</h2><span class="en">Analysis</span></div>
+    <div class="exam anim" style="--i:1;--pc:#be9a92">
+      <div class="exam-head"><span class="tag">答案 + 解析</span></div>
+      <details class="reveal" open><summary><span class="caret">▸</span> 17. Why does Laura need a holiday?</summary><div class="ans"><div class="en">B</div>细节理解：Laura 说 <b>I just really need a total change of scene!</b>（我需要换个完全不同的景色）。</div></details>
+      <details class="reveal"><summary><span class="caret">▸</span> 18. Where is Laura thinking of going?</summary><div class="ans"><div class="en">C</div>细节区别：虽想去「somewhere warm」、不喜欢滑雪，但关键在 <b>the main point is that I go somewhere I haven't been before</b>（去从没去过的地方）。</div></details>
+      <details class="reveal"><summary><span class="caret">▸</span> 19. How long will Laura most likely go on holiday?</summary><div class="ans"><div class="en">D</div>细节区别：虽「a month」最理想，但她认为 <b>14 days is more realistic</b>（14 天更实际）→ 2 weeks。</div></details>
+      <details class="reveal"><summary><span class="caret">▸</span> 20. How will Laura go on holiday?</summary><div class="ans"><div class="en">A</div>细节理解：她说不用协调亲戚朋友的时间，因为 <b>I'm going by myself</b>（独自前往）。</div></details>
+    </div>
+    <div class="note anim" style="--i:2">
+      <span class="ico">🎯</span>
+      <div><b>解析共性：</b>长对话每题基本都考<b>「细节 + 同义替换」</b>——答案选项往往不是原文原句，而是<b>换个说法</b>（change of scene → different environment；14 days → 2 weeks；by myself → alone）。</div>
+    </div>
+  </section>
+
+  <!-- 31 分类词汇① -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#9a8fae">Part 5 · 分类词汇 ①</span><h2>星期 · 月份 · 人名</h2><span class="en">Time &amp; Names</span></div>
+    <div class="vocab g3" style="margin-top:6px">
+      <div class="vcard anim" style="--i:1;--pc:#9a8fae">
+        <h5>表示星期</h5>
+        <div class="words">
+          <span class="w">Monday</span><span class="w">Tuesday</span><span class="w">Wednesday</span><span class="w">Thursday</span><span class="w">Friday</span><span class="w">Saturday</span><span class="w">Sunday</span>
+        </div>
+      </div>
+      <div class="vcard anim" style="--i:2;--pc:#7c90a1">
+        <h5>表示月份</h5>
+        <div class="words">
+          <span class="w">January</span><span class="w">February</span><span class="w">March</span><span class="w">April</span><span class="w">May</span><span class="w">June</span><span class="w">July</span><span class="w">August</span><span class="w">September</span><span class="w">October</span><span class="w">November</span><span class="w">December</span>
+        </div>
+      </div>
+      <div class="vcard anim" style="--i:3;--pc:#83917c">
+        <h5>普通人名及姓氏</h5>
+        <div class="words">
+          <span class="w">Mary</span><span class="w">John</span><span class="w">Tom</span><span class="w">George</span><span class="w">Susan</span><span class="w">David</span><span class="w">James</span><span class="w">Jack</span><span class="w">Jane</span><span class="w">Smith</span><span class="w">Brown</span><span class="w">Taylor</span><span class="w">Johnson</span><span class="w">White</span><span class="w">Williams</span><span class="w">Black</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 32 分类词汇② -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#9a8fae">Part 5 · 分类词汇 ②</span><h2>国家人民 · 城市</h2><span class="en">Countries &amp; Cities</span></div>
+    <div class="vocab" style="margin-top:6px">
+      <div class="vcard anim" style="--i:1;--pc:#9a8fae">
+        <h5>常考国家及人民</h5>
+        <div class="words">
+          <span class="w">China · Chinese</span><span class="w">America · American</span><span class="w">Canada · Canadian</span><span class="w">Australia · Australian</span><span class="w">Brazil · Brazilian</span><span class="w">Egypt · Egyptian</span><span class="w">France · French</span><span class="w">Germany · German</span><span class="w">Britain · British</span><span class="w">India · Indian</span><span class="w">Italy · Italian</span><span class="w">Korea · Korean</span><span class="w">Mexico · Mexican</span><span class="w">Singapore · Singaporean</span><span class="w">Spain · Spaniard</span><span class="w">Russia · Russian</span><span class="w">Japan · Japanese</span>
+        </div>
+      </div>
+      <div class="vcard anim" style="--i:2;--pc:#7c90a1">
+        <h5>常见城市名</h5>
+        <div class="words">
+          <span class="w">London</span><span class="w">New York</span><span class="w">Boston</span><span class="w">Chicago</span><span class="w">Hong Kong</span><span class="w">Macao</span><span class="w">Seattle</span><span class="w">Tokyo</span><span class="w">Seoul</span><span class="w">Toronto</span><span class="w">Washington D.C.</span><span class="w">Vancouver</span><span class="w">Paris</span><span class="w">Berlin</span><span class="w">Moscow</span><span class="w">Sydney</span><span class="w">Beijing</span><span class="w">Shanghai</span>
+        </div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:3">
+      <span>💡</span>
+      <div><b>注意：</b>国家名与「该国人 / 语言」的形容词形式不同（<b>China → Chinese</b>、<b>France → French</b>、<b>Spain → Spaniard</b>）；听力常借此考查<b>国籍 / 地点</b>细节。</div>
+    </div>
+  </section>
+
+  <!-- 33 分类词汇③ -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#9a8fae">Part 5 · 分类词汇 ③</span><h2>大洲大洋 · 科目 · 天气</h2><span class="en">Geography · Weather</span></div>
+    <div class="vocab g3" style="margin-top:6px">
+      <div class="vcard anim" style="--i:1;--pc:#7c90a1">
+        <h5>七大洲 · 四大洋</h5>
+        <div class="words">
+          <span class="w">Asia</span><span class="w">Europe</span><span class="w">Africa</span><span class="w">North America</span><span class="w">South America</span><span class="w">Antarctica</span><span class="w">Oceania</span><span class="w">the Pacific Ocean</span><span class="w">the Atlantic Ocean</span><span class="w">the Indian Ocean</span><span class="w">the Arctic Ocean</span>
+        </div>
+      </div>
+      <div class="vcard anim" style="--i:2;--pc:#83917c">
+        <h5>科目名称</h5>
+        <div class="words">
+          <span class="w">Physics</span><span class="w">Chemistry</span><span class="w">Biology</span><span class="w">Politics</span><span class="w">History</span><span class="w">Geography</span><span class="w">Mathematics</span>
+        </div>
+      </div>
+      <div class="vcard anim" style="--i:3;--pc:#b4a075">
+        <h5>表示天气情况</h5>
+        <div class="words">
+          <span class="w">weather report</span><span class="w">wet</span><span class="w">warm</span><span class="w">cloudy</span><span class="w">grey</span><span class="w">sunny</span><span class="w">snowy</span><span class="w">dark</span><span class="w">rainy</span><span class="w">icy</span><span class="w">foggy</span><span class="w">storm</span><span class="w">windy</span><span class="w">fine</span><span class="w">sunshine</span><span class="w">snow</span><span class="w">heavy rain</span><span class="w">strong wind</span><span class="w">cold</span><span class="w">cool</span><span class="w">hot</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 34 小结 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8b8477">SUMMARY</span><h2>本节小结</h2><span class="en">Recap</span></div>
+    <div class="grid g4" style="margin-top:6px">
+      <div class="sum-block anim" style="--i:1;--pc:#b4a075">
+        <h4><span class="dot"></span>预判</h4>
+        <ul><li>看选项定考点</li><li>联想 / 比较 / 揣摩</li><li>带着问题听</li></ul>
+      </div>
+      <div class="sum-block anim" style="--i:2;--pc:#83917c">
+        <h4><span class="dot"></span>短对话</h4>
+        <ul><li>数字：抓修饰词换算</li><li>地点：抓场景触发词</li><li>态度：听 but / 语气</li><li>推断：听第二人 + 虚拟</li></ul>
+      </div>
+      <div class="sum-block anim" style="--i:3;--pc:#7c90a1">
+        <h4><span class="dot"></span>短文理解</h4>
+        <ul><li>记叙：六要素 + 过去时</li><li>说明：现在时 + 顺序</li><li>议论：论点论据论证</li></ul>
+      </div>
+      <div class="sum-block anim" style="--i:4;--pc:#9a8fae">
+        <h4><span class="dot"></span>长对话</h4>
+        <ul><li>浏览选项 + 做笔记</li><li>同义替换找答案</li><li>警惕修饰词陷阱</li></ul>
+      </div>
+    </div>
+    <div class="motto anim" style="--i:5">
+      听前预判 · 听中抓关键词 · 听后排除干扰 —— <span>听力拼的是「耳到 + 心到」</span>
+    </div>
+  </section>
+
+</div>
+
+<div id="nav">
+  <button id="prev" aria-label="上一页" title="上一页 (←)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="counter"><b id="cur">1</b> / <span id="total">34</span></div>
+  <button id="next" aria-label="下一页" title="下一页 (→)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <button class="toc-btn" id="toc" aria-label="返回目录" title="返回目录">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+    目录
+  </button>
+  <button id="fs" aria-label="全屏" title="全屏 (F)" style="border:none;background:transparent;width:34px">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+  </button>
+</div>
+<div id="hint">← → 翻页 · F 全屏 · 空格下一页</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  const curEl = document.getElementById('cur');
+  const totalEl = document.getElementById('total');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const fsBtn = document.getElementById('fs');
+  const tocBtn = document.getElementById('toc');
+  const progress = document.getElementById('progress');
+  let idx = 0;
+  totalEl.textContent = total;
+
+  function render(){
+    slides.forEach((s,i)=>{
+      s.classList.toggle('active', i===idx);
+      s.classList.toggle('prev', i<idx);
+    });
+    curEl.textContent = idx+1;
+    progress.style.width = ((idx+1)/total*100) + '%';
+    prevBtn.disabled = idx===0;
+    nextBtn.disabled = idx===total-1;
+  }
+  function go(n){
+    idx = Math.max(0, Math.min(total-1, n));
+    render();
+  }
+  prevBtn.addEventListener('click', ()=>go(idx-1));
+  nextBtn.addEventListener('click', ()=>go(idx+1));
+  tocBtn.addEventListener('click', ()=>go(1));
+  document.addEventListener('keydown', (e)=>{
+    if(e.key==='ArrowRight' || e.key===' ' || e.key==='PageDown'){ e.preventDefault(); go(idx+1); }
+    else if(e.key==='ArrowLeft' || e.key==='PageUp'){ e.preventDefault(); go(idx-1); }
+    else if(e.key==='Home'){ go(0); }
+    else if(e.key==='End'){ go(total-1); }
+    else if(e.key==='f' || e.key==='F'){
+      if(document.fullscreenElement){ document.exitFullscreen(); }
+      else { document.documentElement.requestFullscreen(); }
+    }
+  });
+  fsBtn.addEventListener('click', ()=>{
+    if(document.fullscreenElement){ document.exitFullscreen(); }
+    else { document.documentElement.requestFullscreen(); }
+  });
+  let touchX=null;
+  document.addEventListener('touchstart', e=>{ touchX=e.touches[0].clientX; });
+  document.addEventListener('touchend', e=>{
+    if(touchX===null) return;
+    const dx=e.changedTouches[0].clientX-touchX;
+    if(Math.abs(dx)>50){ dx<0?go(idx+1):go(idx-1); }
+    touchX=null;
+  });
+  render();
+</script>
+</body>
+</html>

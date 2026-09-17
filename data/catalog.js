@@ -69,7 +69,13 @@ window.CATALOG = {
       id: "tingli",
       name: "新高考英语听力与口试",
       color: "mist",
-      coursewares: []
+      coursewares: [
+        {
+          title: "听力测试部分课件（第6-24页）",
+          file: "courseware/听力测试部分课件.html",
+          added: "2026-09-17"
+        }
+      ]
     }
   ]
 };
