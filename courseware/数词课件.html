@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高考英语语法 · 第3节 数词</title>
+<style>
+  :root{
+    --ink:#453f37;
+    --muted:#8b8477;
+    --line:#e1dacb;
+    --bg:#eae4d9;
+    --paper:#faf7f1;
+    --brand:#83917c;
+    --brand-2:#7c90a1;
+    --gold:#b4a075;
+    --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:var(--font);
+    color:var(--ink);
+    background:var(--bg);
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ===== 舞台 ===== */
+  #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:64px 48px 96px}
+
+  .slide{
+    position:absolute;
+    width:min(1180px,100%);
+    max-height:100%;
+    background:var(--paper);
+    border-radius:20px;
+    box-shadow:0 24px 60px -24px rgba(80,72,60,.32), 0 0 0 1px rgba(80,72,60,.05);
+    padding:48px 56px;
+    opacity:0;
+    transform:translateX(40px);
+    pointer-events:none;
+    transition:opacity .45s ease, transform .45s ease;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+  .slide.active{opacity:1;transform:translateX(0);pointer-events:auto}
+  .slide.prev{transform:translateX(-40px)}
+
+  /* 入场动画 */
+  .slide .anim{opacity:0;transform:translateY(14px)}
+  .slide.active .anim{
+    opacity:1;transform:none;
+    transition:opacity .5s ease, transform .5s ease;
+    transition-delay:calc(var(--i,0)*70ms + 60ms);
+  }
+
+  /* ===== 页头 ===== */
+  .head{display:flex;align-items:center;gap:14px;margin-bottom:24px}
+  .part-badge{
+    font-size:13px;font-weight:700;letter-spacing:.06em;
+    color:#fff;background:var(--pc,#83917c);
+    padding:6px 14px;border-radius:99px;white-space:nowrap;
+  }
+  .head h2{font-size:28px;font-weight:800;letter-spacing:.01em;color:var(--ink)}
+  .head .en{font-size:14px;color:var(--muted);font-weight:600;margin-left:auto;white-space:nowrap}
+
+  /* ===== 封面 ===== */
+  .slide.cover{
+    background:
+      radial-gradient(900px 500px at 85% -10%, rgba(124,144,161,.5), transparent 60%),
+      radial-gradient(700px 500px at -10% 110%, rgba(180,160,117,.4), transparent 55%),
+      linear-gradient(135deg,#53604f 0%,#5e6e66 55%,#6e7f82 100%);
+    color:#fff;
+    justify-content:center;
+  }
+  .cover .brand-line{position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#b4a075,#c9b58d,#83917c,#7c90a1,#9a8fae)}
+  .cover .tag{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#e7e0d2;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);padding:7px 16px;border-radius:99px;margin-bottom:26px}
+  .cover h1{font-size:56px;font-weight:900;line-height:1.18;letter-spacing:.01em}
+  .cover h1 .hl{color:#c9b58d}
+  .cover .sub{margin-top:20px;font-size:19px;color:#e0d9ca;font-weight:500}
+  .cover .meta{margin-top:40px;display:flex;gap:26px;font-size:14px;color:#c4cdd3;font-weight:600}
+  .cover .meta b{color:#fff}
+
+  /* ===== 卡片 & 列表 ===== */
+  .grid{display:grid;gap:16px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .g5{grid-template-columns:repeat(5,1fr)}
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:16px;
+    padding:20px 22px;position:relative;overflow:hidden;
+  }
+  .card .num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:34px;height:34px;border-radius:10px;font-size:16px;font-weight:800;
+    color:#fff;background:var(--pc,#83917c);margin-bottom:12px;
+  }
+  .card h4{font-size:20px;font-weight:800;margin-bottom:6px}
+  .card .cn{font-size:14px;color:var(--muted);font-weight:600}
+  .card .frm{font-size:19px;font-weight:800;color:var(--pc,#83917c);margin-top:10px;letter-spacing:.02em}
+  .card .eg{font-size:14px;color:#5c564c;margin-top:10px;line-height:1.7;word-break:break-word}
+  .card .eg b{color:#53604f;font-weight:800}
+
+  /* 高亮关键词 */
+  .key{color:var(--brand-2);font-weight:800}
+  .gold{color:#8a7440;font-weight:800}
+  .red{color:#b05f4d;font-weight:800}
+
+  /* 例句区 */
+  .ex{
+    background:#f6f3ec;border:1px solid var(--line);border-radius:14px;
+    padding:16px 20px;margin-top:8px;
+  }
+  .ex + .ex{margin-top:14px}
+  .ex .lead{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:12px}
+
+  .cn-tran{font-size:15px;color:var(--muted);margin-top:10px;font-weight:500}
+  .cn-tran b{color:var(--ink)}
+
+  /* 重点框 */
+  .note{
+    display:flex;gap:12px;align-items:flex-start;
+    background:#f3eee2;border:1px solid #d9cbac;border-left:4px solid #b4a075;
+    border-radius:12px;padding:14px 18px;margin-top:16px;font-size:15.5px;line-height:1.6;
+  }
+  .note .ico{font-size:18px;line-height:1.4}
+  .note b{color:#6f5d33}
+
+  .tip{
+    display:flex;gap:10px;align-items:flex-start;
+    background:#eef1ea;border:1px solid #cdd7c6;border-left:4px solid #83917c;
+    border-radius:12px;padding:12px 16px;margin-top:14px;font-size:14.5px;line-height:1.6;color:#3f4a3c;
+  }
+  .tip b{color:#3f4a3c}
+
+  /* 易错点框 */
+  .warn{
+    display:flex;gap:10px;align-items:flex-start;
+    background:#f2e8e3;border:1px solid #e0c4b9;border-left:4px solid #b0725e;
+    border-radius:12px;padding:12px 16px;margin-top:14px;font-size:14.5px;line-height:1.6;color:#7a4232;
+  }
+  .warn b{color:#8a4a39}
+
+  /* 两栏 */
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .cols .ex{margin-top:0}
+
+  /* 表 */
+  table{width:100%;border-collapse:collapse;font-size:15px}
+  th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:13px;letter-spacing:.06em;color:var(--muted);background:#f4f1ea;font-weight:700}
+  td .en{font-weight:700}
+  td .cn{color:var(--muted);font-size:13.5px}
+  td .big{font-weight:800;font-size:16px}
+
+  .pill{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:#eef1ea;color:#3f4a3c;margin-right:6px}
+
+  /* 短语列表 */
+  .ph-list{display:grid;grid-template-columns:1fr 1fr;gap:6px 18px;font-size:14.5px;line-height:1.6}
+  .ph-list .ph{display:flex;justify-content:space-between;gap:8px;padding:5px 0;border-bottom:1px dashed #e8e2d4}
+  .ph-list .ph .en{font-weight:700;color:#53604f;white-space:nowrap}
+  .ph-list .ph .cn{color:var(--muted)}
+
+  /* 练习题 */
+  .q{background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 16px;margin-top:9px}
+  .q .qtxt{font-size:14.5px;line-height:1.6;color:#4c463c}
+  .q .qtxt b{color:var(--ink)}
+  .q .opts{font-size:13.5px;color:#6b655a;margin-top:6px;line-height:1.7}
+  .q .opts span{margin-right:14px;white-space:nowrap}
+  .q .opts .good{color:#b05f4d;font-weight:800}
+
+  /* ===== 答案折叠 ===== */
+  .reveal{margin-top:10px;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .reveal summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:9px 14px;font-size:13.5px;font-weight:700;color:#53604f;background:#f6f3ec;user-select:none}
+  .reveal summary::-webkit-details-marker{display:none}
+  .reveal summary .caret{display:inline-block;transition:transform .2s;font-size:11px}
+  .reveal[open] summary .caret{transform:rotate(90deg)}
+  .reveal .ans{padding:10px 14px 12px;border-top:1px dashed var(--line);font-size:14.5px}
+  .reveal .ans .en{font-weight:800;color:#53604f;line-height:1.6}
+  .reveal .ans .mark{margin-top:4px;font-size:13px;color:#7a7468;line-height:1.55}
+  .reveal .ans .mark b{color:#6f5d33}
+  .q .reveal{margin-top:7px}
+  .q .reveal summary{padding:7px 12px;font-size:12.5px}
+  .q .reveal .ans{padding:8px 12px 10px;font-size:13.5px}
+
+  /* 小结 */
+  .sum-block{border:1px solid var(--line);border-radius:16px;padding:20px 22px;background:#fff}
+  .sum-block h4{font-size:16px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .sum-block .dot{width:10px;height:10px;border-radius:3px;background:var(--pc,#83917c)}
+  .sum-block ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+  .sum-block li{font-size:14.5px;color:#4c463c;line-height:1.5}
+  .sum-block li b{color:var(--ink)}
+
+  .motto{
+    margin-top:22px;text-align:center;font-size:20px;font-weight:800;color:#53604f;
+    background:#eef1ea;border-radius:14px;padding:18px;
+  }
+  .motto span{color:#b05f4d}
+
+  /* ===== 导航 ===== */
+  #nav{
+    position:fixed;left:50%;bottom:26px;transform:translateX(-50%);
+    display:flex;align-items:center;gap:14px;z-index:50;
+    background:rgba(250,247,241,.9);backdrop-filter:blur(10px);
+    border:1px solid var(--line);border-radius:99px;padding:9px 12px;
+    box-shadow:0 10px 30px -12px rgba(80,72,60,.3);
+  }
+  #nav button{
+    border:none;background:#fff;border:1px solid var(--line);
+    width:40px;height:40px;border-radius:50%;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;color:#4c463c;
+    transition:.15s;
+  }
+  #nav button:hover:not(:disabled){background:#eef1ea;border-color:#cdd7c6;color:#53604f}
+  #nav button:disabled{opacity:.35;cursor:default}
+  #nav .counter{font-size:14px;font-weight:700;color:#4c463c;min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
+  #nav .counter b{color:#53604f;font-size:16px}
+  #progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#83917c,#7c90a1);z-index:60;width:0;transition:width .35s ease}
+  #hint{position:fixed;left:50%;transform:translateX(-50%);bottom:4px;font-size:12px;color:#a49c8c;z-index:40;white-space:nowrap}
+
+  /* ===== 响应式 ===== */
+  @media (max-width:900px){
+    #stage{padding:20px 16px 90px}
+    .slide{padding:28px 24px;border-radius:14px}
+    .g2,.g3,.g4,.g5,.cols,.ph-list{grid-template-columns:1fr}
+    .head h2{font-size:22px}
+    .cover h1{font-size:34px}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<div id="stage">
+
+  <!-- 1 封面 -->
+  <section class="slide cover active">
+    <div class="brand-line"></div>
+    <div class="anim" style="--i:0">
+      <span class="tag">高考英语 · 核心语法精讲</span>
+    </div>
+    <h1 class="anim" style="--i:1">数词 <span class="hl">·</span> 基数词与序数词</h1>
+    <p class="sub anim" style="--i:2">基数词 · 序数词 · 日期时间 · 分数小数 · 百分数 · 真题实战 —— 一对一精讲</p>
+    <div class="meta anim" style="--i:3">
+      <span>主讲：<b>杨老师</b></span>
+      <span>对象：<b>高三</b></span>
+      <span>板块：<b>数词 · 基数词 · 序数词 · 应用</b></span>
+    </div>
+  </section>
+
+  <!-- 2 目录 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8b8477">CONTENTS</span><h2>本节内容</h2><span class="en">Roadmap</span></div>
+    <div class="grid g3" style="margin-top:8px">
+      <div class="card anim" style="--i:1;--pc:#83917c"><span class="num">01</span><h4>基数词</h4><div class="cn">0~多位数 · 拼写规则 · thousand/million/billion</div></div>
+      <div class="card anim" style="--i:2;--pc:#7c90a1"><span class="num">02</span><h4>序数词</h4><div class="cn">变化规则 · the / a-an · 省略 the</div></div>
+      <div class="card anim" style="--i:3;--pc:#be9a92"><span class="num">03</span><h4>数词应用</h4><div class="cn">日期 · 时刻 · 编号 · 分数 · 倍数</div></div>
+      <div class="card anim" style="--i:4;--pc:#b4a075"><span class="num">04</span><h4>小数与百分数</h4><div class="cn">point · percent · 句中成分</div></div>
+      <div class="card anim" style="--i:5;--pc:#9a8fae"><span class="num">05</span><h4>专项练习</h4><div class="cn">30 道单选 · 逐题讲评</div></div>
+      <div class="card anim" style="--i:6;--pc:#7e8e86"><span class="num">06</span><h4>易错点复盘</h4><div class="cn">六大高频陷阱 · 口诀记忆</div></div>
+    </div>
+    <div class="note anim" style="--i:7;margin-top:26px">
+      <span class="ico">🎯</span>
+      <div>一句话抓住主线：<b>基数词管“多少”（数量）</b>，<b>序数词管“第几”（顺序）</b>；先分清<b>基数 / 序数</b>，再看<b>搭配（the、a/an、连字符、所有格）</b>收口。</div>
+    </div>
+  </section>
+
+  <!-- 3 数词总览 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#83917c">数词 · 总览</span><h2>数词：表“多少”与“第几”</h2><span class="en">Overview</span></div>
+    <div class="grid g2" style="margin-top:6px">
+      <div class="card anim" style="--i:1;--pc:#83917c">
+        <span class="num">one</span><h4>基数词 Cardinal</h4>
+        <div class="cn">表示<b>数量多少</b>（多少个）</div>
+        <div class="eg">one, two, three …<br>twenty-one, <b>hundred</b>, <b>thousand</b>, <b>million</b>, <b>billion</b></div>
+      </div>
+      <div class="card anim" style="--i:2;--pc:#7c90a1">
+        <span class="num">1st</span><h4>序数词 Ordinal</h4>
+        <div class="cn">表示<b>顺序先后</b>（第几个）</div>
+        <div class="eg">first, second, third …<br><b>the first</b>（第一）· <b>a fourth</b>（又一个）</div>
+      </div>
+    </div>
+    <div class="note anim" style="--i:3;margin-top:18px">
+      <span class="ico">🔑</span>
+      <div><b>数词在句中可作：</b>主语（<b>Thirty</b> of them…）· 宾语（pass me <b>the second</b>）· 表语（He was <b>the fourth</b> to arrive）· 定语（<b>the ninth</b> boy）· 同位语（<b>We two</b> will go with you，仅限基数词）。</div>
+    </div>
+    <div class="tip anim" style="--i:4">
+      <span>💡</span>
+      <div><b>记忆抓手：</b>记数词先记「<b>两大类</b>」→ 再记「<b>三张表</b>」（基数词表、序数词表、应用表）→ 最后用「<b>分数 / 小数 / 百分数</b>」三块收尾。</div>
+    </div>
+  </section>
+
+  <!-- 4 考点1 基数词 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#83917c">考点 1 · 基数词</span><h2>基数词的构成规则</h2><span class="en">Cardinal Numbers</span></div>
+    <div style="margin-top:2px">
+      <table class="anim" style="--i:1">
+        <thead><tr><th style="width:20%">数字范围</th><th style="width:30%">构成规则</th><th>例词</th></tr></thead>
+        <tbody>
+          <tr><td class="big">0 ~ 12</td><td class="cn">各自独立，无规律</td><td><span class="en">zero 0 · one 1 · nine 9 · twelve 12</span></td></tr>
+          <tr><td class="big">13 ~ 19</td><td class="cn">3~9 加 -teen 结尾</td><td>特殊：<span class="en">thirteen 13 · fifteen 15 · eighteen 18</span><br>一般：<span class="en">fourteen 14 · sixteen 16</span></td></tr>
+          <tr><td class="big">20 ~ 90 整十</td><td class="cn">以 -ty 结尾</td><td><span class="en">twenty 20 · thirty 30 · forty 40 · fifty 50 · sixty 60 · seventy 70 · eighty 80 · ninety 90</span></td></tr>
+          <tr><td class="big">两位数（几十几）</td><td class="cn">整十位数 + 连字符 + 个位数</td><td><span class="en">twenty-one 21 · thirty-five 35 · ninety-eight 98</span></td></tr>
+          <tr><td class="big">三位数（几百几）</td><td class="cn">…hundred <b>and</b> + 两位数</td><td><span class="en">seven hundred and eighty-five 785 · two hundred and ten 210</span></td></tr>
+          <tr><td class="big">多位数</td><td class="cn">从右向左每三位加逗号，依次为 thousand / million / billion</td><td><span class="en">76,832,154,968 → seventy-six billion, eight hundred and thirty-two million, one hundred and fifty-four thousand, nine hundred and sixty-eight</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="warn anim" style="--i:2">
+      <span>⚠️</span>
+      <div><b>易错：</b>具体数字后的 <b>hundred / thousand / million / billion 不加 s</b>（eight <b>hundred</b>，不是 hundreds）；只有表“成百上千”的泛指才用 <b>hundreds of / thousands of / millions of</b>。</div>
+    </div>
+  </section>
+
+  <!-- 5 考点2 序数词 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7c90a1">考点 2 · 序数词</span><h2>序数词的变化规则</h2><span class="en">Ordinal Numbers</span></div>
+    <div style="margin-top:2px">
+      <table class="anim" style="--i:1">
+        <thead><tr><th style="width:24%">数字范围</th><th style="width:30%">变化规则</th><th>例词</th></tr></thead>
+        <tbody>
+          <tr><td class="big">1, 2, 3</td><td class="cn">不规则变化</td><td><span class="en">first 第一 · second 第二 · third 第三</span></td></tr>
+          <tr><td class="big">4 ~ 19</td><td class="cn">基数词词尾加 -th</td><td>一般：<span class="en">fourth 第四 · nineteenth 第十九</span><br>特殊：<span class="en">fifth 第五 · eighth 第八 · ninth 第九 · twelfth 第十二</span></td></tr>
+          <tr><td class="big">20 ~ 90 整十</td><td class="cn">把 -ty 变 -tie，再加 -th</td><td><span class="en">twenty → twentieth 第二十 · ninety → ninetieth 第九十</span></td></tr>
+          <tr><td class="big">两位数 / 多位数（除整数外）</td><td class="cn">只变个位数为序数词，hundred / thousand 等只在词尾加 -th</td><td><span class="en">twenty-third 第二十三 · one hundred and fifty-ninth 第一百五十九 · hundredth 第一百</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tip anim" style="--i:2">
+      <span>💡</span>
+      <div><b>序数词简写：</b>阿拉伯数字 + 序数词最后两个字母 → <b>1st、2nd、3rd、4th、5th</b>（first、second、third 特殊，其余多 -th）。</div>
+    </div>
+  </section>
+
+  <!-- 6 考点3 序数词用法 ① -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#be9a92">考点 3 · 序数词用法</span><h2>基本用法 · 省略 the</h2><span class="en">Usage of Ordinals ①</span></div>
+    <div class="grid g2" style="margin-top:4px">
+      <div class="card anim" style="--i:1;--pc:#7c90a1">
+        <span class="num">the</span><h4>加 the 表顺序</h4>
+        <div class="eg"><b>the first book</b> 第一本书<br>He lives on <b>the second</b> floor. 他住在二楼。<br>I come <b>first</b>. 我得了第一名。</div>
+      </div>
+      <div class="card anim" style="--i:2;--pc:#be9a92">
+        <span class="num">a / an</span><h4>加 a/an 表“又一、再一”</h4>
+        <div class="eg">They still want <b>a fourth</b> one.<br>尽管已有三个孩子，还想<b>再要一个</b>。<br><b>a second</b> = 又一次 / 再来一次</div>
+      </div>
+    </div>
+    <div class="ex anim" style="--i:3;margin-top:16px">
+      <div class="lead">省略 the 的三种情况</div>
+      <div class="ph-list">
+        <div class="ph"><span class="en">① 表日期</span><span class="cn">June <b>1st</b>（1st 前的 the 省略）</span></div>
+        <div class="ph"><span class="en">② 固定搭配</span><span class="cn"><b>at first</b>（起初）· be <b>second</b> to · <b>Second</b> Avenue</span></div>
+        <div class="ph"><span class="en">③ 物主代词 / 所有格</span><span class="cn">Tom's <b>third</b> time（前面已有 Tom's，不加 the）</span></div>
+      </div>
+    </div>
+    <div class="note anim" style="--i:4">
+      <span class="ico">🔑</span>
+      <div><b>一句话：</b>序数词前<b>该加 the</b>，但遇到<b>物主代词 / 名词所有格</b>、<b>日期</b>、<b>固定搭配</b>就<b>省掉 the</b>。例：<b>his fortieth birthday</b>（他的四十岁生日，his 后面不出现 the）。</div>
+    </div>
+  </section>
+
+  <!-- 7 考点3 序数词用法 ② -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#be9a92">考点 3 · 序数词用法</span><h2>复数形式 · 搭配 · 位置</h2><span class="en">Usage of Ordinals ②</span></div>
+    <div class="grid g3" style="margin-top:6px">
+      <div class="card anim" style="--i:1;--pc:#be9a92">
+        <span class="num">1</span><h4>复数形式</h4>
+        <div class="cn">表示“第几组 / 第几类”概念</div>
+        <div class="eg"><b>the fifths</b> = 五分之一的人或事物（将整体分五等份中的一份）</div>
+      </div>
+      <div class="card anim" style="--i:2;--pc:#b4a075">
+        <span class="num">2</span><h4>与其他词搭配</h4>
+        <div class="cn">可搭配形容词 / 副词 / 介词短语</div>
+        <div class="eg"><b>second-best</b> 第二好的 · <b>third-largest</b> 第三大的 · <b>in the first place</b> 首先 · <b>at the second attempt</b> 第二次尝试时</div>
+      </div>
+      <div class="card anim" style="--i:3;--pc:#9a8fae">
+        <span class="num">3</span><h4>在句中的位置</h4>
+        <div class="cn">通常位于名词 / 代词之前</div>
+        <div class="eg">序数词 + 名词构成名词短语<br><b>the first book</b> · <b>the ninth boy</b></div>
+      </div>
+    </div>
+    <div class="note anim" style="--i:4;margin-top:18px">
+      <span class="ico">🎯</span>
+      <div><b>高频考点聚焦：</b>“<b>a/an + 序数词</b> = 再一、又一”（a second / a fourth）是改错和语法填空的常客，务必和“<b>the + 序数词</b> = 第几个”区别开。</div>
+    </div>
+  </section>
+
+  <!-- 8 考点4 应用① 日期年份年代 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b4a075">考点 4 · 数词应用</span><h2>日期 · 年份 · 年代</h2><span class="en">Dates &amp; Years</span></div>
+    <div style="margin-top:2px">
+      <table class="anim" style="--i:1">
+        <thead><tr><th style="width:22%">名称</th><th style="width:36%">表达法</th><th>例词</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="big">年份日期<br>（月·日·年）</td>
+            <td class="cn"><b>日</b>用序数词，<b>年</b>用基数词；年份可先读前两位再读后两位，读“日”时要加 the</td>
+            <td><span class="en">March the twenty-first, nineteen ninety-seven</span><br><span class="cn">1997年3月21日</span></td>
+          </tr>
+          <tr>
+            <td class="big">年份日期<br>（日·月·年）</td>
+            <td class="cn">the + 序数词 + of + 月，年</td>
+            <td><span class="en">the twenty-first of March, two thousand and seven</span><br><span class="cn">2007年3月21日</span></td>
+          </tr>
+          <tr>
+            <td class="big">年代</td>
+            <td class="cn">in + the + 数词复数形式（加 -s 或 's）</td>
+            <td><span class="en">in the 1720's / 1720s</span><br><span class="cn">读作 in the seventeen twenties，18世纪20年代</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tip anim" style="--i:2">
+      <span>💡</span>
+      <div><b>年代高频：</b>“二十世纪九十年代” = <b>the 1990s</b> / <b>the nineties</b>；“在他八十多岁时” = <b>in his eighties</b>（注意介词 in + 物主代词 his）。</div>
+    </div>
+  </section>
+
+  <!-- 9 考点4 应用② 时刻 编号 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b4a075">考点 4 · 数词应用</span><h2>时刻 · 编号</h2><span class="en">Time &amp; Numbering</span></div>
+    <div style="margin-top:2px">
+      <table class="anim" style="--i:1">
+        <thead><tr><th style="width:26%">名称</th><th style="width:40%">表达法</th><th>例词</th></tr></thead>
+        <tbody>
+          <tr><td class="big">顺读</td><td class="cn">时在前，分在后，按基数词读</td><td><span class="en">10:15 → ten fifteen</span></td></tr>
+          <tr><td class="big">past（过）</td><td class="cn">分在前时在后，“几点过几分”用 past，分钟数 ≤ 半小时</td><td><span class="en">7:05 five past seven · 7:15 a quarter past seven · 7:30 half past seven</span></td></tr>
+          <tr><td class="big">to（差）</td><td class="cn">“几点差几分”用 to，分钟数在半小时以内（不含半小时）</td><td><span class="en">7:57 three to eight · 11:46 fourteen to twelve · 2:40 twenty to three</span></td></tr>
+          <tr><td class="big">刻钟</td><td class="cn">一刻钟 a quarter，三刻钟 three quarters</td><td><span class="en">九点一刻 → a quarter past nine</span></td></tr>
+          <tr><td class="big">编号</td><td class="cn">序号在名词<b>前</b>用序数词，在名词<b>后</b>用基数词</td><td><span class="en">第12课 → the twelfth lesson = Lesson Twelve</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="warn anim" style="--i:2">
+      <span>⚠️</span>
+      <div><b>编号陷阱：</b>“Gate Four / Lesson Twelve”是<b>名词 + 基数词</b>（不加 the、不用序数词）；而“the twelfth lesson”才是<b>the + 序数词 + 名词</b>。两者都对，别混着用。</div>
+    </div>
+  </section>
+
+  <!-- 10 考点4 应用③ 分数 倍数 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b4a075">考点 4 · 数词应用</span><h2>分数 · 倍数</h2><span class="en">Fractions &amp; Multiples</span></div>
+    <div style="margin-top:2px">
+      <table class="anim" style="--i:1">
+        <thead><tr><th style="width:22%">名称</th><th style="width:40%">表达法</th><th>例词</th></tr></thead>
+        <tbody>
+          <tr><td class="big">分数</td><td class="cn">分子用<b>基数词</b>，分母用<b>序数词</b>；分子 &gt; 1 时分母加 -s</td><td><span class="en">1/3 one third · 2/3 two thirds · 4/5 four fifths · 7/10 seven tenths</span></td></tr>
+          <tr><td class="big">特殊分数</td><td class="cn">1/2 用 a/one half，1/4 用 a/one quarter</td><td><span class="en">a half · a quarter</span></td></tr>
+          <tr><td class="big">带分数</td><td class="cn">整数 + and + 分数</td><td><span class="en">2¾ → two and three fourths</span></td></tr>
+          <tr><td class="big">倍数</td><td class="cn">两倍用 twice，两倍以上用基数词 + times</td><td><span class="en">twice 两倍 · three times 三倍 · forty times 四十倍</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note anim" style="--i:2">
+      <span class="ico">🔑</span>
+      <div><b>记忆口诀：</b>「<b>分子基，分母序</b>；<b>分子大于 1，分母加 s</b>」—— 例：三分之二 = <b>two thirds</b>（two 是基数，third 变复数 thirds）。</div>
+    </div>
+  </section>
+
+  <!-- 11 考点5 小数百分数 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#9a8fae">考点 5 · 小数与百分数</span><h2>小数 · 百分数</h2><span class="en">Decimals &amp; Percent</span></div>
+    <div class="grid g2" style="margin-top:6px">
+      <div class="card anim" style="--i:1;--pc:#9a8fae">
+        <span class="num">point</span><h4>小数</h4>
+        <div class="cn">小数点读 point，点前按基数词、点后逐位读数字</div>
+        <div class="eg">0.5 → <b>zero point five</b> / <b>point five</b><br>12.12 → <b>twelve point one two</b><br>12.297 → <b>twelve point two nine seven</b><br><span class="cn">The price is 19.99 dollars.（表价格、尺寸）</span></div>
+      </div>
+      <div class="card anim" style="--i:2;--pc:#7c90a1">
+        <span class="num">%</span><h4>百分数</h4>
+        <div class="cn">基数词 + percent，直接读 percent</div>
+        <div class="eg">25% → <b>twenty-five percent</b><br><br>作主语：<b>Ninety percent</b> of the students passed.<br>作宾语：invested <b>twenty percent</b><br>作定语：<b>a thirty percent</b> increase<br>作表语：The pass rate is <b>sixty percent</b>.</div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:3;margin-top:18px">
+      <span>💡</span>
+      <div><b>区别记忆：</b>小数读 <b>point</b>（逐位读），百分数读 <b>percent</b>（整体读）；两者都可作主语、宾语、定语、表语。</div>
+    </div>
+  </section>
+
+  <!-- 12 练习① 1-6 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b0725e">实战 · 专项练习</span><h2>单项选择 ①（1–6）</h2><span class="en">Multiple Choice</span></div>
+    <div class="anim" style="--i:1">
+      <div class="q">
+        <div class="qtxt"><b>1.</b> There are ___ days in a week and Tuesday is ___ day of the week.</div>
+        <div class="opts">A. seven, third　B. seven, the third　C. seventh, three　D. the seventh, three</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B</div><div class="mark">“七天”用基数 <b>seven</b>；“第二天”序数词前加 <b>the third</b>。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>2.</b> — There are 60 students in my class and 44 of them use Weibo very often.<br>— 44? That means about ___ of your classmates are Weibo users, right?</div>
+        <div class="opts">A. half　B. one third　C. two thirds　D. three quarters</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">D</div><div class="mark">44/60 ≈ 75% → <b>three quarters</b>（四分之三）。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>3.</b> Eight ___ students in our school are from the countryside.</div>
+        <div class="opts">A. hundreds　B. hundred　C. hundreds of　D. hundred of</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B</div><div class="mark">具体数字 eight 后的 hundred 不加 s、不加 of。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>4.</b> He wrote his ___ novel when he was ___.</div>
+        <div class="opts">A. five, fifties　B. fifth, fifty　C. fifth, fiftieth　D. five, fiftieth</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B</div><div class="mark">“第五本小说”用序数 <b>fifth</b>；“他五十岁”用基数 <b>fifty</b>。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>5.</b> July 1st, 2011 is ___ birthday of the Communist Party of China.</div>
+        <div class="opts">A. ninety　B. the ninety　C. the ninetieth　D. ninetieth</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">C</div><div class="mark">“第九十个生日”= <b>the ninetieth</b>（序数词 + the）。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>6.</b> Kangkang is a school boy. He got a good gift on his ___ birthday.</div>
+        <div class="opts">A. fourteenth　B. fortieth　C. the fortieth　D. the fourteenth</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A</div><div class="mark">物主代词 his 后<b>省略 the</b>；学生约 14 岁 → <b>fourteenth</b>。</div></div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 练习② 7-12 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b0725e">实战 · 专项练习</span><h2>单项选择 ②（7–12）</h2><span class="en">Multiple Choice</span></div>
+    <div class="anim" style="--i:1">
+      <div class="q">
+        <div class="qtxt"><b>7.</b> I don't believe that this ___ boy can paint such a nice picture.</div>
+        <div class="opts">A. five years old　B. five-years-old　C. five-year-old　D. fifth-year-old</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">C</div><div class="mark">复合形容词作定语用连字符、名词用单数：<b>five-year-old</b>。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>8.</b> About ___ of the students in Grade Nine this year were born in the ___.</div>
+        <div class="opts">A. three five, 1996　B. three fifths, 1990s　C. third fifth, 1997　D. third fifths, 1990s</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B</div><div class="mark">“五分之三”分子 &gt; 1 分母加 s → <b>three fifths</b>；年代 <b>the 1990s</b>。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>9.</b> — If a=4, b=5, what's the answer to the question “a²+2ab+1”?</div>
+        <div class="opts">A. Forty-fifth　B. Forty-five　C. Twenty-three　D. One hundred and twenty-one</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B</div><div class="mark">数学题答案读作<b>基数词</b> forty-five（45），不用序数词 Forty-fifth。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>10.</b> — Do you have enough students to clean the laboratory?<br>— No, I think we need ___ students.</div>
+        <div class="opts">A. another　B. two others　C. more two　D. two more</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">D</div><div class="mark">“还需要两个”= 数词 + more：<b>two more students</b>。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>11.</b> ___ reward was offered for the capture of the escaped criminals.</div>
+        <div class="opts">A. A five-thousand-dollars　B. A five-thousand-dollar　C. The five-thousands-dollar　D. Five thousand-dollar</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B</div><div class="mark">复合形容词 <b>five-thousand-dollar</b>（单数），前面加 a。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>12.</b> The salesgirl remembered clearly the fashionable woman ordered ___ value of software.</div>
+        <div class="opts">A. fifty dollars　B. fiftieth dollars'　C. fifty dollar　D. fifty dollars'</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">D</div><div class="mark">“五十美元的价值”= 复数所有格 <b>fifty dollars' value</b>。</div></div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14 练习③ 13-18 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b0725e">实战 · 专项练习</span><h2>单项选择 ③（13–18）</h2><span class="en">Multiple Choice</span></div>
+    <div class="anim" style="--i:1">
+      <div class="q">
+        <div class="qtxt"><b>13.</b> That was ___ desk, for there was no room for ___ in their study.</div>
+        <div class="opts">A. Susan and her sister's, a second　B. Susan's and her sister's, the second　C. Susan and her sister's, the second　D. Susan's and her sister's, a second</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A</div><div class="mark">两人<b>共有</b>的桌子只在最后加 's：<b>Susan and her sister's</b>；“再放一张”= <b>a second</b>。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>14.</b> — I've been laid off, and my boss gave me only ___ notice.<br>— I'm sorry to hear that.</div>
+        <div class="opts">A. six-day　B. a week's　C. a weeks'　D. five day's</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B</div><div class="mark">“一周的通知”= <b>a week's notice</b>（名词所有格）。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>15.</b> She asked for leave to visit her mother and was granted ___.</div>
+        <div class="opts">A. a forty-eight-hours leave　B. the leave of forty-eight hour's　C. a forty-eight hours' leave　D. the forty-eight hour's leave</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">C</div><div class="mark">“48 小时的假”= 复数所有格 <b>forty-eight hours' leave</b>。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>16.</b> The railway station is quite near: only ___ from the hotel.</div>
+        <div class="opts">A. ten-minutes drive　B. ten minute's drive　C. ten minutes' drive　D. ten-minute-drive</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">C</div><div class="mark">“十分钟车程”= <b>ten minutes' drive</b>（复数所有格）。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>17.</b> — Is your home far away from the subway station?<br>— Well, not so far. It's ___ walk.</div>
+        <div class="opts">A. ten minutes　B. ten-minutes　C. ten minutes'　D. ten-minutes'</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">C</div><div class="mark">“十分钟路程”= <b>ten minutes' walk</b>。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>18.</b> With an initial investment of only ten thousand dollars, he has increased his money ___.</div>
+        <div class="opts">A. by two thousand more　B. by two thousand　C. at two thousand more　D. by two thousands</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B</div><div class="mark">“增加了两千”= <b>by two thousand</b>（by + 具体差额；thousand 不加 s）。</div></div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15 练习④ 19-24 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b0725e">实战 · 专项练习</span><h2>单项选择 ④（19–24）</h2><span class="en">Multiple Choice</span></div>
+    <div class="anim" style="--i:1">
+      <div class="q">
+        <div class="qtxt"><b>19.</b> We have run 3 shops, even though they are small, at 220 ___ Street. We are not able to open ___ one at present.</div>
+        <div class="opts">A. Second; a fourth　B. the second; fourth　C. second; the fourth　D. Second; a four</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A</div><div class="mark">街名“第二大街”大写 <b>Second</b> Street；“再开第四家”= <b>a fourth</b>。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>20.</b> Attention, please. Flight CA893 from Hong Kong is now arriving at ___.</div>
+        <div class="opts">A. Gate Four　B. The Gate Four　C. The Four Gate　D. Fourth Gate</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A</div><div class="mark">“四号门”编号 = <b>名词 + 基数词</b> Gate Four。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>21.</b> The terrible war broke out in ___ of ___ century.</div>
+        <div class="opts">A. the nineties, eighteenth　B. nineties, the eighteen　C. the nineties, the nineteenth　D. nineties, the ninteenth</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">C</div><div class="mark">“十九世纪九十年代”= <b>the nineties of the nineteenth century</b>。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>22.</b> It's amazing that my grandfather started to learn how to use a computer ___, when he was already ___.</div>
+        <div class="opts">A. in the 1990, eighties　B. in the 1990's, in his eighties　C. in the 1990, in eighties　D. in 1990's, in the eighties</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B</div><div class="mark">“九十年代”= <b>in the 1990s</b>；“他八十多岁”= <b>in his eighties</b>。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>23.</b> Is it ___ supermarket on ___ Avenue, ___ Street?</div>
+        <div class="opts">A. the, the Fifth, the Ninth　B. a, Fifth, Ninth　C. the, Fifth, Ninth　D. a, Fifth, the Ninth</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B</div><div class="mark">泛指“一家超市”= <b>a</b>；街名 Fifth Avenue、Ninth Street 不加 the。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>24.</b> During ___, this famous scientist found the way of discovering the new chemical element.</div>
+        <div class="opts">A. the later 1920's　B. the late 1920s　C. later 1920's　D. late 1920s</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B</div><div class="mark">“20 世纪 20 年代末”= <b>the late 1920s</b>。</div></div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 16 练习⑤ 25-30 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b0725e">实战 · 专项练习</span><h2>单项选择 ⑤（25–30）</h2><span class="en">Multiple Choice</span></div>
+    <div class="anim" style="--i:1">
+      <div class="q">
+        <div class="qtxt"><b>25.</b> The planet appears small because it is ___ miles away from us.</div>
+        <div class="opts">A. millions of　B. million of　C. millions　D. million</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A</div><div class="mark">表“数百万”的泛指用 <b>millions of</b>。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>26.</b> — Did you buy anything at the clothing sale?<br>— Yes, I bought three ___ ties for just twelve dollars.</div>
+        <div class="opts">A. five dollars　B. five-dollars　C. five-dollar　D. fifth dollar</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">C</div><div class="mark">复合形容词作定语用单数：<b>five-dollar ties</b>（5 美元的领带）。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>27.</b> When I went to the computer course on ___ for the first time, I made up my mind to learn to use computer.</div>
+        <div class="opts">A. July twentieth-first　B. July the twenty-first　C. the twenty-first of July　D. both B and C</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">D</div><div class="mark">“7 月 21 日”两种说法都对：<b>July the twenty-first</b> = <b>the twenty-first of July</b>。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>28.</b> He said he would be back in ___ hours, but I have been waiting for almost the whole morning.</div>
+        <div class="opts">A. two and half an　B. two and a half　C. half and two　D. two a half</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B</div><div class="mark">“两个半小时”= <b>two and a half hours</b>。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>29.</b> The Manchester City manager Mark Hughes has confirmed that Brazilian striker Robinho will be out of action for ___ weeks.</div>
+        <div class="opts">A. three other　B. another three　C. more three　D. other three</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B</div><div class="mark">“再三个星期”= <b>another three weeks</b>。</div></div></details>
+      </div>
+      <div class="q">
+        <div class="qtxt"><b>30.</b> Don't speak at once, boys and girls. ___ please.</div>
+        <div class="opts">A. Once at a time　B. One at a time　C. One at one time　D. Each at one time</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B</div><div class="mark">“一次一个”= <b>one at a time</b>。</div></div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 17 易错点复盘 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b0725e">实战 · 复盘</span><h2>数词六大易错点</h2><span class="en">Six Traps</span></div>
+    <div class="grid g3" style="margin-top:4px">
+      <div class="card anim" style="--i:1;--pc:#83917c"><span class="num">1</span><h4>hundred 不加 s</h4><div class="eg">eight <b>hundred</b>（具体数字后）；<b>hundreds of</b>（泛指）</div></div>
+      <div class="card anim" style="--i:2;--pc:#7c90a1"><span class="num">2</span><h4>复合形容词用单数</h4><div class="eg">five-<b>year</b>-old · five-thousand-<b>dollar</b> · five-<b>dollar</b> ties</div></div>
+      <div class="card anim" style="--i:3;--pc:#b4a075"><span class="num">3</span><h4>复数所有格</h4><div class="eg">ten <b>minutes'</b> walk · forty-eight <b>hours'</b> leave · fifty <b>dollars'</b> value</div></div>
+      <div class="card anim" style="--i:4;--pc:#be9a92"><span class="num">4</span><h4>序数词前的 the</h4><div class="eg">his <b>fourteenth</b> birthday（his 后省 the）· <b>the first</b> book</div></div>
+      <div class="card anim" style="--i:5;--pc:#9a8fae"><span class="num">5</span><h4>a/an + 序数词 = 再一</h4><div class="eg"><b>a second</b> 又一次 · <b>a fourth</b> 第四个 · <b>a fifth</b> 五分之一</div></div>
+      <div class="card anim" style="--i:6;--pc:#7e8e86"><span class="num">6</span><h4>分数：分子基分母序</h4><div class="eg">two <b>thirds</b>（分子 &gt; 1 分母加 s）· one <b>third</b></div></div>
+    </div>
+    <div class="note anim" style="--i:7">
+      <span class="ico">🎯</span>
+      <div><b>做题顺序：</b>① 先判<b>基数还是序数</b>；② 再看<b>修饰关系</b>（复合形容词单数 / 复数所有格）；③ 最后查<b>the、a/an、of</b> 等固定搭配。</div>
+    </div>
+  </section>
+
+  <!-- 18 小结 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8b8477">SUMMARY</span><h2>本节小结</h2><span class="en">Recap</span></div>
+    <div class="grid g4" style="margin-top:6px">
+      <div class="sum-block anim" style="--i:1;--pc:#83917c">
+        <h4><span class="dot"></span>基数词</h4>
+        <ul>
+          <li>0~12 独立；13~19 加 -teen</li>
+          <li>整十 -ty；几十几连字符</li>
+          <li>hundred <b>and</b>；三位一分</li>
+        </ul>
+      </div>
+      <div class="sum-block anim" style="--i:2;--pc:#7c90a1">
+        <h4><span class="dot"></span>序数词</h4>
+        <ul>
+          <li>first / second / third 特殊</li>
+          <li>4~19 加 -th；整十 -tie+th</li>
+          <li>the + 序数 = 第几</li>
+        </ul>
+      </div>
+      <div class="sum-block anim" style="--i:3;--pc:#b4a075">
+        <h4><span class="dot"></span>数词应用</h4>
+        <ul>
+          <li>日期：日序年基</li>
+          <li>时刻：past / to / quarter</li>
+          <li>分数：分子基分母序</li>
+        </ul>
+      </div>
+      <div class="sum-block anim" style="--i:4;--pc:#9a8fae">
+        <h4><span class="dot"></span>小数百分数</h4>
+        <ul>
+          <li>小数读 <b>point</b></li>
+          <li>百分数读 <b>percent</b></li>
+          <li>可作主 / 宾 / 定 / 表语</li>
+        </ul>
+      </div>
+    </div>
+    <div class="motto anim" style="--i:5">
+      基数管多少 · 序数管第几 —— <span>数词虽小，细节见分</span>
+    </div>
+  </section>
+
+</div>
+
+<div id="nav">
+  <button id="prev" aria-label="上一页" title="上一页 (←)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="counter"><b id="cur">1</b> / <span id="total">18</span></div>
+  <button id="next" aria-label="下一页" title="下一页 (→)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <button id="fs" aria-label="全屏" title="全屏 (F)" style="border:none;background:transparent;width:34px">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+  </button>
+</div>
+<div id="hint">← → 翻页 · F 全屏 · 空格下一页</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  const curEl = document.getElementById('cur');
+  const totalEl = document.getElementById('total');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const fsBtn = document.getElementById('fs');
+  const progress = document.getElementById('progress');
+  let idx = 0;
+  totalEl.textContent = total;
+
+  function render(){
+    slides.forEach((s,i)=>{
+      s.classList.toggle('active', i===idx);
+      s.classList.toggle('prev', i<idx);
+    });
+    curEl.textContent = idx+1;
+    progress.style.width = ((idx+1)/total*100) + '%';
+    prevBtn.disabled = idx===0;
+    nextBtn.disabled = idx===total-1;
+  }
+  function go(n){
+    idx = Math.max(0, Math.min(total-1, n));
+    render();
+  }
+  prevBtn.addEventListener('click', ()=>go(idx-1));
+  nextBtn.addEventListener('click', ()=>go(idx+1));
+  document.addEventListener('keydown', (e)=>{
+    if(e.key==='ArrowRight' || e.key===' ' || e.key==='PageDown'){ e.preventDefault(); go(idx+1); }
+    else if(e.key==='ArrowLeft' || e.key==='PageUp'){ e.preventDefault(); go(idx-1); }
+    else if(e.key==='Home'){ go(0); }
+    else if(e.key==='End'){ go(total-1); }
+    else if(e.key==='f' || e.key==='F'){
+      if(document.fullscreenElement){ document.exitFullscreen(); }
+      else { document.documentElement.requestFullscreen(); }
+    }
+  });
+  fsBtn.addEventListener('click', ()=>{
+    if(document.fullscreenElement){ document.exitFullscreen(); }
+    else { document.documentElement.requestFullscreen(); }
+  });
+  // 触屏滑动
+  let touchX=null;
+  document.addEventListener('touchstart', e=>{ touchX=e.touches[0].clientX; });
+  document.addEventListener('touchend', e=>{
+    if(touchX===null) return;
+    const dx=e.changedTouches[0].clientX-touchX;
+    if(Math.abs(dx)>50){ dx<0?go(idx+1):go(idx-1); }
+    touchX=null;
+  });
+  render();
+</script>
+</body>
+</html>

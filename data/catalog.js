@@ -51,6 +51,11 @@ window.CATALOG = {
           title: "冠词课件",
           file: "courseware/冠词课件.html",
           added: "2026-09-16"
+        },
+        {
+          title: "数词课件",
+          file: "courseware/数词课件.html",
+          added: "2026-09-17"
         }
       ]
     },
