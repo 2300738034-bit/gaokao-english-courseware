@@ -17,7 +17,13 @@ window.CATALOG = {
       id: "fanyi",
       name: "高考英语翻译专项训练",
       color: "sage",
-      coursewares: []
+      coursewares: [
+        {
+          title: "高考翻译中的语法课件（第三章）",
+          file: "courseware/高考翻译中的语法课件.html",
+          added: "2026-09-17"
+        }
+      ]
     },
     {
       id: "gaiyao",
