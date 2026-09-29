@@ -63,7 +63,13 @@ window.CATALOG = {
       id: "zuowen",
       name: "高考英语作文",
       color: "clay",
-      coursewares: []
+      coursewares: [
+        {
+          title: "主题类语汇与基本句型课件",
+          file: "courseware/主题类语汇与基本句型课件.html",
+          added: "2026-09-29"
+        }
+      ]
     },
     {
       id: "tingli",

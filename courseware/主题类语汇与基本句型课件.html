@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>十组主题类语汇 · 二十组基本句型（高考英语作文·强基篇）</title>
+<style>
+  :root{
+    --bg:#EFEBE4;
+    --paper:#FBF9F5;
+    --card:#FFFFFF;
+    --ink:#4A463F;
+    --muted:#8C8578;
+    --line:#E3DDD3;
+    --line-soft:#EDE8DF;
+    --brand:#A8B5A0;
+    --brand-deep:#7E8F76;
+    --rose:#C4A79E;
+    --blue:#8FA6B0;
+    --shadow:0 2px 6px rgba(90,80,60,.06), 0 10px 28px -12px rgba(90,80,60,.16);
+    --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--font);
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ===== 顶部导航 ===== */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:center;gap:14px;
+    padding:14px 22px;
+    background:rgba(251,249,245,.9);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .menu-btn{
+    width:42px;height:42px;flex:0 0 auto;
+    border:1px solid var(--line);border-radius:12px;
+    background:var(--card);color:var(--ink);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+    cursor:pointer;transition:.2s;
+  }
+  .menu-btn:hover{background:var(--brand);color:#fff;border-color:var(--brand)}
+  .menu-btn span{display:block;width:18px;height:2px;background:currentColor;border-radius:2px;transition:.25s}
+  .menu-btn.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .menu-btn.open span:nth-child(2){opacity:0}
+  .menu-btn.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .topbar .titles{min-width:0}
+  .topbar .titles h1{font-size:17px;font-weight:800;letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .topbar .titles .sub{font-size:12px;color:var(--muted)}
+  .topbar .badge{
+    margin-left:auto;flex:0 0 auto;
+    font-size:11px;font-weight:700;letter-spacing:.06em;
+    color:#fff;background:var(--rose);
+    padding:5px 12px;border-radius:99px;
+  }
+
+  /* ===== 目录侧滑 ===== */
+  .overlay{
+    position:fixed;inset:0;z-index:60;background:rgba(70,60,48,.28);
+    opacity:0;pointer-events:none;transition:opacity .3s;
+  }
+  .overlay.show{opacity:1;pointer-events:auto}
+  .drawer{
+    position:fixed;top:0;left:0;bottom:0;z-index:70;
+    width:min(340px,86vw);
+    background:var(--paper);
+    border-right:1px solid var(--line);
+    transform:translateX(-102%);transition:transform .32s cubic-bezier(.4,0,.2,1);
+    display:flex;flex-direction:column;
+    box-shadow:12px 0 40px -20px rgba(70,60,48,.3);
+  }
+  .drawer.open{transform:translateX(0)}
+  .drawer .d-head{padding:22px 24px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px}
+  .drawer .d-head .dot{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--blue));color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .drawer .d-head h2{font-size:16px;font-weight:800}
+  .drawer .d-head p{font-size:11px;color:var(--muted)}
+  .drawer nav{flex:1;overflow-y:auto;padding:14px 0 30px}
+  .drawer .grp-title{
+    font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--muted);
+    padding:16px 24px 8px;display:flex;align-items:center;gap:8px;
+  }
+  .drawer .grp-title::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--brand)}
+  .drawer .grp-title.p2::before{background:var(--blue)}
+  .drawer a{
+    display:flex;align-items:center;gap:10px;
+    padding:9px 24px;color:var(--ink);text-decoration:none;font-size:14px;
+    transition:.15s;border-left:3px solid transparent;
+  }
+  .drawer a:hover{background:#F1EDE5;border-left-color:var(--brand)}
+  .drawer a .idx{font-size:11px;color:var(--muted);min-width:22px;font-weight:600}
+  .drawer a .sw{width:10px;height:10px;border-radius:3px;flex:0 0 auto}
+
+  /* ===== 内容区 ===== */
+  main{max-width:1060px;margin:0 auto;padding:26px 20px 90px}
+
+  /* 封面 */
+  .hero{
+    background:linear-gradient(135deg,#E9E4DA 0%,#E3DCD0 55%,#DCD4C6 100%);
+    border:1px solid var(--line);border-radius:22px;
+    padding:46px 40px;margin-bottom:34px;position:relative;overflow:hidden;
+  }
+  .hero::after{
+    content:"";position:absolute;right:-70px;top:-70px;width:280px;height:280px;border-radius:50%;
+    background:radial-gradient(circle at 30% 30%,rgba(196,167,158,.5),rgba(196,167,158,0) 70%);
+  }
+  .hero .kicker{font-size:12px;font-weight:800;letter-spacing:.22em;color:var(--brand-deep);text-transform:uppercase}
+  .hero h1{font-size:34px;font-weight:900;margin:10px 0 8px;letter-spacing:.01em}
+  .hero h1 em{font-style:normal;color:var(--rose)}
+  .hero p.desc{font-size:15px;color:#6E675C;max-width:640px}
+  .hero .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+  .hero .chip{font-size:12.5px;font-weight:600;color:#5E584D;background:rgba(255,255,255,.65);border:1px solid var(--line);padding:6px 14px;border-radius:99px}
+
+  /* 板块标题 */
+  .section{margin-top:14px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin:34px 0 18px;flex-wrap:wrap}
+  .sec-head .num{
+    font-size:13px;font-weight:800;color:#fff;background:var(--brand);
+    padding:4px 12px;border-radius:8px;letter-spacing:.05em;
+  }
+  .sec-head h2{font-size:25px;font-weight:900;letter-spacing:.01em}
+  .sec-head .en{font-size:13px;color:var(--muted);font-weight:600}
+  .sec-head .hint{width:100%;font-size:13px;color:var(--muted);margin-top:2px}
+
+  /* 模式切换 */
+  .mode-switch{
+    display:inline-flex;background:#EDE8DF;border:1px solid var(--line);
+    border-radius:12px;padding:4px;gap:4px;margin:0 0 18px;
+  }
+  .mode-switch button{
+    border:none;background:transparent;cursor:pointer;
+    font-family:var(--font);font-size:14px;font-weight:700;color:#7A7266;
+    padding:9px 20px;border-radius:9px;transition:.18s;
+  }
+  .mode-switch button.active{background:#fff;color:var(--ink);box-shadow:var(--shadow)}
+  .mode-switch button:first-child.active{color:var(--brand-deep)}
+  .mode-switch button:last-child.active{color:#B18C7F}
+
+  /* 主题标签 */
+  .theme-tabs{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:20px}
+  .theme-tabs button{
+    border:1px solid var(--line);background:var(--card);cursor:pointer;
+    font-family:var(--font);font-size:13.5px;font-weight:600;color:#6E675C;
+    padding:8px 15px;border-radius:99px;transition:.16s;display:flex;align-items:center;gap:7px;
+  }
+  .theme-tabs button .sw{width:9px;height:9px;border-radius:3px}
+  .theme-tabs button.active{color:#fff;border-color:transparent;box-shadow:var(--shadow)}
+  .theme-tabs button:hover{border-color:#c9c0b2}
+
+  /* 主题卡片容器 */
+  .theme-panel{display:none}
+  .theme-panel.active{display:block;animation:fadeUp .35s ease}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+  .theme-head{
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+    padding:18px 20px;border-radius:16px;background:var(--paper);border:1px solid var(--line);
+    margin-bottom:16px;
+  }
+  .theme-head .big{font-size:19px;font-weight:800}
+  .theme-head .cnt{font-size:12.5px;color:#fff;padding:3px 11px;border-radius:99px;font-weight:700}
+  .theme-head .tip{width:100%;font-size:13px;color:var(--muted)}
+
+  /* 词汇网格 */
+  .vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+  .vcard{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:13px 15px;cursor:default;transition:.18s;position:relative;
+  }
+  .vcard:hover{box-shadow:var(--shadow);transform:translateY(-1px)}
+  .vcard .en{font-size:14.5px;font-weight:600;color:var(--ink);line-height:1.45}
+  .vcard .zh{font-size:13px;color:var(--muted);margin-top:5px;line-height:1.5}
+  /* 自检模式 */
+  .selfcheck .vcard{cursor:pointer;min-height:66px;display:flex;flex-direction:column;justify-content:center;perspective:900px}
+  .selfcheck .vcard .zh{display:none}
+  .selfcheck .vcard.flipped{background:#F5F1E9;border-color:var(--brand)}
+  .selfcheck .vcard.flipped .zh{display:block}
+  .selfcheck .vcard::after{
+    content:"点我看中文";position:absolute;right:12px;top:10px;
+    font-size:10.5px;color:#B8AF9F;opacity:0;transition:.2s;
+  }
+  .selfcheck .vcard.flipped::after{content:"✓";font-size:13px;color:var(--brand-deep);opacity:1}
+
+  /* 例句 */
+  .examples{margin-top:18px;background:#F6F2EA;border:1px dashed var(--line);border-radius:14px;padding:16px 18px}
+  .examples h4{font-size:13px;font-weight:800;color:var(--brand-deep);letter-spacing:.06em;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  .examples h4::before{content:"✦"}
+  .ex-item{display:flex;flex-direction:column;gap:3px;padding:9px 0;border-bottom:1px solid var(--line-soft)}
+  .ex-item:last-child{border-bottom:none}
+  .ex-item .en{font-size:14px;font-weight:600;line-height:1.6}
+  .ex-item .en b{color:var(--brand-deep);font-weight:700}
+  .ex-item .zh{font-size:12.5px;color:var(--muted)}
+
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+  .toolbar button{
+    font-family:var(--font);font-size:12.5px;font-weight:700;cursor:pointer;
+    color:#6E675C;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:7px 15px;transition:.15s;
+  }
+  .toolbar button:hover{background:#F1EDE5}
+  .stat{font-size:12.5px;color:var(--muted);margin-left:auto;align-self:center}
+
+  /* ===== 句型区 ===== */
+  .pattern-list{display:flex;flex-direction:column;gap:14px}
+  .pcard{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+  .pcard .p-head{
+    display:flex;align-items:center;gap:14px;padding:17px 20px;cursor:pointer;user-select:none;
+  }
+  .pcard .p-no{
+    width:40px;height:40px;flex:0 0 auto;border-radius:12px;color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;
+  }
+  .pcard .p-name{font-size:17px;font-weight:800}
+  .pcard .p-en{font-size:12px;color:var(--muted);font-weight:600}
+  .pcard .arrow{margin-left:auto;color:#B8AF9F;transition:.25s;font-size:14px}
+  .pcard.open .arrow{transform:rotate(180deg)}
+  .pcard .p-body{display:none;padding:4px 22px 22px;border-top:1px solid var(--line-soft)}
+  .pcard.open .p-body{display:block;animation:fadeUp .3s ease}
+
+  .p-formulas{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 12px}
+  .p-formulas .f{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,"PingFang SC","Microsoft YaHei",sans-serif;
+    font-size:14px;font-weight:700;letter-spacing:.01em;
+    background:#F4F0E8;border:1px solid var(--line-soft);
+    padding:6px 12px;border-radius:8px;color:#3F3A33;
+  }
+  .p-explain{
+    font-size:13.5px;color:#6E675C;background:#FBF8F3;border-left:3px solid var(--blue);
+    padding:10px 14px;border-radius:6px;margin-bottom:16px;
+  }
+  .p-practice h5{font-size:12.5px;font-weight:800;color:#B18C7F;letter-spacing:.06em;margin-bottom:9px;display:flex;align-items:center;gap:7px}
+  .p-practice h5::before{content:"✎";font-size:14px}
+  .pr-item{padding:10px 0;border-bottom:1px solid var(--line-soft)}
+  .pr-item:last-child{border-bottom:none}
+  .pr-item .q{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:400;cursor:pointer}
+  .pr-item .q .dot{font-size:12px;color:var(--rose);font-weight:800}
+  .pr-item .q .show{margin-left:auto;font-size:11.5px;font-weight:700;color:#A99A7F;background:#F1EDE5;padding:3px 10px;border-radius:99px;transition:.15s;flex:0 0 auto}
+  .pr-item .q:hover .show{background:#E5DED0}
+  .pr-item .a{display:none;margin-top:7px;font-size:13.5px;color:var(--brand-deep);background:#F6F2EA;padding:9px 13px;border-radius:9px;line-height:1.6}
+  .pr-item .a .fm{font-weight:700;text-decoration:underline;text-underline-offset:3px;color:#3F3A33}
+  .pr-item.open .a{display:block;animation:fadeUp .25s ease}
+
+  .footer{text-align:center;color:var(--muted);font-size:12px;margin-top:44px;padding-top:22px;border-top:1px solid var(--line)}
+
+  @media (max-width:640px){
+    .hero{padding:32px 24px}
+    .hero h1{font-size:26px}
+    .sec-head h2{font-size:21px}
+    .vocab-grid{grid-template-columns:1fr 1fr}
+    .topbar .titles h1{font-size:15px}
+  }
+</style>
+</head>
+<body>
+
+<!-- 顶部导航 -->
+<div class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="目录"><span></span><span></span><span></span></button>
+  <div class="titles">
+    <h1>主题类语汇 · 基本句型</h1>
+    <div class="sub">高考英语作文 · 强基篇</div>
+  </div>
+  <div class="badge">共 600 组语汇 · 20 组句型</div>
+</div>
+
+<!-- 侧滑目录 -->
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer">
+  <div class="d-head">
+    <div class="dot">目</div>
+    <div><h2>目录</h2><p>十组主题类语汇 · 二十组基本句型</p></div>
+  </div>
+  <nav id="tocNav"></nav>
+</aside>
+
+<main>
+  <!-- 封面 -->
+  <section class="hero">
+    <div class="kicker">Composition · Language Reserve</div>
+    <h1>高考英语作文 <em>强基篇</em></h1>
+    <p class="desc">十组主题类语汇充实内容，二十组基本句型循序渐进。背词汇、练句型，夯实写作根基，让作文有词可用、有句可循。</p>
+    <div class="meta">
+      <span class="chip">📚 10 组主题类语汇</span>
+      <span class="chip">🧩 20 组基本句型</span>
+      <span class="chip">🔁 背诵 / 自检双模式</span>
+      <span class="chip">✏️ 句型专项练习</span>
+    </div>
+  </section>
+
+  <!-- ============ 第一板块 ============ -->
+  <section class="section" id="sec-vocab">
+    <div class="sec-head">
+      <span class="num">板块一</span>
+      <h2>十组主题类语汇</h2>
+      <span class="en">Ten Groups of Thematic Vocabulary</span>
+      <div class="hint">背诵模式：语汇 + 中文 + 作文例句；自检模式：看英文想中文，点击英文出答案。</div>
+    </div>
+
+    <div class="mode-switch" id="modeSwitch">
+      <button data-mode="recite" class="active">📖 背诵模式</button>
+      <button data-mode="selfcheck">🃏 自检模式</button>
+    </div>
+
+    <div class="theme-tabs" id="themeTabs"></div>
+
+    <div class="toolbar" id="vocabToolbar">
+      <button id="revealAll">显示全部答案</button>
+      <button id="hideAll">隐藏全部答案</button>
+      <span class="stat" id="vocabStat"></span>
+    </div>
+
+    <div id="themePanels"></div>
+  </section>
+
+  <!-- ============ 第二板块 ============ -->
+  <section class="section" id="sec-patterns">
+    <div class="sec-head">
+      <span class="num" style="background:var(--blue)">板块二</span>
+      <h2>二十组基本句型</h2>
+      <span class="en">Twenty Groups of Basic Sentence Patterns</span>
+      <div class="hint">每组句型含【讲解 · 公式 · 练习】，练习句子用第一板块语汇编写，点击中文句可查看英文答案。</div>
+    </div>
+
+    <div class="pattern-list" id="patternList"></div>
+  </section>
+
+  <div class="footer">十组主题类语汇 · 二十组基本句型 —— 据《高考英语作文全攻略（第3版）· 强基篇》整理</div>
+</main>
+
+<script>
+/* ==================== 数据 ==================== */
+const THEMES = [
+  { id:1, name:"生活与学习", count:106, color:"#A8B5A0",
+    vocab:[
+      ["recreational activity","娱乐活动"],
+      ["widen one's scope of knowledge","拓宽知识面"],
+      ["spare / leisure time","业余时间"],
+      ["broaden one's horizons","拓宽眼界"],
+      ["cultivate a hobby","培养爱好"],
+      ["non-intelligence factors","非智力因素"],
+      ["refresh oneself after an exhausting day","精疲力竭的一天后恢复精神"],
+      ["independent / critical thinking","独立 / 批判性思考"],
+      ["enrich one's life","丰富生活"],
+      ["academic environment","教学环境"],
+      ["uncover / nurture talents","发现 / 培养天赋"],
+      ["lifelong learning capability","终身学习能力"],
+      ["add a great deal of value to time","增加了时间的质量"],
+      ["distribute time in a sensible way","合理分配时间"],
+      ["live a(n) peaceful / active / sheltered life","过着平静 / 活跃 / 被庇护的生活"],
+      ["satisfy one's curiosity","满足好奇心"],
+      ["strike a balance between work and rest","劳逸结合"],
+      ["literacy / numeracy","读写能力 / 计算能力"],
+      ["travel far and wide","到处旅行"],
+      ["quality-oriented / exam-oriented education","素质 / 应试教育"],
+      ["family life / conflict / commitment / reunion / get-together","家庭生活 / 冲突 / 义务 / 团圆 / 聚会"],
+      ["moral / aesthetic / physical education","德育 / 美育 / 体育"],
+      ["household expenses / items / chores","家庭花费 / 用品 / 杂务"],
+      ["decent / first-class / dynamic education","体面的 / 一流的 / 充满活力的教育"],
+      ["parent-child relationship","亲子关系"],
+      ["subject area","学科领域"],
+      ["independent of parents","独立于家长"],
+      ["interdisciplinary study","跨学科学习"],
+      ["live on pension","靠养老金生活"],
+      ["inspirational teaching style","启发式教学"],
+      ["generation gap","代沟"],
+      ["tutorial center","补习中心"],
+      ["warm and harmonious family atmosphere","温暖和睦的家庭氛围"],
+      ["self-motivated and diligent learner","自我激励的辛勤学习者"],
+      ["living / housing conditions","生活 / 居住条件"],
+      ["consolidate one's knowledge","巩固知识"],
+      ["live with a phone glued to hands","手机不离手"],
+      ["reference book / supplementary exercises","参考书 / 补充练习"],
+      ["video game addict","玩游戏上瘾的人"],
+      ["awaken / cultivate interest","唤起 / 培养兴趣"],
+      ["convenient transportation connections","交通四通八达"],
+      ["language acquisition","语言习得"],
+      ["road transport / rail transport / commuter","公路交通 / 轨道交通 / (上下班)通勤者"],
+      ["be buried in books","埋头读书"],
+      ["consumption pattern","消费习惯"],
+      ["teaching order","教学秩序"],
+      ["minimalist lifestyle","极简主义生活方式"],
+      ["optional / compulsory course","选修 / 必修课"],
+      ["financially self-reliant","经济上独立"],
+      ["extra-curricular activity","课外活动"],
+      ["wise / sound / risky / long-term investment","明智 / 合理 / 冒险 / 长期的投资"],
+      ["a strong thirst for knowledge","强烈求知欲"],
+      ["demonstrate a spirit of adventure","表现出冒险精神"],
+      ["lay a solid foundation for","为……打下扎实的基础"],
+      ["basic life skills","基本的生活技能"],
+      ["find out priority in study","找出学习的重点"],
+      ["eating habit","饮食习惯"],
+      ["tuition fee","学费"],
+      ["lower the risk of obesity, diabetes, and cancer","降低肥胖、糖尿病和癌症的风险"],
+      ["improve study habit","改善学习习惯"],
+      ["secondhand smoke","被动吸烟"],
+      ["treat tests with a positive attitude","用积极的态度对待考试"],
+      ["preventive / life-threatening disease","可以预防的 / 威胁生命的疾病"],
+      ["an average student with average intelligence","平均智商水平的普通学生"],
+      ["health-conscious diners","关注健康的用餐者"],
+      ["top student","优等生"],
+      ["let out negative feelings / channel energy in more productive ways","宣泄负面情绪 / 用更高效的方式消耗精力"],
+      ["make the most of educational facilities","充分利用教育设施"],
+      ["make peace with the past","和过去和解"],
+      ["study load","学习负担"],
+      ["limit alcohol and avoid cigarettes","远离烟酒"],
+      ["distance learning","远程学习"],
+      ["mental and physical health","心理和身体健康"],
+      ["learning efficiency / outcome / site / resources","学习效率 / 结果 / 场所 / 资源"],
+      ["enhance the immune system","增强免疫系统"],
+      ["attention span","注意力集中时间"],
+      ["sleep quality","睡眠质量"],
+      ["divided / distracted attention","分散的注意力"],
+      ["eye strain","眼部疲劳"],
+      ["big-sized / small-sized class","大班 / 小班"],
+      ["comprehensive nutritional supplement","全面的营养补充"],
+      ["framework of knowledge","知识框架"],
+      ["balanced / unbalanced / healthy diet","均衡的 / 不均衡的 / 健康的饮食"],
+      ["note-taking skills / techniques","笔记技巧 / 技术"],
+      ["rush through three meals a day","匆忙解决一日三餐"],
+      ["chronic anxiety about / over school performance","对学校表现的长期焦虑"],
+      ["improve one's fitness","增强体质"],
+      ["gain a scholarship","获得奖学金"],
+      ["personal hygiene","个人卫生"],
+      ["school report","学习成绩单"],
+      ["regular medical check-up","定期体检"],
+      ["formula / theory / concept","公式 / 理论 / 概念"],
+      ["considerable / moderate stress","巨大 / 适中的压力"],
+      ["short-term / long-term / photographic memory","短期 / 长期 / 图像式记忆"],
+      ["a low-stress / safe and sound life","低压力生活 / 平平安安的生活"],
+      ["the sheer joy of learning","学习的纯粹乐趣"],
+      ["find healthy ways of coping with anxiety","找到应对焦虑的健康方法"],
+      ["learning by doing","做中学"],
+      ["discover a new side of life","发现生活的另一面"],
+      ["multitasking ability","多任务处理能力"],
+      ["short-lived / long-lasting enjoyment","短暂的 / 长久的快乐"],
+      ["follow a strict daily routine","遵循严格的日常作息"],
+      ["gain a livelihood in various vocations","在不同的行业里谋生"],
+      ["join a study group","加入学习小组"],
+      ["travel light / military-style travel","轻装旅行 / 特种兵旅行"],
+      ["high-achiever / under-achiever","优等生 / 后进生"]
+    ],
+    examples:[
+      ["Reading widely not only <b>widens our scope of knowledge</b> but also <b>broadens our horizons</b>.","广泛阅读不仅能拓宽知识面，还能拓宽眼界。"],
+      ["It is essential for students to <b>strike a balance between work and rest</b>, so that they can <b>refresh themselves after an exhausting day</b>.","学生劳逸结合至关重要，这样他们才能在精疲力竭的一天后恢复精神。"],
+      ["A <b>warm and harmonious family atmosphere</b> helps <b>cultivate a hobby</b> and <b>satisfy a child's curiosity</b>.","温暖和睦的家庭氛围有助于培养爱好并满足孩子的好奇心。"],
+      ["Only by <b>consolidating our knowledge</b> step by step can we <b>lay a solid foundation for</b> further study.","只有一步步巩固知识，我们才能为进一步学习打下扎实的基础。"],
+      ["A <b>self-motivated and diligent learner</b> always <b>makes the most of educational facilities</b>.","自我激励的辛勤学习者总能充分利用教育设施。"]
+    ]
+  },
+  { id:2, name:"做人与做事", count:54, color:"#C4A79E",
+    vocab:[
+      ["build integrity","为人正直"],
+      ["fulfill the qualifications of","满足……的资格"],
+      ["define values and visions","明确价值观和目标"],
+      ["fighting / unyielding / adventurous spirit","奋斗 / 不屈 / 冒险精神"],
+      ["fulfil promises","履行承诺"],
+      ["ingredient of success / success formula","成功的要素 / 成功的方程式"],
+      ["spread kindness","传播善良"],
+      ["break down a huge task into manageable parts","把艰巨的任务分成可以处理的部分"],
+      ["pursue excellence","追求卓越"],
+      ["commitment to belief","对信仰忠贞不渝"],
+      ["practice persistence","坚持不懈"],
+      ["develop organization skills","发展组织能力"],
+      ["hold oneself accountable for decisions","有责任担当"],
+      ["review and adjust goals periodically","定期回顾调整目标"],
+      ["demonstrate self-discipline","自律"],
+      ["realize / tap one's potential","意识到 / 发掘潜力"],
+      ["step out of comfort zone","走出舒适区"],
+      ["grow mature through trial and error","在摸索和错误中变成熟"],
+      ["learn to empathize","学会有同理心"],
+      ["learn to handle fear","学会处理恐惧"],
+      ["lose graciously","优雅地接受失败"],
+      ["stay well-informed of the current events","了解时事"],
+      ["use setbacks as fuel","越挫越勇"],
+      ["work for pride and achievement","为荣誉和成就工作"],
+      ["think big / start small","大处着眼 / 小处起步"],
+      ["work individually and cooperatively at high efficiency","高效率地独立工作和团队合作"],
+      ["avoid idleness","不虚度光阴"],
+      ["make a realistic self-assessment","客观地自我评价"],
+      ["embrace challenges","不惧挑战"],
+      ["decide on an appropriate major / career in accordance with interest and ability","根据兴趣和能力选择合适的专业 / 职业"],
+      ["sharpen one's competitive edge","提升竞争优势"],
+      ["build self-confidence and a positive self-image","建立自信和积极的个人形象"],
+      ["enhance strong points and avoid weakness","扬长避短"],
+      ["make informed choices","做有根据的决定"],
+      ["enrich one's knowledge","丰富知识"],
+      ["integrate career / academic aspirations into whole-person development","把职业 / 学习志向融入个人全面发展中"],
+      ["go all out / work tirelessly","全力以赴 / 孜孜不倦地工作"],
+      ["adapt to the transition from school to work","适应从学校到工作的转变"],
+      ["formulate attainable goals","制定可达成目标"],
+      ["stop blind comparison","停止盲目比较"],
+      ["have a clear conscience","问心无愧"],
+      ["find a role model / teen role model","找到行为榜样 / 青少年榜样"],
+      ["dream big but stay practical","志向高远但脚踏实地"],
+      ["transition from childhood to adulthood","从童年到成年的过渡"],
+      ["chart a course ahead and stick to it","规划好前进的路线并坚持到底"],
+      ["shoulder grown-up responsibilities","肩负成年人的责任"],
+      ["act heroically","见义勇为"],
+      ["keep ears and eyes open","眼观六路，耳听八方"],
+      ["broad-minded vision","开阔的视野"],
+      ["turn frustration into action / translate words into actions","把挫折转化为行动 / 说到做到"],
+      ["attack a problem head-on","正面解决问题"],
+      ["insider knowledge","行家知识"],
+      ["hatch a great idea","孵化出一个很棒的想法"],
+      ["hallmarks of a great inventor","伟大发明家的特征"]
+    ],
+    examples:[
+      ["To <b>pursue excellence</b>, we must first <b>step out of our comfort zone</b> and <b>embrace challenges</b>.","要追求卓越，我们必须先走出舒适区、不惧挑战。"],
+      ["A true leader <b>holds himself accountable for decisions</b> and <b>shoulders grown-up responsibilities</b>.","真正的领导者对自己的决定有责任担当，并肩负成年人的责任。"],
+      ["Those who <b>realize and tap their potential</b> learn to <b>use setbacks as fuel</b>.","那些意识到并发掘自己潜力的人，学会越挫越勇。"],
+      ["We should <b>dream big but stay practical</b>, <b>charting a course ahead and sticking to it</b>.","我们应志向高远但脚踏实地，规划好前进的路线并坚持到底。"],
+      ["<b>Demonstrating self-discipline</b> and <b>practicing persistence</b> are the <b>ingredients of success</b>.","自律与坚持不懈是成功的要素。"]
+    ]
+  },
+  { id:3, name:"社会服务与人际沟通", count:64, color:"#8FA6B0",
+    vocab:[
+      ["volunteer to teach in a less-developed region","自愿去落后地区支教"],
+      ["verbal / written communication","口头 / 书面交流"],
+      ["devote one's time to doing volunteer work","花时间做志愿者工作"],
+      ["understand the basics of communication skills","理解沟通技巧的基本要素"],
+      ["worthwhile cause","值得做的事业"],
+      ["appropriate wording","措辞得体"],
+      ["undertakings of public welfare","社会公益事业"],
+      ["mutual understanding / support / trust","互相理解 / 支持 / 信任"],
+      ["civic duty","公民义务"],
+      ["heart-to-heart chat","倾心交谈"],
+      ["advocate volunteer spirit","倡导志愿者精神"],
+      ["open and free communication","开诚布公、自由的交流"],
+      ["voluntary contribution","自愿贡献"],
+      ["face-to-face / interpersonal interaction","面对面 / 人际互动"],
+      ["personal sacrifice","自我牺牲"],
+      ["social network / friend-making website","社交网络 / 交友网站"],
+      ["social service agency","社工机构"],
+      ["a cure for loneliness","治愈孤独感"],
+      ["homeless people","无家可归的人"],
+      ["pen pal","笔友"],
+      ["vulnerable group","弱势群体"],
+      ["starve for companionship","渴望有人陪伴"],
+      ["low-income families","低收入家庭"],
+      ["expand circle of friends","扩大朋友圈"],
+      ["abandoned and stray animals","被遗弃和流浪的动物"],
+      ["have a lot in common","有许多共同之处"],
+      ["empty-nesters","空巢老人"],
+      ["share the same outlook on life","有共同的人生观"],
+      ["nursing home","养老院"],
+      ["close / bosom / fair-weather friends","密友 / 知己 / 不能共患难的朋友"],
+      ["orphanage","孤儿院"],
+      ["treasure friendship","珍惜友谊"],
+      ["left-behind children","留守儿童"],
+      ["emotional attachment / connection","情感依附 / 联系"],
+      ["psychological counseling","心理咨询"],
+      ["boost social competence and self-esteem","提高社交能力和自尊"],
+      ["ease the sufferings of the dying","临终关怀"],
+      ["responsive to the needs from friends","回应朋友的需求"],
+      ["unserved / underserved population","未被 / 缺少关心的人群"],
+      ["thoughtful communicator","考虑他人的交流者"],
+      ["identify the skills and knowledge one can offer","明确自己的技能和知识"],
+      ["share joys and sorrows","分享喜怒哀乐"],
+      ["get all the relevant details for the volunteer position","了解志愿者岗位所有相关细节"],
+      ["put forward valuable opinions","提出宝贵意见"],
+      ["complete required training","完成需要的培训"],
+      ["eliminate misunderstanding / frosty relations","消除误会 / 冷淡的关系"],
+      ["show up on time","准时到岗"],
+      ["make like-minded friends","结交志趣相投的朋友"],
+      ["be professional while doing social work","专业地做社会工作"],
+      ["socialize with peers","和同伴社交"],
+      ["non-profit organization","非营利组织"],
+      ["an empathetic listener","感同身受的倾听者"],
+      ["build stronger communities","构建强大的社区"],
+      ["listen in respectful silence","安静尊重地倾听"],
+      ["promote equality","促进公平"],
+      ["use appropriate volume","用适当的音量"],
+      ["social worker","社工"],
+      ["genuine compliment and honest criticism","诚恳的表扬和实在的批评"],
+      ["community-wide programs","社区项目"],
+      ["non-verbal cues / body language","非语言提示 / 肢体语言"],
+      ["work one-on-one with community members","一对一服务社区成员"],
+      ["facial expression / eye contact / gesture / stance","面部表情 / 目光交流 / 手势 / 站姿"],
+      ["recipients of social service","社会服务对象"],
+      ["contagious smile","富有感染力的笑容"]
+    ],
+    examples:[
+      ["<b>Volunteering to teach in a less-developed region</b> is a <b>worthwhile cause</b> that deserves our <b>personal sacrifice</b>.","自愿去落后地区支教是一项值得付出的公益事业，值得自我牺牲。"],
+      ["<b>Heart-to-heart chats</b> help <b>eliminate misunderstanding</b> and build <b>mutual trust</b> between friends.","倾心交谈有助于消除误会、建立朋友间的互信。"],
+      ["We should pay attention to <b>vulnerable groups</b> such as <b>empty-nesters</b> and <b>left-behind children</b>.","我们应当关注空巢老人、留守儿童等弱势群体。"],
+      ["A <b>thoughtful communicator</b> knows how to use <b>appropriate wording</b> and <b>non-verbal cues</b>.","一个考虑他人的交流者懂得如何措辞得体、使用非语言提示。"],
+      ["<b>Advocating volunteer spirit</b> is a way to <b>build stronger communities</b> and <b>promote equality</b>.","倡导志愿者精神是构建强大社区、促进公平的一种方式。"]
+    ]
+  },
+  { id:4, name:"文学、艺术、体育", count:80, color:"#B0A3C0",
+    vocab:[
+      ["art form / education / institution / seminar","艺术形式 / 教育 / 学院 / 研讨会"],
+      ["the Olympic spirits","奥运精神"],
+      ["abstract / avant-garde / commercial / folk / popular / contemporary / body / performance art","抽象 / 先锋 / 商业 / 民间 / 大众 / 当代 / 身体 / 行为艺术"],
+      ["competitive / extreme / indoor / outdoor sports","竞技性 / 极限 / 室内 / 室外运动"],
+      ["an excellent taste in art","出色的艺术品味"],
+      ["individual / team event","个人 / 团体项目"],
+      ["artistic trend / endeavor","艺术潮流 / 艺术方面的努力"],
+      ["sports injury / field / facilities / celebrity / sponsorship","体育伤害 / 场地 / 设施 / 名人 / 赞助"],
+      ["fine craftsmanship / aesthetic value / traditional craft skills","精湛的工艺 / 美学价值 / 传统工艺"],
+      ["play / take part in / compete in a sport","参与体育活动"],
+      ["an expression of individuality / feeling / emotion","个性 / 感受 / 情绪的表达"],
+      ["reduce stress and anxiety / get mood lifted","减少压力和焦虑 / 改善情绪"],
+      ["trigger inspiration / imagination","触发灵感 / 想象力"],
+      ["improve blood circulation and lung function","改善血液循环和肺功能"],
+      ["a vehicle / channel of communication","交流的载体 / 渠道"],
+      ["build up body / enhance the muscle strength","强身健体 / 增强肌肉力量"],
+      ["stand the test of time","经受时间的考验"],
+      ["win (lose) the game / beat (defeat) the opponent","赢得(输掉)比赛 / 战胜对手"],
+      ["lack of originality","缺少独创性"],
+      ["end in a draw (tie) / draw the game","比赛平局"],
+      ["appreciate / interpret works of art","欣赏 / 解读艺术品"],
+      ["come out number one in the medal table","奖牌榜名列榜首"],
+      ["impressionism / accurate depiction of light in its changing qualities","印象派 / 光线变化的精确描绘"],
+      ["bring home one gold medal after another","把一块块金牌带回家"],
+      ["canvas / brush / sketch pad","画布 / 画笔 / 速写本"],
+      ["defend championship","卫冕"],
+      ["portrait / calligraphy / seal-carving / sewing / knitting / embroidery","肖像画 / 书法 / 篆刻 / 缝纫 / 编织 / 刺绣"],
+      ["home (field) advantage / home field / home game","主场优势 / 主场 / 主场比赛"],
+      ["art gallery / exhibition","美术馆 / 展览"],
+      ["pride of the nation","民族的骄傲"],
+      ["auction house","拍卖行"],
+      ["the issue of gambling in sport","体育中的赌博行为"],
+      ["self-taught / leading artist / architect / musician","自学成才 / 杰出的艺术家 / 建筑师 / 音乐家"],
+      ["coach / referee","教练 / 裁判"],
+      ["comedy / tragedy / poem / diary / fable / myth / biography / autobiography / fiction / non-fiction","喜剧 / 悲剧 / 诗歌 / 日记 / 寓言 / 神话 / 传记 / 自传 / 虚构小说 / 非虚构文学"],
+      ["all-round / first-time / worthy winner","全能 / 第一次的 / 名副其实的冠军"],
+      ["novelist / poet / playwright","小说家 / 诗人 / 剧作家"],
+      ["cheering squad","啦啦队"],
+      ["masterpiece / best-seller / gripping story / must-read","杰作 / 畅销品 / 扣人心弦的故事 / 必读刊物"],
+      ["face strong rivals","面对强大的对手"],
+      ["plot / setting / character / theme / writing style / tone","情节 / 背景 / 角色 / 主题 / 写作风格 / 语气"],
+      ["record-breaker / record-holder","纪录打破者 / 纪录保持者"],
+      ["literary terms / critic / criticism","文学术语 / 评论家 / 评论"],
+      ["sponsor a sport event","赞助体育赛事"],
+      ["touch upon issues of humanity / human nature","触及有关人性的话题"],
+      ["a historic moment","历史性的时刻"],
+      ["the complete works (of...)","全集"],
+      ["demonstrate skill and determination","展现技术和决心"],
+      ["quotable quotes","值得引用的妙句"],
+      ["stand for the peak of human physical strength and will power","代表人类体力和意志力的顶峰"],
+      ["visual and sound effect / stage set / camera angle","视觉和音响效果 / 舞台布景 / 摄影角度"],
+      ["the host city / country","主办城市 / 国家"],
+      ["theme song","主题曲"],
+      ["tournament / elimination match / final / semi-final","锦标赛 / 淘汰赛 / 决赛 / 半决赛"],
+      ["shoot a movie / play a role","拍电影 / 扮演角色"],
+      ["attack / defend","进攻 / 防守"],
+      ["documentary / animation / thriller / romance / action movie / road movie","纪录片 / 动画片 / 恐怖片 / 爱情片 / 动作片 / 公路片"],
+      ["fair play","公平竞争"],
+      ["director / producer / cameraman / crew","导演 / 制片人 / 摄影 / 一组工作人员"],
+      ["live broadcast / recorded broadcast","现场转播 / 录播"],
+      ["all-star cast","全明星阵容"],
+      ["fitness center / gym / exercise equipment","健身中心 / 体育馆 / 运动设备"],
+      ["compose a beautiful piece of music","谱写悦耳的乐曲"],
+      ["sportswear / running shoes","运动服 / 跑鞋"],
+      ["note / melody / tune","音符 / 旋律 / 曲调"],
+      ["aquatic sport / ice sport / ball sport / track and field","水上运动 / 冰上运动 / 球类运动 / 田径"],
+      ["musical / symphony / sonata / orchestra / conductor","音乐剧 / 交响乐 / 奏鸣曲 / 管弦乐队 / 指挥家"],
+      ["dribble / pass / shoot","运球 / 传球 / 射门"],
+      ["ancient / medieval / modern architecture","古代 / 中世纪 / 现代建筑"],
+      ["basketball court / football pitch / boxing ring / ice rink / running track","篮球场 / 足球场 / 拳击场 / 溜冰场 / 跑道"],
+      ["masterpieces of the Renaissance period","文艺复兴时期的杰作"],
+      ["practice tai chi","打太极"],
+      ["nature-based paintings","关于大自然的绘画"],
+      ["spectator culture","观众文化"],
+      ["rich in expression and metaphor / expressive and precise detail / lively and delicate images","富于表现力且充满隐喻 / 表现力强且精确的细节 / 生动细致的意象"],
+      ["on-field data","现场数据"],
+      ["a perceptive portrayal of a fascinating time","敏锐地描绘了一个迷人的时代"],
+      ["seeded player / unseeded player","种子选手 / 非种子选手"],
+      ["heavy ink / bright colors / energetic strokes","浓墨重彩 / 明亮的颜色 / 活力十足的笔画"],
+      ["flexibility / explosive power / endurance / coordination","柔韧性 / 爆发力 / 耐力 / 协调性"]
+    ],
+    examples:[
+      ["Works of art that <b>stand the test of time</b> reflect <b>fine craftsmanship</b> and <b>aesthetic value</b>.","经受时间考验的艺术品体现了精湛的工艺和美学价值。"],
+      ["Regular exercise not only <b>builds up our body</b> but also <b>reduces stress and anxiety</b>.","经常锻炼不仅能强身健体，还能减少压力和焦虑。"],
+      ["Art serves as <b>a vehicle of communication</b> and <b>an expression of individuality and emotion</b>.","艺术是交流的载体，也是个性和情感的表达。"],
+      ["<b>The Olympic spirits</b> teach us to <b>demonstrate skill and determination</b> when we <b>face strong rivals</b>.","奥运精神教会我们在面对强大对手时展现技术和决心。"],
+      ["<b>Appreciating works of art</b> can <b>trigger inspiration</b> and <b>enrich our life</b>.","欣赏艺术品能触发灵感、丰富生活。"]
+    ]
+  },
+  { id:5, name:"科学与技术", count:62, color:"#9BB0B8",
+    vocab:[
+      ["technical innovation / advance (progress)","技术革新 / 进步"],
+      ["electronic device","电子设备"],
+      ["dramatic breakthrough in scientific research","科研领域的重大突破"],
+      ["genetic engineering / gene therapy","基因工程 / 基因治疗"],
+      ["four great inventions of ancient China","中国古代四大发明"],
+      ["virtual reality","虚拟现实"],
+      ["digital revolution","数字革命"],
+      ["space exploration","探索太空"],
+      ["boost productivity","促进生产力"],
+      ["artificial intelligence","人工智能"],
+      ["simplify the procedure","简化程序"],
+      ["cloning technology","克隆技术"],
+      ["enhance learning experiences","增强学习体验"],
+      ["online shopping / chatting / education","网络购物 / 聊天 / 教育"],
+      ["reduce cost","节约成本"],
+      ["GPS (global positioning system)","全球定位系统"],
+      ["liberate labor force","解放劳动力"],
+      ["user-friendly interface","友好的界面"],
+      ["immersive learning","沉浸式学习"],
+      ["smart home / card / sensor","智能家居 / 卡片 / 感应器"],
+      ["personalized education experiences","个性化教育体验"],
+      ["back up files","备份数据"],
+      ["with the advent of the Internet","随着因特网的到来"],
+      ["machine translation","机器翻译"],
+      ["facilitate learning / communication","使学习 / 沟通变得轻松"],
+      ["text a message on the phone","手机发短信"],
+      ["paperless office","无纸化办公"],
+      ["genetic modified food","转基因食品"],
+      ["information explosion","信息爆炸"],
+      ["self-service ticketing system","自助售票系统"],
+      ["keep civilization in sync with technological advances","文明与科技同步进步"],
+      ["fingerprint lock","指纹锁"],
+      ["data transmission","数据传输"],
+      ["interactive advertisement / map","互动式广告 / 地图"],
+      ["handy gadget","方便的设备 / 小工具"],
+      ["interplanetary travel","星际旅行"],
+      ["increasingly computerized age","日益电脑化的时代"],
+      ["communications / weather satellite","通信 / 气候卫星"],
+      ["overreliance on technology","对科技过度依赖"],
+      ["wireless network","无线网络"],
+      ["disengage oneself from technology","远离科技"],
+      ["e-reader","电子阅读器"],
+      ["hostile to the emerging technology","对新科技不友好"],
+      ["security camera","监控摄像头"],
+      ["hacker attack","黑客袭击"],
+      ["3D printing","3D 打印"],
+      ["be exposed to radiation","接触辐射"],
+      ["mobile payment","移动支付"],
+      ["functional / operational / compatible","实用的 / 操作的 / 兼容的"],
+      ["long-distance surgery / tele-surgery","远距离外科手术"],
+      ["click on links / tap on the phone screen / post footage on social media sites","点击链接 / 点击手机屏幕 / 在社交媒体上发布视频"],
+      ["digital time-capsule","数码时间胶囊"],
+      ["tag / untag","贴标签 / 去除标签"],
+      ["deep-sea mining","深海采矿"],
+      ["information leakage / exposure of personal information online","信息泄露 / 在网上暴露个人信息"],
+      ["flat-screen TV / curved monitor","平板电视 / 曲屏显示器"],
+      ["misleading / inaccurate information online","网上误导人的 / 不精确的信息"],
+      ["extract rare metals","提取稀有金属"],
+      ["check the source of information","核查消息来源"],
+      ["mobile phone charger","手机充电器"],
+      ["put the data to good use","好好利用数据"],
+      ["AI video-generation tools","人工智能图像生成工具"]
+    ],
+    examples:[
+      ["<b>With the advent of the Internet</b>, <b>artificial intelligence</b> has begun to <b>boost productivity</b> in every field.","随着因特网的到来，人工智能开始在各领域促进生产力。"],
+      ["New technologies <b>facilitate learning</b> and <b>enhance learning experiences</b>, but we should avoid <b>overreliance on technology</b>.","新技术使学习变得轻松并增强学习体验，但我们应避免对科技过度依赖。"],
+      ["Scientific research can <b>shed light on important issues</b> and <b>liberate the labor force</b>.","科学研究能阐明重要议题、解放劳动力。"],
+      ["While enjoying the convenience of <b>mobile payment</b>, we must be aware of <b>information leakage</b>.","在享受移动支付便利的同时，我们必须警惕信息泄露。"],
+      ["<b>Technical innovation</b> helps <b>simplify the procedure</b> and <b>reduce cost</b>.","技术革新有助于简化程序、节约成本。"]
+    ]
+  },
+  { id:6, name:"环境保护", count:50, color:"#9FB596",
+    vocab:[
+      ["pollution from heavy industry","来自重工业的污染"],
+      ["Reduce, Reuse, and Recycle","减少使用、重复使用和循环使用"],
+      ["noise / light / vehicle / air pollution","噪声 / 光源 / 车辆 / 空气污染"],
+      ["change daily habits","改变日常习惯"],
+      ["a major source of pollution","污染的主要来源"],
+      ["the green movement / product / consumption","绿色环保运动 / 产品 / 消费"],
+      ["the pile-up of pollutants","污染物的堆积"],
+      ["huge contributors to pollution","污染的主要促成因素"],
+      ["car exhaust","汽车尾气"],
+      ["waste sorting / put recycling bins in every neighborhood","垃圾分类 / 小区设立垃圾回收箱"],
+      ["hazy days","雾霾天"],
+      ["unplug electric appliances for energy savings","为节能切断电源"],
+      ["invisible yet harmful particles floating in the air","空气中飘浮的无形的有害微粒"],
+      ["air dry clothes","风干衣物"],
+      ["discharge industrial pollutant / waste water","排出工业污染物 / 废水"],
+      ["carpool to school (work) / ride-sharing app","拼车去上学(上班) / 拼车软件"],
+      ["release harmful gas into the air","排放有毒气体到空中"],
+      ["disposable / single-use container","一次性餐盒"],
+      ["dump toxic substance into the ocean","把有毒物质倾倒入海洋"],
+      ["eco-tourism","生态旅游"],
+      ["pour hazardous chemicals down the drain","把有害化学物质倒入下水道"],
+      ["water / energy conservation project","节约水 / 能源项目"],
+      ["leak harmful substances into the soil","把有害物质释放到土壤"],
+      ["put an end to the unrestrained exploitation of resources","停止对资源的无节制开采"],
+      ["non-biodegradable materials","不可生物降解材料"],
+      ["apply gentle pressure to gas / accelerate slowly","轻踩油门 / 缓慢加速"],
+      ["medical waste (bandages, surgical gloves, surgical instruments, etc.)","医疗垃圾(绑带、手术手套、手术器具等)"],
+      ["turn to renewable and recyclable resources","利用可再生和可回收利用资源"],
+      ["the short / long-term effect of pollution","污染的短期 / 长期影响"],
+      ["run the dishwasher only when it is full","洗碗机装满再启动"],
+      ["environment-friendly technology","环保科技"],
+      ["choose local food whenever possible","尽量就地取食材"],
+      ["combat global warming / the green-house effect","和全球变暖 / 温室效应作斗争"],
+      ["carry one's own containers for take-out","自备外卖餐盒"],
+      ["enforce laws to prevent contamination","执法防止污染"],
+      ["use natural light instead of electric light","用自然光线而非电灯"],
+      ["severely penalize those who violate the law","严惩犯法者"],
+      ["choose items with minimal packaging","选择简单包装的产品"],
+      ["energy-efficient design / building","节能设计 / 大楼"],
+      ["keep chemicals out of the water supply","剔除供水系统里的化学物质"],
+      ["alternative energy","可替代能源"],
+      ["use public transportation","利用公共交通"],
+      ["water / energy shortage","水 / 能源短缺"],
+      ["take shorter showers","缩减淋浴时间"],
+      ["a growing hole in the ozone layer","臭氧层日益变大的洞"],
+      ["state-funded energy research and development","国家资金资助的能源研发"],
+      ["environmentally conscious","有环保意识的"],
+      ["relieve the growing energy stress","减缓日益增长的能源压力"],
+      ["wastage rate","损耗率"],
+      ["coastal clean-up","海岸清理"]
+    ],
+    examples:[
+      ["To <b>combat global warming</b>, we should reduce our carbon footprint and <b>turn to renewable resources</b>.","为了和全球变暖作斗争，我们应减少碳足迹、利用可再生资源。"],
+      ["Everyone can contribute to environmental protection by <b>changing daily habits</b> and practicing <b>waste sorting</b>.","每个人都能通过改变日常习惯、实行垃圾分类为环保作贡献。"],
+      ["We must <b>put an end to the unrestrained exploitation of resources</b> to protect <b>rare and endangered species</b>.","我们必须停止对资源的无节制开采，以保护珍稀濒危物种。"],
+      ["<b>Car exhaust</b> and industrial pollution are <b>huge contributors to air pollution</b>.","汽车尾气和工业污染是空气污染的主要促成因素。"],
+      ["Choosing <b>environment-friendly technology</b> and <b>alternative energy</b> can <b>relieve the growing energy stress</b>.","选择环保科技和可替代能源能减缓日益增长的能源压力。"]
+    ]
+  },
+  { id:7, name:"历史、社会、文化", count:60, color:"#C2A184",
+    vocab:[
+      ["historical figure / evidence / context / trend","历史人物 / 证据 / 背景 / 趋势"],
+      ["a uniting force","团结的力量"],
+      ["preserve cultural / architectural / literary heritage","保护文化 / 建筑 / 文学遗产"],
+      ["fit / challenge the stereotype","符合 / 挑战固有形象"],
+      ["inheritance of cultural traits","文化品质的传承"],
+      ["define the way people treat each other","明确了人们相处的方式"],
+      ["chronology of historical events","历史事件的发展顺序"],
+      ["record of folk wisdom","民间智慧的记录"],
+      ["establish connections between facts","在事实间建立联系"],
+      ["social behavior / customary practice","社会行为 / 习惯做法"],
+      ["develop an understanding of the big picture","了解全局"],
+      ["build a sense of pride","建立自豪感"],
+      ["find linkages between the past and the present","在过去和现在之间找到联系"],
+      ["give social members a sense of belonging","给社会成员归属感"],
+      ["meaningful products of specific times","特定时期的有意义的产物"],
+      ["mainstream / contemporary culture","主流 / 当代文化"],
+      ["great products of human civilization","人类文明的伟大产物"],
+      ["pop / street / corporate / immigrant culture","流行 / 街头 / 企业 / 移民文化"],
+      ["intangible assets of a group or society","群体或社会的无形资产"],
+      ["cultural identity / diversity / artifact / idea / behavior","文化身份 / 多样性 / 手工艺品 / 观念 / 行为"],
+      ["legendary national heroes","传奇的民族英雄"],
+      ["culture shock / multiculturalism","文化冲击 / 多元文化主义"],
+      ["family tree","家谱"],
+      ["tradition / custom / religion / ritual / taboo","传统 / 习俗 / 宗教 / 仪式 / 禁忌"],
+      ["tourism / entertainment / fashion industry","旅游业 / 娱乐业 / 时尚业"],
+      ["food culture / main course / side dish","饮食文化 / 主菜 / 配菜"],
+      ["issues capturing social attention","社会热点"],
+      ["ethnic / exotic food","民族 / 外国食物"],
+      ["social norm / capital / trend / equality / justice","社会准则 / 资本 / 趋势 / 平等 / 正义"],
+      ["comfort food","慰藉心灵的美食"],
+      ["observe / celebrate festivals","庆祝节日"],
+      ["core value","核心价值"],
+      ["table manners","餐桌礼仪"],
+      ["shared ideology / belief systems","共同的理念 / 信仰体系"],
+      ["patterns of politeness","礼貌模式"],
+      ["market regulation","市场管理"],
+      ["festival parade / countdown / fireworks display / family reunion","节日游行 / 倒计时 / 烟火表演 / 家庭团聚"],
+      ["urban planning","城市规划"],
+      ["ethnically diverse populations","多民族人口"],
+      ["mass media","大众媒体"],
+      ["threatened by industrialization","受到工业化威胁"],
+      ["gender roles","性别角色"],
+      ["legal advice / aid","法律咨询 / 援助"],
+      ["national pastime","全民娱乐"],
+      ["observe / break (violate) / enforce (enact) / interpret the law","遵守 / 违反 / 执行 / 解释法律"],
+      ["average life expectancy","人均寿命"],
+      ["popularize basic knowledge of law","普及法律基础知识"],
+      ["a classless / multicultural / civilized society","无阶级 / 多文化 / 文明社会"],
+      ["UNESCO World Heritage Site","联合国教科文组织世界遗产名录"],
+      ["illiteracy / inadequate sanitation","文盲 / 卫生落后"],
+      ["terracotta dancer / Qinshihuang Mausoleum","赤陶舞者 / 秦始皇陵"],
+      ["an encyclopedic museum / a wide-ranging collection","百科全书式博物馆 / 类别繁多的收藏"],
+      ["the legendary Silk Road","传奇的丝绸之路"],
+      ["enable better international understanding","促进国际了解"],
+      ["bell tower / drum tower / pagoda","钟楼 / 鼓楼 / 古塔"],
+      ["high-end / second-hand / discount / charity shop","高端 / 二手 / 折扣 / 慈善商店"],
+      ["birthplace of amazing ideas and discoveries","惊人的想法和发现的起源地"],
+      ["must-see","必看的地方"],
+      ["archeological site / primitive community","考古遗址 / 远古社会"],
+      ["sentimental value / emotional currency","情感价值 / 情绪价值"]
+    ],
+    examples:[
+      ["We should <b>preserve cultural and literary heritage</b>, which <b>gives social members a sense of belonging</b>.","我们应保护文化和文学遗产，它给社会成员归属感。"],
+      ["<b>Observing traditional festivals</b> helps pass on <b>the inheritance of cultural traits</b>.","庆祝传统节日有助于传承文化品质。"],
+      ["Museums <b>enable better international understanding</b> by exhibiting <b>great products of human civilization</b>.","博物馆通过展出人类文明的伟大产物促进国际了解。"],
+      ["<b>Culture shock</b> is common, but an open mind helps us <b>fit rather than challenge the stereotype</b>.","文化冲击很常见，但开放的心态帮助我们适应而非挑战固有形象。"],
+      ["<b>Core values</b> and <b>shared ideology</b> <b>define the way people treat each other</b>.","核心价值和共同理念明确了人们相处的方式。"]
+    ]
+  },
+  { id:8, name:"自然生态", count:44, color:"#94B0A0",
+    vocab:[
+      ["bay / stream / tide / shore / horizon","海湾 / 溪流 / 潮汐 / 海岸 / 地平线"],
+      ["fertile soil","肥沃的土壤"],
+      ["plain / cliff / valley / woods / maple / ginkgo tree","平原 / 悬崖 / 山谷 / 森林 / 枫树 / 银杏树"],
+      ["natural vegetation","天然植被"],
+      ["dawn / dusk / sunrise / sunset / aglow of sunlight","黎明 / 黄昏 / 日出 / 日落 / 一缕阳光"],
+      ["restore the harmony between man and nature","恢复人和自然的和谐"],
+      ["misty / frosty","起雾的 / 结霜的"],
+      ["ecological footprint","生态足迹"],
+      ["picturesque landscape","风景如画"],
+      ["components of biodiversity","生物多样性的组成部分"],
+      ["a breathtaking / magnificent view","壮观的景色"],
+      ["the health of the earth / ocean","地球 / 海洋的健康"],
+      ["rainy / dry / fruitful season","雨季 / 旱季 / 硕果累累的季节"],
+      ["rare / endangered species","珍稀 / 濒临灭绝的物种"],
+      ["seasonal change / produce","季节性的变化 / 农产品"],
+      ["shrinking habitat","缩小的栖息地"],
+      ["light / gentle / soft breeze","微风"],
+      ["a planet with decreased vitality and diversity","活力和多样性下降的星球"],
+      ["be bathed in warm sunshine / bright moonlight","沐浴温暖的阳光 / 明亮的月光"],
+      ["upset / maintain the balance of ecosystem","破坏 / 保持生态系统的平衡"],
+      ["snow-capped mountain range","山顶被白雪覆盖的山脉"],
+      ["the food chain / organism","食物链 / 有机体"],
+      ["a thick / dense forest","茂密的森林"],
+      ["safeguard the tropical forest","保卫热带雨林"],
+      ["restless / motionless ocean","波涛汹涌 / 风平浪静的大海"],
+      ["the natural cycle of the marine life / creatures","海洋生物的自然循环"],
+      ["bouquets of fresh flowers","鲜花花束"],
+      ["green space","绿地"],
+      ["chirping birds and fragrant flowers","鸟语花香"],
+      ["forest coverage","森林覆盖率"],
+      ["collect objects from nature","收集大自然的物品"],
+      ["establish / set aside nature reserves","建立自然保护区"],
+      ["listen to the sounds of nature","聆听大自然的声音"],
+      ["on the verge of extinction","濒临灭绝"],
+      ["smell the salty sea air / the freshness of spring","闻一闻咸咸的海风 / 春天的清新气息"],
+      ["build a self-sustaining ecosystem","建立自我维系的生态系统"],
+      ["pick fruit at an orchard","在果园采果实"],
+      ["a complex and delicate / fragile ecosystem","复杂而脆弱的生态系统"],
+      ["establish a seed bank","建立种子库"],
+      ["human's harmonious unity with nature","人类和自然的统一协调"],
+      ["wither / flourish / bud","萎缩 / 旺盛 / 发芽"],
+      ["harsh landscape and climate","严酷的景观和气候"],
+      ["a tiny / long stretch of white sand","一小 / 长片白沙地"],
+      ["stony shoreline","多石的海岸线"]
+    ],
+    examples:[
+      ["We must <b>restore the harmony between man and nature</b> and <b>maintain the balance of the ecosystem</b>.","我们必须恢复人和自然的和谐，保持生态系统的平衡。"],
+      ["<b>Establishing nature reserves</b> is an effective way to protect <b>rare and endangered species</b>.","建立自然保护区是保护珍稀濒危物种的有效方式。"],
+      ["A walk in a <b>thick forest</b>, <b>listening to the sounds of nature</b>, refreshes both body and mind.","在茂密的森林中漫步、聆听大自然的声音，能让身心焕然一新。"],
+      ["Human activities are <b>shrinking the habitat</b> of wildlife, pushing some species to <b>the verge of extinction</b>.","人类活动正使野生动物的栖息地缩小，将一些物种推向濒临灭绝的边缘。"],
+      ["<b>Green space</b> and <b>forest coverage</b> are vital to <b>the health of the earth</b>.","绿地和森林覆盖率对地球的健康至关重要。"]
+    ]
+  },
+  { id:9, name:"灾害防范", count:42, color:"#C29A8D",
+    vocab:[
+      ["natural / man-made disasters","自然 / 人为灾害"],
+      ["catch sb. off guard","措手不及"],
+      ["hurricane / typhoon / tornado","飓风 / 台风 / 龙卷风"],
+      ["affected / disaster-stricken area","受灾地区"],
+      ["drought / sandstorm / flood / tsunami / avalanche","干旱 / 沙尘暴 / 洪水 / 海啸 / 雪崩"],
+      ["take necessary precautions","采取必要的预防措施"],
+      ["earthquake / volcano eruption","地震 / 火山喷发"],
+      ["emergency preparedness","紧急状况的准备工作"],
+      ["overfishing","过度捕捞"],
+      ["emergency alert system","紧急报警系统"],
+      ["uncontrolled deforestation / excessive tree-felling","过度的森林砍伐 / 伐木"],
+      ["disaster relief / drill","灾难救援 / 防灾演练"],
+      ["oil leak","原油泄漏"],
+      ["first-aid kit / flashlight / whistle / dust mask","急救箱 / 手电筒 / 哨子 / 防尘面罩"],
+      ["overexploitation of underground water","地下水的过度开采"],
+      ["basic life-saving techniques","基本的救生技能"],
+      ["damage / destruction / devastation","破坏 / 毁坏 / 摧毁"],
+      ["minimize loss and casualties","减少损失和人员伤亡"],
+      ["persistent attack of disasters","灾害的不断袭击"],
+      ["accurate prediction / precise forecast","精准的预报"],
+      ["ecological disaster","生态灾难"],
+      ["exposure to toxic smoke","接触有害烟雾"],
+      ["(homes) be washed away / (earth) be ripped open","(家园)被冲走 / (土地)被撕开"],
+      ["fire extinguisher","灭火器"],
+      ["an unprecedented extent / scale (of...)","前所未有的程度 / 规模"],
+      ["put important documents in a waterproof bag","把重要文件放入防水袋"],
+      ["loss of homes","失去家园"],
+      ["evacuation exit / map / instructions","疏散出口 / 地图 / 指示"],
+      ["innocent victims","无辜受害者"],
+      ["evacuate to high ground","撤离到地势较高地区"],
+      ["be left stranded","被困"],
+      ["escape route","逃生路线"],
+      ["death toll","死亡人数"],
+      ["voluntary donation of money and resources","自发捐款捐物"],
+      ["terrifying winds of a typhoon / gushing waters of a flood / raging flames of a wild fire","可怕的台风 / 奔涌的洪水 / 熊熊的野火"],
+      ["stay upwind of the fire","待在火的上风头"],
+      ["rescue operation","救援行动"],
+      ["post-disaster management / reconstruction","灾后管理 / 重建"],
+      ["relief supplies","救援物资"],
+      ["restoration to pre-disaster condition","恢复到灾前状态"],
+      ["infrastructure restoration","基础设施恢复"],
+      ["recovery plan","修复计划"]
+    ],
+    examples:[
+      ["It is wise to <b>take necessary precautions</b> and be well prepared with <b>emergency preparedness</b>.","采取必要的预防措施、做好紧急状况准备是明智的。"],
+      ["<b>Accurate prediction</b> and <b>precise forecast</b> can <b>minimize loss and casualties</b> in natural disasters.","精准的预报能在自然灾害中减少损失和人员伤亡。"],
+      ["After the earthquake, <b>relief supplies</b> and <b>rescue operations</b> were organized to help the <b>disaster-stricken area</b>.","地震后，救援物资和救援行动被组织起来帮助受灾地区。"],
+      ["Learning <b>basic life-saving techniques</b> can protect us when disasters <b>catch us off guard</b>.","学习基本救生技能能在灾难措手不及时保护我们。"],
+      ["<b>Overfishing</b> and <b>uncontrolled deforestation</b> may lead to <b>ecological disasters</b>.","过度捕捞和过度的森林砍伐可能导致生态灾难。"]
+    ]
+  },
+  { id:10, name:"宇宙探索", count:38, color:"#8E9BB8",
+    vocab:[
+      ["identify gaps in knowledge","找出知识缺口"],
+      ["propel the development of society","推动社会的发展"],
+      ["design experiments","设计实验"],
+      ["frontiers of science and technology","科技前沿"],
+      ["gather data","收集数据"],
+      ["shed light on important issues","阐明重要议题"],
+      ["statistical analysis","数据分析"],
+      ["expand knowledge base","扩大知识库"],
+      ["unanswered question / unsolved mystery","未解之谜"],
+      ["solve practical problems collectively","合作解决实际问题"],
+      ["formulate a hypothesis","构建假设"],
+      ["diagnose problems with a systematic approach","有条理地诊断问题"],
+      ["observable / detectable / noticeable change","能观察的 / 能探测的 / 能注意到的变化"],
+      ["sharpen analytical skills","增强分析能力"],
+      ["access / evaluate various forms of information","得到 / 评估各种信息"],
+      ["increase the quality of life","提高生活质量"],
+      ["academic journals","学术期刊"],
+      ["place scientists in a moral dilemma","使科学家陷入道德困境"],
+      ["launch a satellite","发射卫星"],
+      ["on-site research","现场研究"],
+      ["distant galaxies","遥远的星系"],
+      ["clear up mysteries / clarify confusion","解开谜团"],
+      ["the origin of the universe","宇宙起源"],
+      ["ask open-ended questions","问开放式问题"],
+      ["moon landing","月球登陆"],
+      ["think differently / outside the box","跳出思维固定模式"],
+      ["international space station","国际空间站"],
+      ["scientific findings / thinking","科学发现 / 思维"],
+      ["sample test","样品检测"],
+      ["human's appetite for exploring the unknown","人类对探索未知的渴望"],
+      ["a major archaeological / medical discovery","重大的考古 / 医学发现"],
+      ["attend seminars","参加研讨会"],
+      ["examine specimens under a microscope","在显微镜下观察标本"],
+      ["experiment with new ideas","实验新想法"],
+      ["field trip","实地考察旅行"],
+      ["notice an inconsistency or oddity","发现异常"],
+      ["the solar system / the Milky Way / comet","太阳系 / 银河 / 彗星"],
+      ["form hypotheses about mysteries","对谜团提出假设"]
+    ],
+    examples:[
+      ["<b>Space exploration</b> reflects <b>human's appetite for exploring the unknown</b> and <b>propels the development of society</b>.","太空探索体现了人类对探索未知的渴望，并推动社会的发展。"],
+      ["Scientists <b>gather data</b> and <b>formulate hypotheses</b> to <b>shed light on important issues</b>.","科学家收集数据、构建假设，以阐明重要议题。"],
+      ["The <b>moon landing</b> and the launch of satellites mark <b>the frontiers of science and technology</b>.","月球登陆和卫星发射标志着科技前沿。"],
+      ["Researchers <b>think outside the box</b> and <b>ask open-ended questions</b> to solve <b>unsolved mysteries</b>.","研究者跳出思维固定模式、问开放式问题，以解开未解之谜。"],
+      ["<b>Statistical analysis</b> helps scientists <b>sharpen analytical skills</b> and <b>expand the knowledge base</b>.","数据分析帮助科学家增强分析能力、扩大知识库。"]
+    ]
+  }
+];
+
+const PATTERNS = [
+  { id:1, name:"形式主语", en:"It as formal subject", color:"#A8B5A0",
+    formulas:["It is + adj. + for/of sb. to do sth.","It is + adj. + that...","It is no use / no good doing sth.","It is said / reported / believed that...","It remains to be seen / proved...","It happened / appeared that...","It takes sb. some time / money to do sth."],
+    explain:"用 it 作形式主语，把真正的主语（不定式或 that 从句）放到句末，使句子结构平衡、表达地道。",
+    practice:[
+      ["广泛阅读来拓宽眼界是很有必要的。","<b class='fm'>It is necessary for us to</b> read widely to broaden our horizons."],
+      ["众所周知，人工智能已经大大促进了生产力。","<b class='fm'>It is widely believed that</b> artificial intelligence has greatly boosted productivity."],
+      ["空谈而不行动是没有用的。","<b class='fm'>It is no use</b> talking without taking action."],
+      ["劳逸结合对学生的身心健康很重要。","<b class='fm'>It is important for students to</b> strike a balance between work and rest."]
+    ]
+  },
+  { id:2, name:"形式宾语", en:"It as formal object", color:"#C4A79E",
+    formulas:["...think / find / consider / make / feel it + adj./n. + for sb. to do sth.","...think it no good / no use doing sth.","...make it a rule (never) to...","...take it for granted that...","See to it that...","...would appreciate it if...could..."],
+    explain:"用 it 作形式宾语，代替真正的宾语（不定式或从句），避免句子头重脚轻。",
+    practice:[
+      ["我觉得养成培养一个爱好的习惯很有帮助。","I <b class='fm'>find it helpful to</b> cultivate a hobby."],
+      ["我们把劳逸结合当作一条准则。","We <b class='fm'>make it a rule to</b> strike a balance between work and rest."],
+      ["我们把父母为我们付出的一切视为理所当然，这是不对的。","We should not <b class='fm'>take it for granted that</b> our parents do everything for us."],
+      ["如果你能利用课余时间做志愿者工作，我将不胜感激。","I would <b class='fm'>appreciate it if</b> you could devote your spare time to doing volunteer work."]
+    ]
+  },
+  { id:3, name:"常用 there be 句型", en:"Common “there be” structures", color:"#8FA6B0",
+    formulas:["There is no doubt / possibility that...","There is no point in doing sth.","There is no need to do sth.","There is no denying / telling / knowing...","There is a growing tendency that..."],
+    explain:"there be 句型表示“存在”，与 no 等否定词连用可表达强调或否定，是议论文中常用的高级表达。",
+    practice:[
+      ["毫无疑问，保护文化遗产能给我们社会成员归属感。","<b class='fm'>There is no doubt that</b> preserving cultural heritage gives social members a sense of belonging."],
+      ["否认科技改变了我们的学习方式是没有意义的。","<b class='fm'>There is no point in</b> denying that technology has changed the way we learn."],
+      ["不可否认，汽车尾气是空气污染的主要促成因素。","<b class='fm'>There is no denying that</b> car exhaust is a huge contributor to air pollution."],
+      ["人们越来越倾向于通过移动支付消费。","<b class='fm'>There is a growing tendency that</b> people spend money through mobile payment."]
+    ]
+  },
+  { id:4, name:"强调句", en:"Emphatic sentences", color:"#B0A3C0",
+    formulas:["It is/was + 被强调部分 + that/who...","...do/does/did + 动词原形"],
+    explain:"用 It is/was...that/who... 强调句中某一部分（主语、宾语、状语等），或用 do/does/did 强调谓语动词。",
+    practice:[
+      ["正是勤奋和自我激励的学习者最终取得了成功。","<b class='fm'>It is</b> the diligent and self-motivated learners <b class='fm'>who</b> finally achieve success."],
+      ["正是通过做中学，我们才能真正巩固知识。","<b class='fm'>It is</b> through learning by doing <b class='fm'>that</b> we can truly consolidate our knowledge."],
+      ["我们确实应该珍惜友谊。","We <b class='fm'>do</b> treasure friendship."],
+      ["是阅读帮助我们拓宽知识面。","<b class='fm'>It is</b> reading <b class='fm'>that</b> widens our scope of knowledge."]
+    ]
+  },
+  { id:5, name:"被动句", en:"Passive voice", color:"#9BB0B8",
+    formulas:["...is regarded as...","...is said / believed / reported to..."],
+    explain:"被动句强调动作的承受者，常用于客观、正式的表述，是书面语的标志之一。",
+    practice:[
+      ["阅读被看作拓宽眼界的最佳方式之一。","Reading <b class='fm'>is regarded as</b> one of the best ways to broaden one's horizons."],
+      ["据报，人工智能正在改变教育的面貌。","Artificial intelligence <b class='fm'>is reported to</b> be changing the face of education."],
+      ["传统文化被认为应该代代相传。","Traditional culture <b class='fm'>is believed to</b> be passed down from generation to generation."],
+      ["体育锻炼被认为能增强免疫系统。","Physical exercise <b class='fm'>is believed to</b> enhance the immune system."]
+    ]
+  },
+  { id:6, name:"双重否定句", en:"Double negation", color:"#9FB596",
+    formulas:["There is no one but...","It is not uncommon that...","Nothing could be...without...","We can never overemphasize / lay too much emphasis on...","We can never be too careful / cautious when..."],
+    explain:"双重否定表肯定，语气比直接肯定更强，是增强说服力的有力手段。",
+    practice:[
+      ["没有什么比保护濒危物种更重要。","<b class='fm'>Nothing could be more important than</b> protecting endangered species."],
+      ["没有自信我们就不可能发掘自己的潜力。","Without self-confidence, we <b class='fm'>can never</b> tap our potential."],
+      ["劳逸结合的重要性怎么强调都不为过。","We <b class='fm'>can never lay too much emphasis on</b> striking a balance between work and rest."],
+      ["学生沉迷于网络游戏并不少见。","<b class='fm'>It is not uncommon that</b> students are addicted to online games."]
+    ]
+  },
+  { id:7, name:"复合句", en:"Complex sentences", color:"#C2A184",
+    formulas:["Those who...","Where there is..., there is...","..., which...","When it comes to..., ...","The reason why...is that...","The problem is not..., but...","The more..., the more..."],
+    explain:"复合句通过主从关系表达复杂的逻辑，使文章句式丰富、层次分明。",
+    practice:[
+      ["那些走出舒适区的人往往能发掘自己的潜力。","<b class='fm'>Those who</b> step out of their comfort zone are more likely to tap their potential."],
+      ["谈到环保，我们每个人都有责任。","<b class='fm'>When it comes to</b> environmental protection, each of us has a responsibility."],
+      ["我之所以推荐这门课程，是因为它能增强我们的学习体验。","<b class='fm'>The reason why</b> I recommend this course <b class='fm'>is that</b> it can enhance our learning experiences."],
+      ["问题不在于我们是否有能力，而在于我们是否愿意尝试。","The problem is <b class='fm'>not</b> whether we are able, <b class='fm'>but</b> whether we are willing to try."]
+    ]
+  },
+  { id:8, name:"倒装句", en:"Inversion", color:"#94B0A0",
+    formulas:["By no means / In no way / On no account / Under no circumstances...","Hardly / Scarcely...when...","No sooner...than...","Not until...","Not only..., but also...","So / Such...that...","Only by / if / when...","...as / though..."],
+    explain:"将否定词、only 等置于句首引起部分倒装，强调语气、增强表现力。",
+    practice:[
+      ["只有通过坚持不懈，我们才能追求卓越。","<b class='fm'>Only</b> through practicing persistence <b class='fm'>can we</b> pursue excellence."],
+      ["科技不仅提高了生产力，还解放了劳动力。","<b class='fm'>Not only does</b> technology boost productivity, <b class='fm'>but it also</b> liberates the labor force."],
+      ["我们绝不能为了发展而破坏生态平衡。","<b class='fm'>By no means should we</b> upset the balance of the ecosystem for development."],
+      ["直到经历了失败，他才学会越挫越勇。","<b class='fm'>Not until</b> he experienced failure <b class='fm'>did he</b> learn to use setbacks as fuel."]
+    ]
+  },
+  { id:9, name:"比较结构", en:"Comparative structures", color:"#C29A8D",
+    formulas:["A is as + 原级 + as B...","A is not as/so + 原级 + as B...","A is the + 最高级 + in/among/of...","...否定词 + 比较级（表达最高级）","no more / less than..."],
+    explain:"用比较级、最高级进行对比，使论述更有层次、更具说服力。",
+    practice:[
+      ["阅读和旅行一样都能拓宽我们的眼界。","Reading is <b class='fm'>as effective as</b> travelling in broadening our horizons."],
+      ["身体健康和心理健康同等重要。","Mental health is <b class='fm'>as important as</b> physical health."],
+      ["网络学习不如面对面交流那样有助于建立信任。","Online learning is <b class='fm'>not as helpful as</b> face-to-face interaction in building trust."],
+      ["没有什么比浪费时间更让人遗憾。","Nothing is <b class='fm'>more regrettable than</b> wasting time."]
+    ]
+  },
+  { id:10, name:"对比结构", en:"Contrast structures", color:"#8E9BB8",
+    formulas:["Just as..., so...","A is to B what C is to D..."],
+    explain:"用类比和对照的方式说明两者之间的关系，形象而有力。",
+    practice:[
+      ["正如植物离不开阳光，人也离不开学习。","<b class='fm'>Just as</b> plants cannot live without sunlight, <b class='fm'>so</b> man cannot live without learning."],
+      ["读书之于心灵，正如运动之于身体。","Reading <b class='fm'>is to the mind what</b> exercise <b class='fm'>is to</b> the body."],
+      ["水之于鱼，正如空气之于人类。","Water <b class='fm'>is to fish what</b> air <b class='fm'>is to</b> human beings."],
+      ["正如大处着眼，我们也要小处起步。","<b class='fm'>Just as</b> we should think big, <b class='fm'>so</b> we should start small."]
+    ]
+  },
+  { id:11, name:"非谓语结构", en:"Non-finite verb structures", color:"#A8B5A0",
+    formulas:["..., making / causing...","To..., one should...","with...","...so / such...as to...","..., only to...","make / have...do / done","get...to do / done","be made to do..."],
+    explain:"用分词、不定式等非谓语结构表达因果、目的、伴随等关系，使句子紧凑、信息丰富。",
+    practice:[
+      ["她微笑着向我走来，消除了我的紧张。","She came up to me with a contagious smile, <b class='fm'>easing</b> my nervousness."],
+      ["为了拓宽知识面，我们应该广泛阅读。","<b class='fm'>To widen our scope of knowledge</b>, we should read widely."],
+      ["这次失败使他意识到必须发掘自己的潜力。","The failure <b class='fm'>made him realize</b> that he must tap his potential."],
+      ["过度使用手机导致学生分散了注意力。","Overuse of mobile phones <b class='fm'>caused students to have</b> divided attention."]
+    ]
+  },
+  { id:12, name:"做……的时候到了", en:"It's time to...", color:"#C4A79E",
+    formulas:["It is time for sb. to do sth.","It is time that sb. did sth."],
+    explain:"表达“到了该做某事的时候”，后者用过去式表示虚拟语气。",
+    practice:[
+      ["到了该采取行动保护环境的时候了。","<b class='fm'>It is time for us to</b> take action to protect the environment."],
+      ["到了我们走出舒适区、直面挑战的时候了。","<b class='fm'>It is time that we stepped</b> out of our comfort zone and embraced challenges."],
+      ["到了学生劳逸结合的时候了。","<b class='fm'>It is time that students struck</b> a balance between work and rest."]
+    ]
+  },
+  { id:13, name:"花（钱/时间）做……", en:"Spend / take", color:"#8FA6B0",
+    formulas:["It takes sb. ... to do sth.","Sb. spends ... in doing sth.","Sb. spends ... on sth."],
+    explain:"表达花费时间、金钱做某事。",
+    practice:[
+      ["我们花了很多时间巩固知识。","We <b class='fm'>spent a lot of time in</b> consolidating our knowledge."],
+      ["培养一个爱好需要时间和耐心。","<b class='fm'>It takes</b> time and patience <b class='fm'>to</b> cultivate a hobby."],
+      ["许多学生把大量时间花在网络游戏上。","Many students <b class='fm'>spend a great deal of time on</b> online games."]
+    ]
+  },
+  { id:14, name:"可能性", en:"Possibility", color:"#B0A3C0",
+    formulas:["There is a possibility / every likelihood that...","Chances are that...","The odds are...","It is certain / likely that...","Sb./Sth. is likely / sure / bound to...","Probably, ..."],
+    explain:"表达推测、可能性，使论述更严谨、客观。",
+    practice:[
+      ["持续努力的人很有可能获得成功。","Those who keep working hard <b class='fm'>are likely to</b> achieve success."],
+      ["只要坚持，我们一定能发掘自己的潜力。","As long as we persist, we <b class='fm'>are bound to</b> tap our potential."],
+      ["人工智能很可能改变未来的就业格局。","<b class='fm'>It is very likely that</b> artificial intelligence will change the future job market."],
+      ["那些沉迷于手机的学生很可能成绩下降。","<b class='fm'>Chances are that</b> students glued to their phones will fall behind."]
+    ]
+  },
+  { id:15, name:"宁愿做A而不愿做B", en:"Would rather...than...", color:"#9BB0B8",
+    formulas:["would rather do A than do B","would do A rather than do B","prefer to do A rather than do B","prefer doing A to doing B"],
+    explain:"表达在两种选择中更倾向于前者。",
+    practice:[
+      ["我宁愿在家阅读，也不愿沉迷于网络游戏。","I <b class='fm'>would rather</b> read at home <b class='fm'>than</b> be addicted to online games."],
+      ["许多学生宁愿实践也不愿死记硬背。","Many students <b class='fm'>prefer learning by doing to</b> learning by rote."],
+      ["我宁愿乘公共交通，也不愿开车增加尾气排放。","I <b class='fm'>would</b> take public transportation <b class='fm'>rather than</b> drive and add to car exhaust."]
+    ]
+  },
+  { id:16, name:"别无选择只能", en:"No choice but...", color:"#9FB596",
+    formulas:["have no choice but / except / other than to do...","can do nothing but / except / other than do...","can't but do..."],
+    explain:"表达“别无选择，只能做某事”。",
+    practice:[
+      ["面对严峻的环境问题，我们别无选择，只能采取行动。","Faced with severe environmental problems, we <b class='fm'>have no choice but to</b> take action."],
+      ["看到受灾地区的情况，我们不得不伸出援手。","Seeing the disaster-stricken area, we <b class='fm'>can do nothing but</b> offer help."],
+      ["他别无选择，只能走出舒适区去迎接挑战。","He <b class='fm'>had no choice but to</b> step out of his comfort zone and embrace challenges."]
+    ]
+  },
+  { id:17, name:"一……就……", en:"As soon as...", color:"#C2A184",
+    formulas:["No sooner had...than...","Hardly had...when...","Scarcely had...when...","...the moment / the minute / the instant..."],
+    explain:"表达两个动作紧接发生，倒装结构语气更强。",
+    practice:[
+      ["铃声一响，学生们就投入到学习中。","<b class='fm'>Hardly had</b> the bell rung <b class='fm'>when</b> the students buried themselves in their study."],
+      ["他一走进考场，就用积极的态度面对考试。","<b class='fm'>The moment</b> he entered the exam room, he treated the test with a positive attitude."],
+      ["我们一完成志愿工作，就收获了满满的成就感。","<b class='fm'>No sooner had</b> we finished the volunteer work <b class='fm'>than</b> we gained a strong sense of achievement."]
+    ]
+  },
+  { id:18, name:"值得", en:"Be worth (doing)", color:"#94B0A0",
+    formulas:["be worth sth.","be worth doing...","be worthy of sth.","be worthy of being done","be worthy to be done"],
+    explain:"表达“值得”。",
+    practice:[
+      ["这本书值得一读，它能拓宽我们的眼界。","This book <b class='fm'>is worth reading</b>, for it can broaden our horizons."],
+      ["保护文化遗产是值得付出努力的事业。","Preserving cultural heritage is a cause <b class='fm'>worthy of</b> our efforts."],
+      ["他的建议值得考虑。","His suggestion is <b class='fm'>worthy of</b> consideration."]
+    ]
+  },
+  { id:19, name:"虚拟（if 条件句）", en:"Subjunctive mood", color:"#C29A8D",
+    formulas:["...would/could/might/should have done..., if...had done...","...would/could/might/should do..., if...did/were...","...would/could/might/should do..., if...should do/did..."],
+    explain:"虚拟语气表示与事实相反的假设，或委婉的建议与愿望。",
+    practice:[
+      ["如果我当初坚持不懈，现在可能已经发掘了自己的潜力。","<b class='fm'>If I had</b> practiced persistence, I <b class='fm'>might have</b> tapped my potential now."],
+      ["如果没有科技，我们的生活就不会这么便利。","Without technology, our life <b class='fm'>would not</b> be so convenient."],
+      ["如果每个人都改变日常习惯，环境就会得到改善。","<b class='fm'>If</b> everyone changed their daily habits, the environment <b class='fm'>would</b> improve."]
+    ]
+  },
+  { id:20, name:"发生（见证）", en:"See / witness", color:"#8E9BB8",
+    formulas:["...saw / witnessed..."],
+    explain:"用“时间/地点 saw/witnessed...”表示“某时/某地发生了某事”，是地道的高级表达。",
+    practice:[
+      ["过去几十年见证了科技的飞速发展。","The past few decades <b class='fm'>have witnessed</b> the rapid development of technology."],
+      ["去年见证了我们学校教育的巨大进步。","Last year <b class='fm'>witnessed</b> great progress in our school's education."],
+      ["这个时代见证了人类对探索未知的渴望。","This era <b class='fm'>has witnessed</b> human's appetite for exploring the unknown."]
+    ]
+  }
+];
+
+/* ==================== 渲染 ==================== */
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+let currentMode = "recite";   // recite | selfcheck
+let currentTheme = 0;
+
+/* ---- 目录 ---- */
+function buildToc(){
+  const nav = $("#tocNav");
+  let html = '<div class="grp-title">板块一 · 十组主题类语汇</div>';
+  html += '<a href="#sec-vocab" data-close><span class="idx">▶</span>主题类语汇总览</a>';
+  THEMES.forEach((t,i)=>{
+    html += `<a href="#theme-${i}" data-close><span class="sw" style="background:${t.color}"></span>${t.name}<span class="idx" style="margin-left:auto">${t.count}组</span></a>`;
+  });
+  html += '<div class="grp-title p2">板块二 · 二十组基本句型</div>';
+  html += '<a href="#sec-patterns" data-close><span class="idx">▶</span>基本句型总览</a>';
+  PATTERNS.forEach(p=>{
+    html += `<a href="#pattern-${p.id}" data-close><span class="sw" style="background:${p.color}"></span>${p.id}. ${p.name}</a>`;
+  });
+  nav.innerHTML = html;
+}
+
+/* ---- 主题标签 ---- */
+function buildThemeTabs(){
+  const wrap = $("#themeTabs");
+  wrap.innerHTML = THEMES.map((t,i)=>{
+    return `<button data-i="${i}" class="${i===0?'active':''}" style="${i===0?`background:${t.color};color:#fff`:''}"><span class="sw" style="background:${t.color}"></span>${t.name}<span style="opacity:.65">${t.count}组</span></button>`;
+  }).join("");
+  wrap.addEventListener("click",e=>{
+    const btn = e.target.closest("button"); if(!btn) return;
+    currentTheme = +btn.dataset.i;
+    $$("#themeTabs button").forEach(b=>{ b.classList.remove("active"); b.style.background=""; b.style.color=""; });
+    btn.classList.add("active"); btn.style.background = THEMES[currentTheme].color; btn.style.color = "#fff";
+    renderThemePanel();
+  });
+}
+
+/* ---- 渲染主题面板 ---- */
+function renderThemePanel(){
+  const wrap = $("#themePanels");
+  const t = THEMES[currentTheme];
+  const isSelf = currentMode === "selfcheck";
+  const cards = t.vocab.map((v,i)=>{
+    return `<div class="vcard" data-i="${i}"><div class="en">${esc(v[0])}</div><div class="zh">${esc(v[1])}</div></div>`;
+  }).join("");
+  const ex = t.examples.map(e=>`<div class="ex-item"><div class="en">${e[0]}</div><div class="zh">${e[1]}</div></div>`).join("");
+  wrap.innerHTML = `
+    <div class="theme-panel active" id="theme-${currentTheme}" data-theme="${currentTheme}">
+      <div class="theme-head">
+        <span class="sw" style="width:14px;height:14px;border-radius:4px;background:${t.color}"></span>
+        <span class="big">${t.name}</span>
+        <span class="cnt" style="background:${t.color}">${t.count} 组</span>
+        <div class="tip">${isSelf ? "🃏 自检模式：看英文想中文，点击卡片显示答案。" : "📖 背诵模式：语汇 + 中文释义，下方附作文例句辅助记忆。"}</div>
+      </div>
+      <div class="vocab-grid ${isSelf?'selfcheck':''}">${cards}</div>
+      <div class="examples"><h4>作文例句 · 辅助记忆</h4>${ex}</div>
+    </div>`;
+  updateStat();
+  bindVocabCards();
+}
+
+function updateStat(){
+  const t = THEMES[currentTheme];
+  const flipped = $$(".selfcheck .vcard.flipped").length;
+  $("#vocabStat").textContent = currentMode==="selfcheck"
+    ? `已显示 ${flipped} / ${t.vocab.length} 个答案`
+    : `共 ${t.vocab.length} 组语汇 · 点击上方标签切换主题`;
+}
+
+function bindVocabCards(){
+  $$(".selfcheck .vcard").forEach(c=>{
+    c.onclick = ()=>{ c.classList.toggle("flipped"); updateStat(); };
+  });
+}
+
+function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+/* ---- 模式切换 ---- */
+function setMode(mode){
+  currentMode = mode;
+  $$("#modeSwitch button").forEach(b=>b.classList.toggle("active", b.dataset.mode===mode));
+  $("#vocabToolbar").style.display = mode==="selfcheck" ? "flex" : "none";
+  renderThemePanel();
+}
+$("#modeSwitch").addEventListener("click", e=>{
+  const btn = e.target.closest("button"); if(!btn) return;
+  setMode(btn.dataset.mode);
+});
+
+/* ---- 句型 ---- */
+function buildPatterns(){
+  const wrap = $("#patternList");
+  wrap.innerHTML = PATTERNS.map(p=>{
+    const f = p.formulas.map(x=>`<span class="f">${esc(x)}</span>`).join("");
+    const pr = p.practice.map((q,i)=>{
+      return `<div class="pr-item" data-qi="${i}"><div class="q"><span class="dot">${i+1}</span><span class="zh">${esc(q[0])}</span><span class="show">查看英文</span></div><div class="a">${q[1]}</div></div>`;
+    }).join("");
+    return `
+      <div class="pcard" id="pattern-${p.id}">
+        <div class="p-head">
+          <div class="p-no" style="background:${p.color}">${p.id}</div>
+          <div><div class="p-name">${p.name}</div><div class="p-en">${esc(p.en)}</div></div>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="p-body">
+          <div class="p-formulas">${f}</div>
+          <div class="p-explain"><b>讲解：</b>${esc(p.explain)}</div>
+          <div class="p-practice">
+            <h5>练习 · 看中文写英文（点击查看答案）</h5>
+            ${pr}
+          </div>
+        </div>
+      </div>`;
+  }).join("");
+
+  // 展开/收起
+  $$("#patternList .p-head").forEach(h=>{
+    h.onclick = ()=>{ h.parentElement.classList.toggle("open"); };
+  });
+  // 练习答案
+  $$("#patternList .pr-item .q").forEach(q=>{
+    q.onclick = ()=>{ q.parentElement.classList.toggle("open"); };
+  });
+}
+
+/* ---- 显示/隐藏全部 ---- */
+$("#revealAll").onclick = ()=>{ $$(".selfcheck .vcard").forEach(c=>c.classList.add("flipped")); updateStat(); };
+$("#hideAll").onclick  = ()=>{ $$(".selfcheck .vcard").forEach(c=>c.classList.remove("flipped")); updateStat(); };
+
+/* ---- 侧滑目录 ---- */
+const drawer = $("#drawer"), overlay = $("#overlay"), menuBtn = $("#menuBtn");
+function openDrawer(){ drawer.classList.add("open"); overlay.classList.add("show"); menuBtn.classList.add("open"); }
+function closeDrawer(){ drawer.classList.remove("open"); overlay.classList.remove("show"); menuBtn.classList.remove("open"); }
+menuBtn.onclick = ()=>{ drawer.classList.contains("open") ? closeDrawer() : openDrawer(); };
+overlay.onclick = closeDrawer;
+document.addEventListener("click",e=>{
+  const a = e.target.closest("#tocNav a[data-close]");
+  if(a) closeDrawer();
+});
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") closeDrawer(); });
+
+/* ---- 初始化 ---- */
+buildToc();
+buildThemeTabs();
+renderThemePanel();
+buildPatterns();
+setMode("recite");
+// 默认展开第一组句型
+$$("#patternList .pcard")[0]?.classList.add("open");
+</script>
+</body>
+</html>
