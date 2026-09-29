@@ -178,11 +178,12 @@
   .vcard .zh{font-size:13px;color:var(--muted);margin-top:5px;line-height:1.5}
   /* 自检模式 */
   .selfcheck .vcard{cursor:pointer;min-height:66px;display:flex;flex-direction:column;justify-content:center;perspective:900px}
-  .selfcheck .vcard .zh{display:none}
+  .selfcheck .vcard .zh{order:1}
+  .selfcheck .vcard .en{display:none;order:2}
   .selfcheck .vcard.flipped{background:#F5F1E9;border-color:var(--brand)}
-  .selfcheck .vcard.flipped .zh{display:block}
+  .selfcheck .vcard.flipped .en{display:block}
   .selfcheck .vcard::after{
-    content:"点我看中文";position:absolute;right:12px;top:10px;
+    content:"点我看英文";position:absolute;right:12px;top:10px;
     font-size:10.5px;color:#B8AF9F;opacity:0;transition:.2s;
   }
   .selfcheck .vcard.flipped::after{content:"✓";font-size:13px;color:var(--brand-deep);opacity:1}
@@ -298,7 +299,7 @@
       <span class="num">板块一</span>
       <h2>十组主题类语汇</h2>
       <span class="en">Ten Groups of Thematic Vocabulary</span>
-      <div class="hint">背诵模式：语汇 + 中文 + 作文例句；自检模式：看英文想中文，点击英文出答案。</div>
+      <div class="hint">背诵模式：语汇 + 中文 + 作文例句；自检模式：看中文想英文，点击中文出英文答案。</div>
     </div>
 
     <div class="mode-switch" id="modeSwitch">
@@ -1294,7 +1295,7 @@ function renderThemePanel(){
         <span class="sw" style="width:14px;height:14px;border-radius:4px;background:${t.color}"></span>
         <span class="big">${t.name}</span>
         <span class="cnt" style="background:${t.color}">${t.count} 组</span>
-        <div class="tip">${isSelf ? "🃏 自检模式：看英文想中文，点击卡片显示答案。" : "📖 背诵模式：语汇 + 中文释义，下方附作文例句辅助记忆。"}</div>
+        <div class="tip">${isSelf ? "🃏 自检模式：看中文想英文，点击卡片显示英文答案。" : "📖 背诵模式：语汇 + 中文释义，下方附作文例句辅助记忆。"}</div>
       </div>
       <div class="vocab-grid ${isSelf?'selfcheck':''}">${cards}</div>
       <div class="examples"><h4>作文例句 · 辅助记忆</h4>${ex}</div>
