@@ -56,6 +56,11 @@ window.CATALOG = {
           title: "数词课件",
           file: "courseware/数词课件.html",
           added: "2026-09-17"
+        },
+        {
+          title: "形容词·副词·名词·动词课件",
+          file: "courseware/形容词副词名词动词课件.html",
+          added: "2026-10-01"
         }
       ]
     },

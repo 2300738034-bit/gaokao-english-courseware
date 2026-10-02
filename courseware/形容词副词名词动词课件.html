@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>形容词·副词·名词·动词（高考英语语法 · 词类四讲）</title>
+<style>
+  :root{
+    --bg:#EFEBE4;
+    --paper:#FBF9F5;
+    --card:#FFFFFF;
+    --ink:#4A463F;
+    --muted:#8C8578;
+    --line:#E3DDD3;
+    --line-soft:#EDE8DF;
+    --brand:#A8B5A0;        /* 形容词 鼠尾草绿 */
+    --brand-deep:#7E8F76;
+    --blue:#8FA6B0;         /* 副词 雾蓝 */
+    --rose:#C4A79E;         /* 名词 灰玫瑰 */
+    --lilac:#B0A3C0;        /* 动词 灰紫 */
+    --gold:#B4A075;
+    --shadow:0 2px 6px rgba(90,80,60,.06), 0 12px 30px -14px rgba(90,80,60,.18);
+    --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--font);
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ===== 顶部导航 ===== */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:center;gap:14px;
+    padding:13px 22px;
+    background:rgba(251,249,245,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .menu-btn{
+    width:42px;height:42px;flex:0 0 auto;
+    border:1px solid var(--line);border-radius:12px;
+    background:var(--card);color:var(--ink);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+    cursor:pointer;transition:.2s;
+  }
+  .menu-btn:hover{background:var(--brand);color:#fff;border-color:var(--brand)}
+  .menu-btn span{display:block;width:18px;height:2px;background:currentColor;border-radius:2px;transition:.25s}
+  .menu-btn.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .menu-btn.open span:nth-child(2){opacity:0}
+  .menu-btn.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .topbar .titles{min-width:0}
+  .topbar .titles h1{font-size:17px;font-weight:800;letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .topbar .titles .sub{font-size:12px;color:var(--muted)}
+  .topbar .badge{
+    margin-left:auto;flex:0 0 auto;
+    font-size:11px;font-weight:700;letter-spacing:.06em;
+    color:#fff;background:var(--brand-deep);
+    padding:5px 12px;border-radius:99px;white-space:nowrap;
+  }
+
+  /* ===== 目录侧滑 ===== */
+  .overlay{position:fixed;inset:0;z-index:60;background:rgba(70,60,48,.28);opacity:0;pointer-events:none;transition:opacity .3s}
+  .overlay.show{opacity:1;pointer-events:auto}
+  .drawer{
+    position:fixed;top:0;left:0;bottom:0;z-index:70;
+    width:min(340px,88vw);
+    background:var(--paper);
+    border-right:1px solid var(--line);
+    transform:translateX(-104%);transition:transform .32s cubic-bezier(.4,0,.2,1);
+    display:flex;flex-direction:column;
+    box-shadow:12px 0 40px -20px rgba(70,60,48,.3);
+  }
+  .drawer.open{transform:translateX(0)}
+  .drawer .d-head{padding:22px 24px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px}
+  .drawer .d-head .dot{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--blue));color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:17px}
+  .drawer .d-head h2{font-size:16px;font-weight:800}
+  .drawer .d-head p{font-size:11px;color:var(--muted)}
+  .drawer nav{flex:1;overflow-y:auto;padding:14px 0 30px}
+  .drawer .grp-title{
+    font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--muted);
+    padding:16px 24px 8px;display:flex;align-items:center;gap:8px;
+  }
+  .drawer .grp-title::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--g,#7E8F76)}
+  .drawer a{
+    display:flex;align-items:center;gap:10px;
+    padding:8px 24px;color:var(--ink);text-decoration:none;font-size:14px;
+    transition:.15s;border-left:3px solid transparent;
+  }
+  .drawer a:hover{background:#F1EDE5;border-left-color:var(--g,#7E8F76)}
+  .drawer a .idx{font-size:11px;color:var(--muted);min-width:20px;font-weight:600}
+  .drawer a .sw{width:9px;height:9px;border-radius:3px;flex:0 0 auto;background:var(--g,#7E8F76)}
+  .drawer a.top{font-weight:700}
+
+  /* ===== 内容区 ===== */
+  main{max-width:1080px;margin:0 auto;padding:26px 20px 90px}
+
+  /* 封面 */
+  .hero{
+    background:linear-gradient(135deg,#E9E4DA 0%,#E3DCD0 52%,#DCD4C6 100%);
+    border:1px solid var(--line);border-radius:22px;
+    padding:46px 40px;margin-bottom:34px;position:relative;overflow:hidden;
+  }
+  .hero::after{content:"";position:absolute;right:-70px;top:-70px;width:290px;height:290px;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(196,167,158,.5),rgba(196,167,158,0) 70%)}
+  .hero::before{content:"";position:absolute;left:-50px;bottom:-90px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle at 60% 40%,rgba(176,163,192,.4),rgba(176,163,192,0) 70%)}
+  .hero .kicker{font-size:12px;font-weight:800;letter-spacing:.22em;color:var(--brand-deep);text-transform:uppercase;position:relative;z-index:1}
+  .hero h1{font-size:36px;font-weight:900;margin:12px 0 10px;letter-spacing:.01em;position:relative;z-index:1}
+  .hero h1 em{font-style:normal;color:var(--rose)}
+  .hero p.desc{font-size:15px;color:#6E675C;max-width:660px;position:relative;z-index:1}
+  .hero .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;position:relative;z-index:1}
+  .hero .chip{font-size:12.5px;font-weight:600;color:#5E584D;background:rgba(255,255,255,.65);border:1px solid var(--line);padding:6px 14px;border-radius:99px}
+
+  /* 板块标题 */
+  .section{margin-top:14px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin:40px 0 20px;flex-wrap:wrap;scroll-margin-top:80px}
+  .sec-head .num{font-size:13px;font-weight:800;color:#fff;background:var(--ac,#7E8F76);padding:4px 13px;border-radius:8px;letter-spacing:.05em}
+  .sec-head h2{font-size:26px;font-weight:900;letter-spacing:.01em}
+  .sec-head .en{font-size:13px;color:var(--muted);font-weight:600}
+  .sec-head .hint{width:100%;font-size:13.5px;color:var(--muted);margin-top:2px;line-height:1.6}
+
+  /* 考点卡片 */
+  .kp{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;
+    margin-top:16px;overflow:hidden;box-shadow:var(--shadow);scroll-margin-top:80px;
+  }
+  .kp .kp-head{
+    display:flex;align-items:center;gap:13px;padding:16px 20px 0;
+  }
+  .kp .kp-no{
+    width:38px;height:38px;flex:0 0 auto;border-radius:11px;color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;
+  }
+  .kp .kp-title{font-size:18px;font-weight:800}
+  .kp .kp-en{font-size:12px;color:var(--muted);font-weight:600}
+  .kp .kp-body{padding:14px 20px 20px}
+
+  .lead{font-size:14px;color:#5c564c;margin-bottom:12px;line-height:1.7}
+  .lead b{color:var(--ink)}
+
+  /* 网格卡片 */
+  .grid{display:grid;gap:12px;margin-top:10px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .mini{
+    background:#FBF8F3;border:1px solid var(--line-soft);border-radius:12px;
+    padding:13px 15px;
+  }
+  .mini h5{font-size:14.5px;font-weight:800;margin-bottom:6px;display:flex;align-items:center;gap:7px}
+  .mini h5::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--ac,#7E8F76);flex:0 0 auto}
+  .mini .eg{font-size:13.5px;color:#5c564c;line-height:1.75;word-break:break-word}
+  .mini .eg b{color:var(--ac,#7E8F76);font-weight:800}
+  .mini .cn{font-size:12.5px;color:var(--muted)}
+
+  /* 表格 */
+  .tbl-wrap{overflow-x:auto;margin-top:12px}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{padding:10px 13px;text-align:left;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  th{font-size:12.5px;letter-spacing:.05em;color:var(--muted);background:#F6F2EA;font-weight:700;white-space:nowrap}
+  td .en{font-weight:700}
+  td .cn{color:var(--muted);font-size:13px}
+  td b{color:var(--ac,#7E8F76);font-weight:800}
+
+  /* 例句 */
+  .ex{
+    background:#F6F2EA;border:1px dashed var(--line);border-radius:12px;
+    padding:12px 16px;margin-top:10px;
+  }
+  .ex .ex-row{display:flex;gap:10px;padding:6px 0;border-bottom:1px dashed var(--line-soft);align-items:baseline}
+  .ex .ex-row:last-child{border-bottom:none}
+  .ex .en{font-size:14px;font-weight:600;line-height:1.55;flex:1}
+  .ex .en b{color:var(--ac,#7E8F76);font-weight:800}
+  .ex .zh{font-size:12.5px;color:var(--muted);flex:0 0 auto}
+
+  /* 强调框 */
+  .note,.tip,.warn{
+    display:flex;gap:10px;align-items:flex-start;border-radius:12px;
+    padding:13px 16px;margin-top:14px;font-size:14px;line-height:1.6;
+  }
+  .note{background:#F3EEE2;border:1px solid #D9CBAC;border-left:4px solid var(--gold);color:#5c4f2f}
+  .note b{color:#6F5D33}
+  .tip{background:#EEF1EA;border:1px solid #CDD7C6;border-left:4px solid var(--brand-deep);color:#3F4A3C}
+  .tip b{color:#3F4A3C}
+  .warn{background:#F2E8E3;border:1px solid #E0C4B9;border-left:4px solid #B0725E;color:#7A4232}
+  .warn b{color:#8A4A39}
+  .ico{font-size:17px;line-height:1.4;flex:0 0 auto}
+
+  /* 口诀横幅 */
+  .motto{
+    margin-top:16px;text-align:center;font-size:19px;font-weight:800;color:#fff;
+    background:linear-gradient(135deg,var(--ac,#7E8F76),var(--ac-2,#8FA6B0));
+    border-radius:14px;padding:17px 20px;letter-spacing:.01em;
+  }
+  .motto span{color:#FFF4D6}
+
+  /* 短语列表 */
+  .ph-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;font-size:13.5px;line-height:1.6}
+  .ph{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px dashed var(--line-soft)}
+  .ph .en{font-weight:700;color:var(--ac,#7E8F76);white-space:nowrap}
+  .ph .cn{color:var(--muted)}
+
+  /* 练习题 */
+  .q{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-top:10px}
+  .q .qtxt{font-size:14.5px;line-height:1.6;color:#4c463c}
+  .q .qtxt b{color:var(--ink)}
+  .q .opts{font-size:13.5px;color:#6b655a;margin-top:5px;line-height:1.8}
+  .q .opts span{margin-right:13px;white-space:nowrap}
+  .reveal{margin-top:8px;background:#FBF8F3;border:1px solid var(--line-soft);border-radius:10px;overflow:hidden}
+  .reveal summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:7px 13px;font-size:12.5px;font-weight:700;color:var(--ac,#7E8F76);user-select:none}
+  .reveal summary::-webkit-details-marker{display:none}
+  .reveal summary .caret{display:inline-block;transition:transform .2s;font-size:11px}
+  .reveal[open] summary .caret{transform:rotate(90deg)}
+  .reveal .ans{padding:9px 13px 11px;border-top:1px dashed var(--line-soft);font-size:13.5px}
+  .reveal .ans .en{font-weight:800;color:var(--ac,#7E8F76);line-height:1.6}
+  .reveal .ans .mark{margin-top:3px;font-size:12.5px;color:#7a7468;line-height:1.55}
+  .reveal .ans .mark b{color:#6F5D33}
+
+  .practice-head{
+    display:flex;align-items:center;gap:10px;margin:26px 0 4px;
+    padding:14px 18px;border-radius:14px;
+    background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);scroll-margin-top:80px;
+  }
+  .practice-head .badge{font-size:13px;font-weight:800;color:#fff;background:#B0725E;padding:4px 13px;border-radius:8px}
+  .practice-head h3{font-size:18px;font-weight:800}
+  .practice-head .sub{font-size:12.5px;color:var(--muted);margin-left:auto}
+
+  .footer{text-align:center;color:var(--muted);font-size:12.5px;margin-top:48px;padding-top:22px;border-top:1px solid var(--line);line-height:1.8}
+
+  @media (max-width:720px){
+    .hero{padding:32px 24px}
+    .hero h1{font-size:27px}
+    .sec-head h2{font-size:22px}
+    .g2,.g3,.g4,.ph-grid{grid-template-columns:1fr}
+    .ex .ex-row{flex-direction:column;gap:2px}
+    .ex .zh{flex:1}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="目录"><span></span><span></span><span></span></button>
+  <div class="titles">
+    <h1>形容词 · 副词 · 名词 · 动词</h1>
+    <div class="sub">高考英语语法 · 词类四讲</div>
+  </div>
+  <div class="badge">4 大词类 · 26 考点 · 专项练习</div>
+</div>
+
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer">
+  <div class="d-head">
+    <div class="dot">目</div>
+    <div><h2>目录</h2><p>形容词 · 副词 · 名词 · 动词</p></div>
+  </div>
+  <nav id="tocNav"></nav>
+</aside>
+
+<main>
+
+  <!-- 封面 -->
+  <section class="hero" id="top">
+    <div class="kicker">Grammar · Four Word Classes</div>
+    <h1>形容词 · 副词 · <em>名词 · 动词</em></h1>
+    <p class="desc">四大词类是英语句子的“砖瓦”。本课件按教材第 6–9 节顺序，逐考点讲清用法、辨析易错，配即学即练，夯实词类基础。</p>
+    <div class="meta">
+      <span class="chip">📗 形容词 · 11 考点</span>
+      <span class="chip">💧 副词 · 2 考点</span>
+      <span class="chip">📦 名词 · 4 考点</span>
+      <span class="chip">⚡ 动词 · 9 考点</span>
+      <span class="chip">✏️ 每节配专项练习</span>
+    </div>
+  </section>
+
+  <!-- ============ 第6节 形容词 ============ -->
+  <section class="section" id="sec-adj" style="--ac:#7E8F76;--ac-2:#8FA6B0">
+    <div class="sec-head">
+      <span class="num" style="--ac:#7E8F76">第 6 节</span>
+      <h2>形容词</h2>
+      <span class="en">The Adjective</span>
+      <div class="hint">形容词主要用来描写、修饰名词或代词，表示人或事物的性质、特征或属性，常用作定语，也可作表语或补语。</div>
+    </div>
+
+    <!-- 考点1 结构分类 -->
+    <div class="kp" id="adj-1">
+      <div class="kp-head"><div class="kp-no" style="background:#7E8F76">1</div><div><div class="kp-title">按结构分类</div><div class="kp-en">Simple &amp; Compound Adjectives</div></div></div>
+      <div class="kp-body">
+        <p class="lead">形容词分<b>简单形容词</b>（单个词，如 kind 善良的、green 绿色的、interesting 有趣的）与<b>复合形容词</b>（两个以上词，常以连字符连接）两大类。</p>
+        <table>
+          <thead><tr><th style="width:26%">构成方式</th><th>例词</th></tr></thead>
+          <tbody>
+            <tr><td class="en">数词 + 名词 + 形容词</td><td><span class="en">ten-meter-wide</span> 十米宽的 · <span class="en">five-year-old</span> 五岁的</td></tr>
+            <tr><td class="en">形容词/数词 + 名词 + -ed</td><td><span class="en">middle-aged</span> 中年的 · <span class="en">three-legged</span> 三条腿的 · <span class="en">fifteen-storyed</span> 十五层的</td></tr>
+            <tr><td class="en">形容词 + V-ing</td><td><span class="en">good-looking</span> 好看的 · <span class="en">easy-going</span> 随和的</td></tr>
+            <tr><td class="en">名词 + V-ed</td><td><span class="en">man-made</span> 人造的 · <span class="en">snow-covered</span> 白雪覆盖的</td></tr>
+            <tr><td class="en">副词 + 形容词 + V-ed</td><td><span class="en">well-known</span> 著名的 · <span class="en">new-born</span> 新生的</td></tr>
+            <tr><td class="en">其他</td><td><span class="en">sea-sick</span> 晕船的 · <span class="en">home-sick</span> 想家的 · <span class="en">life-long</span> 终身的 · <span class="en">snow-white</span> 雪白的 · <span class="en">ever-green</span> 常青的 · <span class="en">first-rate</span> 一流的</td></tr>
+          </tbody>
+        </table>
+        <div class="tip"><span class="ico">💡</span><div>复合形容词主要作<b>定语</b>，其中的<b>名词用单数</b>（a <b>five-year-old</b> girl，不说 five-years-old）。</div></div>
+      </div>
+    </div>
+
+    <!-- 考点2 功能及位置 -->
+    <div class="kp" id="adj-2">
+      <div class="kp-head"><div class="kp-no" style="background:#7E8F76">2</div><div><div class="kp-title">功能及其位置</div><div class="kp-en">Functions &amp; Positions</div></div></div>
+      <div class="kp-body">
+        <div class="grid g2">
+          <div class="mini"><h5>作定语 / 表语</h5><div class="eg">a <b>beautiful</b> girl（定语）<br>She is <b>beautiful</b>.（表语，位于连系动词后）</div></div>
+          <div class="mini"><h5>作状语（原因 / 伴随）</h5><div class="eg"><b>Curious</b>, the children went into the cave. 出于好奇，孩子们进了山洞。<br><b>Most important</b>, all the equipment is homemade. 最重要的是，设备都是国产的。</div></div>
+          <div class="mini"><h5>作补语（主补 / 宾补 / 结果）</h5><div class="eg">The news made her very <b>sad</b>.（宾补）<br>The farmer sold the oranges <b>green</b>.（宾补）<br>The father beat the boy <b>black and blue</b>.（结果）</div></div>
+          <div class="mini"><h5>作主语 / 感叹词</h5><div class="eg"><b>Rich and poor</b> were sitting together. 富人和穷人坐在一起。<br><b>Old and young</b> joined in the discussion. 老老少少都参加了讨论。<br><b>Very good!</b> 很好！ <b>Stupid!</b> 愚蠢！</div></div>
+        </div>
+        <div class="note"><span class="ico">🔑</span><div>形容词作<b>主语</b>往往<b>成对使用</b>，具有名词化特点，指“一类人”（Rich and poor = 富人穷人）。</div></div>
+      </div>
+    </div>
+
+    <!-- 考点3 前置后置 -->
+    <div class="kp" id="adj-3">
+      <div class="kp-head"><div class="kp-no" style="background:#7E8F76">3</div><div><div class="kp-title">定语形容词的前置与后置</div><div class="kp-en">Attributive Position</div></div></div>
+      <div class="kp-body">
+        <p class="lead">形容词作定语一般<b>单词前置、短语后置</b>；但修饰<b>复合不定代词</b>（something / anything / nothing / someone / anyone / somewhere / anywhere 等）时必须<b>后置</b>。</p>
+        <div class="ex">
+          <div class="ex-row"><div class="en">I don't find <b>anything interesting</b> in today's newspaper.</div><div class="zh">今天的报纸没什么有趣的内容。</div></div>
+          <div class="ex-row"><div class="en"><b>Someone careful and dutiful</b> is needed to take over the company.</div><div class="zh">需要一位细心、负责的人来接管公司。</div></div>
+          <div class="ex-row"><div class="en">We want to find <b>somewhere quiet and beautiful</b> to live.</div><div class="zh">想找个安静美丽的地方定居。</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 考点4 常作表语 -->
+    <div class="kp" id="adj-4">
+      <div class="kp-head"><div class="kp-no" style="background:#7E8F76">4</div><div><div class="kp-title">常作表语的形容词</div><div class="kp-en">Predicative-only Adjectives</div></div></div>
+      <div class="kp-body">
+        <p class="lead">下列形容词<b>常作表语</b>：afraid, alive, alone, ashamed, asleep, awake, aware, conscious, fond, unable, well。以 <b>a-</b> 开头的形容词如有状语修饰，可作<b>前置定语</b>。</p>
+        <div class="ex">
+          <div class="ex-row"><div class="en">The man was still <b>alive</b> after being trapped for 4 days.</div><div class="zh">被困四天后那人仍活着。</div></div>
+          <div class="ex-row"><div class="en">The <b>half-asleep</b> man will wake at any little sound.</div><div class="zh">半睡半醒的人会被一点声音吵醒。</div></div>
+          <div class="ex-row"><div class="en">She is a very <b>ashamed</b> girl.</div><div class="zh">她是个很害羞的女孩。</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 考点5 顺序 -->
+    <div class="kp" id="adj-5">
+      <div class="kp-head"><div class="kp-no" style="background:#7E8F76">5</div><div><div class="kp-title">形容词的顺序</div><div class="kp-en">Word Order</div></div></div>
+      <div class="kp-body">
+        <p class="lead">多个不同种类的形容词修饰同一名词时，按下列顺序排列：</p>
+        <div class="motto">限 <span>·</span> 描 <span>·</span> 大 <span>·</span> 形 <span>·</span> 龄 <span>·</span> 颜 <span>·</span> 籍 <span>·</span> 物 <span>·</span> 类 <span>·</span> 名词</div>
+        <table style="margin-top:14px">
+          <thead><tr><th>类别</th><th>含义</th><th>例词</th></tr></thead>
+          <tbody>
+            <tr><td class="en">限</td><td class="cn">限定词</td><td>the, my, three, this</td></tr>
+            <tr><td class="en">描</td><td class="cn">描绘性</td><td>brave, beautiful, lovely, nice</td></tr>
+            <tr><td class="en">大</td><td class="cn">大小高低长短</td><td>big, large, small, short</td></tr>
+            <tr><td class="en">形</td><td class="cn">形状</td><td>round, square</td></tr>
+            <tr><td class="en">龄</td><td class="cn">年龄 / 新旧 / 年代</td><td>young, old, new</td></tr>
+            <tr><td class="en">颜</td><td class="cn">颜色</td><td>red, blue, green</td></tr>
+            <tr><td class="en">籍</td><td class="cn">国籍 / 地区 / 出处</td><td>Chinese, American, Japanese</td></tr>
+            <tr><td class="en">物</td><td class="cn">物质材料</td><td>golden, wooden, woolen</td></tr>
+            <tr><td class="en">类</td><td class="cn">类别 / 用途</td><td>medical, chemical, writing</td></tr>
+          </tbody>
+        </table>
+        <div class="ex">
+          <div class="ex-row"><div class="en">a <b>pretty little square old black Japanese wooden writing</b> desk</div><div class="zh">一张漂亮的日式黑色方形旧木小写字桌</div></div>
+          <div class="ex-row"><div class="en">a <b>beautiful short new red Chinese woolen</b> coat</div><div class="zh">一件漂亮的红色中式短款新羊毛外套</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 考点6 主动被动 -->
+    <div class="kp" id="adj-6">
+      <div class="kp-head"><div class="kp-no" style="background:#7E8F76">6</div><div><div class="kp-title">主动意义与被动意义的形容词</div><div class="kp-en">Active vs Passive</div></div></div>
+      <div class="kp-body">
+        <div class="grid g2">
+          <div class="mini"><h5>-ing 主动 / -ed 被动</h5><div class="eg">a <b>promising</b> young man 有前途的青年<br>the <b>reserved</b> tickets 预定的票</div></div>
+          <div class="mini"><h5>后缀提示</h5><div class="eg">主动：-ful / -ive / -ous / -ant<br><b>respectful</b> 尊敬的 · <b>pleasant</b> 讨喜的<br>被动：-ible / -able / -worthy<br><b>soluble</b> 可溶的 · <b>trustworthy</b> 可信的</div></div>
+        </div>
+        <div class="tip"><span class="ico">💡</span><div>少数形容词主动、被动两可，要<b>看语境</b>：He was <b>sensible of</b> the danger. 他察觉到危险（主动）；Her worry was <b>sensible</b> from her face. 担忧形于色（被动）。</div></div>
+      </div>
+    </div>
+
+    <!-- 考点7 最高级多种表示 -->
+    <div class="kp" id="adj-7">
+      <div class="kp-head"><div class="kp-no" style="background:#7E8F76">7</div><div><div class="kp-title">最高级的多种表示</div><div class="kp-en">Ways to Express Superlative</div></div></div>
+      <div class="kp-body">
+        <table>
+          <thead><tr><th style="width:38%">结构</th><th>例句</th></tr></thead>
+          <tbody>
+            <tr><td class="en">never + such/so + 原级 + 名词</td><td>I have never seen <b>such a glorious</b> sunrise. 从没见过这么壮观的日出。</td></tr>
+            <tr><td class="en">as + 原级 + as ever</td><td>He is <b>as great a philosopher as ever</b> breathed. 有史以来最伟大的哲学家之一。</td></tr>
+            <tr><td class="en">否定词 + 比较级</td><td>I have <b>not seen better</b> this year. 今年没见过比这更好的。</td></tr>
+            <tr><td class="en">比较级 + than any other + 名词</td><td>He is <b>cleverer than any other</b> student in the class.</td></tr>
+            <tr><td class="en">否定词 + so/as + 原级 + as</td><td>No experience is <b>so valuable as</b> that gained with one's own sweat.</td></tr>
+            <tr><td class="en">more + adj + than + the + 名词</td><td>He is <b>more Russian than the Russian</b>. 地地道道的俄罗斯人。</td></tr>
+            <tr><td class="en">单数名词 + of + 名词复数</td><td>Confucius is <b>the teacher of teachers</b>. 万师之表。</td></tr>
+            <tr><td class="en">more than 等强调结构</td><td>She is <b>more than</b> pretty. 她十分漂亮。 He is <b>all courage itself</b>. 浑身是胆。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 考点8 修饰语 -->
+    <div class="kp" id="adj-8">
+      <div class="kp-head"><div class="kp-no" style="background:#7E8F76">8</div><div><div class="kp-title">比较级和最高级的修饰语</div><div class="kp-en">Modifiers</div></div></div>
+      <div class="kp-body">
+        <div class="grid g3">
+          <div class="mini"><h5>as…as 结构前</h5><div class="eg">just, almost / nearly, not half, twice / four times, hundredfold, exactly, not quite, nowhere near, nothing like<br>— Louise is <b>nearly</b> as tall as her mother.</div></div>
+          <div class="mini"><h5>比较级前</h5><div class="eg">a bit, a head / an inch, somewhat, no / not any, <b>far / much / a lot</b>, hardly any, even / still / rather, any, three times, nothing<br>— This book is <b>a great deal</b> more interesting.</div></div>
+          <div class="mini"><h5>最高级前后</h5><div class="eg">前：by no means, nothing like, nearly, almost, quite, really, far, much<br>后：ever, yet（the biggest field <b>yet</b> discovered）<br>中：second, third, next（the <b>third</b> longest）</div></div>
+        </div>
+        <div class="warn"><span class="ico">⚠️</span><div>注意 <b>very</b> 只能修饰<b>原级</b>；修饰比较级用 <b>much / far / even / still / a lot</b>，不能用 very（✗ very more beautiful）。</div></div>
+      </div>
+    </div>
+
+    <!-- 考点9 前置后置含义不同 -->
+    <div class="kp" id="adj-9">
+      <div class="kp-head"><div class="kp-no" style="background:#7E8F76">9</div><div><div class="kp-title">可前置也可后置、含义不同的形容词</div><div class="kp-en">Different Meanings</div></div></div>
+      <div class="kp-body">
+        <table>
+          <thead><tr><th style="width:16%">形容词</th><th>前置（意义）</th><th>后置（意义）</th></tr></thead>
+          <tbody>
+            <tr><td class="en">adopted</td><td>收养的：an adopted son 养子</td><td>被采纳的：the proposal adopted</td></tr>
+            <tr><td class="en">concerned</td><td>挂念的：a concerned look</td><td>有关的：all the countries concerned</td></tr>
+            <tr><td class="en">due</td><td>应得的：due punishment</td><td>应付的：the rent due 到期房租</td></tr>
+            <tr><td class="en">involved</td><td>复杂的：a fairly involved operation</td><td>有关的：all the people involved</td></tr>
+            <tr><td class="en">known</td><td>有名的：a best-known book</td><td>已知的：a writer known to us all</td></tr>
+            <tr><td class="en">present</td><td>目前的：the present situation</td><td>在场的：the only person present</td></tr>
+            <tr><td class="en">responsible</td><td>有责任心的：a responsible man</td><td>应负责的：the man responsible 负责人</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 考点10 比较级短语 -->
+    <div class="kp" id="adj-10">
+      <div class="kp-head"><div class="kp-no" style="background:#7E8F76">10</div><div><div class="kp-title">由比较级构成的短语</div><div class="kp-en">Comparative Phrases</div></div></div>
+      <div class="kp-body">
+        <div class="ph-grid">
+          <div class="ph"><span class="en">none the better</span><span class="cn">依然如故，不见好转</span></div>
+          <div class="ph"><span class="en">none the worse</span><span class="cn">一点也不差</span></div>
+          <div class="ph"><span class="en">for the better</span><span class="cn">好转，向好发展</span></div>
+          <div class="ph"><span class="en">for the worse</span><span class="cn">变坏，恶化</span></div>
+          <div class="ph"><span class="en">none the less</span><span class="cn">依然（= nonetheless）</span></div>
+          <div class="ph"><span class="en">all the better</span><span class="cn">反而更好</span></div>
+          <div class="ph"><span class="en">for better or (for) worse</span><span class="cn">不管好坏</span></div>
+          <div class="ph"><span class="en">so much the better</span><span class="cn">那就更好了</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 考点11 最高级短语 -->
+    <div class="kp" id="adj-11">
+      <div class="kp-head"><div class="kp-no" style="background:#7E8F76">11</div><div><div class="kp-title">由最高级构成的状语短语</div><div class="kp-en">Superlative Phrases</div></div></div>
+      <div class="kp-body">
+        <div class="ph-grid">
+          <div class="ph"><span class="en">at best</span><span class="cn">至多，充其量</span></div>
+          <div class="ph"><span class="en">at (the) worst</span><span class="cn">往最坏处说</span></div>
+          <div class="ph"><span class="en">at the earliest / latest</span><span class="cn">最早 / 最迟</span></div>
+          <div class="ph"><span class="en">at most / at least</span><span class="cn">最多 / 至少</span></div>
+          <div class="ph"><span class="en">at the lowest</span><span class="cn">最低（价）</span></div>
+          <div class="ph"><span class="en">least of all</span><span class="cn">最不，尤其不</span></div>
+          <div class="ph"><span class="en">to the best of one's ability</span><span class="cn">尽最大能力</span></div>
+          <div class="ph"><span class="en">to the best of my knowledge</span><span class="cn">据我所知</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 形容词专项练习 -->
+    <div class="practice-head" id="adj-prac"><span class="badge">专项练习</span><h3>形容词 · 即学即练</h3><span class="sub">单项选择 · 点击展开答案</span></div>
+    <div class="q"><div class="qtxt"><b>1.</b> There are ___ students in the small classroom, which makes it very crowded.</div>
+      <div class="opts"><span>A. so many</span><span>B. such many</span><span>C. so much</span><span>D. such a many</span></div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A</div><div class="mark">“如此多”修饰可数名词复数用 <b>so many</b>；such 后接名词但“many/much/few/little”前用 so。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>2.</b> — How about Jim? — He came home ___ and sound.</div>
+      <div class="opts"><span>A. safe</span><span>B. safely</span><span>C. safety</span><span>D. safeness</span></div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A</div><div class="mark">固定搭配 <b>safe and sound</b>（安然无恙），此处 safe 是主语补足语。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>3.</b> I couldn't find ___ coat large enough for me in this shop.</div>
+      <div class="opts"><span>A. a</span><span>B. an</span><span>C. the</span><span>D. /</span></div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A</div><div class="mark">泛指“一件够大的外套”，用 <b>a coat large enough</b>（形容词短语后置）。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>4.</b> This broadcast comes to you ___ from the stadium.</div>
+      <div class="opts"><span>A. alive</span><span>B. lively</span><span>C. live</span><span>D. living</span></div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">C</div><div class="mark"><b>live</b> 作副词/形容词表“直播地/现场的”；alive“活着的”、lively“活泼的”、living“活着的”。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>5.</b> — Anne is quite unfriendly. — I think she is ___ than unfriendly.</div>
+      <div class="opts"><span>A. shyer</span><span>B. shier</span><span>C. more shy</span><span>D. rather shy</span></div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">C</div><div class="mark">“与其说不友好，不如说害羞”用 <b>more shy than</b>（more A than B = 与其说 B 不如说 A）。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>6.</b> ___ more than 200 houses are heated by solar energy in the small town.</div>
+      <div class="opts"><span>A. In the small alone town</span><span>B. In the small town alone</span><span>C. Alone in the small town</span><span>D. In the alone small town</span></div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B</div><div class="mark"><b>alone</b> 作“仅仅”解要<b>后置</b>：in the small town <b>alone</b>（仅这个小镇）。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>7.</b> Our ___ English short lessons were not difficult at all.</div>
+      <div class="opts"><span>A. first few</span><span>B. few first</span><span>C. the first few</span><span>D. few the first</span></div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A</div><div class="mark">顺序为 <b>序数词（first）+ 数量词（few）</b>：our first few English short lessons。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>8.</b> The house smells as if it hasn't been lived in for years: a ___ house.</div>
+      <div class="opts"><span>A. little white wooden</span><span>B. little wooden white</span><span>C. white wooden little</span><span>D. wooden white little</span></div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A</div><div class="mark">顺序口诀“描大形龄颜籍物类”：<b>little（大小）+ white（颜色）+ wooden（材料）</b>。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>9.</b> He is ___ the cleverest boy in the school.</div>
+      <div class="opts"><span>A. far</span><span>B. by far</span><span>C. far the</span><span>D. by far the</span></div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">D</div><div class="mark"><b>by far</b> 修饰最高级要置于 the 前：<b>by far the</b> cleverest（最最聪明的）。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>10.</b> I don't think this film is by far the most boring — I have seen ___ one.</div>
+      <div class="opts"><span>A. a better</span><span>B. a worse</span><span>C. the best</span><span>D. the worst</span></div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B</div><div class="mark">“我看过更无聊的”→ 比较级 <b>a worse</b> one（此处表“一部更差的”）。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>11.</b> It is ___ easier to make a plan than to carry it out.</div>
+      <div class="opts"><span>A. much</span><span>B. very</span><span>C. too</span><span>D. quite</span></div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A</div><div class="mark">修饰比较级用 <b>much / far / even / still</b>，不能用 very。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>12.</b> — Is your headache getting ___? — No, it's worse.</div>
+      <div class="opts"><span>A. better</span><span>B. bad</span><span>C. less</span><span>D. well</span></div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A</div><div class="mark">“好转”= get <b>better</b>；下句答“更糟了”呼应，正用比较级。</div></div></details>
+    </div>
+  </section>
+
+  <!-- ============ 第7节 副词 ============ -->
+  <section class="section" id="sec-adv" style="--ac:#6F8A99;--ac-2:#8FA6B0">
+    <div class="sec-head">
+      <span class="num" style="--ac:#6F8A99">第 7 节</span>
+      <h2>副词</h2>
+      <span class="en">The Adverb</span>
+      <div class="hint">副词以其独特功能丰富语言表达力与灵活性，主要修饰动词、形容词、副词，也可修饰整个句子。</div>
+    </div>
+
+    <div class="kp" id="adv-1">
+      <div class="kp-head"><div class="kp-no" style="background:#6F8A99">1</div><div><div class="kp-title">副词的功能</div><div class="kp-en">Functions</div></div></div>
+      <div class="kp-body">
+        <div class="grid g2">
+          <div class="mini"><h5>修饰动词 / 形容词 / 副词</h5><div class="eg">He dances <b>happily</b>. 他快乐地跳舞。<br>an <b>extremely</b> hot day 极其炎热的一天<br>She runs <b>really</b> quickly. 她跑得真快。</div></div>
+          <div class="mini"><h5>调整语气</h5><div class="eg"><b>Unfortunately</b>, I can't attend the party. 很遗憾，我不能参加。<br><b>Certainly</b>, I will help you. 当然，我会帮你。</div></div>
+          <div class="mini"><h5>连接句子 / 表达态度</h5><div class="eg"><b>However</b>, he still kept trying. 然而他仍在坚持。<br>He <b>elegantly</b> solved the problem. 他优雅地解决了问题（表赞赏）。</div></div>
+          <div class="mini"><h5>位置灵活</h5><div class="eg"><b>Sometimes</b> I go to visit my parents. 有时我去看父母。<br>I <b>sometimes</b> go to visit my parents. 我有时去看父母。</div></div>
+        </div>
+        <div class="tip"><span class="ico">💡</span><div>副词位置不同，语气与强调也不同：<b>句首</b>更强调整体时间/态度，<b>句中</b>语气相对较弱。</div></div>
+      </div>
+    </div>
+
+    <div class="kp" id="adv-2">
+      <div class="kp-head"><div class="kp-no" style="background:#6F8A99">2</div><div><div class="kp-title">副词充当的语法成分</div><div class="kp-en">Grammatical Roles</div></div></div>
+      <div class="kp-body">
+        <div class="grid g2">
+          <div class="mini"><h5>作状语</h5><div class="eg">修饰动词、形容词、副词、介词短语、数词、连词乃至全句：The book will come out <b>soon</b>. / <b>Frankly</b>, I don't agree with you.</div></div>
+          <div class="mini"><h5>作表语</h5><div class="eg">位置副词（above, inside, upstairs）或方向副词（up, down, in, out, on, off）：Time is <b>up</b>. 时间到了。/ One of the tyres is <b>down</b>. 一个轮胎没气了。</div></div>
+          <div class="mini"><h5>作定语</h5><div class="eg">多<b>后置</b>：The buildings <b>around</b> are of modern style. / my first day <b>off</b> 休假第一天<br>也可<b>前置</b>：the <b>up</b> train 北上的列车 / <b>rather</b> a fool</div></div>
+          <div class="mini"><h5>作介词宾语 / 宾补 / 主语</h5><div class="eg">I did not know her until quite <b>recently</b>.（介词宾语）<br>Please ask her <b>in</b>.（宾补）<br><b>Carefully</b> does it. 小心就行。（主语）</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="practice-head" id="adv-prac"><span class="badge">专项练习</span><h3>副词 · 即学即练</h3><span class="sub">单项选择 · 点击展开答案</span></div>
+    <div class="q"><div class="qtxt"><b>1.</b> When did you ___ go to the cinema?</div>
+      <div class="opts"><span>A. last</span><span>B. lastly</span><span>C. at last</span><span>D. latest</span></div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A</div><div class="mark"><b>last</b> 作副词“上一次”；lastly“最后（列举）”；at last“终于”。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>2.</b> He is ___ interested in English. He often works ___ into the night.</div>
+      <div class="opts"><span>A. deep; deep</span><span>B. deeply; deep</span><span>C. deep; deeply</span><span>D. deeply; deeply</span></div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B</div><div class="mark">抽象意义用 <b>deeply</b>（深深地）；具体意义用 <b>deep</b>（深入地）：work deep into the night 熬夜。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>3.</b> Ba Jin is certainly one of the Chinese writers who are ___ read.</div>
+      <div class="opts"><span>A. most widely</span><span>B. widely most</span><span>C. read most widely</span><span>D. most read widely</span></div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A</div><div class="mark">“被最广泛地阅读”= <b>most widely</b> read（副词修饰过去分词）。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>4.</b> He knows little of maths, and ___ of chemistry.</div>
+      <div class="opts"><span>A. still less</span><span>B. even more</span><span>C. still least</span><span>D. no less</span></div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A</div><div class="mark">“更少”= <b>still less</b>；little 后递进用比较级 less。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>5.</b> However, he would ___ have paid ___ for it.</div>
+      <div class="opts"><span>A. gladly; twice as much</span><span>B. glad; twice much</span><span>C. gladly; as much twice</span><span>D. glad; as twice much</span></div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A</div><div class="mark">“两倍那么多”= <b>twice as much</b>；副词 <b>gladly</b> 修饰动词。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>6.</b> Though I tried hard, I couldn't sing ___ he did.</div>
+      <div class="opts"><span>A. half as well as</span><span>B. as half well as</span><span>C. half as good as</span><span>D. as half good as</span></div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A</div><div class="mark">修饰动词 sing 用副词 well：<b>half as well as</b>（及他一半好）。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>7.</b> Could you hold the light ___ to it?</div>
+      <div class="opts"><span>A. a little closer</span><span>B. a little close</span><span>C. closer a little</span><span>D. close a little</span></div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A</div><div class="mark">“再靠近一点”= <b>a little closer</b>（a little 修饰比较级）。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>8.</b> He moved away from his parents, and missed them ___ enjoy the exciting life in New York.</div>
+      <div class="opts"><span>A. too much to</span><span>B. enough to</span><span>C. very much to</span><span>D. much so as to</span></div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A</div><div class="mark"><b>too…to…</b> 结构：太想念父母而无法享受纽约的精彩生活。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>9.</b> Those young students were ___ tired, because they had been working for eight hours.</div>
+      <div class="opts"><span>A. not a bit</span><span>B. hardly</span><span>C. not a little</span><span>D. nearly</span></div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">C</div><div class="mark">工作八小时“非常累”用 <b>not a little</b>（= very）；not a bit = 一点也不。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>10.</b> When hearing the news, the mother was ___ than angry.</div>
+      <div class="opts"><span>A. sorry</span><span>B. very sorry</span><span>C. more sorry</span><span>D. rather sorry</span></div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">C</div><div class="mark"><b>more sorry than angry</b> = 与其说生气，不如说难过。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>11.</b> The population of many Alaskan cities has ___ doubled in the past three years.</div>
+      <div class="opts"><span>A. larger than</span><span>B. as great as</span><span>C. as many as</span><span>D. more than</span></div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">D</div><div class="mark"><b>more than</b> doubled = 不止翻了一番（more than + 动词表程度）。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>12.</b> ___ students enough to take this adventure course will learn a lot.</div>
+      <div class="opts"><span>A. Brave enough students</span><span>B. Enough brave students</span><span>C. Students brave enough</span><span>D. Students enough brave</span></div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">C</div><div class="mark"><b>enough</b> 修饰形容词须后置：students <b>brave enough</b>（足够勇敢的学生）。</div></div></details>
+    </div>
+  </section>
+
+  <!-- ============ 第8节 名词 ============ -->
+  <section class="section" id="sec-noun" style="--ac:#B0857C;--ac-2:#C4A79E">
+    <div class="sec-head">
+      <span class="num" style="--ac:#B0857C">第 8 节</span>
+      <h2>名词</h2>
+      <span class="en">The Noun</span>
+      <div class="hint">名词表示人、事物、地点或抽象概念。分清“可数 / 不可数”与“单数 / 复数”，是名词用法的关键。</div>
+    </div>
+
+    <div class="kp" id="noun-1">
+      <div class="kp-head"><div class="kp-no" style="background:#B0857C">1</div><div><div class="kp-title">名词的分类</div><div class="kp-en">Classification</div></div></div>
+      <div class="kp-body">
+        <div class="grid g2">
+          <div class="mini"><h5>专有名词 / 普通名词</h5><div class="eg"><b>专有名词</b>：the Great Wall；姓氏复数表一家：the Greens 格林一家。<br><b>普通名词</b>：个体（car, room）· 集体（family, army, government, group）· 物质（fire, steel, air, water, milk）· 抽象（labor, health, life, friendship, patience）。</div></div>
+          <div class="mini"><h5>可数名词复数规则</h5><div class="eg">一般加 <b>s</b>；s/x/sh/ch 加 <b>es</b>；辅音+y → <b>ies</b>（city→cities）；<b>o</b> 结尾有生命加 es（heroes, potatoes, tomatoes）、无生命加 s（zoos, pianos, photos）；<b>f/fe→ves</b>（thief→thieves, wife→wives, life→lives, knife→knives）。</div></div>
+        </div>
+        <table style="margin-top:12px">
+          <thead><tr><th style="width:22%">不规则 / 特殊</th><th>例词</th></tr></thead>
+          <tbody>
+            <tr><td class="en">不规则变化</td><td>tooth→teeth · foot→feet · child→children · mouse→mice · man→men · woman→women</td></tr>
+            <tr><td class="en">单复数同形</td><td>Chinese · Japanese · Swiss · works（工厂）· fish · deer · sheep · means</td></tr>
+            <tr><td class="en">只有复数形式</td><td>people · cattle · police</td></tr>
+            <tr><td class="en">以 -s 结尾仍为单数</td><td>maths · politics · physics · news · the United States · the United Nations</td></tr>
+            <tr><td class="en">f/fe 例外</td><td>belief→beliefs · roof→roofs · gulf→gulfs · bamboo→bamboos</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="kp" id="noun-2">
+      <div class="kp-head"><div class="kp-no" style="background:#B0857C">2</div><div><div class="kp-title">名词的句法功能</div><div class="kp-en">Functions</div></div></div>
+      <div class="kp-body">
+        <div class="ex">
+          <div class="ex-row"><div class="en"><b>Recent studies</b> show that we are more productive if we take short breaks.</div><div class="zh">主语</div></div>
+          <div class="ex-row"><div class="en">She is determined to carry on with her <b>education</b>.</div><div class="zh">宾语</div></div>
+          <div class="ex-row"><div class="en">We named the new baby <b>John</b>.</div><div class="zh">补语</div></div>
+          <div class="ex-row"><div class="en"><b>We students</b> need to develop physically and mentally.</div><div class="zh">同位语</div></div>
+          <div class="ex-row"><div class="en">He bought a <b>diamond</b> necklace.</div><div class="zh">定语</div></div>
+        </div>
+        <div class="tip"><span class="ico">💡</span><div>名词作定语<b>一般用单数</b>（paper money, city life, office work）；少数用复数（<b>sports</b> meet, <b>goods</b> train, <b>customs</b> papers）。</div></div>
+      </div>
+    </div>
+
+    <div class="kp" id="noun-3">
+      <div class="kp-head"><div class="kp-no" style="background:#B0857C">3</div><div><div class="kp-title">单位词作修饰语</div><div class="kp-en">Partitives</div></div></div>
+      <div class="kp-body">
+        <div class="ph-grid">
+          <div class="ph"><span class="en">a piece of furniture / chalk / bread</span><span class="cn">一件家具 / 一支粉笔 / 一片面包</span></div>
+          <div class="ph"><span class="en">a fit of laughter</span><span class="cn">一阵笑声</span></div>
+          <div class="ph"><span class="en">a gust of wind</span><span class="cn">一阵风</span></div>
+          <div class="ph"><span class="en">a burst of anger</span><span class="cn">一阵怒火</span></div>
+          <div class="ph"><span class="en">a round of applause</span><span class="cn">一阵掌声</span></div>
+          <div class="ph"><span class="en">a bottle of beer / a glass of water</span><span class="cn">一瓶啤酒 / 一杯水</span></div>
+          <div class="ph"><span class="en">a cake of soap / a bar of chocolate</span><span class="cn">一块肥皂 / 一条巧克力</span></div>
+          <div class="ph"><span class="en">a crowd of children / a troop of soldiers</span><span class="cn">一群孩子 / 一队士兵</span></div>
+          <div class="ph"><span class="en">a fleet of ships / a school of fish</span><span class="cn">一支舰队 / 一群鱼</span></div>
+          <div class="ph"><span class="en">a loaf of bread / a drop of rain</span><span class="cn">一条面包 / 一滴雨水</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kp" id="noun-4">
+      <div class="kp-head"><div class="kp-no" style="background:#B0857C">4</div><div><div class="kp-title">不可数名词的几种用法</div><div class="kp-en">Uncountable Nouns</div></div></div>
+      <div class="kp-body">
+        <p class="lead">不可数名词一般<b>没有复数、不能用 a/an</b>，需借助量词（✗ informations → information）。但有以下特殊用法：</p>
+        <div class="grid g3">
+          <div class="mini"><h5>① 可数化（一份/一杯/一场）</h5><div class="eg"><b>a beer</b> 一瓶啤酒 · <b>a coffee</b> 一杯咖啡 · <b>a rain</b> 一场雨 · <b>a snow</b> 一场雪 · <b>a paper</b> 一张报纸 · <b>a fire</b> 一场大火 · <b>a time</b> 一个时代</div></div>
+          <div class="mini"><h5>② 物质名词复数表种类</h5><div class="eg">foods 各种食物 · wines 各种酒 · waters 水域 · glasses 眼镜 · woods 树林 · sands 沙丘 · fishes 各种鱼</div></div>
+          <div class="mini"><h5>③ 抽象名词可数化</h5><div class="eg"><b>a success</b> 一个成功的人/事 · <b>a surprise</b> 一件意外的事 · <b>a comfort</b> 一个安慰 · <b>an honor</b> 一种荣耀 · <b>a pity</b> 一件遗憾事</div></div>
+        </div>
+        <div class="ex">
+          <div class="ex-row"><div class="en">Mike is <b>a great honor</b> to my team.</div><div class="zh">迈克是我们队的骄傲。</div></div>
+          <div class="ex-row"><div class="en"><b>A John</b> is waiting for you outside. / We have <b>two Smiths</b> in our class.</div><div class="zh">专有名词也可数化：一个叫约翰的人 / 两个史密斯。</div></div>
+          <div class="ex-row"><div class="en">常以复数出现：<b>trousers, glasses, goods, manners, brains, troops, arms, ashes</b>；动词短语中：<b>take turns, shake hands, make friends, make preparations</b></div><div class="zh">复数形式表专门含义</div></div>
+          <div class="ex-row"><div class="en">basis→<b>bases</b> · analysis→<b>analyses</b> · crisis→<b>crises</b> · phenomenon→<b>phenomena</b> · medium→<b>media</b></div><div class="zh">不规则复数</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="practice-head" id="noun-prac"><span class="badge">专项练习</span><h3>名词 · 即学即练</h3><span class="sub">语法填空 / 改错 · 点击展开答案</span></div>
+    <div class="q"><div class="qtxt"><b>1.</b> The rolling sea of clouds will remind you how tiny we ___ (human) are.</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">humans</div><div class="mark">“人类”作泛指用复数 <b>humans</b>。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>2.</b> Chinese New Year is a ___ (celebrate) marking the end of winter.</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">celebration</div><div class="mark">a + 名词，celebrate 的名词形式 <b>celebration</b>（庆祝活动）。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>3.</b> Filled with ___ (curious), the artist packed his bags and left.</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">curiosity</div><div class="mark">介词 with 后接名词 <b>curiosity</b>（好奇心）。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>4.</b> She has turned down several ___ (invitation) to concentrate on her studies.</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">invitations</div><div class="mark">several + 可数名词复数 <b>invitations</b>。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>5.</b> Pandas are its top ___ (attract) for tourists like me.</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">attraction</div><div class="mark">top + 名词，attract 的名词形式 <b>attraction</b>（吸引力/景点）。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>6.</b> Recent ___ (study) show that exercise improves memory.</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">studies</div><div class="mark">主语为复数概念“研究”，辅音+y 变 <b>studies</b>。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>7.</b> He influenced the ___ (develop) of artificial intelligence.</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">development</div><div class="mark">the + 名词，develop 的名词形式 <b>development</b>。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>8.</b> This switch has decreased ___ (pollute) in the country's major lakes.</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">pollution</div><div class="mark">不可数名词 <b>pollution</b>（污染），无复数。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>9.</b> 改错：Many students say they will talk to their friend or classmates because they're of the same age.</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">friend → friends</div><div class="mark">与 classmates 并列，用复数 <b>friends</b>。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>10.</b> 改错：I always assist my parents in doing the dish after meals.</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">dish → dishes</div><div class="mark">“洗碗”= do the <b>dishes</b>（固定用复数）。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>11.</b> 改错：Next I broke the eggs into a bowl and beat them quickly with chopstick.</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">chopstick → chopsticks</div><div class="mark">筷子成对，用复数 <b>chopsticks</b>。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>12.</b> 改错：Mom taught me some basic step of baking.</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">step → steps</div><div class="mark">some + 可数名词复数 <b>steps</b>（步骤）。</div></div></details>
+    </div>
+  </section>
+
+  <!-- ============ 第9节 动词 ============ -->
+  <section class="section" id="sec-verb" style="--ac:#8F82A6;--ac-2:#B0A3C0">
+    <div class="sec-head">
+      <span class="num" style="--ac:#8F82A6">第 9 节</span>
+      <h2>动词</h2>
+      <span class="en">The Verb</span>
+      <div class="hint">根据意义和句法作用，英语动词分为行为动词、连系动词、助动词和情态动词；绝大部分动词有不定式、过去式、过去分词、现在分词四种形式。</div>
+    </div>
+
+    <div class="kp" id="verb-1">
+      <div class="kp-head"><div class="kp-no" style="background:#8F82A6">1</div><div><div class="kp-title">动词的五种句型结构</div><div class="kp-en">Five Sentence Patterns</div></div></div>
+      <div class="kp-body">
+        <table>
+          <thead><tr><th style="width:32%">结构</th><th>例句</th></tr></thead>
+          <tbody>
+            <tr><td class="en">主语 + 动词 (vi)</td><td>Birds <b>fly</b>. 鸟会飞。 The candle <b>flickered</b>. 烛光摇曳。</td></tr>
+            <tr><td class="en">主语 + 连系动词 + 表语</td><td>Her father <b>is</b> a professor. She <b>became</b> angry.</td></tr>
+            <tr><td class="en">主语 + 动词 (vt) + 宾语</td><td>Jane <b>likes</b> light music very much. He <b>decided</b> to give up smoking.</td></tr>
+            <tr><td class="en">主语 + 动词 + 间接宾语 + 直接宾语</td><td>Father <b>bought</b> me a new cap. He <b>wrote</b> her a long letter.</td></tr>
+            <tr><td class="en">主语 + 动词 + 宾语 + 补语</td><td>I <b>found</b> the book interesting. They <b>elected</b> him dean.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="kp" id="verb-2">
+      <div class="kp-head"><div class="kp-no" style="background:#8F82A6">2</div><div><div class="kp-title">动词 + 双宾语</div><div class="kp-en">Double Object</div></div></div>
+      <div class="kp-body">
+        <p class="lead">接双宾语的动词（间接宾语=人，直接宾语=物）：choose, cook, draw, find, get, order, pick, prepare, save, sing, spare, steal, give, make, show, offer, bring, buy, read, send, take, sell, write, allow, teach, tell, ask, deny。间接宾语可经 <b>to / for</b> 后置。</p>
+        <div class="ex">
+          <div class="ex-row"><div class="en">Mother <b>cooked</b> us a delicious dinner. = Mother cooked a delicious dinner <b>for</b> us.</div><div class="zh">妈妈为我们做了顿美味的晚餐。</div></div>
+          <div class="ex-row"><div class="en">Can you <b>spare</b> me a few minutes?</div><div class="zh">你能抽出几分钟给我吗？</div></div>
+          <div class="ex-row"><div class="en">The choir <b>sang</b> us a beautiful hymn.</div><div class="zh">合唱团为我们唱了首优美的赞美诗。</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kp" id="verb-3">
+      <div class="kp-head"><div class="kp-no" style="background:#8F82A6">3</div><div><div class="kp-title">动词 + 反身代词 + 介词</div><div class="kp-en">Verb + oneself + prep.</div></div></div>
+      <div class="kp-body">
+        <div class="ph-grid">
+          <div class="ph"><span class="en">absent oneself from</span><span class="cn">缺席</span></div>
+          <div class="ph"><span class="en">adapt oneself to</span><span class="cn">适应</span></div>
+          <div class="ph"><span class="en">apply oneself to</span><span class="cn">致力于</span></div>
+          <div class="ph"><span class="en">devote / dedicate oneself to</span><span class="cn">献身于</span></div>
+          <div class="ph"><span class="en">engage / occupy oneself in</span><span class="cn">从事 / 忙于</span></div>
+          <div class="ph"><span class="en">indulge / abandon / addict oneself to</span><span class="cn">沉迷于</span></div>
+          <div class="ph"><span class="en">break oneself of</span><span class="cn">改掉…习惯</span></div>
+          <div class="ph"><span class="en">help oneself to</span><span class="cn">随意吃 / 自取</span></div>
+          <div class="ph"><span class="en">avail oneself of</span><span class="cn">利用</span></div>
+          <div class="ph"><span class="en">pride oneself on</span><span class="cn">以…自豪</span></div>
+          <div class="ph"><span class="en">prepare oneself for</span><span class="cn">为…做准备</span></div>
+          <div class="ph"><span class="en">accustom / familiarize oneself with</span><span class="cn">习惯于 / 精通</span></div>
+        </div>
+        <div class="ex">
+          <div class="ex-row"><div class="en">I'd like to <b>avail myself of</b> this opportunity to express my heartfelt thanks to you.</div><div class="zh">我想借此机会表达衷心的感谢。</div></div>
+          <div class="ex-row"><div class="en">It was hard for him to <b>break himself of</b> the bad habit.</div><div class="zh">要他改掉坏习惯很难。</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kp" id="verb-4">
+      <div class="kp-head"><div class="kp-no" style="background:#8F82A6">4</div><div><div class="kp-title">动词 + 同源宾语</div><div class="kp-en">Cognate Object</div></div></div>
+      <div class="kp-body">
+        <p class="lead">有些动词后接与词根相同、意义相近的名词作宾语（live / lead / die / sleep / dream / breathe / smile / laugh / fight / sing / dance / think 等）。</p>
+        <div class="ex">
+          <div class="ex-row"><div class="en">The farmers are <b>living a happy life</b>.</div><div class="zh">农民们过着幸福的生活。</div></div>
+          <div class="ex-row"><div class="en">He <b>died a heroic death</b>.</div><div class="zh">他英勇地死去。</div></div>
+          <div class="ex-row"><div class="en">I <b>dreamed a terrible dream</b> last night. / She <b>smiled a warm smile</b> at the child.</div><div class="zh">昨晚我做噩梦。/ 她对孩子温暖一笑。</div></div>
+          <div class="ex-row"><div class="en">He <b>thought great thoughts</b>. / They <b>laughed a hearty laugh</b>.</div><div class="zh">他志向远大。/ 他们开怀大笑。</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kp" id="verb-5">
+      <div class="kp-head"><div class="kp-no" style="background:#8F82A6">5</div><div><div class="kp-title">常见的连系动词</div><div class="kp-en">Linking Verbs</div></div></div>
+      <div class="kp-body">
+        <div class="grid g4">
+          <div class="mini"><h5>状态系动词</h5><div class="eg">be, seem, appear, look, feel, remain, stay, keep, stand, lie</div></div>
+          <div class="mini"><h5>变化系动词</h5><div class="eg">become, get, turn, grow, fall, go, come, run</div></div>
+          <div class="mini"><h5>感官系动词</h5><div class="eg">smell, taste, sound, feel（摸起来）</div></div>
+          <div class="mini"><h5>终止系动词</h5><div class="eg">turn out（结果是）, prove（证明是）</div></div>
+        </div>
+        <div class="tip"><span class="ico">💡</span><div>变化系动词有分工：<b>go</b> 常表“变糟”（go bad, go blind），<b>come</b> 常表“变好”（come true），<b>turn</b> 常表颜色/性质突变（turn red, turn 20）。</div></div>
+      </div>
+    </div>
+
+    <div class="kp" id="verb-6">
+      <div class="kp-head"><div class="kp-no" style="background:#8F82A6">6</div><div><div class="kp-title">连系动词的五种语法结构</div><div class="kp-en">Structures after Linking Verbs</div></div></div>
+      <div class="kp-body">
+        <table>
+          <thead><tr><th style="width:30%">结构</th><th>例句</th></tr></thead>
+          <tbody>
+            <tr><td class="en">连系动词 + 形容词</td><td>The sun <b>rose red</b>. 太阳升起红艳艳。 / He <b>played dumb</b>. 他装哑巴。 / The door <b>blew open</b>. 门被风吹开。</td></tr>
+            <tr><td class="en">连系动词 + 名词 / 代词</td><td>He <b>lived a bachelor</b>. 他过着单身汉生活。 / She <b>emerged a victor</b>. 她成了胜利者。</td></tr>
+            <tr><td class="en">连系动词 + 副词</td><td>The project <b>went well</b>. 项目进展顺利。</td></tr>
+            <tr><td class="en">连系动词 + 分词</td><td>All my letters <b>went unanswered</b>. 信都没回音。 / Mary <b>lay shivering</b> on the ground. 玛丽躺在地上发抖。</td></tr>
+            <tr><td class="en">连系动词 + 介词短语</td><td>Nancy <b>fell into a doze</b>. 南希打起盹来。 / The town <b>lay in ruins</b>. 小城已成废墟。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="kp" id="verb-7">
+      <div class="kp-head"><div class="kp-no" style="background:#8F82A6">7</div><div><div class="kp-title">复合动词</div><div class="kp-en">Compound Verbs</div></div></div>
+      <div class="kp-body">
+        <p class="lead">由两个单词合成的动词，多由“名词 + 动词”构成，部分带连字符。</p>
+        <div class="ph-grid">
+          <div class="ph"><span class="en">baby-sit 看孩子</span><span class="cn">bottle-feed 人工喂养</span></div>
+          <div class="ph"><span class="en">day-dream 做白日梦</span><span class="cn">chain-smoke 连续吸烟</span></div>
+          <div class="ph"><span class="en">water-ski 滑水</span><span class="cn">sleepwalk 梦游</span></div>
+          <div class="ph"><span class="en">dry-clean 干洗</span><span class="cn">ill-treat 虐待</span></div>
+          <div class="ph"><span class="en">white-wash 粉饰</span><span class="cn">blacklist 列入黑名单</span></div>
+          <div class="ph"><span class="en">ghostwrite 代写</span><span class="cn">pinpoint 指出</span></div>
+          <div class="ph"><span class="en">air-freight 空运</span><span class="cn">hitch-hike 免费搭车</span></div>
+          <div class="ph"><span class="en">undergo 经历</span><span class="cn">hard-boil 煮老</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kp" id="verb-8">
+      <div class="kp-head"><div class="kp-no" style="background:#8F82A6">8</div><div><div class="kp-title">短语动词</div><div class="kp-en">Phrasal Verbs</div></div></div>
+      <div class="kp-body">
+        <div class="grid g2">
+          <div class="mini"><h5>动词 + 介词</h5><div class="eg">account for 说明 · agree with 同意 · apply for 申请 · come across 偶遇 · contribute to 贡献 · dream of 梦见 · insist on 坚持 · live on 靠…生活 · look into 调查 · object to 反对 · send for 派人请</div></div>
+          <div class="mini"><h5>动词 + 副词</h5><div class="eg">blow up 炸毁 · bring up 抚养 · call off 取消 · carry out 执行 · give away 泄露 · hand out 分发 · look up 查找 · make up 构成 · put off 推迟 · turn on 打开 · wipe out 消灭</div></div>
+          <div class="mini"><h5>动词 + 副词 + 介词</h5><div class="eg">catch up with 赶上 · cut down on 减少 · date back to 追溯到 · do away with 废除 · live up to 不辜负 · put up with 忍受 · run out of 用光</div></div>
+          <div class="mini"><h5>动词 + 名词 + 介词</h5><div class="eg">catch sight of 看见 · give rise to 引起 · make fun of 取笑 · take part in 参加 · pay attention to 注意 · get rid of 摆脱 · make a fool of 愚弄</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kp" id="verb-9">
+      <div class="kp-head"><div class="kp-no" style="background:#8F82A6">9</div><div><div class="kp-title">常见的动词错误接续</div><div class="kp-en">Verb Patterns</div></div></div>
+      <div class="kp-body">
+        <p class="lead">掌握动词后接 <b>doing / to do / that 从句 / sb. to do</b> 的正确搭配，是改错与语法填空的高频考点。</p>
+        <table>
+          <thead><tr><th style="width:48%">正确接续 ✔</th><th>错误接续 ✘</th></tr></thead>
+          <tbody>
+            <tr><td class="en">consider / suggest / advise / finish doing</td><td class="cn">consider (sb.) to do ✗ · suggest to do ✗ · finish to do ✗</td></tr>
+            <tr><td class="en">would like / agree / refuse / promise / decide to do</td><td class="cn">would like doing ✗ · agree doing ✗ · promise doing ✗</td></tr>
+            <tr><td class="en">allow doing / allow sb. to do</td><td class="cn">allow to do ✗</td></tr>
+            <tr><td class="en">order / send / tell / ask sb. to do</td><td class="cn">order / tell to do ✗（缺宾语）</td></tr>
+            <tr><td class="en">look at / watch / catch sb. doing (do)</td><td class="cn">look at / watch + that 从句 ✗ · catch sb. do ✗</td></tr>
+            <tr><td class="en">stop / prevent sb. (from) doing</td><td class="cn">stop sb. to do ✗</td></tr>
+            <tr><td class="en">hope / expect to do</td><td class="cn">hope / expect doing ✗</td></tr>
+            <tr><td class="en">demand / propose / suggest + that 从句</td><td class="cn">demand / suggest sb. to do ✗</td></tr>
+          </tbody>
+        </table>
+        <div class="warn"><span class="ico">⚠️</span><div>特别注意：<b>hope</b> 不能接 sb. to do（✗ hope you to come），只能说 <b>hope that…</b> 或 <b>hope to do</b>；而 <b>wish</b> 可以接 sb. to do。</div></div>
+      </div>
+    </div>
+
+    <div class="practice-head" id="verb-prac"><span class="badge">专项练习</span><h3>动词 · 即学即练</h3><span class="sub">单项选择 / 填空 · 点击展开答案</span></div>
+    <div class="q"><div class="qtxt"><b>1.</b> The Xi'an City Wall was ___ (build) originally to protect the city in the Tang dynasty.</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">built</div><div class="mark">主语 City Wall 与 build 是被动关系，用过去分词 <b>built</b>。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>2.</b> After Lincoln was elected, they ___ (sell) most of their furniture.</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">sold</div><div class="mark">与 rented 并列，用一般过去时 <b>sold</b>。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>3.</b> It means we have the chance to obtain information about how the moon ___ (construct).</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">is constructed</div><div class="mark">月球“被构建”，一般现在时被动 <b>is constructed</b>。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>4.</b> But some students didn't want ___ (wear) the uniform.</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">to wear</div><div class="mark">want <b>to do</b>：want to wear。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>5.</b> He decided to give up ___ (smoke).</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">smoking</div><div class="mark">give up <b>doing</b>：放弃吸烟。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>6.</b> I found the book ___ (interest).</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">interesting</div><div class="mark">宾语补足语用 -ing 形容词 <b>interesting</b>（书本身“有趣”）。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>7.</b> They elected him ___ (chairman) of the department.</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">chairman</div><div class="mark">elect sb. + 名词作宾补，职务名词前不加冠词：elect him <b>chairman</b>。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>8.</b> The cake ___ (taste) delicious. I want another piece.</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">tastes</div><div class="mark">taste 作感官系动词，用一般现在时 <b>tastes</b>，无被动。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>9.</b> He often ___ (go) fishing on weekends when he was young.</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">went</div><div class="mark">when he was young 表过去习惯，用 <b>went</b>。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>10.</b> The teacher asked the students ___ (hand) in their papers.</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">to hand</div><div class="mark">ask sb. <b>to do</b>：让学生交论文。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>11.</b> Would you like ___ (have) another cup of coffee?</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">to have</div><div class="mark">would like <b>to do</b>：想再喝一杯。</div></div></details>
+    </div>
+    <div class="q"><div class="qtxt"><b>12.</b> She said that she ___ (leave) for Paris the next week.</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">would leave</div><div class="mark">主句 said 过去时，宾语从句用过去将来时 <b>would leave</b>。</div></div></details>
+    </div>
+  </section>
+
+  <div class="footer">形容词 · 副词 · 名词 · 动词（词类四讲）—— 据《高考英语语法全攻略（第 2 版）· 第 6–9 节》整理，讲解与练习相结合，供高三复习使用</div>
+</main>
+
+<script>
+const $ = s => document.querySelector(s);
+
+/* ==================== 目录数据 ==================== */
+const TOC = [
+  { g:"形容词 · The Adjective", c:"#7E8F76", top:true,
+    items:[
+      ["考点1 · 按结构分类","adj-1"],
+      ["考点2 · 功能及其位置","adj-2"],
+      ["考点3 · 前置与后置","adj-3"],
+      ["考点4 · 常作表语","adj-4"],
+      ["考点5 · 形容词的顺序","adj-5"],
+      ["考点6 · 主动 / 被动意义","adj-6"],
+      ["考点7 · 最高级多种表示","adj-7"],
+      ["考点8 · 比较级 / 最高级修饰语","adj-8"],
+      ["考点9 · 前置后置含义不同","adj-9"],
+      ["考点10 · 比较级短语","adj-10"],
+      ["考点11 · 最高级短语","adj-11"],
+      ["✎ 专项练习","adj-prac"]
+    ]},
+  { g:"副词 · The Adverb", c:"#6F8A99",
+    items:[
+      ["考点1 · 副词的功能","adv-1"],
+      ["考点2 · 充当的语法成分","adv-2"],
+      ["✎ 专项练习","adv-prac"]
+    ]},
+  { g:"名词 · The Noun", c:"#B0857C",
+    items:[
+      ["考点1 · 名词的分类","noun-1"],
+      ["考点2 · 句法功能","noun-2"],
+      ["考点3 · 单位词作修饰语","noun-3"],
+      ["考点4 · 不可数名词的用法","noun-4"],
+      ["✎ 专项练习","noun-prac"]
+    ]},
+  { g:"动词 · The Verb", c:"#8F82A6",
+    items:[
+      ["考点1 · 五种句型结构","verb-1"],
+      ["考点2 · 动词 + 双宾语","verb-2"],
+      ["考点3 · 动词 + 反身代词 + 介词","verb-3"],
+      ["考点4 · 动词 + 同源宾语","verb-4"],
+      ["考点5 · 常见的连系动词","verb-5"],
+      ["考点6 · 连系动词五种结构","verb-6"],
+      ["考点7 · 复合动词","verb-7"],
+      ["考点8 · 短语动词","verb-8"],
+      ["考点9 · 常见动词错误接续","verb-9"],
+      ["✎ 专项练习","verb-prac"]
+    ]}
+];
+
+function buildToc(){
+  const nav = $("#tocNav");
+  let html = `<a href="#top" class="top" data-close style="--g:#8C8578"><span class="sw"></span>封面 · 课程导览</a>`;
+  TOC.forEach(sec=>{
+    html += `<div class="grp-title" style="--g:${sec.c}">${sec.g}</div>`;
+    sec.items.forEach(([label,id])=>{
+      html += `<a href="#${id}" data-close style="--g:${sec.c}"><span class="sw"></span>${label}</a>`;
+    });
+  });
+  nav.innerHTML = html;
+}
+
+/* ==================== 侧滑目录 ==================== */
+const drawer = $("#drawer"), overlay = $("#overlay"), menuBtn = $("#menuBtn");
+function openDrawer(){ drawer.classList.add("open"); overlay.classList.add("show"); menuBtn.classList.add("open"); }
+function closeDrawer(){ drawer.classList.remove("open"); overlay.classList.remove("show"); menuBtn.classList.remove("open"); }
+menuBtn.onclick = ()=>{ drawer.classList.contains("open") ? closeDrawer() : openDrawer(); };
+overlay.onclick = closeDrawer;
+document.addEventListener("click", e=>{
+  if(e.target.closest("#tocNav a[data-close]")) closeDrawer();
+});
+document.addEventListener("keydown", e=>{ if(e.key==="Escape") closeDrawer(); });
+
+/* ==================== 初始化 ==================== */
+buildToc();
+</script>
+</body>
+</html>
