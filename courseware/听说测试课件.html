@@ -1,0 +1,1745 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>听说测试 · 课件（含音标读音示范）</title>
+<style>
+  :root{
+    --ink:#46413b;          /* 主文字 暖灰棕 */
+    --muted:#8c857b;        /* 次要文字 */
+    --line:#e6ded1;         /* 边框 */
+    --bg:#f4efe6;           /* 背景 燕麦米色 */
+    --paper:#fcf9f3;        /* 卡片纸面 暖白 */
+    --paper-2:#f6f0e6;      /* 二级纸面 */
+    --ink-soft:#5c564f;
+
+    /* 五节主题色（莫兰迪） */
+    --blue:#7e96a5;  --blue-deep:#5c7383;  --blue-bg:#edf1f3;   /* 概览 */
+    --sage:#93aa92;  --sage-deep:#6e856d;  --sage-bg:#eff2ec;   /* 音标拼读 */
+    --rose:#c09892;  --rose-deep:#98706a;  --rose-bg:#f5ecea;   /* 朗读技巧 */
+    --lav:#a69cb4;   --lav-deep:#7f7590;   --lav-bg:#f0edf3;    /* 各题型 */
+    --teal:#8aa8a0;  --teal-deep:#6a8780;  --teal-bg:#eaf0ee;   /* 听说测试 */
+
+    /* 功能色 */
+    --gold:#b99c6a;  --gold-deep:#937a48;  --gold-bg:#f3ecdd;
+    --warn:#b48780;  --warn-deep:#966963;  --warn-bg:#f5e7e4;
+    --tip:#7e96a5;   --tip-bg:#edf1f3;
+
+    --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:var(--font);
+    color:var(--ink);
+    background:var(--bg);
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ===== 舞台 ===== */
+  #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:58px 44px 96px}
+
+  .slide{
+    position:absolute;
+    width:min(1200px,100%);
+    max-height:100%;
+    background:var(--paper);
+    border-radius:22px;
+    box-shadow:0 26px 60px -26px rgba(92,82,66,.34), 0 0 0 1px rgba(92,82,66,.05);
+    padding:44px 54px;
+    opacity:0;
+    transform:translateX(42px);
+    pointer-events:none;
+    transition:opacity .45s ease, transform .45s ease;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+  .slide.active{opacity:1;transform:translateX(0);pointer-events:auto}
+  .slide.prev{transform:translateX(-42px)}
+  .slide.scrollable{overflow-y:auto}
+
+  .slide .anim{opacity:0;transform:translateY(14px)}
+  .slide.active .anim{
+    opacity:1;transform:none;
+    transition:opacity .5s ease, transform .5s ease;
+    transition-delay:calc(var(--i,0)*70ms + 60ms);
+  }
+
+  /* ===== 页头 ===== */
+  .head{display:flex;align-items:center;gap:14px;margin-bottom:20px;flex-wrap:wrap}
+  .part-badge{
+    font-size:13px;font-weight:700;letter-spacing:.05em;
+    color:#fff;background:var(--pc,#8a8378);
+    padding:6px 15px;border-radius:99px;white-space:nowrap;
+  }
+  .head h2{font-size:27px;font-weight:800;letter-spacing:.01em;color:var(--ink)}
+  .head .en{font-size:14px;color:var(--muted);font-weight:600;margin-left:auto;white-space:nowrap}
+
+  .kicker{font-size:13px;font-weight:700;letter-spacing:.14em;color:var(--pc-deep,#937a48);text-transform:uppercase;margin-bottom:8px}
+
+  /* ===== 封面 ===== */
+  .slide.cover{
+    background:
+      radial-gradient(900px 520px at 88% -10%, rgba(185,156,106,.30), transparent 60%),
+      radial-gradient(720px 540px at -10% 112%, rgba(138,168,160,.32), transparent 55%),
+      linear-gradient(135deg,#5c7383 0%,#7e96a5 50%,#8aa8a0 100%);
+    color:#fff;
+    justify-content:center;
+  }
+  .cover .brand-line{position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#b99c6a,#c9b88f,#93aa92,#a69cb4,#8aa8a0)}
+  .cover .tag{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#eef1f3;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);padding:7px 16px;border-radius:99px;margin-bottom:26px}
+  .cover h1{font-size:50px;font-weight:900;line-height:1.2;letter-spacing:.01em}
+  .cover h1 .hl{color:#e4d3ad}
+  .cover .sub{margin-top:18px;font-size:20px;color:#e7ebee;font-weight:500;line-height:1.7}
+  .cover .meta{margin-top:40px;display:flex;gap:28px;font-size:14px;color:#c9d3da;font-weight:600}
+  .cover .meta b{color:#fff}
+
+  /* ===== 卡片 & 列表 ===== */
+  .grid{display:grid;gap:14px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .g5{grid-template-columns:repeat(5,1fr)}
+  .card{
+    background:var(--paper);border:1px solid var(--line);border-radius:16px;
+    padding:18px 20px;position:relative;overflow:hidden;
+  }
+  .card .num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:34px;height:34px;border-radius:10px;font-size:16px;font-weight:800;
+    color:#fff;background:var(--pc,#8a8378);margin-bottom:11px;
+  }
+  .card h4{font-size:19px;font-weight:800;margin-bottom:5px;color:var(--ink)}
+  .card .cn{font-size:13.5px;color:var(--muted);font-weight:600;line-height:1.5}
+
+  .key{color:var(--pc-deep,#937a48);font-weight:800}
+  .gold{color:var(--gold-deep);font-weight:800}
+  .red{color:var(--warn-deep);font-weight:800}
+
+  /* 例句区 */
+  .ex{
+    background:var(--paper-2);border:1px solid var(--line);border-radius:15px;
+    padding:15px 19px;margin-top:8px;
+  }
+  .ex + .ex{margin-top:13px}
+  .ex .lead{font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .ex .lead .pill{background:var(--gold-bg);color:var(--gold-deep)}
+  .cn-src{font-size:16.5px;font-weight:600;color:var(--ink);line-height:1.6}
+  .cn-src b{color:var(--gold-deep)}
+  .en-ref{font-size:16px;font-weight:700;color:var(--pc-deep,#5c7383);margin-top:8px;line-height:1.55;word-break:break-word}
+  .en-ref .mt{display:inline-block;font-size:12px;font-weight:800;color:#fff;background:var(--pc,#8a8378);border-radius:6px;padding:2px 8px;margin-right:8px;vertical-align:2px}
+  .ana{margin-top:9px;font-size:13.5px;color:#6f6a62;line-height:1.6}
+  .ana b{color:var(--gold-deep)}
+
+  /* 重点框 */
+  .note{
+    display:flex;gap:12px;align-items:flex-start;
+    background:var(--gold-bg);border:1px solid #e6d8ba;border-left:4px solid var(--gold);
+    border-radius:12px;padding:13px 17px;margin-top:14px;font-size:15px;line-height:1.65;
+  }
+  .note .ico{font-size:18px;line-height:1.4}
+  .note b{color:var(--gold-deep)}
+
+  .tip{
+    display:flex;gap:10px;align-items:flex-start;
+    background:var(--tip-bg);border:1px solid #d5e0e4;border-left:4px solid var(--tip);
+    border-radius:12px;padding:12px 16px;margin-top:12px;font-size:14.5px;line-height:1.65;color:var(--blue-deep);
+  }
+  .tip b{color:var(--blue-deep)}
+
+  .warn{
+    display:flex;gap:10px;align-items:flex-start;
+    background:var(--warn-bg);border:1px solid #ecd2cd;border-left:4px solid var(--warn);
+    border-radius:12px;padding:12px 16px;margin-top:12px;font-size:14.5px;line-height:1.65;color:var(--warn-deep);
+  }
+  .warn b{color:var(--warn-deep)}
+
+  /* 表 */
+  table{width:100%;border-collapse:collapse;font-size:14.5px}
+  th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:12.5px;letter-spacing:.05em;color:var(--muted);background:var(--paper-2);font-weight:700}
+  td .en{font-weight:700;color:#3f3b35}
+  td .cn{color:var(--muted);font-size:13px}
+
+  .pill{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:var(--tip-bg);color:var(--blue-deep);margin-right:6px}
+  .ipatext{font-family:"Times New Roman","Georgia",serif;font-size:16px;letter-spacing:.02em}
+
+  /* 小结 */
+  .sum-block{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:var(--paper)}
+  .sum-block h4{font-size:15.5px;font-weight:800;margin-bottom:11px;display:flex;align-items:center;gap:8px;color:var(--ink)}
+  .sum-block .dot{width:10px;height:10px;border-radius:3px;background:var(--pc,#8a8378)}
+  .sum-block ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .sum-block li{font-size:13.5px;color:#5c564f;line-height:1.5}
+  .sum-block li b{color:var(--ink)}
+
+  .motto{
+    margin-top:18px;text-align:center;font-size:19px;font-weight:800;color:var(--ink);
+    background:var(--gold-bg);border:1px solid #e6d8ba;border-radius:14px;padding:16px;
+  }
+  .motto span{color:var(--warn-deep)}
+
+  /* ===== 真题折叠 ===== */
+  .reveal{margin-top:9px;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .reveal summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:9px 14px;font-size:13.5px;font-weight:700;color:var(--pc-deep,#5c7383);background:var(--paper-2);user-select:none}
+  .reveal summary::-webkit-details-marker{display:none}
+  .reveal summary .caret{display:inline-block;transition:transform .2s;font-size:11px}
+  .reveal[open] summary .caret{transform:rotate(90deg)}
+  .reveal .ans{padding:12px 15px 14px;border-top:1px dashed var(--line);font-size:15px}
+  .reveal .ans .en{font-weight:700;color:var(--pc-deep,#5c7383);line-height:1.6}
+  .reveal .ans .mark{margin-top:7px;font-size:13px;color:#6f6a62;line-height:1.6}
+  .reveal .ans .mark b{color:var(--gold-deep)}
+
+  /* ===== 音标卡（读音示范） ===== */
+  .ph-hint{
+    display:flex;align-items:center;gap:9px;font-size:13px;font-weight:600;color:var(--muted);
+    background:var(--tip-bg);border:1px solid #d5e0e4;border-radius:11px;padding:8px 13px;margin-bottom:14px;
+  }
+  .ph-hint .ic{font-size:17px}
+  .ph-group{border:1px solid var(--line);border-radius:14px;padding:13px 15px;margin-bottom:12px;background:var(--paper)}
+  .ph-group .phg-head{display:flex;align-items:center;gap:10px;margin-bottom:11px}
+  .ph-group .phg-head .gname{font-size:14.5px;font-weight:800;color:var(--ink)}
+  .ph-group .phg-head .gen{font-size:12.5px;color:var(--muted);font-weight:600}
+  .ph-group .phg-head .play{font-size:11.5px}
+  .ph-row{display:flex;flex-wrap:wrap;gap:9px}
+  .ph{
+    display:flex;align-items:center;gap:9px;
+    background:var(--paper-2);border:1px solid var(--line);border-radius:11px;
+    padding:8px 12px;min-width:0;
+  }
+  .ph .sym{
+    font-family:"Times New Roman","Georgia",serif;font-size:20px;font-weight:700;
+    color:var(--pc-deep,#5c7383);line-height:1;min-width:44px;text-align:center;
+  }
+  .ph .words{font-size:13px;color:#5c564f;font-weight:600;line-height:1.35}
+  .ph .words .cap{color:var(--gold-deep);font-weight:800}
+  .speak{
+    border:none;background:#fff;border:1px solid var(--line);border-radius:9px;
+    width:30px;height:30px;cursor:pointer;font-size:15px;line-height:1;
+    display:inline-flex;align-items:center;justify-content:center;flex:none;
+    transition:.15s;color:#8a8378;
+  }
+  .speak:hover{border-color:var(--gold);color:var(--gold-deep);background:var(--gold-bg)}
+  .speak.playing{background:var(--gold-bg);border-color:var(--gold);color:var(--gold-deep);animation:pulse .8s ease infinite}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+  .speak.mini{width:26px;height:26px;font-size:13px;border-radius:8px}
+
+  /* 功能意念对答 */
+  .func{margin-top:9px;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .func summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:9px;padding:10px 14px;font-size:14px;font-weight:800;color:var(--ink);background:var(--paper-2);user-select:none}
+  .func summary::-webkit-details-marker{display:none}
+  .func summary .caret{display:inline-block;transition:transform .2s;font-size:11px;color:var(--muted)}
+  .func[open] summary .caret{transform:rotate(90deg)}
+  .func summary .fnum{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:7px;background:var(--pc,#8a8378);color:#fff;font-size:12px;font-weight:800;flex:none}
+  .func summary .fen{font-size:12px;color:var(--muted);font-weight:600;margin-left:auto}
+  .func .fbody{padding:10px 14px 12px;border-top:1px dashed var(--line);font-size:14px;line-height:1.55}
+  .func .fbody .qa{padding:5px 0;border-bottom:1px dashed #efe7da}
+  .func .fbody .qa:last-child{border-bottom:none}
+  .func .fbody .q{color:#3f3b35;font-weight:700}
+  .func .fbody .a{color:var(--pc-deep,#5c7383);font-weight:600}
+  .func .fbody .q::before{content:"Q ";font-size:11px;font-weight:800;color:#b3ab9f}
+  .func .fbody .a::before{content:"A ";font-size:11px;font-weight:800;color:#b3ab9f}
+
+  /* ===== 导航 ===== */
+  #nav{
+    position:fixed;left:50%;bottom:24px;transform:translateX(-50%);
+    display:flex;align-items:center;gap:12px;z-index:50;
+    background:rgba(252,249,243,.88);backdrop-filter:blur(10px);
+    border:1px solid var(--line);border-radius:99px;padding:8px 12px;
+    box-shadow:0 12px 32px -14px rgba(92,82,66,.32);
+  }
+  #nav button{
+    border:none;background:var(--paper);border:1px solid var(--line);
+    width:40px;height:40px;border-radius:50%;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;color:#5c564f;
+    transition:.15s;
+  }
+  #nav button:hover:not(:disabled){background:var(--paper-2);border-color:var(--gold);color:var(--gold-deep)}
+  #nav button:disabled{opacity:.35;cursor:default}
+  #nav .counter{font-size:14px;font-weight:700;color:#5c564f;min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
+  #nav .counter b{color:var(--gold-deep);font-size:16px}
+  #nav #menuBtn{width:auto;border-radius:99px;padding:0 16px;font-size:13px;font-weight:700;gap:7px}
+  #progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#7e96a5,#93aa92,#c09892,#a69cb4,#8aa8a0);z-index:60;width:0;transition:width .35s ease}
+  #hint{position:fixed;left:50%;transform:translateX(-50%);bottom:3px;font-size:12px;color:#b3ab9f;z-index:40;white-space:nowrap}
+
+  /* ===== 抽拉式目录 ===== */
+  #drawerTab{
+    position:fixed;left:0;top:50%;transform:translateY(-50%);
+    z-index:80;cursor:pointer;user-select:none;
+    display:flex;align-items:center;gap:6px;
+    padding:16px 10px;
+    background:linear-gradient(180deg,#7e96a5,#5c7383);
+    color:#fff;border-radius:0 14px 14px 0;
+    box-shadow:4px 8px 20px -8px rgba(92,82,66,.45);
+    transition:padding .2s ease, box-shadow .2s ease;
+    writing-mode:vertical-rl;letter-spacing:.3em;font-weight:800;font-size:14px;
+  }
+  #drawerTab:hover{padding:20px 11px;box-shadow:6px 12px 28px -8px rgba(92,82,66,.55)}
+  #drawerTab .darr{display:inline-block;transition:transform .25s ease;writing-mode:horizontal-tb;font-size:13px}
+
+  #drawerOverlay{
+    position:fixed;inset:0;background:rgba(70,63,55,.34);backdrop-filter:blur(3px);
+    z-index:85;opacity:0;pointer-events:none;transition:opacity .28s ease;
+  }
+  #drawerOverlay.open{opacity:1;pointer-events:auto}
+
+  #drawerPanel{
+    position:fixed;top:0;left:0;bottom:0;width:min(380px,90vw);
+    background:var(--paper);box-shadow:24px 0 50px -30px rgba(92,82,66,.5);
+    z-index:86;transform:translateX(-100%);transition:transform .32s cubic-bezier(.22,.9,.3,1);
+    display:flex;flex-direction:column;
+  }
+  #drawerOverlay.open #drawerPanel{transform:translateX(0)}
+  #drawerPanel .dp-head{
+    padding:22px 22px 16px;border-bottom:1px solid var(--line);
+    background:linear-gradient(135deg,#7e96a5 0%,#5c7383 100%);color:#fff;position:relative;
+  }
+  #drawerPanel .dp-head .k{font-size:12px;font-weight:700;letter-spacing:.12em;opacity:.8}
+  #drawerPanel .dp-head h3{font-size:19px;font-weight:800;margin-top:4px}
+  #drawerPanel .dp-head .sub{font-size:12px;opacity:.85;margin-top:3px}
+  #drawerPanel .dp-head .close{
+    position:absolute;top:18px;right:18px;border:none;background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.3);width:32px;height:32px;border-radius:50%;
+    cursor:pointer;font-size:15px;color:#fff;line-height:1;
+  }
+  #drawerPanel .dp-head .close:hover{background:rgba(255,255,255,.28)}
+  #drawerList{overflow-y:auto;padding:10px 14px 34px;flex:1}
+  .dp-sec{
+    display:flex;align-items:center;gap:8px;
+    font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--muted);
+    margin:18px 6px 6px;
+  }
+  .dp-sec .swatch{width:9px;height:9px;border-radius:3px}
+  .dp-item{
+    display:flex;align-items:center;gap:11px;width:100%;text-align:left;
+    padding:9px 12px;border:none;background:transparent;border-radius:10px;cursor:pointer;
+    font-size:13.5px;color:#4c4740;transition:.13s;
+  }
+  .dp-item:hover{background:var(--paper-2)}
+  .dp-item.active{background:var(--gold-bg);color:var(--gold-deep);font-weight:700}
+  .dp-item .n{font-size:12px;font-weight:800;color:#b3ab9f;min-width:22px;text-align:right}
+
+  /* ===== 响应式 ===== */
+  @media (max-width:900px){
+    #stage{padding:18px 14px 88px}
+    .slide{padding:24px 20px;border-radius:15px}
+    .g2,.g3,.g4,.g5,.cols{grid-template-columns:1fr 1fr}
+    .g5{grid-template-columns:1fr 1fr}
+    .head h2{font-size:20px}
+    .cover h1{font-size:32px}
+    .cover .sub{font-size:16px}
+    .cn-src{font-size:15px}
+    #drawerTab{padding:13px 8px;font-size:12px}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<div id="stage">
+
+  <!-- 1 封面 -->
+  <section class="slide cover active" data-title="封面" data-sec="封面">
+    <div class="brand-line"></div>
+    <div class="anim" style="--i:0"><span class="tag">新高考英语听力与口试 · 第 2 版</span></div>
+    <h1 class="anim" style="--i:1">听说测试 <span class="hl">全攻略</span></h1>
+    <p class="sub anim" style="--i:2">音标拼读 · 朗读技巧 · 各题型应对 —— 附 <b>音标读音示范</b></p>
+    <div class="meta anim" style="--i:3">
+      <span>主讲：<b>杨老师</b></span>
+      <span>对象：<b>高三</b></span>
+      <span>板块：<b>听说 · 口试</b></span>
+    </div>
+  </section>
+
+  <!-- 2 导读 -->
+  <section class="slide" data-title="本章导读" data-sec="导读">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">导读</span><h2>听说测试考什么 · 怎么学</h2><span class="en">Overview</span></div>
+    <p class="anim" style="--i:1;font-size:15.5px;color:#5c564f;line-height:1.75">听说测试是<b class="gold">人机对话</b>的口试：计算机录下你的朗读与应答，再按<b class="key">音素发音、流利度、语调、韵律、总体</b>五个维度自动评分。想在口试拿高分，只靠“会说几句”远远不够，要从<b>底层语音</b>练起。本章五步走：</p>
+    <div class="grid g5" style="margin-top:16px">
+      <div class="card anim" style="--i:2;--pc:#7e96a5"><span class="num">一</span><h4>了解考试</h4><div class="cn">评分标准<br>语音评测原理</div></div>
+      <div class="card anim" style="--i:3;--pc:#93aa92"><span class="num">二</span><h4>练准音标</h4><div class="cn">48 音素<br>拼读规则 🔊</div></div>
+      <div class="card anim" style="--i:4;--pc:#c09892"><span class="num">三</span><h4>读得地道</h4><div class="cn">连读 · 失爆<br>重读 · 升降调</div></div>
+      <div class="card anim" style="--i:5;--pc:#a69cb4"><span class="num">四</span><h4>各题型技巧</h4><div class="cn">朗读 · 提问<br>看图说话</div></div>
+      <div class="card anim" style="--i:6;--pc:#8aa8a0"><span class="num">五</span><h4>听说实战</h4><div class="cn">快速应答<br>听短文 · 口头作文</div></div>
+    </div>
+    <div class="note anim" style="--i:7;margin-top:22px">
+      <span class="ico">🔊</span>
+      <div><b>读音示范怎么用：</b>所有带 <b>🔊</b> 按钮的内容，点击即可听到<b>示范读音</b>——这是调用浏览器<b>内置的语音合成</b>（英语发音），<b>无需联网、无需音频文件</b>。音标、例词、连读句、范文都可以点读跟读。</div>
+    </div>
+    <div class="tip anim" style="--i:8">
+      <span>💡</span>
+      <div>左侧有<b>抽拉式目录</b>，点手柄随时跳转；口试最忌“哑巴英语”，每页看到 🔊 就<b>开口跟读</b>。</div>
+    </div>
+  </section>
+
+  <!-- 3 听说测试是什么 -->
+  <section class="slide" data-title="听说测试是什么" data-sec="一 · 了解考试">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7e96a5">一 · 了解考试</span><h2>听说测试是什么</h2><span class="en">The Test</span></div>
+    <p class="anim" style="--i:1;font-size:15.5px;color:#5c564f;line-height:1.75">听说测试是<b class="key">人机对话的口试考试</b>，采用<b class="gold">双评模式</b>：计算机对同一份录音自动评分两次，若两次分数相差不大，取<b>平均分</b>作为最终成绩。所以考生最关心的第一个问题就是——</p>
+    <div class="note anim" style="--i:2;margin-top:16px">
+      <span class="ico">🤖</span>
+      <div><b>计算机能“听懂”我的英语吗？</b>能。它并不“理解”意思，而是把你的声音<b>解析成数字特征</b>，再与“标准发音”的声学模型比对，算出相似度打分。说得越接近标准、越流畅，分越高。</div>
+    </div>
+    <div class="grid g3" style="margin-top:16px">
+      <div class="card anim" style="--i:3;--pc:#7e96a5"><span class="num">📄</span><h4>双评模式</h4><div class="cn">同一录音评两次，取平均分，减少偶然误差。</div></div>
+      <div class="card anim" style="--i:4;--pc:#8aa8a0"><span class="num">🎙️</span><h4>人机对话</h4><div class="cn">对着电脑读、答，录音上传自动评分。</div></div>
+      <div class="card anim" style="--i:5;--pc:#93aa92"><span class="num">🔇</span><h4>降噪除噪</h4><div class="cn">软件会降噪，不必担心录进旁边同学的声音。</div></div>
+    </div>
+    <div class="warn anim" style="--i:6">
+      <span>⚠️</span>
+      <div><b>特别提醒：</b>人机对话时<b>说话要响亮、清晰</b>。声音太小、含含糊糊，机器“听不清”就会误判丢分——这不是你发音不准，是录音质量不够。</div>
+    </div>
+  </section>
+
+  <!-- 4 语音评测技术 -->
+  <section class="slide" data-title="语音评测技术原理" data-sec="一 · 了解考试">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7e96a5">一 · 了解考试</span><h2>语音评测技术原理</h2><span class="en">How Scoring Works</span></div>
+    <p class="anim" style="--i:1;font-size:15px;color:#5c564f;line-height:1.7">通俗地理解，它就像<b class="gold">教小孩子认发音</b>：先给计算机输入大量“标准发音”，计算机把这些声音<b>解析成数字（特征）</b>，剔除掉每个人不同的杂音，留下<b>始终不变的本质特征</b>——这就是「声学模型」。你练习时，机器提取你的特征与声学模型比对，得出评分。</p>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">原理三步</div>
+        <div class="cn-src">① <b>训练</b>：输入海量标准发音 → 解析为数字特征</div>
+        <div class="cn-src">② <b>建模</b>：剔除个人差异，留下单词正确发音的<b>本质特征</b></div>
+        <div class="cn-src">③ <b>评分</b>：你的发音特征 vs 声学模型 → 相似度打分</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">对考生的启发</div>
+        <div class="cn-src">① 分数 = <b>与标准发音的接近程度</b>，所以要往“标准、清晰”靠</div>
+        <div class="cn-src">② 机器看<b>发音准不准</b>，也看<b>流畅不流畅、语调对不对</b></div>
+        <div class="cn-src">③ 因此<b>音标发音</b>是根基，<b>连读、失爆、重读、语调</b>是加分项</div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:4">
+      <span>💡</span>
+      <div><b>结论：</b>口试分数可训练、可提高。把本章的<b>音标 + 朗读技巧</b>练熟，是提分最直接的路。</div>
+    </div>
+  </section>
+
+  <!-- 5 评分标准 -->
+  <section class="slide" data-title="评分标准" data-sec="一 · 了解考试">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7e96a5">一 · 了解考试</span><h2>评分标准（五个维度）</h2><span class="en">Scoring Rubric</span></div>
+    <div class="grid g5" style="margin-top:4px">
+      <div class="card anim" style="--i:1;--pc:#7e96a5"><span class="num">1</span><h4>音素发音</h4><div class="cn">元音、辅音<br>读得准不准</div></div>
+      <div class="card anim" style="--i:2;--pc:#8aa8a0"><span class="num">2</span><h4>流利程度</h4><div class="cn">熟练、流利<br>少停顿重复</div></div>
+      <div class="card anim" style="--i:3;--pc:#93aa92"><span class="num">3</span><h4>语调分数</h4><div class="cn">整句语调<br>升降是否自然</div></div>
+      <div class="card anim" style="--i:4;--pc:#c09892"><span class="num">4</span><h4>韵律分数</h4><div class="cn">单词重音<br>单词间衔接</div></div>
+      <div class="card anim" style="--i:5;--pc:#a69cb4"><span class="num">5</span><h4>总体分数</h4><div class="cn">整句发音<br>的总体评价</div></div>
+    </div>
+    <p class="anim" style="--i:6;margin-top:18px;font-size:14.5px;color:#5c564f">等级由高到低（5→1）：<b class="key">5</b> 发音准确无误、流利连贯；<b class="key">4</b> 少数音素（如 /eə/ /θ/ /ð/）略有错误；<b class="key">3</b> 一般音素发得不够好、语调起伏随意；<b class="key">2</b> 出现严重发音错误、不连贯、口音明显；<b class="key">1</b> 无法正确发出句子音素、听者难以理解。</p>
+    <div class="note anim" style="--i:7;margin-top:16px">
+      <span class="ico">🎯</span>
+      <div><b>五维一体：</b>五个分数是<b>相互叠加</b>的——音素准了，流利度和总体分才会跟着涨；语调、韵律是“英语味”的来源，是冲高分的<b>关键增量</b>。</div>
+    </div>
+  </section>
+
+  <!-- 6 提分提醒 -->
+  <section class="slide" data-title="得分偏低怎么办" data-sec="一 · 了解考试">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7e96a5">一 · 了解考试</span><h2>得分偏低，对症下药</h2><span class="en">Diagnose &amp; Fix</span></div>
+    <p class="anim" style="--i:1;font-size:15px;color:#5c564f">口试得分低，先分清是<b class="gold">哪一种</b>偏低，再对症练：</p>
+    <div class="grid g2" style="margin-top:12px">
+      <div class="ex anim" style="--i:2"><div class="lead">总分偏低</div><div class="cn-src">衡量整体发音水平（完整度＋流利度＋准确度）。</div><div class="ana"><b>对策：</b>三项一起抓，先完整、再流畅、最后抠准确。</div></div>
+      <div class="ex anim" style="--i:3"><div class="lead">完整度偏低</div><div class="cn-src">衡量朗读的<b>完成情况</b>。</div><div class="ana"><b>对策：</b>规定时间内尽量读完，别为抠语调放慢到读不完。</div></div>
+      <div class="ex anim" style="--i:4"><div class="lead">流利度偏低</div><div class="cn-src">衡量朗读时的<b>流利程度</b>。</div><div class="ana"><b>对策：</b>自然流利地读，别逐词蹦、别反复回读修正。</div></div>
+      <div class="ex anim" style="--i:5"><div class="lead">准确度偏低</div><div class="cn-src">衡量<b>发音准确度</b>。</div><div class="ana"><b>对策：</b>清晰、准确、完整、饱满地发音，重点练本章音标。</div></div>
+    </div>
+    <div class="warn anim" style="--i:6">
+      <span>⚠️</span>
+      <div><b>三个考场提醒：</b>① 说话<b>响亮</b>；② 不必担心录进别人声音（软件会降噪）；③ 读错或答错<b>立刻重说一遍</b>，评分通常以<b>最后讲的话为准</b>。</div>
+    </div>
+  </section>
+
+  <!-- 7 音标总览 -->
+  <section class="slide" data-title="音标总览 · 48音素" data-sec="二 · 音标与拼读">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 音标与拼读</span><h2>48 个音素总览</h2><span class="en">The 48 Phonemes</span></div>
+    <p class="anim" style="--i:1;font-size:15px;color:#5c564f;line-height:1.7">英语共有 <b class="key">48 个音素</b>：<b class="gold">20 个元音</b> + <b class="gold">28 个辅音</b>。元音分<b>前 / 中 / 后元音</b>和<b>双元音</b>；辅音分<b>爆破音、摩擦音、破擦音、鼻音、流音、半元音</b>。音标是发音的“地基”，也是口试评分的<b>第一项</b>。</p>
+    <div class="grid g4" style="margin-top:14px">
+      <div class="card anim" style="--i:2;--pc:#93aa92"><span class="num">①</span><h4>元音 20 个</h4><div class="cn">前元音 4 · 中元音 3<br>后元音 5 · 双元音 8</div></div>
+      <div class="card anim" style="--i:3;--pc:#8aa8a0"><span class="num">②</span><h4>辅音 28 个</h4><div class="cn">爆破 6 · 摩擦 10 · 破擦 6<br>鼻音 3 · 流音 1 · 半元音 2</div></div>
+      <div class="card anim" style="--i:4;--pc:#c09892"><span class="num">③</span><h4>拼读规则</h4><div class="cn">元音字母 · 元音字组<br>-r / -re 音节 · 辅音字组</div></div>
+      <div class="card anim" style="--i:5;--pc:#a69cb4"><span class="num">④</span><h4>易错提醒</h4><div class="cn">长短音不分 · 清浊不分<br>是上海考生的常见失分点</div></div>
+    </div>
+    <div class="note anim" style="--i:6;margin-top:20px">
+      <span class="ico">🔊</span>
+      <div><b>下一页起是「读音示范」：</b>每个音标都配了<b>例词 + 🔊 按钮</b>，点一下听标准发音，跟着多读几遍。先听<b>元音</b>，再听<b>辅音</b>。</div>
+    </div>
+  </section>
+
+  <!-- 8 元音音素 -->
+  <section class="slide scrollable" data-title="元音音素 · 读音示范" data-sec="二 · 音标与拼读">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 音标与拼读</span><h2>元音音素（20 个）· 读音示范</h2><span class="en">Vowels 🔊</span></div>
+    <div class="ph-hint anim" style="--i:1"><span class="ic">🔊</span><span>点击每个音标右侧的喇叭，听<b>例词示范读音</b>；也可点每组标题旁的「连续播放」从头听到尾。</span></div>
+
+    <div class="ph-group anim" style="--i:2;--pc:#93aa92">
+      <div class="phg-head"><span class="gname">前元音 Front Vowels</span><span class="gen">舌位靠前</span><button class="speak play" onclick="speakGroup(this)" title="连续播放本组">▶</button></div>
+      <div class="ph-row">
+        <div class="ph" data-say="see, sheep, meet"><span class="sym">/iː/</span><span class="words"><span class="cap">see</span> · sheep · meet</span><button class="speak" onclick="speakDemo(this,'see, sheep, meet')">🔊</button></div>
+        <div class="ph" data-say="sit, ship, big"><span class="sym">/ɪ/</span><span class="words"><span class="cap">sit</span> · ship · big</span><button class="speak" onclick="speakDemo(this,'sit, ship, big')">🔊</button></div>
+        <div class="ph" data-say="bed, ten, head"><span class="sym">/e/</span><span class="words"><span class="cap">bed</span> · ten · head</span><button class="speak" onclick="speakDemo(this,'bed, ten, head')">🔊</button></div>
+        <div class="ph" data-say="cat, bag, map"><span class="sym">/æ/</span><span class="words"><span class="cap">cat</span> · bag · map</span><button class="speak" onclick="speakDemo(this,'cat, bag, map')">🔊</button></div>
+      </div>
+    </div>
+
+    <div class="ph-group anim" style="--i:3;--pc:#93aa92">
+      <div class="phg-head"><span class="gname">中元音 Central Vowels</span><span class="gen">舌位居中</span><button class="speak play" onclick="speakGroup(this)" title="连续播放本组">▶</button></div>
+      <div class="ph-row">
+        <div class="ph" data-say="bird, girl, work"><span class="sym">/ɜː/</span><span class="words"><span class="cap">bird</span> · girl · work</span><button class="speak" onclick="speakDemo(this,'bird, girl, work')">🔊</button></div>
+        <div class="ph" data-say="about, teacher, banana"><span class="sym">/ə/</span><span class="words"><span class="cap">about</span> · teacher · banana</span><button class="speak" onclick="speakDemo(this,'about, teacher, banana')">🔊</button></div>
+        <div class="ph" data-say="cup, sun, bus"><span class="sym">/ʌ/</span><span class="words"><span class="cap">cup</span> · sun · bus</span><button class="speak" onclick="speakDemo(this,'cup, sun, bus')">🔊</button></div>
+      </div>
+    </div>
+
+    <div class="ph-group anim" style="--i:4;--pc:#93aa92">
+      <div class="phg-head"><span class="gname">后元音 Back Vowels</span><span class="gen">舌位靠后</span><button class="speak play" onclick="speakGroup(this)" title="连续播放本组">▶</button></div>
+      <div class="ph-row">
+        <div class="ph" data-say="car, father, park"><span class="sym">/ɑː/</span><span class="words"><span class="cap">car</span> · father · park</span><button class="speak" onclick="speakDemo(this,'car, father, park')">🔊</button></div>
+        <div class="ph" data-say="door, four, more"><span class="sym">/ɔː/</span><span class="words"><span class="cap">door</span> · four · more</span><button class="speak" onclick="speakDemo(this,'door, four, more')">🔊</button></div>
+        <div class="ph" data-say="dog, hot, box"><span class="sym">/ɒ/</span><span class="words"><span class="cap">dog</span> · hot · box</span><button class="speak" onclick="speakDemo(this,'dog, hot, box')">🔊</button></div>
+        <div class="ph" data-say="food, school, blue"><span class="sym">/uː/</span><span class="words"><span class="cap">food</span> · school · blue</span><button class="speak" onclick="speakDemo(this,'food, school, blue')">🔊</button></div>
+        <div class="ph" data-say="book, good, foot"><span class="sym">/ʊ/</span><span class="words"><span class="cap">book</span> · good · foot</span><button class="speak" onclick="speakDemo(this,'book, good, foot')">🔊</button></div>
+      </div>
+    </div>
+
+    <div class="ph-group anim" style="--i:5;--pc:#93aa92">
+      <div class="phg-head"><span class="gname">合口双元音 Rising Diphthongs</span><span class="gen">由开到合</span><button class="speak play" onclick="speakGroup(this)" title="连续播放本组">▶</button></div>
+      <div class="ph-row">
+        <div class="ph" data-say="name, cake, day"><span class="sym">/eɪ/</span><span class="words"><span class="cap">name</span> · cake · day</span><button class="speak" onclick="speakDemo(this,'name, cake, day')">🔊</button></div>
+        <div class="ph" data-say="bike, like, my"><span class="sym">/aɪ/</span><span class="words"><span class="cap">bike</span> · like · my</span><button class="speak" onclick="speakDemo(this,'bike, like, my')">🔊</button></div>
+        <div class="ph" data-say="boy, toy, oil"><span class="sym">/ɔɪ/</span><span class="words"><span class="cap">boy</span> · toy · oil</span><button class="speak" onclick="speakDemo(this,'boy, toy, oil')">🔊</button></div>
+        <div class="ph" data-say="go, no, boat"><span class="sym">/əʊ/</span><span class="words"><span class="cap">go</span> · no · boat</span><button class="speak" onclick="speakDemo(this,'go, no, boat')">🔊</button></div>
+        <div class="ph" data-say="how, now, house"><span class="sym">/aʊ/</span><span class="words"><span class="cap">how</span> · now · house</span><button class="speak" onclick="speakDemo(this,'how, now, house')">🔊</button></div>
+      </div>
+    </div>
+
+    <div class="ph-group anim" style="--i:6;--pc:#93aa92">
+      <div class="phg-head"><span class="gname">集中双元音 Centering Diphthongs</span><span class="gen">收于 /ə/</span><button class="speak play" onclick="speakGroup(this)" title="连续播放本组">▶</button></div>
+      <div class="ph-row">
+        <div class="ph" data-say="hear, near, beer"><span class="sym">/ɪə/</span><span class="words"><span class="cap">hear</span> · near · beer</span><button class="speak" onclick="speakDemo(this,'hear, near, beer')">🔊</button></div>
+        <div class="ph" data-say="hair, bear, air"><span class="sym">/eə/</span><span class="words"><span class="cap">hair</span> · bear · air</span><button class="speak" onclick="speakDemo(this,'hair, bear, air')">🔊</button></div>
+        <div class="ph" data-say="sure, tour, poor"><span class="sym">/ʊə/</span><span class="words"><span class="cap">sure</span> · tour · poor</span><button class="speak" onclick="speakDemo(this,'sure, tour, poor')">🔊</button></div>
+      </div>
+    </div>
+
+    <div class="tip anim" style="--i:7">
+      <span>💡</span>
+      <div><b>上海考生重点：</b>上海话通常<b>没有长音</b>，容易把 /iː/ 发成 /ɪ/、把 /uː/ 发成 /ʊ/。练习时注意<b>长音拉长、短音短促</b>，双元音要有<b>滑动过程</b>（如 /aɪ/ 从 a 滑到 ɪ）。</div>
+    </div>
+  </section>
+
+  <!-- 9 辅音音素 -->
+  <section class="slide scrollable" data-title="辅音音素 · 读音示范" data-sec="二 · 音标与拼读">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 音标与拼读</span><h2>辅音音素（28 个）· 读音示范</h2><span class="en">Consonants 🔊</span></div>
+    <div class="ph-hint anim" style="--i:1"><span class="ic">🔊</span><span>辅音重“<b>清浊</b>”与“<b>气流</b>”。/θ/ /ð/ 要<b>咬舌尖</b>；/ʃ/ /ʒ/ 是“嘘”音；破擦音要<b>先堵后放</b>。</span></div>
+
+    <div class="ph-group anim" style="--i:2;--pc:#8aa8a0">
+      <div class="phg-head"><span class="gname">爆破音 Plosives</span><span class="gen">先堵气、再爆破</span><button class="speak play" onclick="speakGroup(this)" title="连续播放本组">▶</button></div>
+      <div class="ph-row">
+        <div class="ph" data-say="pen, pig, map"><span class="sym">/p/</span><span class="words"><span class="cap">pen</span> · pig · map</span><button class="speak" onclick="speakDemo(this,'pen, pig, map')">🔊</button></div>
+        <div class="ph" data-say="bag, bed, job"><span class="sym">/b/</span><span class="words"><span class="cap">bag</span> · bed · job</span><button class="speak" onclick="speakDemo(this,'bag, bed, job')">🔊</button></div>
+        <div class="ph" data-say="tea, ten, cat"><span class="sym">/t/</span><span class="words"><span class="cap">tea</span> · ten · cat</span><button class="speak" onclick="speakDemo(this,'tea, ten, cat')">🔊</button></div>
+        <div class="ph" data-say="dog, day, red"><span class="sym">/d/</span><span class="words"><span class="cap">dog</span> · day · red</span><button class="speak" onclick="speakDemo(this,'dog, day, red')">🔊</button></div>
+        <div class="ph" data-say="key, cat, black"><span class="sym">/k/</span><span class="words"><span class="cap">key</span> · cat · black</span><button class="speak" onclick="speakDemo(this,'key, cat, black')">🔊</button></div>
+        <div class="ph" data-say="go, big, egg"><span class="sym">/g/</span><span class="words"><span class="cap">go</span> · big · egg</span><button class="speak" onclick="speakDemo(this,'go, big, egg')">🔊</button></div>
+      </div>
+    </div>
+
+    <div class="ph-group anim" style="--i:3;--pc:#8aa8a0">
+      <div class="phg-head"><span class="gname">摩擦音 Fricatives</span><span class="gen">气流摩擦出声</span><button class="speak play" onclick="speakGroup(this)" title="连续播放本组">▶</button></div>
+      <div class="ph-row">
+        <div class="ph" data-say="fish, five, leaf"><span class="sym">/f/</span><span class="words"><span class="cap">fish</span> · five · leaf</span><button class="speak" onclick="speakDemo(this,'fish, five, leaf')">🔊</button></div>
+        <div class="ph" data-say="very, five, love"><span class="sym">/v/</span><span class="words"><span class="cap">very</span> · five · love</span><button class="speak" onclick="speakDemo(this,'very, five, love')">🔊</button></div>
+        <div class="ph" data-say="three, think, mouth"><span class="sym">/θ/</span><span class="words"><span class="cap">three</span> · think · mouth</span><button class="speak" onclick="speakDemo(this,'three, think, mouth')">🔊</button></div>
+        <div class="ph" data-say="this, that, mother"><span class="sym">/ð/</span><span class="words"><span class="cap">this</span> · that · mother</span><button class="speak" onclick="speakDemo(this,'this, that, mother')">🔊</button></div>
+        <div class="ph" data-say="sun, six, bus"><span class="sym">/s/</span><span class="words"><span class="cap">sun</span> · six · bus</span><button class="speak" onclick="speakDemo(this,'sun, six, bus')">🔊</button></div>
+        <div class="ph" data-say="zoo, zero, music"><span class="sym">/z/</span><span class="words"><span class="cap">zoo</span> · zero · music</span><button class="speak" onclick="speakDemo(this,'zoo, zero, music')">🔊</button></div>
+        <div class="ph" data-say="she, ship, fish"><span class="sym">/ʃ/</span><span class="words"><span class="cap">she</span> · ship · fish</span><button class="speak" onclick="speakDemo(this,'she, ship, fish')">🔊</button></div>
+        <div class="ph" data-say="vision, measure, pleasure"><span class="sym">/ʒ/</span><span class="words"><span class="cap">vision</span> · measure · pleasure</span><button class="speak" onclick="speakDemo(this,'vision, measure, pleasure')">🔊</button></div>
+        <div class="ph" data-say="he, hot, hand"><span class="sym">/h/</span><span class="words"><span class="cap">he</span> · hot · hand</span><button class="speak" onclick="speakDemo(this,'he, hot, hand')">🔊</button></div>
+        <div class="ph" data-say="red, run, rice"><span class="sym">/r/</span><span class="words"><span class="cap">red</span> · run · rice</span><button class="speak" onclick="speakDemo(this,'red, run, rice')">🔊</button></div>
+      </div>
+    </div>
+
+    <div class="ph-group anim" style="--i:4;--pc:#8aa8a0">
+      <div class="phg-head"><span class="gname">破擦音 Affricates</span><span class="gen">先爆破、后摩擦</span><button class="speak play" onclick="speakGroup(this)" title="连续播放本组">▶</button></div>
+      <div class="ph-row">
+        <div class="ph" data-say="chair, teach, watch"><span class="sym">/tʃ/</span><span class="words"><span class="cap">chair</span> · teach · watch</span><button class="speak" onclick="speakDemo(this,'chair, teach, watch')">🔊</button></div>
+        <div class="ph" data-say="jam, judge, page"><span class="sym">/dʒ/</span><span class="words"><span class="cap">jam</span> · judge · page</span><button class="speak" onclick="speakDemo(this,'jam, judge, page')">🔊</button></div>
+        <div class="ph" data-say="tree, train, try"><span class="sym">/tr/</span><span class="words"><span class="cap">tree</span> · train · try</span><button class="speak" onclick="speakDemo(this,'tree, train, try')">🔊</button></div>
+        <div class="ph" data-say="dream, drive, drink"><span class="sym">/dr/</span><span class="words"><span class="cap">dream</span> · drive · drink</span><button class="speak" onclick="speakDemo(this,'dream, drive, drink')">🔊</button></div>
+        <div class="ph" data-say="cats, hats, boats"><span class="sym">/ts/</span><span class="words"><span class="cap">cats</span> · hats · boats</span><button class="speak" onclick="speakDemo(this,'cats, hats, boats')">🔊</button></div>
+        <div class="ph" data-say="beds, hands, cards"><span class="sym">/dz/</span><span class="words"><span class="cap">beds</span> · hands · cards</span><button class="speak" onclick="speakDemo(this,'beds, hands, cards')">🔊</button></div>
+      </div>
+    </div>
+
+    <div class="ph-group anim" style="--i:5;--pc:#8aa8a0">
+      <div class="phg-head"><span class="gname">鼻音 · 流音 · 半元音</span><span class="gen">Nasals · Lateral · Semi-vowels</span><button class="speak play" onclick="speakGroup(this)" title="连续播放本组">▶</button></div>
+      <div class="ph-row">
+        <div class="ph" data-say="me, map, come"><span class="sym">/m/</span><span class="words"><span class="cap">me</span> · map · come</span><button class="speak" onclick="speakDemo(this,'me, map, come')">🔊</button></div>
+        <div class="ph" data-say="no, sun, ten"><span class="sym">/n/</span><span class="words"><span class="cap">no</span> · sun · ten</span><button class="speak" onclick="speakDemo(this,'no, sun, ten')">🔊</button></div>
+        <div class="ph" data-say="sing, long, king"><span class="sym">/ŋ/</span><span class="words"><span class="cap">sing</span> · long · king</span><button class="speak" onclick="speakDemo(this,'sing, long, king')">🔊</button></div>
+        <div class="ph" data-say="like, leg, ball"><span class="sym">/l/</span><span class="words"><span class="cap">like</span> · leg · ball</span><button class="speak" onclick="speakDemo(this,'like, leg, ball')">🔊</button></div>
+        <div class="ph" data-say="we, walk, win"><span class="sym">/w/</span><span class="words"><span class="cap">we</span> · walk · win</span><button class="speak" onclick="speakDemo(this,'we, walk, win')">🔊</button></div>
+        <div class="ph" data-say="yes, you, young"><span class="sym">/j/</span><span class="words"><span class="cap">yes</span> · you · young</span><button class="speak" onclick="speakDemo(this,'yes, you, young')">🔊</button></div>
+      </div>
+    </div>
+
+    <div class="warn anim" style="--i:6">
+      <span>⚠️</span>
+      <div><b>最易混：</b>① /θ/（清，咬舌尖送气）vs /ð/（浊，声带震动）——three 是 /θ/，this 是 /ð/；② /n/ vs /ŋ/——sun 是 /n/（舌尖抵上齿龈），sing 是 /ŋ/（舌根抬起）；③ /l/ 的两种读音：词首 light（清晰 /l/）、词尾 ball（含糊 /l/）。</div>
+    </div>
+  </section>
+
+  <!-- 10 元音字母重读音节 -->
+  <section class="slide" data-title="元音字母 · 重读音节" data-sec="二 · 音标与拼读">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 音标与拼读</span><h2>元音字母在重读音节中的读音</h2><span class="en">Stressed Vowels</span></div>
+    <div class="note anim" style="--i:1">
+      <span class="ico">🔑</span>
+      <div><b>规律：</b>元音字母在<b>开音节</b>里读<b>字母本音</b>（a→/eɪ/，e→/iː/，i→/aɪ/，o→/əʊ/，u→/juː/）；在<b>闭音节</b>里读<b>短音</b>。开音节 = “元音结尾”或“元音+辅音+不发音 e”。</div>
+    </div>
+    <table class="anim" style="--i:2;margin-top:6px">
+      <thead><tr><th style="width:22%">元音字母</th><th style="width:14%">位置</th><th style="width:18%">读音</th><th>例词</th></tr></thead>
+      <tbody>
+        <tr><td><span class="en">a</span></td><td>开音节</td><td class="ipatext">/eɪ/</td><td><span class="en">name, cake, late</span></td></tr>
+        <tr><td><span class="en">a</span></td><td>闭音节</td><td class="ipatext">/æ/</td><td><span class="en">bag, black, back, cat</span></td></tr>
+        <tr><td><span class="en">e</span></td><td>开音节</td><td class="ipatext">/iː/</td><td><span class="en">he, she, me, we</span></td></tr>
+        <tr><td><span class="en">e</span></td><td>闭音节</td><td class="ipatext">/e/</td><td><span class="en">bed, egg, ten, red</span></td></tr>
+        <tr><td><span class="en">i</span></td><td>开音节</td><td class="ipatext">/aɪ/</td><td><span class="en">bike, kite, time</span></td></tr>
+        <tr><td><span class="en">i</span></td><td>闭音节</td><td class="ipatext">/ɪ/</td><td><span class="en">fish, swim, big</span></td></tr>
+        <tr><td><span class="en">o</span></td><td>开音节</td><td class="ipatext">/əʊ/</td><td><span class="en">those, no, go, home</span></td></tr>
+        <tr><td><span class="en">o</span></td><td>闭音节</td><td class="ipatext">/ɒ/</td><td><span class="en">clock, not, sock, dog</span></td></tr>
+        <tr><td><span class="en">u</span></td><td>开音节</td><td class="ipatext">/juː/</td><td><span class="en">student, excuse, duty, Tuesday</span></td></tr>
+        <tr><td><span class="en">u</span></td><td>闭音节</td><td class="ipatext">/ʌ/</td><td><span class="en">bus, cup, jump, much, lunch</span></td></tr>
+      </tbody>
+    </table>
+    <div class="tip anim" style="--i:3">
+      <span>💡</span>
+      <div><b>特例：</b>开音节中的 u 在辅音字母 <b>j, l, r, s</b> 后读 <b>/uː/</b>（不读 /juː/）：<span class="en">June, blue, ruler, super</span>。</div>
+    </div>
+  </section>
+
+  <!-- 11 特殊与非重读 -->
+  <section class="slide" data-title="元音字母 · 特殊与非重读" data-sec="二 · 音标与拼读">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 音标与拼读</span><h2>特殊读音 &amp; 非重读音节</h2><span class="en">Special Cases</span></div>
+    <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f"><b class="key">特殊读音：</b>元音字母受前后字母影响而变音；<b class="gold">非重读音节：</b>元音字母往往弱化为 /ə/ 或 /ɪ/。</p>
+    <div class="grid g2" style="margin-top:12px">
+      <div class="anim" style="--i:2">
+        <table>
+          <thead><tr><th>字母 · 位置</th><th>读音</th><th>例词</th></tr></thead>
+          <tbody>
+            <tr><td>a 在 [w] 后</td><td class="ipatext">/ɒ/</td><td><span class="en">want, what, watch, wash, quality</span></td></tr>
+            <tr><td>a 在 f,n,sk,ph,sp,ss,st,th 前</td><td class="ipatext">/ɑː/</td><td><span class="en">after, plant, graph, ask, grasp, glass, fast, father</span></td></tr>
+            <tr><td>i 在 -nd,-ld,gh 前</td><td class="ipatext">/aɪ/</td><td><span class="en">find, child, light, high</span></td></tr>
+            <tr><td>o 在 -st,-ld 前</td><td class="ipatext">/əʊ/</td><td><span class="en">most, postcard, old, cold</span></td></tr>
+            <tr><td>o 在 m,n,v,th 前</td><td class="ipatext">/ʌ/</td><td><span class="en">come, monkey, love, mother</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="anim" style="--i:3">
+        <table>
+          <thead><tr><th>字母 · 位置</th><th>读音</th><th>例词</th></tr></thead>
+          <tbody>
+            <tr><td>a（非重读）</td><td class="ipatext">/ə/</td><td><span class="en">China, orange, another, woman, breakfast</span></td></tr>
+            <tr><td>e（非重读）</td><td class="ipatext">/ə/ /ɪ/</td><td><span class="en">hundred, chicken, open</span></td></tr>
+            <tr><td>i（非重读）</td><td class="ipatext">/ɪ/ /aɪ/</td><td><span class="en">holiday, exercise, family, tonight</span></td></tr>
+            <tr><td>o（非重读）</td><td class="ipatext">/ə/</td><td><span class="en">second, welcome, photo</span></td></tr>
+            <tr><td>u（非重读）</td><td class="ipatext">/ə/ /ju/</td><td><span class="en">autumn, population, difficult, January</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:4">
+      <span>💡</span>
+      <div>动词中的 a 若处开音节读 /eɪ/（<span class="en">operate</span>）；u 在 j,l,r,s 后处开音节读 /uː/（<span class="en">July, influence, February, issue</span>）。非重读音节里 a/e/i 常可读 /ə/ 也可读 /ɪ/，<b>以词典为准</b>。</div>
+    </div>
+  </section>
+
+  <!-- 12 -r / -re 音节 -->
+  <section class="slide" data-title="-r / -re 音节" data-sec="二 · 音标与拼读">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 音标与拼读</span><h2>-r 音节 与 -re 音节</h2><span class="en">r / re Syllables</span></div>
+    <div class="grid g2" style="margin-top:4px">
+      <div class="anim" style="--i:1">
+        <div class="kicker" style="--pc-deep:#6e856d">-r 音节</div>
+        <table>
+          <thead><tr><th>字母组</th><th>读音</th><th>例词</th></tr></thead>
+          <tbody>
+            <tr><td><span class="en">ar</span></td><td class="ipatext">/ɑː/</td><td><span class="en">car, farm, dark, sharpener</span></td></tr>
+            <tr><td><span class="en">ar</span> 在 [w] 后</td><td class="ipatext">/ɔː/</td><td><span class="en">warm, quarter, towards</span></td></tr>
+            <tr><td><span class="en">or</span></td><td class="ipatext">/ɔː/</td><td><span class="en">forty, morning, short</span></td></tr>
+            <tr><td><span class="en">or</span> 在 [w] 后</td><td class="ipatext">/ɜː/</td><td><span class="en">word, worker, worse</span></td></tr>
+            <tr><td><span class="en">er / ir / ur</span></td><td class="ipatext">/ɜː/</td><td><span class="en">certainly, bird, Thursday</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="anim" style="--i:2">
+        <div class="kicker" style="--pc-deep:#6e856d">-re 音节</div>
+        <table>
+          <thead><tr><th>字母组</th><th>读音</th><th>例词</th></tr></thead>
+          <tbody>
+            <tr><td><span class="en">are</span></td><td class="ipatext">/eə/</td><td><span class="en">care, dare, hare</span></td></tr>
+            <tr><td><span class="en">ere</span></td><td class="ipatext">/ɪə/</td><td><span class="en">here, mere</span></td></tr>
+            <tr><td><span class="en">ire</span></td><td class="ipatext">/aɪə/</td><td><span class="en">fire, hire, wire</span></td></tr>
+            <tr><td><span class="en">ore</span></td><td class="ipatext">/ɔː/</td><td><span class="en">more, score, before</span></td></tr>
+            <tr><td><span class="en">ure</span></td><td class="ipatext">/jʊə/</td><td><span class="en">pure, cure</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="note anim" style="--i:3">
+      <span class="ico">🔑</span>
+      <div><b>三个注意：</b>① 辅音字母 r <b>双写</b>时，前面元音不构成 -r 音节，按<b>重读闭音节</b>读：<span class="en">carry, sorry, hurry</span>；② -r 音节<b>非重读</b>时读 /ə/：<span class="en">dollar, teacher, Saturday</span>；③ -re 音节中 ure <b>非重读</b>读 /ə/：<span class="en">picture, pleasure</span>。</div>
+    </div>
+  </section>
+
+  <!-- 13 元音字组(一) -->
+  <section class="slide" data-title="元音字组(一)" data-sec="二 · 音标与拼读">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 音标与拼读</span><h2>元音字组读音（一）</h2><span class="en">Vowel Digraphs</span></div>
+    <table class="anim" style="--i:1">
+      <thead><tr><th style="width:16%">字母组</th><th style="width:14%">读音</th><th>例词</th></tr></thead>
+      <tbody>
+        <tr><td><span class="en">ai / ay</span></td><td class="ipatext">/eɪ/</td><td><span class="en">rain, wait, day, play</span></td></tr>
+        <tr><td><span class="en">air</span></td><td class="ipatext">/eə/</td><td><span class="en">air, hair, chair, pair, repair</span></td></tr>
+        <tr><td><span class="en">al</span></td><td class="ipatext">/ɔː(l)/</td><td><span class="en">small, ball, wall, talk, all, also, salt, almost</span></td></tr>
+        <tr><td><span class="en">al</span> 在 f,m 前</td><td class="ipatext">/ɑː/</td><td><span class="en">half, calm</span></td></tr>
+        <tr><td><span class="en">au / aw</span></td><td class="ipatext">/ɔː/</td><td><span class="en">autumn, daughter, draw</span></td></tr>
+        <tr><td><span class="en">ea</span></td><td class="ipatext">/iː/ /e/ /eɪ/</td><td><span class="en">teach, easy, cheap · heavy, bread, sweater · break, great</span></td></tr>
+        <tr><td><span class="en">ear</span></td><td class="ipatext">/ɪə/ /eə/ /ɜː/</td><td><span class="en">hear, dear, near · bear, pear, wear · earth, learn, early</span></td></tr>
+        <tr><td><span class="en">ee</span></td><td class="ipatext">/iː/</td><td><span class="en">jeep, week, green, three</span></td></tr>
+      </tbody>
+    </table>
+    <div class="tip anim" style="--i:2">
+      <span>💡</span>
+      <div><b>ea 三个读音要记牢：</b>多数读 /iː/（teach, please）；个别读 /e/（heavy, bread, sweater）；极少读 /eɪ/（break, great）。<b>ear 同理</b>：hear /ɪə/、bear /eə/、learn /ɜː/。</div>
+    </div>
+  </section>
+
+  <!-- 14 元音字组(二) -->
+  <section class="slide" data-title="元音字组(二)" data-sec="二 · 音标与拼读">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 音标与拼读</span><h2>元音字组读音（二）</h2><span class="en">Vowel Digraphs</span></div>
+    <table class="anim" style="--i:1">
+      <thead><tr><th style="width:16%">字母组</th><th style="width:14%">读音</th><th>例词</th></tr></thead>
+      <tbody>
+        <tr><td><span class="en">eer</span></td><td class="ipatext">/ɪə/</td><td><span class="en">beer, deer</span></td></tr>
+        <tr><td><span class="en">ei / ey</span></td><td class="ipatext">/eɪ/ /iː/</td><td><span class="en">they, grey · key</span></td></tr>
+        <tr><td><span class="en">eu / ew</span></td><td class="ipatext">/juː/</td><td><span class="en">few, newspaper</span></td></tr>
+        <tr><td><span class="en">ew</span> 在 j,l,r,s 后</td><td class="ipatext">/uː/</td><td><span class="en">blew, flew, jewel</span></td></tr>
+        <tr><td><span class="en">ie / ei</span> 在 [s] 后</td><td class="ipatext">/iː/</td><td><span class="en">piece, receive</span></td></tr>
+        <tr><td><span class="en">oa</span></td><td class="ipatext">/əʊ/</td><td><span class="en">boat, coat, goal</span></td></tr>
+        <tr><td><span class="en">oar / oor</span></td><td class="ipatext">/ɔː/</td><td><span class="en">board, door, floor</span></td></tr>
+        <tr><td><span class="en">oi / oy</span></td><td class="ipatext">/ɔɪ/</td><td><span class="en">boy, toy, toilet, oil</span></td></tr>
+        <tr><td><span class="en">ou / ow</span></td><td class="ipatext">/aʊ/ /əʊ/ /uː/ /ʌ/</td><td><span class="en">count, down, house · throw, though, row · you, soup · enough, country</span></td></tr>
+        <tr><td><span class="en">our</span></td><td class="ipatext">/ɔː/ /aʊə/</td><td><span class="en">course, four, your · our, hour</span></td></tr>
+        <tr><td><span class="en">ui</span> 在 j,l,r,s 后</td><td class="ipatext">/uː/</td><td><span class="en">fruit, juice, suit, fluid, tuition</span></td></tr>
+      </tbody>
+    </table>
+    <div class="warn anim" style="--i:2">
+      <span>⚠️</span>
+      <div><b>ou/ow 最难：</b>一个组合四种读音——/aʊ/（count, now）、/əʊ/（know, throw）、/uː/（you, soup, group）、/ʌ/（enough, country）。见到新词先查音标，<b>不凭感觉</b>。</div>
+    </div>
+  </section>
+
+  <!-- 15 非重读字组 + 复合词 -->
+  <section class="slide" data-title="非重读字组 & 复合词" data-sec="二 · 音标与拼读">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 音标与拼读</span><h2>非重读字组 &amp; 复合词</h2><span class="en">Unstressed Suffixes</span></div>
+    <div class="grid g2" style="margin-top:4px">
+      <div class="anim" style="--i:1">
+        <div class="kicker" style="--pc-deep:#6e856d">非重读后缀字组</div>
+        <table>
+          <thead><tr><th>字组</th><th>读音</th><th>例词</th></tr></thead>
+          <tbody>
+            <tr><td><span class="en">-sion / -tion</span></td><td class="ipatext">/ʃn/</td><td><span class="en">impression, nation</span></td></tr>
+            <tr><td><span class="en">-sion</span> 在元音后</td><td class="ipatext">/ʒn/</td><td><span class="en">vision, decision, occasion</span></td></tr>
+            <tr><td><span class="en">-tion</span> 在 s 后</td><td class="ipatext">/tʃn/</td><td><span class="en">question, suggestion</span></td></tr>
+            <tr><td><span class="en">-sten / -stle</span></td><td class="ipatext">/sn/ /sl/</td><td><span class="en">listen · whistle</span></td></tr>
+            <tr><td><span class="en">-sure / -ture</span></td><td class="ipatext">/ʒə/ /tʃə/</td><td><span class="en">pleasure, measure · picture, culture</span></td></tr>
+            <tr><td><span class="en">ai/ay ei/ey</span>（非重读）</td><td class="ipatext">/ɪ/</td><td><span class="en">Sunday, foreign, monkey</span></td></tr>
+            <tr><td><span class="en">ow</span>（非重读）</td><td class="ipatext">/əʊ/</td><td><span class="en">yellow, sparrow, tomorrow</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="anim" style="--i:2">
+        <div class="kicker" style="--pc-deep:#6e856d">复合词读音</div>
+        <p style="font-size:14px;color:#5c564f;line-height:1.7">复合词第二部分<b>不标重音</b>，元音仍按<b>重读规则</b>拼读；但已“融合成新词”的，非重读部分按<b>非重读规则</b>：</p>
+        <div class="ex" style="margin-top:10px">
+          <div class="lead">仍按重读规则读</div>
+          <div class="en-ref"><span class="mt">例</span>every<b class="gold">day</b> /eɪ/ · hand<b class="gold">bag</b> /æ/ · black<b class="gold">board</b> /ɔː/</div>
+        </div>
+        <div class="ex" style="margin-top:10px">
+          <div class="lead">融合成新词，非重读弱化</div>
+          <div class="en-ref"><span class="mt">例</span>sun + day → Sun<b class="gold">day</b> · holy + day → holi<b class="gold">day</b></div>
+          <div class="en-ref" style="margin-top:6px"><span class="mt">例</span>break + fast → break<b class="gold">fast</b> /ə/ · cup + board → cup<b class="gold">board</b> /ə/</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 16 辅音字组(一) -->
+  <section class="slide" data-title="辅音字组(一)" data-sec="二 · 音标与拼读">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 音标与拼读</span><h2>辅音字组读音（一）</h2><span class="en">Consonant Groups</span></div>
+    <table class="anim" style="--i:1">
+      <thead><tr><th style="width:20%">字母组</th><th style="width:16%">读音</th><th>例词</th></tr></thead>
+      <tbody>
+        <tr><td><span class="en">b</span></td><td class="ipatext">/b/</td><td><span class="en">bike, bus, bag</span></td></tr>
+        <tr><td><span class="en">c</span></td><td class="ipatext">/k/ /s/</td><td><span class="en">cake, coat, music · face, decide, cinema, cycle</span></td></tr>
+        <tr><td><span class="en">ch / -ck</span></td><td class="ipatext">/tʃ/ /k/</td><td><span class="en">teacher, watch · black, clock</span></td></tr>
+        <tr><td><span class="en">d / -dge</span></td><td class="ipatext">/d/ /dʒ/</td><td><span class="en">day, dog · bridge, judge</span></td></tr>
+        <tr><td><span class="en">dr-</span></td><td class="ipatext">/dr/</td><td><span class="en">drive, drink, dream</span></td></tr>
+        <tr><td><span class="en">f</span></td><td class="ipatext">/f/</td><td><span class="en">fish, five, leaf</span></td></tr>
+        <tr><td><span class="en">g</span> 在 e/i/y 前</td><td class="ipatext">/dʒ/</td><td><span class="en">age, cage, gym</span></td></tr>
+        <tr><td><span class="en">gu- / -gue</span></td><td class="ipatext">/g/</td><td><span class="en">guess, guide, league</span></td></tr>
+        <tr><td><span class="en">h</span></td><td class="ipatext">/h/</td><td><span class="en">hand, hot（hour 中不发音）</span></td></tr>
+        <tr><td><span class="en">j / k</span></td><td class="ipatext">/dʒ/ /k/</td><td><span class="en">jam, join · key, week</span></td></tr>
+        <tr><td><span class="en">kn-</span></td><td class="ipatext">/n/</td><td><span class="en">knife, know, knock</span></td></tr>
+        <tr><td><span class="en">l / m</span></td><td class="ipatext">/l/ /m/</td><td><span class="en">leg, like · me, make</span></td></tr>
+        <tr><td><span class="en">-mn</span></td><td class="ipatext">/m/</td><td><span class="en">autumn, column</span></td></tr>
+        <tr><td><span class="en">n</span> 在 [k][g] 前 / -ng</td><td class="ipatext">/ŋ/</td><td><span class="en">thank, English, hungry · sing, long, wrong</span></td></tr>
+      </tbody>
+    </table>
+    <div class="tip anim" style="--i:2">
+      <span>💡</span>
+      <div><b>c 的规律：</b>c 在 e、i、y 前读 /s/（face, city, cycle），其余读 /k/（cake）。<b>g 的规律：</b>g 在 e、i、y 前常读 /dʒ/（age, gym），其余读 /g/（go）。</div>
+    </div>
+  </section>
+
+  <!-- 17 辅音字组(二) -->
+  <section class="slide" data-title="辅音字组(二)" data-sec="二 · 音标与拼读">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 音标与拼读</span><h2>辅音字组读音（二）</h2><span class="en">Consonant Groups</span></div>
+    <table class="anim" style="--i:1">
+      <thead><tr><th style="width:20%">字母组</th><th style="width:16%">读音</th><th>例词</th></tr></thead>
+      <tbody>
+        <tr><td><span class="en">p / q-</span></td><td class="ipatext">/p/ /kw/</td><td><span class="en">pig, pen · question</span></td></tr>
+        <tr><td><span class="en">r</span></td><td class="ipatext">/r/</td><td><span class="en">red, run, rice</span></td></tr>
+        <tr><td><span class="en">s</span></td><td class="ipatext">/s/ /z/</td><td><span class="en">sun, six, bus · music, husband</span></td></tr>
+        <tr><td><span class="en">sc-</span></td><td class="ipatext">/sk/ /s/</td><td><span class="en">scar, scarlet · science, muscle</span></td></tr>
+        <tr><td><span class="en">sh</span></td><td class="ipatext">/ʃ/</td><td><span class="en">she, ship, wash</span></td></tr>
+        <tr><td><span class="en">t</span>（弱读 ia/ie/io 前）</td><td class="ipatext">/t/ /ʃ/</td><td><span class="en">ten, tree · patient, nation</span></td></tr>
+        <tr><td><span class="en">tch</span></td><td class="ipatext">/tʃ/</td><td><span class="en">watch, match</span></td></tr>
+        <tr><td><span class="en">th</span></td><td class="ipatext">/θ/ /ð/</td><td><span class="en">thin, thirty, method · the, these, than, weather</span></td></tr>
+        <tr><td><span class="en">tr-</span></td><td class="ipatext">/tr/</td><td><span class="en">tree, train, truck</span></td></tr>
+        <tr><td><span class="en">v / w</span></td><td class="ipatext">/v/ /w/</td><td><span class="en">very, voice, love · week, win, wake</span></td></tr>
+        <tr><td><span class="en">wh-</span></td><td class="ipatext">/w/ /h/</td><td><span class="en">what, when, white, why · who, whose, whole（在 o 前）</span></td></tr>
+        <tr><td><span class="en">wr-</span></td><td class="ipatext">/r/</td><td><span class="en">write, wrong</span></td></tr>
+        <tr><td><span class="en">x</span></td><td class="ipatext">/ks/ /gz/</td><td><span class="en">box, text, exercise · example, exist, exact</span></td></tr>
+        <tr><td><span class="en">y / z</span></td><td class="ipatext">/j/ /z/</td><td><span class="en">yes, yellow, young · zero, zoo, puzzle</span></td></tr>
+      </tbody>
+    </table>
+    <div class="warn anim" style="--i:2">
+      <span>⚠️</span>
+      <div><b>th 两条规则：</b>① 实词（名词/动词/形容词）开头多读 /θ/——thin, three, thank；② <b>冠词、代词、介词、连词</b>及词尾 -the/-ther 多读 /ð/——the, this, these, than, weather。</div>
+    </div>
+  </section>
+
+  <!-- 18 连读(一) -->
+  <section class="slide" data-title="连读(一)" data-sec="三 · 朗读技巧">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">三 · 朗读技巧</span><h2>连读（一）</h2><span class="en">Linking 🔉</span></div>
+    <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f;line-height:1.7">连读 = 同一<b class="gold">意群</b>内，前一词<b>末尾的音</b>与后一词<b>开头的音</b>连着读，避免“蹦单词”。连读构成的音节<b>一般不重读</b>，一带而过。（符号 ～）</p>
+    <div class="grid g2" style="margin-top:12px">
+      <div class="anim" style="--i:2">
+        <div class="ex">
+          <div class="lead">① 辅音 + 元音</div>
+          <div class="en-ref"><span class="mt">例</span>I'm <b class="gold">an</b> English boy. <button class="speak mini" onclick="speakDemo(this,'I am an English boy')">🔊</button></div>
+          <div class="en-ref"><span class="mt">例</span>It is <b class="gold">an old</b> book. <button class="speak mini" onclick="speakDemo(this,'It is an old book')">🔊</button></div>
+          <div class="en-ref"><span class="mt">例</span>Put it <b class="gold">on</b>, please. <button class="speak mini" onclick="speakDemo(this,'Put it on, please')">🔊</button></div>
+          <div class="en-ref"><span class="mt">例</span>Not at <b class="gold">all</b>. <button class="speak mini" onclick="speakDemo(this,'Not at all')">🔊</button></div>
+        </div>
+      </div>
+      <div class="anim" style="--i:3">
+        <div class="ex">
+          <div class="lead">② r / re + 元音（r 要发音并连读）</div>
+          <div class="en-ref"><span class="mt">例</span>There <b class="gold">is</b> a football under it. <button class="speak mini" onclick="speakDemo(this,'There is a football under it')">🔊</button></div>
+          <div class="en-ref"><span class="mt">例</span>Here <b class="gold">is</b> a letter for you. <button class="speak mini" onclick="speakDemo(this,'Here is a letter for you')">🔊</button></div>
+          <div class="en-ref"><span class="mt">例</span>But where <b class="gold">is</b> my cup? <button class="speak mini" onclick="speakDemo(this,'But where is my cup')">🔊</button></div>
+        </div>
+        <div class="ex">
+          <div class="lead">③ 元音 + 元音</div>
+          <div class="en-ref"><span class="mt">例</span>I <b class="gold">am</b> Chinese. <button class="speak mini" onclick="speakDemo(this,'I am Chinese')">🔊</button></div>
+          <div class="en-ref"><span class="mt">例</span>He <b class="gold">is</b> very friendly. <button class="speak mini" onclick="speakDemo(this,'He is very friendly')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="note anim" style="--i:4">
+      <span class="ico">🎯</span>
+      <div><b>关键：</b>只有<b>同属一个意群</b>才连读；意群之间（哪怕辅音+元音相邻）<b>不连读</b>。如 <span class="en">Is it a hat ⌇ or a cat?</span> 中 hat 与 or 之间要停。</div>
+    </div>
+  </section>
+
+  <!-- 19 连读(二) -->
+  <section class="slide" data-title="连读(二)" data-sec="三 · 朗读技巧">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">三 · 朗读技巧</span><h2>连读（二）· 同化 &amp; h 省略</h2><span class="en">Assimilation 🔉</span></div>
+    <div class="grid g2" style="margin-top:4px">
+      <div class="anim" style="--i:1">
+        <div class="ex">
+          <div class="lead">④ 辅音 + 半元音（/j/ /w/）</div>
+          <div class="en-ref"><span class="mt">例</span>Thank <b class="gold">you</b>. <button class="speak mini" onclick="speakDemo(this,'Thank you')">🔊</button></div>
+          <div class="en-ref"><span class="mt">例</span>Nice to meet <b class="gold">you</b>. <button class="speak mini" onclick="speakDemo(this,'Nice to meet you')">🔊</button></div>
+          <div class="en-ref"><span class="mt">例</span>Would <b class="gold">you</b> like a cup of tea? <button class="speak mini" onclick="speakDemo(this,'Would you like a cup of tea')">🔊</button></div>
+        </div>
+        <div class="ex">
+          <div class="lead">⑤ 音的同化</div>
+          <div class="cn-src">/d/ + /j/ 常合成 /dʒ/：</div>
+          <div class="en-ref"><span class="mt">例</span>did you → /dɪdʒuː/ · would you → /wʊdʒuː/ · could you → /kʊdʒuː/</div>
+        </div>
+      </div>
+      <div class="anim" style="--i:2">
+        <div class="ex">
+          <div class="lead">⑥ 后一词以 h 开头 → h 省略，直接连读</div>
+          <div class="en-ref"><span class="mt">例</span>give him → give-<b class="gold">im</b> <button class="speak mini" onclick="speakDemo(this,'give him')">🔊</button></div>
+          <div class="en-ref"><span class="mt">例</span>Has he gone? → Has-<b class="gold">i</b> gone? <button class="speak mini" onclick="speakDemo(this,'Has he gone')">🔊</button></div>
+          <div class="en-ref"><span class="mt">例</span>Can he do it? → Can-<b class="gold">i</b> do it? <button class="speak mini" onclick="speakDemo(this,'Can he do it')">🔊</button></div>
+        </div>
+        <div class="ex">
+          <div class="lead">⑦ 意群间不连读</div>
+          <div class="cn-src">She opened the door ⌇ and walked in.（door 与 and 不连读）</div>
+          <div class="cn-src" style="margin-top:6px">There is a good book ⌇ in my desk.（book 与 in 不连读）</div>
+        </div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:3">
+      <span>💡</span>
+      <div><b>练习方法：</b>点 🔊 听一句，<b>跟读模仿</b>，注意“一带而过、不加重”。连读是“英语味”的第一来源，也是口试<b>流利度、韵律</b>两项的加分点。</div>
+    </div>
+  </section>
+
+  <!-- 20 失去爆破 -->
+  <section class="slide" data-title="失去爆破" data-sec="三 · 朗读技巧">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8aa8a0">三 · 朗读技巧</span><h2>失去爆破（不完全爆破）</h2><span class="en">Loss of Plosion 🔉</span></div>
+    <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f;line-height:1.7">两个辅音相邻时，前一个<b class="gold">爆破音</b>只做口型<b>不发音</b>，直接过渡到后一个音。6 个爆破音：/p/ /b/ /t/ /d/ /k/ /g/。</p>
+    <div class="grid g2" style="margin-top:12px">
+      <div class="anim" style="--i:2">
+        <div class="ex">
+          <div class="lead">① 爆破音 + 爆破音</div>
+          <div class="en-ref"><span class="mt">例</span>The girl in the re<b class="red">(d)</b> coat… <button class="speak mini" onclick="speakDemo(this,'The girl in the red coat was on a black bike just now')">🔊</button></div>
+          <div class="en-ref"><span class="mt">例</span>…a bla<b class="red">(ck)</b> bike…</div>
+          <div class="en-ref"><span class="mt">例</span>Wha<b class="red">(t)</b> time…?</div>
+        </div>
+      </div>
+      <div class="anim" style="--i:3">
+        <div class="ex">
+          <div class="lead">② 爆破音 + 摩擦音 / 破擦音</div>
+          <div class="en-ref"><span class="mt">例</span>a goo<b class="red">(d)</b> child · a bi<b class="red">(g)</b> house <button class="speak mini" onclick="speakDemo(this,'Harry is a good child')">🔊</button></div>
+          <div class="en-ref"><span class="mt">例</span>a fa<b class="red">(s)</b>t train · a re<b class="red">(d)</b> shirt</div>
+        </div>
+        <div class="ex">
+          <div class="lead">③ 爆破音 + 鼻音（鼻腔爆破）</div>
+          <div class="en-ref"><span class="mt">例</span>bu<b class="red">(tt)</b>on /ˈbʌtn/ · gar<b class="red">(d)</b>en /ˈgɑːdn/ <button class="speak mini" onclick="speakDemo(this,'button, garden')">🔊</button></div>
+        </div>
+        <div class="ex">
+          <div class="lead">④ 爆破音 + 舌侧音 /l/（舌边爆破）</div>
+          <div class="en-ref"><span class="mt">例</span>la<b class="red">(t)</b>ely · ba<b class="red">(d)</b>ly <button class="speak mini" onclick="speakDemo(this,'I have been very busy lately')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="note anim" style="--i:4">
+      <span class="ico">🔑</span>
+      <div><b>做法：</b>前一个爆破音<b>只摆口型、稍作停顿</b>，随即发后一个音——不是“漏掉”，而是<b>憋住不爆破</b>。这是口试<b>连读、失爆技巧</b>的直接考点。</div>
+    </div>
+  </section>
+
+  <!-- 21 句子重读 -->
+  <section class="slide" data-title="句子重读" data-sec="三 · 朗读技巧">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">三 · 朗读技巧</span><h2>句子重读</h2><span class="en">Sentence Stress</span></div>
+    <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f">语句重音 = 对句中某些词<b>用力、放大、拖长</b>加以强调。分三类：</p>
+    <div class="grid g3" style="margin-top:12px">
+      <div class="card anim" style="--i:2;--pc:#c09892"><span class="num">1</span><h4>表意重音</h4><div class="cn">对句中所有<b>实词</b>（名/动/形/副/数/指示/疑问代词）一视同仁地强调；<b>虚词</b>（介/冠/助/连/人称代词）弱读。</div></div>
+      <div class="card anim" style="--i:3;--pc:#8aa8a0"><span class="num">2</span><h4>逻辑重音</h4><div class="cn">为<b>对比</b>而突出某成分，被强调的虚词要用<b>重读形式</b>，其余实词读得快而弱。</div></div>
+      <div class="card anim" style="--i:4;--pc:#a69cb4"><span class="num">3</span><h4>情感重音</h4><div class="cn">激动时对表达情感的词作<b>超常规</b>强调。</div></div>
+    </div>
+    <div class="ex anim" style="--i:5">
+      <div class="lead">逻辑重音示例 · 同一句 8 种读法（加粗处重读）<button class="speak mini" onclick="speakDemo(this,'Tommy proposes you should discuss the topic with him this evening')">🔊</button></div>
+      <div class="cn-src" style="font-size:15px"><b class="gold">Tommy</b> proposes you should discuss the topic with him this evening.（强调“是谁”）<br>
+      Tommy proposes <b class="gold">you</b> should discuss…（强调“是你”）<br>
+      …discuss the <b class="gold">topic</b> with him…（强调“话题”而非别的）<br>
+      …with <b class="gold">him</b> this <b class="gold">evening</b>（强调“和他”“今晚”）</div>
+    </div>
+    <div class="tip anim" style="--i:6">
+      <span>💡</span>
+      <div>口试<b>韵律分数</b>考的就是<b>重音与节奏</b>：实词清晰有力、虚词一带而过，句子就有了轻重起伏，不再是“机器腔”。</div>
+    </div>
+  </section>
+
+  <!-- 22 升降调与意群 -->
+  <section class="slide" data-title="升降调 & 意群停顿" data-sec="三 · 朗读技巧">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">三 · 朗读技巧</span><h2>升降调 &amp; 意群停顿</h2><span class="en">Intonation &amp; Pausing</span></div>
+    <div class="grid g2" style="margin-top:4px">
+      <div class="anim" style="--i:1">
+        <div class="kicker" style="--pc-deep:#98706a">升调 ↗ 用于</div>
+        <table>
+          <thead><tr><th>场景</th><th>例句</th></tr></thead>
+          <tbody>
+            <tr><td>一般疑问句</td><td><span class="en">Did you visit your old friend last night?↗</span></td></tr>
+            <tr><td>选择疑问句前半</td><td><span class="en">Is your teacher an American ↗ or an Englishman?↘</span></td></tr>
+            <tr><td>并列项（除最后一项）</td><td><span class="en">yogurt ↗, tuna salad ↗, chocolate cake ↗ and hamburger ↘</span></td></tr>
+            <tr><td>表疑问的陈述句</td><td><span class="en">You want another cup?↗</span></td></tr>
+            <tr><td>祝贺 / 同情 / 热情</td><td><span class="en">Congratulations!↗ / Have a nice weekend!↗</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="anim" style="--i:2">
+        <div class="kicker" style="--pc-deep:#98706a">降调 ↘ 用于</div>
+        <table>
+          <thead><tr><th>场景</th><th>例句</th></tr></thead>
+          <tbody>
+            <tr><td>特殊疑问句</td><td><span class="en">Where will you go for your holiday?↘</span></td></tr>
+            <tr><td>感叹句</td><td><span class="en">What a sunny day!↘</span></td></tr>
+            <tr><td>反义疑问句（已确定）</td><td><span class="en">We will live in a global village, aren't we?↘</span></td></tr>
+            <tr><td>选择疑问句末项</td><td><span class="en">…or hand-drawn ones?↘</span></td></tr>
+            <tr><td>并列项最后一项</td><td><span class="en">three bedrooms ↗, a study ↗ and two baths ↘</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="note anim" style="--i:3">
+      <span class="ico">⏸️</span>
+      <div><b>意群停顿：</b>长句按<b>意群</b>分段、段尾<b>短暂停顿</b>换气。例：<span class="en">I think / we need to buy some meat / for the party.</span> 意群内要连读、意群间稍停——<b>别逐词停，也别一口气读完</b>。</div>
+    </div>
+  </section>
+
+  <!-- 23 题型全景 -->
+  <section class="slide" data-title="题型全景" data-sec="四 · 各题型技巧">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a69cb4">四 · 各题型技巧</span><h2>听说测试 · 题型全景</h2><span class="en">Question Types</span></div>
+    <p class="anim" style="--i:1;font-size:15px;color:#5c564f">上海高考口试共有<b class="gold">六大题型</b>，分两大块：<b class="key">「口语」</b>（朗读句子、段落朗读、情景提问、看图说话）和<b class="key">「听说」</b>（快速应答、听短文回答问题）。</p>
+    <div class="grid g3" style="margin-top:14px">
+      <div class="card anim" style="--i:2;--pc:#a69cb4"><span class="num">A</span><h4>朗读句子</h4><div class="cn">30s 准备 · 15s 朗读<br>2 分</div></div>
+      <div class="card anim" style="--i:3;--pc:#a69cb4"><span class="num">B</span><h4>段落朗读</h4><div class="cn">1min 准备 · 30s 朗读<br>2 分</div></div>
+      <div class="card anim" style="--i:4;--pc:#a69cb4"><span class="num">C</span><h4>情景提问</h4><div class="cn">对情景提两个问题<br>4 分</div></div>
+      <div class="card anim" style="--i:5;--pc:#a69cb4"><span class="num">D</span><h4>看图说话</h4><div class="cn">1min 准备 · 1min 说<br>≥5 句 · 3 分</div></div>
+      <div class="card anim" style="--i:6;--pc:#8aa8a0"><span class="num">A</span><h4>快速应答</h4><div class="cn">听 4 句 · 即时应答<br>4 分</div></div>
+      <div class="card anim" style="--i:7;--pc:#8aa8a0"><span class="num">B</span><h4>听短文回答</h4><div class="cn">听 2 遍 · 答 2 题<br>5 分</div></div>
+    </div>
+    <div class="tip anim" style="--i:8">
+      <span>💡</span>
+      <div>前四题靠<b>发音准 + 朗读技巧</b>（第二、三部分）；后两题靠<b>听懂 + 快速组织语言</b>（第五部分）。四页后逐一拆解。</div>
+    </div>
+  </section>
+
+  <!-- 24 朗读句子 -->
+  <section class="slide" data-title="朗读句子" data-sec="四 · 各题型技巧">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a69cb4">四 · 各题型技巧</span><h2>Section A · 朗读句子</h2><span class="en">Read Sentences</span></div>
+    <div class="ex anim" style="--i:1">
+      <div class="lead">评分标准（每题 1 分，共 2 分）</div>
+      <div class="cn-src"><b class="gold">1 分</b>：流利朗读、发音清楚、语音语调节奏正确、正确处理重音与意群停顿、掌握连读失爆。<br><b class="gold">0.5 分</b>：基本读出、有错误但不影响理解。<br><b class="gold">0 分</b>：错误严重、无法理解。</div>
+    </div>
+    <div class="ex anim" style="--i:2">
+      <div class="lead">典型例题 <button class="speak mini" onclick="speakDemo(this,'Overweight individuals had a widespread reduction in white matter compared with lean people')">🔊</button></div>
+      <div class="en-ref"><span class="mt">句</span>Overweight individuals had a widespread reduction in white matter compared with lean people.</div>
+      <div class="ana"><b>意群：</b>Overweight individuals / had a widespread reduction / in white matter / compared with lean people.</div>
+    </div>
+    <div class="grid g2" style="margin-top:6px">
+      <div class="ex anim" style="--i:3"><div class="lead">五个常见错误</div>
+        <div class="cn-src">① 清浊不分（t 读成 d）<br>② <b>长短音不分</b>、双元音时长不够<br>③ 单词重音随意（wide'spread 错）<br>④ 缺乏意群停顿（逐词停或一口气读完）<br>⑤ 无连读失爆，全一个调</div></div>
+      <div class="ex anim" style="--i:4"><div class="lead">答题技巧</div>
+        <div class="cn-src">① 读题时<b>先理解句意</b>、划意群<br>② 分清<b>动词/名词重音</b>差异（produce / migration vs immigration）<br>③ 平时用<b>语音识别软件</b>录音自查</div></div>
+    </div>
+  </section>
+
+  <!-- 25 段落朗读 -->
+  <section class="slide" data-title="段落朗读" data-sec="四 · 各题型技巧">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a69cb4">四 · 各题型技巧</span><h2>Section B · 段落朗读</h2><span class="en">Read a Passage</span></div>
+    <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f"><b class="gold">评分：</b>2 分（流利、清楚、语调节奏正确、处理重音/意群/语气转换）→ 1 分（有错误不影响理解）→ 0 分（严重错误）。</p>
+    <div class="ex anim" style="--i:2">
+      <div class="lead">典型例题（节选）<button class="speak mini" onclick="speakDemo(this,'I have been thinking about Jess all day, unable to focus on anything but what I saw this morning. What was it that made me think that something was wrong? I could not possibly see her expression at that distance, but I felt when I was looking at her that she was alone.')">🔊</button></div>
+      <div class="en-ref"><span class="mt">段</span>I have been thinking about Jess all day, unable to focus on anything but what I saw this morning. What was it that made me think that something was wrong? …Perhaps she was, or perhaps he's away, gone to one of those hot countries he jets off to to save lives.</div>
+    </div>
+    <div class="grid g2" style="margin-top:6px">
+      <div class="ex anim" style="--i:3"><div class="lead">三个额外问题</div>
+        <div class="cn-src">① <b>不必读完全篇</b>，但别为抠语调故意放慢<br>② 先<b>理解文意</b>（一般疑问句升调、特殊疑问句降调）<br>③ 拗口处特别注意——如 <span class="en">…he jets off to <b class="red">to</b> save lives</span> 两个 to 别漏读</div></div>
+      <div class="ex anim" style="--i:4"><div class="lead">答题技巧</div>
+        <div class="cn-src">① 1 分钟准备：<b>轻声读一遍</b>、划连读失爆<br>② 有口音别怕，<b>多模仿</b>磁带/新闻即可<br>③ 美音注意：不是所有 /ɑː/ 后都跟 /r/——<span class="en">writer, sister</span> 有 /r/，<span class="en">idea, campus</span> 没有</div></div>
+    </div>
+  </section>
+
+  <!-- 26 情景提问 -->
+  <section class="slide" data-title="情景提问" data-sec="四 · 各题型技巧">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a69cb4">四 · 各题型技巧</span><h2>Section C · 情景提问</h2><span class="en">Ask Questions</span></div>
+    <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f"><b class="gold">评分：</b>每题 1 分，共 4 分。1 分（内容恰当、结构正确）→ 0.5 分（有语言错误）→ 0 分。<b class="red">注意：</b>两个问题答案相同（如 How much…? / What's the price…?）只算半分；答错<b>立刻重说</b>，以最后为准。</p>
+    <div class="ex anim" style="--i:2">
+      <div class="lead">典型例题</div>
+      <div class="en-ref"><span class="mt">①</span>Your friend has just flown back home. Ask him <b>two questions</b> about the trip.</div>
+      <div class="en-ref"><span class="mt">②</span>Your classmate is preparing for a writing contest. Ask him <b>two questions</b> about it.</div>
+    </div>
+    <div class="grid g2" style="margin-top:6px">
+      <div class="ex anim" style="--i:3"><div class="lead">「5W1H」快速联想</div>
+        <div class="cn-src">从 <b>when / where / why / who / what</b> + <b>how</b>（how many / much / long / soon / often）把题目<b>具体化</b>：<br>How long is the trip? · When did you come back? · Where have you come from? · Who did you go with? · What did you see?</div></div>
+      <div class="ex anim" style="--i:4"><div class="lead">「上位 / 下位 / 平行」</div>
+        <div class="cn-src">题目多抽象（<b>上位</b>）→ 迅速<b>具体化（下位）</b>找可问点：把“旅行”落到时间、地点、同伴、见闻、感受。时态：朋友已回 → 过去时；同学备战 → 现在/现在完成时。</div></div>
+    </div>
+  </section>
+
+  <!-- 27 看图说话 -->
+  <section class="slide" data-title="看图说话" data-sec="四 · 各题型技巧">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a69cb4">四 · 各题型技巧</span><h2>Section D · 看图说话</h2><span class="en">Picture Talk</span></div>
+    <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f"><b class="gold">评分：</b>共 3 分。3 分（有条理、完整、与图相符、连贯流畅、语言正确）→ 2 分 → 1 分 → 0 分。要求<b>至少 5 句</b>，以所给句子开头。</p>
+    <div class="grid g2" style="margin-top:10px">
+      <div class="anim" style="--i:2">
+        <div class="kicker" style="--pc-deep:#7f7590">四象限分析</div>
+        <table>
+          <thead><tr><th>维度</th><th>分类</th></tr></thead>
+          <tbody>
+            <tr><td>时间</td><td><span class="en">一日 / 多日</span></td></tr>
+            <tr><td>主体</td><td><span class="en">个人 / 集体</span></td></tr>
+          </tbody>
+        </table>
+        <div class="cn-src" style="margin-top:8px">⇒ 个人一日 / 集体一日 / 集体多日 / 个人多日，基本覆盖全部题型。</div>
+        <div class="cn-src" style="margin-top:8px"><b>六要素：</b>时间、地点、人物、起因、经过、结果（记叙文）。</div>
+      </div>
+      <div class="anim" style="--i:3">
+        <div class="kicker" style="--pc-deep:#7f7590">动宾 → 成句（例）</div>
+        <div class="cn-src" style="font-size:14.5px;line-height:1.8">P1 Discussed where to go → <span class="en">We had a class meeting to discuss…</span><br>
+        P2 Climbed the mountain → <span class="en">We climbed the mountain, enjoying…</span><br>
+        P3 Picked up the litter → <span class="en">Shocked to see litter…</span><br>
+        P4 Put it into bins → <span class="en">Finally we put the litter…</span></div>
+      </div>
+    </div>
+    <div class="note anim" style="--i:4">
+      <span class="ico">🔑</span>
+      <div><b>拿分要点：</b>① 首句定<b>时态、人物、地点</b>；② 先写<b>动宾要点</b>再扩展；③ 加<b>必要细节＋拓展细节</b>；④ 用 <span class="en">the next day / when we got to the top / after about half an hour</span> 等<b>过渡词</b>串联；⑤ 适当用<b>复合句</b>，别全是简单句。</div>
+    </div>
+  </section>
+
+  <!-- 28 快速应答 -->
+  <section class="slide" data-title="快速应答" data-sec="五 · 听说测试">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8aa8a0">五 · 听说测试</span><h2>Section A · 快速应答</h2><span class="en">Quick Response</span></div>
+    <div class="ex anim" style="--i:1">
+      <div class="lead">评分标准（每题 1 分，共 4 分）</div>
+      <div class="cn-src"><b class="gold">1 分</b>：应答正确、符合英语表达习惯。<b class="gold">0.5 分</b>：内容正确、表达有误。<b class="gold">0 分</b>：内容不对。<br><b class="red">无效答案：</b>只会说 Sorry, I don't know. / Pardon? / Could you repeat it? —— 一律不得分。</div>
+    </div>
+    <div class="grid g2" style="margin-top:8px">
+      <div class="ex anim" style="--i:2"><div class="lead">典型例题（听 → 答）</div>
+        <div class="en-ref"><span class="mt">1</span>Where are you going during your summer holiday?</div>
+        <div class="en-ref"><span class="mt">2</span>How do you like my new dress?</div>
+        <div class="en-ref"><span class="mt">3</span>Why did you spend your time watching TV?</div>
+        <div class="en-ref"><span class="mt">4</span>Please send my best regards to your brother, will you?</div></div>
+      <div class="ex anim" style="--i:3"><div class="lead">万能结构：态度 + 原因 / 结果</div>
+        <div class="cn-src">听到 <span class="en">Ouch, you are hurting me!</span><br>→ 只答 Sorry 太单薄。应说：<br><b class="gold">态度</b> Oh, I'm so sorry.<br><b class="gold">原因</b> I didn't know you were here.<br><b class="gold">结果</b> Does it hurt?</div></div>
+    </div>
+    <div class="tip anim" style="--i:4">
+      <span>💡</span>
+      <div><b>方法：</b>① 边听边记关键词（where、holiday…）；② 尽量用<b>完整句子</b>回答；③ 别用中文思维硬译——<span class="en">What a nice coat!</span> 答 <b class="red">“Oh, just so so.”</b> 就不地道。后面四页是 37 类<b>功能意念对答</b>，务必背熟。</div>
+    </div>
+  </section>
+
+  <!-- 29 功能意念(一) -->
+  <section class="slide scrollable" data-title="功能意念对答(一)" data-sec="五 · 听说测试">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8aa8a0">五 · 听说测试</span><h2>功能意念对答（一）</h2><span class="en">Functions 1–7</span></div>
+    <p class="anim" style="--i:1;font-size:13.5px;color:#5c564f">点每个标题展开；点 🔊 听示范。<b class="gold">快速应答考的就是这 37 类对答</b>。</p>
+
+    <details class="func anim" style="--i:2"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">1</span>问候 Greetings <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'How do you do? How are you? Fine, thank you. And you? How is everything going? Not bad.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">How do you do?</span> <span class="a">How do you do?</span></div>
+        <div class="qa"><span class="q">How are you? / How is everything going?</span> <span class="a">Fine, thank you. / Not bad. / Pretty well. And you?</span></div>
+        <div class="qa"><span class="q">Please give my regards to your family.</span> <span class="a">I will. Thank you.</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:3"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">2</span>道别 Saying Goodbye <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Well, I must be going now. Please drop in again when you have time. Have fun in your winter vacation. You too. Goodbye.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">Well, I must be going now.</span> <span class="a">Please drop in again when you have time.</span></div>
+        <div class="qa"><span class="q">Have fun in your winter vacation.</span> <span class="a">You too. Goodbye.</span></div>
+        <div class="qa"><span class="q">Please give my best regards to your family.</span> <span class="a">OK. I will.</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:4"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">3</span>打电话 Telephone Calls <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Hello, may I speak to Mary? This is Mary speaking. Could I take a message? Hold on, please.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">Hello, may I speak to Mary?</span> <span class="a">This is Mary speaking.</span></div>
+        <div class="qa"><span class="q">I'd like to speak to Kim, please.</span> <span class="a">Sorry, she's out. Can I take a message?</span></div>
+        <div class="qa"><span class="q">Hello, Lucy?</span> <span class="a">Sorry, there's nobody by that name. / Hold on, please. / You've got the wrong number.</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:5"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">4</span>问路 Asking the Way <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Excuse me, can you tell me the way to the Park Hotel? Go straight ahead and turn right. It is on the left.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">Can you tell me the way to the Park Hotel?</span> <span class="a">Go straight ahead and turn right. It's on the left.</span></div>
+        <div class="qa"><span class="q">How can I get to the railway station?</span> <span class="a">You can take the No. 41 bus over there.</span></div>
+        <div class="qa"><span class="q">How far is it to Columbia University?</span> <span class="a">It's a twenty-five-minute walk from here.</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:6"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">5</span>时间日期 Time &amp; Dates <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'What time is it? It is six twenty-four. What day is it today? It is Sunday.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">What's the time? / What time is it?</span> <span class="a">It's 6:24. / It's 5 o'clock sharp.</span></div>
+        <div class="qa"><span class="q">What's the date today?</span> <span class="a">It's Feb. 15th, 2017.</span></div>
+        <div class="qa"><span class="q">What day is it today?</span> <span class="a">It's Sunday.</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:7"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">6</span>介绍 Introductions <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'May I introduce myself? I am Zhao Lin. Nice to meet you.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">May I introduce myself? I'm Zhao Lin.</span> <span class="a">Nice to meet you.</span></div>
+        <div class="qa"><span class="q">I don't think you've met Bryan. He's our football star.</span> <span class="a">Glad to meet you.</span></div>
+        <div class="qa"><span class="q">Excuse me, I don't believe we've met. I'm Sidney Carson.</span> <span class="a">Pleased to meet you.</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:8"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">7</span>致谢 Giving Thanks <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Thank you very much. You are welcome. I really appreciate your help. It is all right.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">Thank you very much for what you've done.</span> <span class="a">Glad to be of help. / You're welcome.</span></div>
+        <div class="qa"><span class="q">Thanks a lot.</span> <span class="a">Don't mention it. / My pleasure.</span></div>
+        <div class="qa"><span class="q">I really appreciate your help.</span> <span class="a">It's all right. / I'm glad I could help.</span></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- 30 功能意念(二) -->
+  <section class="slide scrollable" data-title="功能意念对答(二)" data-sec="五 · 听说测试">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8aa8a0">五 · 听说测试</span><h2>功能意念对答（二）</h2><span class="en">Functions 8–15</span></div>
+    <p class="anim" style="--i:1;font-size:13.5px;color:#5c564f">道歉、求助、征求意见、表态、购物、就餐。</p>
+
+    <details class="func anim" style="--i:2"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">8</span>道歉 Apologies <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'I am sorry to have kept you waiting. It does not matter. Please excuse me for being late. Never mind.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">I'm sorry to have kept you waiting.</span> <span class="a">It doesn't matter.</span></div>
+        <div class="qa"><span class="q">Please excuse me for being late.</span> <span class="a">Never mind. You're not too late.</span></div>
+        <div class="qa"><span class="q">Forgive me for being so careless.</span> <span class="a">Forget it. Anyway we didn't like it.</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:3"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">9</span>提供帮助 Offering Help <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Can I help you with that? Yes, please. Would you like me to carry it for you? That is very kind of you.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">Can I help you with that?</span> <span class="a">Yes, please.</span></div>
+        <div class="qa"><span class="q">Would you like me to carry it for you?</span> <span class="a">That's very kind of you. Thanks.</span></div>
+        <div class="qa"><span class="q">Do you need help?</span> <span class="a">No, thank you all the same. I can manage it.</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:4"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">10</span>请求许可 Permission <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'May I borrow your bike for a while? Yes, of course. Do you mind if I turn on the TV? Not at all.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">May I borrow your bike for a while?</span> <span class="a">Yes, of course. But be careful with the brakes.</span></div>
+        <div class="qa"><span class="q">Do you mind if I turn on the TV?</span> <span class="a">Not at all.</span></div>
+        <div class="qa"><span class="q">Is it OK if I sit here?</span> <span class="a">I'd rather you didn't. My friend is coming in a minute.</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:5"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">11</span>同意/不同意 Agreement <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Chinese food is the best in the world. Yes, it certainly is. I guess we should buy a new refrigerator. I do not agree.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">Chinese food is the best in the world.</span> <span class="a">Yes, it certainly is.</span></div>
+        <div class="qa"><span class="q">The students gave a very good performance.</span> <span class="a">Absolutely. / You took the words right out of my mouth.</span></div>
+        <div class="qa"><span class="q">I guess we should buy a new refrigerator.</span> <span class="a">I don't agree. / You may be right, but it depends.</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:6"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">12</span>确定/不确定 Certainty <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Is it going to rain? There is no doubt about it. Are you sure? Yes, I am pretty sure.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">Is it going to rain?</span> <span class="a">There's no doubt about it.</span></div>
+        <div class="qa"><span class="q">Are you sure that Tom and Mary are going to marry?</span> <span class="a">Yes, I'm pretty sure.</span></div>
+        <div class="qa"><span class="q">Will they win the match this time?</span> <span class="a">It's hard to say. / Maybe, but I'm not sure.</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:7"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">13</span>喜好 Likes / Dislikes <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'I am fond of western movies. Really? I love science fiction movies. I hate rock and roll. It is not to my taste either.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">I'm fond of western movies.</span> <span class="a">You are? I love science fiction movies.</span></div>
+        <div class="qa"><span class="q">I prefer beef to mutton.</span> <span class="a">I like pork.</span></div>
+        <div class="qa"><span class="q">I don't care for football.</span> <span class="a">Neither do I.</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:8"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">14</span>购物 Shopping <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'May I help you? Yes, I am looking for a toy. How much is it? It is fifteen dollars.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">May I help you?</span> <span class="a">Yes, I'm looking for a toy for a five-year-old boy.</span></div>
+        <div class="qa"><span class="q">How much is it?</span> <span class="a">It's $15. / It's 230 yuan.</span></div>
+        <div class="qa"><span class="q">Do you have anything larger?</span> <span class="a">Let me see.</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:9"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">15</span>就餐 Restaurant <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'May I take your order now? Yes, I would like to have fried fish. How do you like your steak? Medium rare, please.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">May I take your order now?</span> <span class="a">Yes, I'd like to have fried fish.</span></div>
+        <div class="qa"><span class="q">How do you like your steak?</span> <span class="a">Medium rare, please. / Well done.</span></div>
+        <div class="qa"><span class="q">May I have the check, please?</span> <span class="a">Sure. Thank you. Have a nice day.</span></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- 31 功能意念(三) -->
+  <section class="slide scrollable" data-title="功能意念对答(三)" data-sec="五 · 听说测试">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8aa8a0">五 · 听说测试</span><h2>功能意念对答（三）</h2><span class="en">Functions 16–23</span></div>
+    <p class="anim" style="--i:1;font-size:13.5px;color:#5c564f">天气、愿望、祝福、安慰、警告、惊奇、请求、建议。</p>
+
+    <details class="func anim" style="--i:2"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">16</span>天气 Weather <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'How is the weather today? It is fine. What is the weather like? It is raining cats and dogs.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">How is the weather today?</span> <span class="a">It's fine.</span></div>
+        <div class="qa"><span class="q">What's the weather like today?</span> <span class="a">It's raining cats and dogs.</span></div>
+        <div class="qa"><span class="q">Lovely weather, isn't it?</span> <span class="a">Yes, isn't it?</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:3"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">17</span>愿望意图 Desires <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'I am going to visit Hong Kong this summer. How wonderful! What are you going to do tomorrow? I am going to fix my TV set.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">I'm going to visit Hong Kong this summer.</span> <span class="a">How wonderful!</span></div>
+        <div class="qa"><span class="q">What are you going to do tomorrow?</span> <span class="a">I'm going to fix my TV set.</span></div>
+        <div class="qa"><span class="q">Have you made any plans for the holiday?</span> <span class="a">Nothing in particular.</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:4"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">18</span>祝贺祝福 Congratulations <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'I got five As in the final examinations. Congratulations! Happy New Year! The same to you.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">I got 5 As in the final examinations.</span> <span class="a">Congratulations! You're a smart boy.</span></div>
+        <div class="qa"><span class="q">Happy New Year! / Merry Christmas!</span> <span class="a">The same to you.</span></div>
+        <div class="qa"><span class="q">Good luck on the test.</span> <span class="a">Thanks.</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:5"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">19</span>同情鼓励 Sympathy <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'I did not pass the exam. I am sorry to hear that. I am sure I can not get that position. Cheer up.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">I didn't pass the exam.</span> <span class="a">I'm sorry to hear that.</span></div>
+        <div class="qa"><span class="q">I'm sure I can't get that position.</span> <span class="a">Oh, cheer up. That's not the end of the world.</span></div>
+        <div class="qa"><span class="q">The business is not good these days.</span> <span class="a">Oh, come on. Things will improve.</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:6"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">20</span>禁止警告 Warnings <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Watch out! Wet paint. You must not smoke here. I am so sorry. I did not know.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">Let's sit on the bench.</span> <span class="a">Watch out! Wet paint.</span></div>
+        <div class="qa"><span class="q">You must not smoke here.</span> <span class="a">I'm so sorry. I didn't know.</span></div>
+        <div class="qa"><span class="q">Watch your step. The floor is slippery.</span> <span class="a">Thanks for warning me.</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:7"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">21</span>惊奇担心 Surprise / Worry <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'What is the matter? I did not get that promotion. I can not believe my eyes. Hard to believe, is it not?')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">What's the matter?</span> <span class="a">I didn't get that promotion this time.</span></div>
+        <div class="qa"><span class="q">Wow, I never thought you would come to see me.</span> <span class="a">What a surprise!</span></div>
+        <div class="qa"><span class="q">I can't believe my eyes.</span> <span class="a">Hard to believe, isn't it?</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:8"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">22</span>请求指导 Requests <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Please tell me how to make a cake. First, beat the egg. Then mix the flour with a little water.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">I don't know how to use the computer. Will you show me?</span> <span class="a">Sure. / I'm sorry I don't know either.</span></div>
+        <div class="qa"><span class="q">Please tell me how to make a cake.</span> <span class="a">First, beat the egg. Then mix the flour with a little water…</span></div>
+        <div class="qa"><span class="q">How do you recommend I brush my teeth?</span> <span class="a">First squeeze some paste onto the brush…</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:9"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">23</span>建议 Advice / Suggestions <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Shall we go to the beach this weekend? Good idea. Why not join me in the game? I guess you are right.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">Shall we go to the beach this weekend?</span> <span class="a">Good idea.</span></div>
+        <div class="qa"><span class="q">How do you suggest we improve our oral English?</span> <span class="a">You'd better speak more.</span></div>
+        <div class="qa"><span class="q">Why not join me in the game?</span> <span class="a">Mmm, I guess you're right.</span></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- 32 功能意念(四) -->
+  <section class="slide scrollable" data-title="功能意念对答(四)" data-sec="五 · 听说测试">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8aa8a0">五 · 听说测试</span><h2>功能意念对答（四）</h2><span class="en">Functions 24–30</span></div>
+    <p class="anim" style="--i:1;font-size:13.5px;color:#5c564f">请求重复、征询意见、满意、失望、责备、就医、义务。</p>
+
+    <details class="func anim" style="--i:2"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">24</span>请求重复 Repetition <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'What did you say? I did not hear you. Could you repeat that, please? OK.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">What did you say? I didn't hear you.</span> <span class="a">I said you play the radio someplace else.</span></div>
+        <div class="qa"><span class="q">Could you repeat that, please?</span> <span class="a">OK. Like human beings, stars have their life circles.</span></div>
+        <div class="qa"><span class="q">I'm sorry I didn't quite catch you.</span> <span class="a">Please put down the earphones and you can hear me.</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:3"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">25</span>征询意见 Ideas <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'What is your opinion of the high cost of weddings? It depends on how much people make. What do you think of the school lunch? It is terrible.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">What's your opinion of the high cost of weddings?</span> <span class="a">It depends on how much people make.</span></div>
+        <div class="qa"><span class="q">What do you think of school lunch?</span> <span class="a">It's terrible.</span></div>
+        <div class="qa"><span class="q">Do you think she is pretty?</span> <span class="a">Yes. She's gorgeous.</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:4"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">26</span>满意/不满意 Satisfaction <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Are you happy with your new dress? Yes, it is fancy. You did a very good job. I am glad you like my work.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">Are you happy with your new dress?</span> <span class="a">Yes, it's fancy.</span></div>
+        <div class="qa"><span class="q">You did a very good job.</span> <span class="a">I'm glad you like my work.</span></div>
+        <div class="qa"><span class="q">I'm not happy with your school report.</span> <span class="a">I'll do better next time.</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:5"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">27</span>失望 Disappointment <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Was the play good? It was disappointing. Did you enjoy the party? Not at all.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">Was the play good?</span> <span class="a">It was disappointing.</span></div>
+        <div class="qa"><span class="q">Did you enjoy the party?</span> <span class="a">Not at all. I didn't know a single person there.</span></div>
+        <div class="qa"><span class="q">What did you think of the movie?</span> <span class="a">Not as good as I thought.</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:6"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">28</span>责备 Reproaches <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'How dare you speak to me like that? Sorry, I just lost my head. How could you lie to me? I did not mean to do that.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">How dare you speak to me like that!</span> <span class="a">Sorry. I just lost my head.</span></div>
+        <div class="qa"><span class="q">How could you lie to me?</span> <span class="a">Sorry. I didn't mean to do that.</span></div>
+        <div class="qa"><span class="q">You had no right to touch my things.</span> <span class="a">Sorry. I didn't know you would care so much.</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:7"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">29</span>就医 Seeing a Doctor <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'What is the matter? I am not feeling well. Is it serious? Do not worry. It is nothing serious.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">What's the matter?</span> <span class="a">I'm not feeling well.</span></div>
+        <div class="qa"><span class="q">Is it serious?</span> <span class="a">Don't worry. It's nothing serious.</span></div>
+        <div class="qa"><span class="q">I have a sore throat, doctor.</span> <span class="a">Open your mouth and say AH.</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:8"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">30</span>义务必须 Obligation <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Do we have to pay income tax? Yes, we have to. Must I take notes? Yes, because you need them.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">Do we have to pay income tax?</span> <span class="a">Yes, we have to.</span></div>
+        <div class="qa"><span class="q">Must I take notes?</span> <span class="a">Yes, because you need them when you go over your lessons.</span></div>
+        <div class="qa"><span class="q">Need I make a copy of that report?</span> <span class="a">No, it's not necessary.</span></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- 33 功能意念(五) -->
+  <section class="slide scrollable" data-title="功能意念对答(五)" data-sec="五 · 听说测试">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8aa8a0">五 · 听说测试</span><h2>功能意念对答（五）</h2><span class="en">Functions 31–37</span></div>
+    <p class="anim" style="--i:1;font-size:13.5px;color:#5c564f">否认、偏好、高兴/不快、求助、能力、信息、邀请。</p>
+
+    <details class="func anim" style="--i:2"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">31</span>否认 Denying <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Tim is going to Sweden. That is not quite right. He is going to Switzerland.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">Tim is going to Sweden to study Hotel Management.</span> <span class="a">That isn't quite right. He's going to Switzerland.</span></div>
+        <div class="qa"><span class="q">Our stock went up ten points today.</span> <span class="a">I think you might be mistaken. It went down ten points.</span></div>
+        <div class="qa"><span class="q">Chris is marrying Mary this June.</span> <span class="a">That's not true. Actually they broke up.</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:3"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">32</span>偏好 Preference <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Would you like to go to the movies tonight? I would prefer to stay home rather than go to the movies. Would you rather have fish or meat? I would rather have fish.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">Would you like to go to the movies tonight?</span> <span class="a">I'd prefer to stay home rather than go to the movies.</span></div>
+        <div class="qa"><span class="q">Would you rather have fish or meat?</span> <span class="a">I'd rather have fish.</span></div>
+        <div class="qa"><span class="q">Which would you prefer, living in the country or the city?</span> <span class="a">As far as I'm concerned, living in the country is more comfortable.</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:4"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">33</span>高兴/不快 Pleasure <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'We are going to move into a bigger house. How wonderful! I lost your bike. How could you!')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">We are going to move into a bigger house.</span> <span class="a">How wonderful!</span></div>
+        <div class="qa"><span class="q">I'm graduating this coming May.</span> <span class="a">I'm really delighted about it.</span></div>
+        <div class="qa"><span class="q">I've lost your bike.</span> <span class="a">How could you!</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:5"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">34</span>求助 Assistance <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Could you give me a lift? Yes, certainly. Would you lend me some money? I am broke myself.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">Could you give me a lift?</span> <span class="a">Yes, certainly.</span></div>
+        <div class="qa"><span class="q">Would you lend me some money?</span> <span class="a">I'd like to say yes, but that's just impossible. I'm broke myself.</span></div>
+        <div class="qa"><span class="q">Would you do me a favour to explain the whole project?</span> <span class="a">Yes, all right.</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:6"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">35</span>能力 Ability / Disability <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Can you take shorthand? Yes, I can. Are you able to operate the computer? I am very good at it.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">Can you take shorthand?</span> <span class="a">Yes, I can.</span></div>
+        <div class="qa"><span class="q">Are you able to operate the computer?</span> <span class="a">I'm very good at it.</span></div>
+        <div class="qa"><span class="q">Can you repair foreign cars?</span> <span class="a">Sorry, I can't manage.</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:7"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">36</span>信息 Information <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'What happened to David? He is going to talk with the manager about the promotion.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">What happened to David?</span> <span class="a">He's going to talk with the manager about the promotion.</span></div>
+        <div class="qa"><span class="q">Why is Julie upset?</span> <span class="a">Because she lost her purse on her way to work.</span></div>
+        <div class="qa"><span class="q">Can you tell me what it is like?</span> <span class="a">Yes. It looks like a blue ball.</span></div>
+      </div>
+    </details>
+
+    <details class="func anim" style="--i:8"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">37</span>接受/拒绝邀请 Invitations <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'I would like to invite you to my place for dinner this Saturday. That would be nice. Will you come? Not this time, but thanks anyway.')">🔊</button></summary>
+      <div class="fbody">
+        <div class="qa"><span class="q">I'd like to invite you to my place for dinner.</span> <span class="a">That would be nice.</span></div>
+        <div class="qa"><span class="q">Do you want to go to the football match with us?</span> <span class="a">I'm afraid I can't.</span></div>
+        <div class="qa"><span class="q">Will you join me for a coffee?</span> <span class="a">Oh, what a pity! I'm going to a party.</span></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- 34 听短文回答 -->
+  <section class="slide" data-title="听短文回答问题" data-sec="五 · 听说测试">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8aa8a0">五 · 听说测试</span><h2>Section B · 听短文回答问题</h2><span class="en">Listen &amp; Answer</span></div>
+    <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f"><b class="gold">流程：</b>短文读两遍 → 第 1 题<b>据听力信息作答</b>（2 分），第 2 题<b>谈自己的看法</b>（≥3 句，3 分）。共 5 分。</p>
+    <div class="ex anim" style="--i:2">
+      <div class="lead">典型例题 <button class="speak mini" onclick="speakDemo(this,'One of my most interesting experiences was swimming in the Great Salt Lake. The surprising fact is that the lake is about six times as salty as the ocean.')">🔊</button></div>
+      <div class="en-ref"><span class="mt">Q1</span>List the two mistakes that the writer made.</div>
+      <div class="en-ref"><span class="mt">Q2</span>Do you like travelling? Why or why not?</div>
+      <div class="ana"><b>参考答案 Q1：</b>One is that he couldn't stand up because the salty water held him up; the other is that he opened his eyes under water, which brought him terrible pain.</div>
+    </div>
+    <div class="grid g2" style="margin-top:6px">
+      <div class="ex anim" style="--i:3"><div class="lead">常见问题</div>
+        <div class="cn-src">① 没抓住<b>关键信息</b>答不出第 1 题<br>② 第 2 题<b>结巴、连不成句</b>、控时不当<br>③ 没看懂要求，<b>泛泛而谈</b>、没答到自己怎么做</div></div>
+      <div class="ex anim" style="--i:4"><div class="lead">答题技巧</div>
+        <div class="cn-src">① 先看<b>屏幕上的两个问题</b>，预判主题、调动词汇<br>② 边听边<b>记关键词</b>（salty water, heavy, hold, pain…）<br>③ 第 2 题用 1 分钟<b>组织口头小作文</b>（见下一页框架）</div></div>
+    </div>
+  </section>
+
+  <!-- 35 口头小作文(一) -->
+  <section class="slide scrollable" data-title="口头小作文框架(一)" data-sec="五 · 听说测试">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8aa8a0">五 · 听说测试</span><h2>口头小作文框架（一）</h2><span class="en">Opinion Frames</span></div>
+    <p class="anim" style="--i:1;font-size:13.5px;color:#5c564f">第二题（谈看法）的万能句式，<b>背熟后套用</b>。点 🔊 听示范。</p>
+
+    <div class="grid g2" style="margin-top:6px">
+      <div class="ex anim" style="--i:2"><div class="lead">1 · Liking 喜欢 <button class="speak mini" onclick="speakDemo(this,'I am fairly keen on animals. To be more precise, I love those little kittens. This is due to the fact that those little furry creatures never fail to intrigue me with their lovely faces and funny gestures.')">🔊</button></div>
+        <div class="cn-src"><b>引入：</b>I am fairly keen on / really into / quite a big fan of…</div>
+        <div class="cn-src"><b>细化：</b>To be more precise / specifically…</div>
+        <div class="cn-src"><b>理由：</b>This is due to the fact that… / The reason has something to do with…</div></div>
+      <div class="ex anim" style="--i:3"><div class="lead">2 · Disliking 不喜欢 <button class="speak mini" onclick="speakDemo(this,'I am not so keen on the weather. To be more precise, I really can not stand the summer months. This is due to the fact that the temperature can get as high as forty degrees.')">🔊</button></div>
+        <div class="cn-src"><b>引入：</b>I am not so keen on / not much of a fan of / can't stand…</div>
+        <div class="cn-src"><b>细化：</b>To be more precise…</div>
+        <div class="cn-src"><b>理由：</b>This is probably because…</div></div>
+      <div class="ex anim" style="--i:4"><div class="lead">3 · Predicting 预测 <button class="speak mini" onclick="speakDemo(this,'I am sure that in the years to come, we will see a number of changes related to this. Initially, I guess that we might begin to see houses that are much bigger and smarter.')">🔊</button></div>
+        <div class="cn-src"><b>开头：</b>I am sure that in the years to come, we will see a number of changes…</div>
+        <div class="cn-src"><b>预测 1：</b>Initially, I guess that we might begin to see…</div>
+        <div class="cn-src"><b>预测 2：</b>At the same time, I suppose it is quite probable that…</div></div>
+      <div class="ex anim" style="--i:5"><div class="lead">4 · Why 原因 <button class="speak mini" onclick="speakDemo(this,'I suppose that there are quite a few clear benefits, but one thing that really stands out is that trains are really cheap, especially for long distance travel.')">🔊</button></div>
+        <div class="cn-src"><b>开头：</b>I suppose there are quite a few clear benefits…</div>
+        <div class="cn-src"><b>最重要：</b>But one thing that really stands out is that…</div>
+        <div class="cn-src"><b>第二个：</b>At the same time, a second bonus might be that…</div></div>
+    </div>
+  </section>
+
+  <!-- 36 口头小作文(二) -->
+  <section class="slide scrollable" data-title="口头小作文框架(二)" data-sec="五 · 听说测试">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8aa8a0">五 · 听说测试</span><h2>口头小作文框架（二）</h2><span class="en">Opinion Frames</span></div>
+    <p class="anim" style="--i:1;font-size:13.5px;color:#5c564f">「问题」与「解决方案」两类，是近年高频命题。</p>
+    <div class="grid g2" style="margin-top:6px">
+      <div class="ex anim" style="--i:2"><div class="lead">5 · Problems 问题 <button class="speak mini" onclick="speakDemo(this,'It is universally accepted that there are a few hazards involved with the over-popularity of private cars. First and foremost, one major worry is probably that cars burn oil, which leads to the greenhouse effect.')">🔊</button></div>
+        <div class="cn-src"><b>开头：</b>It is universally accepted that there are quite a few problems with regard to this issue…</div>
+        <div class="cn-src"><b>问题 1：</b>First and foremost, one major worry is probably that…</div>
+        <div class="cn-src"><b>问题 2：</b>Another matter which causes unease is that…</div></div>
+      <div class="ex anim" style="--i:3"><div class="lead">6 · Solutions 解决方案 <button class="speak mini" onclick="speakDemo(this,'In my view, there are a number of measures that can be taken. In reaction to the issue, the most effective way will be to develop public transport.')">🔊</button></div>
+        <div class="cn-src"><b>开头：</b>In my view, there are a number of measures that can be taken…</div>
+        <div class="cn-src"><b>方案 1：</b>In reaction to the issue, the most effective way will be to…</div>
+        <div class="cn-src"><b>方案 2：</b>Moreover, taking on the challenge, the most successful way will be to…</div></div>
+    </div>
+    <div class="note anim" style="--i:4">
+      <span class="ico">🔑</span>
+      <div><b>用法：</b>准备时只写<b>关键词</b>（如 kittens, intrigue, faces, gestures, kill time, reduce stress），说的时候按框架<b>串成句</b>。第一句亮<b>总观点</b>，然后<b>细化 → 理由 → 再补一点</b>，一分钟从容说完。</div>
+    </div>
+  </section>
+
+  <!-- 37 小结 -->
+  <section class="slide" data-title="本章小结" data-sec="收尾">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">小结</span><h2>听说测试 · 高分要点</h2><span class="en">Recap</span></div>
+    <div class="grid g5" style="margin-top:6px">
+      <div class="sum-block anim" style="--i:1;--pc:#93aa92">
+        <h4><span class="dot"></span>音标</h4>
+        <ul><li>48 音素：<b>20 元音 + 28 辅音</b></li><li>长短音、清浊要分清</li><li>ea / ear / ou 多音要记牢</li><li>点 🔊 反复跟读</li></ul>
+      </div>
+      <div class="sum-block anim" style="--i:2;--pc:#c09892">
+        <h4><span class="dot"></span>朗读技巧</h4>
+        <ul><li>连读：同义群<b>相连读</b></li><li>失爆：爆破音<b>憋住不发音</b></li><li>重读：<b>实词重、虚词轻</b></li><li>意群停顿 + 升降调</li></ul>
+      </div>
+      <div class="sum-block anim" style="--i:3;--pc:#a69cb4">
+        <h4><span class="dot"></span>各题型</h4>
+        <ul><li>朗读：先<b>理解再读</b></li><li>提问：<b>5W1H</b> 具体化</li><li>看图：<b>六要素 + 过渡词</b></li><li>注意时态一致</li></ul>
+      </div>
+      <div class="sum-block anim" style="--i:4;--pc:#8aa8a0">
+        <h4><span class="dot"></span>快速应答</h4>
+        <ul><li><b>态度 + 原因/结果</b></li><li>完整句子，别只说 Sorry</li><li>37 类功能意念背熟</li><li>答错立刻重说</li></ul>
+      </div>
+      <div class="sum-block anim" style="--i:5;--pc:#7e96a5">
+        <h4><span class="dot"></span>听短文</h4>
+        <ul><li>先看题、<b>预判主题</b></li><li>边听边记<b>关键词</b></li><li>口头小作文<b>套框架</b></li><li>控时、说满一分钟</li></ul>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:6">
+      <span>⚠️</span>
+      <div><b>最易丢分五处：</b>① 长短音不分、清浊不分；② 逐词蹦、无连读失爆；③ 机器腔（无重读无升降调）；④ 快速应答只会说 Sorry / Pardon；⑤ 看图说话时态乱用、说不满时间。</div>
+    </div>
+    <div class="motto anim" style="--i:7">
+      音准 · 语顺 · 气连 · 意明 —— <span>开口多练，听说拿高分</span>
+    </div>
+  </section>
+
+</div>
+
+<div id="nav">
+  <button id="prev" aria-label="上一页" title="上一页 (←)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="counter"><b id="cur">1</b> / <span id="total">37</span></div>
+  <button id="next" aria-label="下一页" title="下一页 (→)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <button id="menuBtn" aria-label="目录" title="目录">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+    <span>目录</span>
+  </button>
+  <button id="fs" aria-label="全屏" title="全屏 (F)">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+  </button>
+</div>
+<div id="hint">← → 翻页 · 空格下一页 · F 全屏 · 左侧手柄抽拉目录 · 点 🔊 听示范读音</div>
+
+<!-- 抽拉式目录（左侧抽屉） -->
+<div id="drawerTab" title="打开目录">
+  <span class="darr">▸</span><span>目 录</span>
+</div>
+<div id="drawerOverlay">
+  <div id="drawerPanel">
+    <div class="dp-head">
+      <div class="k">听说测试 · 目录</div>
+      <h3>听说测试全攻略</h3>
+      <div class="sub">音标拼读 · 朗读技巧 · 各题型 · 听说实战</div>
+      <button class="close" id="drawerClose" aria-label="关闭">✕</button>
+    </div>
+    <div id="drawerList"></div>
+  </div>
+</div>
+
+<script>
+  // ================= 语音合成（读音示范）=================
+  let voices = [];
+  function loadVoices(){ try{ voices = window.speechSynthesis.getVoices(); }catch(e){} }
+  function pickEnglishVoice(){
+    if(!voices.length){ try{ voices = window.speechSynthesis.getVoices(); }catch(e){} }
+    return voices.find(v => /^en[-_]/i.test(v.lang))
+        || voices.find(v => /en/i.test(v.lang))
+        || null;
+  }
+  function assertTTS(){
+    if(!('speechSynthesis' in window)){
+      alert('当前浏览器不支持语音合成。请用 Chrome / Edge / Safari 打开，即可点击 🔊 听示范读音。');
+      return false;
+    }
+    return true;
+  }
+  // 单个示范（例词 / 例句）
+  window.speakDemo = function(btn, text){
+    if(!text) text = btn.getAttribute('data-say');
+    if(!text || !assertTTS()) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-US';
+    const v = pickEnglishVoice(); if(v) u.voice = v;
+    u.rate = 0.82;   // 稍慢，便于听清
+    u.pitch = 1;
+    btn.classList.add('playing');
+    u.onend = u.onerror = function(){ btn.classList.remove('playing'); };
+    window.speechSynthesis.speak(u);
+  };
+  // 连续播放一组（读本组所有例词）
+  window.speakGroup = function(btn){
+    const group = btn.closest('.ph-group');
+    const texts = Array.from(group.querySelectorAll('.ph')).map(p => p.getAttribute('data-say')).filter(Boolean);
+    if(!texts.length || !assertTTS()) return;
+    window.speechSynthesis.cancel();
+    let i = 0;
+    btn.classList.add('playing');
+    function next(){
+      if(i >= texts.length){ btn.classList.remove('playing'); return; }
+      const u = new SpeechSynthesisUtterance(texts[i]);
+      u.lang = 'en-US';
+      const v = pickEnglishVoice(); if(v) u.voice = v;
+      u.rate = 0.85;
+      u.onend = function(){ i++; next(); };
+      u.onerror = function(){ i++; next(); };
+      window.speechSynthesis.speak(u);
+    }
+    next();
+  };
+  if('speechSynthesis' in window){
+    loadVoices();
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+  }
+
+  // ================= 幻灯片 & 目录 =================
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  const curEl = document.getElementById('cur');
+  const totalEl = document.getElementById('total');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const fsBtn = document.getElementById('fs');
+  const menuBtn = document.getElementById('menuBtn');
+  const drawerTab = document.getElementById('drawerTab');
+  const drawerClose = document.getElementById('drawerClose');
+  const drawerOverlay = document.getElementById('drawerOverlay');
+  const drawerList = document.getElementById('drawerList');
+  const progress = document.getElementById('progress');
+  let idx = 0;
+  totalEl.textContent = total;
+
+  const SEC_COLORS = {
+    '封面':'#b99c6a', '导读':'#b99c6a', '收尾':'#b99c6a',
+    '一 · 了解考试':'#7e96a5', '二 · 音标与拼读':'#93aa92',
+    '三 · 朗读技巧':'#c09892', '四 · 各题型技巧':'#a69cb4', '五 · 听说测试':'#8aa8a0'
+  };
+
+  (function buildMenu(){
+    const groups = [];
+    const map = {};
+    slides.forEach((s,i)=>{
+      const sec = s.dataset.sec || '其他';
+      const title = s.dataset.title || ('第'+(i+1)+'页');
+      if(!map[sec]){ map[sec] = {sec, items:[]}; groups.push(map[sec]); }
+      map[sec].items.push({title, i});
+    });
+    groups.forEach(g=>{
+      const h = document.createElement('div');
+      h.className = 'dp-sec';
+      const c = SEC_COLORS[g.sec] || '#8a8378';
+      h.innerHTML = '<span class="swatch" style="background:'+c+'"></span><span>'+g.sec+'</span>';
+      drawerList.appendChild(h);
+      g.items.forEach(it=>{
+        const b = document.createElement('button');
+        b.className = 'dp-item';
+        b.innerHTML = '<span class="n">'+ (it.i+1) +'</span><span>'+ it.title +'</span>';
+        b.addEventListener('click', ()=>{ go(it.i); closeDrawer(); });
+        drawerList.appendChild(b);
+      });
+    });
+  })();
+
+  function render(){
+    slides.forEach((s,i)=>{
+      s.classList.toggle('active', i===idx);
+      s.classList.toggle('prev', i<idx);
+    });
+    curEl.textContent = idx+1;
+    progress.style.width = ((idx+1)/total*100) + '%';
+    prevBtn.disabled = idx===0;
+    nextBtn.disabled = idx===total-1;
+    Array.from(drawerList.querySelectorAll('.dp-item')).forEach((b,i)=>{
+      b.classList.toggle('active', i===idx);
+    });
+    // 回到顶部，方便看滚动页
+    const cur = slides[idx];
+    if(cur) cur.scrollTop = 0;
+  }
+  function go(n){
+    idx = Math.max(0, Math.min(total-1, n));
+    render();
+  }
+  function closeDrawer(){ drawerOverlay.classList.remove('open'); drawerTab.querySelector('.darr').textContent='▸'; }
+  function openDrawer(){ drawerOverlay.classList.add('open'); drawerTab.querySelector('.darr').textContent='◂'; }
+
+  prevBtn.addEventListener('click', ()=>go(idx-1));
+  nextBtn.addEventListener('click', ()=>go(idx+1));
+  menuBtn.addEventListener('click', openDrawer);
+  drawerTab.addEventListener('click', openDrawer);
+  drawerClose.addEventListener('click', closeDrawer);
+  drawerOverlay.addEventListener('click', (e)=>{ if(e.target===drawerOverlay) closeDrawer(); });
+
+  document.addEventListener('keydown', (e)=>{
+    if(drawerOverlay.classList.contains('open')){
+      if(e.key==='Escape') closeDrawer();
+      return;
+    }
+    if(e.key==='ArrowRight' || e.key===' ' || e.key==='PageDown'){ e.preventDefault(); go(idx+1); }
+    else if(e.key==='ArrowLeft' || e.key==='PageUp'){ e.preventDefault(); go(idx-1); }
+    else if(e.key==='Home'){ go(0); }
+    else if(e.key==='End'){ go(total-1); }
+    else if(e.key==='m' || e.key==='M'){ openDrawer(); }
+    else if(e.key==='f' || e.key==='F'){
+      if(document.fullscreenElement){ document.exitFullscreen(); }
+      else { document.documentElement.requestFullscreen(); }
+    }
+  });
+  fsBtn.addEventListener('click', ()=>{
+    if(document.fullscreenElement){ document.exitFullscreen(); }
+    else { document.documentElement.requestFullscreen(); }
+  });
+  // 触屏滑动
+  let touchX=null;
+  document.addEventListener('touchstart', e=>{ touchX=e.touches[0].clientX; });
+  document.addEventListener('touchend', e=>{
+    if(touchX===null) return;
+    const dx=e.changedTouches[0].clientX-touchX;
+    if(Math.abs(dx)>50){ dx<0?go(idx+1):go(idx-1); }
+    touchX=null;
+  });
+  render();
+</script>
+</body>
+</html>
