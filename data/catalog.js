@@ -92,7 +92,7 @@ window.CATALOG = {
           added: "2026-09-17"
         },
         {
-          title: "听说测试部分课件（含音标读音示范）",
+          title: "听说测试部分课件",
           file: "courseware/听说测试课件.html",
           added: "2026-10-12"
         }

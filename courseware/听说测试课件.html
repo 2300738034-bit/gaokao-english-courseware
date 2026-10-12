@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>听说测试 · 课件（含音标读音示范）</title>
+<title>听说测试 · 课件</title>
 <style>
   :root{
     --ink:#46413b;          /* 主文字 暖灰棕 */
@@ -192,17 +192,11 @@
   .reveal .ans .mark{margin-top:7px;font-size:13px;color:#6f6a62;line-height:1.6}
   .reveal .ans .mark b{color:var(--gold-deep)}
 
-  /* ===== 音标卡（读音示范） ===== */
-  .ph-hint{
-    display:flex;align-items:center;gap:9px;font-size:13px;font-weight:600;color:var(--muted);
-    background:var(--tip-bg);border:1px solid #d5e0e4;border-radius:11px;padding:8px 13px;margin-bottom:14px;
-  }
-  .ph-hint .ic{font-size:17px}
+  /* ===== 音标卡 ===== */
   .ph-group{border:1px solid var(--line);border-radius:14px;padding:13px 15px;margin-bottom:12px;background:var(--paper)}
   .ph-group .phg-head{display:flex;align-items:center;gap:10px;margin-bottom:11px}
   .ph-group .phg-head .gname{font-size:14.5px;font-weight:800;color:var(--ink)}
   .ph-group .phg-head .gen{font-size:12.5px;color:var(--muted);font-weight:600}
-  .ph-group .phg-head .play{font-size:11.5px}
   .ph-row{display:flex;flex-wrap:wrap;gap:9px}
   .ph{
     display:flex;align-items:center;gap:9px;
@@ -215,16 +209,6 @@
   }
   .ph .words{font-size:13px;color:#5c564f;font-weight:600;line-height:1.35}
   .ph .words .cap{color:var(--gold-deep);font-weight:800}
-  .speak{
-    border:none;background:#fff;border:1px solid var(--line);border-radius:9px;
-    width:30px;height:30px;cursor:pointer;font-size:15px;line-height:1;
-    display:inline-flex;align-items:center;justify-content:center;flex:none;
-    transition:.15s;color:#8a8378;
-  }
-  .speak:hover{border-color:var(--gold);color:var(--gold-deep);background:var(--gold-bg)}
-  .speak.playing{background:var(--gold-bg);border-color:var(--gold);color:var(--gold-deep);animation:pulse .8s ease infinite}
-  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
-  .speak.mini{width:26px;height:26px;font-size:13px;border-radius:8px}
 
   /* 功能意念对答 */
   .func{margin-top:9px;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden}
@@ -345,7 +329,7 @@
     <div class="brand-line"></div>
     <div class="anim" style="--i:0"><span class="tag">新高考英语听力与口试 · 第 2 版</span></div>
     <h1 class="anim" style="--i:1">听说测试 <span class="hl">全攻略</span></h1>
-    <p class="sub anim" style="--i:2">音标拼读 · 朗读技巧 · 各题型应对 —— 附 <b>音标读音示范</b></p>
+    <p class="sub anim" style="--i:2">音标拼读 · 朗读技巧 · 各题型应对 · 听说实战</p>
     <div class="meta anim" style="--i:3">
       <span>主讲：<b>杨老师</b></span>
       <span>对象：<b>高三</b></span>
@@ -359,18 +343,14 @@
     <p class="anim" style="--i:1;font-size:15.5px;color:#5c564f;line-height:1.75">听说测试是<b class="gold">人机对话</b>的口试：计算机录下你的朗读与应答，再按<b class="key">音素发音、流利度、语调、韵律、总体</b>五个维度自动评分。想在口试拿高分，只靠“会说几句”远远不够，要从<b>底层语音</b>练起。本章五步走：</p>
     <div class="grid g5" style="margin-top:16px">
       <div class="card anim" style="--i:2;--pc:#7e96a5"><span class="num">一</span><h4>了解考试</h4><div class="cn">评分标准<br>语音评测原理</div></div>
-      <div class="card anim" style="--i:3;--pc:#93aa92"><span class="num">二</span><h4>练准音标</h4><div class="cn">48 音素<br>拼读规则 🔊</div></div>
+      <div class="card anim" style="--i:3;--pc:#93aa92"><span class="num">二</span><h4>练准音标</h4><div class="cn">48 音素<br>拼读规则</div></div>
       <div class="card anim" style="--i:4;--pc:#c09892"><span class="num">三</span><h4>读得地道</h4><div class="cn">连读 · 失爆<br>重读 · 升降调</div></div>
       <div class="card anim" style="--i:5;--pc:#a69cb4"><span class="num">四</span><h4>各题型技巧</h4><div class="cn">朗读 · 提问<br>看图说话</div></div>
       <div class="card anim" style="--i:6;--pc:#8aa8a0"><span class="num">五</span><h4>听说实战</h4><div class="cn">快速应答<br>听短文 · 口头作文</div></div>
     </div>
-    <div class="note anim" style="--i:7;margin-top:22px">
-      <span class="ico">🔊</span>
-      <div><b>读音示范怎么用：</b>所有带 <b>🔊</b> 按钮的内容，点击即可听到<b>示范读音</b>——这是调用浏览器<b>内置的语音合成</b>（英语发音），<b>无需联网、无需音频文件</b>。音标、例词、连读句、范文都可以点读跟读。</div>
-    </div>
-    <div class="tip anim" style="--i:8">
+    <div class="tip anim" style="--i:7;margin-top:22px">
       <span>💡</span>
-      <div>左侧有<b>抽拉式目录</b>，点手柄随时跳转；口试最忌“哑巴英语”，每页看到 🔊 就<b>开口跟读</b>。</div>
+      <div>左侧有<b>抽拉式目录</b>，点手柄随时跳转；口试最忌“哑巴英语”，记得<b>开口多读多练</b>。</div>
     </div>
   </section>
 
@@ -461,63 +441,62 @@
       <div class="card anim" style="--i:5;--pc:#a69cb4"><span class="num">④</span><h4>易错提醒</h4><div class="cn">长短音不分 · 清浊不分<br>是上海考生的常见失分点</div></div>
     </div>
     <div class="note anim" style="--i:6;margin-top:20px">
-      <span class="ico">🔊</span>
-      <div><b>下一页起是「读音示范」：</b>每个音标都配了<b>例词 + 🔊 按钮</b>，点一下听标准发音，跟着多读几遍。先听<b>元音</b>，再听<b>辅音</b>。</div>
+      <span class="ico">🔑</span>
+      <div><b>记忆方法：</b>48 音素是发音的“地基”。下一页起逐一过一遍<b>元音、辅音</b>，重点记<b>易混音</b>——/θ/ 与 /ð/、长短音、双元音的滑动过程。想“见词能读”，最后还有一套<b>「周育如音标法」附录</b>。</div>
     </div>
   </section>
 
   <!-- 8 元音音素 -->
-  <section class="slide scrollable" data-title="元音音素 · 读音示范" data-sec="二 · 音标与拼读">
-    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 音标与拼读</span><h2>元音音素（20 个）· 读音示范</h2><span class="en">Vowels 🔊</span></div>
-    <div class="ph-hint anim" style="--i:1"><span class="ic">🔊</span><span>点击每个音标右侧的喇叭，听<b>例词示范读音</b>；也可点每组标题旁的「连续播放」从头听到尾。</span></div>
+  <section class="slide scrollable" data-title="元音音素" data-sec="二 · 音标与拼读">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 音标与拼读</span><h2>元音音素（20 个）</h2><span class="en">Vowels</span></div>
 
     <div class="ph-group anim" style="--i:2;--pc:#93aa92">
-      <div class="phg-head"><span class="gname">前元音 Front Vowels</span><span class="gen">舌位靠前</span><button class="speak play" onclick="speakGroup(this)" title="连续播放本组">▶</button></div>
+      <div class="phg-head"><span class="gname">前元音 Front Vowels</span><span class="gen">舌位靠前</span></div>
       <div class="ph-row">
-        <div class="ph" data-say="see, sheep, meet"><span class="sym">/iː/</span><span class="words"><span class="cap">see</span> · sheep · meet</span><button class="speak" onclick="speakDemo(this,'see, sheep, meet')">🔊</button></div>
-        <div class="ph" data-say="sit, ship, big"><span class="sym">/ɪ/</span><span class="words"><span class="cap">sit</span> · ship · big</span><button class="speak" onclick="speakDemo(this,'sit, ship, big')">🔊</button></div>
-        <div class="ph" data-say="bed, ten, head"><span class="sym">/e/</span><span class="words"><span class="cap">bed</span> · ten · head</span><button class="speak" onclick="speakDemo(this,'bed, ten, head')">🔊</button></div>
-        <div class="ph" data-say="cat, bag, map"><span class="sym">/æ/</span><span class="words"><span class="cap">cat</span> · bag · map</span><button class="speak" onclick="speakDemo(this,'cat, bag, map')">🔊</button></div>
+        <div class="ph"><span class="sym">/iː/</span><span class="words"><span class="cap">see</span> · sheep · meet</span></div>
+        <div class="ph"><span class="sym">/ɪ/</span><span class="words"><span class="cap">sit</span> · ship · big</span></div>
+        <div class="ph"><span class="sym">/e/</span><span class="words"><span class="cap">bed</span> · ten · head</span></div>
+        <div class="ph"><span class="sym">/æ/</span><span class="words"><span class="cap">cat</span> · bag · map</span></div>
       </div>
     </div>
 
     <div class="ph-group anim" style="--i:3;--pc:#93aa92">
-      <div class="phg-head"><span class="gname">中元音 Central Vowels</span><span class="gen">舌位居中</span><button class="speak play" onclick="speakGroup(this)" title="连续播放本组">▶</button></div>
+      <div class="phg-head"><span class="gname">中元音 Central Vowels</span><span class="gen">舌位居中</span></div>
       <div class="ph-row">
-        <div class="ph" data-say="bird, girl, work"><span class="sym">/ɜː/</span><span class="words"><span class="cap">bird</span> · girl · work</span><button class="speak" onclick="speakDemo(this,'bird, girl, work')">🔊</button></div>
-        <div class="ph" data-say="about, teacher, banana"><span class="sym">/ə/</span><span class="words"><span class="cap">about</span> · teacher · banana</span><button class="speak" onclick="speakDemo(this,'about, teacher, banana')">🔊</button></div>
-        <div class="ph" data-say="cup, sun, bus"><span class="sym">/ʌ/</span><span class="words"><span class="cap">cup</span> · sun · bus</span><button class="speak" onclick="speakDemo(this,'cup, sun, bus')">🔊</button></div>
+        <div class="ph"><span class="sym">/ɜː/</span><span class="words"><span class="cap">bird</span> · girl · work</span></div>
+        <div class="ph"><span class="sym">/ə/</span><span class="words"><span class="cap">about</span> · teacher · banana</span></div>
+        <div class="ph"><span class="sym">/ʌ/</span><span class="words"><span class="cap">cup</span> · sun · bus</span></div>
       </div>
     </div>
 
     <div class="ph-group anim" style="--i:4;--pc:#93aa92">
-      <div class="phg-head"><span class="gname">后元音 Back Vowels</span><span class="gen">舌位靠后</span><button class="speak play" onclick="speakGroup(this)" title="连续播放本组">▶</button></div>
+      <div class="phg-head"><span class="gname">后元音 Back Vowels</span><span class="gen">舌位靠后</span></div>
       <div class="ph-row">
-        <div class="ph" data-say="car, father, park"><span class="sym">/ɑː/</span><span class="words"><span class="cap">car</span> · father · park</span><button class="speak" onclick="speakDemo(this,'car, father, park')">🔊</button></div>
-        <div class="ph" data-say="door, four, more"><span class="sym">/ɔː/</span><span class="words"><span class="cap">door</span> · four · more</span><button class="speak" onclick="speakDemo(this,'door, four, more')">🔊</button></div>
-        <div class="ph" data-say="dog, hot, box"><span class="sym">/ɒ/</span><span class="words"><span class="cap">dog</span> · hot · box</span><button class="speak" onclick="speakDemo(this,'dog, hot, box')">🔊</button></div>
-        <div class="ph" data-say="food, school, blue"><span class="sym">/uː/</span><span class="words"><span class="cap">food</span> · school · blue</span><button class="speak" onclick="speakDemo(this,'food, school, blue')">🔊</button></div>
-        <div class="ph" data-say="book, good, foot"><span class="sym">/ʊ/</span><span class="words"><span class="cap">book</span> · good · foot</span><button class="speak" onclick="speakDemo(this,'book, good, foot')">🔊</button></div>
+        <div class="ph"><span class="sym">/ɑː/</span><span class="words"><span class="cap">car</span> · father · park</span></div>
+        <div class="ph"><span class="sym">/ɔː/</span><span class="words"><span class="cap">door</span> · four · more</span></div>
+        <div class="ph"><span class="sym">/ɒ/</span><span class="words"><span class="cap">dog</span> · hot · box</span></div>
+        <div class="ph"><span class="sym">/uː/</span><span class="words"><span class="cap">food</span> · school · blue</span></div>
+        <div class="ph"><span class="sym">/ʊ/</span><span class="words"><span class="cap">book</span> · good · foot</span></div>
       </div>
     </div>
 
     <div class="ph-group anim" style="--i:5;--pc:#93aa92">
-      <div class="phg-head"><span class="gname">合口双元音 Rising Diphthongs</span><span class="gen">由开到合</span><button class="speak play" onclick="speakGroup(this)" title="连续播放本组">▶</button></div>
+      <div class="phg-head"><span class="gname">合口双元音 Rising Diphthongs</span><span class="gen">由开到合</span></div>
       <div class="ph-row">
-        <div class="ph" data-say="name, cake, day"><span class="sym">/eɪ/</span><span class="words"><span class="cap">name</span> · cake · day</span><button class="speak" onclick="speakDemo(this,'name, cake, day')">🔊</button></div>
-        <div class="ph" data-say="bike, like, my"><span class="sym">/aɪ/</span><span class="words"><span class="cap">bike</span> · like · my</span><button class="speak" onclick="speakDemo(this,'bike, like, my')">🔊</button></div>
-        <div class="ph" data-say="boy, toy, oil"><span class="sym">/ɔɪ/</span><span class="words"><span class="cap">boy</span> · toy · oil</span><button class="speak" onclick="speakDemo(this,'boy, toy, oil')">🔊</button></div>
-        <div class="ph" data-say="go, no, boat"><span class="sym">/əʊ/</span><span class="words"><span class="cap">go</span> · no · boat</span><button class="speak" onclick="speakDemo(this,'go, no, boat')">🔊</button></div>
-        <div class="ph" data-say="how, now, house"><span class="sym">/aʊ/</span><span class="words"><span class="cap">how</span> · now · house</span><button class="speak" onclick="speakDemo(this,'how, now, house')">🔊</button></div>
+        <div class="ph"><span class="sym">/eɪ/</span><span class="words"><span class="cap">name</span> · cake · day</span></div>
+        <div class="ph"><span class="sym">/aɪ/</span><span class="words"><span class="cap">bike</span> · like · my</span></div>
+        <div class="ph"><span class="sym">/ɔɪ/</span><span class="words"><span class="cap">boy</span> · toy · oil</span></div>
+        <div class="ph"><span class="sym">/əʊ/</span><span class="words"><span class="cap">go</span> · no · boat</span></div>
+        <div class="ph"><span class="sym">/aʊ/</span><span class="words"><span class="cap">how</span> · now · house</span></div>
       </div>
     </div>
 
     <div class="ph-group anim" style="--i:6;--pc:#93aa92">
-      <div class="phg-head"><span class="gname">集中双元音 Centering Diphthongs</span><span class="gen">收于 /ə/</span><button class="speak play" onclick="speakGroup(this)" title="连续播放本组">▶</button></div>
+      <div class="phg-head"><span class="gname">集中双元音 Centering Diphthongs</span><span class="gen">收于 /ə/</span></div>
       <div class="ph-row">
-        <div class="ph" data-say="hear, near, beer"><span class="sym">/ɪə/</span><span class="words"><span class="cap">hear</span> · near · beer</span><button class="speak" onclick="speakDemo(this,'hear, near, beer')">🔊</button></div>
-        <div class="ph" data-say="hair, bear, air"><span class="sym">/eə/</span><span class="words"><span class="cap">hair</span> · bear · air</span><button class="speak" onclick="speakDemo(this,'hair, bear, air')">🔊</button></div>
-        <div class="ph" data-say="sure, tour, poor"><span class="sym">/ʊə/</span><span class="words"><span class="cap">sure</span> · tour · poor</span><button class="speak" onclick="speakDemo(this,'sure, tour, poor')">🔊</button></div>
+        <div class="ph"><span class="sym">/ɪə/</span><span class="words"><span class="cap">hear</span> · near · beer</span></div>
+        <div class="ph"><span class="sym">/eə/</span><span class="words"><span class="cap">hair</span> · bear · air</span></div>
+        <div class="ph"><span class="sym">/ʊə/</span><span class="words"><span class="cap">sure</span> · tour · poor</span></div>
       </div>
     </div>
 
@@ -528,59 +507,58 @@
   </section>
 
   <!-- 9 辅音音素 -->
-  <section class="slide scrollable" data-title="辅音音素 · 读音示范" data-sec="二 · 音标与拼读">
-    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 音标与拼读</span><h2>辅音音素（28 个）· 读音示范</h2><span class="en">Consonants 🔊</span></div>
-    <div class="ph-hint anim" style="--i:1"><span class="ic">🔊</span><span>辅音重“<b>清浊</b>”与“<b>气流</b>”。/θ/ /ð/ 要<b>咬舌尖</b>；/ʃ/ /ʒ/ 是“嘘”音；破擦音要<b>先堵后放</b>。</span></div>
+  <section class="slide scrollable" data-title="辅音音素" data-sec="二 · 音标与拼读">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 音标与拼读</span><h2>辅音音素（28 个）</h2><span class="en">Consonants</span></div>
 
     <div class="ph-group anim" style="--i:2;--pc:#8aa8a0">
-      <div class="phg-head"><span class="gname">爆破音 Plosives</span><span class="gen">先堵气、再爆破</span><button class="speak play" onclick="speakGroup(this)" title="连续播放本组">▶</button></div>
+      <div class="phg-head"><span class="gname">爆破音 Plosives</span><span class="gen">先堵气、再爆破</span></div>
       <div class="ph-row">
-        <div class="ph" data-say="pen, pig, map"><span class="sym">/p/</span><span class="words"><span class="cap">pen</span> · pig · map</span><button class="speak" onclick="speakDemo(this,'pen, pig, map')">🔊</button></div>
-        <div class="ph" data-say="bag, bed, job"><span class="sym">/b/</span><span class="words"><span class="cap">bag</span> · bed · job</span><button class="speak" onclick="speakDemo(this,'bag, bed, job')">🔊</button></div>
-        <div class="ph" data-say="tea, ten, cat"><span class="sym">/t/</span><span class="words"><span class="cap">tea</span> · ten · cat</span><button class="speak" onclick="speakDemo(this,'tea, ten, cat')">🔊</button></div>
-        <div class="ph" data-say="dog, day, red"><span class="sym">/d/</span><span class="words"><span class="cap">dog</span> · day · red</span><button class="speak" onclick="speakDemo(this,'dog, day, red')">🔊</button></div>
-        <div class="ph" data-say="key, cat, black"><span class="sym">/k/</span><span class="words"><span class="cap">key</span> · cat · black</span><button class="speak" onclick="speakDemo(this,'key, cat, black')">🔊</button></div>
-        <div class="ph" data-say="go, big, egg"><span class="sym">/g/</span><span class="words"><span class="cap">go</span> · big · egg</span><button class="speak" onclick="speakDemo(this,'go, big, egg')">🔊</button></div>
+        <div class="ph"><span class="sym">/p/</span><span class="words"><span class="cap">pen</span> · pig · map</span></div>
+        <div class="ph"><span class="sym">/b/</span><span class="words"><span class="cap">bag</span> · bed · job</span></div>
+        <div class="ph"><span class="sym">/t/</span><span class="words"><span class="cap">tea</span> · ten · cat</span></div>
+        <div class="ph"><span class="sym">/d/</span><span class="words"><span class="cap">dog</span> · day · red</span></div>
+        <div class="ph"><span class="sym">/k/</span><span class="words"><span class="cap">key</span> · cat · black</span></div>
+        <div class="ph"><span class="sym">/g/</span><span class="words"><span class="cap">go</span> · big · egg</span></div>
       </div>
     </div>
 
     <div class="ph-group anim" style="--i:3;--pc:#8aa8a0">
-      <div class="phg-head"><span class="gname">摩擦音 Fricatives</span><span class="gen">气流摩擦出声</span><button class="speak play" onclick="speakGroup(this)" title="连续播放本组">▶</button></div>
+      <div class="phg-head"><span class="gname">摩擦音 Fricatives</span><span class="gen">气流摩擦出声</span></div>
       <div class="ph-row">
-        <div class="ph" data-say="fish, five, leaf"><span class="sym">/f/</span><span class="words"><span class="cap">fish</span> · five · leaf</span><button class="speak" onclick="speakDemo(this,'fish, five, leaf')">🔊</button></div>
-        <div class="ph" data-say="very, five, love"><span class="sym">/v/</span><span class="words"><span class="cap">very</span> · five · love</span><button class="speak" onclick="speakDemo(this,'very, five, love')">🔊</button></div>
-        <div class="ph" data-say="three, think, mouth"><span class="sym">/θ/</span><span class="words"><span class="cap">three</span> · think · mouth</span><button class="speak" onclick="speakDemo(this,'three, think, mouth')">🔊</button></div>
-        <div class="ph" data-say="this, that, mother"><span class="sym">/ð/</span><span class="words"><span class="cap">this</span> · that · mother</span><button class="speak" onclick="speakDemo(this,'this, that, mother')">🔊</button></div>
-        <div class="ph" data-say="sun, six, bus"><span class="sym">/s/</span><span class="words"><span class="cap">sun</span> · six · bus</span><button class="speak" onclick="speakDemo(this,'sun, six, bus')">🔊</button></div>
-        <div class="ph" data-say="zoo, zero, music"><span class="sym">/z/</span><span class="words"><span class="cap">zoo</span> · zero · music</span><button class="speak" onclick="speakDemo(this,'zoo, zero, music')">🔊</button></div>
-        <div class="ph" data-say="she, ship, fish"><span class="sym">/ʃ/</span><span class="words"><span class="cap">she</span> · ship · fish</span><button class="speak" onclick="speakDemo(this,'she, ship, fish')">🔊</button></div>
-        <div class="ph" data-say="vision, measure, pleasure"><span class="sym">/ʒ/</span><span class="words"><span class="cap">vision</span> · measure · pleasure</span><button class="speak" onclick="speakDemo(this,'vision, measure, pleasure')">🔊</button></div>
-        <div class="ph" data-say="he, hot, hand"><span class="sym">/h/</span><span class="words"><span class="cap">he</span> · hot · hand</span><button class="speak" onclick="speakDemo(this,'he, hot, hand')">🔊</button></div>
-        <div class="ph" data-say="red, run, rice"><span class="sym">/r/</span><span class="words"><span class="cap">red</span> · run · rice</span><button class="speak" onclick="speakDemo(this,'red, run, rice')">🔊</button></div>
+        <div class="ph"><span class="sym">/f/</span><span class="words"><span class="cap">fish</span> · five · leaf</span></div>
+        <div class="ph"><span class="sym">/v/</span><span class="words"><span class="cap">very</span> · five · love</span></div>
+        <div class="ph"><span class="sym">/θ/</span><span class="words"><span class="cap">three</span> · think · mouth</span></div>
+        <div class="ph"><span class="sym">/ð/</span><span class="words"><span class="cap">this</span> · that · mother</span></div>
+        <div class="ph"><span class="sym">/s/</span><span class="words"><span class="cap">sun</span> · six · bus</span></div>
+        <div class="ph"><span class="sym">/z/</span><span class="words"><span class="cap">zoo</span> · zero · music</span></div>
+        <div class="ph"><span class="sym">/ʃ/</span><span class="words"><span class="cap">she</span> · ship · fish</span></div>
+        <div class="ph"><span class="sym">/ʒ/</span><span class="words"><span class="cap">vision</span> · measure · pleasure</span></div>
+        <div class="ph"><span class="sym">/h/</span><span class="words"><span class="cap">he</span> · hot · hand</span></div>
+        <div class="ph"><span class="sym">/r/</span><span class="words"><span class="cap">red</span> · run · rice</span></div>
       </div>
     </div>
 
     <div class="ph-group anim" style="--i:4;--pc:#8aa8a0">
-      <div class="phg-head"><span class="gname">破擦音 Affricates</span><span class="gen">先爆破、后摩擦</span><button class="speak play" onclick="speakGroup(this)" title="连续播放本组">▶</button></div>
+      <div class="phg-head"><span class="gname">破擦音 Affricates</span><span class="gen">先爆破、后摩擦</span></div>
       <div class="ph-row">
-        <div class="ph" data-say="chair, teach, watch"><span class="sym">/tʃ/</span><span class="words"><span class="cap">chair</span> · teach · watch</span><button class="speak" onclick="speakDemo(this,'chair, teach, watch')">🔊</button></div>
-        <div class="ph" data-say="jam, judge, page"><span class="sym">/dʒ/</span><span class="words"><span class="cap">jam</span> · judge · page</span><button class="speak" onclick="speakDemo(this,'jam, judge, page')">🔊</button></div>
-        <div class="ph" data-say="tree, train, try"><span class="sym">/tr/</span><span class="words"><span class="cap">tree</span> · train · try</span><button class="speak" onclick="speakDemo(this,'tree, train, try')">🔊</button></div>
-        <div class="ph" data-say="dream, drive, drink"><span class="sym">/dr/</span><span class="words"><span class="cap">dream</span> · drive · drink</span><button class="speak" onclick="speakDemo(this,'dream, drive, drink')">🔊</button></div>
-        <div class="ph" data-say="cats, hats, boats"><span class="sym">/ts/</span><span class="words"><span class="cap">cats</span> · hats · boats</span><button class="speak" onclick="speakDemo(this,'cats, hats, boats')">🔊</button></div>
-        <div class="ph" data-say="beds, hands, cards"><span class="sym">/dz/</span><span class="words"><span class="cap">beds</span> · hands · cards</span><button class="speak" onclick="speakDemo(this,'beds, hands, cards')">🔊</button></div>
+        <div class="ph"><span class="sym">/tʃ/</span><span class="words"><span class="cap">chair</span> · teach · watch</span></div>
+        <div class="ph"><span class="sym">/dʒ/</span><span class="words"><span class="cap">jam</span> · judge · page</span></div>
+        <div class="ph"><span class="sym">/tr/</span><span class="words"><span class="cap">tree</span> · train · try</span></div>
+        <div class="ph"><span class="sym">/dr/</span><span class="words"><span class="cap">dream</span> · drive · drink</span></div>
+        <div class="ph"><span class="sym">/ts/</span><span class="words"><span class="cap">cats</span> · hats · boats</span></div>
+        <div class="ph"><span class="sym">/dz/</span><span class="words"><span class="cap">beds</span> · hands · cards</span></div>
       </div>
     </div>
 
     <div class="ph-group anim" style="--i:5;--pc:#8aa8a0">
-      <div class="phg-head"><span class="gname">鼻音 · 流音 · 半元音</span><span class="gen">Nasals · Lateral · Semi-vowels</span><button class="speak play" onclick="speakGroup(this)" title="连续播放本组">▶</button></div>
+      <div class="phg-head"><span class="gname">鼻音 · 流音 · 半元音</span><span class="gen">Nasals · Lateral · Semi-vowels</span></div>
       <div class="ph-row">
-        <div class="ph" data-say="me, map, come"><span class="sym">/m/</span><span class="words"><span class="cap">me</span> · map · come</span><button class="speak" onclick="speakDemo(this,'me, map, come')">🔊</button></div>
-        <div class="ph" data-say="no, sun, ten"><span class="sym">/n/</span><span class="words"><span class="cap">no</span> · sun · ten</span><button class="speak" onclick="speakDemo(this,'no, sun, ten')">🔊</button></div>
-        <div class="ph" data-say="sing, long, king"><span class="sym">/ŋ/</span><span class="words"><span class="cap">sing</span> · long · king</span><button class="speak" onclick="speakDemo(this,'sing, long, king')">🔊</button></div>
-        <div class="ph" data-say="like, leg, ball"><span class="sym">/l/</span><span class="words"><span class="cap">like</span> · leg · ball</span><button class="speak" onclick="speakDemo(this,'like, leg, ball')">🔊</button></div>
-        <div class="ph" data-say="we, walk, win"><span class="sym">/w/</span><span class="words"><span class="cap">we</span> · walk · win</span><button class="speak" onclick="speakDemo(this,'we, walk, win')">🔊</button></div>
-        <div class="ph" data-say="yes, you, young"><span class="sym">/j/</span><span class="words"><span class="cap">yes</span> · you · young</span><button class="speak" onclick="speakDemo(this,'yes, you, young')">🔊</button></div>
+        <div class="ph"><span class="sym">/m/</span><span class="words"><span class="cap">me</span> · map · come</span></div>
+        <div class="ph"><span class="sym">/n/</span><span class="words"><span class="cap">no</span> · sun · ten</span></div>
+        <div class="ph"><span class="sym">/ŋ/</span><span class="words"><span class="cap">sing</span> · long · king</span></div>
+        <div class="ph"><span class="sym">/l/</span><span class="words"><span class="cap">like</span> · leg · ball</span></div>
+        <div class="ph"><span class="sym">/w/</span><span class="words"><span class="cap">we</span> · walk · win</span></div>
+        <div class="ph"><span class="sym">/j/</span><span class="words"><span class="cap">yes</span> · you · young</span></div>
       </div>
     </div>
 
@@ -831,29 +809,29 @@
 
   <!-- 18 连读(一) -->
   <section class="slide" data-title="连读(一)" data-sec="三 · 朗读技巧">
-    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">三 · 朗读技巧</span><h2>连读（一）</h2><span class="en">Linking 🔉</span></div>
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">三 · 朗读技巧</span><h2>连读（一）</h2><span class="en">Linking</span></div>
     <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f;line-height:1.7">连读 = 同一<b class="gold">意群</b>内，前一词<b>末尾的音</b>与后一词<b>开头的音</b>连着读，避免“蹦单词”。连读构成的音节<b>一般不重读</b>，一带而过。（符号 ～）</p>
     <div class="grid g2" style="margin-top:12px">
       <div class="anim" style="--i:2">
         <div class="ex">
           <div class="lead">① 辅音 + 元音</div>
-          <div class="en-ref"><span class="mt">例</span>I'm <b class="gold">an</b> English boy. <button class="speak mini" onclick="speakDemo(this,'I am an English boy')">🔊</button></div>
-          <div class="en-ref"><span class="mt">例</span>It is <b class="gold">an old</b> book. <button class="speak mini" onclick="speakDemo(this,'It is an old book')">🔊</button></div>
-          <div class="en-ref"><span class="mt">例</span>Put it <b class="gold">on</b>, please. <button class="speak mini" onclick="speakDemo(this,'Put it on, please')">🔊</button></div>
-          <div class="en-ref"><span class="mt">例</span>Not at <b class="gold">all</b>. <button class="speak mini" onclick="speakDemo(this,'Not at all')">🔊</button></div>
+          <div class="en-ref"><span class="mt">例</span>I'm <b class="gold">an</b> English boy.</div>
+          <div class="en-ref"><span class="mt">例</span>It is <b class="gold">an old</b> book.</div>
+          <div class="en-ref"><span class="mt">例</span>Put it <b class="gold">on</b>, please.</div>
+          <div class="en-ref"><span class="mt">例</span>Not at <b class="gold">all</b>.</div>
         </div>
       </div>
       <div class="anim" style="--i:3">
         <div class="ex">
           <div class="lead">② r / re + 元音（r 要发音并连读）</div>
-          <div class="en-ref"><span class="mt">例</span>There <b class="gold">is</b> a football under it. <button class="speak mini" onclick="speakDemo(this,'There is a football under it')">🔊</button></div>
-          <div class="en-ref"><span class="mt">例</span>Here <b class="gold">is</b> a letter for you. <button class="speak mini" onclick="speakDemo(this,'Here is a letter for you')">🔊</button></div>
-          <div class="en-ref"><span class="mt">例</span>But where <b class="gold">is</b> my cup? <button class="speak mini" onclick="speakDemo(this,'But where is my cup')">🔊</button></div>
+          <div class="en-ref"><span class="mt">例</span>There <b class="gold">is</b> a football under it.</div>
+          <div class="en-ref"><span class="mt">例</span>Here <b class="gold">is</b> a letter for you.</div>
+          <div class="en-ref"><span class="mt">例</span>But where <b class="gold">is</b> my cup?</div>
         </div>
         <div class="ex">
           <div class="lead">③ 元音 + 元音</div>
-          <div class="en-ref"><span class="mt">例</span>I <b class="gold">am</b> Chinese. <button class="speak mini" onclick="speakDemo(this,'I am Chinese')">🔊</button></div>
-          <div class="en-ref"><span class="mt">例</span>He <b class="gold">is</b> very friendly. <button class="speak mini" onclick="speakDemo(this,'He is very friendly')">🔊</button></div>
+          <div class="en-ref"><span class="mt">例</span>I <b class="gold">am</b> Chinese.</div>
+          <div class="en-ref"><span class="mt">例</span>He <b class="gold">is</b> very friendly.</div>
         </div>
       </div>
     </div>
@@ -865,14 +843,14 @@
 
   <!-- 19 连读(二) -->
   <section class="slide" data-title="连读(二)" data-sec="三 · 朗读技巧">
-    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">三 · 朗读技巧</span><h2>连读（二）· 同化 &amp; h 省略</h2><span class="en">Assimilation 🔉</span></div>
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">三 · 朗读技巧</span><h2>连读（二）· 同化 &amp; h 省略</h2><span class="en">Assimilation</span></div>
     <div class="grid g2" style="margin-top:4px">
       <div class="anim" style="--i:1">
         <div class="ex">
           <div class="lead">④ 辅音 + 半元音（/j/ /w/）</div>
-          <div class="en-ref"><span class="mt">例</span>Thank <b class="gold">you</b>. <button class="speak mini" onclick="speakDemo(this,'Thank you')">🔊</button></div>
-          <div class="en-ref"><span class="mt">例</span>Nice to meet <b class="gold">you</b>. <button class="speak mini" onclick="speakDemo(this,'Nice to meet you')">🔊</button></div>
-          <div class="en-ref"><span class="mt">例</span>Would <b class="gold">you</b> like a cup of tea? <button class="speak mini" onclick="speakDemo(this,'Would you like a cup of tea')">🔊</button></div>
+          <div class="en-ref"><span class="mt">例</span>Thank <b class="gold">you</b>.</div>
+          <div class="en-ref"><span class="mt">例</span>Nice to meet <b class="gold">you</b>.</div>
+          <div class="en-ref"><span class="mt">例</span>Would <b class="gold">you</b> like a cup of tea?</div>
         </div>
         <div class="ex">
           <div class="lead">⑤ 音的同化</div>
@@ -883,9 +861,9 @@
       <div class="anim" style="--i:2">
         <div class="ex">
           <div class="lead">⑥ 后一词以 h 开头 → h 省略，直接连读</div>
-          <div class="en-ref"><span class="mt">例</span>give him → give-<b class="gold">im</b> <button class="speak mini" onclick="speakDemo(this,'give him')">🔊</button></div>
-          <div class="en-ref"><span class="mt">例</span>Has he gone? → Has-<b class="gold">i</b> gone? <button class="speak mini" onclick="speakDemo(this,'Has he gone')">🔊</button></div>
-          <div class="en-ref"><span class="mt">例</span>Can he do it? → Can-<b class="gold">i</b> do it? <button class="speak mini" onclick="speakDemo(this,'Can he do it')">🔊</button></div>
+          <div class="en-ref"><span class="mt">例</span>give him → give-<b class="gold">im</b></div>
+          <div class="en-ref"><span class="mt">例</span>Has he gone? → Has-<b class="gold">i</b> gone?</div>
+          <div class="en-ref"><span class="mt">例</span>Can he do it? → Can-<b class="gold">i</b> do it?</div>
         </div>
         <div class="ex">
           <div class="lead">⑦ 意群间不连读</div>
@@ -896,19 +874,19 @@
     </div>
     <div class="tip anim" style="--i:3">
       <span>💡</span>
-      <div><b>练习方法：</b>点 🔊 听一句，<b>跟读模仿</b>，注意“一带而过、不加重”。连读是“英语味”的第一来源，也是口试<b>流利度、韵律</b>两项的加分点。</div>
+      <div><b>练习方法：</b>朗读时注意“一带而过、不加重”。连读是“英语味”的第一来源，也是口试<b>流利度、韵律</b>两项的加分点。</div>
     </div>
   </section>
 
   <!-- 20 失去爆破 -->
   <section class="slide" data-title="失去爆破" data-sec="三 · 朗读技巧">
-    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8aa8a0">三 · 朗读技巧</span><h2>失去爆破（不完全爆破）</h2><span class="en">Loss of Plosion 🔉</span></div>
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8aa8a0">三 · 朗读技巧</span><h2>失去爆破（不完全爆破）</h2><span class="en">Loss of Plosion</span></div>
     <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f;line-height:1.7">两个辅音相邻时，前一个<b class="gold">爆破音</b>只做口型<b>不发音</b>，直接过渡到后一个音。6 个爆破音：/p/ /b/ /t/ /d/ /k/ /g/。</p>
     <div class="grid g2" style="margin-top:12px">
       <div class="anim" style="--i:2">
         <div class="ex">
           <div class="lead">① 爆破音 + 爆破音</div>
-          <div class="en-ref"><span class="mt">例</span>The girl in the re<b class="red">(d)</b> coat… <button class="speak mini" onclick="speakDemo(this,'The girl in the red coat was on a black bike just now')">🔊</button></div>
+          <div class="en-ref"><span class="mt">例</span>The girl in the re<b class="red">(d)</b> coat…</div>
           <div class="en-ref"><span class="mt">例</span>…a bla<b class="red">(ck)</b> bike…</div>
           <div class="en-ref"><span class="mt">例</span>Wha<b class="red">(t)</b> time…?</div>
         </div>
@@ -916,16 +894,16 @@
       <div class="anim" style="--i:3">
         <div class="ex">
           <div class="lead">② 爆破音 + 摩擦音 / 破擦音</div>
-          <div class="en-ref"><span class="mt">例</span>a goo<b class="red">(d)</b> child · a bi<b class="red">(g)</b> house <button class="speak mini" onclick="speakDemo(this,'Harry is a good child')">🔊</button></div>
+          <div class="en-ref"><span class="mt">例</span>a goo<b class="red">(d)</b> child · a bi<b class="red">(g)</b> house</div>
           <div class="en-ref"><span class="mt">例</span>a fa<b class="red">(s)</b>t train · a re<b class="red">(d)</b> shirt</div>
         </div>
         <div class="ex">
           <div class="lead">③ 爆破音 + 鼻音（鼻腔爆破）</div>
-          <div class="en-ref"><span class="mt">例</span>bu<b class="red">(tt)</b>on /ˈbʌtn/ · gar<b class="red">(d)</b>en /ˈgɑːdn/ <button class="speak mini" onclick="speakDemo(this,'button, garden')">🔊</button></div>
+          <div class="en-ref"><span class="mt">例</span>bu<b class="red">(tt)</b>on /ˈbʌtn/ · gar<b class="red">(d)</b>en /ˈgɑːdn/</div>
         </div>
         <div class="ex">
           <div class="lead">④ 爆破音 + 舌侧音 /l/（舌边爆破）</div>
-          <div class="en-ref"><span class="mt">例</span>la<b class="red">(t)</b>ely · ba<b class="red">(d)</b>ly <button class="speak mini" onclick="speakDemo(this,'I have been very busy lately')">🔊</button></div>
+          <div class="en-ref"><span class="mt">例</span>la<b class="red">(t)</b>ely · ba<b class="red">(d)</b>ly</div>
         </div>
       </div>
     </div>
@@ -945,7 +923,7 @@
       <div class="card anim" style="--i:4;--pc:#a69cb4"><span class="num">3</span><h4>情感重音</h4><div class="cn">激动时对表达情感的词作<b>超常规</b>强调。</div></div>
     </div>
     <div class="ex anim" style="--i:5">
-      <div class="lead">逻辑重音示例 · 同一句 8 种读法（加粗处重读）<button class="speak mini" onclick="speakDemo(this,'Tommy proposes you should discuss the topic with him this evening')">🔊</button></div>
+      <div class="lead">逻辑重音示例 · 同一句 8 种读法（加粗处重读）</div>
       <div class="cn-src" style="font-size:15px"><b class="gold">Tommy</b> proposes you should discuss the topic with him this evening.（强调“是谁”）<br>
       Tommy proposes <b class="gold">you</b> should discuss…（强调“是你”）<br>
       …discuss the <b class="gold">topic</b> with him…（强调“话题”而非别的）<br>
@@ -1020,7 +998,7 @@
       <div class="cn-src"><b class="gold">1 分</b>：流利朗读、发音清楚、语音语调节奏正确、正确处理重音与意群停顿、掌握连读失爆。<br><b class="gold">0.5 分</b>：基本读出、有错误但不影响理解。<br><b class="gold">0 分</b>：错误严重、无法理解。</div>
     </div>
     <div class="ex anim" style="--i:2">
-      <div class="lead">典型例题 <button class="speak mini" onclick="speakDemo(this,'Overweight individuals had a widespread reduction in white matter compared with lean people')">🔊</button></div>
+      <div class="lead">典型例题</div>
       <div class="en-ref"><span class="mt">句</span>Overweight individuals had a widespread reduction in white matter compared with lean people.</div>
       <div class="ana"><b>意群：</b>Overweight individuals / had a widespread reduction / in white matter / compared with lean people.</div>
     </div>
@@ -1037,7 +1015,7 @@
     <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a69cb4">四 · 各题型技巧</span><h2>Section B · 段落朗读</h2><span class="en">Read a Passage</span></div>
     <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f"><b class="gold">评分：</b>2 分（流利、清楚、语调节奏正确、处理重音/意群/语气转换）→ 1 分（有错误不影响理解）→ 0 分（严重错误）。</p>
     <div class="ex anim" style="--i:2">
-      <div class="lead">典型例题（节选）<button class="speak mini" onclick="speakDemo(this,'I have been thinking about Jess all day, unable to focus on anything but what I saw this morning. What was it that made me think that something was wrong? I could not possibly see her expression at that distance, but I felt when I was looking at her that she was alone.')">🔊</button></div>
+      <div class="lead">典型例题（节选）</div>
       <div class="en-ref"><span class="mt">段</span>I have been thinking about Jess all day, unable to focus on anything but what I saw this morning. What was it that made me think that something was wrong? …Perhaps she was, or perhaps he's away, gone to one of those hot countries he jets off to to save lives.</div>
     </div>
     <div class="grid g2" style="margin-top:6px">
@@ -1121,9 +1099,9 @@
   <!-- 29 功能意念(一) -->
   <section class="slide scrollable" data-title="功能意念对答(一)" data-sec="五 · 听说测试">
     <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8aa8a0">五 · 听说测试</span><h2>功能意念对答（一）</h2><span class="en">Functions 1–7</span></div>
-    <p class="anim" style="--i:1;font-size:13.5px;color:#5c564f">点每个标题展开；点 🔊 听示范。<b class="gold">快速应答考的就是这 37 类对答</b>。</p>
+    <p class="anim" style="--i:1;font-size:13.5px;color:#5c564f">点每个标题展开查看对答。<b class="gold">快速应答考的就是这 37 类对答</b>。</p>
 
-    <details class="func anim" style="--i:2"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">1</span>问候 Greetings <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'How do you do? How are you? Fine, thank you. And you? How is everything going? Not bad.')">🔊</button></summary>
+    <details class="func anim" style="--i:2"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">1</span>问候 Greetings <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">How do you do?</span> <span class="a">How do you do?</span></div>
         <div class="qa"><span class="q">How are you? / How is everything going?</span> <span class="a">Fine, thank you. / Not bad. / Pretty well. And you?</span></div>
@@ -1131,7 +1109,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:3"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">2</span>道别 Saying Goodbye <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Well, I must be going now. Please drop in again when you have time. Have fun in your winter vacation. You too. Goodbye.')">🔊</button></summary>
+    <details class="func anim" style="--i:3"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">2</span>道别 Saying Goodbye <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">Well, I must be going now.</span> <span class="a">Please drop in again when you have time.</span></div>
         <div class="qa"><span class="q">Have fun in your winter vacation.</span> <span class="a">You too. Goodbye.</span></div>
@@ -1139,7 +1117,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:4"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">3</span>打电话 Telephone Calls <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Hello, may I speak to Mary? This is Mary speaking. Could I take a message? Hold on, please.')">🔊</button></summary>
+    <details class="func anim" style="--i:4"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">3</span>打电话 Telephone Calls <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">Hello, may I speak to Mary?</span> <span class="a">This is Mary speaking.</span></div>
         <div class="qa"><span class="q">I'd like to speak to Kim, please.</span> <span class="a">Sorry, she's out. Can I take a message?</span></div>
@@ -1147,7 +1125,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:5"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">4</span>问路 Asking the Way <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Excuse me, can you tell me the way to the Park Hotel? Go straight ahead and turn right. It is on the left.')">🔊</button></summary>
+    <details class="func anim" style="--i:5"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">4</span>问路 Asking the Way <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">Can you tell me the way to the Park Hotel?</span> <span class="a">Go straight ahead and turn right. It's on the left.</span></div>
         <div class="qa"><span class="q">How can I get to the railway station?</span> <span class="a">You can take the No. 41 bus over there.</span></div>
@@ -1155,7 +1133,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:6"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">5</span>时间日期 Time &amp; Dates <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'What time is it? It is six twenty-four. What day is it today? It is Sunday.')">🔊</button></summary>
+    <details class="func anim" style="--i:6"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">5</span>时间日期 Time &amp; Dates <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">What's the time? / What time is it?</span> <span class="a">It's 6:24. / It's 5 o'clock sharp.</span></div>
         <div class="qa"><span class="q">What's the date today?</span> <span class="a">It's Feb. 15th, 2017.</span></div>
@@ -1163,7 +1141,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:7"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">6</span>介绍 Introductions <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'May I introduce myself? I am Zhao Lin. Nice to meet you.')">🔊</button></summary>
+    <details class="func anim" style="--i:7"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">6</span>介绍 Introductions <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">May I introduce myself? I'm Zhao Lin.</span> <span class="a">Nice to meet you.</span></div>
         <div class="qa"><span class="q">I don't think you've met Bryan. He's our football star.</span> <span class="a">Glad to meet you.</span></div>
@@ -1171,7 +1149,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:8"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">7</span>致谢 Giving Thanks <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Thank you very much. You are welcome. I really appreciate your help. It is all right.')">🔊</button></summary>
+    <details class="func anim" style="--i:8"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">7</span>致谢 Giving Thanks <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">Thank you very much for what you've done.</span> <span class="a">Glad to be of help. / You're welcome.</span></div>
         <div class="qa"><span class="q">Thanks a lot.</span> <span class="a">Don't mention it. / My pleasure.</span></div>
@@ -1185,7 +1163,7 @@
     <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8aa8a0">五 · 听说测试</span><h2>功能意念对答（二）</h2><span class="en">Functions 8–15</span></div>
     <p class="anim" style="--i:1;font-size:13.5px;color:#5c564f">道歉、求助、征求意见、表态、购物、就餐。</p>
 
-    <details class="func anim" style="--i:2"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">8</span>道歉 Apologies <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'I am sorry to have kept you waiting. It does not matter. Please excuse me for being late. Never mind.')">🔊</button></summary>
+    <details class="func anim" style="--i:2"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">8</span>道歉 Apologies <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">I'm sorry to have kept you waiting.</span> <span class="a">It doesn't matter.</span></div>
         <div class="qa"><span class="q">Please excuse me for being late.</span> <span class="a">Never mind. You're not too late.</span></div>
@@ -1193,7 +1171,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:3"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">9</span>提供帮助 Offering Help <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Can I help you with that? Yes, please. Would you like me to carry it for you? That is very kind of you.')">🔊</button></summary>
+    <details class="func anim" style="--i:3"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">9</span>提供帮助 Offering Help <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">Can I help you with that?</span> <span class="a">Yes, please.</span></div>
         <div class="qa"><span class="q">Would you like me to carry it for you?</span> <span class="a">That's very kind of you. Thanks.</span></div>
@@ -1201,7 +1179,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:4"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">10</span>请求许可 Permission <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'May I borrow your bike for a while? Yes, of course. Do you mind if I turn on the TV? Not at all.')">🔊</button></summary>
+    <details class="func anim" style="--i:4"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">10</span>请求许可 Permission <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">May I borrow your bike for a while?</span> <span class="a">Yes, of course. But be careful with the brakes.</span></div>
         <div class="qa"><span class="q">Do you mind if I turn on the TV?</span> <span class="a">Not at all.</span></div>
@@ -1209,7 +1187,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:5"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">11</span>同意/不同意 Agreement <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Chinese food is the best in the world. Yes, it certainly is. I guess we should buy a new refrigerator. I do not agree.')">🔊</button></summary>
+    <details class="func anim" style="--i:5"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">11</span>同意/不同意 Agreement <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">Chinese food is the best in the world.</span> <span class="a">Yes, it certainly is.</span></div>
         <div class="qa"><span class="q">The students gave a very good performance.</span> <span class="a">Absolutely. / You took the words right out of my mouth.</span></div>
@@ -1217,7 +1195,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:6"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">12</span>确定/不确定 Certainty <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Is it going to rain? There is no doubt about it. Are you sure? Yes, I am pretty sure.')">🔊</button></summary>
+    <details class="func anim" style="--i:6"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">12</span>确定/不确定 Certainty <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">Is it going to rain?</span> <span class="a">There's no doubt about it.</span></div>
         <div class="qa"><span class="q">Are you sure that Tom and Mary are going to marry?</span> <span class="a">Yes, I'm pretty sure.</span></div>
@@ -1225,7 +1203,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:7"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">13</span>喜好 Likes / Dislikes <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'I am fond of western movies. Really? I love science fiction movies. I hate rock and roll. It is not to my taste either.')">🔊</button></summary>
+    <details class="func anim" style="--i:7"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">13</span>喜好 Likes / Dislikes <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">I'm fond of western movies.</span> <span class="a">You are? I love science fiction movies.</span></div>
         <div class="qa"><span class="q">I prefer beef to mutton.</span> <span class="a">I like pork.</span></div>
@@ -1233,7 +1211,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:8"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">14</span>购物 Shopping <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'May I help you? Yes, I am looking for a toy. How much is it? It is fifteen dollars.')">🔊</button></summary>
+    <details class="func anim" style="--i:8"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">14</span>购物 Shopping <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">May I help you?</span> <span class="a">Yes, I'm looking for a toy for a five-year-old boy.</span></div>
         <div class="qa"><span class="q">How much is it?</span> <span class="a">It's $15. / It's 230 yuan.</span></div>
@@ -1241,7 +1219,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:9"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">15</span>就餐 Restaurant <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'May I take your order now? Yes, I would like to have fried fish. How do you like your steak? Medium rare, please.')">🔊</button></summary>
+    <details class="func anim" style="--i:9"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">15</span>就餐 Restaurant <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">May I take your order now?</span> <span class="a">Yes, I'd like to have fried fish.</span></div>
         <div class="qa"><span class="q">How do you like your steak?</span> <span class="a">Medium rare, please. / Well done.</span></div>
@@ -1255,7 +1233,7 @@
     <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8aa8a0">五 · 听说测试</span><h2>功能意念对答（三）</h2><span class="en">Functions 16–23</span></div>
     <p class="anim" style="--i:1;font-size:13.5px;color:#5c564f">天气、愿望、祝福、安慰、警告、惊奇、请求、建议。</p>
 
-    <details class="func anim" style="--i:2"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">16</span>天气 Weather <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'How is the weather today? It is fine. What is the weather like? It is raining cats and dogs.')">🔊</button></summary>
+    <details class="func anim" style="--i:2"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">16</span>天气 Weather <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">How is the weather today?</span> <span class="a">It's fine.</span></div>
         <div class="qa"><span class="q">What's the weather like today?</span> <span class="a">It's raining cats and dogs.</span></div>
@@ -1263,7 +1241,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:3"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">17</span>愿望意图 Desires <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'I am going to visit Hong Kong this summer. How wonderful! What are you going to do tomorrow? I am going to fix my TV set.')">🔊</button></summary>
+    <details class="func anim" style="--i:3"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">17</span>愿望意图 Desires <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">I'm going to visit Hong Kong this summer.</span> <span class="a">How wonderful!</span></div>
         <div class="qa"><span class="q">What are you going to do tomorrow?</span> <span class="a">I'm going to fix my TV set.</span></div>
@@ -1271,7 +1249,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:4"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">18</span>祝贺祝福 Congratulations <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'I got five As in the final examinations. Congratulations! Happy New Year! The same to you.')">🔊</button></summary>
+    <details class="func anim" style="--i:4"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">18</span>祝贺祝福 Congratulations <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">I got 5 As in the final examinations.</span> <span class="a">Congratulations! You're a smart boy.</span></div>
         <div class="qa"><span class="q">Happy New Year! / Merry Christmas!</span> <span class="a">The same to you.</span></div>
@@ -1279,7 +1257,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:5"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">19</span>同情鼓励 Sympathy <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'I did not pass the exam. I am sorry to hear that. I am sure I can not get that position. Cheer up.')">🔊</button></summary>
+    <details class="func anim" style="--i:5"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">19</span>同情鼓励 Sympathy <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">I didn't pass the exam.</span> <span class="a">I'm sorry to hear that.</span></div>
         <div class="qa"><span class="q">I'm sure I can't get that position.</span> <span class="a">Oh, cheer up. That's not the end of the world.</span></div>
@@ -1287,7 +1265,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:6"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">20</span>禁止警告 Warnings <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Watch out! Wet paint. You must not smoke here. I am so sorry. I did not know.')">🔊</button></summary>
+    <details class="func anim" style="--i:6"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">20</span>禁止警告 Warnings <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">Let's sit on the bench.</span> <span class="a">Watch out! Wet paint.</span></div>
         <div class="qa"><span class="q">You must not smoke here.</span> <span class="a">I'm so sorry. I didn't know.</span></div>
@@ -1295,7 +1273,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:7"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">21</span>惊奇担心 Surprise / Worry <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'What is the matter? I did not get that promotion. I can not believe my eyes. Hard to believe, is it not?')">🔊</button></summary>
+    <details class="func anim" style="--i:7"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">21</span>惊奇担心 Surprise / Worry <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">What's the matter?</span> <span class="a">I didn't get that promotion this time.</span></div>
         <div class="qa"><span class="q">Wow, I never thought you would come to see me.</span> <span class="a">What a surprise!</span></div>
@@ -1303,7 +1281,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:8"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">22</span>请求指导 Requests <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Please tell me how to make a cake. First, beat the egg. Then mix the flour with a little water.')">🔊</button></summary>
+    <details class="func anim" style="--i:8"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">22</span>请求指导 Requests <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">I don't know how to use the computer. Will you show me?</span> <span class="a">Sure. / I'm sorry I don't know either.</span></div>
         <div class="qa"><span class="q">Please tell me how to make a cake.</span> <span class="a">First, beat the egg. Then mix the flour with a little water…</span></div>
@@ -1311,7 +1289,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:9"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">23</span>建议 Advice / Suggestions <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Shall we go to the beach this weekend? Good idea. Why not join me in the game? I guess you are right.')">🔊</button></summary>
+    <details class="func anim" style="--i:9"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">23</span>建议 Advice / Suggestions <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">Shall we go to the beach this weekend?</span> <span class="a">Good idea.</span></div>
         <div class="qa"><span class="q">How do you suggest we improve our oral English?</span> <span class="a">You'd better speak more.</span></div>
@@ -1325,7 +1303,7 @@
     <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8aa8a0">五 · 听说测试</span><h2>功能意念对答（四）</h2><span class="en">Functions 24–30</span></div>
     <p class="anim" style="--i:1;font-size:13.5px;color:#5c564f">请求重复、征询意见、满意、失望、责备、就医、义务。</p>
 
-    <details class="func anim" style="--i:2"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">24</span>请求重复 Repetition <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'What did you say? I did not hear you. Could you repeat that, please? OK.')">🔊</button></summary>
+    <details class="func anim" style="--i:2"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">24</span>请求重复 Repetition <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">What did you say? I didn't hear you.</span> <span class="a">I said you play the radio someplace else.</span></div>
         <div class="qa"><span class="q">Could you repeat that, please?</span> <span class="a">OK. Like human beings, stars have their life circles.</span></div>
@@ -1333,7 +1311,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:3"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">25</span>征询意见 Ideas <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'What is your opinion of the high cost of weddings? It depends on how much people make. What do you think of the school lunch? It is terrible.')">🔊</button></summary>
+    <details class="func anim" style="--i:3"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">25</span>征询意见 Ideas <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">What's your opinion of the high cost of weddings?</span> <span class="a">It depends on how much people make.</span></div>
         <div class="qa"><span class="q">What do you think of school lunch?</span> <span class="a">It's terrible.</span></div>
@@ -1341,7 +1319,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:4"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">26</span>满意/不满意 Satisfaction <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Are you happy with your new dress? Yes, it is fancy. You did a very good job. I am glad you like my work.')">🔊</button></summary>
+    <details class="func anim" style="--i:4"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">26</span>满意/不满意 Satisfaction <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">Are you happy with your new dress?</span> <span class="a">Yes, it's fancy.</span></div>
         <div class="qa"><span class="q">You did a very good job.</span> <span class="a">I'm glad you like my work.</span></div>
@@ -1349,7 +1327,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:5"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">27</span>失望 Disappointment <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Was the play good? It was disappointing. Did you enjoy the party? Not at all.')">🔊</button></summary>
+    <details class="func anim" style="--i:5"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">27</span>失望 Disappointment <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">Was the play good?</span> <span class="a">It was disappointing.</span></div>
         <div class="qa"><span class="q">Did you enjoy the party?</span> <span class="a">Not at all. I didn't know a single person there.</span></div>
@@ -1357,7 +1335,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:6"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">28</span>责备 Reproaches <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'How dare you speak to me like that? Sorry, I just lost my head. How could you lie to me? I did not mean to do that.')">🔊</button></summary>
+    <details class="func anim" style="--i:6"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">28</span>责备 Reproaches <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">How dare you speak to me like that!</span> <span class="a">Sorry. I just lost my head.</span></div>
         <div class="qa"><span class="q">How could you lie to me?</span> <span class="a">Sorry. I didn't mean to do that.</span></div>
@@ -1365,7 +1343,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:7"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">29</span>就医 Seeing a Doctor <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'What is the matter? I am not feeling well. Is it serious? Do not worry. It is nothing serious.')">🔊</button></summary>
+    <details class="func anim" style="--i:7"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">29</span>就医 Seeing a Doctor <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">What's the matter?</span> <span class="a">I'm not feeling well.</span></div>
         <div class="qa"><span class="q">Is it serious?</span> <span class="a">Don't worry. It's nothing serious.</span></div>
@@ -1373,7 +1351,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:8"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">30</span>义务必须 Obligation <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Do we have to pay income tax? Yes, we have to. Must I take notes? Yes, because you need them.')">🔊</button></summary>
+    <details class="func anim" style="--i:8"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">30</span>义务必须 Obligation <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">Do we have to pay income tax?</span> <span class="a">Yes, we have to.</span></div>
         <div class="qa"><span class="q">Must I take notes?</span> <span class="a">Yes, because you need them when you go over your lessons.</span></div>
@@ -1387,7 +1365,7 @@
     <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8aa8a0">五 · 听说测试</span><h2>功能意念对答（五）</h2><span class="en">Functions 31–37</span></div>
     <p class="anim" style="--i:1;font-size:13.5px;color:#5c564f">否认、偏好、高兴/不快、求助、能力、信息、邀请。</p>
 
-    <details class="func anim" style="--i:2"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">31</span>否认 Denying <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Tim is going to Sweden. That is not quite right. He is going to Switzerland.')">🔊</button></summary>
+    <details class="func anim" style="--i:2"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">31</span>否认 Denying <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">Tim is going to Sweden to study Hotel Management.</span> <span class="a">That isn't quite right. He's going to Switzerland.</span></div>
         <div class="qa"><span class="q">Our stock went up ten points today.</span> <span class="a">I think you might be mistaken. It went down ten points.</span></div>
@@ -1395,7 +1373,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:3"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">32</span>偏好 Preference <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Would you like to go to the movies tonight? I would prefer to stay home rather than go to the movies. Would you rather have fish or meat? I would rather have fish.')">🔊</button></summary>
+    <details class="func anim" style="--i:3"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">32</span>偏好 Preference <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">Would you like to go to the movies tonight?</span> <span class="a">I'd prefer to stay home rather than go to the movies.</span></div>
         <div class="qa"><span class="q">Would you rather have fish or meat?</span> <span class="a">I'd rather have fish.</span></div>
@@ -1403,7 +1381,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:4"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">33</span>高兴/不快 Pleasure <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'We are going to move into a bigger house. How wonderful! I lost your bike. How could you!')">🔊</button></summary>
+    <details class="func anim" style="--i:4"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">33</span>高兴/不快 Pleasure <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">We are going to move into a bigger house.</span> <span class="a">How wonderful!</span></div>
         <div class="qa"><span class="q">I'm graduating this coming May.</span> <span class="a">I'm really delighted about it.</span></div>
@@ -1411,7 +1389,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:5"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">34</span>求助 Assistance <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Could you give me a lift? Yes, certainly. Would you lend me some money? I am broke myself.')">🔊</button></summary>
+    <details class="func anim" style="--i:5"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">34</span>求助 Assistance <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">Could you give me a lift?</span> <span class="a">Yes, certainly.</span></div>
         <div class="qa"><span class="q">Would you lend me some money?</span> <span class="a">I'd like to say yes, but that's just impossible. I'm broke myself.</span></div>
@@ -1419,7 +1397,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:6"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">35</span>能力 Ability / Disability <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'Can you take shorthand? Yes, I can. Are you able to operate the computer? I am very good at it.')">🔊</button></summary>
+    <details class="func anim" style="--i:6"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">35</span>能力 Ability / Disability <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">Can you take shorthand?</span> <span class="a">Yes, I can.</span></div>
         <div class="qa"><span class="q">Are you able to operate the computer?</span> <span class="a">I'm very good at it.</span></div>
@@ -1427,7 +1405,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:7"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">36</span>信息 Information <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'What happened to David? He is going to talk with the manager about the promotion.')">🔊</button></summary>
+    <details class="func anim" style="--i:7"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">36</span>信息 Information <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">What happened to David?</span> <span class="a">He's going to talk with the manager about the promotion.</span></div>
         <div class="qa"><span class="q">Why is Julie upset?</span> <span class="a">Because she lost her purse on her way to work.</span></div>
@@ -1435,7 +1413,7 @@
       </div>
     </details>
 
-    <details class="func anim" style="--i:8"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">37</span>接受/拒绝邀请 Invitations <span class="fen">EN</span><button class="speak mini" style="margin-left:8px" onclick="speakDemo(this,'I would like to invite you to my place for dinner this Saturday. That would be nice. Will you come? Not this time, but thanks anyway.')">🔊</button></summary>
+    <details class="func anim" style="--i:8"><summary><span class="caret">▸</span><span class="fnum" style="--pc:#8aa8a0">37</span>接受/拒绝邀请 Invitations <span class="fen">EN</span></summary>
       <div class="fbody">
         <div class="qa"><span class="q">I'd like to invite you to my place for dinner.</span> <span class="a">That would be nice.</span></div>
         <div class="qa"><span class="q">Do you want to go to the football match with us?</span> <span class="a">I'm afraid I can't.</span></div>
@@ -1449,7 +1427,7 @@
     <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8aa8a0">五 · 听说测试</span><h2>Section B · 听短文回答问题</h2><span class="en">Listen &amp; Answer</span></div>
     <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f"><b class="gold">流程：</b>短文读两遍 → 第 1 题<b>据听力信息作答</b>（2 分），第 2 题<b>谈自己的看法</b>（≥3 句，3 分）。共 5 分。</p>
     <div class="ex anim" style="--i:2">
-      <div class="lead">典型例题 <button class="speak mini" onclick="speakDemo(this,'One of my most interesting experiences was swimming in the Great Salt Lake. The surprising fact is that the lake is about six times as salty as the ocean.')">🔊</button></div>
+      <div class="lead">典型例题</div>
       <div class="en-ref"><span class="mt">Q1</span>List the two mistakes that the writer made.</div>
       <div class="en-ref"><span class="mt">Q2</span>Do you like travelling? Why or why not?</div>
       <div class="ana"><b>参考答案 Q1：</b>One is that he couldn't stand up because the salty water held him up; the other is that he opened his eyes under water, which brought him terrible pain.</div>
@@ -1465,22 +1443,22 @@
   <!-- 35 口头小作文(一) -->
   <section class="slide scrollable" data-title="口头小作文框架(一)" data-sec="五 · 听说测试">
     <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8aa8a0">五 · 听说测试</span><h2>口头小作文框架（一）</h2><span class="en">Opinion Frames</span></div>
-    <p class="anim" style="--i:1;font-size:13.5px;color:#5c564f">第二题（谈看法）的万能句式，<b>背熟后套用</b>。点 🔊 听示范。</p>
+    <p class="anim" style="--i:1;font-size:13.5px;color:#5c564f">第二题（谈看法）的万能句式，<b>背熟后套用</b>。</p>
 
     <div class="grid g2" style="margin-top:6px">
-      <div class="ex anim" style="--i:2"><div class="lead">1 · Liking 喜欢 <button class="speak mini" onclick="speakDemo(this,'I am fairly keen on animals. To be more precise, I love those little kittens. This is due to the fact that those little furry creatures never fail to intrigue me with their lovely faces and funny gestures.')">🔊</button></div>
+      <div class="ex anim" style="--i:2"><div class="lead">1 · Liking 喜欢</div>
         <div class="cn-src"><b>引入：</b>I am fairly keen on / really into / quite a big fan of…</div>
         <div class="cn-src"><b>细化：</b>To be more precise / specifically…</div>
         <div class="cn-src"><b>理由：</b>This is due to the fact that… / The reason has something to do with…</div></div>
-      <div class="ex anim" style="--i:3"><div class="lead">2 · Disliking 不喜欢 <button class="speak mini" onclick="speakDemo(this,'I am not so keen on the weather. To be more precise, I really can not stand the summer months. This is due to the fact that the temperature can get as high as forty degrees.')">🔊</button></div>
+      <div class="ex anim" style="--i:3"><div class="lead">2 · Disliking 不喜欢</div>
         <div class="cn-src"><b>引入：</b>I am not so keen on / not much of a fan of / can't stand…</div>
         <div class="cn-src"><b>细化：</b>To be more precise…</div>
         <div class="cn-src"><b>理由：</b>This is probably because…</div></div>
-      <div class="ex anim" style="--i:4"><div class="lead">3 · Predicting 预测 <button class="speak mini" onclick="speakDemo(this,'I am sure that in the years to come, we will see a number of changes related to this. Initially, I guess that we might begin to see houses that are much bigger and smarter.')">🔊</button></div>
+      <div class="ex anim" style="--i:4"><div class="lead">3 · Predicting 预测</div>
         <div class="cn-src"><b>开头：</b>I am sure that in the years to come, we will see a number of changes…</div>
         <div class="cn-src"><b>预测 1：</b>Initially, I guess that we might begin to see…</div>
         <div class="cn-src"><b>预测 2：</b>At the same time, I suppose it is quite probable that…</div></div>
-      <div class="ex anim" style="--i:5"><div class="lead">4 · Why 原因 <button class="speak mini" onclick="speakDemo(this,'I suppose that there are quite a few clear benefits, but one thing that really stands out is that trains are really cheap, especially for long distance travel.')">🔊</button></div>
+      <div class="ex anim" style="--i:5"><div class="lead">4 · Why 原因</div>
         <div class="cn-src"><b>开头：</b>I suppose there are quite a few clear benefits…</div>
         <div class="cn-src"><b>最重要：</b>But one thing that really stands out is that…</div>
         <div class="cn-src"><b>第二个：</b>At the same time, a second bonus might be that…</div></div>
@@ -1492,11 +1470,11 @@
     <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8aa8a0">五 · 听说测试</span><h2>口头小作文框架（二）</h2><span class="en">Opinion Frames</span></div>
     <p class="anim" style="--i:1;font-size:13.5px;color:#5c564f">「问题」与「解决方案」两类，是近年高频命题。</p>
     <div class="grid g2" style="margin-top:6px">
-      <div class="ex anim" style="--i:2"><div class="lead">5 · Problems 问题 <button class="speak mini" onclick="speakDemo(this,'It is universally accepted that there are a few hazards involved with the over-popularity of private cars. First and foremost, one major worry is probably that cars burn oil, which leads to the greenhouse effect.')">🔊</button></div>
+      <div class="ex anim" style="--i:2"><div class="lead">5 · Problems 问题</div>
         <div class="cn-src"><b>开头：</b>It is universally accepted that there are quite a few problems with regard to this issue…</div>
         <div class="cn-src"><b>问题 1：</b>First and foremost, one major worry is probably that…</div>
         <div class="cn-src"><b>问题 2：</b>Another matter which causes unease is that…</div></div>
-      <div class="ex anim" style="--i:3"><div class="lead">6 · Solutions 解决方案 <button class="speak mini" onclick="speakDemo(this,'In my view, there are a number of measures that can be taken. In reaction to the issue, the most effective way will be to develop public transport.')">🔊</button></div>
+      <div class="ex anim" style="--i:3"><div class="lead">6 · Solutions 解决方案</div>
         <div class="cn-src"><b>开头：</b>In my view, there are a number of measures that can be taken…</div>
         <div class="cn-src"><b>方案 1：</b>In reaction to the issue, the most effective way will be to…</div>
         <div class="cn-src"><b>方案 2：</b>Moreover, taking on the challenge, the most successful way will be to…</div></div>
@@ -1513,7 +1491,7 @@
     <div class="grid g5" style="margin-top:6px">
       <div class="sum-block anim" style="--i:1;--pc:#93aa92">
         <h4><span class="dot"></span>音标</h4>
-        <ul><li>48 音素：<b>20 元音 + 28 辅音</b></li><li>长短音、清浊要分清</li><li>ea / ear / ou 多音要记牢</li><li>点 🔊 反复跟读</li></ul>
+        <ul><li>48 音素：<b>20 元音 + 28 辅音</b></li><li>长短音、清浊要分清</li><li>ea / ear / ou 多音要记牢</li><li>反复朗读，形成肌肉记忆</li></ul>
       </div>
       <div class="sum-block anim" style="--i:2;--pc:#c09892">
         <h4><span class="dot"></span>朗读技巧</h4>
@@ -1541,13 +1519,176 @@
     </div>
   </section>
 
+  <!-- 38 附录 · 周育如音标法 总览 -->
+  <section class="slide" data-title="周育如音标法 · 总览" data-sec="附录 · 周育如音标法">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b08d7a">附录 · 周育如音标法</span><h2>周育如音标法 · 总览</h2><span class="en">Natural Phonics</span></div>
+    <p class="anim" style="--i:1;font-size:15.5px;color:#5c564f;line-height:1.75">前面第 7–17 页的 48 音素，是“<b class="gold">发音的地基</b>”——告诉你每个音怎么发准。这套「<b class="key">周育如音标法</b>」（自然拼读 / 自然发音法）解决另一个问题：<b>看到一个生词，怎么拼出来</b>。</p>
+    <div class="note anim" style="--i:2;margin-top:14px">
+      <span class="ico">💡</span>
+      <div><b>核心理念：</b>英语是<b>拼音文字</b>——字母（字组）与发音有<b>固定的对应关系</b>。掌握规律后，<b>看到单词能拼出来、听到读音能写出来</b>，不再一个个死背。</div>
+    </div>
+    <div class="grid g3" style="margin-top:14px">
+      <div class="card anim" style="--i:3;--pc:#b08d7a"><span class="num">①</span><h4>基础音标表</h4><div class="cn">26 个字母的<b>本音</b><br>子音（辅音）一对一</div></div>
+      <div class="card anim" style="--i:4;--pc:#b08d7a"><span class="num">②</span><h4>元音规则</h4><div class="cn">母音 a e i o u 的<b>本音 / 短音</b><br>非重读音节弱化</div></div>
+      <div class="card anim" style="--i:5;--pc:#b08d7a"><span class="num">③</span><h4>特殊规则</h4><div class="cn">词尾 e · 元音 + r · oo<br>字母组合 au/ou/th…</div></div>
+    </div>
+    <div class="tip anim" style="--i:6">
+      <span>🧭</span>
+      <div><b>怎么用：</b>把这一块当作<b>“查词拼读”的快捷键</b>。考试朗读题里遇到生词，先用这套规则<b>拼出读音</b>，再用前面的音标知识<b>校准发音</b>——两者配合，口试更稳。</div>
+    </div>
+  </section>
+
+  <!-- 39 附录 · 基础音标表（子音） -->
+  <section class="slide" data-title="周育如音标法 · 基础音标表" data-sec="附录 · 周育如音标法">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b08d7a">附录 · 周育如音标法</span><h2>基础音标表 · 26 字母本音</h2><span class="en">Letter Sounds</span></div>
+    <div class="note anim" style="--i:1">
+      <span class="ico">🔑</span>
+      <div><b>最重要的一条：</b>辅音字母（子音）<b>写法与读法基本相同、发音基本不变</b>——一对一，最好记。元音字母（a e i o u）的读音会在下一页「元音规则」展开。</div>
+    </div>
+    <div class="ph-group anim" style="--i:2;--pc:#b08d7a;margin-top:6px">
+      <div class="phg-head"><span class="gname">26 个字母在单词中的「本音」</span><span class="gen">字母 → 音标</span></div>
+      <div class="ph-row">
+        <div class="ph"><span class="sym">a</span><span class="words">[æ]</span></div>
+        <div class="ph"><span class="sym">b</span><span class="words">[b]</span></div>
+        <div class="ph"><span class="sym">c</span><span class="words">[k]</span></div>
+        <div class="ph"><span class="sym">d</span><span class="words">[d]</span></div>
+        <div class="ph"><span class="sym">e</span><span class="words">[e]</span></div>
+        <div class="ph"><span class="sym">f</span><span class="words">[f]</span></div>
+        <div class="ph"><span class="sym">g</span><span class="words">[g]</span></div>
+        <div class="ph"><span class="sym">h</span><span class="words">[h]</span></div>
+        <div class="ph"><span class="sym">i</span><span class="words">[ɪ]</span></div>
+        <div class="ph"><span class="sym">j</span><span class="words">[dʒ]</span></div>
+        <div class="ph"><span class="sym">k</span><span class="words">[k]</span></div>
+        <div class="ph"><span class="sym">l</span><span class="words">[l]</span></div>
+        <div class="ph"><span class="sym">m</span><span class="words">[m]</span></div>
+        <div class="ph"><span class="sym">n</span><span class="words">[n]</span></div>
+        <div class="ph"><span class="sym">o</span><span class="words">[ɑː]</span></div>
+        <div class="ph"><span class="sym">p</span><span class="words">[p]</span></div>
+        <div class="ph"><span class="sym">q</span><span class="words">[kw]</span></div>
+        <div class="ph"><span class="sym">r</span><span class="words">[r]</span></div>
+        <div class="ph"><span class="sym">s</span><span class="words">[s]</span></div>
+        <div class="ph"><span class="sym">t</span><span class="words">[t]</span></div>
+        <div class="ph"><span class="sym">u</span><span class="words">[ʌ]</span></div>
+        <div class="ph"><span class="sym">v</span><span class="words">[v]</span></div>
+        <div class="ph"><span class="sym">w</span><span class="words">[w]</span></div>
+        <div class="ph"><span class="sym">x</span><span class="words">[ks]</span></div>
+        <div class="ph"><span class="sym">y</span><span class="words">[j]</span></div>
+        <div class="ph"><span class="sym">z</span><span class="words">[z]</span></div>
+      </div>
+    </div>
+    <div class="ex anim" style="--i:3">
+      <div class="lead">试拼</div>
+      <div class="en-ref"><span class="mt">例</span>desk → d-e-s-k = [d][e][s][k] · cat → [k][æ][t] · box → [b][ɒ][ks] · bed → [b][e][d]</div>
+    </div>
+    <div class="warn anim" style="--i:4">
+      <span>⚠️</span>
+      <div><b>几个“不按常理”的：</b>c 常读 [k]（cat），但在 e/i/y 前读 [s]（city）；g 常读 [g]（go），在 e/i/y 前读 [dʒ]（age）；j 读 [dʒ]、q 读 [kw]、x 读 [ks]、y 常读 [j]。</div>
+    </div>
+  </section>
+
+  <!-- 40 附录 · 元音规则 -->
+  <section class="slide" data-title="周育如音标法 · 元音规则" data-sec="附录 · 周育如音标法">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b08d7a">附录 · 周育如音标法</span><h2>元音规则 · 母音的两种读法</h2><span class="en">Vowel Rules</span></div>
+    <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f;line-height:1.7">每个母音字母（a e i o u）都有<b class="gold">“本音”（长音）</b>和<b class="gold">“短音”</b>两套读法。规律：<b>开音节读本音，闭音节读短音</b>。</p>
+    <table class="anim" style="--i:2;margin-top:6px">
+      <thead><tr><th style="width:14%">母音</th><th style="width:22%">本音（开音节）</th><th style="width:22%">短音（闭音节）</th><th>例词</th></tr></thead>
+      <tbody>
+        <tr><td><span class="en">a</span></td><td class="ipatext">/eɪ/</td><td class="ipatext">/æ/</td><td><span class="en">name, late · cat, bag</span></td></tr>
+        <tr><td><span class="en">e</span></td><td class="ipatext">/iː/</td><td class="ipatext">/e/</td><td><span class="en">he, me · bed, ten</span></td></tr>
+        <tr><td><span class="en">i</span></td><td class="ipatext">/aɪ/</td><td class="ipatext">/ɪ/</td><td><span class="en">bike, time · sit, big</span></td></tr>
+        <tr><td><span class="en">o</span></td><td class="ipatext">/əʊ/</td><td class="ipatext">/ɒ/ 或 /ɑː/</td><td><span class="en">no, home · dog, hot</span></td></tr>
+        <tr><td><span class="en">u</span></td><td class="ipatext">/juː/ 或 /uː/</td><td class="ipatext">/ʌ/</td><td><span class="en">student · blue · bus, cup</span></td></tr>
+      </tbody>
+    </table>
+    <div class="grid g2" style="margin-top:8px">
+      <div class="ex anim" style="--i:3">
+        <div class="lead">非重读音节（最常见 → 弱化为 /ə/）</div>
+        <div class="cn-src">a → /ə/（<span class="en">China</span>） · e → /ə/ /ɪ/（<span class="en">open</span>）<br>i → /ə/ /ɪ/（<span class="en">family</span>） · o → /ə/（<span class="en">photo</span>） · u → /ə/ /ʊ/（<span class="en">January</span>）</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">重读 / 非重读（例）</div>
+        <div class="en-ref"><span class="mt">例</span>o<b class="gold">pen</b> /ˈəʊpən/ —— 重读的 o 读本音 /əʊ/，非重读的 e 弱化为 /ə/。</div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:5">
+      <span>💡</span>
+      <div><b>判断开闭音节最快的方法：</b>单词结尾是<b>“元音 + 辅音 + 不发音的 e”</b>（name, ride）→ 开音节，读本音；结尾是<b>辅音收尾</b>（cat, bed, sit）→ 闭音节，读短音。</div>
+    </div>
+  </section>
+
+  <!-- 41 附录 · 特殊规则(一) -->
+  <section class="slide scrollable" data-title="周育如音标法 · 特殊规则(一)" data-sec="附录 · 周育如音标法">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b08d7a">附录 · 周育如音标法</span><h2>特殊规则（一）</h2><span class="en">Special Rules</span></div>
+
+    <div class="ex anim" style="--i:1">
+      <div class="lead">规则一 · 单音节词尾的“e”不发音，前面元音读<b>本音</b></div>
+      <div class="en-ref"><span class="mt">例</span>name /neɪm/ · take /teɪk/ · ride /raɪd/ · came /keɪm/ · fine /faɪn/</div>
+      <div class="ana">这就是上一页「开音节」的具体运用：<b>结尾的 e 只管“托音”，自己不发音</b>。</div>
+    </div>
+
+    <div class="ex anim" style="--i:2">
+      <div class="lead">规则二 · a e i o u 加 r：重读时读 /ɜː/（或 /ɔː/），词尾读 /ə/</div>
+      <table style="margin-top:8px">
+        <thead><tr><th>字组</th><th>重读音节</th><th>词尾（非重读）</th><th>例词</th></tr></thead>
+        <tbody>
+          <tr><td><span class="en">ar</span></td><td class="ipatext">/ɑː/</td><td class="ipatext">/ə/</td><td><span class="en">car · dollar</span></td></tr>
+          <tr><td><span class="en">er</span></td><td class="ipatext">/ɜː/</td><td class="ipatext">/ə/</td><td><span class="en">her · teacher</span></td></tr>
+          <tr><td><span class="en">ir</span></td><td class="ipatext">/ɜː/</td><td class="ipatext">/ə/</td><td><span class="en">bird</span></td></tr>
+          <tr><td><span class="en">or</span></td><td class="ipatext">/ɔː/</td><td class="ipatext">/ə/</td><td><span class="en">short · doctor</span></td></tr>
+          <tr><td><span class="en">ur</span></td><td class="ipatext">/ɜː/</td><td class="ipatext">/ə/</td><td><span class="en">turn</span></td></tr>
+        </tbody>
+      </table>
+      <div class="en-ref"><span class="mt">例</span>work /wɜːk/ · bird /bɜːd/ · her /hɜː/ · worker /ˈwɜːkə/ · doctor /ˈdɒktə/</div>
+    </div>
+
+    <div class="ex anim" style="--i:3">
+      <div class="lead">规则三 · oo 常读 /ʊ/，有时读 /uː/</div>
+      <div class="en-ref"><span class="mt">例</span>book /bʊk/ · good /gʊd/ · look /lʊk/ · foot /fʊt/　｜　room /ruːm/ · food /fuːd/ · school /skuːl/</div>
+      <div class="ana"><b>小技巧：</b>多数“日常短词”读短 /ʊ/（book, look），遇到 <b>m, n, l, d</b> 前的 oo 常读长 /uː/（room, food, cool）。</div>
+    </div>
+  </section>
+
+  <!-- 42 附录 · 特殊规则(二) -->
+  <section class="slide" data-title="周育如音标法 · 特殊规则(二)" data-sec="附录 · 周育如音标法">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b08d7a">附录 · 周育如音标法</span><h2>特殊规则（二）</h2><span class="en">Special Rules</span></div>
+
+    <div class="ex anim" style="--i:1">
+      <div class="lead">规则四 · au / ou / aw / ow 常读 /aʊ/ 或 /əʊ/</div>
+      <div class="en-ref"><span class="mt">例</span>house /haʊs/ · hour /ˈaʊə/ · how /haʊ/ · now /naʊ/　｜　know /nəʊ/ · throw /θrəʊ/ · row /rəʊ/</div>
+      <div class="ana"><b>规律：</b>多数读 /aʊ/（house, how）；<b>ow 在词尾</b>常读 /əʊ/（know, throw, yellow）。</div>
+    </div>
+
+    <div class="ex anim" style="--i:2">
+      <div class="lead">规则五 · 字母组合（子音）</div>
+      <table style="margin-top:8px">
+        <thead><tr><th style="width:16%">字组</th><th style="width:26%">读音</th><th>例词</th></tr></thead>
+        <tbody>
+          <tr><td><span class="en">th</span></td><td class="ipatext">/θ/ 或 /ð/</td><td><span class="en">think /θ/ · this, that /ð/</span></td></tr>
+          <tr><td><span class="en">ch</span></td><td class="ipatext">/tʃ/</td><td><span class="en">chair, teach, watch</span></td></tr>
+          <tr><td><span class="en">sh</span></td><td class="ipatext">/ʃ/</td><td><span class="en">she, ship, wash</span></td></tr>
+          <tr><td><span class="en">ph</span></td><td class="ipatext">/f/</td><td><span class="en">phone, photo</span></td></tr>
+          <tr><td><span class="en">ng</span></td><td class="ipatext">/ŋ/ 或 /ŋg/</td><td><span class="en">sing /ŋ/ · English /ŋg/</span></td></tr>
+          <tr><td><span class="en">nk</span></td><td class="ipatext">/ŋk/</td><td><span class="en">think, thank</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note anim" style="--i:3">
+      <span class="ico">🎯</span>
+      <div><b>两条最值得记：</b>① <b>th</b> 有两个音——<b>实词开头读 /θ/</b>（think, three），<b>虚词（the, this, that, than）读 /ð/</b>；② <b>ng</b> 在词尾读 /ŋ/（sing），在词中后接 g/k 时读 /ŋg/（English, hungry）。</div>
+    </div>
+    <div class="motto anim" style="--i:4">
+      见词能拼 · 听音能写 —— <span>周育如音标法，让发音“有章可循”</span>
+    </div>
+  </section>
+
 </div>
 
 <div id="nav">
   <button id="prev" aria-label="上一页" title="上一页 (←)">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
   </button>
-  <div class="counter"><b id="cur">1</b> / <span id="total">37</span></div>
+  <div class="counter"><b id="cur">1</b> / <span id="total">42</span></div>
   <button id="next" aria-label="下一页" title="下一页 (→)">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
   </button>
@@ -1559,7 +1700,7 @@
     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
   </button>
 </div>
-<div id="hint">← → 翻页 · 空格下一页 · F 全屏 · 左侧手柄抽拉目录 · 点 🔊 听示范读音</div>
+<div id="hint">← → 翻页 · 空格下一页 · F 全屏 · 左侧手柄抽拉目录</div>
 
 <!-- 抽拉式目录（左侧抽屉） -->
 <div id="drawerTab" title="打开目录">
@@ -1570,7 +1711,7 @@
     <div class="dp-head">
       <div class="k">听说测试 · 目录</div>
       <h3>听说测试全攻略</h3>
-      <div class="sub">音标拼读 · 朗读技巧 · 各题型 · 听说实战</div>
+      <div class="sub">音标拼读 · 朗读技巧 · 各题型 · 听说实战 · 周育如音标法附录</div>
       <button class="close" id="drawerClose" aria-label="关闭">✕</button>
     </div>
     <div id="drawerList"></div>
@@ -1578,61 +1719,6 @@
 </div>
 
 <script>
-  // ================= 语音合成（读音示范）=================
-  let voices = [];
-  function loadVoices(){ try{ voices = window.speechSynthesis.getVoices(); }catch(e){} }
-  function pickEnglishVoice(){
-    if(!voices.length){ try{ voices = window.speechSynthesis.getVoices(); }catch(e){} }
-    return voices.find(v => /^en[-_]/i.test(v.lang))
-        || voices.find(v => /en/i.test(v.lang))
-        || null;
-  }
-  function assertTTS(){
-    if(!('speechSynthesis' in window)){
-      alert('当前浏览器不支持语音合成。请用 Chrome / Edge / Safari 打开，即可点击 🔊 听示范读音。');
-      return false;
-    }
-    return true;
-  }
-  // 单个示范（例词 / 例句）
-  window.speakDemo = function(btn, text){
-    if(!text) text = btn.getAttribute('data-say');
-    if(!text || !assertTTS()) return;
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = 'en-US';
-    const v = pickEnglishVoice(); if(v) u.voice = v;
-    u.rate = 0.82;   // 稍慢，便于听清
-    u.pitch = 1;
-    btn.classList.add('playing');
-    u.onend = u.onerror = function(){ btn.classList.remove('playing'); };
-    window.speechSynthesis.speak(u);
-  };
-  // 连续播放一组（读本组所有例词）
-  window.speakGroup = function(btn){
-    const group = btn.closest('.ph-group');
-    const texts = Array.from(group.querySelectorAll('.ph')).map(p => p.getAttribute('data-say')).filter(Boolean);
-    if(!texts.length || !assertTTS()) return;
-    window.speechSynthesis.cancel();
-    let i = 0;
-    btn.classList.add('playing');
-    function next(){
-      if(i >= texts.length){ btn.classList.remove('playing'); return; }
-      const u = new SpeechSynthesisUtterance(texts[i]);
-      u.lang = 'en-US';
-      const v = pickEnglishVoice(); if(v) u.voice = v;
-      u.rate = 0.85;
-      u.onend = function(){ i++; next(); };
-      u.onerror = function(){ i++; next(); };
-      window.speechSynthesis.speak(u);
-    }
-    next();
-  };
-  if('speechSynthesis' in window){
-    loadVoices();
-    window.speechSynthesis.onvoiceschanged = loadVoices;
-  }
-
   // ================= 幻灯片 & 目录 =================
   const slides = Array.from(document.querySelectorAll('.slide'));
   const total = slides.length;
@@ -1653,7 +1739,8 @@
   const SEC_COLORS = {
     '封面':'#b99c6a', '导读':'#b99c6a', '收尾':'#b99c6a',
     '一 · 了解考试':'#7e96a5', '二 · 音标与拼读':'#93aa92',
-    '三 · 朗读技巧':'#c09892', '四 · 各题型技巧':'#a69cb4', '五 · 听说测试':'#8aa8a0'
+    '三 · 朗读技巧':'#c09892', '四 · 各题型技巧':'#a69cb4', '五 · 听说测试':'#8aa8a0',
+    '附录 · 周育如音标法':'#b08d7a'
   };
 
   (function buildMenu(){
@@ -1693,7 +1780,6 @@
     Array.from(drawerList.querySelectorAll('.dp-item')).forEach((b,i)=>{
       b.classList.toggle('active', i===idx);
     });
-    // 回到顶部，方便看滚动页
     const cur = slides[idx];
     if(cur) cur.scrollTop = 0;
   }
