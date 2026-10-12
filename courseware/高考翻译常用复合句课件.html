@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高考英语翻译 · 第四章 高考翻译常用复合句</title>
+<style>
+  :root{
+    --ink:#46413b;          /* 主文字 暖灰棕 */
+    --muted:#8c857b;        /* 次要文字 */
+    --line:#e6ded1;         /* 边框 */
+    --bg:#f4efe6;           /* 背景 燕麦米色 */
+    --paper:#fcf9f3;        /* 卡片纸面 暖白 */
+    --paper-2:#f6f0e6;      /* 二级纸面 */
+    --ink-soft:#5c564f;
+
+    /* 四节主题色（莫兰迪） */
+    --blue:#7e96a5;  --blue-deep:#5c7383;  --blue-bg:#edf1f3;   /* 状语从句 */
+    --sage:#93aa92;  --sage-deep:#6e856d;  --sage-bg:#eff2ec;   /* 定语从句 */
+    --rose:#c09892;  --rose-deep:#98706a;  --rose-bg:#f5ecea;   /* 宾语从句 */
+    --lav:#a69cb4;   --lav-deep:#7f7590;   --lav-bg:#f0edf3;    /* 主语从句 */
+
+    /* 功能色 */
+    --gold:#b99c6a;  --gold-deep:#937a48;  --gold-bg:#f3ecdd;
+    --warn:#b48780;  --warn-deep:#966963;  --warn-bg:#f5e7e4;
+    --tip:#7e96a5;   --tip-bg:#edf1f3;
+
+    --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:var(--font);
+    color:var(--ink);
+    background:var(--bg);
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ===== 舞台 ===== */
+  #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:58px 44px 96px}
+
+  .slide{
+    position:absolute;
+    width:min(1200px,100%);
+    max-height:100%;
+    background:var(--paper);
+    border-radius:22px;
+    box-shadow:0 26px 60px -26px rgba(92,82,66,.34), 0 0 0 1px rgba(92,82,66,.05);
+    padding:44px 54px;
+    opacity:0;
+    transform:translateX(42px);
+    pointer-events:none;
+    transition:opacity .45s ease, transform .45s ease;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+  .slide.active{opacity:1;transform:translateX(0);pointer-events:auto}
+  .slide.prev{transform:translateX(-42px)}
+
+  /* 入场动画 */
+  .slide .anim{opacity:0;transform:translateY(14px)}
+  .slide.active .anim{
+    opacity:1;transform:none;
+    transition:opacity .5s ease, transform .5s ease;
+    transition-delay:calc(var(--i,0)*70ms + 60ms);
+  }
+
+  /* ===== 页头 ===== */
+  .head{display:flex;align-items:center;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+  .part-badge{
+    font-size:13px;font-weight:700;letter-spacing:.05em;
+    color:#fff;background:var(--pc,#8a8378);
+    padding:6px 15px;border-radius:99px;white-space:nowrap;
+  }
+  .head h2{font-size:28px;font-weight:800;letter-spacing:.01em;color:var(--ink)}
+  .head .en{font-size:14px;color:var(--muted);font-weight:600;margin-left:auto;white-space:nowrap}
+
+  .kicker{font-size:13px;font-weight:700;letter-spacing:.14em;color:var(--pc-deep,#937a48);text-transform:uppercase;margin-bottom:8px}
+
+  /* ===== 封面 ===== */
+  .slide.cover{
+    background:
+      radial-gradient(900px 520px at 88% -10%, rgba(185,156,106,.30), transparent 60%),
+      radial-gradient(720px 540px at -10% 112%, rgba(166,156,180,.32), transparent 55%),
+      linear-gradient(135deg,#66788a 0%,#7f8fa0 50%,#99a3ae 100%);
+    color:#fff;
+    justify-content:center;
+  }
+  .cover .brand-line{position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#b99c6a,#c9b88f,#93aa92,#a69cb4)}
+  .cover .tag{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#eef1f3;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);padding:7px 16px;border-radius:99px;margin-bottom:26px}
+  .cover h1{font-size:52px;font-weight:900;line-height:1.2;letter-spacing:.01em}
+  .cover h1 .hl{color:#e4d3ad}
+  .cover .sub{margin-top:18px;font-size:20px;color:#e7ebee;font-weight:500;line-height:1.7}
+  .cover .meta{margin-top:40px;display:flex;gap:28px;font-size:14px;color:#c9d3da;font-weight:600}
+  .cover .meta b{color:#fff}
+
+  /* ===== 卡片 & 列表 ===== */
+  .grid{display:grid;gap:15px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .g5{grid-template-columns:repeat(5,1fr)}
+  .card{
+    background:var(--paper);border:1px solid var(--line);border-radius:16px;
+    padding:18px 20px;position:relative;overflow:hidden;
+  }
+  .card .num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:34px;height:34px;border-radius:10px;font-size:16px;font-weight:800;
+    color:#fff;background:var(--pc,#8a8378);margin-bottom:11px;
+  }
+  .card h4{font-size:19px;font-weight:800;margin-bottom:5px;color:var(--ink)}
+  .card .cn{font-size:13.5px;color:var(--muted);font-weight:600;line-height:1.5}
+  .card .frm{font-size:18px;font-weight:800;color:var(--pc,#8a8378);margin-top:9px;letter-spacing:.02em;font-family:"SF Mono",ui-monospace,monospace}
+  .card .eg{font-size:13.5px;color:#6f6a62;margin-top:8px;line-height:1.6;word-break:break-all}
+  .card .eg b{color:#3f3b35;font-weight:700}
+  .card .tagrow{margin-top:10px}
+
+  /* 高亮关键词 */
+  .key{color:var(--pc-deep,#937a48);font-weight:800}
+  .gold{color:var(--gold-deep);font-weight:800}
+  .red{color:var(--warn-deep);font-weight:800}
+
+  /* 例句区 */
+  .ex{
+    background:var(--paper-2);border:1px solid var(--line);border-radius:15px;
+    padding:16px 20px;margin-top:8px;
+  }
+  .ex + .ex{margin-top:14px}
+  .ex .lead{font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:11px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .ex .lead .pill{background:var(--gold-bg);color:var(--gold-deep)}
+
+  .cn-src{font-size:17px;font-weight:600;color:var(--ink);line-height:1.6}
+  .cn-src b{color:var(--gold-deep)}
+  .en-ref{font-size:16.5px;font-weight:700;color:var(--pc-deep,#5c7383);margin-top:9px;line-height:1.55;word-break:break-word}
+  .en-ref .mt{display:inline-block;font-size:12px;font-weight:800;color:#fff;background:var(--pc,#8a8378);border-radius:6px;padding:2px 8px;margin-right:8px;vertical-align:2px}
+  .ana{margin-top:10px;font-size:13.5px;color:#6f6a62;line-height:1.65}
+  .ana b{color:var(--gold-deep)}
+
+  .formula{
+    background:var(--paper);border:1px dashed var(--line);border-radius:12px;
+    padding:13px 16px;margin-top:10px;font-size:15.5px;font-weight:700;color:var(--ink);
+  }
+  .formula .fb{display:inline-block;background:var(--pc,#8a8378);color:#fff;font-size:12px;font-weight:800;border-radius:6px;padding:2px 9px;margin-right:8px}
+
+  /* 重点框 */
+  .note{
+    display:flex;gap:12px;align-items:flex-start;
+    background:var(--gold-bg);border:1px solid #e6d8ba;border-left:4px solid var(--gold);
+    border-radius:12px;padding:13px 17px;margin-top:15px;font-size:15px;line-height:1.65;
+  }
+  .note .ico{font-size:18px;line-height:1.4}
+  .note b{color:var(--gold-deep)}
+
+  .tip{
+    display:flex;gap:10px;align-items:flex-start;
+    background:var(--tip-bg);border:1px solid #d5e0e4;border-left:4px solid var(--tip);
+    border-radius:12px;padding:12px 16px;margin-top:13px;font-size:14.5px;line-height:1.65;color:var(--blue-deep);
+  }
+  .tip b{color:var(--blue-deep)}
+
+  .warn{
+    display:flex;gap:10px;align-items:flex-start;
+    background:var(--warn-bg);border:1px solid #ecd2cd;border-left:4px solid var(--warn);
+    border-radius:12px;padding:12px 16px;margin-top:13px;font-size:14.5px;line-height:1.65;color:var(--warn-deep);
+  }
+  .warn b{color:var(--warn-deep)}
+
+  /* 两栏例句 */
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+  .cols .ex{margin-top:0}
+
+  /* 表 */
+  table{width:100%;border-collapse:collapse;font-size:15px}
+  th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:12.5px;letter-spacing:.05em;color:var(--muted);background:var(--paper-2);font-weight:700}
+  td .en{font-weight:700;color:#3f3b35}
+  td .cn{color:var(--muted);font-size:13px}
+
+  .pill{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:var(--tip-bg);color:var(--blue-deep);margin-right:6px}
+
+  .wordlist{font-size:13.5px;color:#5c564f;line-height:1.9;background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-top:10px}
+  .wordlist b{color:var(--pc-deep,#5c7383)}
+
+  /* 小结 */
+  .sum-block{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:var(--paper)}
+  .sum-block h4{font-size:15.5px;font-weight:800;margin-bottom:11px;display:flex;align-items:center;gap:8px;color:var(--ink)}
+  .sum-block .dot{width:10px;height:10px;border-radius:3px;background:var(--pc,#8a8378)}
+  .sum-block ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .sum-block li{font-size:13.5px;color:#5c564f;line-height:1.5}
+  .sum-block li b{color:var(--ink)}
+
+  .motto{
+    margin-top:20px;text-align:center;font-size:19px;font-weight:800;color:var(--ink);
+    background:var(--gold-bg);border:1px solid #e6d8ba;border-radius:14px;padding:17px;
+  }
+  .motto span{color:var(--warn-deep)}
+
+  /* ===== 真题折叠 ===== */
+  .reveal{margin-top:10px;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .reveal summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 15px;font-size:13.5px;font-weight:700;color:var(--pc-deep,#5c7383);background:var(--paper-2);user-select:none}
+  .reveal summary::-webkit-details-marker{display:none}
+  .reveal summary .caret{display:inline-block;transition:transform .2s;font-size:11px}
+  .reveal[open] summary .caret{transform:rotate(90deg)}
+  .reveal .ans{padding:13px 16px 15px;border-top:1px dashed var(--line);font-size:15.5px}
+  .reveal .ans .en{font-weight:700;color:var(--pc-deep,#5c7383);line-height:1.6}
+  .reveal .ans .mark{margin-top:8px;font-size:13px;color:#6f6a62;line-height:1.6}
+  .reveal .ans .mark b{color:var(--gold-deep)}
+
+  /* ===== 导航 ===== */
+  #nav{
+    position:fixed;left:50%;bottom:24px;transform:translateX(-50%);
+    display:flex;align-items:center;gap:12px;z-index:50;
+    background:rgba(252,249,243,.88);backdrop-filter:blur(10px);
+    border:1px solid var(--line);border-radius:99px;padding:8px 12px;
+    box-shadow:0 12px 32px -14px rgba(92,82,66,.32);
+  }
+  #nav button{
+    border:none;background:var(--paper);border:1px solid var(--line);
+    width:40px;height:40px;border-radius:50%;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;color:#5c564f;
+    transition:.15s;
+  }
+  #nav button:hover:not(:disabled){background:var(--paper-2);border-color:var(--gold);color:var(--gold-deep)}
+  #nav button:disabled{opacity:.35;cursor:default}
+  #nav .counter{font-size:14px;font-weight:700;color:#5c564f;min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
+  #nav .counter b{color:var(--gold-deep);font-size:16px}
+  #nav #menuBtn{width:auto;border-radius:99px;padding:0 16px;font-size:13px;font-weight:700;gap:7px}
+  #progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#7e96a5,#93aa92,#c09892,#a69cb4);z-index:60;width:0;transition:width .35s ease}
+  #hint{position:fixed;left:50%;transform:translateX(-50%);bottom:3px;font-size:12px;color:#b3ab9f;z-index:40;white-space:nowrap}
+
+  /* ===== 抽拉式目录 ===== */
+  #drawerTab{
+    position:fixed;left:0;top:50%;transform:translateY(-50%);
+    z-index:80;cursor:pointer;user-select:none;
+    display:flex;align-items:center;gap:6px;
+    padding:16px 10px;
+    background:linear-gradient(180deg,#7e96a5,#5c7383);
+    color:#fff;border-radius:0 14px 14px 0;
+    box-shadow:4px 8px 20px -8px rgba(92,82,66,.45);
+    transition:padding .2s ease, box-shadow .2s ease;
+    writing-mode:vertical-rl;letter-spacing:.3em;font-weight:800;font-size:14px;
+  }
+  #drawerTab .bar{font-size:16px;writing-mode:vertical-rl}
+  #drawerTab:hover{padding:20px 11px;box-shadow:6px 12px 28px -8px rgba(92,82,66,.55)}
+  #drawerTab .darr{display:inline-block;transition:transform .25s ease;writing-mode:horizontal-tb;font-size:13px}
+
+  #drawerOverlay{
+    position:fixed;inset:0;background:rgba(70,63,55,.34);backdrop-filter:blur(3px);
+    z-index:85;opacity:0;pointer-events:none;transition:opacity .28s ease;
+  }
+  #drawerOverlay.open{opacity:1;pointer-events:auto}
+
+  #drawerPanel{
+    position:fixed;top:0;left:0;bottom:0;width:min(360px,88vw);
+    background:var(--paper);box-shadow:24px 0 50px -30px rgba(92,82,66,.5);
+    z-index:86;transform:translateX(-100%);transition:transform .32s cubic-bezier(.22,.9,.3,1);
+    display:flex;flex-direction:column;
+  }
+  #drawerOverlay.open #drawerPanel{transform:translateX(0)}
+  #drawerPanel .dp-head{
+    padding:22px 22px 16px;border-bottom:1px solid var(--line);
+    background:linear-gradient(135deg,#7e96a5 0%,#5c7383 100%);color:#fff;
+  }
+  #drawerPanel .dp-head .k{font-size:12px;font-weight:700;letter-spacing:.12em;opacity:.8}
+  #drawerPanel .dp-head h3{font-size:19px;font-weight:800;margin-top:4px}
+  #drawerPanel .dp-head .sub{font-size:12px;opacity:.85;margin-top:3px}
+  #drawerPanel .dp-head .close{
+    position:absolute;top:18px;right:18px;border:none;background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.3);width:32px;height:32px;border-radius:50%;
+    cursor:pointer;font-size:15px;color:#fff;line-height:1;
+  }
+  #drawerPanel .dp-head .close:hover{background:rgba(255,255,255,.28)}
+  #drawerList{overflow-y:auto;padding:10px 14px 34px;flex:1}
+  .dp-sec{
+    display:flex;align-items:center;gap:8px;
+    font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--muted);
+    margin:18px 6px 6px;
+  }
+  .dp-sec .swatch{width:9px;height:9px;border-radius:3px}
+  .dp-item{
+    display:flex;align-items:center;gap:11px;width:100%;text-align:left;
+    padding:10px 12px;border:none;background:transparent;border-radius:10px;cursor:pointer;
+    font-size:14px;color:#4c4740;transition:.13s;
+  }
+  .dp-item:hover{background:var(--paper-2)}
+  .dp-item.active{background:var(--gold-bg);color:var(--gold-deep);font-weight:700}
+  .dp-item .n{font-size:12px;font-weight:800;color:#b3ab9f;min-width:22px;text-align:right}
+
+  /* ===== 响应式 ===== */
+  @media (max-width:900px){
+    #stage{padding:18px 14px 88px}
+    .slide{padding:26px 22px;border-radius:15px}
+    .g2,.g3,.g4,.g5,.cols{grid-template-columns:1fr 1fr}
+    .g5{grid-template-columns:1fr 1fr}
+    .head h2{font-size:21px}
+    .cover h1{font-size:34px}
+    .cover .sub{font-size:16px}
+    .cn-src{font-size:15.5px}
+    #drawerTab{padding:13px 8px;font-size:12px}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<div id="stage">
+
+  <!-- 1 封面 -->
+  <section class="slide cover active" data-title="封面" data-sec="封面">
+    <div class="brand-line"></div>
+    <div class="anim" style="--i:0"><span class="tag">高考英语 · 翻译专项训练（修订版）</span></div>
+    <h1 class="anim" style="--i:1">第四章 <span class="hl">高考翻译常用复合句</span></h1>
+    <p class="sub anim" style="--i:2">状语从句 · 定语从句 · 宾语从句 · 主语从句 —— 一对一精讲</p>
+    <div class="meta anim" style="--i:3">
+      <span>主讲：<b>杨老师</b></span>
+      <span>对象：<b>高三</b></span>
+      <span>板块：<b>翻译 · 从句</b></span>
+    </div>
+  </section>
+
+  <!-- 2 本章导读 -->
+  <section class="slide" data-title="本章导读" data-sec="导读">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">导读</span><h2>本章要讲什么</h2><span class="en">Overview</span></div>
+    <p class="anim" style="--i:1;font-size:15.5px;color:#5c564f;line-height:1.75">纵观近几年的上海高考翻译，<b class="gold">几乎所有句子都涉及从句</b>，最后两题往往还会出现<b>多重复合句</b>。其中<b class="key">状语从句、定语从句、宾语从句、主语从句</b>这四类考查最多、失分也最多，本章逐一攻克：</p>
+    <div class="grid g4" style="margin-top:16px">
+      <div class="card anim" style="--i:2;--pc:#7e96a5"><span class="num">一</span><h4>状语从句</h4><div class="cn">让步 · 结果 · 条件 · 时间 · 目的</div></div>
+      <div class="card anim" style="--i:3;--pc:#93aa92"><span class="num">二</span><h4>定语从句</h4><div class="cn">关系代词 · as · 关系副词</div></div>
+      <div class="card anim" style="--i:4;--pc:#c09892"><span class="num">三</span><h4>宾语从句</h4><div class="cn">whether · what · 介词宾语</div></div>
+      <div class="card anim" style="--i:5;--pc:#a69cb4"><span class="num">四</span><h4>主语从句</h4><div class="cn">that / wh- 引导 · it 作形式主语</div></div>
+    </div>
+    <div class="note anim" style="--i:6;margin-top:24px">
+      <span class="ico">🧭</span>
+      <div><b>一条主线：</b>翻译复合句时<b>先抓“主句 + 从句”的连接词</b>（连接词定对，句子就对了一半）→ <b>再排从句语序</b>（宾语 / 主语从句用陈述语序）→ <b>最后核时态</b>（时间 / 条件从句“主将从现”）。</div>
+    </div>
+    <div class="tip anim" style="--i:7">
+      <span>💡</span>
+      <div>每节后附「真题自测」，先遮住答案自行翻译，再点开核对；左侧有<b>抽拉式目录</b>，点手柄随时跳转。</div>
+    </div>
+  </section>
+
+  <!-- 3 状语从句 总览 -->
+  <section class="slide" data-title="状语从句 · 总览" data-sec="一 · 状语从句">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7e96a5">一 · 状语从句</span><h2>状语从句总览</h2><span class="en">Adverbial Clauses</span></div>
+    <p class="anim" style="--i:1;font-size:15.5px;color:#5c564f;line-height:1.75">状语从句几乎是<b class="key">每年上海高考翻译必考</b>的句型，按意义分为八类；高考重点考查其中的<b class="gold">五类</b>：</p>
+    <div class="grid g5" style="margin-top:14px">
+      <div class="card anim" style="--i:2;--pc:#7e96a5"><span class="num">1</span><h4>让步</h4><div class="cn">although · even if<br>wh-ever · whether</div></div>
+      <div class="card anim" style="--i:3;--pc:#8aa0ae"><span class="num">2</span><h4>结果</h4><div class="cn">so…that<br>such…that</div></div>
+      <div class="card anim" style="--i:4;--pc:#8aa0ae"><span class="num">3</span><h4>条件</h4><div class="cn">if · unless<br>as long as</div></div>
+      <div class="card anim" style="--i:5;--pc:#8aa0ae"><span class="num">4</span><h4>时间</h4><div class="cn">once · before<br>no sooner…than</div></div>
+      <div class="card anim" style="--i:6;--pc:#8aa0ae"><span class="num">5</span><h4>目的</h4><div class="cn">so that<br>in order that</div></div>
+    </div>
+    <div class="note anim" style="--i:7;margin-top:20px">
+      <span class="ico">🎯</span>
+      <div><b>核心：</b>状语从句翻译抓两件事——<b>连接词的准确选用</b>（中英对应）与<b>时态搭配</b>（时间 / 条件从句里“主将从现”）。</div>
+    </div>
+  </section>
+
+  <!-- 4 让步状语从句 一 -->
+  <section class="slide" data-title="状语 · 让步(一)" data-sec="一 · 状语从句">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7e96a5">一 · 状语从句</span><h2>让步状语从句（一）</h2><span class="en">Concessive</span></div>
+    <p class="anim" style="--i:1;font-size:15px;color:#5c564f">“尽管……但是……”常用 <b class="key">although / though / while</b>；“即使”用 <b class="key">even though / even if</b>。<b class="gold">although / though 与 but 不能连用</b>。</p>
+    <div class="grid g2" style="margin-top:12px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">案例 1 · 提示词 <span class="pill">although</span></div>
+        <div class="cn-src">尽管他的尝试失败了，但他尽了全力。</div>
+        <div class="en-ref"><span class="mt">译文</span>Although his attempt was a failure, he tried his best.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">案例 2 · 提示词 <span class="pill">even if</span></div>
+        <div class="cn-src">即使你通过了这次面试，你也不能确定自己被录取了。</div>
+        <div class="en-ref"><span class="mt">译文</span>Even if you pass the interview, you are not sure whether you will be accepted.</div>
+        <div class="ana"><b>注意：</b>让步从句表将来时，从句部分也要用<b>一般现在时</b>。</div>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:4">
+      <span>⚠️</span>
+      <div><b>易错：</b>中文“尽管……但是……”是两个关联词，英文只需一个 although / though，<b>绝不能再加 but</b>；同样 even if / even though 后也不加 but。</div>
+    </div>
+  </section>
+
+  <!-- 5 让步状语从句 二 -->
+  <section class="slide" data-title="状语 · 让步(二)" data-sec="一 · 状语从句">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7e96a5">一 · 状语从句</span><h2>让步状语从句（二）无论……</h2><span class="en">Concessive</span></div>
+    <p class="anim" style="--i:1;font-size:15px;color:#5c564f;line-height:1.7">“无论……”用 <b class="key">whoever / whichever / whatever / whenever / wherever / however</b>（= <b class="gold">no matter + wh-</b>）。</p>
+    <div class="grid g2" style="margin-top:10px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">① whoever 作主语视为<b>单数</b></div>
+        <div class="cn-src">不管你是谁，你都要遵守法律。</div>
+        <div class="en-ref"><span class="mt">译文</span>Whoever you are, you must obey the law.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">② however 修饰形/副 → 与其<b>一起提前</b></div>
+        <div class="cn-src">无论成功的决心多么大，一个人永远不能丧失他/她的道德。</div>
+        <div class="en-ref"><span class="mt">译文</span>However great one's will to succeed is, he or she should never abandon his or her moral.</div>
+        <div class="ana"><b>结构：</b>however + 形容词/副词 + 主语 + 谓语。</div>
+      </div>
+    </div>
+    <div class="ex anim" style="--i:4">
+      <div class="lead">③ whether…or…（无论是……还是……）</div>
+      <div class="cn-src">无论输赢，我们都会支持你。</div>
+      <div class="en-ref"><span class="mt">译文</span>Whether you lose or win, all of us will stand by you.</div>
+    </div>
+  </section>
+
+  <!-- 6 结果状语从句 -->
+  <section class="slide" data-title="状语 · 结果" data-sec="一 · 状语从句">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7e96a5">一 · 状语从句</span><h2>结果状语从句</h2><span class="en">Result</span></div>
+    <p class="anim" style="--i:1;font-size:15px;color:#5c564f">表示“如此……以致……”，常用 <b class="key">so…that…</b> 和 <b class="key">such…that…</b>。</p>
+    <div class="grid g2" style="margin-top:12px">
+      <div class="anim" style="--i:2">
+        <div class="formula" style="margin-top:0"><span class="fb">so</span>so + <b class="key">形容词 / 副词</b> + that + 主语 + 谓语</div>
+        <div class="ex" style="margin-top:10px">
+          <div class="lead">案例 · 提示词 <span class="pill">attract</span></div>
+          <div class="cn-src">他穿的外衣太奇特了，吸引了很多人的注意。</div>
+          <div class="en-ref"><span class="mt">译文</span>The coat he wore was so odd that it attracted a lot of people's attention.</div>
+        </div>
+      </div>
+      <div class="anim" style="--i:3">
+        <div class="formula" style="margin-top:0"><span class="fb">such</span>such + (a/an + 形 + 可数单 / 形 + 可数复 / 形 + 不可数) + that + 主语 + 谓语</div>
+        <div class="ex" style="margin-top:10px">
+          <div class="lead">案例 · 提示词 <span class="pill">such</span></div>
+          <div class="cn-src">我们取得了很大的进步，连校长也称赞我们。</div>
+          <div class="en-ref"><span class="mt">译文</span>We made such great progress that the principal praised us for it.</div>
+        </div>
+      </div>
+    </div>
+    <div class="note anim" style="--i:4">
+      <span class="ico">🔑</span>
+      <div><b>判断：</b>so 后面跟<b>形容词 / 副词</b>；such 后面跟<b>名词</b>。注意 such a/an + 形 + 可数名词单数 的顺序（such 在 a/an 前）。</div>
+    </div>
+  </section>
+
+  <!-- 7 条件状语从句 -->
+  <section class="slide" data-title="状语 · 条件" data-sec="一 · 状语从句">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7e96a5">一 · 状语从句</span><h2>条件状语从句</h2><span class="en">Conditional</span></div>
+    <p class="anim" style="--i:1;font-size:15px;color:#5c564f">连接词 <b class="key">if</b>（如果）、<b class="key">unless</b>（除非……否则）、<b class="key">as / so long as</b>（只要）。中文表将来时，<b class="gold">主句用一般将来时、从句用一般现在时</b>（主将从现）。</p>
+    <div class="grid g2" style="margin-top:12px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">案例 1 · 提示词 <span class="pill">charge</span></div>
+        <div class="cn-src">如果修理工索价高的话，我就买台新的空调。</div>
+        <div class="en-ref"><span class="mt">译文</span>If the repairman charges a lot, I will buy a new air-conditioner.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">案例 2 · 提示词 <span class="pill">Unless</span></div>
+        <div class="cn-src">除非你尽可能多地开口说英语，否则你口试不会取得好成绩。</div>
+        <div class="en-ref"><span class="mt">译文</span>Unless you speak English as often as you can, you won't do well in the oral exam.</div>
+        <div class="ana"><b>分析：</b>“除非……否则”只需一个 unless，时态同 if 从句（主将从现）。</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">案例 3 · 提示词 <span class="pill">effort</span></div>
+        <div class="cn-src">只要我们继续努力，就一定能克服眼前的困难。</div>
+        <div class="en-ref"><span class="mt">译文</span>As long as we make a continuous effort, we are sure to overcome the difficulties facing us.</div>
+      </div>
+      <div class="ex anim" style="--i:5">
+        <div class="lead">④ 条件句 ⇄ 祈使句 · 提示词 <span class="pill">diet</span></div>
+        <div class="cn-src">饮食营养均衡，你的头发就会健康而有光泽。</div>
+        <div class="en-ref"><span class="mt">译文</span>Have a balanced diet <b>and</b> your hair will be healthy and shiny.</div>
+        <div class="ana"><b>等价：</b>If you have a balanced diet, your hair will be healthy and shiny.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 时间状语从句 一 -->
+  <section class="slide" data-title="状语 · 时间(一)" data-sec="一 · 状语从句">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7e96a5">一 · 状语从句</span><h2>时间状语从句（一）once · before</h2><span class="en">Time</span></div>
+    <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f;line-height:1.7">连接词：<b class="key">once / when / before / not…until / as soon as / each(every) time / no sooner…than / hardly…when</b>。时态同条件句——中文表将来，<b class="gold">主将从现</b>。</p>
+    <div class="grid g2" style="margin-top:12px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">① once「一旦」→ 从句用一般现在时</div>
+        <div class="cn-src">一旦我们决定采纳这个方案，就会马上实行。</div>
+        <div class="en-ref"><span class="mt">译文</span>Once we decide to adopt the plan, we will carry it out.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">② before A「……（之后）才……」</div>
+        <div class="cn-src">要过很久我们才会见面。</div>
+        <div class="en-ref"><span class="mt">译文</span>It will be long before we meet again.</div>
+        <div class="cn-src" style="margin-top:8px">几周后他才告诉父母发生的事。</div>
+        <div class="en-ref"><span class="mt">译文</span>It was a few weeks before he told his parents what had happened.</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">③ before B「不到……就……」</div>
+        <div class="cn-src">他们刚结婚不到一个月就吵架了。</div>
+        <div class="en-ref"><span class="mt">译文</span>They had not been married a month before they quarrelled.</div>
+        <div class="cn-src" style="margin-top:8px">没多久，乐队就募捐了 2000 多元。</div>
+        <div class="en-ref"><span class="mt">译文</span>It wasn't long before the band raised over 2,000 yuan.</div>
+      </div>
+      <div class="ex anim" style="--i:5">
+        <div class="lead">④ before C「还没来得及……就…… / 趁……」</div>
+        <div class="cn-src">我还没来得及讲一个字，他就把电话挂了。</div>
+        <div class="en-ref"><span class="mt">译文</span>He hung up before I could say a single word.</div>
+        <div class="cn-src" style="margin-top:8px">趁妈妈没改变主意，我买下了这个价格不菲的数码相机。</div>
+        <div class="en-ref"><span class="mt">译文</span>I bought the expensive digital camera before my mother changed her mind.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 时间状语从句 二 -->
+  <section class="slide" data-title="状语 · 时间(二)" data-sec="一 · 状语从句">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7e96a5">一 · 状语从句</span><h2>时间状语从句（二）</h2><span class="en">Time</span></div>
+    <div class="grid g2" style="margin-top:4px">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">⑤ each / every time「每当」· the first time「第一次」→ 后直接跟句子</div>
+        <div class="cn-src">每次见到 Hellen 的时候，她看上去总是精神焕发，精力充沛。</div>
+        <div class="en-ref"><span class="mt">译文</span>Each / every time I meet Hellen, she looks refreshed and energetic.</div>
+        <div class="ana"><b>可互换：</b>Whenever I meet Hellen, she looks refreshed and energetic.</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">⑥ no sooner…than / hardly…when「一……就」→ 句首倒装 + 过去完成时</div>
+        <div class="cn-src">我刚进家门电话就响了。</div>
+        <div class="en-ref"><span class="mt">译文</span>Hardly <b>had</b> I <b>got</b> into my room <b>when</b> the telephone rang.</div>
+        <div class="ana"><b>等价：</b>As soon as I got into my room, the telephone rang.（详见第六章“倒装句”）</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">⑦ not…until「直到……才」</div>
+        <div class="cn-src">直到考试开始，他才发现计算器不见了。</div>
+        <div class="en-ref"><span class="mt">译文</span>He didn't find that his calculator was gone until the exam began.</div>
+        <div class="ana"><b>倒装：</b>Not until the exam began <b>did</b> he find his calculator was gone.</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">⑧ 目的状语从句 · so that / in order that / in case</div>
+        <div class="cn-src">外出时带着手机，以防有人找你。</div>
+        <div class="en-ref"><span class="mt">译文</span>Take your cellphone with you when going out <b>in case</b> someone contacts you.</div>
+      </div>
+    </div>
+    <div class="note anim" style="--i:5">
+      <span class="ico">🔑</span>
+      <div><b>口诀：</b>no sooner / hardly 在<b>句首</b>要<b>倒装</b>（had + 主语 + 过去分词），主句用<b>过去完成时</b>；not until 在句首主句也要<b>部分倒装</b>。</div>
+    </div>
+  </section>
+
+  <!-- 10 状语从句 真题自测 -->
+  <section class="slide" data-title="状语 · 真题自测" data-sec="一 · 状语从句">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7e96a5">一 · 状语从句</span><h2>真题自测（代表题）</h2><span class="en">Practice</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1"><div class="lead">1 · 提示词 <span class="pill">so</span></div><div class="cn-src">建筑工地上过大的噪声使他难以入眠。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">There was so much noise from the construction site that he couldn't fall asleep.</div><div class="mark"><b>考点</b>：so…that 结果状语从句。</div></div></details></div>
+      <div class="ex anim" style="--i:2"><div class="lead">2 · 提示词 <span class="pill">Each time</span></div><div class="cn-src">每当我看到国旗升起的时候，心中非常自豪。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">Each time I see our national flag raised, I feel very proud / am full of pride.</div><div class="mark"><b>考点</b>：each time 引导时间状语从句。</div></div></details></div>
+      <div class="ex anim" style="--i:3"><div class="lead">3 · 提示词 <span class="pill">apply</span></div><div class="cn-src">即使报酬很低，我也会申请这份工作。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">I will apply for the job even if / even though it pays little.</div><div class="mark"><b>考点</b>：even if 让步状语从句。</div></div></details></div>
+      <div class="ex anim" style="--i:4"><div class="lead">4 · 提示词 <span class="pill">enlarge</span></div><div class="cn-src">只要你坚持每天记一些英语单词，你的词汇量就一定会扩大。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">As long as you keep on memorizing some words every day, you will surely enlarge your vocabulary.</div><div class="mark"><b>考点</b>：as long as 条件状语从句。</div></div></details></div>
+      <div class="ex anim" style="--i:5"><div class="lead">5 · 提示词 <span class="pill">unless</span></div><div class="cn-src">除非你出示学生证，否则门卫不会让你进去。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">The gatekeeper won't let you in unless you show him your student card.</div><div class="mark"><b>考点</b>：unless 条件状语从句 + 主将从现。</div></div></details></div>
+      <div class="ex anim" style="--i:6"><div class="lead">6 · 提示词 <span class="pill">not…until</span></div><div class="cn-src">直到被送进手术室，他才意识到遵守交通规则的重要性。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">He didn't realize the importance of obeying the traffic rules until he was sent into the operation room.</div><div class="mark"><b>考点</b>：not…until 时间状语从句。</div></div></details></div>
+    </div>
+  </section>
+
+  <!-- 11 定语从句 总览 -->
+  <section class="slide" data-title="定语从句 · 总览" data-sec="二 · 定语从句">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 定语从句</span><h2>定语从句总览</h2><span class="en">Attributive Clauses</span></div>
+    <p class="anim" style="--i:1;font-size:15.5px;color:#5c564f;line-height:1.75">定语从句在高考翻译中<b class="key">非常常见也非常重要</b>。本章重点讲三个难点：</p>
+    <div class="grid g3" style="margin-top:14px">
+      <div class="card anim" style="--i:2;--pc:#93aa92"><span class="num">1</span><h4>关系代词</h4><div class="cn">that / which / who / whose<br>何时用 that · 何时用 which</div></div>
+      <div class="card anim" style="--i:3;--pc:#9db39c"><span class="num">2</span><h4>as 从句</h4><div class="cn">“正如……”引导<br>非限制性定语从句</div></div>
+      <div class="card anim" style="--i:4;--pc:#9db39c"><span class="num">3</span><h4>关系副词</h4><div class="cn">where / when / why<br>与关系代词如何区分</div></div>
+    </div>
+    <div class="note anim" style="--i:5;margin-top:20px">
+      <span class="ico">🧩</span>
+      <div><b>判断关键：</b>看先行词在从句里<b>作什么成分</b>——作<b>主语 / 宾语</b>用关系代词（可省略的是宾语）；作<b>状语</b>（地点 / 时间 / 原因）才用关系副词 where / when / why。</div>
+    </div>
+  </section>
+
+  <!-- 12 关系代词 -->
+  <section class="slide" data-title="定语 · 关系代词" data-sec="二 · 定语从句">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 定语从句</span><h2>关系代词的用法</h2><span class="en">Relative Pronouns</span></div>
+    <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f;line-height:1.7"><b class="key">that</b> 指人 / 物均可；<b class="key">who</b> 只指人；<b class="key">which</b> 只指物；<b class="key">whose</b> 是形容词性（“……的”），后接名词。关系代词在从句中<b class="gold">作宾语时可省略</b>。</p>
+    <div class="grid g2" style="margin-top:11px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">案例 1 · 提示词 <span class="pill">lose</span></div>
+        <div class="cn-src">我丢了我昨天买的书。</div>
+        <div class="en-ref"><span class="mt">译文</span>I lost the book (which / that) I bought yesterday.</div>
+        <div class="ana"><b>分析：</b>book 在从句中作 bought 的<b>宾语</b>，关系代词可省略。</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">案例 2 · 提示词 <span class="pill">specialize</span></div>
+        <div class="cn-src">Mike 是专门拍结婚照的摄影师。</div>
+        <div class="en-ref"><span class="mt">译文</span>Mike is a photographer who / that specializes in wedding photos.</div>
+        <div class="ana"><b>分析：</b>先行词指人用 who；who 在从句中作<b>主语</b>，指代 photographer，谓语用<b>单数</b> specializes。</div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:4">
+      <span>💡</span>
+      <div><b>保险策略：</b>高考翻译一般不限定句式，若对关系词<b>拿不准，改用介词短语 / 分词短语</b>往往同样正确。</div>
+    </div>
+  </section>
+
+  <!-- 13 常用 that / which -->
+  <section class="slide" data-title="定语 · that / which 辨析" data-sec="二 · 定语从句">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 定语从句</span><h2>何时用 that · 何时用 which</h2><span class="en">that vs which</span></div>
+    <div class="grid g2" style="margin-top:4px">
+      <div class="anim" style="--i:1">
+        <div class="formula" style="margin-top:0"><span class="fb">常用 that</span>① 先行词<b>既有人又有物</b>　② 先行词是 <b>all / few / much / something / nothing / anything</b>　③ 先行词被<b>最高级 / 序数词 / only</b> 修饰　④ 先行词被 <b>all / every / no / some</b> 修饰</div>
+        <div class="ex" style="margin-top:10px">
+          <div class="lead">案例 · 提示词 <span class="pill">all</span></div>
+          <div class="cn-src">你说的一切都是难以置信的。</div>
+          <div class="en-ref"><span class="mt">译文</span>All (that) you said is unbelievable.</div>
+          <div class="cn-src" style="margin-top:8px">这是我看过的最好看的电影。</div>
+          <div class="en-ref"><span class="mt">译文</span>This is the most entertaining film (that) I have ever seen.</div>
+        </div>
+      </div>
+      <div class="anim" style="--i:2">
+        <div class="formula" style="margin-top:0"><span class="fb">常用 which</span>① 指代物且<b>前面有介词</b>　② <b>非限制性</b>定语从句（逗号后）指代物 / 整句</div>
+        <div class="ex" style="margin-top:10px">
+          <div class="lead">案例 · 提示词 <span class="pill">which</span></div>
+          <div class="cn-src">他工作了一整天，没有吃任何东西，这使他筋疲力尽。</div>
+          <div class="en-ref"><span class="mt">译文</span>He worked all day without eating anything, <b>which</b> exhausted him.</div>
+          <div class="ana"><b>分析：</b>非限制性定语从句指代<b>整个主句</b>，只能用 which。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14 as 定语从句 -->
+  <section class="slide" data-title="定语 · as 从句" data-sec="二 · 定语从句">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 定语从句</span><h2>as 引导的定语从句</h2><span class="en">as-clauses</span></div>
+    <p class="anim" style="--i:1;font-size:15px;color:#5c564f">as 引导<b class="key">非限制性定语从句</b>，意为“正如……”，指代主句或主句的一部分，可放<b class="gold">主句前 / 中 / 后</b>。</p>
+    <div class="grid g2" style="margin-top:12px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">案例 1 · 提示词 <span class="pill">As</span></div>
+        <div class="cn-src">综上所述，精读必须和泛读结合在一起。</div>
+        <div class="en-ref"><span class="mt">译文</span>As has been mentioned above, intensive reading must be combined with extensive reading.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">案例 2 · 提示词 <span class="pill">burden</span></div>
+        <div class="cn-src">正如校长所说的那样，现在学生仍有很重的课业负担。</div>
+        <div class="en-ref"><span class="mt">译文</span>As the principal points out, students still carry a heavy burden of schoolwork at present.</div>
+      </div>
+    </div>
+    <div class="wordlist anim" style="--i:4"><b>高频 as 句式（背熟）：</b>as is reported in the newspaper（正如报纸所报道）· as sb. points out（正如某人所指）· as is often the case（通常如此）· as is known to all / as we all know（众所周知）· as is said / mentioned above（综上所述）· as is expected（正如所期待）</div>
+  </section>
+
+  <!-- 15 关系副词 -->
+  <section class="slide" data-title="定语 · 关系副词" data-sec="二 · 定语从句">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 定语从句</span><h2>关系副词 where / when / why</h2><span class="en">Relative Adverbs</span></div>
+    <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f;line-height:1.7">关系副词在从句中作<b class="key">状语</b>（不作宾语），<b class="gold">不可省略</b>。用关系副词还是关系代词，取决于先行词在从句中<b>作状语还是宾语</b>。</p>
+    <div class="grid g2" style="margin-top:11px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">① where（地点作状语）</div>
+        <div class="cn-src">这是我曾经读过三年书的学校。</div>
+        <div class="en-ref"><span class="mt">译文</span>This is the school <b>where</b> I studied for three years.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">② when（时间作状语）</div>
+        <div class="cn-src">我们都记得中国成功举办奥运会的那一年。</div>
+        <div class="en-ref"><span class="mt">译文</span>We all remember the year <b>when</b> China held the Olympic Games successfully.</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">③ 时间作<b>宾语</b> → 用 that / which（可省略）</div>
+        <div class="cn-src">母亲经常回忆起她小时候经历的艰苦岁月。</div>
+        <div class="en-ref"><span class="mt">译文</span>My mother often recalls those hard times (that / which) she experienced when she was young.</div>
+        <div class="ana"><b>分析：</b>times 作 experienced 的<b>宾语</b>，用关系代词。</div>
+      </div>
+      <div class="ex anim" style="--i:5">
+        <div class="lead">④ why（先行词只能是 reason）</div>
+        <div class="cn-src">这就是他给我们的理由。</div>
+        <div class="en-ref"><span class="mt">译文</span>This is the reason (that / which) he gave us.</div>
+        <div class="cn-src" style="margin-top:8px">这就是他为什么迟到的理由。</div>
+        <div class="en-ref"><span class="mt">译文</span>This is the reason <b>why</b> he was late.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 16 定语从句 真题自测 -->
+  <section class="slide" data-title="定语 · 真题自测" data-sec="二 · 定语从句">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 定语从句</span><h2>真题自测（代表题）</h2><span class="en">Practice</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1"><div class="lead">1 · 提示词 <span class="pill">expect</span></div><div class="cn-src">正如我们所期待的，这次会议获得了极大的成功。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">As we expected, the meeting is a great success.</div><div class="mark"><b>考点</b>：as 引导非限制性定语从句。</div></div></details></div>
+      <div class="ex anim" style="--i:2"><div class="lead">2 · 提示词 <span class="pill">whose</span></div><div class="cn-src">这个星球上存在着这样一种生物，他们的噪音会让大多数人心烦，但他们独特的飞行方式却让科学家一直为之着迷。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">On this planet exists a special kind of species, whose noises may annoy most people, but whose unique way of flying has been fascinating scientists all the time.</div><div class="mark"><b>考点</b>：whose 引导定语从句（形容词性）。</div></div></details></div>
+      <div class="ex anim" style="--i:3"><div class="lead">3 · 提示词 <span class="pill">place</span></div><div class="cn-src">很多退休的人向往一个没什么噪声，交通不拥挤，人不要太多的地方。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">Many retired people dream of a place where there is less noise, less traffic and fewer crowds.</div><div class="mark"><b>考点</b>：where 关系副词作地点状语。</div></div></details></div>
+      <div class="ex anim" style="--i:4"><div class="lead">4 · 提示词 <span class="pill">impress</span></div><div class="cn-src">这个年轻人法语讲得很流利，给评委们留下了很深的印象。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">The young man spoke French very fluently, which impressed the judges.</div><div class="mark"><b>考点</b>：which 非限制性定语从句。</div></div></details></div>
+      <div class="ex anim" style="--i:5"><div class="lead">5 · 提示词 <span class="pill">which</span></div><div class="cn-src">近年来，网络课程蓬勃发展，对传统教学很可能是一种巨大的冲击。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">In recent years, online courses have been developing fast, which is very likely to have a great impact on traditional teaching.</div><div class="mark"><b>考点</b>：which 指代整个主句。</div></div></details></div>
+      <div class="ex anim" style="--i:6"><div class="lead">6 · 提示词 <span class="pill">might as well</span></div><div class="cn-src">那些出门总忘带钥匙的人不妨给家里大门装个指纹锁。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">Those who often forget to take keys with them might as well equip the door with a fingerprint lock.</div><div class="mark"><b>考点</b>：who 引导定语从句 + might as well do。</div></div></details></div>
+    </div>
+  </section>
+
+  <!-- 17 宾语从句 总览 -->
+  <section class="slide" data-title="宾语从句 · 总览" data-sec="三 · 宾语从句">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">三 · 宾语从句</span><h2>宾语从句总览</h2><span class="en">Object Clauses</span></div>
+    <p class="anim" style="--i:1;font-size:15.5px;color:#5c564f;line-height:1.75">宾语从句在句中作<b class="key">及物动词或介词</b>的宾语，引导词有 <b class="gold">that / whether / if / who / whose / what / which / when / where / how / why</b>，从句要用<b class="key">陈述语序</b>。</p>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">案例 1 · 提示词 <span class="pill">stand</span>（2012 上海）</div>
+        <div class="cn-src">每位设计师都希望自己的作品能经受时间的考验。</div>
+        <div class="en-ref"><span class="mt">译文</span>Every designer hopes that his (her) work can stand the test of time.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">案例 2 · 提示词 <span class="pill">cost</span></div>
+        <div class="cn-src">这名顾客想知道这台中国产的冰箱是多少钱。</div>
+        <div class="en-ref"><span class="mt">译文</span>The customer wants to know how much the fridge made in China costs.</div>
+        <div class="ana"><b>注意：</b>宾语从句用陈述语序 how much … costs，不倒装。</div>
+      </div>
+    </div>
+    <div class="note anim" style="--i:4">
+      <span class="ico">🎯</span>
+      <div><b>本节重点：</b>whether 的用法、what 的用法、以及<b>宾语从句作介词宾语</b>三个难点。</div>
+    </div>
+  </section>
+
+  <!-- 18 whether + what -->
+  <section class="slide" data-title="宾语 · whether / what" data-sec="三 · 宾语从句">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">三 · 宾语从句</span><h2>whether 与 what 的用法</h2><span class="en">whether &amp; what</span></div>
+    <div class="grid g2" style="margin-top:4px">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">① 没决定 / 不确定 → 用 <b>whether</b>（不是 that）</div>
+        <div class="cn-src">我还没决定明天要不要参加他的生日聚会。</div>
+        <div class="en-ref"><span class="mt">译文</span>I haven't decided whether I will go to his birthday party tomorrow.</div>
+        <div class="ana"><b>易错：</b>不能用 that；也可用不定式 whether to go。</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">② what 指“……的事 / 东西”，可作从句主语或宾语</div>
+        <div class="cn-src">父母常告诫我们，不要不懂装懂。</div>
+        <div class="en-ref"><span class="mt">译文</span>Our parents often warn us not to pretend to know <b>what</b> we don't know.</div>
+        <div class="ana"><b>分析：</b>“不懂（的东西）”用 what 代替。</div>
+      </div>
+    </div>
+    <div class="ex anim" style="--i:3">
+      <div class="lead">③ what 与 how 的区分：how 表“多么”，修饰<b>形容词 / 副词</b>；what 修饰<b>名词</b></div>
+      <div class="cn-src">很多人还没有意识到支持慈善事业是多么必要。</div>
+      <div class="en-ref"><span class="mt">译文</span>Many people haven't realized <b>how</b> necessary it is to support the charity cause.</div>
+    </div>
+  </section>
+
+  <!-- 19 介词宾语 -->
+  <section class="slide" data-title="宾语 · 介词宾语" data-sec="三 · 宾语从句">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">三 · 宾语从句</span><h2>宾语从句作介词宾语</h2><span class="en">Preposition + Object Clause</span></div>
+    <p class="anim" style="--i:1;font-size:15px;color:#5c564f;line-height:1.7">宾语从句也可作<b class="key">介词的宾语</b>，介词后直接跟连接词 + 从句。</p>
+    <div class="grid g2" style="margin-top:12px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">案例 1 · 提示词 <span class="pill">communicate</span></div>
+        <div class="cn-src">他写了篇关于父母如何与孩子沟通的文章。</div>
+        <div class="en-ref"><span class="mt">译文</span>He wrote an article <b>on how</b> parents communicate with their children.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">案例 2 · 提示词 <span class="pill">laugh</span></div>
+        <div class="cn-src">不要嘲笑我做的事。</div>
+        <div class="en-ref"><span class="mt">译文</span>Don't laugh <b>at what</b> I did / have done.</div>
+        <div class="ana"><b>分析：</b>what I did 作介词 at 的宾语；laugh 是不及物动词，介词 at 不能省略。</div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:4">
+      <span>💡</span>
+      <div>常见“介词 + 疑问词 + 从句”：<b>on / about + how / what / whether…</b>，介词与后面的连接词连用，注意句子仍是<b>陈述语序</b>。</div>
+    </div>
+  </section>
+
+  <!-- 20 宾语从句 真题自测 -->
+  <section class="slide" data-title="宾语 · 真题自测" data-sec="三 · 宾语从句">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">三 · 宾语从句</span><h2>真题自测（代表题）</h2><span class="en">Practice</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1"><div class="lead">1 · 提示词 <span class="pill">show</span></div><div class="cn-src">孩子们对在上海自然博物馆看到的一切表现出浓厚的兴趣。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">The children showed great interest in what they saw in the Shanghai Natural History Museum.</div><div class="mark"><b>考点</b>：what 作介词 in 的宾语从句。</div></div></details></div>
+      <div class="ex anim" style="--i:2"><div class="lead">2 · 提示词 <span class="pill">inform</span></div><div class="cn-src">秘书已告知全体员工上午十点在会议室集合。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">The secretary has informed all the staff that they are to assemble in the meeting room at 10 a.m.</div><div class="mark"><b>考点</b>：that 引导宾语从句。</div></div></details></div>
+      <div class="ex anim" style="--i:3"><div class="lead">3 · 提示词 <span class="pill">wonder</span></div><div class="cn-src">他想知道这个剧院能容纳多少人。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">He wonders how many people the theatre can hold.</div><div class="mark"><b>考点</b>：how many 引导宾语从句（陈述语序）。</div></div></details></div>
+      <div class="ex anim" style="--i:4"><div class="lead">4 · 提示词 <span class="pill">clear</span></div><div class="cn-src">政府明确表示会对那些故意散布谣言的人严惩不贷。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">The government has made it clear that those who spread rumours on purpose will be punished severely.</div><div class="mark"><b>考点</b>：it 作形式宾语 + that 从句。</div></div></details></div>
+      <div class="ex anim" style="--i:5"><div class="lead">5 · 提示词 <span class="pill">what</span></div><div class="cn-src">警方正在调查是什么导致了这次严重的火灾。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">The police was investigating what resulted in / caused the terrible fire accident.</div><div class="mark"><b>考点</b>：what 引导宾语从句。</div></div></details></div>
+      <div class="ex anim" style="--i:6"><div class="lead">6 · 提示词 <span class="pill">insist</span>（2018 上海）</div><div class="cn-src">在法庭上，他坚称自己没犯抢劫罪。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">He insisted that he wasn't guilty of robbing / robbery in court.</div><div class="mark"><b>考点</b>：insist 表“坚持说”用陈述语气 + 宾语从句。</div></div></details></div>
+    </div>
+  </section>
+
+  <!-- 21 主语从句 总览 -->
+  <section class="slide" data-title="主语从句 · 总览" data-sec="四 · 主语从句">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a69cb4">四 · 主语从句</span><h2>主语从句总览</h2><span class="en">Subject Clauses</span></div>
+    <p class="anim" style="--i:1;font-size:15.5px;color:#5c564f;line-height:1.75">主语从句作句子<b class="key">主语</b>，一般放句首。引导词有 <b class="gold">that、wh- 疑问词（whether / what / who / where / when / why / which / how）以及 whoever / whatever / whichever</b>。单个从句作主语视为<b class="key">单数</b>，谓语用单数。</p>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">案例 1 · 提示词 <span class="pill">pass</span></div>
+        <div class="cn-src">他能够通过面试让我们都很惊讶。</div>
+        <div class="en-ref"><span class="mt">译文</span>That he was able to pass the interview amazed all of us.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">案例 2 · 提示词 <span class="pill">Why</span></div>
+        <div class="cn-src">没人知道他为什么离开公司。</div>
+        <div class="en-ref"><span class="mt">译文</span>Why he left the company is unknown.</div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:4">
+      <span>💡</span>
+      <div><b>连接词选择同宾语从句一致</b>——从中文意思出发，结合句子成分判断用哪个连接词。</div>
+    </div>
+  </section>
+
+  <!-- 22 it 形式主语 -->
+  <section class="slide" data-title="主语 · it 形式主语" data-sec="四 · 主语从句">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a69cb4">四 · 主语从句</span><h2>it 作形式主语</h2><span class="en">Preparatory it</span></div>
+    <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f;line-height:1.7">主语过长时用 <b class="key">it</b> 作形式主语，主语从句放句末，<b class="gold">避免头重脚轻</b>。</p>
+    <div style="margin-top:11px">
+      <table class="anim" style="--i:2">
+        <thead><tr><th style="width:52%">句型</th><th>含义</th></tr></thead>
+        <tbody>
+          <tr><td><span class="en">It is well-known that…</span></td><td><span class="cn">众所周知……</span></td></tr>
+          <tr><td><span class="en">It is estimated that…</span></td><td><span class="cn">据估计……</span></td></tr>
+          <tr><td><span class="en">It turned out that…</span></td><td><span class="cn">结果是…… / 原来……</span></td></tr>
+          <tr><td><span class="en">It is said / reported that…</span></td><td><span class="cn">据说 / 据报道……</span></td></tr>
+          <tr><td><span class="en">It seems + (形容词) + that…</span></td><td><span class="cn">看起来似乎……</span></td></tr>
+          <tr><td><span class="en">It occurs to sb. that…</span></td><td><span class="cn">某人突然想起……</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="ex anim" style="--i:3">
+      <div class="lead">案例 · 提示词 <span class="pill">turn out</span></div>
+      <div class="cn-src">原来他并没有去过国外读书。</div>
+      <div class="en-ref"><span class="mt">译文</span>It turned out that he hadn't studied overseas.</div>
+    </div>
+    <div class="warn anim" style="--i:4">
+      <span>⚠️</span>
+      <div><b>虚拟语气：</b>It is / was + 形容词（<b>advisable / important / natural / necessary / strange</b> 等表惊奇、不相信）+ that 从句时，从句用 <b>(should) + 动词原形</b>。例：It is strange that the puppy <b>should survive</b> the earthquake.（若不含惊奇之意，则用陈述语气。）</div>
+    </div>
+  </section>
+
+  <!-- 23 主语从句 真题自测 -->
+  <section class="slide" data-title="主语 · 真题自测" data-sec="四 · 主语从句">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a69cb4">四 · 主语从句</span><h2>真题自测（代表题）</h2><span class="en">Practice</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1"><div class="lead">1 · 提示词 <span class="pill">It</span></div><div class="cn-src">据估计，上海每年春节要接待几百万游客。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">It is estimated that Shanghai receives millions of visitors every Spring Festival.</div><div class="mark"><b>考点</b>：It is estimated that…</div></div></details></div>
+      <div class="ex anim" style="--i:2"><div class="lead">2 · 提示词 <span class="pill">cause</span></div><div class="cn-src">还不知道是什么原因造成这次森林火灾。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">What caused the forest fire is still unknown.</div><div class="mark"><b>考点</b>：what 引导主语从句。</div></div></details></div>
+      <div class="ex anim" style="--i:3"><div class="lead">3 · 提示词 <span class="pill">occur</span></div><div class="cn-src">我突然想到我忘记通知他们考试的时间了。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">It suddenly occurred to me that I had forgotten to inform them of the time for the exam.</div><div class="mark"><b>考点</b>：It occurs to sb. that…</div></div></details></div>
+      <div class="ex anim" style="--i:4"><div class="lead">4 · 提示词 <span class="pill">What</span></div><div class="cn-src">这个课程的创新之处在于它很大程度上尊重了小学生的学习习惯。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">What is original in this course is that it respects pupils' study habits to a great extent.</div><div class="mark"><b>考点</b>：what 引导主语从句 + 表语从句。</div></div></details></div>
+      <div class="ex anim" style="--i:5"><div class="lead">5 · 提示词 <span class="pill">stay</span></div><div class="cn-src">据说每天喝适量的葡萄酒可以使人保持年轻。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">It is said that drinking a proper amount of wine every day can help one to stay young.</div><div class="mark"><b>考点</b>：It is said that…</div></div></details></div>
+      <div class="ex anim" style="--i:6"><div class="lead">6 · 提示词 <span class="pill">suggest</span></div><div class="cn-src">建议该实验在低温下操作。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">It is suggested that the experiment should be made under a low temperature.</div><div class="mark"><b>考点</b>：It is suggested that + (should) 虚拟语气。</div></div></details></div>
+    </div>
+  </section>
+
+  <!-- 24 复合句 综合自测 -->
+  <section class="slide" data-title="复合句 · 综合自测" data-sec="综合自测">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">综合</span><h2>复合句综合自测</h2><span class="en">Mixed Practice</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1"><div class="lead">1 · 提示词 <span class="pill">The first time</span></div><div class="cn-src">第一次在班级演讲的时候，我感觉不自在。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">The first time I made a speech in my class, I felt awkward / uncomfortable.</div><div class="mark"><b>考点</b>：the first time 引导时间状语从句。</div></div></details></div>
+      <div class="ex anim" style="--i:2"><div class="lead">2 · 提示词 <span class="pill">While</span></div><div class="cn-src">尽管我完全明白你的观点，但是我认为 Jane 的观点更合理。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">While I fully understand your point of view, I think Jane's is more sensible / reasonable.</div><div class="mark"><b>考点</b>：while 引导让步状语从句（不与 but 连用）。</div></div></details></div>
+      <div class="ex anim" style="--i:3"><div class="lead">3 · 提示词 <span class="pill">Whether</span></div><div class="cn-src">一个人成功与否主要取决于他有多勤奋。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">Whether a person is successful mainly depends on how hard he works.</div><div class="mark"><b>考点</b>：whether 主语从句 + how 宾语从句。</div></div></details></div>
+      <div class="ex anim" style="--i:4"><div class="lead">4 · 提示词 <span class="pill">result</span></div><div class="cn-src">专家已经否认了关于每天喝牛奶会导致癌症的谣言。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">Experts have denied the rumour that drinking milk every day will result in cancer.</div><div class="mark"><b>考点</b>：that 引导同位语从句。</div></div></details></div>
+      <div class="ex anim" style="--i:5"><div class="lead">5 · 提示词 <span class="pill">which</span></div><div class="cn-src">你能推荐几部与宇宙探索有关的电影吗？</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">Can you recommend some films which involve the exploration into the universe?</div><div class="mark"><b>考点</b>：which 引导定语从句。</div></div></details></div>
+      <div class="ex anim" style="--i:6"><div class="lead">6 · 提示词 <span class="pill">so…that</span></div><div class="cn-src">这个机场非常小，20 分钟就可以从这一头走到那一头。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">The airport is so small that it only takes 20 minutes to walk from one end to the other.</div><div class="mark"><b>考点</b>：so…that 结果状语从句。</div></div></details></div>
+    </div>
+  </section>
+
+  <!-- 25 本章小结 -->
+  <section class="slide" data-title="本章小结 · 易错点" data-sec="收尾">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">小结</span><h2>本章小结 · 高频易错点</h2><span class="en">Recap</span></div>
+    <div class="grid g4" style="margin-top:6px">
+      <div class="sum-block anim" style="--i:1;--pc:#7e96a5">
+        <h4><span class="dot"></span>状语从句</h4>
+        <ul><li>although / though <b>不与 but 连用</b></li><li>时间 / 条件从句 <b>主将从现</b></li><li>no sooner / hardly 句首<b>倒装</b></li><li>so + 形/副，<b>such + 名词</b></li></ul>
+      </div>
+      <div class="sum-block anim" style="--i:2;--pc:#93aa92">
+        <h4><span class="dot"></span>定语从句</h4>
+        <ul><li>作<b>宾语</b>用代词（可省略）</li><li>作<b>状语</b>用 where / when / why</li><li>非限制 / 介词后 <b>只用 which</b></li><li>as 表“正如”，可放句首</li></ul>
+      </div>
+      <div class="sum-block anim" style="--i:3;--pc:#c09892">
+        <h4><span class="dot"></span>宾语从句</h4>
+        <ul><li>一律用<b>陈述语序</b></li><li>“没决定” → <b>whether</b> 不用 that</li><li>“多么”修饰形/副 → <b>how</b></li><li>介词后接从句别丢介词</li></ul>
+      </div>
+      <div class="sum-block anim" style="--i:4;--pc:#a69cb4">
+        <h4><span class="dot"></span>主语从句</h4>
+        <ul><li>从句作主语视为<b>单数</b></li><li>长主语用 <b>it 作形式主语</b></li><li>It is + 形容词(惊) + that → <b>虚拟</b></li><li>It occurs to sb. that…</li></ul>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:5">
+      <span>⚠️</span>
+      <div><b>最易失分的五处：</b>① although / though 后又加 but；② 时间 / 条件从句误用 will（应“主将从现”）；③ 宾语 / 主语从句误用疑问语序；④ 该用 whether（不确定）却用 that；⑤ no sooner / hardly 放句首忘倒装。</div>
+    </div>
+    <div class="motto anim" style="--i:6">
+      抓连接词 · 排语序 · 核时态 —— <span>三类复合句，翻译不丢分</span>
+    </div>
+  </section>
+
+</div>
+
+<div id="nav">
+  <button id="prev" aria-label="上一页" title="上一页 (←)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="counter"><b id="cur">1</b> / <span id="total">25</span></div>
+  <button id="next" aria-label="下一页" title="下一页 (→)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <button id="menuBtn" aria-label="目录" title="目录">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+    <span>目录</span>
+  </button>
+  <button id="fs" aria-label="全屏" title="全屏 (F)">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+  </button>
+</div>
+<div id="hint">← → 翻页 · 空格下一页 · F 全屏 · 左侧手柄抽拉目录</div>
+
+<!-- 抽拉式目录（左侧抽屉） -->
+<div id="drawerTab" title="打开目录">
+  <span class="darr">▸</span><span>目 录</span>
+</div>
+<div id="drawerOverlay">
+  <div id="drawerPanel">
+    <div class="dp-head">
+      <div class="k">第四章 · 目录</div>
+      <h3>高考翻译常用复合句</h3>
+      <div class="sub">状语 · 定语 · 宾语 · 主语从句</div>
+      <button class="close" id="drawerClose" aria-label="关闭">✕</button>
+    </div>
+    <div id="drawerList"></div>
+  </div>
+</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  const curEl = document.getElementById('cur');
+  const totalEl = document.getElementById('total');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const fsBtn = document.getElementById('fs');
+  const menuBtn = document.getElementById('menuBtn');
+  const drawerTab = document.getElementById('drawerTab');
+  const drawerClose = document.getElementById('drawerClose');
+  const drawerOverlay = document.getElementById('drawerOverlay');
+  const drawerList = document.getElementById('drawerList');
+  const progress = document.getElementById('progress');
+  let idx = 0;
+  totalEl.textContent = total;
+
+  // 每节主题色
+  const SEC_COLORS = {
+    '封面':'#b99c6a', '导读':'#b99c6a', '收尾':'#b99c6a', '综合自测':'#b99c6a',
+    '一 · 状语从句':'#7e96a5', '二 · 定语从句':'#93aa92',
+    '三 · 宾语从句':'#c09892', '四 · 主语从句':'#a69cb4'
+  };
+
+  // 构建抽拉式目录（按 data-sec 分组）
+  (function buildMenu(){
+    const groups = [];
+    const map = {};
+    slides.forEach((s,i)=>{
+      const sec = s.dataset.sec || '其他';
+      const title = s.dataset.title || ('第'+(i+1)+'页');
+      if(!map[sec]){ map[sec] = {sec, items:[]}; groups.push(map[sec]); }
+      map[sec].items.push({title, i});
+    });
+    groups.forEach(g=>{
+      const h = document.createElement('div');
+      h.className = 'dp-sec';
+      const c = SEC_COLORS[g.sec] || '#8a8378';
+      h.innerHTML = '<span class="swatch" style="background:'+c+'"></span><span>'+g.sec+'</span>';
+      drawerList.appendChild(h);
+      g.items.forEach(it=>{
+        const b = document.createElement('button');
+        b.className = 'dp-item';
+        b.innerHTML = '<span class="n">'+ (it.i+1) +'</span><span>'+ it.title +'</span>';
+        b.addEventListener('click', ()=>{ go(it.i); closeDrawer(); });
+        drawerList.appendChild(b);
+      });
+    });
+  })();
+
+  function render(){
+    slides.forEach((s,i)=>{
+      s.classList.toggle('active', i===idx);
+      s.classList.toggle('prev', i<idx);
+    });
+    curEl.textContent = idx+1;
+    progress.style.width = ((idx+1)/total*100) + '%';
+    prevBtn.disabled = idx===0;
+    nextBtn.disabled = idx===total-1;
+    // 高亮目录当前项
+    Array.from(drawerList.querySelectorAll('.dp-item')).forEach((b,i)=>{
+      b.classList.toggle('active', i===idx);
+    });
+  }
+  function go(n){
+    idx = Math.max(0, Math.min(total-1, n));
+    render();
+  }
+  function closeDrawer(){ drawerOverlay.classList.remove('open'); drawerTab.querySelector('.darr').textContent='▸'; }
+  function openDrawer(){ drawerOverlay.classList.add('open'); drawerTab.querySelector('.darr').textContent='◂'; }
+
+  prevBtn.addEventListener('click', ()=>go(idx-1));
+  nextBtn.addEventListener('click', ()=>go(idx+1));
+  menuBtn.addEventListener('click', openDrawer);
+  drawerTab.addEventListener('click', openDrawer);
+  drawerClose.addEventListener('click', closeDrawer);
+  drawerOverlay.addEventListener('click', (e)=>{ if(e.target===drawerOverlay) closeDrawer(); });
+
+  document.addEventListener('keydown', (e)=>{
+    if(drawerOverlay.classList.contains('open')){
+      if(e.key==='Escape') closeDrawer();
+      return;
+    }
+    if(e.key==='ArrowRight' || e.key===' ' || e.key==='PageDown'){ e.preventDefault(); go(idx+1); }
+    else if(e.key==='ArrowLeft' || e.key==='PageUp'){ e.preventDefault(); go(idx-1); }
+    else if(e.key==='Home'){ go(0); }
+    else if(e.key==='End'){ go(total-1); }
+    else if(e.key==='m' || e.key==='M'){ openDrawer(); }
+    else if(e.key==='f' || e.key==='F'){
+      if(document.fullscreenElement){ document.exitFullscreen(); }
+      else { document.documentElement.requestFullscreen(); }
+    }
+  });
+  fsBtn.addEventListener('click', ()=>{
+    if(document.fullscreenElement){ document.exitFullscreen(); }
+    else { document.documentElement.requestFullscreen(); }
+  });
+  // 触屏滑动
+  let touchX=null;
+  document.addEventListener('touchstart', e=>{ touchX=e.touches[0].clientX; });
+  document.addEventListener('touchend', e=>{
+    if(touchX===null) return;
+    const dx=e.changedTouches[0].clientX-touchX;
+    if(Math.abs(dx)>50){ dx<0?go(idx+1):go(idx-1); }
+    touchX=null;
+  });
+  render();
+</script>
+</body>
+</html>

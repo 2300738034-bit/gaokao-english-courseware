@@ -22,6 +22,11 @@ window.CATALOG = {
           title: "高考翻译中的语法课件（第三章）",
           file: "courseware/高考翻译中的语法课件.html",
           added: "2026-09-17"
+        },
+        {
+          title: "高考翻译常用复合句课件（第四章）",
+          file: "courseware/高考翻译常用复合句课件.html",
+          added: "2026-10-12"
         }
       ]
     },
