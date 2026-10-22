@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高考英语语法 · 独立主格结构</title>
+<style>
+  :root{
+    --ink:#46413b;
+    --muted:#8c857b;
+    --line:#e6ded1;
+    --bg:#f4efe6;
+    --paper:#fcf9f3;
+    --paper-2:#f6f0e6;
+    --ink-soft:#5c564f;
+
+    --blue:#7e96a5;  --blue-deep:#5c7383;  --blue-bg:#edf1f3;   /* 概念构成 */
+    --sage:#93aa92;  --sage-deep:#6e856d;  --sage-bg:#eff2ec;   /* with 结构 */
+    --rose:#c09892;  --rose-deep:#98706a;  --rose-bg:#f5ecea;   /* 句法功能 */
+    --lav:#a69cb4;   --lav-deep:#7f7590;   --lav-bg:#f0edf3;    /* 解题练习 */
+
+    --gold:#b99c6a;  --gold-deep:#937a48;  --gold-bg:#f3ecdd;
+    --warn:#b48780;  --warn-deep:#966963;  --warn-bg:#f5e7e4;
+    --tip:#7e96a5;   --tip-bg:#edf1f3;
+
+    --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:var(--font);color:var(--ink);background:var(--bg);overflow:hidden;-webkit-font-smoothing:antialiased}
+
+  #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:58px 44px 96px}
+  .slide{
+    position:absolute;width:min(1200px,100%);max-height:100%;
+    background:var(--paper);border-radius:22px;
+    box-shadow:0 26px 60px -26px rgba(92,82,66,.34), 0 0 0 1px rgba(92,82,66,.05);
+    padding:44px 54px;opacity:0;transform:translateX(42px);pointer-events:none;
+    transition:opacity .45s ease, transform .45s ease;overflow:hidden;
+    display:flex;flex-direction:column;
+  }
+  .slide.active{opacity:1;transform:translateX(0);pointer-events:auto}
+  .slide.prev{transform:translateX(-42px)}
+  .slide .anim{opacity:0;transform:translateY(14px)}
+  .slide.active .anim{opacity:1;transform:none;transition:opacity .5s ease, transform .5s ease;transition-delay:calc(var(--i,0)*70ms + 60ms)}
+
+  .head{display:flex;align-items:center;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+  .part-badge{font-size:13px;font-weight:700;letter-spacing:.05em;color:#fff;background:var(--pc,#8a8378);padding:6px 15px;border-radius:99px;white-space:nowrap}
+  .head h2{font-size:28px;font-weight:800;letter-spacing:.01em;color:var(--ink)}
+  .head .en{font-size:14px;color:var(--muted);font-weight:600;margin-left:auto;white-space:nowrap}
+
+  .slide.cover{
+    background:
+      radial-gradient(900px 520px at 88% -10%, rgba(185,156,106,.30), transparent 60%),
+      radial-gradient(720px 540px at -10% 112%, rgba(166,156,180,.32), transparent 55%),
+      linear-gradient(135deg,#66788a 0%,#7f8fa0 50%,#99a3ae 100%);
+    color:#fff;justify-content:center;
+  }
+  .cover .brand-line{position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#b99c6a,#c9b88f,#93aa92,#a69cb4)}
+  .cover .tag{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#eef1f3;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);padding:7px 16px;border-radius:99px;margin-bottom:26px}
+  .cover h1{font-size:52px;font-weight:900;line-height:1.2;letter-spacing:.01em}
+  .cover h1 .hl{color:#e4d3ad}
+  .cover .sub{margin-top:18px;font-size:20px;color:#e7ebee;font-weight:500;line-height:1.7}
+  .cover .meta{margin-top:40px;display:flex;gap:28px;font-size:14px;color:#c9d3da;font-weight:600}
+  .cover .meta b{color:#fff}
+
+  .grid{display:grid;gap:15px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px 20px;position:relative;overflow:hidden}
+  .card .num{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:10px;font-size:16px;font-weight:800;color:#fff;background:var(--pc,#8a8378);margin-bottom:11px}
+  .card h4{font-size:19px;font-weight:800;margin-bottom:5px;color:var(--ink)}
+  .card .cn{font-size:13.5px;color:var(--muted);font-weight:600;line-height:1.5}
+  .card .frm{font-size:18px;font-weight:800;color:var(--pc,#8a8378);margin-top:9px;letter-spacing:.02em;font-family:"SF Mono",ui-monospace,monospace}
+  .card .eg{font-size:13.5px;color:#6f6a62;margin-top:8px;line-height:1.6;word-break:break-all}
+  .card .eg b{color:#3f3b35;font-weight:700}
+
+  .key{color:var(--pc-deep,#937a48);font-weight:800}
+  .gold{color:var(--gold-deep);font-weight:800}
+  .red{color:var(--warn-deep);font-weight:800}
+
+  .ex{background:var(--paper-2);border:1px solid var(--line);border-radius:15px;padding:16px 20px;margin-top:8px}
+  .ex + .ex{margin-top:14px}
+  .ex .lead{font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:11px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .ex .lead .pill{background:var(--gold-bg);color:var(--gold-deep)}
+  .cn-src{font-size:17px;font-weight:600;color:var(--ink);line-height:1.6}
+  .cn-src b{color:var(--gold-deep)}
+  .en-ref{font-size:16.5px;font-weight:700;color:var(--pc-deep,#5c7383);margin-top:9px;line-height:1.55;word-break:break-word}
+  .en-ref .mt{display:inline-block;font-size:12px;font-weight:800;color:#fff;background:var(--pc,#8a8378);border-radius:6px;padding:2px 8px;margin-right:8px;vertical-align:2px}
+  .ana{margin-top:10px;font-size:13.5px;color:#6f6a62;line-height:1.65}
+  .ana b{color:var(--gold-deep)}
+
+  .formula{background:var(--paper);border:1px dashed var(--line);border-radius:12px;padding:13px 16px;margin-top:10px;font-size:15.5px;font-weight:700;color:var(--ink)}
+  .formula .fb{display:inline-block;background:var(--pc,#8a8378);color:#fff;font-size:12px;font-weight:800;border-radius:6px;padding:2px 9px;margin-right:8px}
+
+  .note{display:flex;gap:12px;align-items:flex-start;background:var(--gold-bg);border:1px solid #e6d8ba;border-left:4px solid var(--gold);border-radius:12px;padding:13px 17px;margin-top:15px;font-size:15px;line-height:1.65}
+  .note .ico{font-size:18px;line-height:1.4}
+  .note b{color:var(--gold-deep)}
+
+  .tip{display:flex;gap:10px;align-items:flex-start;background:var(--tip-bg);border:1px solid #d5e0e4;border-left:4px solid var(--tip);border-radius:12px;padding:12px 16px;margin-top:13px;font-size:14.5px;line-height:1.65;color:var(--blue-deep)}
+  .tip b{color:var(--blue-deep)}
+
+  .warn{display:flex;gap:10px;align-items:flex-start;background:var(--warn-bg);border:1px solid #ecd2cd;border-left:4px solid var(--warn);border-radius:12px;padding:12px 16px;margin-top:13px;font-size:14.5px;line-height:1.65;color:var(--warn-deep)}
+  .warn b{color:var(--warn-deep)}
+
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+  .cols .ex{margin-top:0}
+
+  table{width:100%;border-collapse:collapse;font-size:15px}
+  th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:12.5px;letter-spacing:.05em;color:var(--muted);background:var(--paper-2);font-weight:700}
+  td .en{font-weight:700;color:#3f3b35}
+  td .cn{color:var(--muted);font-size:13px}
+
+  .pill{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:var(--tip-bg);color:var(--blue-deep);margin-right:6px}
+
+  .sum-block{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:var(--paper)}
+  .sum-block h4{font-size:15.5px;font-weight:800;margin-bottom:11px;display:flex;align-items:center;gap:8px;color:var(--ink)}
+  .sum-block .dot{width:10px;height:10px;border-radius:3px;background:var(--pc,#8a8378)}
+  .sum-block ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .sum-block li{font-size:13.5px;color:#5c564f;line-height:1.5}
+  .sum-block li b{color:var(--ink)}
+
+  .motto{margin-top:20px;text-align:center;font-size:19px;font-weight:800;color:var(--ink);background:var(--gold-bg);border:1px solid #e6d8ba;border-radius:14px;padding:17px}
+  .motto span{color:var(--warn-deep)}
+
+  .reveal{margin-top:10px;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .reveal summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 15px;font-size:13.5px;font-weight:700;color:var(--pc-deep,#5c7383);background:var(--paper-2);user-select:none}
+  .reveal summary::-webkit-details-marker{display:none}
+  .reveal summary .caret{display:inline-block;transition:transform .2s;font-size:11px}
+  .reveal[open] summary .caret{transform:rotate(90deg)}
+  .reveal .ans{padding:13px 16px 15px;border-top:1px dashed var(--line);font-size:15.5px}
+  .reveal .ans .en{font-weight:700;color:var(--pc-deep,#5c7383);line-height:1.6}
+  .reveal .ans .mark{margin-top:8px;font-size:13px;color:#6f6a62;line-height:1.6}
+  .reveal .ans .mark b{color:var(--gold-deep)}
+
+  #nav{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);display:flex;align-items:center;gap:12px;z-index:50;background:rgba(252,249,243,.88);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:99px;padding:8px 12px;box-shadow:0 12px 32px -14px rgba(92,82,66,.32)}
+  #nav button{border:none;background:var(--paper);border:1px solid var(--line);width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#5c564f;transition:.15s}
+  #nav button:hover:not(:disabled){background:var(--paper-2);border-color:var(--gold);color:var(--gold-deep)}
+  #nav button:disabled{opacity:.35;cursor:default}
+  #nav .counter{font-size:14px;font-weight:700;color:#5c564f;min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
+  #nav .counter b{color:var(--gold-deep);font-size:16px}
+  #nav #menuBtn{width:auto;border-radius:99px;padding:0 16px;font-size:13px;font-weight:700;gap:7px}
+  #progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#7e96a5,#93aa92,#c09892,#a69cb4);z-index:60;width:0;transition:width .35s ease}
+  #hint{position:fixed;left:50%;transform:translateX(-50%);bottom:3px;font-size:12px;color:#b3ab9f;z-index:40;white-space:nowrap}
+
+  #drawerTab{position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:80;cursor:pointer;user-select:none;display:flex;align-items:center;gap:6px;padding:16px 10px;background:linear-gradient(180deg,#7e96a5,#5c7383);color:#fff;border-radius:0 14px 14px 0;box-shadow:4px 8px 20px -8px rgba(92,82,66,.45);transition:padding .2s ease, box-shadow .2s ease;writing-mode:vertical-rl;letter-spacing:.3em;font-weight:800;font-size:14px}
+  #drawerTab:hover{padding:20px 11px;box-shadow:6px 12px 28px -8px rgba(92,82,66,.55)}
+  #drawerTab .darr{display:inline-block;transition:transform .25s ease;writing-mode:horizontal-tb;font-size:13px}
+
+  #drawerOverlay{position:fixed;inset:0;background:rgba(70,63,55,.34);backdrop-filter:blur(3px);z-index:85;opacity:0;pointer-events:none;transition:opacity .28s ease}
+  #drawerOverlay.open{opacity:1;pointer-events:auto}
+  #drawerPanel{position:fixed;top:0;left:0;bottom:0;width:min(360px,88vw);background:var(--paper);box-shadow:24px 0 50px -30px rgba(92,82,66,.5);z-index:86;transform:translateX(-100%);transition:transform .32s cubic-bezier(.22,.9,.3,1);display:flex;flex-direction:column}
+  #drawerOverlay.open #drawerPanel{transform:translateX(0)}
+  #drawerPanel .dp-head{padding:22px 22px 16px;border-bottom:1px solid var(--line);background:linear-gradient(135deg,#7e96a5 0%,#5c7383 100%);color:#fff}
+  #drawerPanel .dp-head .k{font-size:12px;font-weight:700;letter-spacing:.12em;opacity:.8}
+  #drawerPanel .dp-head h3{font-size:19px;font-weight:800;margin-top:4px}
+  #drawerPanel .dp-head .sub{font-size:12px;opacity:.85;margin-top:3px}
+  #drawerPanel .dp-head .close{position:absolute;top:18px;right:18px;border:none;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:15px;color:#fff;line-height:1}
+  #drawerPanel .dp-head .close:hover{background:rgba(255,255,255,.28)}
+  #drawerList{overflow-y:auto;padding:10px 14px 34px;flex:1}
+  .dp-sec{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--muted);margin:18px 6px 6px}
+  .dp-sec .swatch{width:9px;height:9px;border-radius:3px}
+  .dp-item{display:flex;align-items:center;gap:11px;width:100%;text-align:left;padding:10px 12px;border:none;background:transparent;border-radius:10px;cursor:pointer;font-size:14px;color:#4c4740;transition:.13s}
+  .dp-item:hover{background:var(--paper-2)}
+  .dp-item.active{background:var(--gold-bg);color:var(--gold-deep);font-weight:700}
+  .dp-item .n{font-size:12px;font-weight:800;color:#b3ab9f;min-width:22px;text-align:right}
+
+  @media (max-width:900px){
+    #stage{padding:18px 14px 88px}
+    .slide{padding:26px 22px;border-radius:15px}
+    .g2,.g3,.g4,.cols{grid-template-columns:1fr 1fr}
+    .head h2{font-size:21px}
+    .cover h1{font-size:34px}
+    .cover .sub{font-size:16px}
+    .cn-src{font-size:15.5px}
+    #drawerTab{padding:13px 8px;font-size:12px}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<div id="stage">
+
+  <!-- 1 封面 -->
+  <section class="slide cover active" data-title="封面" data-sec="封面">
+    <div class="brand-line"></div>
+    <div class="anim" style="--i:0"><span class="tag">高考英语 · 语法专项（第二版）</span></div>
+    <h1 class="anim" style="--i:1"><span class="hl">独立主格结构</span></h1>
+    <p class="sub anim" style="--i:2">名词 / 代词 + 非谓语 —— 书面语里的"简洁高手" · 一对一精讲</p>
+    <div class="meta anim" style="--i:3">
+      <span>板块：<b>语法 · 非谓语 · 独立主格</b></span>
+    </div>
+  </section>
+
+  <!-- 2 导读 -->
+  <section class="slide" data-title="本章导读" data-sec="导读">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">导读</span><h2>本章要讲什么</h2><span class="en">Overview</span></div>
+    <p class="anim" style="--i:1;font-size:15.5px;color:#5c564f;line-height:1.75">独立主格结构是<b class="gold">高考语法填空、翻译和写作里的"高级货"</b>。它一句话能干两件事：一是<b>作状语</b>（表时间、原因、条件、伴随），二是<b>给句子补充细节</b>，让你不用从句也能把话说得又简洁又地道。学会它，你的作文档次会明显上一截。</p>
+    <div class="grid g3" style="margin-top:16px">
+      <div class="card anim" style="--i:2;--pc:#7e96a5"><span class="num">一</span><h4>概念与构成</h4><div class="cn">名词/代词 + 非谓语<br>七种构成类型</div></div>
+      <div class="card anim" style="--i:3;--pc:#93aa92"><span class="num">二</span><h4>with 引导</h4><div class="cn">with + 宾语 + 宾补<br>七种结构</div></div>
+      <div class="card anim" style="--i:4;--pc:#c09892"><span class="num">三</span><h4>句法功能</h4><div class="cn">作状语 · 定语 · 主语</div></div>
+      <div class="card anim" style="--i:5;--pc:#a69cb4"><span class="num">四</span><h4>解题策略</h4><div class="cn">结构分析法<br>三步锁定答案</div></div>
+    </div>
+    <div class="note anim" style="--i:6;margin-top:20px">
+      <span class="ico">🧭</span>
+      <div><b>一句话记住它：</b>独立主格 = 一个<b>自带主语</b>的"非谓语短语"，中间用<b>逗号</b>和主句隔开，<b class="gold">绝不能加任何连接词</b>（and / when / because 都不行）。这是它区别于从句的根本标志。</div>
+    </div>
+  </section>
+
+  <!-- 3 概念与特点 -->
+  <section class="slide" data-title="概念与特点" data-sec="一 · 概念与构成">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7e96a5">一 · 概念与构成</span><h2>什么是独立主格</h2><span class="en">What It Is</span></div>
+    <p class="anim" style="--i:1;font-size:15px;color:#5c564f;line-height:1.7">独立主格结构由<b class="key">名词或代词 + 分词（或形容词、副词、不定式、介词短语、名词）</b>组成，用来<b>修饰整个句子</b>。它的"逻辑主语"和主句的主语<b>不是同一个</b>，所以叫"独立"主格。</p>
+    <div class="grid g3" style="margin-top:12px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">例 1</div>
+        <div class="en-ref">Night <b>enshrouding</b> the earth, nobody could make out what the dark mass was.</div>
+        <div class="ana">黑夜笼罩大地，谁也看不清远处黑压压的一片是什么。</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">例 2</div>
+        <div class="en-ref">He lay at full length upon his stomach, his head <b>resting</b> upon his left forearm.</div>
+        <div class="ana">他头靠着左前臂，直挺挺地趴着。</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">例 3</div>
+        <div class="en-ref">The coward was backing, his face <b>being</b> deathly pale.</div>
+        <div class="ana">那个胆小鬼向另一个房间退去，脸色煞白。</div>
+      </div>
+    </div>
+    <div class="grid g3" style="margin-top:6px">
+      <div class="sum-block anim" style="--i:5"><h4><span class="dot" style="background:#7e96a5"></span>特点 ①</h4><ul><li>逻辑主语<b>与主句主语不同</b>，独立存在。</li></ul></div>
+      <div class="sum-block anim" style="--i:6"><h4><span class="dot" style="background:#7e96a5"></span>特点 ②</h4><ul><li>名词与后面的分词/形/副/不定式是<b>逻辑主谓</b>关系。</li></ul></div>
+      <div class="sum-block anim" style="--i:7"><h4><span class="dot" style="background:#7e96a5"></span>特点 ③</h4><ul><li>用<b>逗号</b>与主句隔开，<b>中间不能加连接词</b>。</li></ul></div>
+    </div>
+  </section>
+
+  <!-- 4 构成类型总览 -->
+  <section class="slide" data-title="七种构成类型" data-sec="一 · 概念与构成">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7e96a5">一 · 概念与构成</span><h2>七种构成类型</h2><span class="en">Seven Forms</span></div>
+    <div class="anim" style="--i:1">
+      <table>
+        <tr><th style="width:30%">构成</th><th>例句</th></tr>
+        <tr><td class="en">名词 + 现在分词（主动）</td><td class="cn">Tom <b>being absent</b>, the party was cancelled.（汤姆缺席，聚会取消）</td></tr>
+        <tr><td class="en">名词 + 过去分词（被动/完成）</td><td class="cn">The project <b>finished</b>, we went back to our hometown.（项目完成，我们回乡）</td></tr>
+        <tr><td class="en">名词 + 形容词</td><td class="cn">Father stood at the door, his hands <b>muddy</b>.（父亲站在门口，双手是泥）</td></tr>
+        <tr><td class="en">名词 + 副词</td><td class="cn">Jack sat silently, his head <b>down</b>.（杰克沉默地坐着，头低着）</td></tr>
+        <tr><td class="en">名词 + 不定式（将来/目的）</td><td class="cn">The teacher assigned homework, the students <b>to finish</b> it by Monday.</td></tr>
+        <tr><td class="en">名词 + 介词短语</td><td class="cn">Mr. Brown entered the room, a magazine <b>in his hand</b>.</td></tr>
+        <tr><td class="en">名词 + 名词</td><td class="cn">The brave man fought the tiger, a stick <b>his only weapon</b>.</td></tr>
+      </table>
+    </div>
+    <div class="tip anim" style="--i:2">
+      <span>💡</span>
+      <div>判断用现在分词还是过去分词，就看<b>逻辑主语和这个动作是"主动"还是"被动"</b>：主动用 -ing，被动用 -ed。这是独立主格里最核心的一条判断，后面解题全靠它。</div>
+    </div>
+  </section>
+
+  <!-- 5 分词类型详解 -->
+  <section class="slide" data-title="现在/过去分词型" data-sec="一 · 概念与构成">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7e96a5">一 · 概念与构成</span><h2>① 现在分词 / ② 过去分词型</h2><span class="en">Participle</span></div>
+    <div class="grid g2">
+      <div class="anim" style="--i:1">
+        <div class="formula" style="margin-top:0"><span class="fb">现在分词</span>名词 / 主格代词 + <b class="key">doing</b>（表主动、进行）</div>
+        <div class="ex" style="margin-top:10px">
+          <div class="en-ref">Time is one of the two elements that Americans save carefully, the other <b>being</b> labor.</div>
+          <div class="ana">时间是美国人节约的两样东西之一，另一样是劳动力。</div>
+        </div>
+        <div class="ex">
+          <div class="en-ref">Winter <b>coming</b>, it gets colder and colder.</div>
+          <div class="ana">冬天来了，天越来越冷。</div>
+        </div>
+      </div>
+      <div class="anim" style="--i:2">
+        <div class="formula" style="margin-top:0"><span class="fb">过去分词</span>名词 / 主格代词 + <b class="key">done</b>（表被动、完成）</div>
+        <div class="ex" style="margin-top:10px">
+          <div class="en-ref">The duty <b>completed</b>, he had three months' leave.</div>
+          <div class="ana">任务完成后，他有三个月假期。</div>
+        </div>
+        <div class="ex">
+          <div class="en-ref">More time <b>given</b>, we should have done it much better.</div>
+          <div class="ana">如果多给些时间，我们本应做得更好。</div>
+        </div>
+      </div>
+    </div>
+    <div class="note anim" style="--i:3">
+      <span class="ico">🔑</span>
+      <div><b>主谓 = 用 doing，动宾 = 用 done。</b> 看名词和分词的关系：名词是动作的<b>发出者</b>，用现在分词；名词是动作的<b>承受者</b>，用过去分词。比如 the duty（被）完成 → completed。</div>
+    </div>
+  </section>
+
+  <!-- 6 形容词/副词/不定式型 -->
+  <section class="slide" data-title="形容词/副词/不定式型" data-sec="一 · 概念与构成">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7e96a5">一 · 概念与构成</span><h2>③ 形容词 / ④ 副词 / ⑤ 不定式型</h2><span class="en">Adj / Adv / Infinitive</span></div>
+    <div class="grid g3">
+      <div class="card anim" style="--i:1;--pc:#7e96a5"><span class="num">③</span><h4>名词 + 形容词</h4><div class="cn">描述逻辑主语的状态</div><div class="eg">The baby began to cry afresh, his face very <b>pale</b> and his lips <b>colorless</b>.<br><br>My mother sat in the kitchen, her face <b>dull and heavy</b>.</div></div>
+      <div class="card anim" style="--i:2;--pc:#8aa0ae"><span class="num">④</span><h4>名词 + 副词</h4><div class="cn">描述动作或状态</div><div class="eg">His chin <b>up</b>, he walked towards the enemies.<br><br>Class <b>over</b>, all the students went out of the classroom.</div></div>
+      <div class="card anim" style="--i:3;--pc:#93aa92"><span class="num">⑤</span><h4>名词 + 不定式</h4><div class="cn">表计划、目的或未完成的动作</div><div class="eg">Here are the first three volumes, the fourth one <b>to come out</b> next month.<br><br>They agreed on a division of labor, each <b>to translate</b> one-third of the book.</div></div>
+    </div>
+  </section>
+
+  <!-- 7 介词短语/名词型 -->
+  <section class="slide" data-title="介词短语/名词型" data-sec="一 · 概念与构成">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7e96a5">一 · 概念与构成</span><h2>⑥ 介词短语 / ⑦ 名词型</h2><span class="en">Prep Phrase / Noun</span></div>
+    <div class="grid g2">
+      <div class="anim" style="--i:1">
+        <div class="formula" style="margin-top:0"><span class="fb">⑥ 介词短语</span>名词 + <b class="key">介词短语</b>（表伴随状况、工具、地点）</div>
+        <div class="ex" style="margin-top:10px">
+          <div class="en-ref">He stood at the door, hands <b>in pocket</b>.</div>
+          <div class="ana">他站在门口，双手插在口袋里。</div>
+        </div>
+        <div class="ex">
+          <div class="en-ref">So Oliver rose from the table and went up to the master, <b>bowl and spoon in hand</b>.</div>
+          <div class="ana">奥利弗端着碗和勺子走到主人面前。</div>
+        </div>
+      </div>
+      <div class="anim" style="--i:2">
+        <div class="formula" style="margin-top:0"><span class="fb">⑦ 名词</span>名词 + <b class="key">名词</b>（表身份、状态或同位说明）</div>
+        <div class="ex" style="margin-top:10px">
+          <div class="en-ref">His first shot <b>a failure</b>, he fired again.</div>
+          <div class="ana">第一枪没打中，他又开了一枪。</div>
+        </div>
+        <div class="ex">
+          <div class="en-ref">The brave man fought the tiger, <b>a stick his only weapon</b>.</div>
+          <div class="ana">他与老虎搏斗，只有一根棍子当武器。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 with 引导 -->
+  <section class="slide" data-title="with 引导的独立主格" data-sec="二 · with 结构">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · with 结构</span><h2>with + 宾语 + 宾补</h2><span class="en">with 复合结构</span></div>
+    <p class="anim" style="--i:1;font-size:15px;color:#5c564f">介词 <b class="key">with / without / like / on</b> 也能带出独立主格，最常见的是 <b class="gold">with + 名词 + 宾补</b>。高考翻译、写作里这个结构出镜率极高：</p>
+    <div class="grid g2" style="margin-top:10px">
+      <div class="ex anim" style="--i:2"><div class="lead">with + 现在分词</div><div class="en-ref">He fell asleep <b>with the lamp burning</b>.</div><div class="ana">灯还亮着，他就睡着了。</div></div>
+      <div class="ex anim" style="--i:3"><div class="lead">with + 过去分词</div><div class="en-ref">She felt nervous, <b>with so many eyes fixed on her</b>.</div><div class="ana">这么多眼睛盯着她，她很紧张。</div></div>
+      <div class="ex anim" style="--i:4"><div class="lead">with + 形容词</div><div class="en-ref">Frank stared at his friend, <b>with his mouth open</b>.</div><div class="ana">他张着嘴瞪着朋友。</div></div>
+      <div class="ex anim" style="--i:5"><div class="lead">with + 副词</div><div class="en-ref">He stood before his teacher, <b>with his head down</b>.</div><div class="ana">他低着头站在老师面前。</div></div>
+      <div class="ex anim" style="--i:6"><div class="lead">with + 不定式</div><div class="en-ref"><b>With him to give us a lead</b>, our team is bound to turn out well.</div><div class="ana">有他带头，我们队一定表现出色。</div></div>
+      <div class="ex anim" style="--i:7"><div class="lead">with + 介词短语 / 名词</div><div class="en-ref">The old man stood there, <b>with his back against the wall</b>. / He died, <b>with his daughter yet a schoolgirl</b>.</div></div>
+    </div>
+    <div class="tip anim" style="--i:8">
+      <span>💡</span>
+      <div><b>写作加分句：</b>"with + 宾语 + 宾补"是作文里最常用的"伴随描写"句式，比如 "He said goodbye <b>with tears in his eyes</b>"（他含着泪告别）。背几个这样的结构，描写立刻生动。</div>
+    </div>
+  </section>
+
+  <!-- 9 句法功能 作状语 -->
+  <section class="slide" data-title="作状语" data-sec="三 · 句法功能">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">三 · 句法功能</span><h2>作状语（四种含义）</h2><span class="en">As Adverbial</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">① 表时间（= 时间状语从句）</div>
+        <div class="en-ref">The bell <b>ringing</b>, all the pupils went into the classroom.</div>
+        <div class="ana">= When the bell rang, all the pupils went into the classroom.</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">② 表原因（= 原因状语从句）</div>
+        <div class="en-ref">The question <b>being</b> rather difficult, we must take time to consider it.</div>
+        <div class="ana">= As the question is rather difficult, we must take time...</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">③ 表条件（= 条件状语从句）</div>
+        <div class="en-ref">All things <b>considered</b>, her paper is of greater value than yours.</div>
+        <div class="ana">= If all things are considered, her paper is of greater value.</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">④ 表伴随（= 并列分句）</div>
+        <div class="en-ref">Almost all metals are good conductors, silver <b>being</b> the best of all.</div>
+        <div class="ana">= ...while silver is the best of all.</div>
+      </div>
+    </div>
+    <div class="note anim" style="--i:5">
+      <span class="ico">🎯</span>
+      <div><b>判断技巧：</b>把独立主格<b class="gold">还原成状语从句</b>，看它带的是"当…时 / 因为… / 如果… / 而且…"哪种意思，含义就清楚了。考试让你判断它表什么，就用这个"还原法"。</div>
+    </div>
+  </section>
+
+  <!-- 10 作定语/主语 -->
+  <section class="slide" data-title="作定语 / 主语" data-sec="三 · 句法功能">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">三 · 句法功能</span><h2>作定语 / 作主语</h2><span class="en">As Attribute / Subject</span></div>
+    <div class="grid g2">
+      <div class="anim" style="--i:1">
+        <div class="sum-block">
+          <h4><span class="dot" style="background:#c09892"></span>作定语（= 定语从句）</h4>
+          <ul>
+            <li>放在所修饰的名词<b>之后</b>。</li>
+            <li><b>例：</b>Close to the bank I saw deep pools, the water <b>blue like the sky</b>.</li>
+            <li>= ...the water <b>of which was</b> blue like the sky.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="anim" style="--i:2">
+        <div class="sum-block">
+          <h4><span class="dot" style="background:#c09892"></span>作主语（= 主语从句）</h4>
+          <ul>
+            <li>较罕见，认识即可。</li>
+            <li><b>例：</b>Mary <b>(being) in trouble</b> was the ample reason for my going there.</li>
+            <li>= That Mary was in trouble was the ample reason...</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:3">
+      <span>💡</span>
+      <div>作状语（尤其是<b>伴随</b>和<b>原因</b>）是独立主格 99% 的考法，作定语、主语只是"认识层面"，了解即可，不用重点练。</div>
+    </div>
+  </section>
+
+  <!-- 11 与状语从句比较 -->
+  <section class="slide" data-title="与状语从句比较" data-sec="三 · 句法功能">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">三 · 句法功能</span><h2>独立主格 vs 状语从句</h2><span class="en">Compare</span></div>
+    <div class="anim" style="--i:1">
+      <table>
+        <tr><th style="width:24%">比较点</th><th>分词独立主格</th><th>状语从句</th></tr>
+        <tr><td><b>连接词</b></td><td>不用于从属连词（无 when / because）</td><td>必须用从属连词</td></tr>
+        <tr><td><b>逻辑主语</b></td><td>有自己的独立主语</td><td>逻辑主语常是主句主语</td></tr>
+        <tr><td><b>独立程度</b></td><td>可作独立的语言单位</td><td>必须附属在主句上</td></tr>
+      </table>
+    </div>
+    <div class="grid g2" style="margin-top:12px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">独立主格</div>
+        <div class="en-ref">The letter <b>having been written</b>, he took it to the post.</div>
+        <div class="ana">信写完，他就拿去寄了。</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">时间状语从句</div>
+        <div class="en-ref">When he <b>had written</b> the letter, he took it to the post.</div>
+        <div class="ana">写完信后，他就拿去寄了。</div>
+      </div>
+    </div>
+    <div class="note anim" style="--i:4">
+      <span class="ico">🔑</span>
+      <div><b>核心区别：</b>逻辑主语和主句主语<b>一致</b> → 用普通分词短语；<b>不一致</b> → 用独立主格（给分词补一个自己的主语）。这就是"从分词到独立主格"的那一步。</div>
+    </div>
+  </section>
+
+  <!-- 12 解题策略 -->
+  <section class="slide" data-title="解题策略" data-sec="四 · 解题练习">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a69cb4">四 · 解题练习</span><h2>结构分析法（三步锁定）</h2><span class="en">Strategy</span></div>
+    <div class="grid g3" style="margin-top:6px">
+      <div class="card anim" style="--i:1;--pc:#a69cb4"><span class="num">1</span><h4>看有没有连接词</h4><div class="cn">逗号前后<b>没有</b> and / when / because → 不是从句，考虑非谓语 / 独立主格。</div></div>
+      <div class="card anim" style="--i:2;--pc:#a69cb4"><span class="num">2</span><h4>看有没有自己的主语</h4><div class="cn">逗号后<b>有自己的名词/代词</b>作主语 → 是独立主格；没有 → 普通分词。</div></div>
+      <div class="card anim" style="--i:3;--pc:#a69cb4"><span class="num">3</span><h4>看主动还是被动</h4><div class="cn">逻辑主语和动词<b>主动 → doing</b>；<b>被动 → done</b>。</div></div>
+    </div>
+    <div class="grid g2" style="margin-top:10px">
+      <div class="ex anim" style="--i:4">
+        <div class="lead">例题 1</div>
+        <div class="cn-src">All flights ___, we decided to take a greyhound.</div>
+        <div class="ana"><b>分析：</b>逗号后无连接词 → 独立主格；flights 是"被取消" → 被动 → 选 <b class="gold">D. having been canceled</b>。</div>
+      </div>
+      <div class="ex anim" style="--i:5">
+        <div class="lead">例题 2</div>
+        <div class="cn-src">The production ___ steadily, the factory needs an ever-increasing supply of raw material.</div>
+        <div class="ana"><b>分析：</b>production 是"主动增长" → 主动 → 选 <b class="gold">C. having gone up</b>。</div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:6">
+      <span>💡</span>
+      <div>看到<b>"逗号 + 名词 + 动词变形"</b>却<b>没有连接词</b>，第一反应就应该是独立主格，然后只做一件事：判断<b>主动 / 被动</b>。选对-ing 还是-ed，题就对了一半。</div>
+    </div>
+  </section>
+
+  <!-- 13 真题自测 -->
+  <section class="slide" data-title="真题自测" data-sec="四 · 解题练习">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a69cb4">四 · 解题练习</span><h2>真题自测（代表题）</h2><span class="en">Practice</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1"><div class="lead">1</div><div class="cn-src">Ford tried dividing the labor, each worker ___ a separate task.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">B. assigned</div><div class="mark"><b>考点</b>：each worker 与 assign 是被动关系，用过去分词。</div></div></details></div>
+      <div class="ex anim" style="--i:2"><div class="lead">2</div><div class="cn-src">The lecture ___, he left his seat so quietly that his leaving didn't disturb the speaker.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">C. having begun</div><div class="mark"><b>考点</b>：讲座"已经开始"，先于主句动作，用 having begun（主动、完成）。</div></div></details></div>
+      <div class="ex anim" style="--i:3"><div class="lead">3</div><div class="cn-src">With all factors ___, we think this program may excel all the others in achieving the goal.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">C. considered</div><div class="mark"><b>考点</b>：factors 被考虑，with + 宾语 + 过去分词。</div></div></details></div>
+      <div class="ex anim" style="--i:4"><div class="lead">4</div><div class="cn-src">A new technique ___, the yields as a whole increased by 20 percent.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">D. having been worked out</div><div class="mark"><b>考点</b>：technique 被研究出来，被动 + 完成，用 having been worked out。</div></div></details></div>
+      <div class="ex anim" style="--i:5"><div class="lead">5</div><div class="cn-src">There are various kinds of metals, each ___ its own properties.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">D. having</div><div class="mark"><b>考点</b>：each 与 have 是主动关系，用 having。</div></div></details></div>
+      <div class="ex anim" style="--i:6"><div class="lead">6</div><div class="cn-src">Walter offered us a lift when he left the office, but our work ___, we declined the offer.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">A. not being finished</div><div class="mark"><b>考点</b>：work 未被完成，用 being finished（被动、进行）。</div></div></details></div>
+    </div>
+  </section>
+
+  <!-- 14 翻译练习 -->
+  <section class="slide" data-title="翻译练习" data-sec="四 · 解题练习">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a69cb4">四 · 解题练习</span><h2>翻译练习（用独立主格）</h2><span class="en">Translation</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1"><div class="lead">1</div><div class="cn-src">如果天气允许的话，明天早上我们去钓鱼。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">Weather permitting, we will go fishing tomorrow morning.</div></div></details></div>
+      <div class="ex anim" style="--i:2"><div class="lead">2</div><div class="cn-src">因为所有的航班都被取消了，所以我们决定坐火车去那儿。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">All flights (having been) cancelled, we decided to go there by train.</div></div></details></div>
+      <div class="ex anim" style="--i:3"><div class="lead">3</div><div class="cn-src">报告开始以后，他就悄悄地离开了座位。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">The report having begun, he left his seat quietly.</div></div></details></div>
+      <div class="ex anim" style="--i:4"><div class="lead">4</div><div class="cn-src">他躺在那里，两手紧握，两眼直瞪瞪地看着天空。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">He lay there, his hands clenched and his eyes staring at the sky.</div></div></details></div>
+      <div class="ex anim" style="--i:5"><div class="lead">5</div><div class="cn-src">由于工作没有完成，所以他们决定加班。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">The work not (being) finished, they decided to work overtime.</div></div></details></div>
+      <div class="ex anim" style="--i:6"><div class="lead">6</div><div class="cn-src">他走进房间，一条大狗跟随着他。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">He entered the room, a big dog following him.</div></div></details></div>
+    </div>
+  </section>
+
+  <!-- 15 小结 -->
+  <section class="slide" data-title="本章小结" data-sec="收尾">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">收尾</span><h2>本章小结</h2><span class="en">Summary</span></div>
+    <div class="grid g2">
+      <div class="sum-block anim" style="--i:1">
+        <h4><span class="dot" style="background:#7e96a5"></span>识别的三句话</h4>
+        <ul>
+          <li><b>① 没连接词</b>：逗号前后无 and / when / because。</li>
+          <li><b>② 有自己主语</b>：名词/代词 + 非谓语，主语不同于主句。</li>
+          <li><b>③ 看主动被动</b>：主动 -ing，被动 -ed。</li>
+        </ul>
+      </div>
+      <div class="sum-block anim" style="--i:2">
+        <h4><span class="dot" style="background:#c09892"></span>七种构成</h4>
+        <ul>
+          <li>名词 + <b>doing / done / 形容词 / 副词 / 不定式 / 介词短语 / 名词</b></li>
+          <li>with + 宾语 + 宾补（写作高频）</li>
+        </ul>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:3">
+      <span>⚠️</span>
+      <div><b>最易失分的三处：</b>① 独立主格中间误加了连接词（这是从"独立"二字上就犯的错）；② 主动被动搞反（该 -ed 用了 -ing）；③ 忘了给分词补自己的主语，写成普通分词。</div>
+    </div>
+    <div class="motto anim" style="--i:4">
+      看逗号 · 找主语 · 判主动 —— <span>独立主格，三步拿下</span>
+    </div>
+  </section>
+
+</div>
+
+<div id="nav">
+  <button id="prev" aria-label="上一页" title="上一页 (←)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="counter"><b id="cur">1</b> / <span id="total">15</span></div>
+  <button id="next" aria-label="下一页" title="下一页 (→)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <button id="menuBtn" aria-label="目录" title="目录">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+    <span>目录</span>
+  </button>
+  <button id="fs" aria-label="全屏" title="全屏 (F)">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+  </button>
+</div>
+<div id="hint">← → 翻页 · 空格下一页 · F 全屏 · 左侧手柄抽拉目录</div>
+
+<div id="drawerTab" title="打开目录">
+  <span class="darr">▸</span><span>目 录</span>
+</div>
+<div id="drawerOverlay">
+  <div id="drawerPanel">
+    <div class="dp-head">
+      <div class="k">目录</div>
+      <h3>独立主格结构</h3>
+      <div class="sub">名词/代词 + 非谓语 · with 复合结构</div>
+      <button class="close" id="drawerClose" aria-label="关闭">✕</button>
+    </div>
+    <div id="drawerList"></div>
+  </div>
+</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  const curEl = document.getElementById('cur');
+  const totalEl = document.getElementById('total');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const fsBtn = document.getElementById('fs');
+  const menuBtn = document.getElementById('menuBtn');
+  const drawerTab = document.getElementById('drawerTab');
+  const drawerClose = document.getElementById('drawerClose');
+  const drawerOverlay = document.getElementById('drawerOverlay');
+  const drawerList = document.getElementById('drawerList');
+  const progress = document.getElementById('progress');
+  let idx = 0;
+  totalEl.textContent = total;
+
+  const SEC_COLORS = {
+    '封面':'#b99c6a', '导读':'#b99c6a', '收尾':'#b99c6a',
+    '一 · 概念与构成':'#7e96a5', '二 · with 结构':'#93aa92',
+    '三 · 句法功能':'#c09892', '四 · 解题练习':'#a69cb4'
+  };
+
+  (function buildMenu(){
+    const groups = [];
+    const map = {};
+    slides.forEach((s,i)=>{
+      const sec = s.dataset.sec || '其他';
+      const title = s.dataset.title || ('第'+(i+1)+'页');
+      if(!map[sec]){ map[sec] = {sec, items:[]}; groups.push(map[sec]); }
+      map[sec].items.push({title, i});
+    });
+    groups.forEach(g=>{
+      const h = document.createElement('div');
+      h.className = 'dp-sec';
+      const c = SEC_COLORS[g.sec] || '#8a8378';
+      h.innerHTML = '<span class="swatch" style="background:'+c+'"></span><span>'+g.sec+'</span>';
+      drawerList.appendChild(h);
+      g.items.forEach(it=>{
+        const b = document.createElement('button');
+        b.className = 'dp-item';
+        b.innerHTML = '<span class="n">'+ (it.i+1) +'</span><span>'+ it.title +'</span>';
+        b.addEventListener('click', ()=>{ go(it.i); closeDrawer(); });
+        drawerList.appendChild(b);
+      });
+    });
+  })();
+
+  function render(){
+    slides.forEach((s,i)=>{
+      s.classList.toggle('active', i===idx);
+      s.classList.toggle('prev', i<idx);
+    });
+    curEl.textContent = idx+1;
+    progress.style.width = ((idx+1)/total*100) + '%';
+    prevBtn.disabled = idx===0;
+    nextBtn.disabled = idx===total-1;
+    Array.from(drawerList.querySelectorAll('.dp-item')).forEach((b,i)=>{
+      b.classList.toggle('active', i===idx);
+    });
+  }
+  function go(n){ idx = Math.max(0, Math.min(total-1, n)); render(); }
+  function closeDrawer(){ drawerOverlay.classList.remove('open'); drawerTab.querySelector('.darr').textContent='▸'; }
+  function openDrawer(){ drawerOverlay.classList.add('open'); drawerTab.querySelector('.darr').textContent='◂'; }
+
+  prevBtn.addEventListener('click', ()=>go(idx-1));
+  nextBtn.addEventListener('click', ()=>go(idx+1));
+  menuBtn.addEventListener('click', openDrawer);
+  drawerTab.addEventListener('click', openDrawer);
+  drawerClose.addEventListener('click', closeDrawer);
+  drawerOverlay.addEventListener('click', (e)=>{ if(e.target===drawerOverlay) closeDrawer(); });
+
+  document.addEventListener('keydown', (e)=>{
+    if(drawerOverlay.classList.contains('open')){
+      if(e.key==='Escape') closeDrawer();
+      return;
+    }
+    if(e.key==='ArrowRight' || e.key===' ' || e.key==='PageDown'){ e.preventDefault(); go(idx+1); }
+    else if(e.key==='ArrowLeft' || e.key==='PageUp'){ e.preventDefault(); go(idx-1); }
+    else if(e.key==='Home'){ go(0); }
+    else if(e.key==='End'){ go(total-1); }
+    else if(e.key==='m' || e.key==='M'){ openDrawer(); }
+    else if(e.key==='f' || e.key==='F'){
+      if(document.fullscreenElement){ document.exitFullscreen(); }
+      else { document.documentElement.requestFullscreen(); }
+    }
+  });
+  fsBtn.addEventListener('click', ()=>{
+    if(document.fullscreenElement){ document.exitFullscreen(); }
+    else { document.documentElement.requestFullscreen(); }
+  });
+  let touchX=null;
+  document.addEventListener('touchstart', e=>{ touchX=e.touches[0].clientX; });
+  document.addEventListener('touchend', e=>{
+    if(touchX===null) return;
+    const dx=e.changedTouches[0].clientX-touchX;
+    if(Math.abs(dx)>50){ dx<0?go(idx+1):go(idx-1); }
+    touchX=null;
+  });
+  render();
+</script>
+</body>
+</html>

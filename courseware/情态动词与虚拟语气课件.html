@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高考英语语法 · 情态动词与虚拟语气</title>
+<style>
+  :root{
+    --ink:#46413b;
+    --muted:#8c857b;
+    --line:#e6ded1;
+    --bg:#f4efe6;
+    --paper:#fcf9f3;
+    --paper-2:#f6f0e6;
+    --ink-soft:#5c564f;
+
+    --blue:#7e96a5;  --blue-deep:#5c7383;  --blue-bg:#edf1f3;   /* 虚拟语气 */
+    --sage:#93aa92;  --sage-deep:#6e856d;  --sage-bg:#eff2ec;   /* 情态动词 */
+    --rose:#c09892;  --rose-deep:#98706a;  --rose-bg:#f5ecea;   /* 虚拟句型 */
+    --lav:#a69cb4;   --lav-deep:#7f7590;   --lav-bg:#f0edf3;    /* 真题自测 */
+
+    --gold:#b99c6a;  --gold-deep:#937a48;  --gold-bg:#f3ecdd;
+    --warn:#b48780;  --warn-deep:#966963;  --warn-bg:#f5e7e4;
+    --tip:#7e96a5;   --tip-bg:#edf1f3;
+
+    --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:var(--font);color:var(--ink);background:var(--bg);overflow:hidden;-webkit-font-smoothing:antialiased}
+
+  #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:58px 44px 96px}
+  .slide{position:absolute;width:min(1200px,100%);max-height:100%;background:var(--paper);border-radius:22px;box-shadow:0 26px 60px -26px rgba(92,82,66,.34), 0 0 0 1px rgba(92,82,66,.05);padding:44px 54px;opacity:0;transform:translateX(42px);pointer-events:none;transition:opacity .45s ease, transform .45s ease;overflow:hidden;display:flex;flex-direction:column}
+  .slide.active{opacity:1;transform:translateX(0);pointer-events:auto}
+  .slide.prev{transform:translateX(-42px)}
+  .slide .anim{opacity:0;transform:translateY(14px)}
+  .slide.active .anim{opacity:1;transform:none;transition:opacity .5s ease, transform .5s ease;transition-delay:calc(var(--i,0)*70ms + 60ms)}
+
+  .head{display:flex;align-items:center;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+  .part-badge{font-size:13px;font-weight:700;letter-spacing:.05em;color:#fff;background:var(--pc,#8a8378);padding:6px 15px;border-radius:99px;white-space:nowrap}
+  .head h2{font-size:28px;font-weight:800;letter-spacing:.01em;color:var(--ink)}
+  .head .en{font-size:14px;color:var(--muted);font-weight:600;margin-left:auto;white-space:nowrap}
+
+  .slide.cover{background:radial-gradient(900px 520px at 88% -10%, rgba(185,156,106,.30), transparent 60%),radial-gradient(720px 540px at -10% 112%, rgba(166,156,180,.32), transparent 55%),linear-gradient(135deg,#66788a 0%,#7f8fa0 50%,#99a3ae 100%);color:#fff;justify-content:center}
+  .cover .brand-line{position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#b99c6a,#c9b88f,#93aa92,#a69cb4)}
+  .cover .tag{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#eef1f3;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);padding:7px 16px;border-radius:99px;margin-bottom:26px}
+  .cover h1{font-size:52px;font-weight:900;line-height:1.2;letter-spacing:.01em}
+  .cover h1 .hl{color:#e4d3ad}
+  .cover .sub{margin-top:18px;font-size:20px;color:#e7ebee;font-weight:500;line-height:1.7}
+  .cover .meta{margin-top:40px;display:flex;gap:28px;font-size:14px;color:#c9d3da;font-weight:600}
+  .cover .meta b{color:#fff}
+
+  .grid{display:grid;gap:15px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px 20px;position:relative;overflow:hidden}
+  .card .num{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:10px;font-size:16px;font-weight:800;color:#fff;background:var(--pc,#8a8378);margin-bottom:11px}
+  .card h4{font-size:19px;font-weight:800;margin-bottom:5px;color:var(--ink)}
+  .card .cn{font-size:13.5px;color:var(--muted);font-weight:600;line-height:1.5}
+  .card .frm{font-size:18px;font-weight:800;color:var(--pc,#8a8378);margin-top:9px;letter-spacing:.02em;font-family:"SF Mono",ui-monospace,monospace}
+  .card .eg{font-size:13.5px;color:#6f6a62;margin-top:8px;line-height:1.6;word-break:break-all}
+  .card .eg b{color:#3f3b35;font-weight:700}
+
+  .key{color:var(--pc-deep,#937a48);font-weight:800}
+  .gold{color:var(--gold-deep);font-weight:800}
+  .red{color:var(--warn-deep);font-weight:800}
+
+  .ex{background:var(--paper-2);border:1px solid var(--line);border-radius:15px;padding:16px 20px;margin-top:8px}
+  .ex + .ex{margin-top:14px}
+  .ex .lead{font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:11px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .ex .lead .pill{background:var(--gold-bg);color:var(--gold-deep)}
+  .cn-src{font-size:17px;font-weight:600;color:var(--ink);line-height:1.6}
+  .cn-src b{color:var(--gold-deep)}
+  .en-ref{font-size:16.5px;font-weight:700;color:var(--pc-deep,#5c7383);margin-top:9px;line-height:1.55;word-break:break-word}
+  .en-ref .mt{display:inline-block;font-size:12px;font-weight:800;color:#fff;background:var(--pc,#8a8378);border-radius:6px;padding:2px 8px;margin-right:8px;vertical-align:2px}
+  .ana{margin-top:10px;font-size:13.5px;color:#6f6a62;line-height:1.65}
+  .ana b{color:var(--gold-deep)}
+
+  .formula{background:var(--paper);border:1px dashed var(--line);border-radius:12px;padding:13px 16px;margin-top:10px;font-size:15.5px;font-weight:700;color:var(--ink)}
+  .formula .fb{display:inline-block;background:var(--pc,#8a8378);color:#fff;font-size:12px;font-weight:800;border-radius:6px;padding:2px 9px;margin-right:8px}
+
+  .note{display:flex;gap:12px;align-items:flex-start;background:var(--gold-bg);border:1px solid #e6d8ba;border-left:4px solid var(--gold);border-radius:12px;padding:13px 17px;margin-top:15px;font-size:15px;line-height:1.65}
+  .note .ico{font-size:18px;line-height:1.4}
+  .note b{color:var(--gold-deep)}
+
+  .tip{display:flex;gap:10px;align-items:flex-start;background:var(--tip-bg);border:1px solid #d5e0e4;border-left:4px solid var(--tip);border-radius:12px;padding:12px 16px;margin-top:13px;font-size:14.5px;line-height:1.65;color:var(--blue-deep)}
+  .tip b{color:var(--blue-deep)}
+
+  .warn{display:flex;gap:10px;align-items:flex-start;background:var(--warn-bg);border:1px solid #ecd2cd;border-left:4px solid var(--warn);border-radius:12px;padding:12px 16px;margin-top:13px;font-size:14.5px;line-height:1.65;color:var(--warn-deep)}
+  .warn b{color:var(--warn-deep)}
+
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+  .cols .ex{margin-top:0}
+
+  table{width:100%;border-collapse:collapse;font-size:15px}
+  th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:12.5px;letter-spacing:.05em;color:var(--muted);background:var(--paper-2);font-weight:700}
+  td .en{font-weight:700;color:#3f3b35}
+  td .cn{color:var(--muted);font-size:13px}
+  .subj-table td{text-align:center;font-size:14px;font-weight:600}
+  .subj-table th{text-align:center}
+
+  .pill{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:var(--tip-bg);color:var(--blue-deep);margin-right:6px}
+
+  .wordlist{font-size:13.5px;color:#5c564f;line-height:1.9;background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-top:10px}
+  .wordlist b{color:var(--pc-deep,#5c7383)}
+
+  .sum-block{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:var(--paper)}
+  .sum-block h4{font-size:15.5px;font-weight:800;margin-bottom:11px;display:flex;align-items:center;gap:8px;color:var(--ink)}
+  .sum-block .dot{width:10px;height:10px;border-radius:3px;background:var(--pc,#8a8378)}
+  .sum-block ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .sum-block li{font-size:13.5px;color:#5c564f;line-height:1.5}
+  .sum-block li b{color:var(--ink)}
+
+  .motto{margin-top:20px;text-align:center;font-size:19px;font-weight:800;color:var(--ink);background:var(--gold-bg);border:1px solid #e6d8ba;border-radius:14px;padding:17px}
+  .motto span{color:var(--warn-deep)}
+
+  .reveal{margin-top:10px;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .reveal summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 15px;font-size:13.5px;font-weight:700;color:var(--pc-deep,#5c7383);background:var(--paper-2);user-select:none}
+  .reveal summary::-webkit-details-marker{display:none}
+  .reveal summary .caret{display:inline-block;transition:transform .2s;font-size:11px}
+  .reveal[open] summary .caret{transform:rotate(90deg)}
+  .reveal .ans{padding:13px 16px 15px;border-top:1px dashed var(--line);font-size:15.5px}
+  .reveal .ans .en{font-weight:700;color:var(--pc-deep,#5c7383);line-height:1.6}
+  .reveal .ans .mark{margin-top:8px;font-size:13px;color:#6f6a62;line-height:1.6}
+  .reveal .ans .mark b{color:var(--gold-deep)}
+
+  #nav{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);display:flex;align-items:center;gap:12px;z-index:50;background:rgba(252,249,243,.88);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:99px;padding:8px 12px;box-shadow:0 12px 32px -14px rgba(92,82,66,.32)}
+  #nav button{border:none;background:var(--paper);border:1px solid var(--line);width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#5c564f;transition:.15s}
+  #nav button:hover:not(:disabled){background:var(--paper-2);border-color:var(--gold);color:var(--gold-deep)}
+  #nav button:disabled{opacity:.35;cursor:default}
+  #nav .counter{font-size:14px;font-weight:700;color:#5c564f;min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
+  #nav .counter b{color:var(--gold-deep);font-size:16px}
+  #nav #menuBtn{width:auto;border-radius:99px;padding:0 16px;font-size:13px;font-weight:700;gap:7px}
+  #progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#93aa92,#7e96a5,#c09892,#a69cb4);z-index:60;width:0;transition:width .35s ease}
+  #hint{position:fixed;left:50%;transform:translateX(-50%);bottom:3px;font-size:12px;color:#b3ab9f;z-index:40;white-space:nowrap}
+
+  #drawerTab{position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:80;cursor:pointer;user-select:none;display:flex;align-items:center;gap:6px;padding:16px 10px;background:linear-gradient(180deg,#93aa92,#6e856d);color:#fff;border-radius:0 14px 14px 0;box-shadow:4px 8px 20px -8px rgba(92,82,66,.45);transition:padding .2s ease, box-shadow .2s ease;writing-mode:vertical-rl;letter-spacing:.3em;font-weight:800;font-size:14px}
+  #drawerTab:hover{padding:20px 11px;box-shadow:6px 12px 28px -8px rgba(92,82,66,.55)}
+  #drawerTab .darr{display:inline-block;transition:transform .25s ease;writing-mode:horizontal-tb;font-size:13px}
+
+  #drawerOverlay{position:fixed;inset:0;background:rgba(70,63,55,.34);backdrop-filter:blur(3px);z-index:85;opacity:0;pointer-events:none;transition:opacity .28s ease}
+  #drawerOverlay.open{opacity:1;pointer-events:auto}
+  #drawerPanel{position:fixed;top:0;left:0;bottom:0;width:min(360px,88vw);background:var(--paper);box-shadow:24px 0 50px -30px rgba(92,82,66,.5);z-index:86;transform:translateX(-100%);transition:transform .32s cubic-bezier(.22,.9,.3,1);display:flex;flex-direction:column}
+  #drawerOverlay.open #drawerPanel{transform:translateX(0)}
+  #drawerPanel .dp-head{padding:22px 22px 16px;border-bottom:1px solid var(--line);background:linear-gradient(135deg,#93aa92 0%,#6e856d 100%);color:#fff}
+  #drawerPanel .dp-head .k{font-size:12px;font-weight:700;letter-spacing:.12em;opacity:.8}
+  #drawerPanel .dp-head h3{font-size:19px;font-weight:800;margin-top:4px}
+  #drawerPanel .dp-head .sub{font-size:12px;opacity:.85;margin-top:3px}
+  #drawerPanel .dp-head .close{position:absolute;top:18px;right:18px;border:none;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:15px;color:#fff;line-height:1}
+  #drawerPanel .dp-head .close:hover{background:rgba(255,255,255,.28)}
+  #drawerList{overflow-y:auto;padding:10px 14px 34px;flex:1}
+  .dp-sec{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--muted);margin:18px 6px 6px}
+  .dp-sec .swatch{width:9px;height:9px;border-radius:3px}
+  .dp-item{display:flex;align-items:center;gap:11px;width:100%;text-align:left;padding:10px 12px;border:none;background:transparent;border-radius:10px;cursor:pointer;font-size:14px;color:#4c4740;transition:.13s}
+  .dp-item:hover{background:var(--paper-2)}
+  .dp-item.active{background:var(--gold-bg);color:var(--gold-deep);font-weight:700}
+  .dp-item .n{font-size:12px;font-weight:800;color:#b3ab9f;min-width:22px;text-align:right}
+
+  @media (max-width:900px){
+    #stage{padding:18px 14px 88px}
+    .slide{padding:26px 22px;border-radius:15px}
+    .g2,.g3,.g4,.cols{grid-template-columns:1fr 1fr}
+    .head h2{font-size:21px}
+    .cover h1{font-size:34px}
+    .cover .sub{font-size:16px}
+    .cn-src{font-size:15.5px}
+    #drawerTab{padding:13px 8px;font-size:12px}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<div id="stage">
+
+  <!-- 1 封面 -->
+  <section class="slide cover active" data-title="封面" data-sec="封面">
+    <div class="brand-line"></div>
+    <div class="anim" style="--i:0"><span class="tag">高考英语 · 语法专项（第二版）</span></div>
+    <h1 class="anim" style="--i:1"><span class="hl">情态动词与虚拟语气</span></h1>
+    <p class="sub anim" style="--i:2">情态动词 · 情态动词 + have done · if 虚拟句 —— 一对一精讲</p>
+    <div class="meta anim" style="--i:3">
+      <span>板块：<b>语法 · 情态动词 · 虚拟语气</b></span>
+    </div>
+  </section>
+
+  <!-- 2 导读 -->
+  <section class="slide" data-title="本章导读" data-sec="导读">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">导读</span><h2>本章要讲什么</h2><span class="en">Overview</span></div>
+    <p class="anim" style="--i:1;font-size:15.5px;color:#5c564f;line-height:1.75">这一节把两个"考得最多、错得也最多"的语法点合在一起讲：<b class="gold">情态动词</b>（表达推测、能力、义务）和<b class="gold">虚拟语气</b>（表达与事实相反的假设）。它俩经常一起考——"情态动词 + have done"就是二者的交汇点，也是高考雷打不动的重点。</p>
+    <div class="grid g3" style="margin-top:16px">
+      <div class="card anim" style="--i:2;--pc:#93aa92"><span class="num">一</span><h4>情态动词</h4><div class="cn">must / can / may / should<br>need / dare / have to</div></div>
+      <div class="card anim" style="--i:3;--pc:#8aa0ae"><span class="num">二</span><h4>情态动词 + have done</h4><div class="cn">推测类 · 责备类<br>must have done 等</div></div>
+      <div class="card anim" style="--i:4;--pc:#7e96a5"><span class="num">三</span><h4>虚拟语气</h4><div class="cn">if 非真实条件句<br>省略 if · 错综虚拟</div></div>
+      <div class="card anim" style="--i:5;--pc:#c09892"><span class="num">四</span><h4>虚拟句型</h4><div class="cn">wish / would rather<br>It's time / If only</div></div>
+    </div>
+    <div class="note anim" style="--i:6;margin-top:20px">
+      <span class="ico">🧭</span>
+      <div><b>一条主线：</b>判断虚拟，就一句话——<b class="gold">"这件事跟事实相反吗？"</b>相反，就虚拟；不相反，就正常。虚拟的核心动作是<b>把时态往过去退一格</b>（现在→过去式、过去→had done），这句话贯穿全章。</div>
+    </div>
+  </section>
+
+  <!-- 3 情态动词总览 -->
+  <section class="slide" data-title="情态动词总览" data-sec="一 · 情态动词">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">一 · 情态动词</span><h2>常见情态动词的用法</h2><span class="en">Modal Verbs</span></div>
+    <div class="grid g3">
+      <div class="card anim" style="--i:1;--pc:#93aa92"><span class="num">must</span><h4>一定 / 必须</h4><div class="cn">肯定推测（只用于肯定句）· 主观必须</div><div class="eg">You're Tom's friend, so you <b>must</b> know what he likes best.<br>— Must we hand in? — Yes, you must. / No, you <b>needn't / don't have to</b>.</div></div>
+      <div class="card anim" style="--i:2;--pc:#93aa92"><span class="num">can/could</span><h4>可能 / 能够</h4><div class="cn">否定/疑问表"不可能"；can't…too/enough</div><div class="eg">It <b>can't</b> be Mr. Li, for he has gone to America.<br>You <b>can never be too</b> careful.（再小心也不为过）</div></div>
+      <div class="card anim" style="--i:3;--pc:#93aa92"><span class="num">may/might</span><h4>可能 / 也许</h4><div class="cn">用于肯定句、否定句</div><div class="eg">Your mother <b>may/might not</b> know the truth.</div></div>
+      <div class="card anim" style="--i:4;--pc:#93aa92"><span class="num">should/ought to</span><h4>应该</h4><div class="cn">ought to 与 should 同义</div><div class="eg">Young people <b>should/ought to</b> show respect for the old.</div></div>
+      <div class="card anim" style="--i:5;--pc:#93aa92"><span class="num">have to</span><h4>不得不</h4><div class="cn">表客观需求（区别于 must 主观）</div><div class="eg">It is raining heavily, so we <b>have to</b> stay at home.</div></div>
+      <div class="card anim" style="--i:6;--pc:#93aa92"><span class="num">need / dare</span><h4>需要 / 敢于</h4><div class="cn">都有"情态动词"与"实义动词"双重身份</div><div class="eg">You <b>needn't</b> do it yourself.（情态，用于否定/疑问）<br>She <b>dare not</b> go out alone at night.</div></div>
+    </div>
+  </section>
+
+  <!-- 4 can vs be able to / need dare 双身份 -->
+  <section class="slide" data-title="can vs be able to" data-sec="一 · 情态动词">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">一 · 情态动词</span><h2>三个易混点</h2><span class="en">Key Distinctions</span></div>
+    <div class="grid g3">
+      <div class="anim" style="--i:1">
+        <div class="sum-block">
+          <h4><span class="dot" style="background:#93aa92"></span>can/could vs be able to</h4>
+          <ul>
+            <li><b>be able to</b> 有时态变化；could 只有过去时。</li>
+            <li>表"成功做成某件具体的事"用 <b>was/were able to</b>（= managed to），不用 could。</li>
+            <li><b>例：</b>He <b>was able to</b> go to the party yesterday despite the heavy rain.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="anim" style="--i:2">
+        <div class="sum-block">
+          <h4><span class="dot" style="background:#93aa92"></span>need 双重身份</h4>
+          <ul>
+            <li><b>情态动词</b>：need do，只用于否定、疑问。</li>
+            <li><b>实义动词</b>：need to do。</li>
+            <li><b>例：</b>You <b>needn't do</b> it.（情态）</li>
+          </ul>
+        </div>
+      </div>
+      <div class="anim" style="--i:3">
+        <div class="sum-block">
+          <h4><span class="dot" style="background:#93aa92"></span>dare 双重身份</h4>
+          <ul>
+            <li><b>情态动词</b>：dare do，用于疑问、否定、条件。</li>
+            <li><b>实义动词</b>：dare to do。</li>
+            <li><b>例：</b>How <b>dare</b> you say I'm unfair?（情态）</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:4">
+      <span>💡</span>
+      <div><b>记法：</b>need / dare 做情态动词时"不戴 to、否定疑问才现身"；做实义动词时"带 to、正常变形"。看到它们，先看有没有 to、是不是否定/疑问。</div>
+    </div>
+  </section>
+
+  <!-- 5 情态动词 + have done 推测类 -->
+  <section class="slide" data-title="情态动词+have done（推测）" data-sec="二 · 情态动词 + have done">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7e96a5">二 · 情态动词 + have done</span><h2>推测类：对过去的判断</h2><span class="en">Speculation</span></div>
+    <div class="grid g3">
+      <div class="card anim" style="--i:1;--pc:#7e96a5"><span class="num">1</span><h4>must have done</h4><div class="cn">"肯定做过"（只用于肯定句）</div><div class="eg">It <b>must have rained</b> last night, for the ground is wet.</div></div>
+      <div class="card anim" style="--i:2;--pc:#7e96a5"><span class="num">2</span><h4>can't / couldn't have done</h4><div class="cn">"不可能做过"</div><div class="eg">Mr. Smith <b>can't have gone</b> to Beijing, for I saw him in the library just now.</div></div>
+      <div class="card anim" style="--i:3;--pc:#7e96a5"><span class="num">3</span><h4>may / might have done</h4><div class="cn">"可能已经做过"</div><div class="eg">You <b>might have read</b> about it in the papers.</div></div>
+    </div>
+    <div class="note anim" style="--i:4">
+      <span class="ico">🔑</span>
+      <div><b>一套口诀记牢：</b>肯定推测 <b class="gold">must have done</b>，否定推测 <b class="gold">can't have done</b>，可能推测 <b class="gold">may/might have done</b>。注意 must 的否定推测不能是 mustn't，而是 can't——这是一个高频陷阱。</div>
+    </div>
+  </section>
+
+  <!-- 6 情态动词 + have done 责备类 -->
+  <section class="slide" data-title="情态动词+have done（责备）" data-sec="二 · 情态动词 + have done">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7e96a5">二 · 情态动词 + have done</span><h2>责备类："本应该 / 本不该"</h2><span class="en">Reproach</span></div>
+    <div class="grid g2">
+      <div class="card anim" style="--i:1;--pc:#7e96a5"><span class="num">1</span><h4>should / ought to have done</h4><div class="cn">"本应该做（却没做）"，含责备</div><div class="eg">You <b>should have finished</b> the task yesterday.</div></div>
+      <div class="card anim" style="--i:2;--pc:#7e96a5"><span class="num">2</span><h4>shouldn't have done</h4><div class="cn">"本不该做（却做了）"</div><div class="eg">I <b>shouldn't have been</b> so harsh on him.</div></div>
+      <div class="card anim" style="--i:3;--pc:#7e96a5"><span class="num">3</span><h4>could have done</h4><div class="cn">"本来可以 / 能够（却没做）"</div><div class="eg">I <b>could have arrived</b> on time, but I was held up by the traffic jam.</div></div>
+      <div class="card anim" style="--i:4;--pc:#7e96a5"><span class="num">4</span><h4>needn't have done</h4><div class="cn">"本没必要做（却做了）"</div><div class="eg">I <b>needn't have bought</b> so much wine — only five people came.</div></div>
+    </div>
+    <div class="warn anim" style="--i:5">
+      <span>⚠️</span>
+      <div><b>区分两组：</b><b class="gold">could have done</b> = 本可以却未做（遗憾）；<b class="gold">must have done</b> = 肯定做了（推测）。一个是"没做"，一个是"做了"，别搞混。同样，<b>needn't have done</b>（做了但多余）≠ <b>didn't need to do</b>（没做也没必要）。</div>
+    </div>
+  </section>
+
+  <!-- 7 虚拟语气总框架 -->
+  <section class="slide" data-title="虚拟语气总框架" data-sec="三 · 虚拟语气">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">三 · 虚拟语气</span><h2>虚拟语气总框架</h2><span class="en">Subjunctive</span></div>
+    <div class="grid g2">
+      <div class="sum-block anim" style="--i:1">
+        <h4><span class="dot" style="background:#93aa92"></span>真实条件句</h4>
+        <ul>
+          <li>条件<b>可能实现</b>，用陈述语气。</li>
+          <li><b>例：</b>If it <b>rains</b> tomorrow, I <b>will stay</b> home.（主将从现）</li>
+        </ul>
+      </div>
+      <div class="sum-block anim" style="--i:2">
+        <h4><span class="dot" style="background:#93aa92"></span>非真实条件句（虚拟）</h4>
+        <ul>
+          <li>条件<b>与事实相反</b>或<b>几乎不可能实现</b>，用虚拟语气。</li>
+          <li><b>例：</b>If I <b>were</b> you, I <b>would</b> help him.（我不是你）</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note anim" style="--i:3">
+      <span class="ico">🧭</span>
+      <div><b>判断口诀：</b>先问一句"<b class="gold">这件事是真的吗？</b>"——是真的，正常时态；是假的/相反/几乎不可能，虚拟。虚拟的核心就是<b class="gold">把时态往过去退一格</b>：现在→过去式，过去→had done，将来→过去式 / should do / were to do。</div>
+    </div>
+  </section>
+
+  <!-- 8 if 非真实条件句 -->
+  <section class="slide" data-title="if 非真实条件句" data-sec="三 · 虚拟语气">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">三 · 虚拟语气</span><h2>if 非真实条件句（三种时间）</h2><span class="en">Unreal Conditional</span></div>
+    <div class="anim" style="--i:1">
+      <table class="subj-table">
+        <tr><th>时间</th><th>从句谓语</th><th>主句谓语</th></tr>
+        <tr><td><b>与现在相反</b></td><td>过去式（be 用 <b>were</b>）</td><td>should / would / could / might + <b>do</b></td></tr>
+        <tr><td><b>与过去相反</b></td><td><b>had + done</b></td><td>should / would / could / might + <b>have done</b></td></tr>
+        <tr><td><b>与将来相反</b></td><td>过去式 / should do / were to do</td><td>should / would / could / might + <b>do</b></td></tr>
+      </table>
+    </div>
+    <div class="grid g3" style="margin-top:12px">
+      <div class="ex anim" style="--i:2"><div class="lead">与现在相反</div><div class="en-ref">If he <b>were</b> here, he <b>would help</b> us.</div><div class="ana">他（现在）不在这儿。</div></div>
+      <div class="ex anim" style="--i:3"><div class="lead">与过去相反</div><div class="en-ref">If I <b>had been</b> free, I <b>would have visited</b> you.</div><div class="ana">我（当时）没空。</div></div>
+      <div class="ex anim" style="--i:4"><div class="lead">与将来相反</div><div class="en-ref">If it <b>should rain</b> tomorrow, we <b>would not go</b> camping.</div><div class="ana">明天（几乎不会）下雨。</div></div>
+    </div>
+    <div class="tip anim" style="--i:5">
+      <span>💡</span>
+      <div><b>记忆抓手：</b>从句"<b>过去式 / had done</b>"，主句"<b>would + do / have done</b>"。主句跟着从句的时间走——从句现在，主句 would do；从句过去，主句 would have done。</div>
+    </div>
+  </section>
+
+  <!-- 9 省略 if 倒装 -->
+  <section class="slide" data-title="省略 if 倒装" data-sec="三 · 虚拟语气">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">三 · 虚拟语气</span><h2>省略 if 的倒装</h2><span class="en">Inversion</span></div>
+    <p class="anim" style="--i:1;font-size:15px;color:#5c564f">虚拟条件句中若含 <b class="key">were / had / should</b>，可<b class="gold">省略 if，把这三个词提到句首</b>构成倒装。多用于正式、书面语：</p>
+    <div class="grid g3" style="margin-top:10px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">were（与现在相反）</div>
+        <div class="en-ref"><b>Were I you</b>, I would not do it.</div>
+        <div class="ana">= If I were you, I would not do it.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">had（与过去相反）</div>
+        <div class="en-ref"><b>Had I been free</b>, I would have visited you.</div>
+        <div class="ana">= If I had been free, I would have visited you.</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">should（与将来相反）</div>
+        <div class="en-ref"><b>Should he come</b>, tell him to ring me up.</div>
+        <div class="ana">= If he should come, tell him to ring me up.</div>
+      </div>
+    </div>
+    <div class="note anim" style="--i:5">
+      <span class="ico">🔑</span>
+      <div><b>口诀：</b>"虚拟倒装三兄弟——<b class="gold">were、had、should</b>，搬到句首去，if 就退休。"看到句首是 were / had / should 却不是疑问句，第一反应就是"虚拟语气省略 if 的倒装"。</div>
+    </div>
+  </section>
+
+  <!-- 10 错综虚拟语气 -->
+  <section class="slide" data-title="错综虚拟语气" data-sec="三 · 虚拟语气">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">三 · 虚拟语气</span><h2>错综虚拟语气</h2><span class="en">Mixed Conditional</span></div>
+    <p class="anim" style="--i:1;font-size:15px;color:#5c564f;line-height:1.7">所谓"错综"，就是<b class="key">条件从句和主句的时间不一致</b>——从句说的是过去，主句说的是现在。这时<b class="gold">各自按各自的时间</b>来定动词形式，别套同一套。</p>
+    <div class="grid g2" style="margin-top:10px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">从句过去 + 主句现在</div>
+        <div class="en-ref">If I <b>had followed</b> your advice, I <b>would be</b> in college now.</div>
+        <div class="ana">如果当时听了你的建议，我现在就在大学里了。</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">从句现在 + 主句过去</div>
+        <div class="en-ref">If I <b>were</b> you, I <b>should not have done</b> it like that.</div>
+        <div class="ana">如果我是你，我肯定不会那样做。</div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:4">
+      <span>💡</span>
+      <div><b>判断法：</b>把从句、主句<b>拆开</b>，分别问"它说的是什么时候"，再各自套那个时间的虚拟形式。别让主从句互相"传染"。</div>
+    </div>
+  </section>
+
+  <!-- 11 名词性从句虚拟 -->
+  <section class="slide" data-title="命令要求建议的虚拟" data-sec="四 · 虚拟句型">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">四 · 虚拟句型</span><h2>命令 / 要求 / 建议从句的虚拟</h2><span class="en">Demand / Suggest</span></div>
+    <p class="anim" style="--i:1;font-size:15px;color:#5c564f">表示"命令、要求、建议"的动词，其<b>宾语从句</b>（以及对应名词后的<b>表语从句、同位语从句</b>）要用虚拟语气：<b class="key">(should) + 动词原形</b>，should 可省略。</p>
+    <div class="wordlist anim" style="--i:2"><b>常见动词：</b>insist（坚持）、order、command（命令）、advise、suggest、propose、recommend（建议）、desire、demand、require、request、urge（要求）</div>
+    <div class="grid g3" style="margin-top:10px">
+      <div class="ex anim" style="--i:3"><div class="lead">宾语从句</div><div class="en-ref">He suggested that we <b>(should) not change</b> our mind.</div></div>
+      <div class="ex anim" style="--i:4"><div class="lead">表语从句</div><div class="en-ref">My advice is that you <b>(should) work</b> with him.</div></div>
+      <div class="ex anim" style="--i:5"><div class="lead">同位语从句</div><div class="en-ref">I am satisfied with his order that we <b>(should) finish</b> the task today.</div></div>
+    </div>
+    <div class="warn anim" style="--i:6">
+      <span>⚠️</span>
+      <div><b>易混：</b>suggest 有两个意思。表"<b>建议</b>"才用虚拟；表"<b>暗示、表明</b>"时用正常陈述语气。→ Her pale face suggested that she <b>was</b> ill.（是"暗示生病"，不用虚拟）</div>
+    </div>
+  </section>
+
+  <!-- 12 wish / would rather / It's time / If only -->
+  <section class="slide" data-title="wish 等四个句型" data-sec="四 · 虚拟句型">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">四 · 虚拟句型</span><h2>wish / would rather / It's time / If only</h2><span class="en">Four Patterns</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">① wish 从句（与现在/过去/将来相反）</div>
+        <div class="en-ref">I wish I <b>were</b> a college student.（现在）</div>
+        <div class="en-ref">I wish I <b>had gone</b> to Shanghai last month.（过去）</div>
+        <div class="en-ref">I wish I <b>could speak</b> French.（将来）</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">② would rather + 从句</div>
+        <div class="en-ref">现在/将来：I'd rather you <b>stayed</b> home tonight.</div>
+        <div class="en-ref">过去：I'd rather you <b>had told</b> me the truth earlier.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">③ It is (high) time that + 从句</div>
+        <div class="en-ref">It's high time that we <b>left / should leave</b>.</div>
+        <div class="ana">从句用过去式或 should do。</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">④ If only + 从句（"要是……该多好"）</div>
+        <div class="en-ref">现在/将来：If only I <b>could</b> speak the local dialect!</div>
+        <div class="en-ref">过去：If only our dream <b>had come true</b>!</div>
+      </div>
+    </div>
+    <div class="note anim" style="--i:5">
+      <span class="ico">🔑</span>
+      <div><b>一条规律串四个：</b>它们统统遵循"<b class="gold">与现在/将来相反 → 过去式；与过去相反 → had done</b>"。记住这一条，四个句型不用分别背。</div>
+    </div>
+  </section>
+
+  <!-- 13 拓展 特殊结构 -->
+  <section class="slide" data-title="虚拟语气拓展" data-sec="四 · 虚拟句型">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">四 · 虚拟句型</span><h2>拓展：其他虚拟结构</h2><span class="en">More Patterns</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">① It is important / necessary / strange that + (should) do</div>
+        <div class="en-ref">It is vital that a child <b>(should) be taught</b> how to obey public rules.</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">② should 表"竟然 / 居然"（不省略）</div>
+        <div class="en-ref">It is amazing that the boy <b>should have learned</b> 500 words in one month.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">③ for fear that / lest / in order that / so that（目的）</div>
+        <div class="en-ref">He kept silent <b>for fear that he would disturb</b> the teacher.</div>
+        <div class="en-ref">Father repeated the time <b>lest my mother (should) forget</b> it.</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">④ Be it…or… / though…be（让步）</div>
+        <div class="en-ref"><b>Be it cheap or not</b>, I will get it for my parents.（不论贵贱）</div>
+        <div class="en-ref"><b>Though all the world be cold</b>, I must be kind to all.</div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:5">
+      <span>💡</span>
+      <div>这部分是<b>拓展拔高</b>，认识、能看懂即可，高考重点是前面的 if 虚拟句和四个句型（wish / would rather / It's time / If only）。</div>
+    </div>
+  </section>
+
+  <!-- 14 真题自测 -->
+  <section class="slide" data-title="真题自测" data-sec="五 · 真题自测">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a69cb4">五 · 真题自测</span><h2>真题自测（代表题）</h2><span class="en">Practice</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1"><div class="lead">1 · 错综虚拟</div><div class="cn-src">If I hadn't been faced with so many barriers, I ___ where I am.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">C. wouldn't be</div><div class="mark"><b>考点</b>：主句表现在，用 would do。</div></div></details></div>
+      <div class="ex anim" style="--i:2"><div class="lead">2 · otherwise 虚拟（过去）</div><div class="cn-src">The workers were not better organized, otherwise they ___ the task in half the time.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">D. would have accomplished</div><div class="mark"><b>考点</b>：对过去虚拟，用 would have done。</div></div></details></div>
+      <div class="ex anim" style="--i:3"><div class="lead">3 · should 表"竟然"</div><div class="cn-src">It's strange that he ___ have taken the books without the owner's permission.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">B. should</div><div class="mark"><b>考点</b>：It is strange that 从句用 should do（虚拟）。</div></div></details></div>
+      <div class="ex anim" style="--i:4"><div class="lead">4 · wish 与现在相反</div><div class="cn-src">There is a good social life in the village, and I wish I ___ a second chance to become more involved.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">A. had</div><div class="mark"><b>考点</b>：wish 从句与现在相反，用过去式。</div></div></details></div>
+      <div class="ex anim" style="--i:5"><div class="lead">5 · shouldn't have done</div><div class="cn-src">You ___ have scolded him for his poor performance. After all, he had done his best.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">D. shouldn't</div><div class="mark"><b>考点</b>：本不该责骂，用 shouldn't have done。</div></div></details></div>
+      <div class="ex anim" style="--i:6"><div class="lead">6 · can 表能力</div><div class="cn-src">Samuel, the tallest boy in our class, ___ easily reach the books on the top shelf.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">C. can</div><div class="mark"><b>考点</b>：表能力用 can。</div></div></details></div>
+      <div class="ex anim" style="--i:7"><div class="lead">7 · 语法填空：情态动词</div><div class="cn-src">It used to be that you ___ drive for miles here without seeing another person.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">could</div><div class="mark"><b>考点</b>：过去的能力，用 could。</div></div></details></div>
+      <div class="ex anim" style="--i:8"><div class="lead">8 · 语法填空：虚拟过去</div><div class="cn-src">If the new safety system ___ (put) to use, the accident would never have happened.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">had been put</div><div class="mark"><b>考点</b>：对过去虚拟，从句 had done（此处被动 had been put）。</div></div></details></div>
+    </div>
+  </section>
+
+  <!-- 15 小结 -->
+  <section class="slide" data-title="本章小结" data-sec="收尾">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">收尾</span><h2>本章小结</h2><span class="en">Summary</span></div>
+    <div class="grid g2">
+      <div class="sum-block anim" style="--i:1">
+        <h4><span class="dot" style="background:#93aa92"></span>情态动词 + have done</h4>
+        <ul>
+          <li><b>推测</b>：must（肯定）/ can't（不可能）/ may（可能）have done。</li>
+          <li><b>责备</b>：should（本应）/ shouldn't（本不该）/ could（本可）/ needn't（本不必）have done。</li>
+        </ul>
+      </div>
+      <div class="sum-block anim" style="--i:2">
+        <h4><span class="dot" style="background:#7e96a5"></span>虚拟语气</h4>
+        <ul>
+          <li><b>if 虚拟</b>：现在→过去式，过去→had done，将来→should/were to do。</li>
+          <li><b>省略 if</b>：were / had / should 提前倒装。</li>
+          <li><b>错综</b>：主从句各按各的时间。</li>
+          <li><b>命令建议</b>：suggest 等 + (should) do。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:3">
+      <span>⚠️</span>
+      <div><b>最易失分的五处：</b>① must 的否定推测误用 mustn't（应用 can't）；② could have done（没做）与 must have done（做了）混淆；③ suggest 表"暗示"时误用虚拟；④ if 虚拟的主从句时态套错；⑤ were/had/should 倒装没认出来。</div>
+    </div>
+    <div class="motto anim" style="--i:4">
+      先判断"是否与事实相反" · 再把时态退一格 —— <span>情态动词与虚拟语气，一条主线拿下</span>
+    </div>
+  </section>
+
+</div>
+
+<div id="nav">
+  <button id="prev" aria-label="上一页" title="上一页 (←)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="counter"><b id="cur">1</b> / <span id="total">15</span></div>
+  <button id="next" aria-label="下一页" title="下一页 (→)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <button id="menuBtn" aria-label="目录" title="目录">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+    <span>目录</span>
+  </button>
+  <button id="fs" aria-label="全屏" title="全屏 (F)">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+  </button>
+</div>
+<div id="hint">← → 翻页 · 空格下一页 · F 全屏 · 左侧手柄抽拉目录</div>
+
+<div id="drawerTab" title="打开目录">
+  <span class="darr">▸</span><span>目 录</span>
+</div>
+<div id="drawerOverlay">
+  <div id="drawerPanel">
+    <div class="dp-head">
+      <div class="k">目录</div>
+      <h3>情态动词与虚拟语气</h3>
+      <div class="sub">情态动词 · have done · 虚拟语气</div>
+      <button class="close" id="drawerClose" aria-label="关闭">✕</button>
+    </div>
+    <div id="drawerList"></div>
+  </div>
+</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  const curEl = document.getElementById('cur');
+  const totalEl = document.getElementById('total');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const fsBtn = document.getElementById('fs');
+  const menuBtn = document.getElementById('menuBtn');
+  const drawerTab = document.getElementById('drawerTab');
+  const drawerClose = document.getElementById('drawerClose');
+  const drawerOverlay = document.getElementById('drawerOverlay');
+  const drawerList = document.getElementById('drawerList');
+  const progress = document.getElementById('progress');
+  let idx = 0;
+  totalEl.textContent = total;
+
+  const SEC_COLORS = {
+    '封面':'#b99c6a', '导读':'#b99c6a', '收尾':'#b99c6a',
+    '一 · 情态动词':'#93aa92', '二 · 情态动词 + have done':'#7e96a5',
+    '三 · 虚拟语气':'#7e96a5', '四 · 虚拟句型':'#c09892', '五 · 真题自测':'#a69cb4'
+  };
+
+  (function buildMenu(){
+    const groups = [];
+    const map = {};
+    slides.forEach((s,i)=>{
+      const sec = s.dataset.sec || '其他';
+      const title = s.dataset.title || ('第'+(i+1)+'页');
+      if(!map[sec]){ map[sec] = {sec, items:[]}; groups.push(map[sec]); }
+      map[sec].items.push({title, i});
+    });
+    groups.forEach(g=>{
+      const h = document.createElement('div');
+      h.className = 'dp-sec';
+      const c = SEC_COLORS[g.sec] || '#8a8378';
+      h.innerHTML = '<span class="swatch" style="background:'+c+'"></span><span>'+g.sec+'</span>';
+      drawerList.appendChild(h);
+      g.items.forEach(it=>{
+        const b = document.createElement('button');
+        b.className = 'dp-item';
+        b.innerHTML = '<span class="n">'+ (it.i+1) +'</span><span>'+ it.title +'</span>';
+        b.addEventListener('click', ()=>{ go(it.i); closeDrawer(); });
+        drawerList.appendChild(b);
+      });
+    });
+  })();
+
+  function render(){
+    slides.forEach((s,i)=>{
+      s.classList.toggle('active', i===idx);
+      s.classList.toggle('prev', i<idx);
+    });
+    curEl.textContent = idx+1;
+    progress.style.width = ((idx+1)/total*100) + '%';
+    prevBtn.disabled = idx===0;
+    nextBtn.disabled = idx===total-1;
+    Array.from(drawerList.querySelectorAll('.dp-item')).forEach((b,i)=>{
+      b.classList.toggle('active', i===idx);
+    });
+  }
+  function go(n){ idx = Math.max(0, Math.min(total-1, n)); render(); }
+  function closeDrawer(){ drawerOverlay.classList.remove('open'); drawerTab.querySelector('.darr').textContent='▸'; }
+  function openDrawer(){ drawerOverlay.classList.add('open'); drawerTab.querySelector('.darr').textContent='◂'; }
+
+  prevBtn.addEventListener('click', ()=>go(idx-1));
+  nextBtn.addEventListener('click', ()=>go(idx+1));
+  menuBtn.addEventListener('click', openDrawer);
+  drawerTab.addEventListener('click', openDrawer);
+  drawerClose.addEventListener('click', closeDrawer);
+  drawerOverlay.addEventListener('click', (e)=>{ if(e.target===drawerOverlay) closeDrawer(); });
+
+  document.addEventListener('keydown', (e)=>{
+    if(drawerOverlay.classList.contains('open')){
+      if(e.key==='Escape') closeDrawer();
+      return;
+    }
+    if(e.key==='ArrowRight' || e.key===' ' || e.key==='PageDown'){ e.preventDefault(); go(idx+1); }
+    else if(e.key==='ArrowLeft' || e.key==='PageUp'){ e.preventDefault(); go(idx-1); }
+    else if(e.key==='Home'){ go(0); }
+    else if(e.key==='End'){ go(total-1); }
+    else if(e.key==='m' || e.key==='M'){ openDrawer(); }
+    else if(e.key==='f' || e.key==='F'){
+      if(document.fullscreenElement){ document.exitFullscreen(); }
+      else { document.documentElement.requestFullscreen(); }
+    }
+  });
+  fsBtn.addEventListener('click', ()=>{
+    if(document.fullscreenElement){ document.exitFullscreen(); }
+    else { document.documentElement.requestFullscreen(); }
+  });
+  let touchX=null;
+  document.addEventListener('touchstart', e=>{ touchX=e.touches[0].clientX; });
+  document.addEventListener('touchend', e=>{
+    if(touchX===null) return;
+    const dx=e.changedTouches[0].clientX-touchX;
+    if(Math.abs(dx)>50){ dx<0?go(idx+1):go(idx-1); }
+    touchX=null;
+  });
+  render();
+</script>
+</body>
+</html>

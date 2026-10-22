@@ -66,6 +66,21 @@ window.CATALOG = {
           title: "形容词·副词·名词·动词课件",
           file: "courseware/形容词副词名词动词课件.html",
           added: "2026-10-01"
+        },
+        {
+          title: "时态语态课件",
+          file: "courseware/时态语态课件.html",
+          added: "2026-10-22"
+        },
+        {
+          title: "独立主格课件",
+          file: "courseware/独立主格课件.html",
+          added: "2026-10-22"
+        },
+        {
+          title: "情态动词与虚拟语气课件",
+          file: "courseware/情态动词与虚拟语气课件.html",
+          added: "2026-10-22"
         }
       ]
     },

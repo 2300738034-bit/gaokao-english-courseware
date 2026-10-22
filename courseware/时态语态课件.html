@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高考英语语法 · 时态与语态</title>
+<style>
+  :root{
+    --ink:#46413b;          /* 主文字 暖灰棕 */
+    --muted:#8c857b;        /* 次要文字 */
+    --line:#e6ded1;         /* 边框 */
+    --bg:#f4efe6;           /* 背景 燕麦米色 */
+    --paper:#fcf9f3;        /* 卡片纸面 暖白 */
+    --paper-2:#f6f0e6;      /* 二级纸面 */
+    --ink-soft:#5c564f;
+
+    /* 分节主题色（莫兰迪） */
+    --blue:#7e96a5;  --blue-deep:#5c7383;  --blue-bg:#edf1f3;   /* 时态框架 */
+    --sage:#93aa92;  --sage-deep:#6e856d;  --sage-bg:#eff2ec;   /* 核心时态 */
+    --rose:#c09892;  --rose-deep:#98706a;  --rose-bg:#f5ecea;   /* 被动语态 */
+    --lav:#a69cb4;   --lav-deep:#7f7590;   --lav-bg:#f0edf3;    /* 真题自测 */
+
+    /* 功能色 */
+    --gold:#b99c6a;  --gold-deep:#937a48;  --gold-bg:#f3ecdd;
+    --warn:#b48780;  --warn-deep:#966963;  --warn-bg:#f5e7e4;
+    --tip:#7e96a5;   --tip-bg:#edf1f3;
+
+    --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:var(--font);
+    color:var(--ink);
+    background:var(--bg);
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ===== 舞台 ===== */
+  #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:58px 44px 96px}
+
+  .slide{
+    position:absolute;
+    width:min(1200px,100%);
+    max-height:100%;
+    background:var(--paper);
+    border-radius:22px;
+    box-shadow:0 26px 60px -26px rgba(92,82,66,.34), 0 0 0 1px rgba(92,82,66,.05);
+    padding:44px 54px;
+    opacity:0;
+    transform:translateX(42px);
+    pointer-events:none;
+    transition:opacity .45s ease, transform .45s ease;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+  .slide.active{opacity:1;transform:translateX(0);pointer-events:auto}
+  .slide.prev{transform:translateX(-42px)}
+
+  /* 入场动画 */
+  .slide .anim{opacity:0;transform:translateY(14px)}
+  .slide.active .anim{
+    opacity:1;transform:none;
+    transition:opacity .5s ease, transform .5s ease;
+    transition-delay:calc(var(--i,0)*70ms + 60ms);
+  }
+
+  /* ===== 页头 ===== */
+  .head{display:flex;align-items:center;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+  .part-badge{
+    font-size:13px;font-weight:700;letter-spacing:.05em;
+    color:#fff;background:var(--pc,#8a8378);
+    padding:6px 15px;border-radius:99px;white-space:nowrap;
+  }
+  .head h2{font-size:28px;font-weight:800;letter-spacing:.01em;color:var(--ink)}
+  .head .en{font-size:14px;color:var(--muted);font-weight:600;margin-left:auto;white-space:nowrap}
+
+  .kicker{font-size:13px;font-weight:700;letter-spacing:.14em;color:var(--pc-deep,#937a48);text-transform:uppercase;margin-bottom:8px}
+
+  /* ===== 封面 ===== */
+  .slide.cover{
+    background:
+      radial-gradient(900px 520px at 88% -10%, rgba(185,156,106,.30), transparent 60%),
+      radial-gradient(720px 540px at -10% 112%, rgba(166,156,180,.32), transparent 55%),
+      linear-gradient(135deg,#66788a 0%,#7f8fa0 50%,#99a3ae 100%);
+    color:#fff;
+    justify-content:center;
+  }
+  .cover .brand-line{position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#b99c6a,#c9b88f,#93aa92,#a69cb4)}
+  .cover .tag{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#eef1f3;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);padding:7px 16px;border-radius:99px;margin-bottom:26px}
+  .cover h1{font-size:52px;font-weight:900;line-height:1.2;letter-spacing:.01em}
+  .cover h1 .hl{color:#e4d3ad}
+  .cover .sub{margin-top:18px;font-size:20px;color:#e7ebee;font-weight:500;line-height:1.7}
+  .cover .meta{margin-top:40px;display:flex;gap:28px;font-size:14px;color:#c9d3da;font-weight:600}
+  .cover .meta b{color:#fff}
+
+  /* ===== 卡片 & 列表 ===== */
+  .grid{display:grid;gap:15px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .g5{grid-template-columns:repeat(5,1fr)}
+  .card{
+    background:var(--paper);border:1px solid var(--line);border-radius:16px;
+    padding:18px 20px;position:relative;overflow:hidden;
+  }
+  .card .num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:34px;height:34px;border-radius:10px;font-size:16px;font-weight:800;
+    color:#fff;background:var(--pc,#8a8378);margin-bottom:11px;
+  }
+  .card h4{font-size:19px;font-weight:800;margin-bottom:5px;color:var(--ink)}
+  .card .cn{font-size:13.5px;color:var(--muted);font-weight:600;line-height:1.5}
+  .card .frm{font-size:18px;font-weight:800;color:var(--pc,#8a8378);margin-top:9px;letter-spacing:.02em;font-family:"SF Mono",ui-monospace,monospace}
+  .card .eg{font-size:13.5px;color:#6f6a62;margin-top:8px;line-height:1.6;word-break:break-all}
+  .card .eg b{color:#3f3b35;font-weight:700}
+
+  /* 高亮关键词 */
+  .key{color:var(--pc-deep,#937a48);font-weight:800}
+  .gold{color:var(--gold-deep);font-weight:800}
+  .red{color:var(--warn-deep);font-weight:800}
+
+  /* 例句区 */
+  .ex{
+    background:var(--paper-2);border:1px solid var(--line);border-radius:15px;
+    padding:16px 20px;margin-top:8px;
+  }
+  .ex + .ex{margin-top:14px}
+  .ex .lead{font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:11px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .ex .lead .pill{background:var(--gold-bg);color:var(--gold-deep)}
+
+  .cn-src{font-size:17px;font-weight:600;color:var(--ink);line-height:1.6}
+  .cn-src b{color:var(--gold-deep)}
+  .en-ref{font-size:16.5px;font-weight:700;color:var(--pc-deep,#5c7383);margin-top:9px;line-height:1.55;word-break:break-word}
+  .en-ref .mt{display:inline-block;font-size:12px;font-weight:800;color:#fff;background:var(--pc,#8a8378);border-radius:6px;padding:2px 8px;margin-right:8px;vertical-align:2px}
+  .ana{margin-top:10px;font-size:13.5px;color:#6f6a62;line-height:1.65}
+  .ana b{color:var(--gold-deep)}
+
+  .formula{
+    background:var(--paper);border:1px dashed var(--line);border-radius:12px;
+    padding:13px 16px;margin-top:10px;font-size:15.5px;font-weight:700;color:var(--ink);
+  }
+  .formula .fb{display:inline-block;background:var(--pc,#8a8378);color:#fff;font-size:12px;font-weight:800;border-radius:6px;padding:2px 9px;margin-right:8px}
+
+  /* 重点框 */
+  .note{
+    display:flex;gap:12px;align-items:flex-start;
+    background:var(--gold-bg);border:1px solid #e6d8ba;border-left:4px solid var(--gold);
+    border-radius:12px;padding:13px 17px;margin-top:15px;font-size:15px;line-height:1.65;
+  }
+  .note .ico{font-size:18px;line-height:1.4}
+  .note b{color:var(--gold-deep)}
+
+  .tip{
+    display:flex;gap:10px;align-items:flex-start;
+    background:var(--tip-bg);border:1px solid #d5e0e4;border-left:4px solid var(--tip);
+    border-radius:12px;padding:12px 16px;margin-top:13px;font-size:14.5px;line-height:1.65;color:var(--blue-deep);
+  }
+  .tip b{color:var(--blue-deep)}
+
+  .warn{
+    display:flex;gap:10px;align-items:flex-start;
+    background:var(--warn-bg);border:1px solid #ecd2cd;border-left:4px solid var(--warn);
+    border-radius:12px;padding:12px 16px;margin-top:13px;font-size:14.5px;line-height:1.65;color:var(--warn-deep);
+  }
+  .warn b{color:var(--warn-deep)}
+
+  /* 两栏例句 */
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+  .cols .ex{margin-top:0}
+
+  /* 表 */
+  table{width:100%;border-collapse:collapse;font-size:15px}
+  th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:12.5px;letter-spacing:.05em;color:var(--muted);background:var(--paper-2);font-weight:700}
+  td .en{font-weight:700;color:#3f3b35}
+  td .cn{color:var(--muted);font-size:13px}
+  .tense-table td{text-align:center;font-size:14px;font-weight:600}
+  .tense-table th{text-align:center}
+  .tense-table .hl-cell{background:var(--gold-bg);color:var(--gold-deep);font-weight:800}
+
+  .pill{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:var(--tip-bg);color:var(--blue-deep);margin-right:6px}
+
+  .wordlist{font-size:13.5px;color:#5c564f;line-height:1.9;background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-top:10px}
+  .wordlist b{color:var(--pc-deep,#5c7383)}
+
+  /* 小结 */
+  .sum-block{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:var(--paper)}
+  .sum-block h4{font-size:15.5px;font-weight:800;margin-bottom:11px;display:flex;align-items:center;gap:8px;color:var(--ink)}
+  .sum-block .dot{width:10px;height:10px;border-radius:3px;background:var(--pc,#8a8378)}
+  .sum-block ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .sum-block li{font-size:13.5px;color:#5c564f;line-height:1.5}
+  .sum-block li b{color:var(--ink)}
+
+  .motto{
+    margin-top:20px;text-align:center;font-size:19px;font-weight:800;color:var(--ink);
+    background:var(--gold-bg);border:1px solid #e6d8ba;border-radius:14px;padding:17px;
+  }
+  .motto span{color:var(--warn-deep)}
+
+  /* ===== 真题折叠 ===== */
+  .reveal{margin-top:10px;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .reveal summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 15px;font-size:13.5px;font-weight:700;color:var(--pc-deep,#5c7383);background:var(--paper-2);user-select:none}
+  .reveal summary::-webkit-details-marker{display:none}
+  .reveal summary .caret{display:inline-block;transition:transform .2s;font-size:11px}
+  .reveal[open] summary .caret{transform:rotate(90deg)}
+  .reveal .ans{padding:13px 16px 15px;border-top:1px dashed var(--line);font-size:15.5px}
+  .reveal .ans .en{font-weight:700;color:var(--pc-deep,#5c7383);line-height:1.6}
+  .reveal .ans .mark{margin-top:8px;font-size:13px;color:#6f6a62;line-height:1.6}
+  .reveal .ans .mark b{color:var(--gold-deep)}
+
+  /* ===== 导航 ===== */
+  #nav{
+    position:fixed;left:50%;bottom:24px;transform:translateX(-50%);
+    display:flex;align-items:center;gap:12px;z-index:50;
+    background:rgba(252,249,243,.88);backdrop-filter:blur(10px);
+    border:1px solid var(--line);border-radius:99px;padding:8px 12px;
+    box-shadow:0 12px 32px -14px rgba(92,82,66,.32);
+  }
+  #nav button{
+    border:none;background:var(--paper);border:1px solid var(--line);
+    width:40px;height:40px;border-radius:50%;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;color:#5c564f;
+    transition:.15s;
+  }
+  #nav button:hover:not(:disabled){background:var(--paper-2);border-color:var(--gold);color:var(--gold-deep)}
+  #nav button:disabled{opacity:.35;cursor:default}
+  #nav .counter{font-size:14px;font-weight:700;color:#5c564f;min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
+  #nav .counter b{color:var(--gold-deep);font-size:16px}
+  #nav #menuBtn{width:auto;border-radius:99px;padding:0 16px;font-size:13px;font-weight:700;gap:7px}
+  #progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#7e96a5,#93aa92,#c09892,#a69cb4);z-index:60;width:0;transition:width .35s ease}
+  #hint{position:fixed;left:50%;transform:translateX(-50%);bottom:3px;font-size:12px;color:#b3ab9f;z-index:40;white-space:nowrap}
+
+  /* ===== 抽拉式目录 ===== */
+  #drawerTab{
+    position:fixed;left:0;top:50%;transform:translateY(-50%);
+    z-index:80;cursor:pointer;user-select:none;
+    display:flex;align-items:center;gap:6px;
+    padding:16px 10px;
+    background:linear-gradient(180deg,#7e96a5,#5c7383);
+    color:#fff;border-radius:0 14px 14px 0;
+    box-shadow:4px 8px 20px -8px rgba(92,82,66,.45);
+    transition:padding .2s ease, box-shadow .2s ease;
+    writing-mode:vertical-rl;letter-spacing:.3em;font-weight:800;font-size:14px;
+  }
+  #drawerTab .bar{font-size:16px;writing-mode:vertical-rl}
+  #drawerTab:hover{padding:20px 11px;box-shadow:6px 12px 28px -8px rgba(92,82,66,.55)}
+  #drawerTab .darr{display:inline-block;transition:transform .25s ease;writing-mode:horizontal-tb;font-size:13px}
+
+  #drawerOverlay{
+    position:fixed;inset:0;background:rgba(70,63,55,.34);backdrop-filter:blur(3px);
+    z-index:85;opacity:0;pointer-events:none;transition:opacity .28s ease;
+  }
+  #drawerOverlay.open{opacity:1;pointer-events:auto}
+
+  #drawerPanel{
+    position:fixed;top:0;left:0;bottom:0;width:min(360px,88vw);
+    background:var(--paper);box-shadow:24px 0 50px -30px rgba(92,82,66,.5);
+    z-index:86;transform:translateX(-100%);transition:transform .32s cubic-bezier(.22,.9,.3,1);
+    display:flex;flex-direction:column;
+  }
+  #drawerOverlay.open #drawerPanel{transform:translateX(0)}
+  #drawerPanel .dp-head{
+    padding:22px 22px 16px;border-bottom:1px solid var(--line);
+    background:linear-gradient(135deg,#7e96a5 0%,#5c7383 100%);color:#fff;
+  }
+  #drawerPanel .dp-head .k{font-size:12px;font-weight:700;letter-spacing:.12em;opacity:.8}
+  #drawerPanel .dp-head h3{font-size:19px;font-weight:800;margin-top:4px}
+  #drawerPanel .dp-head .sub{font-size:12px;opacity:.85;margin-top:3px}
+  #drawerPanel .dp-head .close{
+    position:absolute;top:18px;right:18px;border:none;background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.3);width:32px;height:32px;border-radius:50%;
+    cursor:pointer;font-size:15px;color:#fff;line-height:1;
+  }
+  #drawerPanel .dp-head .close:hover{background:rgba(255,255,255,.28)}
+  #drawerList{overflow-y:auto;padding:10px 14px 34px;flex:1}
+  .dp-sec{
+    display:flex;align-items:center;gap:8px;
+    font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--muted);
+    margin:18px 6px 6px;
+  }
+  .dp-sec .swatch{width:9px;height:9px;border-radius:3px}
+  .dp-item{
+    display:flex;align-items:center;gap:11px;width:100%;text-align:left;
+    padding:10px 12px;border:none;background:transparent;border-radius:10px;cursor:pointer;
+    font-size:14px;color:#4c4740;transition:.13s;
+  }
+  .dp-item:hover{background:var(--paper-2)}
+  .dp-item.active{background:var(--gold-bg);color:var(--gold-deep);font-weight:700}
+  .dp-item .n{font-size:12px;font-weight:800;color:#b3ab9f;min-width:22px;text-align:right}
+
+  /* ===== 响应式 ===== */
+  @media (max-width:900px){
+    #stage{padding:18px 14px 88px}
+    .slide{padding:26px 22px;border-radius:15px}
+    .g2,.g3,.g4,.g5,.cols{grid-template-columns:1fr 1fr}
+    .g5{grid-template-columns:1fr 1fr}
+    .head h2{font-size:21px}
+    .cover h1{font-size:34px}
+    .cover .sub{font-size:16px}
+    .cn-src{font-size:15.5px}
+    #drawerTab{padding:13px 8px;font-size:12px}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<div id="stage">
+
+  <!-- 1 封面 -->
+  <section class="slide cover active" data-title="封面" data-sec="封面">
+    <div class="brand-line"></div>
+    <div class="anim" style="--i:0"><span class="tag">高考英语 · 语法专项（第二版）</span></div>
+    <h1 class="anim" style="--i:1"><span class="hl">时态与语态</span></h1>
+    <p class="sub anim" style="--i:2">十六种时态 · 主动语态与被动语态 —— 一对一精讲</p>
+    <div class="meta anim" style="--i:3">
+      <span>板块：<b>语法 · 时态语态</b></span>
+    </div>
+  </section>
+
+  <!-- 2 导读 -->
+  <section class="slide" data-title="本章导读" data-sec="导读">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">导读</span><h2>本章要讲什么</h2><span class="en">Overview</span></div>
+    <p class="anim" style="--i:1;font-size:15.5px;color:#5c564f;line-height:1.75">时态语态是<b class="gold">高考英语语法的地基</b>：单选、语法填空、翻译、写作，处处都在考。动词的时态由<b class="key">时间</b>（现在 / 过去 / 将来 / 过去将来）与<b class="key">方式</b>（一般 / 进行 / 完成 / 完成进行）交叉，理论上 4×4 = 16 种，但高考真正盯住的只有几类高频时态，外加一个<b class="gold">被动语态</b>：</p>
+    <div class="grid g5" style="margin-top:16px">
+      <div class="card anim" style="--i:2;--pc:#7e96a5"><span class="num">1</span><h4>一般现在时</h4><div class="cn">习惯 · 真理 · 主将从现</div></div>
+      <div class="card anim" style="--i:3;--pc:#8aa0ae"><span class="num">2</span><h4>一般过去时</h4><div class="cn">过去动作 · 与现在完成区分</div></div>
+      <div class="card anim" style="--i:4;--pc:#93aa92"><span class="num">3</span><h4>现在完成时</h4><div class="cn">have/has done · since/for</div></div>
+      <div class="card anim" style="--i:5;--pc:#9db39c"><span class="num">4</span><h4>过去完成时</h4><div class="cn">had done · 过去的过去</div></div>
+      <div class="card anim" style="--i:6;--pc:#a7b3a1"><span class="num">5</span><h4>一般将来时</h4><div class="cn">will / be going to / 表将来</div></div>
+      <div class="card anim" style="--i:7;--pc:#c09892"><span class="num">6</span><h4>进行时</h4><div class="cn">现在 / 过去 / 将来进行</div></div>
+      <div class="card anim" style="--i:8;--pc:#c9a9a1"><span class="num">7</span><h4>被动语态</h4><div class="cn">be + 过去分词 · 主动表被动</div></div>
+    </div>
+    <div class="note anim" style="--i:9;margin-top:22px">
+      <span class="ico">🧭</span>
+      <div><b>两条主线：</b>① 时态 = <b>时间</b> × <b>方式</b>，判断时态先问“什么时候、什么状态”；② 语态 = 主语是<b>动作的执行者（主动）</b>还是<b>承受者（被动）</b>。把这两条线抓住，时态语态就不会乱。</div>
+    </div>
+    <div class="tip anim" style="--i:10">
+      <span>💡</span>
+      <div>本章最大失分点只有一个：<b>一般过去时 vs 现在完成时</b>。我会专门用一页对比讲透，先把别的基础打牢。</div>
+    </div>
+  </section>
+
+  <!-- 3 时态总框架 -->
+  <section class="slide" data-title="时态总框架" data-sec="一 · 时态框架">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7e96a5">一 · 时态框架</span><h2>十六种时态，一张表看懂</h2><span class="en">The 16 Tenses</span></div>
+    <p class="anim" style="--i:1;font-size:15px;color:#5c564f">英语时态 = <b class="key">时间</b>（横排）× <b class="key">方式</b>（竖排）。以动词 <b>do</b> 为例，最常用的几个时态已用金底标出：</p>
+    <div class="anim" style="--i:2;margin-top:12px">
+      <table class="tense-table">
+        <tr><th></th><th>一般</th><th>进行</th><th>完成</th><th>完成进行</th></tr>
+        <tr><th>现在</th><td class="hl-cell">I do</td><td class="hl-cell">I am doing</td><td class="hl-cell">I have done</td><td>I have been doing</td></tr>
+        <tr><th>过去</th><td class="hl-cell">I did</td><td>I was doing</td><td class="hl-cell">I had done</td><td>I had been doing</td></tr>
+        <tr><th>将来</th><td class="hl-cell">I shall/will do</td><td>I shall be doing</td><td>I shall have done</td><td>I shall have been doing</td></tr>
+        <tr><th>过去将来</th><td>I should do</td><td>I should be doing</td><td>I should have done</td><td>I should have been doing</td></tr>
+      </table>
+    </div>
+    <div class="note anim" style="--i:3">
+      <span class="ico">🎯</span>
+      <div><b>高考重点：</b>金底 6 个时态是“必会”，此外<b class="gold">现在完成进行时</b>（have been doing）在真题里也出现，表示“从过去一直持续到现在还在做”。其余完成进行、过去将来等，认识即可。</div>
+    </div>
+  </section>
+
+  <!-- 4 一般现在时 -->
+  <section class="slide" data-title="一般现在时" data-sec="二 · 核心时态">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 核心时态</span><h2>一般现在时</h2><span class="en">Simple Present</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">① 经常性 / 习惯性动作</div>
+        <div class="cn-src">我每天早上 7 点出门上学。</div>
+        <div class="en-ref">I leave home for school at 7 every morning.</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">② 客观真理 / 科学事实</div>
+        <div class="cn-src">地球围绕太阳转。</div>
+        <div class="en-ref">The earth moves around the sun.</div>
+        <div class="ana"><b>注意：</b>即使主句是过去时，宾语从句里的真理仍用<b>一般现在时</b>。→ Columbus proved that the earth <b>is</b> round.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">③ 格言警句</div>
+        <div class="cn-src">骄者必败。</div>
+        <div class="en-ref">Pride goes before a fall.</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">④ 现在的状态 / 能力 / 性格</div>
+        <div class="cn-src">安英语写得好，但说得不好。</div>
+        <div class="en-ref">Ann writes good English but does not speak well.</div>
+      </div>
+    </div>
+    <div class="note anim" style="--i:5">
+      <span class="ico">🔑</span>
+      <div><b>最常考的其实是“主将从现”：</b>在<b class="gold">时间状语从句、条件状语从句</b>里，哪怕说的是将来的事，从句也要用<b>一般现在时</b>。→ When Bill <b>comes</b>, ask him to wait for me.（不是 will come）</div>
+    </div>
+  </section>
+
+  <!-- 5 一般过去时 vs 现在完成时 -->
+  <section class="slide" data-title="过去时 vs 现在完成时" data-sec="二 · 核心时态">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 核心时态</span><h2>一般过去时 vs 现在完成时（重点）</h2><span class="en">Past vs Perfect</span></div>
+    <p class="anim" style="--i:1;font-size:15px;color:#5c564f;line-height:1.7">这是本章<b class="gold">头号失分点</b>。一句话记住：<b class="key">一般过去时强调“动作本身发生在过去”；现在完成时强调“对现在的影响 / 结果”。</b></p>
+    <div class="anim" style="--i:2;margin-top:12px">
+      <table>
+        <tr><th style="width:34%"></th><th>一般过去时</th><th>现在完成时</th></tr>
+        <tr><td><b>强调</b></td><td>动作（发生过这件事）</td><td>结果 / 对现在的影响</td></tr>
+        <tr><td><b>时间状语</b></td><td>具体：yesterday, last week, in 2013, just now</td><td>模糊：for, since, so far, ever, never, just, yet</td></tr>
+        <tr><td><b>动词</b></td><td>延续或短暂动词均可</td><td>多与延续性动词连用</td></tr>
+        <tr><td><b>例子</b></td><td>I <b>saw</b> this film yesterday.（昨天看过）</td><td>I <b>have seen</b> this film.（内容已经知道）</td></tr>
+      </table>
+    </div>
+    <div class="grid g2" style="margin-top:12px">
+      <div class="ex anim" style="--i:3">
+        <div class="lead">含义对比 · 人还活着吗？</div>
+        <div class="en-ref">Christine <b>was</b> an invalid all her life.（她已不在人间）</div>
+        <div class="en-ref">Christine <b>has been</b> an invalid all her life.（她现在还活着）</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">含义对比 · 还住吗？</div>
+        <div class="en-ref">Mrs. Smith <b>lived</b> in Kentucky for seven years.（已搬走）</div>
+        <div class="en-ref">Mrs. Smith <b>has lived</b> in Kentucky for seven years.（仍住着）</div>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:5">
+      <span>⚠️</span>
+      <div><b>铁律：</b>句子里一旦出现<b>明确的过去时间状语</b>（yesterday、last night、in 1960…），就<b>绝不能用现在完成时</b>。（✗）Tom has written a letter to his parents last night. →（✓）Tom <b>wrote</b> a letter... last night.</div>
+    </div>
+  </section>
+
+  <!-- 6 现在完成时 -->
+  <section class="slide" data-title="现在完成时" data-sec="二 · 核心时态">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 核心时态</span><h2>现在完成时</h2><span class="en">Present Perfect</span></div>
+    <div class="formula anim" style="--i:1;margin-top:0"><span class="fb">构成</span>have / has + <b class="key">过去分词</b></div>
+    <div class="grid g2" style="margin-top:12px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">since 的四种用法</div>
+        <div class="ana"><b>① since + 具体时间点</b>：since 2013</div>
+        <div class="ana"><b>② since + 一段时间 + ago</b>：since five months ago</div>
+        <div class="ana"><b>③ since + 从句</b>：since you left</div>
+        <div class="ana"><b>④ It is + 时间 + since 从句</b>：It is two years since I became a postgraduate.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">for vs since</div>
+        <div class="ana"><b>for</b> 说<b>持续多长时间</b>；<b>since</b> 说<b>从什么时候开始</b>。</div>
+        <div class="en-ref">I have lived here <b>for</b> more than twenty years.</div>
+        <div class="en-ref">I have lived here <b>since</b> I was born.</div>
+        <div class="ana"><b>注意：</b>并非有 for 就一定用完成时——I worked here for twenty years.（现在不在这工作了）</div>
+      </div>
+    </div>
+    <div class="grid g2" style="margin-top:4px">
+      <div class="ex anim" style="--i:4">
+        <div class="lead">句型 ① It is/was + the first/second time + that 从句</div>
+        <div class="en-ref">This is the first time (that) I <b>have heard</b> him sing.</div>
+        <div class="en-ref">It was the third time that the boy <b>had been</b> late.</div>
+      </div>
+      <div class="ex anim" style="--i:5">
+        <div class="lead">句型 ② This is + 最高级 + 名词 + that 从句</div>
+        <div class="en-ref">This is the best film that I've (ever) seen.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 过去完成时 -->
+  <section class="slide" data-title="过去完成时" data-sec="二 · 核心时态">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 核心时态</span><h2>过去完成时</h2><span class="en">Past Perfect</span></div>
+    <div class="formula anim" style="--i:1;margin-top:0"><span class="fb">构成</span>had + <b class="key">过去分词</b> → 表示“<b class="gold">过去的过去</b>”</div>
+    <div class="grid g2" style="margin-top:12px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">① 转述：tell / say / know 等后的宾语从句</div>
+        <div class="en-ref">She said (that) she <b>had never been</b> to Paris.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">② 两个动作，先发生的用过去完成</div>
+        <div class="en-ref">When the police arrived, the thieves <b>had run</b> away.</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">③ 意向动词“原本…却未能…”</div>
+        <div class="cn-src">我们本希望你来的，但你没来。</div>
+        <div class="en-ref">We <b>had hoped</b> that you would come, but you didn't.</div>
+        <div class="ana"><b>动词：</b>hope, wish, expect, think, intend, mean, suppose</div>
+      </div>
+      <div class="ex anim" style="--i:5">
+        <div class="lead">④ 常见时间状语</div>
+        <div class="ana">before / by / until / when / after / once / as soon as</div>
+        <div class="en-ref">By the time he was twelve, Edison <b>had begun</b> to make a living by himself.</div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:6">
+      <span>💡</span>
+      <div>两个动作<b>按顺序接连发生、不强调先后</b>（用 and / then 连接）时，可都用一般过去时：She saw the mouse and screamed. 叙述历史事实也可用一般过去时。</div>
+    </div>
+  </section>
+
+  <!-- 8 一般将来时 -->
+  <section class="slide" data-title="一般将来时" data-sec="二 · 核心时态">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 核心时态</span><h2>一般将来时（四种表达）</h2><span class="en">Future</span></div>
+    <div class="grid g2">
+      <div class="card anim" style="--i:1;--pc:#93aa92"><span class="num">1</span><h4>will / shall + 动词原形</h4><div class="cn">最通用；shall 用于第一人称</div><div class="eg">Which paragraph <b>shall</b> I read first?</div></div>
+      <div class="card anim" style="--i:2;--pc:#93aa92"><span class="num">2</span><h4>be going to + 不定式</h4><div class="cn">打算 / 计划 / 有迹象</div><div class="eg">Look at the dark clouds. There <b>is going to be</b> a storm.</div></div>
+      <div class="card anim" style="--i:3;--pc:#93aa92"><span class="num">3</span><h4>be + 不定式</h4><div class="cn">按计划 / 正式安排</div><div class="eg">We <b>are to discuss</b> the report next Monday.</div></div>
+      <div class="card anim" style="--i:4;--pc:#93aa92"><span class="num">4</span><h4>be about to + 不定式</h4><div class="cn">马上要做（不与明确将来时间连用）</div><div class="eg">He <b>is about to leave</b> for Beijing.</div></div>
+    </div>
+    <div class="note anim" style="--i:5">
+      <span class="ico">🔑</span>
+      <div><b>“一般现在时表将来”：</b>① 时刻表已定的安排（The train <b>leaves</b> at six tomorrow morning）；② <b class="gold">时间 / 条件从句中主将从现</b>（I'll write to you as soon as I <b>arrive</b>）。</div>
+    </div>
+    <div class="tip anim" style="--i:6">
+      <span>💡</span>
+      <div><b>“现在进行时表将来”：</b>位移动词 come, go, arrive, leave, start, begin, return 用进行时表将来 → I'm <b>leaving</b> tomorrow.</div>
+    </div>
+  </section>
+
+  <!-- 9 进行时 -->
+  <section class="slide" data-title="进行时" data-sec="二 · 核心时态">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 核心时态</span><h2>三种进行时</h2><span class="en">Continuous Tenses</span></div>
+    <div class="grid g3">
+      <div class="card anim" style="--i:1;--pc:#93aa92">
+        <div class="frm">现在进行时 am/is/are + doing</div>
+        <div class="eg">① 正在发生：We <b>are waiting</b> for him.</div>
+        <div class="eg">② 渐变：The leaves <b>are turning</b> yellow.</div>
+        <div class="eg">③ 与 always 连用表感情：You <b>are always changing</b> your mind.（你总改主意）</div>
+      </div>
+      <div class="card anim" style="--i:2;--pc:#9db39c">
+        <div class="frm">过去进行时 was/were + doing</div>
+        <div class="eg">① 过去某时正在做（背景动作）：It <b>was raining</b> when they left the station.</div>
+        <div class="eg">② 长动作延续中短动作发生：While Mary <b>was making</b> a dress, she cut her finger.</div>
+      </div>
+      <div class="card anim" style="--i:3;--pc:#a7b3a1">
+        <div class="frm">将来进行时 will + be + doing</div>
+        <div class="eg">将来某时正在做 / 预测：By this time tomorrow, I'll <b>be lying</b> on the beach.</div>
+        <div class="eg">注意：将来进行时不表“意愿”。</div>
+      </div>
+    </div>
+    <div class="note anim" style="--i:4">
+      <span class="ico">🎯</span>
+      <div>过去进行时是高考的常客：<b>“when + 一般过去时（短动作）” 打断 “过去进行时（长动作/背景）”</b> 这个搭配要一眼认出来。</div>
+    </div>
+  </section>
+
+  <!-- 10 不用于进行时的动词 -->
+  <section class="slide" data-title="不用于进行时的动词" data-sec="二 · 核心时态">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 核心时态</span><h2>哪些动词不用于进行时</h2><span class="en">Non-continuous Verbs</span></div>
+    <p class="anim" style="--i:1;font-size:15px;color:#5c564f">这些动词表示<b class="key">状态、心理、瞬间结果</b>，一般<b class="gold">不能用进行时</b>，语法填空里常见：</p>
+    <div class="grid g4" style="margin-top:14px">
+      <div class="card anim" style="--i:2;--pc:#93aa92"><span class="num">①</span><h4>状态动词</h4><div class="cn">have, belong, owe, exist, matter, cost, contain</div><div class="eg">I <b>have</b> two brothers.（不是 am having）</div></div>
+      <div class="card anim" style="--i:3;--pc:#93aa92"><span class="num">②</span><h4>心理动词</h4><div class="cn">know, believe, think, remember, want, need, prefer, love, hate</div><div class="eg">I <b>know</b> him well.</div></div>
+      <div class="card anim" style="--i:4;--pc:#93aa92"><span class="num">③</span><h4>瞬间动词</h4><div class="cn">accept, receive, finish, decide, refuse, complete</div><div class="eg">I <b>accept</b> your advice.</div></div>
+      <div class="card anim" style="--i:5;--pc:#93aa92"><span class="num">④</span><h4>系动词</h4><div class="cn">seem, remain, hear, smell, feel, taste, look, sound</div><div class="eg">You <b>seem</b> a little tired.</div></div>
+    </div>
+  </section>
+
+  <!-- 11 时态的替换 -->
+  <section class="slide" data-title="时态的替换" data-sec="二 · 核心时态">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 核心时态</span><h2>时态的替换（主将从现等）</h2><span class="en">Tense Shifts</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">① 一般现在时 → 代替一般将来时</div>
+        <div class="ana">时间 / 条件从句（when, if, unless, as soon as, before…）一律主将从现。</div>
+        <div class="en-ref">He is going to visit his aunt the day he <b>arrives</b> in Beijing.</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">② 一般现在时 → 代替一般过去时</div>
+        <div class="ana">“书上说 / 报纸上说”，叙述更生动。</div>
+        <div class="en-ref">The newspaper <b>says</b> that it's going to be cold tomorrow.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">③ 一般现在时 → 代替现在完成时</div>
+        <div class="ana">hear, tell, learn, forget, know 等。</div>
+        <div class="en-ref">I <b>hear</b> (= have heard) he will go to London.</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">④ 现在进行时 → 代替一般将来时</div>
+        <div class="ana">位移动词 / 渐变动词 / 瞬间动词 die。</div>
+        <div class="en-ref">We <b>are leaving</b> for Paris soon. / He is so seriously wounded that he <b>is dying</b>.</div>
+      </div>
+    </div>
+    <div class="motto anim" style="--i:5">
+      主将从现 —— <span>时间 / 条件从句里，将来也走一般现在时</span>
+    </div>
+  </section>
+
+  <!-- 12 被动语态构成 -->
+  <section class="slide" data-title="被动语态构成" data-sec="三 · 被动语态">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">三 · 被动语态</span><h2>被动语态的构成</h2><span class="en">Passive Voice</span></div>
+    <p class="anim" style="--i:1;font-size:15px;color:#5c564f">被动语态 = <b class="key">be + 过去分词</b>，时态全靠 <b>be</b> 的变化来体现，常见 8 种：</p>
+    <div class="anim" style="--i:2;margin-top:10px">
+      <table>
+        <tr><th>时态</th><th>结构</th><th>例句</th></tr>
+        <tr><td>一般现在时</td><td class="en">am / is / are + done</td><td class="cn">Japanese <b>is taught</b> in that school.</td></tr>
+        <tr><td>现在进行时</td><td class="en">am / is / are + being + done</td><td class="cn">The road <b>is being widened</b>.</td></tr>
+        <tr><td>一般过去时</td><td class="en">was / were + done</td><td class="cn">The house <b>was built</b> last year.</td></tr>
+        <tr><td>过去进行时</td><td class="en">was / were + being + done</td><td class="cn">The bridge <b>was being repaired</b>.</td></tr>
+        <tr><td>一般将来时</td><td class="en">will / shall + be + done</td><td class="cn">The report <b>will be discussed</b>.</td></tr>
+        <tr><td>过去将来时</td><td class="en">would / should + be + done</td><td class="cn">He said the work <b>would be finished</b>.</td></tr>
+        <tr><td>现在完成时</td><td class="en">have / has + been + done</td><td class="cn">Three bridges <b>have been built</b>.</td></tr>
+        <tr><td>过去完成时</td><td class="en">had + been + done</td><td class="cn">The task <b>had been completed</b>.</td></tr>
+      </table>
+    </div>
+    <div class="formula anim" style="--i:3"><span class="fb">情态动词</span>can / may / must / should + <b class="key">be + 过去分词</b></div>
+  </section>
+
+  <!-- 13 被动语态用法 -->
+  <section class="slide" data-title="被动语态用法" data-sec="三 · 被动语态">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">三 · 被动语态</span><h2>什么时候用被动语态</h2><span class="en">When to Use Passive</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">① 不知道 / 不必指出执行者</div>
+        <div class="en-ref">Three bridges <b>have been built</b> over the river since 1988.</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">② 强调承受者（而非执行者）</div>
+        <div class="en-ref">Japanese <b>is taught</b> in that school.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">③ 感官动词：被动时不定式要把 to 还原</div>
+        <div class="en-ref">We saw him play football. → He <b>was seen to play</b> football.</div>
+        <div class="ana"><b>口诀：</b>主动“see sb. <b>do</b>”，被动“be seen <b>to do</b>”，to 不能丢。</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">④ 短语动词：被动时别漏掉介词</div>
+        <div class="en-ref">My younger sister will <b>be taken care of</b> by Grandma.</div>
+        <div class="ana"><b>注意：</b>take care of 里的 of 保留，不能说 be taken care。</div>
+      </div>
+    </div>
+    <div class="note anim" style="--i:5">
+      <span class="ico">📌</span>
+      <div><b>“据说 / 据信”固定句型：</b>It is said that… / It is believed that… / It is reported that… / It is well known that…，翻译和写作高频，直接背。</div>
+    </div>
+  </section>
+
+  <!-- 14 主动表被动 + 不用被动 -->
+  <section class="slide" data-title="主动表被动 / 不用被动" data-sec="三 · 被动语态">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">三 · 被动语态</span><h2>主动表被动 · 哪些动词没有被动</h2><span class="en">Key Rules</span></div>
+    <div class="grid g2">
+      <div class="anim" style="--i:1">
+        <div class="sum-block">
+          <h4><span class="dot" style="background:#c09892"></span>主动形式表被动意义</h4>
+          <ul>
+            <li><b>属性动词</b>：wash, clean, sell, cut, read, write → The book <b>sells well</b>.</li>
+            <li><b>be to blame / remain / let(出租)</b>：The driver <b>is to blame</b> for the accident.</li>
+            <li><b>need / want / require / deserve / be worth + doing</b>：The door <b>needs repairing</b>.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="anim" style="--i:2">
+        <div class="sum-block">
+          <h4><span class="dot" style="background:#c09892"></span>没有被动语态的情况</h4>
+          <ul>
+            <li><b>不及物动词</b>：happen, rise, appear, die, take place → The accident <b>happened</b>.</li>
+            <li><b>系动词</b>：seem, look, sound, feel → The idea <b>sounds</b> good.</li>
+            <li><b>宾语是不定式</b>：She likes to swim.（不说 To swim is liked by her.）</li>
+            <li><b>同源宾语</b>：We are living a happy life.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:3">
+      <span>⚠️</span>
+      <div><b>易混：</b>rise（不及物，无被动）vs raise（及物，可被动）；happen（无被动）vs 及物动词。→（✓）The price has <b>risen</b>.　（✓）The price has been <b>raised</b>.</div>
+    </div>
+  </section>
+
+  <!-- 15 真题自测 -->
+  <section class="slide" data-title="真题自测" data-sec="四 · 真题自测">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a69cb4">四 · 真题自测</span><h2>真题自测（代表题）</h2><span class="en">Practice</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1"><div class="lead">1 · 现在完成时 + since</div><div class="cn-src">The reports went missing in 2012 and nobody ___ them since.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">C. has seen</div><div class="mark"><b>考点</b>：since 用现在完成时。</div></div></details></div>
+      <div class="ex anim" style="--i:2"><div class="lead">2 · 被动语态（until 从句）</div><div class="cn-src">We won't start the work until all the preparations ___.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">C. have been made</div><div class="mark"><b>考点</b>：until 从句用现在完成时被动。</div></div></details></div>
+      <div class="ex anim" style="--i:3"><div class="lead">3 · 现在完成进行时</div><div class="cn-src">— Tony, why are your eyes red? — I ___ up peppers for the last five minutes.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">D. have been cutting</div><div class="mark"><b>考点</b>：for the last five minutes 用现在完成进行时。</div></div></details></div>
+      <div class="ex anim" style="--i:4"><div class="lead">4 · 主将从现</div><div class="cn-src">If we ___ now to protect the environment, we'll live to regret it.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">C. don't act</div><div class="mark"><b>考点</b>：if 条件句主将从现。</div></div></details></div>
+      <div class="ex anim" style="--i:5"><div class="lead">5 · 过去完成时</div><div class="cn-src">I found the lecture hard to follow because it ___ when I arrived.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">D. had started</div><div class="mark"><b>考点</b>：过去的过去用过去完成时。</div></div></details></div>
+      <div class="ex anim" style="--i:6"><div class="lead">6 · 一般现在时表习惯</div><div class="cn-src">On Monday morning it usually ___ me an hour to drive to work.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">A. takes</div><div class="mark"><b>考点</b>：usually 用一般现在时。</div></div></details></div>
+      <div class="ex anim" style="--i:7"><div class="lead">7 · 现在进行时（打断背景）</div><div class="cn-src">Jim ___ a late night film at home when the television went blank.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">C. was watching</div><div class="mark"><b>考点</b>：when 打断，用过去进行时。</div></div></details></div>
+      <div class="ex anim" style="--i:8"><div class="lead">8 · 被动语态（将来）</div><div class="cn-src">We are confident that the environment ___ by our further efforts to reduce pollution.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">B. will be improved</div><div class="mark"><b>考点</b>：将来被动。</div></div></details></div>
+    </div>
+  </section>
+
+  <!-- 16 小结 -->
+  <section class="slide" data-title="本章小结" data-sec="收尾">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">收尾</span><h2>本章小结</h2><span class="en">Summary</span></div>
+    <div class="grid g2">
+      <div class="sum-block anim" style="--i:1">
+        <h4><span class="dot" style="background:#93aa92"></span>时态 · 五句口诀</h4>
+        <ul>
+          <li><b>① 主将从现</b>：时间 / 条件从句里，将来也走一般现在时。</li>
+          <li><b>② 一般过去 vs 现在完成</b>：具体时间状语句用过去时；无时间、表影响用完成时。</li>
+          <li><b>③ 过去的过去</b>：用过去完成时 had done。</li>
+          <li><b>④ since / for</b>：since 看起点，for 看时长。</li>
+          <li><b>⑤ 位移动词</b>：进行时表将来。</li>
+        </ul>
+      </div>
+      <div class="sum-block anim" style="--i:2">
+        <h4><span class="dot" style="background:#c09892"></span>语态 · 三句口诀</h4>
+        <ul>
+          <li><b>① 被动 = be + done</b>，时态靠 be 变化。</li>
+          <li><b>② 主动表被动</b>：need / want / require + doing；书 sells well。</li>
+          <li><b>③ 不及物动词、系动词</b>无被动。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:3">
+      <span>⚠️</span>
+      <div><b>最易失分的五处：</b>① 有过去时间状语却用了现在完成时；② 时间 / 条件从句误用 will；③ 感官动词被动漏了 to；④ 短语动词被动漏了介词；⑤ rise / happen 等不及物动词硬套被动。</div>
+    </div>
+    <div class="motto anim" style="--i:4">
+      先定时（什么时候）· 再定态（什么状态）· 后定语（主动还是被动）—— <span>动词三连问，时态语态不丢分</span>
+    </div>
+  </section>
+
+</div>
+
+<div id="nav">
+  <button id="prev" aria-label="上一页" title="上一页 (←)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="counter"><b id="cur">1</b> / <span id="total">16</span></div>
+  <button id="next" aria-label="下一页" title="下一页 (→)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <button id="menuBtn" aria-label="目录" title="目录">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+    <span>目录</span>
+  </button>
+  <button id="fs" aria-label="全屏" title="全屏 (F)">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+  </button>
+</div>
+<div id="hint">← → 翻页 · 空格下一页 · F 全屏 · 左侧手柄抽拉目录</div>
+
+<!-- 抽拉式目录（左侧抽屉） -->
+<div id="drawerTab" title="打开目录">
+  <span class="darr">▸</span><span>目 录</span>
+</div>
+<div id="drawerOverlay">
+  <div id="drawerPanel">
+    <div class="dp-head">
+      <div class="k">目录</div>
+      <h3>时态与语态</h3>
+      <div class="sub">十六种时态 · 被动语态</div>
+      <button class="close" id="drawerClose" aria-label="关闭">✕</button>
+    </div>
+    <div id="drawerList"></div>
+  </div>
+</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  const curEl = document.getElementById('cur');
+  const totalEl = document.getElementById('total');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const fsBtn = document.getElementById('fs');
+  const menuBtn = document.getElementById('menuBtn');
+  const drawerTab = document.getElementById('drawerTab');
+  const drawerClose = document.getElementById('drawerClose');
+  const drawerOverlay = document.getElementById('drawerOverlay');
+  const drawerList = document.getElementById('drawerList');
+  const progress = document.getElementById('progress');
+  let idx = 0;
+  totalEl.textContent = total;
+
+  // 每节主题色
+  const SEC_COLORS = {
+    '封面':'#b99c6a', '导读':'#b99c6a', '收尾':'#b99c6a',
+    '一 · 时态框架':'#7e96a5', '二 · 核心时态':'#93aa92',
+    '三 · 被动语态':'#c09892', '四 · 真题自测':'#a69cb4'
+  };
+
+  // 构建抽拉式目录（按 data-sec 分组）
+  (function buildMenu(){
+    const groups = [];
+    const map = {};
+    slides.forEach((s,i)=>{
+      const sec = s.dataset.sec || '其他';
+      const title = s.dataset.title || ('第'+(i+1)+'页');
+      if(!map[sec]){ map[sec] = {sec, items:[]}; groups.push(map[sec]); }
+      map[sec].items.push({title, i});
+    });
+    groups.forEach(g=>{
+      const h = document.createElement('div');
+      h.className = 'dp-sec';
+      const c = SEC_COLORS[g.sec] || '#8a8378';
+      h.innerHTML = '<span class="swatch" style="background:'+c+'"></span><span>'+g.sec+'</span>';
+      drawerList.appendChild(h);
+      g.items.forEach(it=>{
+        const b = document.createElement('button');
+        b.className = 'dp-item';
+        b.innerHTML = '<span class="n">'+ (it.i+1) +'</span><span>'+ it.title +'</span>';
+        b.addEventListener('click', ()=>{ go(it.i); closeDrawer(); });
+        drawerList.appendChild(b);
+      });
+    });
+  })();
+
+  function render(){
+    slides.forEach((s,i)=>{
+      s.classList.toggle('active', i===idx);
+      s.classList.toggle('prev', i<idx);
+    });
+    curEl.textContent = idx+1;
+    progress.style.width = ((idx+1)/total*100) + '%';
+    prevBtn.disabled = idx===0;
+    nextBtn.disabled = idx===total-1;
+    Array.from(drawerList.querySelectorAll('.dp-item')).forEach((b,i)=>{
+      b.classList.toggle('active', i===idx);
+    });
+  }
+  function go(n){
+    idx = Math.max(0, Math.min(total-1, n));
+    render();
+  }
+  function closeDrawer(){ drawerOverlay.classList.remove('open'); drawerTab.querySelector('.darr').textContent='▸'; }
+  function openDrawer(){ drawerOverlay.classList.add('open'); drawerTab.querySelector('.darr').textContent='◂'; }
+
+  prevBtn.addEventListener('click', ()=>go(idx-1));
+  nextBtn.addEventListener('click', ()=>go(idx+1));
+  menuBtn.addEventListener('click', openDrawer);
+  drawerTab.addEventListener('click', openDrawer);
+  drawerClose.addEventListener('click', closeDrawer);
+  drawerOverlay.addEventListener('click', (e)=>{ if(e.target===drawerOverlay) closeDrawer(); });
+
+  document.addEventListener('keydown', (e)=>{
+    if(drawerOverlay.classList.contains('open')){
+      if(e.key==='Escape') closeDrawer();
+      return;
+    }
+    if(e.key==='ArrowRight' || e.key===' ' || e.key==='PageDown'){ e.preventDefault(); go(idx+1); }
+    else if(e.key==='ArrowLeft' || e.key==='PageUp'){ e.preventDefault(); go(idx-1); }
+    else if(e.key==='Home'){ go(0); }
+    else if(e.key==='End'){ go(total-1); }
+    else if(e.key==='m' || e.key==='M'){ openDrawer(); }
+    else if(e.key==='f' || e.key==='F'){
+      if(document.fullscreenElement){ document.exitFullscreen(); }
+      else { document.documentElement.requestFullscreen(); }
+    }
+  });
+  fsBtn.addEventListener('click', ()=>{
+    if(document.fullscreenElement){ document.exitFullscreen(); }
+    else { document.documentElement.requestFullscreen(); }
+  });
+  // 触屏滑动
+  let touchX=null;
+  document.addEventListener('touchstart', e=>{ touchX=e.touches[0].clientX; });
+  document.addEventListener('touchend', e=>{
+    if(touchX===null) return;
+    const dx=e.changedTouches[0].clientX-touchX;
+    if(Math.abs(dx)>50){ dx<0?go(idx+1):go(idx-1); }
+    touchX=null;
+  });
+  render();
+</script>
+</body>
+</html>
