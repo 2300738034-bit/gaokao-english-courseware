@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高考英语语法 · 倒装</title>
+<style>
+  :root{
+    --ink:#46413b;
+    --muted:#8c857b;
+    --line:#e6ded1;
+    --bg:#f4efe6;
+    --paper:#fcf9f3;
+    --paper-2:#f6f0e6;
+    --ink-soft:#5c564f;
+
+    --clay:#c2a18b;  --clay-deep:#9c7d68;  --clay-bg:#f4ece6;   /* 形式倒装 */
+    --sage:#9aa98d;  --sage-deep:#75856a;  --sage-bg:#eef1ea;   /* 完全倒装 */
+    --blue:#8a9aa8;  --blue-deep:#647887;  --blue-bg:#edf1f3;   /* 部分倒装 */
+    --lav:#a49bb0;   --lav-deep:#7d7390;   --lav-bg:#f0edf3;    /* 其他倒装 */
+    --rose:#c09892;  --rose-deep:#98706a;  --rose-bg:#f5ecea;   /* 真题精练 */
+
+    --gold:#b99c6a;  --gold-deep:#937a48;  --gold-bg:#f3ecdd;
+    --warn:#b48780;  --warn-deep:#966963;  --warn-bg:#f5e7e4;
+    --tip:#7e96a5;   --tip-bg:#edf1f3;
+
+    --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:var(--font);color:var(--ink);background:var(--bg);overflow:hidden;-webkit-font-smoothing:antialiased}
+
+  #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:58px 44px 96px}
+  .slide{position:absolute;width:min(1200px,100%);max-height:100%;background:var(--paper);border-radius:22px;box-shadow:0 26px 60px -26px rgba(92,82,66,.34), 0 0 0 1px rgba(92,82,66,.05);padding:44px 54px;opacity:0;transform:translateX(42px);pointer-events:none;transition:opacity .45s ease, transform .45s ease;overflow:hidden;display:flex;flex-direction:column}
+  .slide.active{opacity:1;transform:translateX(0);pointer-events:auto}
+  .slide.prev{transform:translateX(-42px)}
+  .slide .anim{opacity:0;transform:translateY(14px)}
+  .slide.active .anim{opacity:1;transform:none;transition:opacity .5s ease, transform .5s ease;transition-delay:calc(var(--i,0)*70ms + 60ms)}
+
+  .head{display:flex;align-items:center;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+  .part-badge{font-size:13px;font-weight:700;letter-spacing:.05em;color:#fff;background:var(--pc,#8a8378);padding:6px 15px;border-radius:99px;white-space:nowrap}
+  .head h2{font-size:28px;font-weight:800;letter-spacing:.01em;color:var(--ink)}
+  .head .en{font-size:14px;color:var(--muted);font-weight:600;margin-left:auto;white-space:nowrap}
+
+  .slide.cover{background:radial-gradient(900px 520px at 88% -10%, rgba(185,156,106,.30), transparent 60%),radial-gradient(720px 540px at -10% 112%, rgba(164,155,176,.34), transparent 55%),linear-gradient(135deg,#6f7f7a 0%,#869289 50%,#9fa8a2 100%);color:#fff;justify-content:center}
+  .cover .brand-line{position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#b99c6a,#c9b88f,#9aa98d,#a49bb0)}
+  .cover .tag{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#eef1f3;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);padding:7px 16px;border-radius:99px;margin-bottom:26px}
+  .cover h1{font-size:52px;font-weight:900;line-height:1.2;letter-spacing:.01em}
+  .cover h1 .hl{color:#e4d3ad}
+  .cover .sub{margin-top:18px;font-size:20px;color:#e7ebee;font-weight:500;line-height:1.7}
+  .cover .meta{margin-top:40px;display:flex;gap:28px;font-size:14px;color:#c9d3da;font-weight:600}
+  .cover .meta b{color:#fff}
+
+  .grid{display:grid;gap:15px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px 20px;position:relative;overflow:hidden}
+  .card .num{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:34px;border-radius:10px;font-size:16px;font-weight:800;color:#fff;background:var(--pc,#8a8378);margin-bottom:11px;padding:0 10px}
+  .card h4{font-size:19px;font-weight:800;margin-bottom:5px;color:var(--ink)}
+  .card .cn{font-size:13.5px;color:var(--muted);font-weight:600;line-height:1.5}
+  .card .frm{font-size:17px;font-weight:800;color:var(--pc,#8a8378);margin-top:9px;letter-spacing:.02em;font-family:"SF Mono",ui-monospace,monospace}
+  .card .eg{font-size:13.5px;color:#6f6a62;margin-top:8px;line-height:1.6;word-break:break-all}
+  .card .eg b{color:#3f3b35;font-weight:700}
+
+  .key{color:var(--pc-deep,#937a48);font-weight:800}
+  .gold{color:var(--gold-deep);font-weight:800}
+  .red{color:var(--warn-deep);font-weight:800}
+
+  .ex{background:var(--paper-2);border:1px solid var(--line);border-radius:15px;padding:16px 20px;margin-top:8px}
+  .ex + .ex{margin-top:14px}
+  .ex .lead{font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:11px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .ex .lead .pill{background:var(--gold-bg);color:var(--gold-deep)}
+  .cn-src{font-size:16.5px;font-weight:600;color:var(--ink);line-height:1.6}
+  .cn-src b{color:var(--gold-deep)}
+  .en-ref{font-size:16px;font-weight:700;color:var(--pc-deep,#5c7383);margin-top:9px;line-height:1.55;word-break:break-word}
+  .en-ref .mt{display:inline-block;font-size:12px;font-weight:800;color:#fff;background:var(--pc,#8a8378);border-radius:6px;padding:2px 8px;margin-right:8px;vertical-align:2px}
+  .ana{margin-top:10px;font-size:13.5px;color:#6f6a62;line-height:1.65}
+  .ana b{color:var(--gold-deep)}
+
+  .formula{background:var(--paper);border:1px dashed var(--line);border-radius:12px;padding:13px 16px;margin-top:10px;font-size:15px;font-weight:700;color:var(--ink)}
+  .formula .fb{display:inline-block;background:var(--pc,#8a8378);color:#fff;font-size:12px;font-weight:800;border-radius:6px;padding:2px 9px;margin-right:8px}
+
+  .note{display:flex;gap:12px;align-items:flex-start;background:var(--gold-bg);border:1px solid #e6d8ba;border-left:4px solid var(--gold);border-radius:12px;padding:13px 17px;margin-top:15px;font-size:15px;line-height:1.65}
+  .note .ico{font-size:18px;line-height:1.4}
+  .note b{color:var(--gold-deep)}
+
+  .tip{display:flex;gap:10px;align-items:flex-start;background:var(--tip-bg);border:1px solid #d5e0e4;border-left:4px solid var(--tip);border-radius:12px;padding:12px 16px;margin-top:13px;font-size:14.5px;line-height:1.65;color:var(--blue-deep)}
+  .tip b{color:var(--blue-deep)}
+
+  .warn{display:flex;gap:10px;align-items:flex-start;background:var(--warn-bg);border:1px solid #ecd2cd;border-left:4px solid var(--warn);border-radius:12px;padding:12px 16px;margin-top:13px;font-size:14.5px;line-height:1.65;color:var(--warn-deep)}
+  .warn b{color:var(--warn-deep)}
+
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+  .cols .ex{margin-top:0}
+
+  table{width:100%;border-collapse:collapse;font-size:15px}
+  th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:12.5px;letter-spacing:.05em;color:var(--muted);background:var(--paper-2);font-weight:700}
+  td .en{font-weight:700;color:#3f3b35}
+  td .cn{color:var(--muted);font-size:13px}
+  .subj-table td{text-align:left;font-size:14.5px;font-weight:600}
+  .subj-table td b{color:var(--sage-deep)}
+
+  .pill{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:var(--tip-bg);color:var(--blue-deep);margin-right:6px}
+
+  .wordlist{font-size:13.5px;color:#5c564f;line-height:1.9;background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-top:10px}
+  .wordlist b{color:var(--pc-deep,#5c7383)}
+
+  .sum-block{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:var(--paper)}
+  .sum-block h4{font-size:15.5px;font-weight:800;margin-bottom:11px;display:flex;align-items:center;gap:8px;color:var(--ink)}
+  .sum-block .dot{width:10px;height:10px;border-radius:3px;background:var(--pc,#8a8378)}
+  .sum-block ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .sum-block li{font-size:13.5px;color:#5c564f;line-height:1.55}
+  .sum-block li b{color:var(--ink)}
+
+  .motto{margin-top:20px;text-align:center;font-size:19px;font-weight:800;color:var(--ink);background:var(--gold-bg);border:1px solid #e6d8ba;border-radius:14px;padding:17px}
+  .motto span{color:var(--warn-deep)}
+
+  .reveal{margin-top:10px;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .reveal summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 15px;font-size:13.5px;font-weight:700;color:var(--pc-deep,#5c7383);background:var(--paper-2);user-select:none}
+  .reveal summary::-webkit-details-marker{display:none}
+  .reveal summary .caret{display:inline-block;transition:transform .2s;font-size:11px}
+  .reveal[open] summary .caret{transform:rotate(90deg)}
+  .reveal .ans{padding:13px 16px 15px;border-top:1px dashed var(--line);font-size:15px}
+  .reveal .ans .en{font-weight:700;color:var(--pc-deep,#5c7383);line-height:1.6}
+  .reveal .ans .mark{margin-top:8px;font-size:13px;color:#6f6a62;line-height:1.6}
+  .reveal .ans .mark b{color:var(--gold-deep)}
+
+  #nav{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);display:flex;align-items:center;gap:12px;z-index:50;background:rgba(252,249,243,.88);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:99px;padding:8px 12px;box-shadow:0 12px 32px -14px rgba(92,82,66,.32)}
+  #nav button{border:none;background:var(--paper);border:1px solid var(--line);width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#5c564f;transition:.15s}
+  #nav button:hover:not(:disabled){background:var(--paper-2);border-color:var(--gold);color:var(--gold-deep)}
+  #nav button:disabled{opacity:.35;cursor:default}
+  #nav .counter{font-size:14px;font-weight:700;color:#5c564f;min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
+  #nav .counter b{color:var(--gold-deep);font-size:16px}
+  #nav #menuBtn{width:auto;border-radius:99px;padding:0 16px;font-size:13px;font-weight:700;gap:7px}
+  #progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#9aa98d,#8a9aa8,#c2a18b,#a49bb0);z-index:60;width:0;transition:width .35s ease}
+  #hint{position:fixed;left:50%;transform:translateX(-50%);bottom:3px;font-size:12px;color:#b3ab9f;z-index:40;white-space:nowrap}
+
+  #drawerTab{position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:80;cursor:pointer;user-select:none;display:flex;align-items:center;gap:6px;padding:16px 10px;background:linear-gradient(180deg,#9aa98d,#75856a);color:#fff;border-radius:0 14px 14px 0;box-shadow:4px 8px 20px -8px rgba(92,82,66,.45);transition:padding .2s ease, box-shadow .2s ease;writing-mode:vertical-rl;letter-spacing:.3em;font-weight:800;font-size:14px}
+  #drawerTab:hover{padding:20px 11px;box-shadow:6px 12px 28px -8px rgba(92,82,66,.55)}
+  #drawerTab .darr{display:inline-block;transition:transform .25s ease;writing-mode:horizontal-tb;font-size:13px}
+
+  #drawerOverlay{position:fixed;inset:0;background:rgba(70,63,55,.34);backdrop-filter:blur(3px);z-index:85;opacity:0;pointer-events:none;transition:opacity .28s ease}
+  #drawerOverlay.open{opacity:1;pointer-events:auto}
+  #drawerPanel{position:fixed;top:0;left:0;bottom:0;width:min(360px,88vw);background:var(--paper);box-shadow:24px 0 50px -30px rgba(92,82,66,.5);z-index:86;transform:translateX(-100%);transition:transform .32s cubic-bezier(.22,.9,.3,1);display:flex;flex-direction:column}
+  #drawerOverlay.open #drawerPanel{transform:translateX(0)}
+  #drawerPanel .dp-head{padding:22px 22px 16px;border-bottom:1px solid var(--line);background:linear-gradient(135deg,#9aa98d 0%,#75856a 100%);color:#fff}
+  #drawerPanel .dp-head .k{font-size:12px;font-weight:700;letter-spacing:.12em;opacity:.8}
+  #drawerPanel .dp-head h3{font-size:19px;font-weight:800;margin-top:4px}
+  #drawerPanel .dp-head .sub{font-size:12px;opacity:.85;margin-top:3px}
+  #drawerPanel .dp-head .close{position:absolute;top:18px;right:18px;border:none;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:15px;color:#fff;line-height:1}
+  #drawerPanel .dp-head .close:hover{background:rgba(255,255,255,.28)}
+  #drawerList{overflow-y:auto;padding:10px 14px 34px;flex:1}
+  .dp-sec{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--muted);margin:18px 6px 6px}
+  .dp-sec .swatch{width:9px;height:9px;border-radius:3px}
+  .dp-item{display:flex;align-items:center;gap:11px;width:100%;text-align:left;padding:10px 12px;border:none;background:transparent;border-radius:10px;cursor:pointer;font-size:14px;color:#4c4740;transition:.13s}
+  .dp-item:hover{background:var(--paper-2)}
+  .dp-item.active{background:var(--gold-bg);color:var(--gold-deep);font-weight:700}
+  .dp-item .n{font-size:12px;font-weight:800;color:#b3ab9f;min-width:22px;text-align:right}
+
+  @media (max-width:900px){
+    #stage{padding:18px 14px 88px}
+    .slide{padding:26px 22px;border-radius:15px}
+    .g2,.g3,.g4,.cols{grid-template-columns:1fr 1fr}
+    .head h2{font-size:21px}
+    .cover h1{font-size:34px}
+    .cover .sub{font-size:16px}
+    .cn-src{font-size:15px}
+    #drawerTab{padding:13px 8px;font-size:12px}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<div id="stage">
+
+  <!-- 1 封面 -->
+  <section class="slide cover active" data-title="封面" data-sec="封面">
+    <div class="brand-line"></div>
+    <div class="anim" style="--i:0"><span class="tag">高考英语 · 语法专项（第19节）</span></div>
+    <h1 class="anim" style="--i:1">倒 <span class="hl">装</span></h1>
+    <p class="sub anim" style="--i:2">完全倒装 · 部分倒装 · 形式倒装 —— 结合上海高考真题</p>
+    <div class="meta anim" style="--i:3">
+      <span>板块：<b>语法 · 倒装</b></span>
+      <span>重点：<b>完全倒装 + 部分倒装</b></span>
+    </div>
+  </section>
+
+  <!-- 2 导读 -->
+  <section class="slide" data-title="本章导读" data-sec="导读">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">导读</span><h2>倒装是什么</h2><span class="en">Inversion</span></div>
+    <p class="anim" style="--i:1;font-size:15.5px;color:#5c564f;line-height:1.75">英语句子有<b class="gold">陈述语序</b>（主语在前、谓语在后）和<b class="gold">倒装语序</b>（谓语或谓语的一部分提到主语前）。倒装按功能分<b>语法倒装</b>（强制性）和<b>修辞倒装</b>（为了平衡、衔接、描绘）；按形式分三种——<b class="gold">形式倒装、完全倒装、部分倒装</b>。</p>
+    <div class="grid g3" style="margin-top:16px">
+      <div class="card anim" style="--i:2;--pc:#c2a18b"><span class="num">一</span><h4>形式倒装</h4><div class="cn">主谓顺序没根本变化<br>感叹句 / the more / whatever</div></div>
+      <div class="card anim" style="--i:3;--pc:#9aa98d"><span class="num">二</span><h4>完全倒装</h4><div class="cn">主语和谓语完全颠倒<br>口诀「有-时-表-地-方」</div></div>
+      <div class="card anim" style="--i:4;--pc:#8a9aa8"><span class="num">三</span><h4>部分倒装</h4><div class="cn">助/系/情态动词提前<br>口诀「不-只-让步-也-常-如此-虚拟-祝福」</div></div>
+    </div>
+    <div class="note anim" style="--i:5;margin-top:20px">
+      <span class="ico">🧭</span>
+      <div><b>一眼分辨：</b>看句首把谁提到主语前——<b class="gold">整个谓语</b>提前是<b>完全倒装</b>（In came the teacher.）；只有<b class="gold">助动词/系动词/情态动词</b>提前、动词还在主语后面的是<b>部分倒装</b>（Never have I seen it.）。</div>
+    </div>
+  </section>
+
+  <!-- 3 形式倒装 -->
+  <section class="slide" data-title="形式倒装" data-sec="一 · 形式倒装">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c2a18b">一 · 形式倒装</span><h2>形式倒装：主谓顺序不变</h2><span class="en">Formal Inversion</span></div>
+    <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f">由于结构需要改变了「主谓宾 / 主系表」语序，但<b class="key">主谓顺序没有根本变化</b>。主要有三类：</p>
+    <div class="grid g3" style="margin-top:10px">
+      <div class="card anim" style="--i:2;--pc:#c2a18b"><span class="num">1</span><h4>感叹句</h4><div class="frm">What + (a/an) + adj. + n. + 主谓<br>How + adj./adv. + 主谓</div><div class="eg">What a <b>beautiful day</b> (it is)!<br>How <b>fast</b> time flies!<br>How <b>colorful</b> the picture is!</div></div>
+      <div class="card anim" style="--i:3;--pc:#c2a18b"><span class="num">2</span><h4>the more…the more</h4><div class="frm">The + 比较级 + 正常语序，<br>the + 比较级 + 正常语序</div><div class="eg"><b>The sooner, the better.</b><br>The greener the trees are, the more beautiful the hill is.</div></div>
+      <div class="card anim" style="--i:4;--pc:#c2a18b"><span class="num">3</span><h4>whatever / however 从句</h4><div class="frm">Whatever + n. + 主谓, 主句<br>However + adj./adv. + 主谓, 主句</div><div class="eg"><b>Whatever you do</b>, you should be brave and careful.<br><b>However hard I tried</b>, I could not solve the problem.</div></div>
+    </div>
+    <div class="tip anim" style="--i:5">
+      <span>💡</span>
+      <div><b>定位：</b>这三类里其实没有「主谓颠倒」，只是把某个成分（表语、比较级、whatever/however 短语）提到了前面，所以叫<b>形式倒装</b>。高考里它通常作为翻译或写作的「加分结构」出现。</div>
+    </div>
+  </section>
+
+  <!-- 4 完全倒装 总览 -->
+  <section class="slide" data-title="完全倒装总览" data-sec="二 · 完全倒装">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#9aa98d">二 · 完全倒装</span><h2>完全倒装：五字诀「有-时-表-地-方」</h2><span class="en">Full Inversion</span></div>
+    <p class="anim" style="--i:1;font-size:15px;color:#5c564f;line-height:1.7">主语和谓语<b class="key">完全颠倒</b>——整个谓语动词（实义动词）直接跑到主语前面。五种情况用一句话记：</p>
+    <div class="grid g3" style="margin-top:12px">
+      <div class="card anim" style="--i:2;--pc:#9aa98d"><span class="num">有</span><h4>There be 结构</h4><div class="cn">be 可由 exist / seem / happen / appear / live / stand 等替代</div></div>
+      <div class="card anim" style="--i:3;--pc:#9aa98d"><span class="num">时</span><h4>now / then 句首</h4><div class="cn">Now/Then + come(be/go/lie/run) + 主语</div></div>
+      <div class="card anim" style="--i:4;--pc:#9aa98d"><span class="num">表</span><h4>表语前置</h4><div class="cn">形容词/过去分词/介词短语 + 系动词 + 主语</div></div>
+      <div class="card anim" style="--i:5;--pc:#9aa98d"><span class="num">地</span><h4>地点副词/介词短语句首</h4><div class="cn">here / there / on the wall / under the tree…</div></div>
+      <div class="card anim" style="--i:6;--pc:#9aa98d"><span class="num">方</span><h4>方向副词句首</h4><div class="cn">out / in / up / down / away…</div></div>
+    </div>
+    <div class="note anim" style="--i:7;margin-top:18px">
+      <span class="ico">🔑</span>
+      <div><b>一句话判断：</b>完全倒装里，句首通常是<b class="gold">地点、方向、时间或表语</b>，谓语是一个<b class="gold">不及物动词</b>（come、go、lie、stand、fly、run、exist 等），整个动词提前。主语往往较重（有定语修饰），倒装让句子更平衡。</div>
+    </div>
+  </section>
+
+  <!-- 5 完全倒装 有/时/表 -->
+  <section class="slide" data-title="完全倒装·有-时-表" data-sec="二 · 完全倒装">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#9aa98d">二 · 完全倒装</span><h2>有 · 时 · 表</h2><span class="en">There / Now / Predicative</span></div>
+    <div class="grid g3">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">① 有 — There be（替代动词）</div>
+        <div class="en-ref">There <b>exist</b> different answers to this question.</div>
+        <div class="en-ref">There <b>happened to be</b> two apples in the bag.</div>
+        <div class="en-ref">There <b>stood</b> a dog before him.</div>
+        <div class="ana">be 的替代动词：exist / seem / happen / appear / live / rise / stand。</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">② 时 — now / then 句首</div>
+        <div class="en-ref">Then <b>came</b> the hour we had been looking forward to.</div>
+        <div class="en-ref">Now <b>comes</b> your turn.</div>
+        <div class="ana">结构：Now/Then + come(或 be、go、lie、run 等) + 主语。</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">③ 表 — 表语前置（形容词）</div>
+        <div class="en-ref"><b>Present at the meeting were</b> Professor White and many other guests.</div>
+        <div class="lead" style="margin-top:12px">③ 表 — 过去分词 / 介词短语</div>
+        <div class="en-ref"><b>Gone are the days</b> when the small town was quiet.</div>
+        <div class="en-ref"><b>Among the goods are</b> Christmas trees, flowers, candles and toys.</div>
+      </div>
+    </div>
+    <div class="formula anim" style="--i:4;--pc:#9aa98d"><span class="fb">表语前置</span>形容词 / 过去分词 / 介词短语 + 系动词 + 主语</div>
+    <div class="tip anim" style="--i:5">
+      <span>💡</span>
+      <div><b>观察点：</b>表语前置时，系动词 be 放在表语后、主语前（Present <b>were</b> guests / Gone <b>are</b> the days），这是「主系表」整体调头，不是助动词提前。</div>
+    </div>
+  </section>
+
+  <!-- 6 完全倒装 地/方 + 注意点 -->
+  <section class="slide" data-title="完全倒装·地-方" data-sec="二 · 完全倒装">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#9aa98d">二 · 完全倒装</span><h2>地 · 方（+ 三个注意点）</h2><span class="en">Place / Direction</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">④ 地 — 地点副词/介词短语句首</div>
+        <div class="en-ref"><b>Here comes</b> the old lady!</div>
+        <div class="en-ref"><b>At the foot of the hill lies</b> a beautiful lake.</div>
+        <div class="en-ref"><b>On the top of which flew</b> a flag.（定语从句内）</div>
+        <div class="en-ref"><b>East of the lake lie</b> two towns.</div>
+        <div class="en-ref"><b>Under the tree lay</b> a wounded farmer.</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">⑤ 方 — 方向副词句首</div>
+        <div class="en-ref"><b>In came</b> Mr. White.</div>
+        <div class="en-ref"><b>Up went</b> the arrow into the air.</div>
+        <div class="en-ref"><b>Away went</b> the boy.</div>
+        <div class="lead" style="margin-top:12px">直接引语在句首</div>
+        <div class="en-ref">"You must be joking!" <b>shouted</b> my wife.</div>
+        <div class="en-ref">"No way," <b>said</b> my boss coldly.</div>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:3">
+      <span>⚠️</span>
+      <div><b>高频陷阱：</b>完全倒装中如果<b class="gold">主语是人称代词</b>，就<b>不倒装</b>——<b class="red">Here you are.</b>（给你）/ <b class="red">There she comes.</b>（她来了）。只有名词主语才倒装：Here comes the bus.（车来了）</div>
+    </div>
+  </section>
+
+  <!-- 7 部分倒装 总览 -->
+  <section class="slide" data-title="部分倒装总览" data-sec="三 · 部分倒装">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">三 · 部分倒装</span><h2>部分倒装：八字诀总览</h2><span class="en">Partial Inversion</span></div>
+    <p class="anim" style="--i:1;font-size:15px;color:#5c564f;line-height:1.7">只把<b class="key">助动词、系动词或情态动词</b>提到主语前，谓语动词本身仍留在主语后。八种情况用一句话串起来：</p>
+    <div class="grid g4" style="margin-top:12px">
+      <div class="card anim" style="--i:2;--pc:#8a9aa8"><span class="num">不</span><h4>否定词句首</h4><div class="cn">never / not / little<br>hardly / seldom…</div></div>
+      <div class="card anim" style="--i:3;--pc:#8a9aa8"><span class="num">只</span><h4>only + 状语句首</h4><div class="cn">only then / only by…<br>only when…</div></div>
+      <div class="card anim" style="--i:4;--pc:#8a9aa8"><span class="num">让步</span><h4>as / though 从句</h4><div class="cn">表语 / 状语 / 动词前置</div></div>
+      <div class="card anim" style="--i:5;--pc:#8a9aa8"><span class="num">也</span><h4>so / neither / nor</h4><div class="cn">So + 助/情 + 主语</div></div>
+      <div class="card anim" style="--i:6;--pc:#8a9aa8"><span class="num">常</span><h4>频度副词句首</h4><div class="cn">often / many a time…</div></div>
+      <div class="card anim" style="--i:7;--pc:#8a9aa8"><span class="num">如此</span><h4>so / such…that</h4><div class="cn">so、such 置于句首</div></div>
+      <div class="card anim" style="--i:8;--pc:#8a9aa8"><span class="num">虚拟</span><h4>were / had / should</h4><div class="cn">省略 if 的虚拟句</div></div>
+      <div class="card anim" style="--i:9;--pc:#8a9aa8"><span class="num">祝福</span><h4>祝愿句</h4><div class="cn">May… / Long live…</div></div>
+    </div>
+    <div class="note anim" style="--i:10;margin-top:18px">
+      <span class="ico">🔑</span>
+      <div><b>口诀：</b>「<b class="gold">不一只一让一步，也一常一如一此一虚拟一祝福</b>」——句首出现否定、only、让步、so/neither、频度、so/such…that、虚拟 were/had/should、祝愿词时，用部分倒装。前四组（不/只/让步/也）是<b>高考主战场</b>。</div>
+    </div>
+  </section>
+
+  <!-- 8 部分倒装 不（否定词/短语） -->
+  <section class="slide" data-title="部分倒装·否定词" data-sec="三 · 部分倒装">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">三 · 部分倒装</span><h2>「不」— 否定词 / 半否定词句首</h2><span class="en">Negative Adverbs</span></div>
+    <div class="wordlist anim" style="--i:1"><b>常见否定词：</b>never、not、no、few、seldom、rarely、little、hardly、scarcely、nowhere、no longer　<b>常见否定短语：</b>in no way、at no time、in no case、by no means、on no condition、under/in no circumstances</div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">否定词句首</div>
+        <div class="en-ref"><b>Not a word did</b> I say to him.</div>
+        <div class="en-ref"><b>Never have</b> I found him so happy.</div>
+        <div class="en-ref"><b>Little does</b> he care about what I said.</div>
+        <div class="en-ref"><b>Seldom does</b> he go out alone at night.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">否定短语句首</div>
+        <div class="en-ref"><b>In no way should</b> you give up.</div>
+        <div class="en-ref"><b>By no means is</b> he the best player.</div>
+        <div class="en-ref"><b>Under no circumstances will</b> we give in.</div>
+        <div class="en-ref"><b>At no time did</b> she lose heart.</div>
+      </div>
+    </div>
+    <div class="note anim" style="--i:4">
+      <span class="ico">🔑</span>
+      <div><b>操作：</b>句首是否定词 → 在主语前补<b class="gold">助动词/情态动词/系动词</b>，谓语动词变原形。注意<b class="red">半否定词</b>（little、seldom、rarely、hardly、scarcely）表示「几乎不」，同样触发倒装，这是语法填空的高频考点。</div>
+    </div>
+  </section>
+
+  <!-- 9 部分倒装 不（句型） -->
+  <section class="slide" data-title="部分倒装·否定句型" data-sec="三 · 部分倒装">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">三 · 部分倒装</span><h2>「不」— 四个否定句型</h2><span class="en">Negative Patterns</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">① Not only…but also（前倒后不倒）</div>
+        <div class="en-ref"><b>Not only does</b> John love Chinese, he <b>is</b> also good at speaking it.</div>
+        <div class="ana">连接主语时不倒装：Not only the mother <b>but also</b> the children are sick.</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">② Not until + 状语/从句（主倒从不倒）</div>
+        <div class="en-ref"><b>Not until I began to work did</b> I realize how much time I had wasted.</div>
+        <div class="ana">主句倒装，until 从句不倒装。</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">③ No sooner…than / Hardly…when（前半倒）</div>
+        <div class="en-ref"><b>No sooner had</b> we reached home <b>than</b> it began to rain.</div>
+        <div class="en-ref"><b>Hardly had</b> we reached home <b>when</b> it began to rain.</div>
+        <div class="ana">前半句倒装，后半句不倒装。</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">④ Neither…nor（前后都倒）</div>
+        <div class="en-ref"><b>Neither will</b> he go to the party, <b>nor does</b> he want to go.</div>
+        <div class="ana">前后两个分句都倒装。</div>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:5">
+      <span>⚠️</span>
+      <div><b>别搞混：</b>Not only…but also 是「前倒后不倒」；Not until 是「主倒从不倒」；No sooner…than / Hardly…when 是「前半倒后半不倒」；Neither…nor 是「前后都倒」。四个句型各记一句即可。</div>
+    </div>
+  </section>
+
+  <!-- 10 部分倒装 只 -->
+  <section class="slide" data-title="部分倒装·only" data-sec="三 · 部分倒装">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">三 · 部分倒装</span><h2>「只」— only + 状语句首</h2><span class="en">Only + Adverbial</span></div>
+    <p class="anim" style="--i:1;font-size:15px;color:#5c564f">「<b class="key">only + 状语</b>」（副词、介词短语、状语从句）置于句首时，主句用部分倒装。</p>
+    <div class="grid g3" style="margin-top:10px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">only + 副词</div>
+        <div class="en-ref"><b>Only then did</b> I realize the importance of math.</div>
+        <div class="ana">直到那时我才意识到数学的重要性。</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">only + 介词短语</div>
+        <div class="en-ref"><b>Only by this means is</b> it possible to explain it.</div>
+        <div class="ana">只有通过这种方法才能解释清楚。</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">only + 状语从句</div>
+        <div class="en-ref"><b>Only when the war was over was</b> he able to get back to work.</div>
+        <div class="ana">主句倒装，从句不倒装。</div>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:5">
+      <span>⚠️</span>
+      <div><b>唯一例外：</b>only 修饰<b class="gold">主语</b>时<b>不倒装</b>——<b class="red">Only he can answer the question.</b>（只有他能回答这个问题）。判断方法：only 后面直接跟的是名词/代词做主语，就不倒装；跟的是状语，就倒装。</div>
+    </div>
+  </section>
+
+  <!-- 11 部分倒装 让步 -->
+  <section class="slide" data-title="部分倒装·as though" data-sec="三 · 部分倒装">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">三 · 部分倒装</span><h2>「让步」— as / though 引导让步从句</h2><span class="en">as / though Concession</span></div>
+    <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f">此句型主谓并不倒装，只是把<b class="key">表语 / 状语 / 谓语动词</b>提到 as / though 前面。作表语的单数可数名词提前时<b class="red">不带冠词</b>。</p>
+    <div class="grid g3" style="margin-top:10px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">① 表语前置</div>
+        <div class="en-ref"><b>Exhausted as</b> she was, she wasn't able to sleep.</div>
+        <div class="en-ref"><b>Strange though</b> it seems, it is true.</div>
+        <div class="en-ref"><b>Child as</b> he is, he knows much about football.</div>
+        <div class="ana">单数名词提前不带冠词：Child as he is（不是 A child）。</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">② 状语前置</div>
+        <div class="en-ref"><b>Much as</b> he likes the bike, he doesn't want to buy it.</div>
+        <div class="en-ref"><b>Carefully as</b> he did his homework, he still made many mistakes.</div>
+        <div class="ana">副词提到 as 前。</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">③ 谓语动词前置</div>
+        <div class="en-ref"><b>Try as</b> he might, he didn't pass the exam.</div>
+        <div class="en-ref"><b>Fail as</b> he did, he didn't give up.</div>
+        <div class="ana">动词原形提到 as 前，主语后补助动词。</div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:5">
+      <span>💡</span>
+      <div><b>翻译抓手：</b>「尽管……但……」用 <b>名词/形容词/副词/动词原形 + as/though + 主谓</b>。这是上海卷翻译题里「让步」表达的高级句式。</div>
+    </div>
+  </section>
+
+  <!-- 12 部分倒装 也 -->
+  <section class="slide" data-title="部分倒装·so neither nor" data-sec="三 · 部分倒装">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">三 · 部分倒装</span><h2>「也」— so / neither / nor 开头</h2><span class="en">so / neither / nor</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">① So + be/助/情态 + 主语（表示「也如此」）</div>
+        <div class="en-ref">He has been to Canada. <b>So have I.</b></div>
+        <div class="ana">他去过加拿大，我也去过。</div>
+        <div class="en-ref" style="margin-top:8px">— I was a teacher but I want to be a doctor now.<br>— <b>So it is with</b> my friend.（也可说 It is the same with…）</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">② Neither / Nor + 助/情 + 主语（表示「也不」）</div>
+        <div class="en-ref">He doesn't like coffee. <b>Neither/Nor do I.</b></div>
+        <div class="ana">他不喜欢咖啡，我也不喜欢。</div>
+        <div class="en-ref" style="margin-top:8px">If Joe's wife doesn't go, <b>neither will he.</b></div>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:3">
+      <span>⚠️</span>
+      <div><b>倒装 vs 不倒装：</b><b class="gold">So + 主语 + 助/情态</b>（主语在前）表示「<b class="red">确实如此</b>」，肯定前面的话——<b class="red">So he has.</b>（他确实去了）。对比 <b class="gold">So + 助/情态 + 主语</b>（倒装）表示「<b class="red">也如此</b>」——<b class="red">So have I.</b>（我也去了）。这是选择题的经典陷阱。</div>
+    </div>
+  </section>
+
+  <!-- 13 部分倒装 常/如此/虚拟/祝福 -->
+  <section class="slide" data-title="部分倒装·常-如此-虚拟-祝福" data-sec="三 · 部分倒装">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">三 · 部分倒装</span><h2>「常 · 如此 · 虚拟 · 祝福」</h2><span class="en">Four More</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">「常」— often / many a time / now and again 句首</div>
+        <div class="en-ref"><b>Many a time has</b> John given me good advice.</div>
+        <div class="en-ref"><b>Often have</b> we taken that test.</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">「如此」— so / such…that（so、such 句首）</div>
+        <div class="en-ref"><b>So fast did</b> he run that I could not catch him.</div>
+        <div class="en-ref"><b>Such a good boy is</b> he that we all like him.</div>
+        <div class="ana">so/such 提到句首，主句倒装，that 从句不倒装。</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">「虚拟」— were / had / should 省略 if</div>
+        <div class="en-ref"><b>Were I you</b>, I would go abroad.（= If I were you）</div>
+        <div class="en-ref"><b>Had you come</b> yesterday, you would have seen him.</div>
+        <div class="en-ref"><b>Should he come</b>, tell him to ring me up.</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">「祝福」— 祝愿句</div>
+        <div class="en-ref"><b>May you succeed!</b></div>
+        <div class="en-ref"><b>Long live</b> the People's Republic of China!</div>
+        <div class="ana">may 或 long live 置于句首。</div>
+      </div>
+    </div>
+    <div class="note anim" style="--i:5">
+      <span class="ico">🔑</span>
+      <div><b>前四组是重点：</b>「常、如此、虚拟、祝福」里，「虚拟（were/had/should 省 if）」和「如此（so…that 句首）」更常见于书面语和写作；「常、祝福」认识即可。</div>
+    </div>
+  </section>
+
+  <!-- 14 其他倒装结构 -->
+  <section class="slide" data-title="其他倒装结构" data-sec="四 · 其他倒装结构">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a49bb0">四 · 其他倒装结构</span><h2>拓展：你可能不知道的倒装</h2><span class="en">More Inversion</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">① 副词/介词 + with + 名词（表命令）</div>
+        <div class="en-ref"><b>In with you</b>, boys!（都进去）</div>
+        <div class="en-ref"><b>Up with the flowers</b>, Tom!（把花捡起来）</div>
+        <div class="en-ref"><b>Out with your ideas!</b>（说出想法）</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">② 行为动词 + 主语 + 情态/助动词（强调）</div>
+        <div class="en-ref">It's my duty to help you out, and <b>do it I will.</b></div>
+        <div class="en-ref"><b>Go ahead I must.</b> I won't give up.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">③ of 短语句首（过长时前置）</div>
+        <div class="en-ref"><b>Of the thirty students</b>, as many as ten passed the interview.</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">④ 比较 / 方式状语从句（than / as 倒装）</div>
+        <div class="en-ref">Mothers usually give more <b>than will fathers.</b></div>
+        <div class="en-ref">He is honest and motivated, <b>as are most</b> high-achieving students.</div>
+        <div class="en-ref"><b>Nowhere is</b> this more evident than in the United States.</div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:5">
+      <span>💡</span>
+      <div>这部分是<b>拔高拓展</b>，能看懂即可，高考重点是前面的完全倒装和部分倒装。但 ④ 里的 <b>as 引导的定语/方式从句倒装</b>（as are/do/does…）在阅读和写作中很实用。</div>
+    </div>
+  </section>
+
+  <!-- 15 真题精练 -->
+  <section class="slide" data-title="真题精练" data-sec="五 · 真题精练">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">五 · 真题精练</span><h2>上海高考真题（倒装考点）</h2><span class="en">Gaokao Practice</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1"><div class="lead">1 · 语法填空（2018 春考）</div><div class="cn-src">I had expected to have more free time after my sons left for college… The kitchen calendar looks spare. <b>Rarely ___ I need</b> to prepare family dinner every day.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">do</div><div class="mark"><b>考点</b>：半否定词 rarely 句首，部分倒装，补助动词 do。</div></div></details></div>
+      <div class="ex anim" style="--i:2"><div class="lead">2 · 语法填空（2017 春考）</div><div class="cn-src"><b>Not only ___ the writers speak</b> with people who study culture and group behavior, but also they talked with animal experts like zookeepers.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">did</div><div class="mark"><b>考点</b>：Not only…but also，前句倒装后句不倒装，过去时补 did。</div></div></details></div>
+      <div class="ex anim" style="--i:3"><div class="lead">3 · 翻译（2019 春考）</div><div class="cn-src">让我的父母非常满意的是，从这个公寓的餐厅可以俯视街对面的世纪公园，<b>从起居室也可以</b>。(so)</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">…overlooks the Century Park opposite the street and <b>so it is with</b> the sitting room.／…, <b>so can they</b> from the living room.</div><div class="mark"><b>考点</b>：so 表示「也」，用 So + 助/情 + 主语 的倒装。</div></div></details></div>
+      <div class="ex anim" style="--i:4"><div class="lead">4 · 写作范文（2018 春考）</div><div class="cn-src"><b>So appealing is your plan</b> to introduce a robot to our school that I decide to respond to your asking for proposals.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">（so…that 结构）</div><div class="mark"><b>考点</b>：so 置于句首，主句部分倒装（So appealing is…），that 从句不倒装。</div></div></details></div>
+      <div class="ex anim" style="--i:5"><div class="lead">5 · 语境识别（2017 秋考）</div><div class="cn-src"><b>Not only do people seem more anxious</b> when animals are nearby, but they may also live longer.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">（Not only do… 已体现倒装）</div><div class="mark"><b>考点</b>：阅读中识别 Not only + 倒装结构，帮助理解句意。</div></div></details></div>
+      <div class="ex anim" style="--i:6"><div class="lead">6 · 语境识别（2023 春考）</div><div class="cn-src">Smith and others knew that the succession of life forms preserved as fossils is useful… <b>Only later did scientists develop</b> a theory to explain that succession.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">（Only + 状语 → 倒装）</div><div class="mark"><b>考点</b>：Only + 副词 later 句首，主句倒装（did scientists develop）。</div></div></details></div>
+    </div>
+  </section>
+
+  <!-- 16 小结 -->
+  <section class="slide" data-title="本章小结" data-sec="收尾">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">收尾</span><h2>本章小结</h2><span class="en">Summary</span></div>
+    <div class="grid g2">
+      <div class="sum-block anim" style="--i:1">
+        <h4><span class="dot" style="background:#9aa98d"></span>完全倒装（有-时-表-地-方）</h4>
+        <ul>
+          <li><b>有</b>：There be（可换 exist / stand / lie 等）。</li>
+          <li><b>时</b>：now / then 句首。</li>
+          <li><b>表</b>：形容词 / 过去分词 / 介词短语作表语前置。</li>
+          <li><b>地 / 方</b>：地点、方向副词/介词短语句首。</li>
+          <li><b>注意</b>：人称代词主语不倒装（Here you are）。</li>
+        </ul>
+      </div>
+      <div class="sum-block anim" style="--i:2">
+        <h4><span class="dot" style="background:#8a9aa8"></span>部分倒装（不-只-让步-也-常-如此-虚拟-祝福）</h4>
+        <ul>
+          <li><b>不</b>：否定词/短语、Not only、Not until、No sooner…than。</li>
+          <li><b>只</b>：only + 状语（修饰主语不倒装）。</li>
+          <li><b>让步</b>：表语/状语/动词原形 + as/though。</li>
+          <li><b>也</b>：So/Neither/Nor + 助情 + 主语。</li>
+          <li><b>虚拟</b>：were / had / should 省 if 提前。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:3">
+      <span>⚠️</span>
+      <div><b>最易失分的五处：</b>① 人称代词主语误倒装（Here you are 不倒装）；② only 修饰主语误倒装；③ Not only 后句也倒装（应前倒后不倒）；④ so 表示「确实如此」误倒装（So he has）；⑤ Child as he is 误带冠词。</div>
+    </div>
+    <div class="motto anim" style="--i:4">
+      先看句首是「地点方向 / 否定 only / 让步 so 也」· 再看提前的是「整个谓语还是助动词」 —— <span>倒装，一个框架拿下</span>
+    </div>
+  </section>
+
+</div>
+
+<div id="nav">
+  <button id="prev" aria-label="上一页" title="上一页 (←)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="counter"><b id="cur">1</b> / <span id="total">16</span></div>
+  <button id="next" aria-label="下一页" title="下一页 (→)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <button id="menuBtn" aria-label="目录" title="目录">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+    <span>目录</span>
+  </button>
+  <button id="fs" aria-label="全屏" title="全屏 (F)">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+  </button>
+</div>
+<div id="hint">← → 翻页 · 空格下一页 · F 全屏 · 左侧手柄抽拉目录</div>
+
+<div id="drawerTab" title="打开目录">
+  <span class="darr">▸</span><span>目 录</span>
+</div>
+<div id="drawerOverlay">
+  <div id="drawerPanel">
+    <div class="dp-head">
+      <div class="k">目录</div>
+      <h3>倒装</h3>
+      <div class="sub">形式倒装 · 完全倒装 · 部分倒装</div>
+      <button class="close" id="drawerClose" aria-label="关闭">✕</button>
+    </div>
+    <div id="drawerList"></div>
+  </div>
+</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  const curEl = document.getElementById('cur');
+  const totalEl = document.getElementById('total');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const fsBtn = document.getElementById('fs');
+  const menuBtn = document.getElementById('menuBtn');
+  const drawerTab = document.getElementById('drawerTab');
+  const drawerClose = document.getElementById('drawerClose');
+  const drawerOverlay = document.getElementById('drawerOverlay');
+  const drawerList = document.getElementById('drawerList');
+  const progress = document.getElementById('progress');
+  let idx = 0;
+  totalEl.textContent = total;
+
+  const SEC_COLORS = {
+    '封面':'#b99c6a', '导读':'#b99c6a', '收尾':'#b99c6a',
+    '一 · 形式倒装':'#c2a18b', '二 · 完全倒装':'#9aa98d',
+    '三 · 部分倒装':'#8a9aa8', '四 · 其他倒装结构':'#a49bb0',
+    '五 · 真题精练':'#c09892'
+  };
+
+  (function buildMenu(){
+    const groups = [];
+    const map = {};
+    slides.forEach((s,i)=>{
+      const sec = s.dataset.sec || '其他';
+      const title = s.dataset.title || ('第'+(i+1)+'页');
+      if(!map[sec]){ map[sec] = {sec, items:[]}; groups.push(map[sec]); }
+      map[sec].items.push({title, i});
+    });
+    groups.forEach(g=>{
+      const h = document.createElement('div');
+      h.className = 'dp-sec';
+      const c = SEC_COLORS[g.sec] || '#8a8378';
+      h.innerHTML = '<span class="swatch" style="background:'+c+'"></span><span>'+g.sec+'</span>';
+      drawerList.appendChild(h);
+      g.items.forEach(it=>{
+        const b = document.createElement('button');
+        b.className = 'dp-item';
+        b.innerHTML = '<span class="n">'+ (it.i+1) +'</span><span>'+ it.title +'</span>';
+        b.addEventListener('click', ()=>{ go(it.i); closeDrawer(); });
+        drawerList.appendChild(b);
+      });
+    });
+  })();
+
+  function render(){
+    slides.forEach((s,i)=>{
+      s.classList.toggle('active', i===idx);
+      s.classList.toggle('prev', i<idx);
+    });
+    curEl.textContent = idx+1;
+    progress.style.width = ((idx+1)/total*100) + '%';
+    prevBtn.disabled = idx===0;
+    nextBtn.disabled = idx===total-1;
+    Array.from(drawerList.querySelectorAll('.dp-item')).forEach((b,i)=>{
+      b.classList.toggle('active', i===idx);
+    });
+  }
+  function go(n){ idx = Math.max(0, Math.min(total-1, n)); render(); }
+  function closeDrawer(){ drawerOverlay.classList.remove('open'); drawerTab.querySelector('.darr').textContent='▸'; }
+  function openDrawer(){ drawerOverlay.classList.add('open'); drawerTab.querySelector('.darr').textContent='◂'; }
+
+  prevBtn.addEventListener('click', ()=>go(idx-1));
+  nextBtn.addEventListener('click', ()=>go(idx+1));
+  menuBtn.addEventListener('click', openDrawer);
+  drawerTab.addEventListener('click', openDrawer);
+  drawerClose.addEventListener('click', closeDrawer);
+  drawerOverlay.addEventListener('click', (e)=>{ if(e.target===drawerOverlay) closeDrawer(); });
+
+  document.addEventListener('keydown', (e)=>{
+    if(drawerOverlay.classList.contains('open')){
+      if(e.key==='Escape') closeDrawer();
+      return;
+    }
+    if(e.key==='ArrowRight' || e.key===' ' || e.key==='PageDown'){ e.preventDefault(); go(idx+1); }
+    else if(e.key==='ArrowLeft' || e.key==='PageUp'){ e.preventDefault(); go(idx-1); }
+    else if(e.key==='Home'){ go(0); }
+    else if(e.key==='End'){ go(total-1); }
+    else if(e.key==='m' || e.key==='M'){ openDrawer(); }
+    else if(e.key==='f' || e.key==='F'){
+      if(document.fullscreenElement){ document.exitFullscreen(); }
+      else { document.documentElement.requestFullscreen(); }
+    }
+  });
+  fsBtn.addEventListener('click', ()=>{
+    if(document.fullscreenElement){ document.exitFullscreen(); }
+    else { document.documentElement.requestFullscreen(); }
+  });
+  let touchX=null;
+  document.addEventListener('touchstart', e=>{ touchX=e.touches[0].clientX; });
+  document.addEventListener('touchend', e=>{
+    if(touchX===null) return;
+    const dx=e.changedTouches[0].clientX-touchX;
+    if(Math.abs(dx)>50){ dx<0?go(idx+1):go(idx-1); }
+    touchX=null;
+  });
+  render();
+</script>
+</body>
+</html>

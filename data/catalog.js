@@ -81,6 +81,11 @@ window.CATALOG = {
           title: "情态动词与虚拟语气课件",
           file: "courseware/情态动词与虚拟语气课件.html",
           added: "2026-10-22"
+        },
+        {
+          title: "倒装课件",
+          file: "courseware/倒装课件.html",
+          added: "2026-10-26"
         }
       ]
     },
