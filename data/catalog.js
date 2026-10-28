@@ -86,6 +86,16 @@ window.CATALOG = {
           title: "倒装课件",
           file: "courseware/倒装课件.html",
           added: "2026-10-26"
+        },
+        {
+          title: "反意疑问句课件",
+          file: "courseware/反意疑问句课件.html",
+          added: "2026-10-28"
+        },
+        {
+          title: "强调课件",
+          file: "courseware/强调课件.html",
+          added: "2026-10-28"
         }
       ]
     },

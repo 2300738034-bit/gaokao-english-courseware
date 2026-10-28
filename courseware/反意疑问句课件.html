@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高考英语语法 · 反意疑问句</title>
+<style>
+  :root{
+    --ink:#46413b;
+    --muted:#8c857b;
+    --line:#e6ded1;
+    --bg:#f4efe6;
+    --paper:#fcf9f3;
+    --paper-2:#f6f0e6;
+    --ink-soft:#5c564f;
+
+    --clay:#c2a18b;  --clay-deep:#9c7d68;  --clay-bg:#f4ece6;   /* 否定词陷阱 */
+    --sage:#9aa98d;  --sage-deep:#75856a;  --sage-bg:#eef1ea;   /* 特殊主语 */
+    --blue:#8a9aa8;  --blue-deep:#647887;  --blue-bg:#edf1f3;   /* 基本结构/助动词 */
+    --lav:#a49bb0;   --lav-deep:#7d7390;   --lav-bg:#f0edf3;    /* 祈使句/复合句 */
+    --rose:#c09892;  --rose-deep:#98706a;  --rose-bg:#f5ecea;   /* 特殊动词/真题 */
+
+    --gold:#b99c6a;  --gold-deep:#937a48;  --gold-bg:#f3ecdd;
+    --warn:#b48780;  --warn-deep:#966963;  --warn-bg:#f5e7e4;
+    --tip:#7e96a5;   --tip-bg:#edf1f3;
+
+    --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:var(--font);color:var(--ink);background:var(--bg);overflow:hidden;-webkit-font-smoothing:antialiased}
+
+  #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:58px 44px 96px}
+  .slide{position:absolute;width:min(1200px,100%);max-height:100%;background:var(--paper);border-radius:22px;box-shadow:0 26px 60px -26px rgba(92,82,66,.34), 0 0 0 1px rgba(92,82,66,.05);padding:44px 54px;opacity:0;transform:translateX(42px);pointer-events:none;transition:opacity .45s ease, transform .45s ease;overflow:hidden;display:flex;flex-direction:column}
+  .slide.active{opacity:1;transform:translateX(0);pointer-events:auto}
+  .slide.prev{transform:translateX(-42px)}
+  .slide .anim{opacity:0;transform:translateY(14px)}
+  .slide.active .anim{opacity:1;transform:none;transition:opacity .5s ease, transform .5s ease;transition-delay:calc(var(--i,0)*70ms + 60ms)}
+
+  .head{display:flex;align-items:center;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+  .part-badge{font-size:13px;font-weight:700;letter-spacing:.05em;color:#fff;background:var(--pc,#8a8378);padding:6px 15px;border-radius:99px;white-space:nowrap}
+  .head h2{font-size:28px;font-weight:800;letter-spacing:.01em;color:var(--ink)}
+  .head .en{font-size:14px;color:var(--muted);font-weight:600;margin-left:auto;white-space:nowrap}
+
+  .slide.cover{background:radial-gradient(900px 520px at 88% -10%, rgba(138,154,168,.34), transparent 60%),radial-gradient(720px 540px at -10% 112%, rgba(154,169,141,.36), transparent 55%),linear-gradient(135deg,#5c6b78 0%,#76838f 50%,#93a1ad 100%);color:#fff;justify-content:center}
+  .cover .brand-line{position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#8a9aa8,#a49bb0,#9aa98d,#c2a18b)}
+  .cover .tag{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#eef1f3;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);padding:7px 16px;border-radius:99px;margin-bottom:26px}
+  .cover h1{font-size:52px;font-weight:900;line-height:1.2;letter-spacing:.01em}
+  .cover h1 .hl{color:#e4d3ad}
+  .cover .sub{margin-top:18px;font-size:20px;color:#e7ebee;font-weight:500;line-height:1.7}
+  .cover .meta{margin-top:40px;display:flex;gap:28px;font-size:14px;color:#c9d3da;font-weight:600}
+  .cover .meta b{color:#fff}
+
+  .grid{display:grid;gap:15px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px 20px;position:relative;overflow:hidden}
+  .card .num{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:34px;border-radius:10px;font-size:16px;font-weight:800;color:#fff;background:var(--pc,#8a8378);margin-bottom:11px;padding:0 10px}
+  .card h4{font-size:19px;font-weight:800;margin-bottom:5px;color:var(--ink)}
+  .card .cn{font-size:13.5px;color:var(--muted);font-weight:600;line-height:1.5}
+  .card .frm{font-size:16px;font-weight:800;color:var(--pc,#8a8378);margin-top:9px;letter-spacing:.02em;font-family:"SF Mono",ui-monospace,monospace}
+  .card .eg{font-size:13.5px;color:#6f6a62;margin-top:8px;line-height:1.6;word-break:break-all}
+  .card .eg b{color:#3f3b35;font-weight:700}
+
+  .key{color:var(--pc-deep,#937a48);font-weight:800}
+  .gold{color:var(--gold-deep);font-weight:800}
+  .red{color:var(--warn-deep);font-weight:800}
+
+  .ex{background:var(--paper-2);border:1px solid var(--line);border-radius:15px;padding:16px 20px;margin-top:8px}
+  .ex + .ex{margin-top:14px}
+  .ex .lead{font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:11px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .ex .lead .pill{background:var(--gold-bg);color:var(--gold-deep)}
+  .cn-src{font-size:16.5px;font-weight:600;color:var(--ink);line-height:1.6}
+  .cn-src b{color:var(--gold-deep)}
+  .en-ref{font-size:16px;font-weight:700;color:var(--pc-deep,#5c7383);margin-top:9px;line-height:1.55;word-break:break-word}
+  .en-ref .mt{display:inline-block;font-size:12px;font-weight:800;color:#fff;background:var(--pc,#8a8378);border-radius:6px;padding:2px 8px;margin-right:8px;vertical-align:2px}
+  .ana{margin-top:10px;font-size:13.5px;color:#6f6a62;line-height:1.65}
+  .ana b{color:var(--gold-deep)}
+
+  .formula{background:var(--paper);border:1px dashed var(--line);border-radius:12px;padding:13px 16px;margin-top:10px;font-size:15px;font-weight:700;color:var(--ink)}
+  .formula .fb{display:inline-block;background:var(--pc,#8a8378);color:#fff;font-size:12px;font-weight:800;border-radius:6px;padding:2px 9px;margin-right:8px}
+
+  .note{display:flex;gap:12px;align-items:flex-start;background:var(--gold-bg);border:1px solid #e6d8ba;border-left:4px solid var(--gold);border-radius:12px;padding:13px 17px;margin-top:15px;font-size:15px;line-height:1.65}
+  .note .ico{font-size:18px;line-height:1.4}
+  .note b{color:var(--gold-deep)}
+
+  .tip{display:flex;gap:10px;align-items:flex-start;background:var(--tip-bg);border:1px solid #d5e0e4;border-left:4px solid var(--tip);border-radius:12px;padding:12px 16px;margin-top:13px;font-size:14.5px;line-height:1.65;color:var(--blue-deep)}
+  .tip b{color:var(--blue-deep)}
+
+  .warn{display:flex;gap:10px;align-items:flex-start;background:var(--warn-bg);border:1px solid #ecd2cd;border-left:4px solid var(--warn);border-radius:12px;padding:12px 16px;margin-top:13px;font-size:14.5px;line-height:1.65;color:var(--warn-deep)}
+  .warn b{color:var(--warn-deep)}
+
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+  .cols .ex{margin-top:0}
+
+  .wordlist{font-size:13.5px;color:#5c564f;line-height:1.9;background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-top:10px}
+  .wordlist b{color:var(--pc-deep,#5c7383)}
+
+  /* 选择题 */
+  .q{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-top:9px}
+  .q .qtxt{font-size:14.5px;line-height:1.6;color:#4c463c}
+  .q .qtxt b{color:var(--ink)}
+  .q .opts{font-size:13.5px;color:#6b655a;margin-top:6px;line-height:1.7}
+  .q .opts b{color:var(--ink)}
+
+  .reveal{margin-top:10px;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .reveal summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 15px;font-size:13.5px;font-weight:700;color:var(--pc-deep,#5c7383);background:var(--paper-2);user-select:none}
+  .reveal summary::-webkit-details-marker{display:none}
+  .reveal summary .caret{display:inline-block;transition:transform .2s;font-size:11px}
+  .reveal[open] summary .caret{transform:rotate(90deg)}
+  .reveal .ans{padding:13px 16px 15px;border-top:1px dashed var(--line);font-size:15px}
+  .reveal .ans .en{font-weight:800;color:var(--pc-deep,#5c7383);line-height:1.6}
+  .reveal .ans .mark{margin-top:8px;font-size:13px;color:#6f6a62;line-height:1.6}
+  .reveal .ans .mark b{color:var(--gold-deep)}
+  .q .reveal{margin-top:8px}
+  .q .reveal summary{padding:7px 12px;font-size:12.5px}
+  .q .reveal .ans{padding:9px 12px 11px;font-size:13.5px}
+
+  .sum-block{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:var(--paper)}
+  .sum-block h4{font-size:15.5px;font-weight:800;margin-bottom:11px;display:flex;align-items:center;gap:8px;color:var(--ink)}
+  .sum-block .dot{width:10px;height:10px;border-radius:3px;background:var(--pc,#8a8378)}
+  .sum-block ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .sum-block li{font-size:13.5px;color:#5c564f;line-height:1.55}
+  .sum-block li b{color:var(--ink)}
+
+  .motto{margin-top:20px;text-align:center;font-size:19px;font-weight:800;color:var(--ink);background:var(--gold-bg);border:1px solid #e6d8ba;border-radius:14px;padding:17px}
+  .motto span{color:var(--warn-deep)}
+
+  #nav{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);display:flex;align-items:center;gap:12px;z-index:50;background:rgba(252,249,243,.88);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:99px;padding:8px 12px;box-shadow:0 12px 32px -14px rgba(92,82,66,.32)}
+  #nav button{border:none;background:var(--paper);border:1px solid var(--line);width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#5c564f;transition:.15s}
+  #nav button:hover:not(:disabled){background:var(--paper-2);border-color:var(--gold);color:var(--gold-deep)}
+  #nav button:disabled{opacity:.35;cursor:default}
+  #nav .counter{font-size:14px;font-weight:700;color:#5c564f;min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
+  #nav .counter b{color:var(--gold-deep);font-size:16px}
+  #nav #menuBtn{width:auto;border-radius:99px;padding:0 16px;font-size:13px;font-weight:700;gap:7px}
+  #progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#8a9aa8,#9aa98d,#c2a18b,#a49bb0);z-index:60;width:0;transition:width .35s ease}
+  #hint{position:fixed;left:50%;transform:translateX(-50%);bottom:3px;font-size:12px;color:#b3ab9f;z-index:40;white-space:nowrap}
+
+  #drawerTab{position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:80;cursor:pointer;user-select:none;display:flex;align-items:center;gap:6px;padding:16px 10px;background:linear-gradient(180deg,#76838f,#5c6b78);color:#fff;border-radius:0 14px 14px 0;box-shadow:4px 8px 20px -8px rgba(92,82,66,.45);transition:padding .2s ease, box-shadow .2s ease;writing-mode:vertical-rl;letter-spacing:.3em;font-weight:800;font-size:14px}
+  #drawerTab:hover{padding:20px 11px;box-shadow:6px 12px 28px -8px rgba(92,82,66,.55)}
+  #drawerTab .darr{display:inline-block;transition:transform .25s ease;writing-mode:horizontal-tb;font-size:13px}
+
+  #drawerOverlay{position:fixed;inset:0;background:rgba(70,63,55,.34);backdrop-filter:blur(3px);z-index:85;opacity:0;pointer-events:none;transition:opacity .28s ease}
+  #drawerOverlay.open{opacity:1;pointer-events:auto}
+  #drawerPanel{position:fixed;top:0;left:0;bottom:0;width:min(360px,88vw);background:var(--paper);box-shadow:24px 0 50px -30px rgba(92,82,66,.5);z-index:86;transform:translateX(-100%);transition:transform .32s cubic-bezier(.22,.9,.3,1);display:flex;flex-direction:column}
+  #drawerOverlay.open #drawerPanel{transform:translateX(0)}
+  #drawerPanel .dp-head{padding:22px 22px 16px;border-bottom:1px solid var(--line);background:linear-gradient(135deg,#76838f 0%,#5c6b78 100%);color:#fff}
+  #drawerPanel .dp-head .k{font-size:12px;font-weight:700;letter-spacing:.12em;opacity:.8}
+  #drawerPanel .dp-head h3{font-size:19px;font-weight:800;margin-top:4px}
+  #drawerPanel .dp-head .sub{font-size:12px;opacity:.85;margin-top:3px}
+  #drawerPanel .dp-head .close{position:absolute;top:18px;right:18px;border:none;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:15px;color:#fff;line-height:1}
+  #drawerPanel .dp-head .close:hover{background:rgba(255,255,255,.28)}
+  #drawerList{overflow-y:auto;padding:10px 14px 34px;flex:1}
+  .dp-sec{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--muted);margin:18px 6px 6px}
+  .dp-sec .swatch{width:9px;height:9px;border-radius:3px}
+  .dp-item{display:flex;align-items:center;gap:11px;width:100%;text-align:left;padding:10px 12px;border:none;background:transparent;border-radius:10px;cursor:pointer;font-size:14px;color:#4c4740;transition:.13s}
+  .dp-item:hover{background:var(--paper-2)}
+  .dp-item.active{background:var(--gold-bg);color:var(--gold-deep);font-weight:700}
+  .dp-item .n{font-size:12px;font-weight:800;color:#b3ab9f;min-width:22px;text-align:right}
+
+  @media (max-width:900px){
+    #stage{padding:18px 14px 88px}
+    .slide{padding:26px 22px;border-radius:15px}
+    .g2,.g3,.g4,.cols{grid-template-columns:1fr 1fr}
+    .head h2{font-size:21px}
+    .cover h1{font-size:34px}
+    .cover .sub{font-size:16px}
+    .cn-src{font-size:15px}
+    #drawerTab{padding:13px 8px;font-size:12px}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<div id="stage">
+
+  <!-- 1 封面 -->
+  <section class="slide cover active" data-title="封面" data-sec="封面">
+    <div class="brand-line"></div>
+    <div class="anim" style="--i:0"><span class="tag">高考英语 · 语法专项</span></div>
+    <h1 class="anim" style="--i:1">反意<span class="hl">疑问句</span></h1>
+    <p class="sub anim" style="--i:2">前肯后否 · 前否后肯 —— 助动词 + 代词，两步拿下</p>
+    <div class="meta anim" style="--i:3">
+      <span>板块：<b>语法 · 反意疑问句</b></span>
+      <span>重点：<b>助动词确定 + 特殊主语 + 祈使句</b></span>
+    </div>
+  </section>
+
+  <!-- 2 导读 -->
+  <section class="slide" data-title="本章导读" data-sec="导读">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">导读</span><h2>反意疑问句是什么</h2><span class="en">Tag Question</span></div>
+    <p class="anim" style="--i:1;font-size:15.5px;color:#5c564f;line-height:1.75">反意疑问句 = <b class="gold">陈述句 + 简短反问</b>。说话人先陈述一个看法，再在句尾加一个很短的问句，<b>希望对方确认、同意</b>。核心规则只有一条：<b class="gold">前肯后否、前否后肯</b>，反意部分由「be 动词 / 助动词 / 情态动词 + 代词」构成。</p>
+    <div class="grid g4" style="margin-top:16px">
+      <div class="card anim" style="--i:2;--pc:#8a9aa8"><span class="num">1</span><h4>基本式</h4><div class="cn">前肯后否 / 前否后肯</div></div>
+      <div class="card anim" style="--i:3;--pc:#8a9aa8"><span class="num">2</span><h4>助动词</h4><div class="cn">跟着陈述句谓语走</div></div>
+      <div class="card anim" style="--i:4;--pc:#9aa98d"><span class="num">3</span><h4>主语</h4><div class="cn">换成对应代词</div></div>
+      <div class="card anim" style="--i:5;--pc:#c2a18b"><span class="num">4</span><h4>陷阱</h4><div class="cn">否定词 / 祈使句 / I think</div></div>
+    </div>
+    <div class="note anim" style="--i:6;margin-top:20px">
+      <span class="ico">🧭</span>
+      <div><b>一眼识别：</b>反意部分<b class="gold">永远很短</b>，只有两样东西——一个「be / 助 / 情态动词」加一个「代词」，时态、人称都跟着前面走。<b class="gold">主语换成代词</b>这一步，是丢分最多的地方。</div>
+    </div>
+  </section>
+
+  <!-- 3 基本结构 -->
+  <section class="slide" data-title="基本结构" data-sec="一 · 基本结构">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">一 · 基本结构</span><h2>前肯后否 · 前否后肯</h2><span class="en">Basic Pattern</span></div>
+    <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f">陈述句<b class="key">肯定</b> → 反意部分<b class="key">否定</b>；陈述句<b class="key">否定</b> → 反意部分<b class="key">肯定</b>。</p>
+    <div class="grid g2" style="margin-top:12px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">① 前肯后否</div>
+        <div class="en-ref">She is a teacher, <b>isn't she</b>?</div>
+        <div class="en-ref">He likes music, <b>doesn't he</b>?</div>
+        <div class="ana">她是老师，对吗？／他喜欢音乐，是吗？</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">② 前否后肯</div>
+        <div class="en-ref">She isn't a teacher, <b>is she</b>?</div>
+        <div class="en-ref">He doesn't like music, <b>does he</b>?</div>
+        <div class="ana">她不是老师，对吗？／他不喜欢音乐，是吗？</div>
+      </div>
+    </div>
+    <div class="formula anim" style="--i:4;--pc:#8a9aa8"><span class="fb">公式</span>陈述句（肯定/否定）＋ 反意部分（否定/肯定）</div>
+    <div class="note anim" style="--i:5">
+      <span class="ico">🔑</span>
+      <div><b>口诀：</b>「<b class="gold">前肯后否、前否后肯</b>」—— 肯定变否定（isn't / don't / can't），否定变肯定（is / do / can）。反意部分的主语一定换成<b class="gold">代词</b>。</div>
+    </div>
+  </section>
+
+  <!-- 4 助动词的确定 -->
+  <section class="slide" data-title="助动词的确定" data-sec="二 · 助动词">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">二 · 助动词</span><h2>反意部分用什么助动词</h2><span class="en">Auxiliary Verb</span></div>
+    <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f">这是<b class="key">最关键的第一步</b>：反意部分用什么 be 动词 / 助动词 / 情态动词，<b class="gold">完全看陈述句的谓语</b>。</p>
+    <div class="grid g2" style="margin-top:12px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">① 有 be → 用 be</div>
+        <div class="en-ref">He is a student, <b>isn't he</b>?</div>
+        <div class="en-ref">They were tired, <b>weren't they</b>?</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">② 有情态动词 → 用情态动词</div>
+        <div class="en-ref">She can swim, <b>can't she</b>?</div>
+        <div class="en-ref">You will come, <b>won't you</b>?</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">③ 有助动词（完成/进行）→ 用助动词</div>
+        <div class="en-ref">They have finished, <b>haven't they</b>?</div>
+        <div class="en-ref">She is reading, <b>isn't she</b>?</div>
+      </div>
+      <div class="ex anim" style="--i:5">
+        <div class="lead">④ 只有实义动词 → 补 do / does / did</div>
+        <div class="en-ref">He likes tea, <b>doesn't he</b>?</div>
+        <div class="en-ref">She went home, <b>didn't she</b>?</div>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:6">
+      <span>⚠️</span>
+      <div><b>三步走：</b>① 找到陈述句谓语 → ② 确定 be / 情态 / 助动词（没有就补 do/does/did）→ ③ 反义（肯定变否定、否定变肯定）。<b class="red">一般现在时第三人称补 does，一般过去时补 did，后面的动词都要还原。</b></div>
+    </div>
+  </section>
+
+  <!-- 5 特殊主语 -->
+  <section class="slide" data-title="特殊主语" data-sec="三 · 特殊主语">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#9aa98d">三 · 特殊主语</span><h2>反意部分的主语怎么换</h2><span class="en">Special Subjects</span></div>
+    <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f">反意部分的主语<b class="key">一律换成代词</b>，遇到这些特殊主语要特别记住：</p>
+    <div class="grid g2" style="margin-top:12px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">this / that → it　·　these / those → they</div>
+        <div class="en-ref">This is your book, <b>isn't it</b>?</div>
+        <div class="en-ref">These are yours, <b>aren't they</b>?</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">everything / nothing / something → it</div>
+        <div class="en-ref">Everything is ready, <b>isn't it</b>?</div>
+        <div class="en-ref">Nothing is wrong, <b>is it</b>?</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">everybody / someone / nobody → they</div>
+        <div class="en-ref">Everybody likes it, <b>don't they</b>?</div>
+        <div class="en-ref">Nobody came, <b>did they</b>?</div>
+      </div>
+      <div class="ex anim" style="--i:5">
+        <div class="lead">there be → there　·　不定式/从句 → it</div>
+        <div class="en-ref">There is a book, <b>isn't there</b>?</div>
+        <div class="en-ref">To learn English is useful, <b>isn't it</b>?</div>
+      </div>
+    </div>
+    <div class="note anim" style="--i:6">
+      <span class="ico">🔑</span>
+      <div><b>记两组：</b>物和事（this/that/everything/nothing/不定式/从句）→ <b class="gold">it</b>；人和复数（everybody/somebody/nobody/these/those）→ <b class="gold">they</b>；<b class="gold">there be</b> 结构反意部分还用 <b class="gold">there</b>。</div>
+    </div>
+  </section>
+
+  <!-- 6 否定词陷阱 -->
+  <section class="slide" data-title="否定词陷阱" data-sec="四 · 否定词">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c2a18b">四 · 否定词</span><h2>否定词 / 半否定词陷阱</h2><span class="en">Negative Words</span></div>
+    <div class="wordlist anim" style="--i:1"><b>否定/半否定词：</b>never、seldom、hardly、rarely、scarcely、little、few、nobody、nothing、none、no one、no + 名词　——　它们一出现，陈述句就<b>算否定</b>，反意部分用<b>肯定</b>。</div>
+    <div class="grid g2" style="margin-top:12px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">否定词 → 反意用肯定</div>
+        <div class="en-ref">He <b>never</b> comes late, <b>does he</b>?</div>
+        <div class="en-ref"><b>Few</b> people know him, <b>do they</b>?</div>
+        <div class="en-ref">She <b>hardly</b> eats meat, <b>does she</b>?</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">前缀否定（不算否定）→ 反意用否定</div>
+        <div class="en-ref">He is <b>un</b>happy, <b>isn't he</b>?</div>
+        <div class="en-ref">She <b>dis</b>likes it, <b>doesn't she</b>?</div>
+        <div class="en-ref">It's <b>im</b>possible, <b>isn't it</b>?</div>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:4">
+      <span>⚠️</span>
+      <div><b>判断标准：</b>看有没有<b class="gold">真正表否定的词</b>（never / little / nobody…），而不是看「词长得像不像否定」。加前缀 un-、in-、dis-、im- 的词意思还是肯定的，反意部分照常用<b class="red">否定</b>。</div>
+    </div>
+  </section>
+
+  <!-- 7 祈使句 -->
+  <section class="slide" data-title="祈使句" data-sec="五 · 祈使句">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a49bb0">五 · 祈使句</span><h2>祈使句的反意疑问</h2><span class="en">Imperative</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">肯定祈使句 → will you? / won't you?</div>
+        <div class="en-ref">Open the door, <b>will you</b>?</div>
+        <div class="en-ref">Sit down, <b>won't you</b>?</div>
+        <div class="ana">won't you 更委婉、更客气。</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">否定祈使句 → will you?</div>
+        <div class="en-ref">Don't be late, <b>will you</b>?</div>
+        <div class="en-ref">Don't make noise, <b>will you</b>?</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">Let's…（含对方）→ shall we?</div>
+        <div class="en-ref">Let's go, <b>shall we</b>?</div>
+        <div class="en-ref">Let's have a rest, <b>shall we</b>?</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">Let us…（请对方允许）→ will you?</div>
+        <div class="en-ref">Let us go, <b>will you</b>?</div>
+        <div class="en-ref">Let us in, <b>will you</b>?</div>
+      </div>
+    </div>
+    <div class="note anim" style="--i:5">
+      <span class="ico">🔑</span>
+      <div><b>一句话区分：</b><b class="gold">Let's（含对方）→ shall we</b>；<b class="gold">Let us（不含对方、请对方放行）→ will you</b>。其他祈使句，肯定用 will you / won't you，否定只用 will you。</div>
+    </div>
+  </section>
+
+  <!-- 8 复合句 -->
+  <section class="slide" data-title="复合句 I think" data-sec="六 · 复合句">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a49bb0">六 · 复合句</span><h2>I think / believe / suppose + 从句</h2><span class="en">Compound Sentence</span></div>
+    <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f">主句是 <b class="key">I / we + think / believe / suppose / expect / imagine / guess</b> 时，反意部分<b class="gold">与宾语从句一致</b>。</p>
+    <div class="grid g2" style="margin-top:12px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">① 肯定主句 → 与从句一致</div>
+        <div class="en-ref">I think he is right, <b>isn't he</b>?</div>
+        <div class="en-ref">I believe she will come, <b>won't she</b>?</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">② 否定转移 I don't think → 与从句一致（肯定）</div>
+        <div class="en-ref">I don't think he is right, <b>is he</b>?</div>
+        <div class="en-ref">I don't suppose she is at home, <b>is she</b>?</div>
+      </div>
+    </div>
+    <div class="ex anim" style="--i:4">
+      <div class="lead">③ 主语不是第一人称 → 与主句一致</div>
+      <div class="en-ref">She thinks he is right, <b>doesn't she</b>?</div>
+      <div class="ana">此时反意部分跟主句 She thinks，用 doesn't she。</div>
+    </div>
+    <div class="warn anim" style="--i:5">
+      <span>⚠️</span>
+      <div><b>只有 I / we + think/believe/suppose</b> 才「看从句」；<b class="red">主语换成 he/she/they</b> 就「看主句」。否定转移（I don't think…）时，反意部分跟着从句用<b class="red">肯定</b>。</div>
+    </div>
+  </section>
+
+  <!-- 9 特殊动词 -->
+  <section class="slide" data-title="特殊动词" data-sec="七 · 特殊动词">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">七 · 特殊动词</span><h2>must / have to / used to / need</h2><span class="en">Special Verbs</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">must 表「必须」→ needn't / mustn't</div>
+        <div class="en-ref">You must go now, <b>needn't you</b>?</div>
+        <div class="lead" style="margin-top:12px">mustn't 表「禁止」→ must</div>
+        <div class="en-ref">You mustn't smoke, <b>must you</b>?</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">must 表推测 → 按 must 后的动词</div>
+        <div class="en-ref">He must be a teacher, <b>isn't he</b>?</div>
+        <div class="en-ref">He must have seen it, <b>hasn't he</b>?</div>
+        <div class="en-ref">He must have seen it last night, <b>didn't he</b>?</div>
+        <div class="ana">有具体过去时间（last night）→ 用 did。</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">have to → do / does / did</div>
+        <div class="en-ref">He has to go, <b>doesn't he</b>?</div>
+        <div class="en-ref">She had to leave, <b>didn't she</b>?</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">used to → didn't　·　had better → hadn't</div>
+        <div class="en-ref">He used to smoke, <b>didn't he</b>?</div>
+        <div class="en-ref">You'd better go, <b>hadn't you</b>?</div>
+        <div class="ana">need / dare 作情态动词用 need / dare；作实义动词补 do。</div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:5">
+      <span>💡</span>
+      <div><b>最容易混的两组：</b><b>have to</b> 是实义动词短语 → 用 <b>do/does/did</b>（不是 haven't）；<b>must 表推测</b> → 反意部分用 must 后面的动词（is / have / did），<b>不直接跟 must</b>。</div>
+    </div>
+  </section>
+
+  <!-- 10 真题精练 -->
+  <section class="slide" data-title="真题精练" data-sec="八 · 真题精练">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">八 · 真题精练</span><h2>代表题 · 单项选择</h2><span class="en">Practice</span></div>
+    <div class="grid g2">
+      <div class="anim" style="--i:1">
+        <div class="q"><div class="qtxt"><b>1.</b> He has to finish the work before Friday, ___?</div><div class="opts">A. hasn't he　B. doesn't he　C. has he　D. does he</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B</div><div class="mark"><b>have to</b> 是实义短语 → 补 does；肯定 → doesn't he。</div></div></details></div>
+        <div class="q"><div class="qtxt"><b>2.</b> Let's go swimming this afternoon, ___?</div><div class="opts">A. will you　B. shall we　C. don't we　D. do we</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B</div><div class="mark"><b>Let's（含对方）</b>→ shall we。</div></div></details></div>
+        <div class="q"><div class="qtxt"><b>3.</b> I don't think he will come to the party, ___?</div><div class="opts">A. will he　B. won't he　C. do I　D. don't I</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A</div><div class="mark"><b>否定转移</b>：与从句一致、用肯定 → will he。</div></div></details></div>
+        <div class="q"><div class="qtxt"><b>4.</b> Nothing is wrong with the machine, ___?</div><div class="opts">A. is it　B. isn't it　C. is there　D. isn't there</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A</div><div class="mark"><b>nothing → it</b>，且 nothing 否定 → 用肯定 is it。</div></div></details></div>
+      </div>
+      <div class="anim" style="--i:2">
+        <div class="q"><div class="qtxt"><b>5.</b> She has never been to Beijing, ___?</div><div class="opts">A. hasn't she　B. has she　C. is she　D. isn't she</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B</div><div class="mark"><b>never</b> 否定 → 反意用肯定 has she。</div></div></details></div>
+        <div class="q"><div class="qtxt"><b>6.</b> Everybody has arrived, ___?</div><div class="opts">A. hasn't he　B. haven't they　C. hasn't everybody　D. has everybody</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B</div><div class="mark"><b>everybody → they</b>；肯定 → haven't they。</div></div></details></div>
+        <div class="q"><div class="qtxt"><b>7.</b> He is unhappy with the result, ___?</div><div class="opts">A. is he　B. isn't he　C. does he　D. doesn't he</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B</div><div class="mark"><b>unhappy</b> 前缀否定不算否定 → isn't he。</div></div></details></div>
+        <div class="q"><div class="qtxt"><b>8.</b> You must have seen the film last night, ___?</div><div class="opts">A. mustn't you　B. didn't you　C. haven't you　D. don't you</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B</div><div class="mark"><b>must have done + 具体过去时间</b> → didn't you。</div></div></details></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 小结 -->
+  <section class="slide" data-title="本章小结" data-sec="收尾">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">收尾</span><h2>本章小结</h2><span class="en">Summary</span></div>
+    <div class="grid g2">
+      <div class="sum-block anim" style="--i:1">
+        <h4><span class="dot" style="background:#8a9aa8"></span>两步法（先助动词，再代词）</h4>
+        <ul>
+          <li><b>助动词</b>：有 be 用 be，有情态用情态，有助动词用助动词，否则补 do/does/did。</li>
+          <li><b>主语</b>：物/事 → it；人/复数 → they；there be → there。</li>
+          <li><b>反义</b>：前肯后否、前否后肯。</li>
+        </ul>
+      </div>
+      <div class="sum-block anim" style="--i:2">
+        <h4><span class="dot" style="background:#c2a18b"></span>五大高频陷阱</h4>
+        <ul>
+          <li><b>否定词</b>：never/little/nobody → 反意用肯定。</li>
+          <li><b>前缀否定</b>：unhappy/dislike → 照常用否定。</li>
+          <li><b>祈使句</b>：Let's→shall we；Let us→will you。</li>
+          <li><b>I think</b>：看从句；I don't think → 从句用肯定。</li>
+          <li><b>must/have to</b>：must 推测看后面，have to 补 do。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:3">
+      <span>⚠️</span>
+      <div><b>最易失分的五处：</b>① 主语没换成代词（*…isn't the machine，错）；② have to 误用 haven't；③ everybody 误用 he；④ unhappy 误当否定；⑤ must 表推测时直接跟 must。</div>
+    </div>
+    <div class="motto anim" style="--i:4">
+      先定「助动词」· 再换「代词」· 最后「反义」 —— <span>反意疑问句，三步不丢分</span>
+    </div>
+  </section>
+
+</div>
+
+<div id="nav">
+  <button id="prev" aria-label="上一页" title="上一页 (←)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="counter"><b id="cur">1</b> / <span id="total">11</span></div>
+  <button id="next" aria-label="下一页" title="下一页 (→)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <button id="menuBtn" aria-label="目录" title="目录">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+    <span>目录</span>
+  </button>
+  <button id="fs" aria-label="全屏" title="全屏 (F)">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+  </button>
+</div>
+<div id="hint">← → 翻页 · 空格下一页 · F 全屏 · 左侧手柄抽拉目录</div>
+
+<div id="drawerTab" title="打开目录">
+  <span class="darr">▸</span><span>目 录</span>
+</div>
+<div id="drawerOverlay">
+  <div id="drawerPanel">
+    <div class="dp-head">
+      <div class="k">目录</div>
+      <h3>反意疑问句</h3>
+      <div class="sub">助动词 · 特殊主语 · 否定词 · 祈使句</div>
+      <button class="close" id="drawerClose" aria-label="关闭">✕</button>
+    </div>
+    <div id="drawerList"></div>
+  </div>
+</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  const curEl = document.getElementById('cur');
+  const totalEl = document.getElementById('total');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const fsBtn = document.getElementById('fs');
+  const menuBtn = document.getElementById('menuBtn');
+  const drawerTab = document.getElementById('drawerTab');
+  const drawerClose = document.getElementById('drawerClose');
+  const drawerOverlay = document.getElementById('drawerOverlay');
+  const drawerList = document.getElementById('drawerList');
+  const progress = document.getElementById('progress');
+  let idx = 0;
+  totalEl.textContent = total;
+
+  const SEC_COLORS = {
+    '封面':'#b99c6a', '导读':'#b99c6a', '收尾':'#b99c6a',
+    '一 · 基本结构':'#8a9aa8', '二 · 助动词':'#8a9aa8',
+    '三 · 特殊主语':'#9aa98d', '四 · 否定词':'#c2a18b',
+    '五 · 祈使句':'#a49bb0', '六 · 复合句':'#a49bb0',
+    '七 · 特殊动词':'#c09892', '八 · 真题精练':'#c09892'
+  };
+
+  (function buildMenu(){
+    const groups = [];
+    const map = {};
+    slides.forEach((s,i)=>{
+      const sec = s.dataset.sec || '其他';
+      const title = s.dataset.title || ('第'+(i+1)+'页');
+      if(!map[sec]){ map[sec] = {sec, items:[]}; groups.push(map[sec]); }
+      map[sec].items.push({title, i});
+    });
+    groups.forEach(g=>{
+      const h = document.createElement('div');
+      h.className = 'dp-sec';
+      const c = SEC_COLORS[g.sec] || '#8a8378';
+      h.innerHTML = '<span class="swatch" style="background:'+c+'"></span><span>'+g.sec+'</span>';
+      drawerList.appendChild(h);
+      g.items.forEach(it=>{
+        const b = document.createElement('button');
+        b.className = 'dp-item';
+        b.innerHTML = '<span class="n">'+ (it.i+1) +'</span><span>'+ it.title +'</span>';
+        b.addEventListener('click', ()=>{ go(it.i); closeDrawer(); });
+        drawerList.appendChild(b);
+      });
+    });
+  })();
+
+  function render(){
+    slides.forEach((s,i)=>{
+      s.classList.toggle('active', i===idx);
+      s.classList.toggle('prev', i<idx);
+    });
+    curEl.textContent = idx+1;
+    progress.style.width = ((idx+1)/total*100) + '%';
+    prevBtn.disabled = idx===0;
+    nextBtn.disabled = idx===total-1;
+    Array.from(drawerList.querySelectorAll('.dp-item')).forEach((b,i)=>{
+      b.classList.toggle('active', i===idx);
+    });
+  }
+  function go(n){ idx = Math.max(0, Math.min(total-1, n)); render(); }
+  function closeDrawer(){ drawerOverlay.classList.remove('open'); drawerTab.querySelector('.darr').textContent='▸'; }
+  function openDrawer(){ drawerOverlay.classList.add('open'); drawerTab.querySelector('.darr').textContent='◂'; }
+
+  prevBtn.addEventListener('click', ()=>go(idx-1));
+  nextBtn.addEventListener('click', ()=>go(idx+1));
+  menuBtn.addEventListener('click', openDrawer);
+  drawerTab.addEventListener('click', openDrawer);
+  drawerClose.addEventListener('click', closeDrawer);
+  drawerOverlay.addEventListener('click', (e)=>{ if(e.target===drawerOverlay) closeDrawer(); });
+
+  document.addEventListener('keydown', (e)=>{
+    if(drawerOverlay.classList.contains('open')){
+      if(e.key==='Escape') closeDrawer();
+      return;
+    }
+    if(e.key==='ArrowRight' || e.key===' ' || e.key==='PageDown'){ e.preventDefault(); go(idx+1); }
+    else if(e.key==='ArrowLeft' || e.key==='PageUp'){ e.preventDefault(); go(idx-1); }
+    else if(e.key==='Home'){ go(0); }
+    else if(e.key==='End'){ go(total-1); }
+    else if(e.key==='m' || e.key==='M'){ openDrawer(); }
+    else if(e.key==='f' || e.key==='F'){
+      if(document.fullscreenElement){ document.exitFullscreen(); }
+      else { document.documentElement.requestFullscreen(); }
+    }
+  });
+  fsBtn.addEventListener('click', ()=>{
+    if(document.fullscreenElement){ document.exitFullscreen(); }
+    else { document.documentElement.requestFullscreen(); }
+  });
+  let touchX=null;
+  document.addEventListener('touchstart', e=>{ touchX=e.touches[0].clientX; });
+  document.addEventListener('touchend', e=>{
+    if(touchX===null) return;
+    const dx=e.changedTouches[0].clientX-touchX;
+    if(Math.abs(dx)>50){ dx<0?go(idx+1):go(idx-1); }
+    touchX=null;
+  });
+  render();
+</script>
+</body>
+</html>

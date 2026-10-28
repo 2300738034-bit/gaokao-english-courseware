@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高考英语语法 · 强调</title>
+<style>
+  :root{
+    --ink:#46413b;
+    --muted:#8c857b;
+    --line:#e6ded1;
+    --bg:#f4efe6;
+    --paper:#fcf9f3;
+    --paper-2:#f6f0e6;
+    --ink-soft:#5c564f;
+
+    --clay:#c2a18b;  --clay-deep:#9c7d68;  --clay-bg:#f4ece6;   /* It is…that */
+    --sage:#9aa98d;  --sage-deep:#75856a;  --sage-bg:#eef1ea;   /* not…until */
+    --blue:#8a9aa8;  --blue-deep:#647887;  --blue-bg:#edf1f3;   /* 判断法 */
+    --lav:#a49bb0;   --lav-deep:#7d7390;   --lav-bg:#f0edf3;    /* 其他强调 */
+    --rose:#c09892;  --rose-deep:#98706a;  --rose-bg:#f5ecea;   /* do 强调/真题 */
+
+    --gold:#b99c6a;  --gold-deep:#937a48;  --gold-bg:#f3ecdd;
+    --warn:#b48780;  --warn-deep:#966963;  --warn-bg:#f5e7e4;
+    --tip:#7e96a5;   --tip-bg:#edf1f3;
+
+    --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:var(--font);color:var(--ink);background:var(--bg);overflow:hidden;-webkit-font-smoothing:antialiased}
+
+  #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:58px 44px 96px}
+  .slide{position:absolute;width:min(1200px,100%);max-height:100%;background:var(--paper);border-radius:22px;box-shadow:0 26px 60px -26px rgba(92,82,66,.34), 0 0 0 1px rgba(92,82,66,.05);padding:44px 54px;opacity:0;transform:translateX(42px);pointer-events:none;transition:opacity .45s ease, transform .45s ease;overflow:hidden;display:flex;flex-direction:column}
+  .slide.active{opacity:1;transform:translateX(0);pointer-events:auto}
+  .slide.prev{transform:translateX(-42px)}
+  .slide .anim{opacity:0;transform:translateY(14px)}
+  .slide.active .anim{opacity:1;transform:none;transition:opacity .5s ease, transform .5s ease;transition-delay:calc(var(--i,0)*70ms + 60ms)}
+
+  .head{display:flex;align-items:center;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+  .part-badge{font-size:13px;font-weight:700;letter-spacing:.05em;color:#fff;background:var(--pc,#8a8378);padding:6px 15px;border-radius:99px;white-space:nowrap}
+  .head h2{font-size:28px;font-weight:800;letter-spacing:.01em;color:var(--ink)}
+  .head .en{font-size:14px;color:var(--muted);font-weight:600;margin-left:auto;white-space:nowrap}
+
+  .slide.cover{background:radial-gradient(900px 520px at 88% -10%, rgba(194,161,139,.34), transparent 60%),radial-gradient(720px 540px at -10% 112%, rgba(192,152,146,.36), transparent 55%),linear-gradient(135deg,#8a6f5f 0%,#a08472 50%,#b69a8a 100%);color:#fff;justify-content:center}
+  .cover .brand-line{position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#c2a18b,#b99c6a,#c09892,#a49bb0)}
+  .cover .tag{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#f5ecea;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);padding:7px 16px;border-radius:99px;margin-bottom:26px}
+  .cover h1{font-size:52px;font-weight:900;line-height:1.2;letter-spacing:.01em}
+  .cover h1 .hl{color:#e9d8bd}
+  .cover .sub{margin-top:18px;font-size:20px;color:#f1ece9;font-weight:500;line-height:1.7}
+  .cover .meta{margin-top:40px;display:flex;gap:28px;font-size:14px;color:#d8ccc4;font-weight:600}
+  .cover .meta b{color:#fff}
+
+  .grid{display:grid;gap:15px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px 20px;position:relative;overflow:hidden}
+  .card .num{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:34px;border-radius:10px;font-size:16px;font-weight:800;color:#fff;background:var(--pc,#8a8378);margin-bottom:11px;padding:0 10px}
+  .card h4{font-size:19px;font-weight:800;margin-bottom:5px;color:var(--ink)}
+  .card .cn{font-size:13.5px;color:var(--muted);font-weight:600;line-height:1.5}
+  .card .frm{font-size:16px;font-weight:800;color:var(--pc,#8a8378);margin-top:9px;letter-spacing:.02em;font-family:"SF Mono",ui-monospace,monospace}
+  .card .eg{font-size:13.5px;color:#6f6a62;margin-top:8px;line-height:1.6;word-break:break-all}
+  .card .eg b{color:#3f3b35;font-weight:700}
+
+  .key{color:var(--pc-deep,#937a48);font-weight:800}
+  .gold{color:var(--gold-deep);font-weight:800}
+  .red{color:var(--warn-deep);font-weight:800}
+
+  .ex{background:var(--paper-2);border:1px solid var(--line);border-radius:15px;padding:16px 20px;margin-top:8px}
+  .ex + .ex{margin-top:14px}
+  .ex .lead{font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:11px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .cn-src{font-size:16.5px;font-weight:600;color:var(--ink);line-height:1.6}
+  .cn-src b{color:var(--gold-deep)}
+  .en-ref{font-size:16px;font-weight:700;color:var(--pc-deep,#5c7383);margin-top:9px;line-height:1.55;word-break:break-word}
+  .en-ref .mt{display:inline-block;font-size:12px;font-weight:800;color:#fff;background:var(--pc,#8a8378);border-radius:6px;padding:2px 8px;margin-right:8px;vertical-align:2px}
+  .ana{margin-top:10px;font-size:13.5px;color:#6f6a62;line-height:1.65}
+  .ana b{color:var(--gold-deep)}
+
+  .formula{background:var(--paper);border:1px dashed var(--line);border-radius:12px;padding:13px 16px;margin-top:10px;font-size:15px;font-weight:700;color:var(--ink)}
+  .formula .fb{display:inline-block;background:var(--pc,#8a8378);color:#fff;font-size:12px;font-weight:800;border-radius:6px;padding:2px 9px;margin-right:8px}
+
+  .note{display:flex;gap:12px;align-items:flex-start;background:var(--gold-bg);border:1px solid #e6d8ba;border-left:4px solid var(--gold);border-radius:12px;padding:13px 17px;margin-top:15px;font-size:15px;line-height:1.65}
+  .note .ico{font-size:18px;line-height:1.4}
+  .note b{color:var(--gold-deep)}
+
+  .tip{display:flex;gap:10px;align-items:flex-start;background:var(--tip-bg);border:1px solid #d5e0e4;border-left:4px solid var(--tip);border-radius:12px;padding:12px 16px;margin-top:13px;font-size:14.5px;line-height:1.65;color:var(--blue-deep)}
+  .tip b{color:var(--blue-deep)}
+
+  .warn{display:flex;gap:10px;align-items:flex-start;background:var(--warn-bg);border:1px solid #ecd2cd;border-left:4px solid var(--warn);border-radius:12px;padding:12px 16px;margin-top:13px;font-size:14.5px;line-height:1.65;color:var(--warn-deep)}
+  .warn b{color:var(--warn-deep)}
+
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+  .cols .ex{margin-top:0}
+
+  .wordlist{font-size:13.5px;color:#5c564f;line-height:1.9;background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-top:10px}
+  .wordlist b{color:var(--pc-deep,#5c7383)}
+
+  /* 选择题 */
+  .q{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-top:9px}
+  .q .qtxt{font-size:14.5px;line-height:1.6;color:#4c463c}
+  .q .qtxt b{color:var(--ink)}
+  .q .opts{font-size:13.5px;color:#6b655a;margin-top:6px;line-height:1.7}
+  .q .opts b{color:var(--ink)}
+
+  .reveal{margin-top:10px;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .reveal summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 15px;font-size:13.5px;font-weight:700;color:var(--pc-deep,#5c7383);background:var(--paper-2);user-select:none}
+  .reveal summary::-webkit-details-marker{display:none}
+  .reveal summary .caret{display:inline-block;transition:transform .2s;font-size:11px}
+  .reveal[open] summary .caret{transform:rotate(90deg)}
+  .reveal .ans{padding:13px 16px 15px;border-top:1px dashed var(--line);font-size:15px}
+  .reveal .ans .en{font-weight:800;color:var(--pc-deep,#5c7383);line-height:1.6}
+  .reveal .ans .mark{margin-top:8px;font-size:13px;color:#6f6a62;line-height:1.6}
+  .reveal .ans .mark b{color:var(--gold-deep)}
+  .q .reveal{margin-top:8px}
+  .q .reveal summary{padding:7px 12px;font-size:12.5px}
+  .q .reveal .ans{padding:9px 12px 11px;font-size:13.5px}
+
+  .sum-block{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:var(--paper)}
+  .sum-block h4{font-size:15.5px;font-weight:800;margin-bottom:11px;display:flex;align-items:center;gap:8px;color:var(--ink)}
+  .sum-block .dot{width:10px;height:10px;border-radius:3px;background:var(--pc,#8a8378)}
+  .sum-block ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .sum-block li{font-size:13.5px;color:#5c564f;line-height:1.55}
+  .sum-block li b{color:var(--ink)}
+
+  .motto{margin-top:20px;text-align:center;font-size:19px;font-weight:800;color:var(--ink);background:var(--gold-bg);border:1px solid #e6d8ba;border-radius:14px;padding:17px}
+  .motto span{color:var(--warn-deep)}
+
+  #nav{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);display:flex;align-items:center;gap:12px;z-index:50;background:rgba(252,249,243,.88);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:99px;padding:8px 12px;box-shadow:0 12px 32px -14px rgba(92,82,66,.32)}
+  #nav button{border:none;background:var(--paper);border:1px solid var(--line);width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#5c564f;transition:.15s}
+  #nav button:hover:not(:disabled){background:var(--paper-2);border-color:var(--gold);color:var(--gold-deep)}
+  #nav button:disabled{opacity:.35;cursor:default}
+  #nav .counter{font-size:14px;font-weight:700;color:#5c564f;min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
+  #nav .counter b{color:var(--gold-deep);font-size:16px}
+  #nav #menuBtn{width:auto;border-radius:99px;padding:0 16px;font-size:13px;font-weight:700;gap:7px}
+  #progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#c2a18b,#9aa98d,#c09892,#a49bb0);z-index:60;width:0;transition:width .35s ease}
+  #hint{position:fixed;left:50%;transform:translateX(-50%);bottom:3px;font-size:12px;color:#b3ab9f;z-index:40;white-space:nowrap}
+
+  #drawerTab{position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:80;cursor:pointer;user-select:none;display:flex;align-items:center;gap:6px;padding:16px 10px;background:linear-gradient(180deg,#a08472,#8a6f5f);color:#fff;border-radius:0 14px 14px 0;box-shadow:4px 8px 20px -8px rgba(92,82,66,.45);transition:padding .2s ease, box-shadow .2s ease;writing-mode:vertical-rl;letter-spacing:.3em;font-weight:800;font-size:14px}
+  #drawerTab:hover{padding:20px 11px;box-shadow:6px 12px 28px -8px rgba(92,82,66,.55)}
+  #drawerTab .darr{display:inline-block;transition:transform .25s ease;writing-mode:horizontal-tb;font-size:13px}
+
+  #drawerOverlay{position:fixed;inset:0;background:rgba(70,63,55,.34);backdrop-filter:blur(3px);z-index:85;opacity:0;pointer-events:none;transition:opacity .28s ease}
+  #drawerOverlay.open{opacity:1;pointer-events:auto}
+  #drawerPanel{position:fixed;top:0;left:0;bottom:0;width:min(360px,88vw);background:var(--paper);box-shadow:24px 0 50px -30px rgba(92,82,66,.5);z-index:86;transform:translateX(-100%);transition:transform .32s cubic-bezier(.22,.9,.3,1);display:flex;flex-direction:column}
+  #drawerOverlay.open #drawerPanel{transform:translateX(0)}
+  #drawerPanel .dp-head{padding:22px 22px 16px;border-bottom:1px solid var(--line);background:linear-gradient(135deg,#a08472 0%,#8a6f5f 100%);color:#fff}
+  #drawerPanel .dp-head .k{font-size:12px;font-weight:700;letter-spacing:.12em;opacity:.8}
+  #drawerPanel .dp-head h3{font-size:19px;font-weight:800;margin-top:4px}
+  #drawerPanel .dp-head .sub{font-size:12px;opacity:.85;margin-top:3px}
+  #drawerPanel .dp-head .close{position:absolute;top:18px;right:18px;border:none;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:15px;color:#fff;line-height:1}
+  #drawerPanel .dp-head .close:hover{background:rgba(255,255,255,.28)}
+  #drawerList{overflow-y:auto;padding:10px 14px 34px;flex:1}
+  .dp-sec{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--muted);margin:18px 6px 6px}
+  .dp-sec .swatch{width:9px;height:9px;border-radius:3px}
+  .dp-item{display:flex;align-items:center;gap:11px;width:100%;text-align:left;padding:10px 12px;border:none;background:transparent;border-radius:10px;cursor:pointer;font-size:14px;color:#4c4740;transition:.13s}
+  .dp-item:hover{background:var(--paper-2)}
+  .dp-item.active{background:var(--gold-bg);color:var(--gold-deep);font-weight:700}
+  .dp-item .n{font-size:12px;font-weight:800;color:#b3ab9f;min-width:22px;text-align:right}
+
+  @media (max-width:900px){
+    #stage{padding:18px 14px 88px}
+    .slide{padding:26px 22px;border-radius:15px}
+    .g2,.g3,.g4,.cols{grid-template-columns:1fr 1fr}
+    .head h2{font-size:21px}
+    .cover h1{font-size:34px}
+    .cover .sub{font-size:16px}
+    .cn-src{font-size:15px}
+    #drawerTab{padding:13px 8px;font-size:12px}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<div id="stage">
+
+  <!-- 1 封面 -->
+  <section class="slide cover active" data-title="封面" data-sec="封面">
+    <div class="brand-line"></div>
+    <div class="anim" style="--i:0"><span class="tag">高考英语 · 语法专项</span></div>
+    <h1 class="anim" style="--i:1">强<span class="hl">调</span></h1>
+    <p class="sub anim" style="--i:2">It is…that 强调句 · do 强调谓语 · 其他强调手段</p>
+    <div class="meta anim" style="--i:3">
+      <span>板块：<b>语法 · 强调</b></span>
+      <span>重点：<b>It is…that + 判断法</b></span>
+    </div>
+  </section>
+
+  <!-- 2 导读 -->
+  <section class="slide" data-title="本章导读" data-sec="导读">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">导读</span><h2>强调的几种方式</h2><span class="en">Emphasis</span></div>
+    <p class="anim" style="--i:1;font-size:15.5px;color:#5c564f;line-height:1.75">英语里要「突出某个成分」，主要有四种手段。高考的<b class="gold">绝对核心</b>是 <b class="gold">It is/was…that/who</b> 强调句，其次是 <b class="gold">do/does/did</b> 强调谓语动词。</p>
+    <div class="grid g4" style="margin-top:16px">
+      <div class="card anim" style="--i:2;--pc:#c2a18b"><span class="num">1</span><h4>It is…that</h4><div class="cn">强调句（核心）<br>强调主/宾/状语</div></div>
+      <div class="card anim" style="--i:3;--pc:#c09892"><span class="num">2</span><h4>do / does / did</h4><div class="cn">强调谓语动词<br>只用于肯定句</div></div>
+      <div class="card anim" style="--i:4;--pc:#a49bb0"><span class="num">3</span><h4>强调词</h4><div class="cn">the very / just / only<br>even / really</div></div>
+      <div class="card anim" style="--i:5;--pc:#9aa98d"><span class="num">4</span><h4>倒装 / what 从句</h4><div class="cn">Never have I…<br>What I want is…</div></div>
+    </div>
+    <div class="note anim" style="--i:6;margin-top:20px">
+      <span class="ico">🧭</span>
+      <div><b>一句话抓重点：</b>高考就考两件事——<b class="gold">① It is/was + 被强调部分 + that/who 的套用；② 用「去掉法」判断到底是不是强调句</b>。do 强调谓语是选择题的常客。</div>
+    </div>
+  </section>
+
+  <!-- 3 It is…that 基本结构 -->
+  <section class="slide" data-title="It is…that 结构" data-sec="一 · It is…that">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c2a18b">一 · It is…that</span><h2>强调句的基本结构</h2><span class="en">Emphatic Sentence</span></div>
+    <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f">原句：<b class="key">Tom broke the window yesterday.</b>　把要强调的部分塞进 <b class="gold">It was … that</b> 中间：</p>
+    <div class="grid g3" style="margin-top:12px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">强调主语</div>
+        <div class="en-ref">It was <b>Tom</b> that/who broke the window yesterday.</div>
+        <div class="ana">是汤姆（不是别人）昨天打破了窗户。</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">强调宾语</div>
+        <div class="en-ref">It was <b>the window</b> that Tom broke yesterday.</div>
+        <div class="ana">汤姆昨天打破的是窗户（不是别的）。</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">强调状语</div>
+        <div class="en-ref">It was <b>yesterday</b> that Tom broke the window.</div>
+        <div class="ana">汤姆是昨天（不是别的时间）打破窗户的。</div>
+      </div>
+    </div>
+    <div class="formula anim" style="--i:5;--pc:#c2a18b"><span class="fb">结构</span>It is/was + 被强调部分 + that/who + 句子的其余部分</div>
+    <div class="tip anim" style="--i:6">
+      <span>💡</span>
+      <div><b>连词选择：</b>强调<b class="gold">人</b>用 <b class="gold">that 或 who</b>；强调<b class="gold">物、时间、地点、原因等</b>一律用 <b class="gold">that</b>（<b class="red">不用 which、when、where</b>）。</div>
+    </div>
+  </section>
+
+  <!-- 4 时态与连词 -->
+  <section class="slide" data-title="时态与连词" data-sec="二 · 时态与连词">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c2a18b">二 · 时态与连词</span><h2>时态 & 主谓一致</h2><span class="en">Tense & Agreement</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">原句现在/将来 → It is　·　原句过去 → It was</div>
+        <div class="en-ref">It <b>is</b> Tom who is to blame.（现在）</div>
+        <div class="en-ref">It <b>was</b> Tom who broke it.（过去）</div>
+        <div class="ana">that 从句里的时态<b>仍按原句</b>，不受 It is/was 影响。</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">强调主语时，从句谓语与被强调主语一致</div>
+        <div class="en-ref">It <b>is I who am</b> responsible.</div>
+        <div class="en-ref">It <b>is he who is</b> wrong.</div>
+        <div class="ana">who 从句的动词跟「被强调的主语」走：I→am，he→is。</div>
+      </div>
+    </div>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="ex anim" style="--i:3">
+        <div class="lead">连词只用 that / who</div>
+        <div class="en-ref">It was <b>in the park that</b> we met.（✔ 强调地点状语）</div>
+        <div class="en-ref">It was <b>because he was ill that</b> he was absent.（✔ 强调原因）</div>
+        <div class="ana">即使强调时间/地点/原因，也<b>不用 when/where/why</b>。</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">被强调的人称代词用主格/宾格</div>
+        <div class="en-ref">It was <b>he</b> that broke the window.（主格）</div>
+        <div class="en-ref">It was <b>him that</b> we met yesterday.（宾格）</div>
+        <div class="ana">强调主语用主格，强调宾语用宾格。</div>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:5">
+      <span>⚠️</span>
+      <div><b>别用错连词：</b>强调句里连词<b class="red">只有 that 和 who</b>。看到 which、when、where、whose、whom 出现在 It is/was 后面，基本就不是强调句（或题目故意设陷阱）。</div>
+    </div>
+  </section>
+
+  <!-- 5 判断法 -->
+  <section class="slide" data-title="判断法" data-sec="三 · 判断法">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">三 · 判断法</span><h2>「去掉法」判断强调句</h2><span class="en">How to Judge</span></div>
+    <p class="anim" style="--i:1;font-size:15px;color:#5c564f">把 <b class="key">It is/was</b> 和 <b class="key">that/who</b> 同时去掉，句子<b class="gold">仍然完整、意思通顺</b>，就是强调句。</p>
+    <div class="grid g3" style="margin-top:12px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">✔ 强调句</div>
+        <div class="en-ref">It was <b>Tom</b> that broke the window.</div>
+        <div class="ana">去掉 → <b>Tom broke the window.</b>（完整）→ 强调句。</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">✘ 主语从句</div>
+        <div class="en-ref">It is <b>a pity</b> that you missed it.</div>
+        <div class="ana">去掉 → a pity you missed it.（不通）→ 主语从句。</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">✘ 定语从句</div>
+        <div class="en-ref">It was <b>the park</b> where we met.</div>
+        <div class="ana">去掉 → the park we met.（不通）→ 定语从句。</div>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:5">
+      <span>⚠️</span>
+      <div><b>经典对比例：</b><b class="gold">It was in the park that we met.</b>（强调地点状语，that）——去掉后「in the park we met」成立；<b class="gold">It was the park where we met.</b>（定语从句，where）——where 修饰 the park。这是选择题最爱考的区分。</div>
+    </div>
+  </section>
+
+  <!-- 6 not…until -->
+  <section class="slide" data-title="not…until 强调" data-sec="四 · not…until">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#9aa98d">四 · not…until</span><h2>强调 not…until</h2><span class="en">Emphatic not…until</span></div>
+    <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f">这是强调句的<b class="key">特殊形式</b>：把 not 提到 until 前，主句<b class="gold">恢复肯定</b>。</p>
+    <div class="grid g2" style="margin-top:12px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">原句</div>
+        <div class="en-ref">He didn't realize it until his teacher told him.</div>
+        <div class="ana">直到老师告诉他，他才意识到。</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">强调（not 移到 until 前）</div>
+        <div class="en-ref">It was <b>not until his teacher told him that</b> he realized it.</div>
+        <div class="ana">主句 didn't realize → 恢复肯定 realized。</div>
+      </div>
+    </div>
+    <div class="formula anim" style="--i:4;--pc:#9aa98d"><span class="fb">结构</span>It is/was not until + 时间/从句 + that + 肯定句</div>
+    <div class="note anim" style="--i:5">
+      <span class="ico">🔑</span>
+      <div><b>操作两步：</b>① 把 <b class="gold">not</b> 搬到 <b class="gold">until</b> 前面；② 主句的否定形式<b class="gold">还原成肯定</b>。倒装句里也一样：<b class="gold">Not until his teacher told him did he realize it.</b></div>
+    </div>
+  </section>
+
+  <!-- 7 do 强调 -->
+  <section class="slide" data-title="do 强调谓语" data-sec="五 · do 强调">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">五 · do 强调</span><h2>do / does / did 强调谓语</h2><span class="en">Emphatic do</span></div>
+    <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f">要强调「确实做了某件事」，在谓语动词前加 <b class="key">do / does / did</b>，动词用<b class="gold">原形</b>。</p>
+    <div class="grid g3" style="margin-top:12px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">一般现在时（第三人称 does）</div>
+        <div class="en-ref">He <b>does</b> like English.</div>
+        <div class="ana">他确实喜欢英语。</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">一般过去时（did）</div>
+        <div class="en-ref">He <b>did</b> go there yesterday.</div>
+        <div class="ana">他昨天确实去了。</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">祈使句（do）</div>
+        <div class="en-ref"><b>Do</b> come to my party!</div>
+        <div class="ana">一定要来我的聚会哦。</div>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:5">
+      <span>⚠️</span>
+      <div><b>三个限制：</b>① 只能用于<b class="gold">肯定句</b>；② 只能用于<b class="gold">一般现在时、一般过去时</b>；③ 后面动词用<b class="gold">原形</b>（does/did 后的动词还原）。否定句、其他时态、被动语态<b class="red">都不能</b>用 do 强调。</div>
+    </div>
+  </section>
+
+  <!-- 8 其他强调 -->
+  <section class="slide" data-title="其他强调" data-sec="六 · 其他强调">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a49bb0">六 · 其他强调</span><h2>其他强调手段</h2><span class="en">More Emphasis</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">① the very + 名词（正是）</div>
+        <div class="en-ref">This is <b>the very</b> book I want.</div>
+        <div class="en-ref">He is <b>the very</b> person we need.</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">② just / only / even / really / indeed</div>
+        <div class="en-ref">He <b>really</b> likes it.</div>
+        <div class="en-ref">It's <b>just</b> what I wanted.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">③ 倒装强调</div>
+        <div class="en-ref"><b>Never have I</b> seen such a sight.</div>
+        <div class="en-ref"><b>Only then did</b> he realize the truth.</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">④ what 从句 / 反身代词</div>
+        <div class="en-ref"><b>What I want is</b> your help.</div>
+        <div class="en-ref">I saw it <b>myself</b>.</div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:5">
+      <span>💡</span>
+      <div>这部分是<b>拔高拓展</b>，能看懂、写作中能模仿即可。高考重点是前面的 <b>It is…that</b> 和 <b>do 强调谓语</b>；③ 倒装强调与「倒装」一节可互相印证。</div>
+    </div>
+  </section>
+
+  <!-- 9 真题精练 -->
+  <section class="slide" data-title="真题精练" data-sec="七 · 真题精练">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">七 · 真题精练</span><h2>代表题 · 单项选择</h2><span class="en">Practice</span></div>
+    <div class="anim" style="--i:1">
+      <div class="q"><div class="qtxt"><b>1.</b> It was in 1998 ___ the flood destroyed the village.</div><div class="opts">A. that　B. when　C. which　D. where</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A</div><div class="mark">强调时间状语 in 1998 → 用 <b>that</b>（不用 when）。</div></div></details></div>
+      <div class="q"><div class="qtxt"><b>2.</b> It was not until she took off her dark glasses ___ I recognized her.</div><div class="opts">A. that　B. when　C. which　D. before</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A</div><div class="mark">强调 <b>not until</b> 结构 → 用 that。</div></div></details></div>
+      <div class="q"><div class="qtxt"><b>3.</b> — ___ was it that he got up so early this morning?<br>　　— To catch the early bus.</div><div class="opts">A. Why　B. When　C. What　D. Where</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A</div><div class="mark">答语表目的（To catch…）→ 用 <b>Why</b>。疑问强调句：疑问词 + was it that。</div></div></details></div>
+      <div class="q"><div class="qtxt"><b>4.</b> It was Tom ___ won the first prize in the English contest.</div><div class="opts">A. which　B. whom　C. who　D. when</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">C</div><div class="mark">强调人 Tom → 用 <b>who / that</b>。</div></div></details></div>
+      <div class="q"><div class="qtxt"><b>5.</b> It ___ because the weather was bad that the sports meeting was put off.</div><div class="opts">A. is　B. was　C. are　D. were</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B</div><div class="mark">原句过去时 → 用 <b>was</b>。</div></div></details></div>
+      <div class="q"><div class="qtxt"><b>6.</b> He doesn't speak French, but he ___ speak English very well.</div><div class="opts">A. does　B. do　C. did　D. is</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A</div><div class="mark"><b>do 强调谓语</b>，一般现在时第三人称 → does，后接动词原形 speak。</div></div></details></div>
+    </div>
+  </section>
+
+  <!-- 10 小结 -->
+  <section class="slide" data-title="本章小结" data-sec="收尾">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">收尾</span><h2>本章小结</h2><span class="en">Summary</span></div>
+    <div class="grid g2">
+      <div class="sum-block anim" style="--i:1">
+        <h4><span class="dot" style="background:#c2a18b"></span>It is/was…that/who 强调句</h4>
+        <ul>
+          <li><b>结构</b>：It is/was + 被强调部分 + that/who + 其余部分。</li>
+          <li><b>连词</b>：强调人用 who/that，其他一律 that。</li>
+          <li><b>时态</b>：现在/将来→is，过去→was；从句时态照原句。</li>
+          <li><b>判断</b>：去掉 It is/was…that/who 仍完整。</li>
+          <li><b>not until</b>：not 提前，主句恢复肯定。</li>
+        </ul>
+      </div>
+      <div class="sum-block anim" style="--i:2">
+        <h4><span class="dot" style="background:#c09892"></span>do 强调 & 其他</h4>
+        <ul>
+          <li><b>do/does/did + 动词原形</b>：只用于肯定句、一般现在/过去时。</li>
+          <li><b>the very + 名词</b>：正是。</li>
+          <li><b>倒装</b>：Never have I…／Only then did…</li>
+          <li><b>what 从句 / 反身代词</b>：What I want is…／I saw it myself。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:3">
+      <span>⚠️</span>
+      <div><b>最易失分的四处：</b>① 强调地点/时间/原因时误用 where/when/why（应用 that）；② 强调句与定语从句分不清（去掉法）；③ not…until 强调时主句没恢复肯定；④ do 强调后动词没还原。</div>
+    </div>
+    <div class="motto anim" style="--i:4">
+      先套「It is…that」· 再「去掉法」验身 · 动词用 do 强调 —— <span>强调，一个框架拿下</span>
+    </div>
+  </section>
+
+</div>
+
+<div id="nav">
+  <button id="prev" aria-label="上一页" title="上一页 (←)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="counter"><b id="cur">1</b> / <span id="total">10</span></div>
+  <button id="next" aria-label="下一页" title="下一页 (→)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <button id="menuBtn" aria-label="目录" title="目录">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+    <span>目录</span>
+  </button>
+  <button id="fs" aria-label="全屏" title="全屏 (F)">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+  </button>
+</div>
+<div id="hint">← → 翻页 · 空格下一页 · F 全屏 · 左侧手柄抽拉目录</div>
+
+<div id="drawerTab" title="打开目录">
+  <span class="darr">▸</span><span>目 录</span>
+</div>
+<div id="drawerOverlay">
+  <div id="drawerPanel">
+    <div class="dp-head">
+      <div class="k">目录</div>
+      <h3>强调</h3>
+      <div class="sub">It is…that · do 强调 · 其他强调</div>
+      <button class="close" id="drawerClose" aria-label="关闭">✕</button>
+    </div>
+    <div id="drawerList"></div>
+  </div>
+</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  const curEl = document.getElementById('cur');
+  const totalEl = document.getElementById('total');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const fsBtn = document.getElementById('fs');
+  const menuBtn = document.getElementById('menuBtn');
+  const drawerTab = document.getElementById('drawerTab');
+  const drawerClose = document.getElementById('drawerClose');
+  const drawerOverlay = document.getElementById('drawerOverlay');
+  const drawerList = document.getElementById('drawerList');
+  const progress = document.getElementById('progress');
+  let idx = 0;
+  totalEl.textContent = total;
+
+  const SEC_COLORS = {
+    '封面':'#b99c6a', '导读':'#b99c6a', '收尾':'#b99c6a',
+    '一 · It is…that':'#c2a18b', '二 · 时态与连词':'#c2a18b',
+    '三 · 判断法':'#8a9aa8', '四 · not…until':'#9aa98d',
+    '五 · do 强调':'#c09892', '六 · 其他强调':'#a49bb0',
+    '七 · 真题精练':'#c09892'
+  };
+
+  (function buildMenu(){
+    const groups = [];
+    const map = {};
+    slides.forEach((s,i)=>{
+      const sec = s.dataset.sec || '其他';
+      const title = s.dataset.title || ('第'+(i+1)+'页');
+      if(!map[sec]){ map[sec] = {sec, items:[]}; groups.push(map[sec]); }
+      map[sec].items.push({title, i});
+    });
+    groups.forEach(g=>{
+      const h = document.createElement('div');
+      h.className = 'dp-sec';
+      const c = SEC_COLORS[g.sec] || '#8a8378';
+      h.innerHTML = '<span class="swatch" style="background:'+c+'"></span><span>'+g.sec+'</span>';
+      drawerList.appendChild(h);
+      g.items.forEach(it=>{
+        const b = document.createElement('button');
+        b.className = 'dp-item';
+        b.innerHTML = '<span class="n">'+ (it.i+1) +'</span><span>'+ it.title +'</span>';
+        b.addEventListener('click', ()=>{ go(it.i); closeDrawer(); });
+        drawerList.appendChild(b);
+      });
+    });
+  })();
+
+  function render(){
+    slides.forEach((s,i)=>{
+      s.classList.toggle('active', i===idx);
+      s.classList.toggle('prev', i<idx);
+    });
+    curEl.textContent = idx+1;
+    progress.style.width = ((idx+1)/total*100) + '%';
+    prevBtn.disabled = idx===0;
+    nextBtn.disabled = idx===total-1;
+    Array.from(drawerList.querySelectorAll('.dp-item')).forEach((b,i)=>{
+      b.classList.toggle('active', i===idx);
+    });
+  }
+  function go(n){ idx = Math.max(0, Math.min(total-1, n)); render(); }
+  function closeDrawer(){ drawerOverlay.classList.remove('open'); drawerTab.querySelector('.darr').textContent='▸'; }
+  function openDrawer(){ drawerOverlay.classList.add('open'); drawerTab.querySelector('.darr').textContent='◂'; }
+
+  prevBtn.addEventListener('click', ()=>go(idx-1));
+  nextBtn.addEventListener('click', ()=>go(idx+1));
+  menuBtn.addEventListener('click', openDrawer);
+  drawerTab.addEventListener('click', openDrawer);
+  drawerClose.addEventListener('click', closeDrawer);
+  drawerOverlay.addEventListener('click', (e)=>{ if(e.target===drawerOverlay) closeDrawer(); });
+
+  document.addEventListener('keydown', (e)=>{
+    if(drawerOverlay.classList.contains('open')){
+      if(e.key==='Escape') closeDrawer();
+      return;
+    }
+    if(e.key==='ArrowRight' || e.key===' ' || e.key==='PageDown'){ e.preventDefault(); go(idx+1); }
+    else if(e.key==='ArrowLeft' || e.key==='PageUp'){ e.preventDefault(); go(idx-1); }
+    else if(e.key==='Home'){ go(0); }
+    else if(e.key==='End'){ go(total-1); }
+    else if(e.key==='m' || e.key==='M'){ openDrawer(); }
+    else if(e.key==='f' || e.key==='F'){
+      if(document.fullscreenElement){ document.exitFullscreen(); }
+      else { document.documentElement.requestFullscreen(); }
+    }
+  });
+  fsBtn.addEventListener('click', ()=>{
+    if(document.fullscreenElement){ document.exitFullscreen(); }
+    else { document.documentElement.requestFullscreen(); }
+  });
+  let touchX=null;
+  document.addEventListener('touchstart', e=>{ touchX=e.touches[0].clientX; });
+  document.addEventListener('touchend', e=>{
+    if(touchX===null) return;
+    const dx=e.changedTouches[0].clientX-touchX;
+    if(Math.abs(dx)>50){ dx<0?go(idx+1):go(idx-1); }
+    touchX=null;
+  });
+  render();
+</script>
+</body>
+</html>
