@@ -101,6 +101,11 @@ window.CATALOG = {
           title: "强调课件",
           file: "courseware/强调课件.html",
           added: "2026-10-28"
+        },
+        {
+          title: "否定课件",
+          file: "courseware/否定课件.html",
+          added: "2026-11-02"
         }
       ]
     },

@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高考英语语法 · 否定</title>
+<style>
+  :root{
+    --ink:#46413b;
+    --muted:#8c857b;
+    --line:#e6ded1;
+    --bg:#f4efe6;
+    --paper:#fcf9f3;
+    --paper-2:#f6f0e6;
+    --ink-soft:#5c564f;
+
+    --clay:#c2a18b;  --clay-deep:#9c7d68;  --clay-bg:#f4ece6;   /* 基本否定 */
+    --sage:#9aa98d;  --sage-deep:#75856a;  --sage-bg:#eef1ea;   /* 半否定/含蓄 */
+    --blue:#8a9aa8;  --blue-deep:#647887;  --blue-bg:#edf1f3;   /* 部分/全部否定 */
+    --lav:#a49bb0;   --lav-deep:#7d7390;   --lav-bg:#f0edf3;    /* 双重否定 */
+    --rose:#c09892;  --rose-deep:#98706a;  --rose-bg:#f5ecea;   /* 否定转移/真题 */
+
+    --gold:#b99c6a;  --gold-deep:#937a48;  --gold-bg:#f3ecdd;
+    --warn:#b48780;  --warn-deep:#966963;  --warn-bg:#f5e7e4;
+    --tip:#7e96a5;   --tip-bg:#edf1f3;
+
+    --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:var(--font);color:var(--ink);background:var(--bg);overflow:hidden;-webkit-font-smoothing:antialiased}
+
+  #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:58px 44px 96px}
+  .slide{position:absolute;width:min(1200px,100%);max-height:100%;background:var(--paper);border-radius:22px;box-shadow:0 26px 60px -26px rgba(92,82,66,.34), 0 0 0 1px rgba(92,82,66,.05);padding:44px 54px;opacity:0;transform:translateX(42px);pointer-events:none;transition:opacity .45s ease, transform .45s ease;overflow:hidden;display:flex;flex-direction:column}
+  .slide.active{opacity:1;transform:translateX(0);pointer-events:auto}
+  .slide.prev{transform:translateX(-42px)}
+  .slide .anim{opacity:0;transform:translateY(14px)}
+  .slide.active .anim{opacity:1;transform:none;transition:opacity .5s ease, transform .5s ease;transition-delay:calc(var(--i,0)*70ms + 60ms)}
+
+  .head{display:flex;align-items:center;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+  .part-badge{font-size:13px;font-weight:700;letter-spacing:.05em;color:#fff;background:var(--pc,#8a8378);padding:6px 15px;border-radius:99px;white-space:nowrap}
+  .head h2{font-size:28px;font-weight:800;letter-spacing:.01em;color:var(--ink)}
+  .head .en{font-size:14px;color:var(--muted);font-weight:600;margin-left:auto;white-space:nowrap}
+
+  .slide.cover{background:radial-gradient(900px 520px at 88% -10%, rgba(138,154,168,.38), transparent 60%),radial-gradient(720px 540px at -10% 112%, rgba(164,155,176,.36), transparent 55%),linear-gradient(135deg,#5f6d78 0%,#7d8a94 50%,#9aa6af 100%);color:#fff;justify-content:center}
+  .cover .brand-line{position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#c2a18b,#b99c6a,#c09892,#a49bb0)}
+  .cover .tag{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#e8eef1;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);padding:7px 16px;border-radius:99px;margin-bottom:26px}
+  .cover h1{font-size:52px;font-weight:900;line-height:1.2;letter-spacing:.01em}
+  .cover h1 .hl{color:#e9d8bd}
+  .cover .sub{margin-top:18px;font-size:20px;color:#eef2f4;font-weight:500;line-height:1.7}
+  .cover .meta{margin-top:40px;display:flex;gap:28px;font-size:14px;color:#cfd8dd;font-weight:600}
+  .cover .meta b{color:#fff}
+
+  .grid{display:grid;gap:15px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px 20px;position:relative;overflow:hidden}
+  .card .num{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:34px;border-radius:10px;font-size:16px;font-weight:800;color:#fff;background:var(--pc,#8a8378);margin-bottom:11px;padding:0 10px}
+  .card h4{font-size:19px;font-weight:800;margin-bottom:5px;color:var(--ink)}
+  .card .cn{font-size:13.5px;color:var(--muted);font-weight:600;line-height:1.5}
+  .card .frm{font-size:16px;font-weight:800;color:var(--pc,#8a8378);margin-top:9px;letter-spacing:.02em;font-family:"SF Mono",ui-monospace,monospace}
+  .card .eg{font-size:13.5px;color:#6f6a62;margin-top:8px;line-height:1.6;word-break:break-all}
+  .card .eg b{color:#3f3b35;font-weight:700}
+
+  .key{color:var(--pc-deep,#937a48);font-weight:800}
+  .gold{color:var(--gold-deep);font-weight:800}
+  .red{color:var(--warn-deep);font-weight:800}
+
+  .ex{background:var(--paper-2);border:1px solid var(--line);border-radius:15px;padding:16px 20px;margin-top:8px}
+  .ex + .ex{margin-top:14px}
+  .ex .lead{font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:11px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .cn-src{font-size:16.5px;font-weight:600;color:var(--ink);line-height:1.6}
+  .cn-src b{color:var(--gold-deep)}
+  .en-ref{font-size:16px;font-weight:700;color:var(--pc-deep,#5c7383);margin-top:9px;line-height:1.55;word-break:break-word}
+  .en-ref .mt{display:inline-block;font-size:12px;font-weight:800;color:#fff;background:var(--pc,#8a8378);border-radius:6px;padding:2px 8px;margin-right:8px;vertical-align:2px}
+  .ana{margin-top:10px;font-size:13.5px;color:#6f6a62;line-height:1.65}
+  .ana b{color:var(--gold-deep)}
+
+  .formula{background:var(--paper);border:1px dashed var(--line);border-radius:12px;padding:13px 16px;margin-top:10px;font-size:15px;font-weight:700;color:var(--ink)}
+  .formula .fb{display:inline-block;background:var(--pc,#8a8378);color:#fff;font-size:12px;font-weight:800;border-radius:6px;padding:2px 9px;margin-right:8px}
+
+  .note{display:flex;gap:12px;align-items:flex-start;background:var(--gold-bg);border:1px solid #e6d8ba;border-left:4px solid var(--gold);border-radius:12px;padding:13px 17px;margin-top:15px;font-size:15px;line-height:1.65}
+  .note .ico{font-size:18px;line-height:1.4}
+  .note b{color:var(--gold-deep)}
+
+  .tip{display:flex;gap:10px;align-items:flex-start;background:var(--tip-bg);border:1px solid #d5e0e4;border-left:4px solid var(--tip);border-radius:12px;padding:12px 16px;margin-top:13px;font-size:14.5px;line-height:1.65;color:var(--blue-deep)}
+  .tip b{color:var(--blue-deep)}
+
+  .warn{display:flex;gap:10px;align-items:flex-start;background:var(--warn-bg);border:1px solid #ecd2cd;border-left:4px solid var(--warn);border-radius:12px;padding:12px 16px;margin-top:13px;font-size:14.5px;line-height:1.65;color:var(--warn-deep)}
+  .warn b{color:var(--warn-deep)}
+
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+  .cols .ex{margin-top:0}
+
+  .wordlist{font-size:13.5px;color:#5c564f;line-height:1.9;background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-top:10px}
+  .wordlist b{color:var(--pc-deep,#5c7383)}
+
+  .cmp{width:100%;border-collapse:collapse;margin-top:10px;font-size:14px}
+  .cmp th,.cmp td{border:1px solid var(--line);padding:9px 12px;text-align:left}
+  .cmp th{background:var(--paper-2);font-weight:800;color:var(--ink);font-size:13px}
+  .cmp td b{color:var(--ink)}
+  .cmp .en{color:var(--pc-deep,#5c7383);font-weight:700}
+  .cmp .zh{color:#6f6a62;font-size:13px}
+
+  /* 选择题 */
+  .q{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-top:9px}
+  .q .qtxt{font-size:14.5px;line-height:1.6;color:#4c463c}
+  .q .qtxt b{color:var(--ink)}
+  .q .opts{font-size:13.5px;color:#6b655a;margin-top:6px;line-height:1.7}
+  .q .opts b{color:var(--ink)}
+
+  .reveal{margin-top:10px;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .reveal summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 15px;font-size:13.5px;font-weight:700;color:var(--pc-deep,#5c7383);background:var(--paper-2);user-select:none}
+  .reveal summary::-webkit-details-marker{display:none}
+  .reveal summary .caret{display:inline-block;transition:transform .2s;font-size:11px}
+  .reveal[open] summary .caret{transform:rotate(90deg)}
+  .reveal .ans{padding:13px 16px 15px;border-top:1px dashed var(--line);font-size:15px}
+  .reveal .ans .en{font-weight:800;color:var(--pc-deep,#5c7383);line-height:1.6}
+  .reveal .ans .mark{margin-top:8px;font-size:13px;color:#6f6a62;line-height:1.6}
+  .reveal .ans .mark b{color:var(--gold-deep)}
+  .q .reveal{margin-top:8px}
+  .q .reveal summary{padding:7px 12px;font-size:12.5px}
+  .q .reveal .ans{padding:9px 12px 11px;font-size:13.5px}
+
+  .sum-block{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:var(--paper)}
+  .sum-block h4{font-size:15.5px;font-weight:800;margin-bottom:11px;display:flex;align-items:center;gap:8px;color:var(--ink)}
+  .sum-block .dot{width:10px;height:10px;border-radius:3px;background:var(--pc,#8a8378)}
+  .sum-block ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .sum-block li{font-size:13.5px;color:#5c564f;line-height:1.55}
+  .sum-block li b{color:var(--ink)}
+
+  .motto{margin-top:20px;text-align:center;font-size:19px;font-weight:800;color:var(--ink);background:var(--gold-bg);border:1px solid #e6d8ba;border-radius:14px;padding:17px}
+  .motto span{color:var(--warn-deep)}
+
+  #nav{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);display:flex;align-items:center;gap:12px;z-index:50;background:rgba(252,249,243,.88);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:99px;padding:8px 12px;box-shadow:0 12px 32px -14px rgba(92,82,66,.32)}
+  #nav button{border:none;background:var(--paper);border:1px solid var(--line);width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#5c564f;transition:.15s}
+  #nav button:hover:not(:disabled){background:var(--paper-2);border-color:var(--gold);color:var(--gold-deep)}
+  #nav button:disabled{opacity:.35;cursor:default}
+  #nav .counter{font-size:14px;font-weight:700;color:#5c564f;min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
+  #nav .counter b{color:var(--gold-deep);font-size:16px}
+  #nav #menuBtn{width:auto;border-radius:99px;padding:0 16px;font-size:13px;font-weight:700;gap:7px}
+  #progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#c2a18b,#9aa98d,#c09892,#a49bb0);z-index:60;width:0;transition:width .35s ease}
+  #hint{position:fixed;left:50%;transform:translateX(-50%);bottom:3px;font-size:12px;color:#b3ab9f;z-index:40;white-space:nowrap}
+
+  #drawerTab{position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:80;cursor:pointer;user-select:none;display:flex;align-items:center;gap:6px;padding:16px 10px;background:linear-gradient(180deg,#7d8a94,#5f6d78);color:#fff;border-radius:0 14px 14px 0;box-shadow:4px 8px 20px -8px rgba(92,82,66,.45);transition:padding .2s ease, box-shadow .2s ease;writing-mode:vertical-rl;letter-spacing:.3em;font-weight:800;font-size:14px}
+  #drawerTab:hover{padding:20px 11px;box-shadow:6px 12px 28px -8px rgba(92,82,66,.55)}
+  #drawerTab .darr{display:inline-block;transition:transform .25s ease;writing-mode:horizontal-tb;font-size:13px}
+
+  #drawerOverlay{position:fixed;inset:0;background:rgba(70,63,55,.34);backdrop-filter:blur(3px);z-index:85;opacity:0;pointer-events:none;transition:opacity .28s ease}
+  #drawerOverlay.open{opacity:1;pointer-events:auto}
+  #drawerPanel{position:fixed;top:0;left:0;bottom:0;width:min(360px,88vw);background:var(--paper);box-shadow:24px 0 50px -30px rgba(92,82,66,.5);z-index:86;transform:translateX(-100%);transition:transform .32s cubic-bezier(.22,.9,.3,1);display:flex;flex-direction:column}
+  #drawerOverlay.open #drawerPanel{transform:translateX(0)}
+  #drawerPanel .dp-head{padding:22px 22px 16px;border-bottom:1px solid var(--line);background:linear-gradient(135deg,#7d8a94 0%,#5f6d78 100%);color:#fff}
+  #drawerPanel .dp-head .k{font-size:12px;font-weight:700;letter-spacing:.12em;opacity:.8}
+  #drawerPanel .dp-head h3{font-size:19px;font-weight:800;margin-top:4px}
+  #drawerPanel .dp-head .sub{font-size:12px;opacity:.85;margin-top:3px}
+  #drawerPanel .dp-head .close{position:absolute;top:18px;right:18px;border:none;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:15px;color:#fff;line-height:1}
+  #drawerPanel .dp-head .close:hover{background:rgba(255,255,255,.28)}
+  #drawerList{overflow-y:auto;padding:10px 14px 34px;flex:1}
+  .dp-sec{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--muted);margin:18px 6px 6px}
+  .dp-sec .swatch{width:9px;height:9px;border-radius:3px}
+  .dp-item{display:flex;align-items:center;gap:11px;width:100%;text-align:left;padding:10px 12px;border:none;background:transparent;border-radius:10px;cursor:pointer;font-size:14px;color:#4c4740;transition:.13s}
+  .dp-item:hover{background:var(--paper-2)}
+  .dp-item.active{background:var(--gold-bg);color:var(--gold-deep);font-weight:700}
+  .dp-item .n{font-size:12px;font-weight:800;color:#b3ab9f;min-width:22px;text-align:right}
+
+  @media (max-width:900px){
+    #stage{padding:18px 14px 88px}
+    .slide{padding:26px 22px;border-radius:15px}
+    .g2,.g3,.g4,.cols{grid-template-columns:1fr 1fr}
+    .head h2{font-size:21px}
+    .cover h1{font-size:34px}
+    .cover .sub{font-size:16px}
+    .cn-src{font-size:15px}
+    #drawerTab{padding:13px 8px;font-size:12px}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<div id="stage">
+
+  <!-- 1 封面 -->
+  <section class="slide cover active" data-title="封面" data-sec="封面">
+    <div class="brand-line"></div>
+    <div class="anim" style="--i:0"><span class="tag">高考英语 · 语法专项</span></div>
+    <h1 class="anim" style="--i:1">否<span class="hl">定</span></h1>
+    <p class="sub anim" style="--i:2">部分否定与全部否定 · 否定转移 · 半否定 · 双重否定</p>
+    <div class="meta anim" style="--i:3">
+      <span>板块：<b>语法 · 否定</b></span>
+      <span>重点：<b>all/both/every 的部分否定 + 否定转移</b></span>
+    </div>
+  </section>
+
+  <!-- 2 导读 -->
+  <section class="slide" data-title="本章导读" data-sec="导读">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">导读</span><h2>否定，不止一个 not</h2><span class="en">Negation</span></div>
+    <p class="anim" style="--i:1;font-size:15.5px;color:#5c564f;line-height:1.75">英语的否定远比「加个 not」复杂：有的否定「部分」，有的否定「全部」；有的否定「藏」在 think 的主句里；有的词本身就含否定。高考的<b class="gold">绝对核心</b>是 <b class="gold">部分否定 vs 全部否定</b> 与 <b class="gold">否定转移</b>。</p>
+    <div class="grid g4" style="margin-top:16px">
+      <div class="card anim" style="--i:2;--pc:#c2a18b"><span class="num">1</span><h4>基本否定</h4><div class="cn">not / no / never<br>直截了当地否定</div></div>
+      <div class="card anim" style="--i:3;--pc:#8a9aa8"><span class="num">2</span><h4>部分 vs 全部</h4><div class="cn">all/both/every + not<br>vs none/neither（核心）</div></div>
+      <div class="card anim" style="--i:4;--pc:#9aa98d"><span class="num">3</span><h4>半否定</h4><div class="cn">hardly / scarcely / seldom<br>little / few</div></div>
+      <div class="card anim" style="--i:5;--pc:#c09892"><span class="num">4</span><h4>否定转移 & 双重否定</h4><div class="cn">I don't think…<br>can't…too</div></div>
+    </div>
+    <div class="note anim" style="--i:6;margin-top:20px">
+      <span class="ico">🧭</span>
+      <div><b>一句话抓重点：</b>高考就考三件事——<b class="gold">① all/both/every 接 not 是「部分否定」（不是都）；② I don't think 是否定转移，翻译和反意疑问句都要「往从句挪」；③ hardly 这类半否定词自带否定义，反意疑问句要用肯定式</b>。</div>
+    </div>
+  </section>
+
+  <!-- 3 基本否定 -->
+  <section class="slide" data-title="基本否定" data-sec="一 · 基本否定">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c2a18b">一 · 基本否定</span><h2>not · no · never</h2><span class="en">Basic Negation</span></div>
+    <div class="grid g3">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">① not + 动词（含助/情态动词）</div>
+        <div class="en-ref">I do <b>not</b> like coffee.</div>
+        <div class="en-ref">She is <b>not</b> a student.</div>
+        <div class="ana">我不喜欢咖啡。/ 她不是学生。</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">② no + 名词（= not a / not any）</div>
+        <div class="en-ref">There is <b>no</b> water in the bottle.</div>
+        <div class="en-ref">I have <b>no</b> idea.</div>
+        <div class="ana">瓶子里没水。/ 我不知道。</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">③ never（从来不，语气强）</div>
+        <div class="en-ref">He <b>never</b> tells lies.</div>
+        <div class="en-ref">I have <b>never</b> been there.</div>
+        <div class="ana">他从不说谎。/ 我从没去过那儿。</div>
+      </div>
+    </div>
+    <div class="formula anim" style="--i:4;--pc:#c2a18b"><span class="fb">结构</span>not + 动词 / no + 名词 / never</div>
+    <div class="tip anim" style="--i:5">
+      <span>💡</span>
+      <div><b>not 与 no 的区别：</b><b class="gold">no</b> 直接放在名词前，相当于 <b class="gold">not a / not any + 名词</b>——<b class="gold">no time = not any time</b>，<b class="gold">no problem = not a problem</b>。no 的否定语气比 not 更坚决。</div>
+    </div>
+  </section>
+
+  <!-- 4 部分否定 -->
+  <section class="slide" data-title="部分否定" data-sec="二 · 部分否定">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">二 · 部分否定</span><h2>「并非都」—— all / both / every + not</h2><span class="en">Partial Negation</span></div>
+    <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f"><b class="key">all / both / every / everyone / everything</b> 与 not 连用时，意思是「<b class="gold">不是全部都……</b>」，只否定一部分。</p>
+    <div class="grid g2" style="margin-top:12px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">not + all</div>
+        <div class="en-ref"><b>Not all</b> the students passed the exam.</div>
+        <div class="ana">并非所有学生都通过了（有的过了，有的没过）。</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">all…not（否定在后同样表部分）</div>
+        <div class="en-ref"><b>All</b> that glitters is <b>not</b> gold.</div>
+        <div class="ana">闪光的未必都是金子。</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">not + both</div>
+        <div class="en-ref"><b>Both</b> of them are <b>not</b> from Shanghai.</div>
+        <div class="ana">并非两人都来自上海（只有一人是）。</div>
+      </div>
+      <div class="ex anim" style="--i:5">
+        <div class="lead">not + every / everyone</div>
+        <div class="en-ref"><b>Not everyone</b> likes pop music.</div>
+        <div class="ana">并非人人都喜欢流行音乐。</div>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:6">
+      <span>⚠️</span>
+      <div><b>最易掉进的坑：</b>中国人习惯说「大家都不喜欢」说成 All…not，但英语里 <b class="red">All…not 是「并非都」</b>，不是「都不」。「都不」要用 <b class="gold">none / neither / no one</b>（见下页）。</div>
+    </div>
+  </section>
+
+  <!-- 5 全部否定 -->
+  <section class="slide" data-title="全部否定" data-sec="三 · 全部否定">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">三 · 全部否定</span><h2>「一个都不」—— none / neither / no one</h2><span class="en">Total Negation</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">none（三者及以上「全都不」）</div>
+        <div class="en-ref"><b>None</b> of the students passed.</div>
+        <div class="ana">没有一个学生通过。</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">neither（两者「都不」）</div>
+        <div class="en-ref"><b>Neither</b> of the two answers is correct.</div>
+        <div class="ana">两个答案都不对。</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">no one / nobody（没有人）</div>
+        <div class="en-ref"><b>No one</b> knows the secret.</div>
+        <div class="ana">没有人知道这个秘密。</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">nothing / nowhere</div>
+        <div class="en-ref"><b>Nothing</b> is impossible.</div>
+        <div class="ana">一切皆有可能（没有不可能）。</div>
+      </div>
+    </div>
+    <table class="cmp anim" style="--i:5">
+      <tr><th>形式</th><th>含 not 的「部分否定」</th><th>全部否定词</th></tr>
+      <tr><td><b>三者以上</b></td><td><span class="en">all…not / not all</span> <span class="zh">并非都</span></td><td><span class="en">none</span> <span class="zh">都不</span></td></tr>
+      <tr><td><b>两者</b></td><td><span class="en">both…not / not both</span> <span class="zh">并非两个都</span></td><td><span class="en">neither</span> <span class="zh">两个都不</span></td></tr>
+      <tr><td><b>每一个</b></td><td><span class="en">every…not / not every</span> <span class="zh">并非每个</span></td><td><span class="en">no one / nothing</span> <span class="zh">没人 / 没物</span></td></tr>
+    </table>
+    <div class="note anim" style="--i:6">
+      <span class="ico">🔑</span>
+      <div><b>口诀：</b><b class="gold">all / both / every + not = 部分（不是都）</b>；<b class="gold">none / neither / no one + 肯定动词 = 全部（都不）</b>。neither/none 作主语时谓语一般用<b class="gold">单数</b>。</div>
+    </div>
+  </section>
+
+  <!-- 6 半否定 -->
+  <section class="slide" data-title="半否定" data-sec="四 · 半否定">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#9aa98d">四 · 半否定</span><h2>hardly · scarcely · seldom · little / few</h2><span class="en">Semi-negation</span></div>
+    <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f">这些词<b class="key">本身含否定意义</b>（几乎不/很少），句子里<b class="gold">不能再加 not</b>，否则又变回肯定。</p>
+    <div class="grid g3" style="margin-top:12px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">hardly / scarcely（几乎不）</div>
+        <div class="en-ref">I can <b>hardly</b> believe it.</div>
+        <div class="ana">我几乎不敢相信。</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">seldom / rarely（很少）</div>
+        <div class="en-ref">He <b>seldom</b> goes out.</div>
+        <div class="ana">他很少出门。</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">little / few（几乎没有）</div>
+        <div class="en-ref"><b>Few</b> people know the answer.</div>
+        <div class="ana">几乎没人知道答案。</div>
+      </div>
+    </div>
+    <div class="ex anim" style="--i:5">
+      <div class="lead">hardly / scarcely…when…　＝「一……就……」</div>
+      <div class="en-ref"><b>Hardly had</b> I got home <b>when</b> it began to rain.</div>
+      <div class="ana">我刚一到家，天就下起雨来（hardly 置于句首要倒装）。</div>
+    </div>
+    <div class="warn anim" style="--i:6">
+      <span>⚠️</span>
+      <div><b>反意疑问句陷阱：</b>半否定词视为否定，反意疑问句用<b class="red">肯定式</b>——<b class="gold">He seldom goes out, does he?</b>　<b class="gold">I can hardly believe it, can I?</b></div>
+    </div>
+  </section>
+
+  <!-- 7 否定转移 -->
+  <section class="slide" data-title="否定转移" data-sec="五 · 否定转移">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">五 · 否定转移</span><h2>I don't think…　否定「挪」进主句</h2><span class="en">Transferred Negation</span></div>
+    <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f">当主句动词是 <b class="key">think / believe / suppose / expect / imagine / guess</b> 等，否定宾语从句时，<b class="gold">把 not 提前到主句</b>（其实否定的是从句）。</p>
+    <div class="grid g2" style="margin-top:12px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">否定转移</div>
+        <div class="en-ref">I <b>don't think</b> (that) he is right.</div>
+        <div class="ana">我认为他<b>不</b>对（不说 I think he is not right）。</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">同类动词</div>
+        <div class="en-ref">I <b>don't believe</b> she will come.</div>
+        <div class="en-ref">I <b>don't suppose</b> it matters.</div>
+        <div class="ana">我相信她不会来。/ 我想那无关紧要。</div>
+      </div>
+    </div>
+    <div class="formula anim" style="--i:4;--pc:#c09892"><span class="fb">结构</span>I don't + think/believe/suppose… + 宾语从句</div>
+    <div class="warn anim" style="--i:5">
+      <span>⚠️</span>
+      <div><b>反意疑问句跟着从句走：</b>not 已转移到主句，从句实际是肯定含义，附加问句用<b class="red">肯定式</b>——<b class="gold">I don't think he is right, is he?</b>（对，是问「he is right」，用 is he）。</div>
+    </div>
+  </section>
+
+  <!-- 8 双重否定 -->
+  <section class="slide" data-title="双重否定" data-sec="六 · 双重否定">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a49bb0">六 · 双重否定</span><h2>负负得正，语气更强</h2><span class="en">Double Negation</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">① not…without（没有…就不…）</div>
+        <div class="en-ref">You <b>can't succeed without</b> hard work.</div>
+        <div class="ana">不努力就不会成功（＝只有努力才能成功）。</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">② no…without / never…without</div>
+        <div class="en-ref">There is <b>no</b> rule <b>without</b> exceptions.</div>
+        <div class="ana">没有规则没有例外（凡规则皆有例外）。</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">③ cannot…too（再…也不为过）</div>
+        <div class="en-ref">You <b>can't be too</b> careful when driving.</div>
+        <div class="ana">开车再怎么小心也不为过。</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">④ can't help doing（忍不住）</div>
+        <div class="en-ref">I <b>can't help</b> laughing.</div>
+        <div class="ana">我忍不住笑了。</div>
+      </div>
+    </div>
+    <div class="note anim" style="--i:5">
+      <span class="ico">🔑</span>
+      <div><b>重点记 cannot…too：</b>它是「<b class="gold">再…也不为过</b>」的肯定义，不是「太…而不能」。选择题常考 <b class="gold">You can't be too careful</b> 后接 <b class="gold">too</b> 而非 very / so / quite。</div>
+    </div>
+  </section>
+
+  <!-- 9 否定词缀 -->
+  <section class="slide" data-title="否定词缀" data-sec="七 · 否定词缀">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c2a18b">七 · 否定词缀</span><h2>加个词缀，单词变否定</h2><span class="en">Negative Affixes</span></div>
+    <div class="grid g3">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">un-（不/无）</div>
+        <div class="en-ref">happy → <b>un</b>happy · fair → <b>un</b>fair</div>
+        <div class="ana">不快乐 / 不公平</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">in- / im- / il- / ir-</div>
+        <div class="en-ref">correct → <b>in</b>correct · possible → <b>im</b>possible</div>
+        <div class="ana">legal → <b>il</b>legal · regular → <b>ir</b>regular</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">dis-（不/相反）</div>
+        <div class="en-ref">agree → <b>dis</b>agree · like → <b>dis</b>like</div>
+        <div class="ana">不同意 / 不喜欢</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">non-（非/无）</div>
+        <div class="en-ref">stop → <b>non</b>stop · smoker → <b>non</b>-smoker</div>
+        <div class="ana">不停的 / 不吸烟者</div>
+      </div>
+      <div class="ex anim" style="--i:5">
+        <div class="lead">-less（无…的）</div>
+        <div class="en-ref">care → care<b>less</b> · home → home<b>less</b></div>
+        <div class="ana">粗心的 / 无家可归的</div>
+      </div>
+      <div class="ex anim" style="--i:6">
+        <div class="lead">mis-（错误地，非纯否定）</div>
+        <div class="en-ref">understand → <b>mis</b>understand · lead → <b>mis</b>lead</div>
+        <div class="ana">误解 / 误导</div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:7">
+      <span>💡</span>
+      <div><b>拼写规律：</b><b class="gold">im-</b> 用于 b/m/p 开头（impossible, impolite, impatient）；<b class="gold">il-</b> 用于 l 开头（illegal）；<b class="gold">ir-</b> 用于 r 开头（irregular）；其余多用 <b class="gold">in-</b>。写作中换用词缀是让表达更高级的诀窍。</div>
+    </div>
+  </section>
+
+  <!-- 10 含蓄否定 -->
+  <section class="slide" data-title="含蓄否定" data-sec="八 · 含蓄否定">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#9aa98d">八 · 含蓄否定</span><h2>用肯定形式「藏着」否定</h2><span class="en">Implied Negation</span></div>
+    <div class="grid g3">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">too…to（太…而不能）</div>
+        <div class="en-ref">He is <b>too</b> young <b>to</b> go to school.</div>
+        <div class="ana">他太小，不能上学。</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">fail to do（未能）</div>
+        <div class="en-ref">He <b>failed to</b> pass the exam.</div>
+        <div class="ana">他未能通过考试。</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">far from（远非）</div>
+        <div class="en-ref">The result is <b>far from</b> satisfactory.</div>
+        <div class="ana">结果远非令人满意。</div>
+      </div>
+    </div>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="ex anim" style="--i:4">
+        <div class="lead">anything but（＝绝不 / 一点也不）</div>
+        <div class="en-ref">He is <b>anything but</b> lazy.</div>
+        <div class="ana">他一点也不懒（＝ He is not lazy at all）。</div>
+      </div>
+      <div class="ex anim" style="--i:5">
+        <div class="lead">nothing but（＝仅仅 / 只不过）</div>
+        <div class="en-ref">He is <b>nothing but</b> a child.</div>
+        <div class="ana">他只不过是个孩子（＝ only）。</div>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:6">
+      <span>⚠️</span>
+      <div><b>一组最易混的对比：</b><b class="gold">anything but = 绝不是</b>（表否定）；<b class="gold">nothing but = 只是</b>（表限定）。一字之差，意思完全相反。</div>
+    </div>
+  </section>
+
+  <!-- 11 易混辨析 -->
+  <section class="slide" data-title="易混辨析" data-sec="九 · 易混辨析">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">九 · 易混辨析</span><h2>只差一个词，意思大不同</h2><span class="en">Confusing Pairs</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">not a bit（一点也不）　vs　not a little（非常）</div>
+        <div class="en-ref">I'm <b>not a bit</b> tired. → 我一点也不累。</div>
+        <div class="en-ref">I'm <b>not a little</b> tired. → 我累极了。</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">no more than（仅仅）　vs　not more than（至多）</div>
+        <div class="en-ref">He is <b>no more than</b> 10 years old. → 他年仅 10 岁。</div>
+        <div class="en-ref">He is <b>not more than</b> 10. → 他至多 10 岁。</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">no less than（多达）　vs　not less than（至少）</div>
+        <div class="en-ref"><b>No less than</b> 100 people came. → 来了多达 100 人。</div>
+        <div class="en-ref"><b>Not less than</b> 100 came. → 至少来了 100 人。</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">no more…than（和…一样不）　vs　not more…than（不如）</div>
+        <div class="en-ref">He is <b>no more</b> diligent <b>than</b> you. → 他和你一样不用功。</div>
+        <div class="en-ref">He is <b>not more</b> diligent <b>than</b> you. → 他不如你用功。</div>
+      </div>
+    </div>
+    <div class="note anim" style="--i:5">
+      <span class="ico">🔑</span>
+      <div><b>规律：</b><b class="gold">no + 比较级</b> 常表「强调」的主观色彩（no more than=只有、no less than=多达、no more…than=一样不）；<b class="gold">not + 比较级</b> 是客观的比较（至多、至少、不如）。</div>
+    </div>
+  </section>
+
+  <!-- 12 真题精练 -->
+  <section class="slide" data-title="真题精练" data-sec="十 · 真题精练">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">十 · 真题精练</span><h2>代表题 · 单项选择</h2><span class="en">Practice</span></div>
+    <div class="anim" style="--i:1">
+      <div class="q"><div class="qtxt"><b>1.</b> Not ___ people can succeed without hard work.</div><div class="opts">A. all　B. none　C. neither　D. no one</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A</div><div class="mark"><b>部分否定</b>：Not all = 并非所有人（不努力都能成功）。</div></div></details></div>
+      <div class="q"><div class="qtxt"><b>2.</b> — I don't think he is fit for the job, ___?<br>　　— I can't agree more.</div><div class="opts">A. do I　B. is he　C. isn't he　D. does he</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B</div><div class="mark"><b>否定转移</b>的反意疑问句：问从句「he is fit」，not 已转移，用肯定式 <b>is he</b>。</div></div></details></div>
+      <div class="q"><div class="qtxt"><b>3.</b> He is ___ hard-working than his brother. In fact, both of them are lazy.</div><div class="opts">A. no more　B. not more　C. much more　D. no less</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A</div><div class="mark"><b>no more…than</b> ＝ 和…一样不（两人都懒）。</div></div></details></div>
+      <div class="q"><div class="qtxt"><b>4.</b> I can hardly believe the news, ___?</div><div class="opts">A. can I　B. can't I　C. do I　D. don't I</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A</div><div class="mark"><b>hardly 表否定</b>，反意疑问句用肯定式 <b>can I</b>。</div></div></details></div>
+      <div class="q"><div class="qtxt"><b>5.</b> There is ___ water left, so we must find some now.</div><div class="opts">A. a little　B. few　C. little　D. a few</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">C</div><div class="mark"><b>little</b> 表否定「几乎没有」，修饰不可数 water；a little 是「有一点」。</div></div></details></div>
+      <div class="q"><div class="qtxt"><b>6.</b> You can't be ___ careful when crossing the street.</div><div class="opts">A. very　B. too　C. so　D. quite</div>
+      <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B</div><div class="mark"><b>can't be too careful</b> ＝ 再小心也不为过。</div></div></details></div>
+    </div>
+  </section>
+
+  <!-- 13 小结 -->
+  <section class="slide" data-title="本章小结" data-sec="收尾">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">收尾</span><h2>本章小结</h2><span class="en">Summary</span></div>
+    <div class="grid g2">
+      <div class="sum-block anim" style="--i:1">
+        <h4><span class="dot" style="background:#8a9aa8"></span>否定的核心体系</h4>
+        <ul>
+          <li><b>基本否定</b>：not + 动词 / no + 名词 / never。</li>
+          <li><b>部分否定</b>：all/both/every + not ＝「并非都」。</li>
+          <li><b>全部否定</b>：none / neither / no one / nothing。</li>
+          <li><b>半否定</b>：hardly / scarcely / seldom / rarely / little / few，反意疑问句用肯定式。</li>
+        </ul>
+      </div>
+      <div class="sum-block anim" style="--i:2">
+        <h4><span class="dot" style="background:#a49bb0"></span>特殊否定结构</h4>
+        <ul>
+          <li><b>否定转移</b>：I don't think + 从句，反意疑问句问从句（is he?）。</li>
+          <li><b>双重否定</b>：can't…too（再…也不为过）、can't help doing。</li>
+          <li><b>词缀</b>：un- / in- / im- / il- / ir- / dis- / -less。</li>
+          <li><b>含蓄否定</b>：too…to、fail to、anything but（绝不）/ nothing but（只是）。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:3">
+      <span>⚠️</span>
+      <div><b>最易失分的四处：</b>① 把 all/both/every + not 当成「都不」（其实是「并非都」）；② hardly 等半否定词反意疑问句误用否定式；③ 否定转移的反意疑问句没问从句；④ can't…too 误当成「太…而不能」。</div>
+    </div>
+    <div class="motto anim" style="--i:4">
+      「部分」「全部」要分清 · 半否定词自带否定义 · 转移、双重否定看穿它 —— <span>一个 not，千变万化</span>
+    </div>
+  </section>
+
+</div>
+
+<div id="nav">
+  <button id="prev" aria-label="上一页" title="上一页 (←)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="counter"><b id="cur">1</b> / <span id="total">13</span></div>
+  <button id="next" aria-label="下一页" title="下一页 (→)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <button id="menuBtn" aria-label="目录" title="目录">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+    <span>目录</span>
+  </button>
+  <button id="fs" aria-label="全屏" title="全屏 (F)">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+  </button>
+</div>
+<div id="hint">← → 翻页 · 空格下一页 · F 全屏 · 左侧手柄抽拉目录</div>
+
+<div id="drawerTab" title="打开目录">
+  <span class="darr">▸</span><span>目 录</span>
+</div>
+<div id="drawerOverlay">
+  <div id="drawerPanel">
+    <div class="dp-head">
+      <div class="k">目录</div>
+      <h3>否定</h3>
+      <div class="sub">部分与全部否定 · 否定转移 · 半否定 · 双重否定</div>
+      <button class="close" id="drawerClose" aria-label="关闭">✕</button>
+    </div>
+    <div id="drawerList"></div>
+  </div>
+</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  const curEl = document.getElementById('cur');
+  const totalEl = document.getElementById('total');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const fsBtn = document.getElementById('fs');
+  const menuBtn = document.getElementById('menuBtn');
+  const drawerTab = document.getElementById('drawerTab');
+  const drawerClose = document.getElementById('drawerClose');
+  const drawerOverlay = document.getElementById('drawerOverlay');
+  const drawerList = document.getElementById('drawerList');
+  const progress = document.getElementById('progress');
+  let idx = 0;
+  totalEl.textContent = total;
+
+  const SEC_COLORS = {
+    '封面':'#b99c6a', '导读':'#b99c6a', '收尾':'#b99c6a',
+    '一 · 基本否定':'#c2a18b',
+    '二 · 部分否定':'#8a9aa8', '三 · 全部否定':'#8a9aa8',
+    '四 · 半否定':'#9aa98d',
+    '五 · 否定转移':'#c09892',
+    '六 · 双重否定':'#a49bb0',
+    '七 · 否定词缀':'#c2a18b',
+    '八 · 含蓄否定':'#9aa98d',
+    '九 · 易混辨析':'#8a9aa8',
+    '十 · 真题精练':'#c09892'
+  };
+
+  (function buildMenu(){
+    const groups = [];
+    const map = {};
+    slides.forEach((s,i)=>{
+      const sec = s.dataset.sec || '其他';
+      const title = s.dataset.title || ('第'+(i+1)+'页');
+      if(!map[sec]){ map[sec] = {sec, items:[]}; groups.push(map[sec]); }
+      map[sec].items.push({title, i});
+    });
+    groups.forEach(g=>{
+      const h = document.createElement('div');
+      h.className = 'dp-sec';
+      const c = SEC_COLORS[g.sec] || '#8a8378';
+      h.innerHTML = '<span class="swatch" style="background:'+c+'"></span><span>'+g.sec+'</span>';
+      drawerList.appendChild(h);
+      g.items.forEach(it=>{
+        const b = document.createElement('button');
+        b.className = 'dp-item';
+        b.innerHTML = '<span class="n">'+ (it.i+1) +'</span><span>'+ it.title +'</span>';
+        b.addEventListener('click', ()=>{ go(it.i); closeDrawer(); });
+        drawerList.appendChild(b);
+      });
+    });
+  })();
+
+  function render(){
+    slides.forEach((s,i)=>{
+      s.classList.toggle('active', i===idx);
+      s.classList.toggle('prev', i<idx);
+    });
+    curEl.textContent = idx+1;
+    progress.style.width = ((idx+1)/total*100) + '%';
+    prevBtn.disabled = idx===0;
+    nextBtn.disabled = idx===total-1;
+    Array.from(drawerList.querySelectorAll('.dp-item')).forEach((b,i)=>{
+      b.classList.toggle('active', i===idx);
+    });
+  }
+  function go(n){ idx = Math.max(0, Math.min(total-1, n)); render(); }
+  function closeDrawer(){ drawerOverlay.classList.remove('open'); drawerTab.querySelector('.darr').textContent='▸'; }
+  function openDrawer(){ drawerOverlay.classList.add('open'); drawerTab.querySelector('.darr').textContent='◂'; }
+
+  prevBtn.addEventListener('click', ()=>go(idx-1));
+  nextBtn.addEventListener('click', ()=>go(idx+1));
+  menuBtn.addEventListener('click', openDrawer);
+  drawerTab.addEventListener('click', openDrawer);
+  drawerClose.addEventListener('click', closeDrawer);
+  drawerOverlay.addEventListener('click', (e)=>{ if(e.target===drawerOverlay) closeDrawer(); });
+
+  document.addEventListener('keydown', (e)=>{
+    if(drawerOverlay.classList.contains('open')){
+      if(e.key==='Escape') closeDrawer();
+      return;
+    }
+    if(e.key==='ArrowRight' || e.key===' ' || e.key==='PageDown'){ e.preventDefault(); go(idx+1); }
+    else if(e.key==='ArrowLeft' || e.key==='PageUp'){ e.preventDefault(); go(idx-1); }
+    else if(e.key==='Home'){ go(0); }
+    else if(e.key==='End'){ go(total-1); }
+    else if(e.key==='m' || e.key==='M'){ openDrawer(); }
+    else if(e.key==='f' || e.key==='F'){
+      if(document.fullscreenElement){ document.exitFullscreen(); }
+      else { document.documentElement.requestFullscreen(); }
+    }
+  });
+  fsBtn.addEventListener('click', ()=>{
+    if(document.fullscreenElement){ document.exitFullscreen(); }
+    else { document.documentElement.requestFullscreen(); }
+  });
+  let touchX=null;
+  document.addEventListener('touchstart', e=>{ touchX=e.touches[0].clientX; });
+  document.addEventListener('touchend', e=>{
+    if(touchX===null) return;
+    const dx=e.changedTouches[0].clientX-touchX;
+    if(Math.abs(dx)>50){ dx<0?go(idx+1):go(idx-1); }
+    touchX=null;
+  });
+  render();
+</script>
+</body>
+</html>
