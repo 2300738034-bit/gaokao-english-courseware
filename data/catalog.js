@@ -118,6 +118,11 @@ window.CATALOG = {
           title: "主题类语汇与基本句型课件",
           file: "courseware/主题类语汇与基本句型课件.html",
           added: "2026-09-29"
+        },
+        {
+          title: "艺术节专场·提议信范文精析（摄影专场）",
+          file: "courseware/艺术节专场·提议信范文精析课件.html",
+          added: "2026-11-02"
         }
       ]
     },

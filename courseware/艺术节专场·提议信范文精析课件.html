@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高考英语 · 应用文范文精析 · 艺术节专场</title>
+<style>
+  :root{
+    --ink:#4a433c;
+    --muted:#8a8177;
+    --line:#ddd6ca;
+    --bg:#ece8df;
+    --paper:#faf7f1;
+    --brand:#66746f;
+    --brand-2:#8593a3;
+    --gold:#b39b72;
+    --rose:#b0898b;
+    --sage:#8ba08a;
+    --mauve:#a296ad;
+    --c1:#96a4b4;  /* 审题 */
+    --c2:#93a894;  /* 范文 */
+    --c3:#be9490;  /* 好词 */
+    --c4:#c2a87f;  /* 表达 */
+    --c5:#a695ae;  /* 小结 */
+    --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:var(--font);
+    color:var(--ink);
+    background:var(--bg);
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ===== 舞台 ===== */
+  #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:56px 44px 96px}
+
+  .slide{
+    position:absolute;
+    width:min(1220px,100%);
+    max-height:100%;
+    background:var(--paper);
+    border-radius:20px;
+    box-shadow:0 24px 60px -24px rgba(74,67,60,.35), 0 0 0 1px rgba(74,67,60,.05);
+    padding:42px 52px;
+    opacity:0;
+    transform:translateX(40px);
+    pointer-events:none;
+    transition:opacity .45s ease, transform .45s ease;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+  .slide.active{opacity:1;transform:translateX(0);pointer-events:auto}
+  .slide.prev{transform:translateX(-40px)}
+
+  .slide .anim{opacity:0;transform:translateY(14px)}
+  .slide.active .anim{
+    opacity:1;transform:none;
+    transition:opacity .5s ease, transform .5s ease;
+    transition-delay:calc(var(--i,0)*70ms + 60ms);
+  }
+
+  /* ===== 页头 ===== */
+  .head{display:flex;align-items:center;gap:14px;margin-bottom:20px;flex:none}
+  .part-badge{
+    font-size:12.5px;font-weight:700;letter-spacing:.05em;
+    color:#fff;background:var(--pc,#8593a3);
+    padding:6px 13px;border-radius:99px;white-space:nowrap;
+  }
+  .head h2{font-size:27px;font-weight:800;letter-spacing:.01em;color:var(--ink)}
+  .head .en{font-size:14px;color:var(--muted);font-weight:600;margin-left:auto;white-space:nowrap}
+
+  .kicker{font-size:13px;font-weight:700;letter-spacing:.14em;color:var(--brand-2);text-transform:uppercase;margin-bottom:8px}
+  .lead{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:10px}
+
+  /* ===== 封面 ===== */
+  .slide.cover{
+    background:
+      radial-gradient(900px 500px at 85% -10%, rgba(176,137,139,.40), transparent 60%),
+      radial-gradient(700px 500px at -10% 110%, rgba(139,160,138,.35), transparent 55%),
+      linear-gradient(135deg,#5d554b 0%,#6e665a 55%,#7b7266 100%);
+    color:#fff;
+    justify-content:center;
+  }
+  .cover .brand-line{position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#b39b72,#c2a87f,#8593a3,#a296ad)}
+  .cover .tag{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#e9e0cd;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);padding:7px 16px;border-radius:99px;margin-bottom:26px}
+  .cover h1{font-size:54px;font-weight:900;line-height:1.16;letter-spacing:.01em}
+  .cover h1 .hl{color:#e0cba0}
+  .cover .sub{margin-top:20px;font-size:20px;color:#d4cbbd;font-weight:500}
+  .cover .meta{margin-top:40px;display:flex;gap:26px;font-size:14px;color:#bdb4a2;font-weight:600}
+  .cover .meta b{color:#fff}
+  .cover .src{margin-top:18px;font-size:12.5px;color:#a99f8e;font-weight:600;letter-spacing:.03em}
+
+  /* ===== 卡片 & 列表 ===== */
+  .grid{display:grid;gap:14px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .g5{grid-template-columns:repeat(5,1fr)}
+  .g6{grid-template-columns:repeat(3,1fr)}
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:16px;
+    padding:18px 20px;position:relative;overflow:hidden;
+  }
+  .card .num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:32px;height:32px;border-radius:10px;font-size:15px;font-weight:800;
+    color:#fff;background:var(--pc,#8593a3);margin-bottom:10px;
+  }
+  .card h4{font-size:19px;font-weight:800;margin-bottom:5px}
+  .card .cn{font-size:13.5px;color:var(--muted);font-weight:600;line-height:1.55}
+
+  .key{color:var(--brand-2);font-weight:800}
+  .gold{color:#7a5c2e;font-weight:800}
+  .red{color:#a06a6a;font-weight:800}
+
+  /* 例句区 */
+  .ex{background:#f5f2ea;border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-top:8px}
+  .ex + .ex{margin-top:12px}
+  .ex .lead{font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:10px}
+  .ex .en-txt{font-size:15px;color:#4a433c;line-height:1.65;font-weight:500}
+  .ex .en-txt b{color:#7a5c2e;font-weight:800}
+  .cn-tran{font-size:15px;color:var(--muted);margin-top:8px;font-weight:500}
+
+  /* 重点框 */
+  .note{
+    display:flex;gap:12px;align-items:flex-start;
+    background:#f2ead9;border:1px solid #dccca4;border-left:4px solid #b39b72;
+    border-radius:12px;padding:13px 16px;margin-top:14px;font-size:15px;line-height:1.6;
+  }
+  .note .ico{font-size:18px;line-height:1.4}
+  .note b{color:#6b5230}
+
+  .tip{
+    display:flex;gap:10px;align-items:flex-start;
+    background:#eef0f1;border:1px solid #c8cfd4;border-left:4px solid #8593a3;
+    border-radius:12px;padding:11px 15px;margin-top:12px;font-size:14px;line-height:1.6;color:#465057;
+  }
+  .tip b{color:#3a454c}
+
+  /* ===== 点击揭示 ===== */
+  .rv{margin-top:10px;border:1px dashed #cfc7b8;border-radius:12px;overflow:hidden;background:#fff}
+  .rv-trigger{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    padding:10px 15px;cursor:pointer;user-select:none;background:#f5f2ea;transition:.15s;
+  }
+  .rv-trigger:hover{background:#efece2}
+  .rv-label{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.02em;transition:.15s}
+  .rv.on .rv-label{color:var(--brand-2)}
+  .rv-plus{font-size:19px;color:var(--brand-2);transition:transform .3s;font-weight:700;line-height:1;flex:none}
+  .rv.on .rv-plus{transform:rotate(45deg)}
+  .rv-body{max-height:0;opacity:0;overflow:hidden;transition:max-height .5s ease, opacity .35s ease;padding:0 15px}
+  .rv.on .rv-body{max-height:600px;opacity:1;padding:13px 15px}
+  .rv-body .sum{font-size:15px;font-weight:700;color:var(--brand);line-height:1.6}
+  .rv-body .sum b{color:#4d6b4d}
+  .rv-body .how{font-size:12.5px;color:var(--brand-2);margin-top:6px;line-height:1.55;font-weight:600}
+  .rv-body .how b{color:#5a6772;font-weight:800}
+  .rv.gold-on .rv-trigger{background:#f2ead9}
+  .rv.gold-on.on{border-color:#b39b72;background:#fbf7ee}
+  .rv.gold-on .rv-body .sum{color:#6b5230}
+
+  /* 目录跳转卡 */
+  .jump{cursor:pointer;transition:.18s;border:1px solid var(--line)}
+  .jump:hover{transform:translateY(-4px);box-shadow:0 16px 34px -18px rgba(74,67,60,.4);border-color:var(--pc,#8593a3)}
+  .jump .go{position:absolute;right:14px;top:14px;font-size:12px;font-weight:700;color:var(--pc,#8593a3);opacity:0;transition:.18s}
+  .jump:hover .go{opacity:1}
+
+  /* 表格 */
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{padding:10px 13px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.55}
+  th{font-size:12.5px;letter-spacing:.05em;color:var(--muted);background:#f5f2ea;font-weight:700}
+  td .en{font-weight:700}
+  td .cn{color:var(--muted);font-size:13px}
+  .pill{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:#e8e3d6;color:#5a5246;margin-right:5px}
+
+  /* 步骤 */
+  .step{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed var(--line)}
+  .step:last-child{border-bottom:none}
+  .step .sn{flex:none;width:26px;height:26px;border-radius:50%;background:var(--pc,#8593a3);color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+  .step .st{font-size:14.5px;line-height:1.55;color:#4a433c}
+  .step .st b{color:var(--ink)}
+
+  /* 小结 */
+  .sum-block{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:#fff}
+  .sum-block h4{font-size:15.5px;font-weight:800;margin-bottom:11px;display:flex;align-items:center;gap:8px}
+  .sum-block .dot{width:10px;height:10px;border-radius:3px;background:var(--pc,#8593a3)}
+  .sum-block ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .sum-block li{font-size:13.8px;color:#4a433c;line-height:1.5}
+  .sum-block li b{color:var(--ink)}
+
+  .motto{
+    margin-top:18px;text-align:center;font-size:20px;font-weight:800;color:var(--brand);
+    background:#e9eee7;border-radius:14px;padding:18px;
+  }
+  .motto span{color:#a06a6a}
+
+  /* ===== 范文高亮 ===== */
+  .grn{background:linear-gradient(transparent 52%, #d9e3d2 52%);color:#4d6b4d;font-weight:700;border-radius:2px}
+  .ul{border-bottom:2px solid #c2a87f;color:#7a5c2e;font-weight:700}
+  .legend{display:flex;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--muted);font-weight:600}
+  .legend .sw{display:inline-block;width:13px;height:13px;border-radius:3px;margin-right:6px;vertical-align:-2px}
+
+  .essay{background:#f5f2ea;border:1px solid var(--line);border-radius:14px;padding:18px 24px;overflow-y:auto;font-size:14.5px;line-height:1.8;color:#4a433c;min-height:0}
+  .essay p{margin-bottom:11px}
+  .essay p:last-child{margin-bottom:0}
+  .essay .salute{font-weight:800;color:var(--ink)}
+  .essay .sign{text-align:right;font-weight:700;margin-top:2px}
+  .essay sup.mk-n{color:#fff;background:var(--c2);border-radius:99px;font-size:10px;font-weight:800;padding:1px 7px;margin-right:3px;vertical-align:super;cursor:default}
+
+  /* ===== 点评标记块 ===== */
+  .mk{
+    display:flex;gap:10px;align-items:flex-start;padding:9px 12px;
+    border-left:3px solid var(--pc,#8593a3);background:#fff;border-radius:8px;
+    margin-top:8px;font-size:14px;line-height:1.55;color:#4a433c;
+  }
+  .mk .mtag{
+    flex:none;font-size:11px;font-weight:800;color:#fff;background:var(--pc,#8593a3);
+    padding:2px 8px;border-radius:99px;margin-top:1px;white-space:nowrap;
+  }
+  .mk b{color:var(--ink)}
+  .mk .why{display:block;font-size:12.5px;color:#6f8a6f;margin-top:4px;line-height:1.55;font-weight:600}
+  .mk .why b{color:#4d6b4d;font-weight:800}
+
+  /* 点评块 */
+  .ping{margin-top:10px;border:1px solid var(--line);border-radius:14px;background:#fff;padding:14px 18px}
+  .ping .phead{display:flex;align-items:center;gap:9px;margin-bottom:9px}
+  .ping .ptag{font-size:11.5px;font-weight:800;color:#fff;background:var(--pc,#93a894);padding:3px 11px;border-radius:99px}
+  .ping .ptitle{font-size:14px;font-weight:800;color:var(--ink)}
+
+  /* 两栏 */
+  .ex-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;min-height:0}
+  .ex-col{display:flex;flex-direction:column;min-height:0}
+  .ex-box{background:#f5f2ea;border:1px solid var(--line);border-radius:14px;padding:14px 16px;overflow-y:auto}
+  .ex-box .lead{font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:10px}
+
+  /* ===== 选词填空 ===== */
+  .cloze{display:flex;flex-direction:column;gap:11px;min-height:0;overflow:hidden}
+  .cloze-passage{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 20px;font-size:13.5px;line-height:2.05;color:#4a433c;overflow-y:auto;flex:none;max-height:44vh}
+  .blank{
+    display:inline-block;min-width:46px;text-align:center;
+    border-bottom:2px solid #c8cfd4;color:var(--muted);
+    padding:0 6px;margin:0 2px;font-weight:700;cursor:pointer;transition:.15s;
+    border-radius:4px 4px 0 0;font-size:13px;vertical-align:baseline;
+  }
+  .blank:hover{background:#eef0f1}
+  .blank.focus{background:#eef0f1;box-shadow:0 0 0 2px rgba(133,147,163,.3)}
+  .blank.filled{color:var(--ink);border-bottom-color:#8593a3}
+  .blank.ok{background:#e3ece0;border-bottom-color:#6f8a6f;color:#3c5a3c}
+  .blank.bad{background:#f3e0de;border-bottom-color:#be9490;color:#a0554f}
+  .blank.answer{background:#f2ead9;border-bottom-color:#b39b72;color:#7a5c2e}
+  .blank .bnum{font-size:10px;color:#b9b0a0;font-weight:700;vertical-align:super;margin-right:1px}
+
+  .bank{display:flex;flex-wrap:wrap;gap:8px;flex:none}
+  .pill-opt{
+    display:inline-flex;align-items:center;gap:7px;
+    background:#fff;border:1px solid var(--line);border-radius:10px;
+    padding:6px 11px;font-size:13px;cursor:pointer;user-select:none;transition:.15s;font-weight:600;
+  }
+  .pill-opt .lo{font-weight:800;color:var(--brand-2);font-size:12px}
+  .pill-opt .zh{color:var(--muted);font-size:12px;font-weight:600}
+  .pill-opt:hover{border-color:var(--brand-2);transform:translateY(-1px)}
+  .pill-opt.sel{border-color:var(--brand-2);background:#eef0f1;box-shadow:0 0 0 2px rgba(133,147,163,.25)}
+
+  .cloze-bar{display:flex;align-items:center;gap:10px;flex:none}
+  .cloze-bar button{
+    border:1px solid var(--line);background:#fff;color:#4a433c;font-weight:700;font-size:13px;
+    padding:8px 16px;border-radius:99px;cursor:pointer;transition:.15s;font-family:var(--font);
+  }
+  .cloze-bar button:hover{border-color:var(--brand-2);color:var(--brand-2)}
+  .cloze-bar button.primary{background:var(--brand-2);border-color:var(--brand-2);color:#fff}
+  .cloze-bar button.primary:hover{background:#74808f;border-color:#74808f;color:#fff}
+  #clozeScore{margin-left:auto;font-size:13.5px;font-weight:800;color:var(--brand);font-variant-numeric:tabular-nums}
+
+  /* 翻译 / 表达训练 */
+  .trans{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-top:10px}
+  .trans .tn{font-size:12.5px;font-weight:800;color:#fff;background:var(--c4);border-radius:99px;padding:2px 10px;display:inline-block;margin-bottom:8px}
+  .trans .cn-src{font-size:14.5px;color:#4a433c;line-height:1.7}
+  .trans .tblank{color:#a0554f;font-weight:700;border-bottom:1px dashed #be9490;padding:0 2px}
+  .trans .kw{display:inline-block;font-size:11px;font-weight:800;color:#7a5c2e;background:#f2ead9;border-radius:6px;padding:1px 7px;margin-left:6px;vertical-align:2px}
+
+  /* 导航 */
+  #nav{
+    position:fixed;left:50%;bottom:26px;transform:translateX(-50%);
+    display:flex;align-items:center;gap:12px;z-index:50;
+    background:rgba(250,247,241,.88);backdrop-filter:blur(10px);
+    border:1px solid var(--line);border-radius:99px;padding:9px 12px;
+    box-shadow:0 10px 30px -12px rgba(74,67,60,.3);
+  }
+  #nav button{
+    border:none;background:#fff;border:1px solid var(--line);
+    width:40px;height:40px;border-radius:50%;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;color:#4a433c;
+    transition:.15s;
+  }
+  #nav button:hover:not(:disabled){background:#eef0f1;border-color:#c8cfd4;color:var(--brand-2)}
+  #nav button:disabled{opacity:.35;cursor:default}
+  #nav .counter{font-size:14px;font-weight:700;color:#4a433c;min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
+  #nav .counter b{color:var(--brand-2);font-size:16px}
+  #progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#8593a3,#93a894,#b0898b,#c2a87f);z-index:60;width:0;transition:width .35s ease}
+  #hint{position:fixed;left:50%;transform:translateX(-50%);bottom:4px;font-size:12px;color:#a49a8a;z-index:40;white-space:nowrap}
+
+  @media (max-width:900px){
+    #stage{padding:20px 16px 90px}
+    .slide{padding:26px 22px;border-radius:14px}
+    .g2,.g3,.g4,.g5,.g6,.ex-grid{grid-template-columns:1fr 1fr}
+    .head h2{font-size:22px}
+    .cover h1{font-size:36px}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<div id="stage">
+
+  <!-- 0 封面 -->
+  <section class="slide cover active">
+    <div class="brand-line"></div>
+    <div class="anim" style="--i:0"><span class="tag">高考英语 · 应用文 · 范文精析</span></div>
+    <h1 class="anim" style="--i:1">艺术节专场 · <span class="hl">提议信</span></h1>
+    <p class="sub anim" style="--i:2">摄影专场 · 审题 → 精读范文 → 好词好句 → 表达积累</p>
+    <div class="meta anim" style="--i:3">
+      <span>体裁 <b>提议信</b></span>
+      <span>话题 <b>学校艺术节</b></span>
+      <span>技能 <b>说明 + 议论</b></span>
+    </div>
+    <div class="src anim" style="--i:4">选自《名校名师高考英语作文全攻略（第 3 版）》· 第三部分 优秀范文评析与表达积累</div>
+  </section>
+
+  <!-- 1 目录 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a8177">CONTENTS</span><h2>本节内容 · 目录</h2><span class="en">Roadmap · 点击卡片跳转</span></div>
+    <div class="grid g5" style="margin-top:6px">
+      <div class="card jump anim" style="--i:1;--pc:#8593a3" onclick="go(2)"><span class="num">01</span><h4>审题分析</h4><div class="cn">写作六要素 · 说明 vs 议论</div><span class="go">进入 →</span></div>
+      <div class="card jump anim" style="--i:2;--pc:#93a894" onclick="go(4)"><span class="num">02</span><h4>范文精读</h4><div class="cn">全文标注 · 逐段点评 ①—⑤</div><span class="go">进入 →</span></div>
+      <div class="card jump anim" style="--i:3;--pc:#be9490" onclick="go(8)"><span class="num">03</span><h4>好词好句</h4><div class="cn">三句背诵级表达 · 点击揭晓</div><span class="go">进入 →</span></div>
+      <div class="card jump anim" style="--i:4;--pc:#c2a87f" onclick="go(9)"><span class="num">04</span><h4>表达积累</h4><div class="cn">选词填空 · 翻译 · 表达训练</div><span class="go">进入 →</span></div>
+      <div class="card jump anim" style="--i:5;--pc:#a695ae" onclick="go(12)"><span class="num">05</span><h4>本课小结</h4><div class="cn">结构模板 · 背诵清单</div><span class="go">进入 →</span></div>
+    </div>
+    <div class="note anim" style="--i:6;margin-top:20px">
+      <span class="ico">🧭</span>
+      <div>这一讲是一篇<b>提议信范文</b>的完整拆解：先看<b>审题</b>（写给谁、写什么、怎么写），再<b>逐段精读</b>范文的语言与结构，最后用<b>选词填空、翻译、表达训练</b>把好词好句真正用起来。重头戏在第二块的<b>范文点评</b>和第四块的<b>动手练习</b>。</div>
+    </div>
+  </section>
+
+  <!-- ===== PART 01 审题 ===== -->
+  <!-- 2 审题六要素 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8593a3">PART 01 · 审题分析</span><h2>写作六要素 · 先想清楚再动笔</h2><span class="en">Read the Task</span></div>
+    <div class="note anim" style="--i:1;margin-top:0">
+      <span class="ico">📌</span>
+      <div><b>题目回顾</b>：明启中学为丰富学校艺术节，拟在原有三个专场（<b>书法 / 器乐 / 歌曲</b>）之外再增加一个专场，现向师生征求意见。假设你是该校学生<b>林平</b>，给负责此事的<b>王老师</b>写一封电子邮件，提出你的意见。</div>
+    </div>
+    <table class="anim" style="--i:2;margin-top:14px">
+      <thead><tr><th style="width:18%">维度</th><th>审题要点</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pill" style="background:#96a4b4;color:#fff">写作背景</span></td><td>学校为丰富艺术节，新增一个专场，向师生征求意见</td></tr>
+        <tr><td><span class="pill" style="background:#93a894;color:#fff">写作体裁</span></td><td><span class="en">电子邮件 · 提议信（proposal letter）</span> <span class="cn">＝ 说明 + 议论</span></td></tr>
+        <tr><td><span class="pill" style="background:#be9490;color:#fff">内容要求</span></td><td><span class="en">① 专场的名称 ② 专场的具体内容 ③ 增加该专场的理由</span></td></tr>
+        <tr><td><span class="pill" style="background:#c2a87f;color:#fff">作者</span></td><td>明启中学学生 · <b>林平</b></td></tr>
+        <tr><td><span class="pill" style="background:#a695ae;color:#fff">读者</span></td><td>学校艺术节负责老师 · <b>王老师</b></td></tr>
+        <tr><td><span class="pill" style="background:#96a4b4;color:#fff">写作目的</span></td><td><b>说服</b>王老师采纳意见、增加该专场</td></tr>
+        <tr><td><span class="pill" style="background:#93a894;color:#fff">所需技能</span></td><td><b>说明</b>（把专场内容讲清楚）+ <b>议论</b>（把增加理由讲充分）</td></tr>
+      </tbody>
+    </table>
+    <div class="tip anim" style="--i:3">
+      <span>💡</span>
+      <div>审题记住三点：<b>写什么</b>（名称＋内容＋理由，缺一不可）、<b>写给谁</b>（老师，语气要委婉）、<b>为什么写</b>（说服采纳）。翻到下一页看「说明 vs 议论」的两条关键提醒。</div>
+    </div>
+  </section>
+
+  <!-- 3 说明 vs 议论 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8593a3">PART 01 · 审题分析</span><h2>两条关键提醒 · 说明 vs 议论</h2><span class="en">Two Reminders</span></div>
+    <div class="step anim" style="--i:1;--pc:#96a4b4"><span class="sn">①</span><span class="st"><b>说明部分 = 专场的具体内容</b>；<b>议论部分 = 增加专场的理由</b>。说明要<b>紧扣所提议专场的具体特点</b>，避免泛泛而谈；议论部分尤其要讲清该专场<b>在学生艺术节中的地位 / 作用</b>，以及它<b>与其他已有专场相比的独到之处</b>。</span></div>
+    <div class="step anim" style="--i:2;--pc:#93a894"><span class="sn">②</span><span class="st">这是<b>学生写给负责老师的提议信</b>，语言要<b>委婉而恳切</b>，避免颐指气使的表达；可联系<b>「艺术」话题的大背景</b>来拔高立意，如人对艺术的感受、艺术对学校生活的作用等。</span></div>
+    <div class="tip anim" style="--i:3">
+      <span>⚠️</span>
+      <div><b>易错点</b>：不少同学把「说明内容」写得像说明书（只罗列流程），把「理由」写得太空（只说"很有意义"）。记住——<b>说明要具体、理由要独到</b>，这正是范文拿高分的地方。</div>
+    </div>
+    <div class="motto anim" style="--i:4">审题口诀 —— <span>名称 · 内容 · 理由</span> 三不缺，<span>委婉 · 独到</span> 两不忘</div>
+  </section>
+
+  <!-- ===== PART 02 范文精读 ===== -->
+  <!-- 4 范文全文 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93a894">PART 02 · 范文精读</span><h2>范文全文 · 先通读一遍</h2><span class="en">Read the Model</span></div>
+    <div class="legend anim" style="--i:1;margin-bottom:10px">
+      <span><span class="sw" style="background:#d9e3d2"></span>绿色高亮 = 优美 / 出彩表达</span>
+      <span><span class="sw" style="background:#fff;border:2px solid #c2a87f;border-radius:2px;width:11px;height:11px"></span>金色下划线 = 委婉表达 & 衔接副词</span>
+      <span><span class="sw" style="background:#93a894;border-radius:99px;width:14px;height:14px"></span>①②③④⑤ = 逐段点评标记</span>
+    </div>
+    <div class="essay anim" style="--i:2">
+      <p class="salute">Dear Mr/Mrs Wang,</p>
+      <p><sup class="mk-n">①</sup>I'm excited to hear that our school is planning to add another section to the art festival apart from calligraphy, instruments and songs. I'm writing to <span class="ul">voice my humble opinions</span>, which will hopefully contribute to your decision.</p>
+      <p><sup class="mk-n">②</sup>From my perspective, it is advisable to add a photography section, which <span class="grn">features photos of various themes and styles shot by students</span>. After <span class="grn">a preliminary selection by photography teachers based on the professionality and meaningfulness of the works</span>, a vote can be held on the school website for the students and teachers to select the best photos and prizes will be awarded to them. Those award-winning photos will then be exhibited in the school art gallery for everyone to appreciate.</p>
+      <p><sup class="mk-n">③</sup>My recommendation for the photography section is based on the following reasons. <span class="grn">Compared to calligraphy, instruments and songs, which greatly emphasize performers' specialized skills and momentary performances</span>, photography more requires students' capability to <span class="grn">observe and capture the tiny but touching moments in this fast-paced life</span>. Therefore, photography is an art activity <span class="grn">not limited to those with special talents, but open to all the students who like to reflect on reality</span>.</p>
+      <p><sup class="mk-n">④</sup>More importantly, its very presence at the school art festival encourages students to <span class="grn">pay attention to the things and people around</span>, and motivates them to <span class="grn">find the hidden beauty in their seemingly repeated and tedious daily lives</span>. <span class="ul">Hopefully</span>, students' <span class="grn">aesthetic appreciation can be greatly improved and their spiritual world can be immensely enriched</span>.</p>
+      <p><sup class="mk-n">⑤</sup>In a nutshell, a photography section is a <span class="grn">wise choice</span> for the art festival, and I would appreciate it very much if my opinions could be taken into consideration. I am looking forward to your reply.</p>
+      <p class="sign">Yours,<br>Lin Ping</p>
+    </div>
+    <div class="tip anim" style="--i:3">
+      <span>👀</span>
+      <div>先<b>通读</b>感受全文的「骨架」：<b>开头表态 → 说明内容 → 理由 1 → 理由 2 → 总结请求</b>。留意绿色与下划线的表达，翻到下一页<b>逐段点评 ①—⑤</b>。</div>
+    </div>
+  </section>
+
+  <!-- 5 点评 12 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93a894">PART 02 · 范文精读</span><h2>点评 ①② · 开头表态 & 说明内容</h2><span class="en">Comment 1–2</span></div>
+    <div class="ping anim" style="--i:1">
+      <div class="phead"><span class="ptag" style="background:#96a4b4">① 开头</span><span class="ptitle">开门见山 · 委婉表态</span></div>
+      <div class="ex"><div class="en-txt">I'm excited to hear that our school is planning to add another section to the art festival apart from calligraphy, instruments and songs. I'm writing to <b>voice my humble opinions</b>, which will hopefully contribute to your decision.</div></div>
+      <div class="rv gold-on" onclick="this.classList.toggle('on')">
+        <div class="rv-trigger"><span class="rv-label">点此查看点评</span><span class="rv-plus">＋</span></div>
+        <div class="rv-body"><div class="sum">一句话同时点明<b>写作背景</b>（学校要新增专场）与<b>写作目的</b>（提出意见）；用 <b>voice my humble opinions</b> 表达委婉恳切，符合「学生写给老师的提议信」这一情境，避免了颐指气使。</div></div>
+      </div>
+    </div>
+    <div class="ping anim" style="--i:2">
+      <div class="phead"><span class="ptag" style="background:#93a894">② 说明</span><span class="ptitle">被动语态 · 讲清专场内容</span></div>
+      <div class="ex"><div class="en-txt">From my perspective, it is advisable to add a photography section, which <b>features photos of various themes and styles shot by students</b>. After <b>a preliminary selection… a vote can be held… prizes will be awarded… will then be exhibited</b> in the school art gallery.</div></div>
+      <div class="rv gold-on" onclick="this.classList.toggle('on')">
+        <div class="rv-trigger"><span class="rv-label">点此查看点评</span><span class="rv-plus">＋</span></div>
+        <div class="rv-body"><div class="sum">用<b>被动语态</b>（a vote can be held / prizes will be awarded / will then be exhibited）说明专场活动内容，流程清晰、重点突出；内容紧扣「摄影」——选片、投票、评奖、展出，环环相扣，具体不空洞。</div></div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:3">
+      <span>✍️</span>
+      <div>「说明部分」的写法：把活动拆成<b>几个步骤</b>，用被动语态串成一条清晰的流程线，让读者一眼看懂「这个专场到底怎么办」。</div>
+    </div>
+  </section>
+
+  <!-- 6 点评 34 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93a894">PART 02 · 范文精读</span><h2>点评 ③④ · 两个理由层层递进</h2><span class="en">Comment 3–4</span></div>
+    <div class="ping anim" style="--i:1">
+      <div class="phead"><span class="ptag" style="background:#be9490">③ 理由 1</span><span class="ptitle">对比凸显独特性</span></div>
+      <div class="ex"><div class="en-txt"><b>Compared to</b> calligraphy, instruments and songs, which greatly emphasize performers' specialized skills and momentary performances, photography more requires students' capability to <b>observe and capture the tiny but touching moments</b> in this fast-paced life. Therefore, photography is an art activity <b>not limited to those with special talents, but open to all the students</b> who like to reflect on reality.</div></div>
+      <div class="rv gold-on" onclick="this.classList.toggle('on')">
+        <div class="rv-trigger"><span class="rv-label">点此查看点评</span><span class="rv-plus">＋</span></div>
+        <div class="rv-body"><div class="sum">第一个理由：通过<b>与其他三个专场对比</b>，凸显摄影「观察并捕捉生活瞬间」的<b>独到之处</b>，说明在学校艺术节增加它的必要性。语法丰富：<b>非谓语作状语</b>（Compared to…）、<b>限定性 / 非限定性定语从句</b>（which…, who…）、<b>非谓语作后置定语</b>（shot by students）；<b>tiny but touching</b> 意义对比、语音押头韵，尤为出彩。</div></div>
+      </div>
+    </div>
+    <div class="ping anim" style="--i:2">
+      <div class="phead"><span class="ptag" style="background:#c2a87f">④ 理由 2</span><span class="ptitle">拔高立意 · 意义升华</span></div>
+      <div class="ex"><div class="en-txt"><b>More importantly</b>, its very presence… encourages students to pay attention to the things and people around, and motivates them to find the hidden beauty in their seemingly repeated and tedious daily lives. <b>Hopefully</b>, students' aesthetic appreciation can be greatly improved and their spiritual world can be immensely enriched.</div></div>
+      <div class="rv gold-on" onclick="this.classList.toggle('on')">
+        <div class="rv-trigger"><span class="rv-label">点此查看点评</span><span class="rv-plus">＋</span></div>
+        <div class="rv-body"><div class="sum">第二个理由：阐释该专场对<b>学校艺术氛围</b>的引导与鼓励作用，把立意从「办活动」<b>拔高</b>到「提升审美、丰富精神世界」。副词（More importantly / Hopefully / greatly / immensely）<b>衔接自然、表意丰富</b>，值得借鉴。</div></div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:3">
+      <span>🎯</span>
+      <div>两个理由有<b>层次</b>：理由 1 讲「<b>它跟别的专场有什么不同</b>」（独特性），理由 2 讲「<b>它对学生有什么好处</b>」（意义）。一个具体、一个升华，缺一不可。</div>
+    </div>
+  </section>
+
+  <!-- 7 点评 5 + 综合评价 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93a894">PART 02 · 范文精读</span><h2>点评 ⑤ · 总结 & 综合评价</h2><span class="en">Comment 5 + Review</span></div>
+    <div class="ping anim" style="--i:1">
+      <div class="phead"><span class="ptag" style="background:#a695ae">⑤ 结尾</span><span class="ptitle">高度总结 · 委婉请求</span></div>
+      <div class="ex"><div class="en-txt">In a nutshell, a photography section is a <b>wise choice</b> for the art festival, and I would appreciate it very much if my opinions could be taken into consideration. I am looking forward to your reply.</div></div>
+      <div class="rv gold-on" onclick="this.classList.toggle('on')">
+        <div class="rv-trigger"><span class="rv-label">点此查看点评</span><span class="rv-plus">＋</span></div>
+        <div class="rv-body"><div class="sum">总结前文：因为前面<b>说明具体、理由充分</b>，句中 <b>a wise choice</b> 才言之有物、掷地有声；结尾用 <b>if my opinions could be taken into consideration</b> 委婉提出请求，得体收束。</div></div>
+      </div>
+    </div>
+    <div class="ping anim" style="--i:2">
+      <div class="phead"><span class="ptag" style="background:#8a8177">综合评价</span><span class="ptitle">整篇好在哪里</span></div>
+      <div class="rv gold-on" onclick="this.classList.toggle('on')">
+        <div class="rv-trigger"><span class="rv-label">点此查看综合评价</span><span class="rv-plus">＋</span></div>
+        <div class="rv-body"><div class="sum">本文<b>结构清晰、层次分明、篇幅合理</b>：说明部分具体明确，议论部分充分有力；字里行间流露出作者对摄影的热爱与了解，以及对增加该专场的殷切盼望。结尾在说明与议论的基础上高度总结，与主题形成照应。除大量优美词汇外，作者还运用丰富多样的句式与语法结构，使内容重点突出、衔接流畅。</div></div>
+      </div>
+    </div>
+    <div class="motto anim" style="--i:3">结构骨架 —— <span>开头表态 → 说明内容 → 理由 1 → 理由 2 → 总结请求</span></div>
+  </section>
+
+  <!-- ===== PART 03 好词好句 ===== -->
+  <!-- 8 好词好句 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#be9490">PART 03 · 好词好句</span><h2>三句背诵级表达 · 点击揭晓讲解</h2><span class="en">Good Sentences</span></div>
+    <div class="note anim" style="--i:1;margin-top:0">
+      <span class="ico">⭐</span>
+      <div>这三句是范文里最值得<b>背诵</b>的句子——一句引出建议，一句写「独特」，一句写「对比」。先读英文，自己想想好在哪，再点开讲解对照。</div>
+    </div>
+    <div class="ex anim" style="--i:2">
+      <div class="en-txt"><b>1.</b> From my perspective, it is <span class="grn">advisable</span> to add a photography section, which <span class="grn">features</span> photos of various themes and styles <span class="grn">shot by students</span>.</div>
+      <div class="rv" onclick="this.classList.toggle('on')">
+        <div class="rv-trigger"><span class="rv-label">点此查看讲解</span><span class="rv-plus">＋</span></div>
+        <div class="rv-body"><div class="how"><b>from my perspective</b> ＝ 在我看来（替代 in my opinion，更书面）；<b>it is advisable to do sth.</b> ＝ 做某事是明智的（提建议常用句式）；<b>feature</b>（动词）＝ 以……为特点；<b>photos of various themes and styles</b> ＝ 各种主题与风格的照片。</div></div>
+      </div>
+    </div>
+    <div class="ex anim" style="--i:3">
+      <div class="en-txt"><b>2.</b> Photography more requires students' capability to <span class="grn">observe and capture</span> the <span class="grn">tiny but touching</span> moments in this <span class="grn">fast-paced</span> life.</div>
+      <div class="rv" onclick="this.classList.toggle('on')">
+        <div class="rv-trigger"><span class="rv-label">点此查看讲解</span><span class="rv-plus">＋</span></div>
+        <div class="rv-body"><div class="how"><b>tiny</b> 与 <b>touching</b> 共同修饰 moments：意义上形成对比、语音上押<b>头韵</b>（alliteration），增强语言的美感与冲击力；<b>observe and capture</b> 观察并捕捉；<b>fast-paced life</b> 快节奏的生活。</div></div>
+      </div>
+    </div>
+    <div class="ex anim" style="--i:4">
+      <div class="en-txt"><b>3.</b> Therefore, photography is an art activity <span class="grn">not limited to</span> those with special talents, <span class="grn">but open to</span> all the students who like to <span class="grn">reflect on reality</span>.</div>
+      <div class="rv" onclick="this.classList.toggle('on')">
+        <div class="rv-trigger"><span class="rv-label">点此查看讲解</span><span class="rv-plus">＋</span></div>
+        <div class="rv-body"><div class="how"><b>not… but…</b> ＝ 不是……而是……，通过<b>对比</b>凸显摄影的独特之处，有力阐释增加专场的必要性；<b>reflect on reality</b> ＝ 反思现实。</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PART 04 表达积累 ===== -->
+  <!-- 9 选词填空 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c2a87f">PART 04 · 表达积累</span><h2>选词填空 · 舞蹈专场提议</h2><span class="en">Fill in the Blanks</span></div>
+    <div class="note anim" style="--i:1;margin-top:0">
+      <span class="ico">✍️</span>
+      <div>从下方 12 个词块中选出恰当的填入空白（每空一个，<b>先点词块选中、再点空白</b>，或先点空白、再点词块）。填完点「检查答案」，绿色＝正确，红色＝再想想。</div>
+    </div>
+    <div class="cloze anim" style="--i:2">
+      <div class="cloze-passage" id="clozePassage"></div>
+      <div class="bank" id="bank"></div>
+      <div class="cloze-bar">
+        <button onclick="checkCloze()">检查答案</button>
+        <button class="primary" onclick="revealCloze()">查看答案</button>
+        <button onclick="resetCloze()">重来</button>
+        <span id="clozeScore">已填 0 / 12</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 翻译填空 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c2a87f">PART 04 · 表达积累</span><h2>翻译填空 · 把括号中文译成英语</h2><span class="en">Translate</span></div>
+    <div class="note anim" style="--i:1;margin-top:0">
+      <span class="ico">🧩</span>
+      <div>先把整句读顺，再想括号里的中文用英语怎么表达。点开对照<b>参考译文</b>——翻译没有唯一答案，<b>言之成理即可</b>。</div>
+    </div>
+    <div class="trans anim" style="--i:2">
+      <span class="tn">1</span>
+      <div class="cn-src">It will <span class="tblank">〔使学生充分意识到〕</span> that art is capable of <span class="tblank">〔通过视觉和听觉感动观众〕</span>, and <span class="tblank">〔唤起情绪反应〕</span> in them.</div>
+      <div class="rv gold-on" onclick="this.classList.toggle('on')">
+        <div class="rv-trigger"><span class="rv-label">点此查看参考译文</span><span class="rv-plus">＋</span></div>
+        <div class="rv-body"><div class="sum">It will <b>make students fully aware</b> that art is capable of <b>moving the audience through sight and hearing</b>, and <b>arousing emotional responses</b> in them.</div><div class="how">注意 <b>be capable of + doing</b>；「使学生充分意识到」用 make… fully aware。</div></div>
+      </div>
+    </div>
+    <div class="trans anim" style="--i:3">
+      <span class="tn">2</span>
+      <div class="cn-src">Calling for great patience and a peaceful mind, painting may get students to <span class="tblank">〔培养一个爱好〕</span> enabling them to be <span class="tblank">〔精神放松〕</span> and <span class="tblank">〔暂时远离压力巨大的学校课业〕</span>.</div>
+      <div class="rv gold-on" onclick="this.classList.toggle('on')">
+        <div class="rv-trigger"><span class="rv-label">点此查看参考译文</span><span class="rv-plus">＋</span></div>
+        <div class="rv-body"><div class="sum">…painting may get students to <b>develop a hobby</b> enabling them to be <b>mentally relaxed</b> and <b>temporarily away from the heavy pressure of schoolwork</b>.</div><div class="how">「培养爱好」develop / cultivate a hobby；「精神放松」mentally relaxed；「暂时远离」temporarily away from。</div></div>
+      </div>
+    </div>
+    <div class="trans anim" style="--i:4">
+      <span class="tn">3</span>
+      <div class="cn-src">Drawing activities <span class="tblank">〔在现场〕</span> may also <span class="tblank">〔激发我们的兴趣〕</span> and broaden our experience by <span class="tblank">〔提供动手的机会〕</span>.</div>
+      <div class="rv gold-on" onclick="this.classList.toggle('on')">
+        <div class="rv-trigger"><span class="rv-label">点此查看参考译文</span><span class="rv-plus">＋</span></div>
+        <div class="rv-body"><div class="sum">Drawing activities <b>on the spot</b> may also <b>arouse our interest</b> and broaden our experience by <b>providing hands-on opportunities</b>.</div><div class="how">「在现场」on the spot；「激发兴趣」arouse / stimulate our interest；「提供动手机会」providing hands-on opportunities。</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 表达训练 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c2a87f">PART 04 · 表达积累</span><h2>表达训练 · 用关键词翻译整句</h2><span class="en">Use the Word</span></div>
+    <div class="note anim" style="--i:1;margin-top:0">
+      <span class="ico">🏋️</span>
+      <div>仿照范文的句式，用括号里的关键词把中文句子译成英语。点开对照参考译文，注意<b>关键词的用法</b>。</div>
+    </div>
+    <div class="trans anim" style="--i:2">
+      <span class="tn">1</span>
+      <div class="cn-src">除了审美乐趣，画画还可以丰富我们的精神世界。<span class="kw">pleasure</span></div>
+      <div class="rv gold-on" onclick="this.classList.toggle('on')">
+        <div class="rv-trigger"><span class="rv-label">点此查看参考译文</span><span class="rv-plus">＋</span></div>
+        <div class="rv-body"><div class="sum">Besides the aesthetic <b>pleasure</b>, painting can also enrich our spiritual world.</div><div class="how">「审美乐趣」aesthetic pleasure；「丰富精神世界」enrich our spiritual world。</div></div>
+      </div>
+    </div>
+    <div class="trans anim" style="--i:3">
+      <span class="tn">2</span>
+      <div class="cn-src">在欣赏芭蕾舞的时候，观众们可能也会觉得自己好像坐在一条宁静的河边。<span class="kw">feel like</span></div>
+      <div class="rv gold-on" onclick="this.classList.toggle('on')">
+        <div class="rv-trigger"><span class="rv-label">点此查看参考译文</span><span class="rv-plus">＋</span></div>
+        <div class="rv-body"><div class="sum">While enjoying the ballet, the audience may also <b>feel like</b> sitting beside a quiet river.</div><div class="how">feel like + doing；「宁静的河边」beside a quiet river。</div></div>
+      </div>
+    </div>
+    <div class="trans anim" style="--i:4">
+      <span class="tn">3</span>
+      <div class="cn-src">综上所述，绘画专场将会为我们即将到来的艺术节添上浓墨重彩的一笔。<span class="kw">touch</span></div>
+      <div class="rv gold-on" onclick="this.classList.toggle('on')">
+        <div class="rv-trigger"><span class="rv-label">点此查看参考译文</span><span class="rv-plus">＋</span></div>
+        <div class="rv-body"><div class="sum">In conclusion, the painting section will add a brilliant <b>touch</b> to our upcoming art festival.</div><div class="how">「添上浓墨重彩的一笔」add a brilliant touch to…；「综上所述」In conclusion / To sum up。</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 小结 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a695ae">本课小结</span><h2>结构模板 & 背诵清单</h2><span class="en">Takeaway</span></div>
+    <div class="ex-grid" style="margin-top:6px">
+      <div class="ex-col">
+        <div class="ex-box anim" style="--i:1">
+          <div class="lead">🏗 提议信 · 五步结构模板</div>
+          <div class="step" style="--pc:#96a4b4"><span class="sn">1</span><span class="st"><b>开头</b>：点明背景 + 委婉表态（I'm excited to hear… / voice my humble opinions）</span></div>
+          <div class="step" style="--pc:#93a894"><span class="sn">2</span><span class="st"><b>提议</b>：名称 + 特点（From my perspective, it is advisable to add…）</span></div>
+          <div class="step" style="--pc:#be9490"><span class="sn">3</span><span class="st"><b>说明内容</b>：被动语态串起清晰流程（a vote can be held / will be awarded / exhibited）</span></div>
+          <div class="step" style="--pc:#c2a87f"><span class="sn">4</span><span class="st"><b>理由</b>：两个层次——独特性（Compared to…）+ 意义拔高（More importantly…）</span></div>
+          <div class="step" style="--pc:#a695ae"><span class="sn">5</span><span class="st"><b>结尾</b>：总结 + 委婉请求（In a nutshell… / I would appreciate it if…）</span></div>
+        </div>
+      </div>
+      <div class="ex-col">
+        <div class="ex-box anim" style="--i:2">
+          <div class="lead">📝 背诵清单 · 必背表达</div>
+          <div class="mk" style="--pc:#96a4b4"><span class="mtag">短语</span><div>From my perspective / it is advisable to do sth.</div></div>
+          <div class="mk" style="--pc:#93a894"><span class="mtag">动词</span><div>feature（v.）· photos of various themes and styles</div></div>
+          <div class="mk" style="--pc:#be9490"><span class="mtag">押韵</span><div>observe and capture the <b>tiny but touching</b> moments</div></div>
+          <div class="mk" style="--pc:#c2a87f"><span class="mtag">对比</span><div>not limited to…, but open to…</div></div>
+          <div class="mk" style="--pc:#a695ae"><span class="mtag">衔接</span><div>More importantly / In a nutshell / a wise choice</div></div>
+          <div class="mk" style="--pc:#8a8177"><span class="mtag">收尾</span><div>I would appreciate it very much if…</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="motto anim" style="--i:3">一课一得 —— <span>说明要具体 · 理由要独到 · 语气要委婉</span></div>
+  </section>
+
+</div>
+
+<div id="nav">
+  <button id="home" aria-label="目录" title="回到目录">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+  </button>
+  <button id="prev" aria-label="上一页" title="上一页 (←)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="counter"><b id="cur">1</b> / <span id="total">13</span></div>
+  <button id="next" aria-label="下一页" title="下一页 (→)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <button id="fs" aria-label="全屏" title="全屏 (F)" style="border:none;background:transparent;width:34px">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+  </button>
+</div>
+<div id="hint">← → 翻页 · 空格下一页 · F 全屏 · 点击「＋」揭示答案</div>
+
+<script>
+  /* ===== 翻页 ===== */
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  const curEl = document.getElementById('cur');
+  const totalEl = document.getElementById('total');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const homeBtn = document.getElementById('home');
+  const fsBtn = document.getElementById('fs');
+  const progress = document.getElementById('progress');
+  let idx = 0;
+  totalEl.textContent = total;
+
+  function render(){
+    slides.forEach((s,i)=>{
+      s.classList.toggle('active', i===idx);
+      s.classList.toggle('prev', i<idx);
+    });
+    curEl.textContent = idx+1;
+    progress.style.width = ((idx+1)/total*100) + '%';
+    prevBtn.disabled = idx===0;
+    nextBtn.disabled = idx===total-1;
+  }
+  function go(n){
+    idx = Math.max(0, Math.min(total-1, n));
+    render();
+  }
+  prevBtn.addEventListener('click', ()=>go(idx-1));
+  nextBtn.addEventListener('click', ()=>go(idx+1));
+  homeBtn.addEventListener('click', ()=>go(1));
+  document.addEventListener('keydown', (e)=>{
+    if(e.key==='ArrowRight' || e.key===' ' || e.key==='PageDown'){ e.preventDefault(); go(idx+1); }
+    else if(e.key==='ArrowLeft' || e.key==='PageUp'){ e.preventDefault(); go(idx-1); }
+    else if(e.key==='Home'){ go(0); }
+    else if(e.key==='End'){ go(total-1); }
+    else if(e.key==='f' || e.key==='F'){
+      if(document.fullscreenElement){ document.exitFullscreen(); }
+      else { document.documentElement.requestFullscreen(); }
+    }
+  });
+  fsBtn.addEventListener('click', ()=>{
+    if(document.fullscreenElement){ document.exitFullscreen(); }
+    else { document.documentElement.requestFullscreen(); }
+  });
+  let touchX=null;
+  document.addEventListener('touchstart', e=>{ touchX=e.touches[0].clientX; });
+  document.addEventListener('touchend', e=>{
+    if(touchX===null) return;
+    const dx=e.changedTouches[0].clientX-touchX;
+    if(Math.abs(dx)>50){ dx<0?go(idx+1):go(idx-1); }
+    touchX=null;
+  });
+  render();
+
+  /* ===== 选词填空 ===== */
+  const CLOZE = {
+    text: "I made this proposal for several reasons. First of all, I suppose the {0} of dance to be necessary at a festival {1} “art”. The {2} movements to the music have a place in the world of art where people express their thoughts and feelings in various {3} forms or styles. Moreover, dance has {4} among us students. There are so many dancing lovers like me looking for a stage to express ourselves in this art form. {5}, dance has its unique and high {6}. It leads the audience to {7} through non-verbal expression by {8} the beauty of human bodies. Ethnic dances even afford people an opportunity to appreciate the {9} of different cultures. {10} it would be if the dance section {11} the art festival!",
+    answers: ["presence","characterized by","graceful or powerful","creative","gained popularity","Above all","aesthetic value","a colorful and vigorous spiritual world","demonstrating","uniqueness","What a shame","missed"],
+    options: [
+      ["A","aesthetic value","审美价值"],
+      ["B","graceful or powerful","优美或有力的"],
+      ["C","missed","错过"],
+      ["D","demonstrating","展示"],
+      ["E","a colorful and vigorous spiritual world","丰富多彩、充满活力的精神世界"],
+      ["F","presence","存在、在场"],
+      ["G","gained popularity","流行起来"],
+      ["H","characterized by","以……为特色"],
+      ["I","Above all","最重要的是"],
+      ["J","creative","有创造力的"],
+      ["K","What a shame","真遗憾"],
+      ["L","uniqueness","独特性"]
+    ]
+  };
+  const root = document.getElementById('clozePassage');
+  const bankEl = document.getElementById('bank');
+  const scoreEl = document.getElementById('clozeScore');
+  const blanks = [];
+  const state = CLOZE.answers.map(()=>({t:null, ok:false, bad:false, lock:false, revealed:false}));
+  let selPill = null;
+  let focusBlank = null;
+
+  // 渲染文章 + 空格
+  (function renderPassage(){
+    root.innerHTML = '';
+    const parts = CLOZE.text.split(/\{(\d+)\}/g);
+    parts.forEach((seg,k)=>{
+      if(k % 2 === 0){
+        if(seg) root.appendChild(document.createTextNode(seg));
+      } else {
+        const i = +seg;
+        const sp = document.createElement('span');
+        sp.className = 'blank';
+        sp.dataset.i = i;
+        sp.addEventListener('click', ()=>blankClick(i));
+        root.appendChild(sp);
+        blanks[i] = sp;
+      }
+    });
+  })();
+
+  // 渲染词块
+  (function renderBank(){
+    bankEl.innerHTML = '';
+    CLOZE.options.forEach(([letter, text, zh])=>{
+      const p = document.createElement('span');
+      p.className = 'pill-opt';
+      p.dataset.letter = letter;
+      p.dataset.text = text;
+      p.innerHTML = `<span class="lo">${letter}</span>${text}<span class="zh">${zh}</span>`;
+      p.addEventListener('click', ()=>pillClick(letter, text, p));
+      bankEl.appendChild(p);
+    });
+  })();
+
+  function renderBlank(i){
+    const sp = blanks[i]; const s = state[i];
+    if(s.t){ sp.textContent = s.t; }
+    else { sp.innerHTML = `<span class="bnum">${i+1}</span>`; }
+    sp.classList.toggle('filled', !!s.t);
+    sp.classList.toggle('ok', s.ok);
+    sp.classList.toggle('bad', s.bad);
+    sp.classList.toggle('answer', s.revealed);
+    sp.classList.toggle('focus', focusBlank===i && !s.lock);
+  }
+  function clearFocus(){ focusBlank=null; blanks.forEach((b,i)=>b.classList.remove('focus')); }
+  function clearSel(){ selPill=null; document.querySelectorAll('.pill-opt').forEach(p=>p.classList.remove('sel')); }
+  function updateCount(){
+    const n = state.filter(s=>s.t).length;
+    scoreEl.textContent = `已填 ${n} / ${CLOZE.answers.length}`;
+  }
+  function fillBlank(i, text){
+    const s = state[i];
+    s.t = text; s.ok=false; s.bad=false; s.lock=false; s.revealed=false;
+    renderBlank(i); updateCount();
+  }
+  function blankClick(i){
+    const s = state[i];
+    if(s.lock) return;
+    if(selPill){
+      fillBlank(i, selPill);
+      clearSel(); clearFocus();
+    } else if(s.t){
+      s.t = null; s.ok=false; s.bad=false; s.revealed=false;
+      renderBlank(i); updateCount();
+    } else {
+      const next = (focusBlank===i) ? null : i;
+      clearFocus(); focusBlank = next;
+      if(next!==null) blanks[next].classList.add('focus');
+    }
+  }
+  function pillClick(letter, text, pillEl){
+    if(focusBlank !== null){
+      fillBlank(focusBlank, text);
+      clearFocus();
+    } else {
+      const next = (selPill===letter) ? null : letter;
+      clearSel(); selPill = next;
+      if(next) pillEl.classList.add('sel');
+    }
+  }
+  function checkCloze(){
+    let n = 0;
+    state.forEach((s,i)=>{
+      if(s.t && s.t.trim().toLowerCase() === CLOZE.answers[i].toLowerCase()){
+        s.ok = true; s.bad = false; s.lock = true; n++;
+      } else if(s.t){
+        s.ok = false; s.bad = true;
+      }
+      renderBlank(i);
+    });
+    scoreEl.textContent = `对 ${n} / ${CLOZE.answers.length}`;
+  }
+  function revealCloze(){
+    state.forEach((s,i)=>{
+      s.t = CLOZE.answers[i]; s.ok=true; s.bad=false; s.lock=true; s.revealed=true;
+      renderBlank(i);
+    });
+    scoreEl.textContent = '参考答案已显示';
+    clearFocus(); clearSel();
+  }
+  function resetCloze(){
+    state.forEach(s=>{ s.t=null; s.ok=false; s.bad=false; s.lock=false; s.revealed=false; });
+    clearFocus(); clearSel();
+    state.forEach((s,i)=>renderBlank(i));
+    updateCount();
+  }
+  updateCount();
+</script>
+</body></html>
