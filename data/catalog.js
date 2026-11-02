@@ -39,6 +39,11 @@ window.CATALOG = {
           title: "概要写作课件（1-2节）",
           file: "courseware/概要写作课件（1-2节）.html",
           added: "2026-09-16"
+        },
+        {
+          title: "概要写作·记叙文精练（An Unforgettable Experience）",
+          file: "courseware/概要写作·记叙文精练课件.html",
+          added: "2026-11-02"
         }
       ]
     },

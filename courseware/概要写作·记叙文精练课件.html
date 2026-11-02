@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高考英语 · 概要写作 记叙文精练</title>
+<style>
+  :root{
+    --ink:#4a433c;
+    --muted:#8a8177;
+    --line:#ddd6ca;
+    --bg:#ece8df;
+    --paper:#faf7f1;
+    --brand:#66746f;
+    --brand-2:#8593a3;
+    --gold:#b39b72;
+    --rose:#b0898b;
+    --sage:#8ba08a;
+    --mauve:#a296ad;
+    --c1:#96a4b4;  /* 引入 */
+    --c2:#93a894;  /* 发展 */
+    --c3:#be9490;  /* 高潮 */
+    --c4:#c2a87f;  /* 结局 */
+    --c5:#a695ae;  /* 尾声 */
+    --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:var(--font);
+    color:var(--ink);
+    background:var(--bg);
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ===== 舞台 ===== */
+  #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:56px 44px 96px}
+
+  .slide{
+    position:absolute;
+    width:min(1220px,100%);
+    max-height:100%;
+    background:var(--paper);
+    border-radius:20px;
+    box-shadow:0 24px 60px -24px rgba(74,67,60,.35), 0 0 0 1px rgba(74,67,60,.05);
+    padding:42px 52px;
+    opacity:0;
+    transform:translateX(40px);
+    pointer-events:none;
+    transition:opacity .45s ease, transform .45s ease;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+  .slide.active{opacity:1;transform:translateX(0);pointer-events:auto}
+  .slide.prev{transform:translateX(-40px)}
+
+  .slide .anim{opacity:0;transform:translateY(14px)}
+  .slide.active .anim{
+    opacity:1;transform:none;
+    transition:opacity .5s ease, transform .5s ease;
+    transition-delay:calc(var(--i,0)*70ms + 60ms);
+  }
+
+  /* ===== 页头 ===== */
+  .head{display:flex;align-items:center;gap:14px;margin-bottom:22px;flex:none}
+  .part-badge{
+    font-size:12.5px;font-weight:700;letter-spacing:.05em;
+    color:#fff;background:var(--pc,#8593a3);
+    padding:6px 13px;border-radius:99px;white-space:nowrap;
+  }
+  .head h2{font-size:28px;font-weight:800;letter-spacing:.01em;color:var(--ink)}
+  .head .en{font-size:14px;color:var(--muted);font-weight:600;margin-left:auto;white-space:nowrap}
+
+  .kicker{font-size:13px;font-weight:700;letter-spacing:.14em;color:var(--brand-2);text-transform:uppercase;margin-bottom:8px}
+  .lead{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:10px}
+
+  /* ===== 封面 ===== */
+  .slide.cover{
+    background:
+      radial-gradient(900px 500px at 85% -10%, rgba(176,137,139,.40), transparent 60%),
+      radial-gradient(700px 500px at -10% 110%, rgba(139,160,138,.35), transparent 55%),
+      linear-gradient(135deg,#5d554b 0%,#6e665a 55%,#7b7266 100%);
+    color:#fff;
+    justify-content:center;
+  }
+  .cover .brand-line{position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#b39b72,#c2a87f,#8593a3,#a296ad)}
+  .cover .tag{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#e9e0cd;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);padding:7px 16px;border-radius:99px;margin-bottom:26px}
+  .cover h1{font-size:56px;font-weight:900;line-height:1.16;letter-spacing:.01em}
+  .cover h1 .hl{color:#e0cba0}
+  .cover .sub{margin-top:20px;font-size:20px;color:#d4cbbd;font-weight:500}
+  .cover .meta{margin-top:40px;display:flex;gap:26px;font-size:14px;color:#bdb4a2;font-weight:600}
+  .cover .meta b{color:#fff}
+
+  /* ===== 卡片 & 列表 ===== */
+  .grid{display:grid;gap:14px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .g5{grid-template-columns:repeat(5,1fr)}
+  .g6{grid-template-columns:repeat(3,1fr)}
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:16px;
+    padding:18px 20px;position:relative;overflow:hidden;
+  }
+  .card .num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:32px;height:32px;border-radius:10px;font-size:15px;font-weight:800;
+    color:#fff;background:var(--pc,#8593a3);margin-bottom:10px;
+  }
+  .card h4{font-size:19px;font-weight:800;margin-bottom:5px}
+  .card .cn{font-size:13.5px;color:var(--muted);font-weight:600;line-height:1.55}
+  .card .frm{font-size:17px;font-weight:800;color:var(--pc,#8593a3);margin-top:9px;letter-spacing:.02em}
+
+  .key{color:var(--brand-2);font-weight:800}
+  .gold{color:#7a5c2e;font-weight:800}
+  .red{color:#a06a6a;font-weight:800}
+
+  /* 例句区 */
+  .ex{background:#f5f2ea;border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-top:8px}
+  .ex + .ex{margin-top:12px}
+  .ex .lead{font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:10px}
+  .ex .en-txt{font-size:15px;color:#4a433c;line-height:1.65;font-weight:500}
+  .ex .en-txt b{color:#7a5c2e;font-weight:800}
+
+  .cn-tran{font-size:15px;color:var(--muted);margin-top:8px;font-weight:500}
+  .cn-tran b{color:var(--ink)}
+
+  /* 重点框 */
+  .note{
+    display:flex;gap:12px;align-items:flex-start;
+    background:#f2ead9;border:1px solid #dccca4;border-left:4px solid #b39b72;
+    border-radius:12px;padding:13px 16px;margin-top:14px;font-size:15px;line-height:1.6;
+  }
+  .note .ico{font-size:18px;line-height:1.4}
+  .note b{color:#6b5230}
+
+  .tip{
+    display:flex;gap:10px;align-items:flex-start;
+    background:#eef0f1;border:1px solid #c8cfd4;border-left:4px solid #8593a3;
+    border-radius:12px;padding:11px 15px;margin-top:12px;font-size:14px;line-height:1.6;color:#465057;
+  }
+  .tip b{color:#3a454c}
+
+  /* ===== 点击揭示 ===== */
+  .rv{margin-top:10px;border:1px dashed #cfc7b8;border-radius:12px;overflow:hidden;background:#fff}
+  .rv-trigger{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    padding:10px 15px;cursor:pointer;user-select:none;background:#f5f2ea;transition:.15s;
+  }
+  .rv-trigger:hover{background:#efece2}
+  .rv-label{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.02em;transition:.15s}
+  .rv.on .rv-label{color:var(--brand-2)}
+  .rv-plus{font-size:19px;color:var(--brand-2);transition:transform .3s;font-weight:700;line-height:1;flex:none}
+  .rv.on .rv-plus{transform:rotate(45deg)}
+  .rv-body{max-height:0;opacity:0;overflow:hidden;transition:max-height .5s ease, opacity .35s ease;padding:0 15px}
+  .rv.on .rv-body{max-height:600px;opacity:1;padding:13px 15px}
+  .rv-body .sum{font-size:15.5px;font-weight:700;color:var(--brand);line-height:1.6}
+  .rv-body .how{font-size:12.5px;color:var(--brand-2);margin-top:6px;line-height:1.55;font-weight:600}
+  .rv-body .how b{color:#5a6772;font-weight:800}
+  .rv.gold-on .rv-trigger{background:#f2ead9}
+  .rv.gold-on.on{border-color:#b39b72;background:#fbf7ee}
+  .rv.gold-on .rv-body .sum{color:#6b5230}
+
+  /* 目录跳转卡 */
+  .jump{cursor:pointer;transition:.18s;border:1px solid var(--line)}
+  .jump:hover{transform:translateY(-4px);box-shadow:0 16px 34px -18px rgba(74,67,60,.4);border-color:var(--pc,#8593a3)}
+  .jump .go{position:absolute;right:14px;top:14px;font-size:12px;font-weight:700;color:var(--pc,#8593a3);opacity:0;transition:.18s}
+  .jump:hover .go{opacity:1}
+
+  /* 原文圈划 */
+  .mk{
+    display:flex;gap:10px;align-items:flex-start;padding:9px 12px;
+    border-left:3px solid var(--pc,#8593a3);background:#fff;border-radius:8px;
+    margin-top:8px;font-size:14px;line-height:1.55;color:#4a433c;
+  }
+  .mk + .mk{margin-top:7px}
+  .mk .mtag{
+    flex:none;font-size:11px;font-weight:800;color:#fff;background:var(--pc,#8593a3);
+    padding:2px 8px;border-radius:99px;margin-top:1px;white-space:nowrap;
+  }
+  .mk b{color:var(--ink)}
+  .mk .en-note{color:var(--muted);font-size:12.5px}
+  .mk.sec{background:#f5f2ea;border-left-color:#b9b0a0;color:#8a8177}
+  .mk .why{display:block;font-size:12px;color:#6f8a6f;margin-top:4px;line-height:1.55;font-weight:600}
+  .mk .why b{color:#4d6b4d;font-weight:800}
+  .passage .why-inline{font-size:12px;color:#6f8a6f;line-height:1.55;margin-top:7px;font-weight:600}
+  .passage .why-inline b{color:#4d6b4d;font-weight:800}
+
+  /* 例题对照两栏 */
+  .ex-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;min-height:0}
+  .ex-col{display:flex;flex-direction:column;min-height:0}
+  .ex-box{background:#f5f2ea;border:1px solid var(--line);border-radius:14px;padding:14px 16px;overflow-y:auto}
+  .ex-box .lead{font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:10px}
+
+  /* 原文全文（叙述类） */
+  .passage{background:#f5f2ea;border:1px solid var(--line);border-radius:14px;padding:16px 20px;overflow-y:auto}
+  .passage p{font-size:14.5px;line-height:1.7;color:#4a433c}
+  .passage p + p{margin-top:10px}
+  .passage b{color:#4a433c;background:#e6dcc7;padding:0 3px;border-radius:3px}
+  .passage .sec-tag{
+    display:inline-block;font-size:11.5px;font-weight:800;color:#fff;
+    padding:3px 10px;border-radius:99px;margin-bottom:6px;
+  }
+
+  /* 结构表 */
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{padding:10px 13px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.5}
+  th{font-size:12.5px;letter-spacing:.05em;color:var(--muted);background:#f5f2ea;font-weight:700}
+  td .en{font-weight:700}
+  td .cn{color:var(--muted);font-size:13px}
+
+  .pill{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:#e8e3d6;color:#5a5246;margin-right:5px}
+
+  /* 步骤 */
+  .step{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed var(--line)}
+  .step:last-child{border-bottom:none}
+  .step .sn{flex:none;width:26px;height:26px;border-radius:50%;background:var(--pc,#8593a3);color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+  .step .st{font-size:14.5px;line-height:1.55;color:#4a433c}
+  .step .st b{color:var(--ink)}
+
+  /* 小结 */
+  .sum-block{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:#fff}
+  .sum-block h4{font-size:15.5px;font-weight:800;margin-bottom:11px;display:flex;align-items:center;gap:8px}
+  .sum-block .dot{width:10px;height:10px;border-radius:3px;background:var(--pc,#8593a3)}
+  .sum-block ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .sum-block li{font-size:13.8px;color:#4a433c;line-height:1.5}
+  .sum-block li b{color:var(--ink)}
+
+  .motto{
+    margin-top:18px;text-align:center;font-size:20px;font-weight:800;color:var(--brand);
+    background:#e9eee7;border-radius:14px;padding:18px;
+  }
+  .motto span{color:#a06a6a}
+
+  /* 导航 */
+  #nav{
+    position:fixed;left:50%;bottom:26px;transform:translateX(-50%);
+    display:flex;align-items:center;gap:12px;z-index:50;
+    background:rgba(250,247,241,.88);backdrop-filter:blur(10px);
+    border:1px solid var(--line);border-radius:99px;padding:9px 12px;
+    box-shadow:0 10px 30px -12px rgba(74,67,60,.3);
+  }
+  #nav button{
+    border:none;background:#fff;border:1px solid var(--line);
+    width:40px;height:40px;border-radius:50%;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;color:#4a433c;
+    transition:.15s;
+  }
+  #nav button:hover:not(:disabled){background:#eef0f1;border-color:#c8cfd4;color:var(--brand-2)}
+  #nav button:disabled{opacity:.35;cursor:default}
+  #nav .counter{font-size:14px;font-weight:700;color:#4a433c;min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
+  #nav .counter b{color:var(--brand-2);font-size:16px}
+  #progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#8593a3,#a296ad,#b0898b);z-index:60;width:0;transition:width .35s ease}
+  #hint{position:fixed;left:50%;transform:translateX(-50%);bottom:4px;font-size:12px;color:#a49a8a;z-index:40;white-space:nowrap}
+
+  @media (max-width:900px){
+    #stage{padding:20px 16px 90px}
+    .slide{padding:26px 22px;border-radius:14px}
+    .g2,.g3,.g4,.g5,.g6,.ex-grid{grid-template-columns:1fr 1fr}
+    .head h2{font-size:22px}
+    .cover h1{font-size:36px}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<div id="stage">
+
+  <!-- 0 封面 -->
+  <section class="slide cover active">
+    <div class="brand-line"></div>
+    <div class="anim" style="--i:0"><span class="tag">高考英语 · 概要写作 · 单篇精练</span></div>
+    <h1 class="anim" style="--i:1">记叙文概要 <span class="hl">精练</span></h1>
+    <p class="sub anim" style="--i:2">An Unforgettable Experience · 从划关键句到 60 词成文</p>
+    <div class="meta anim" style="--i:3">
+      <span>体裁 <b>记叙文</b></span>
+      <span>抓手 <b>情节五阶段</b></span>
+      <span>目标 <b>60 词</b></span>
+    </div>
+  </section>
+
+  <!-- 1 目录 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a8177">CONTENTS</span><h2>本节内容 · 目录</h2><span class="en">Roadmap · 点击卡片跳转</span></div>
+    <div class="grid g4" style="margin-top:6px">
+      <div class="card jump anim" style="--i:1;--pc:#8593a3" onclick="go(2)"><span class="num">01</span><h4>回顾方法</h4><div class="cn">记叙文概要的骨架 · 改写六大技巧</div><span class="go">进入 →</span></div>
+      <div class="card jump anim" style="--i:2;--pc:#93a894" onclick="go(4)"><span class="num">02</span><h4>精读划关键句</h4><div class="cn">情节五阶段 · 留什么删什么</div><span class="go">进入 →</span></div>
+      <div class="card jump anim" style="--i:3;--pc:#be9490" onclick="go(10)"><span class="num">03</span><h4>转写与整合</h4><div class="cn">要点清单 · 逐句改写 · 连句成文</div><span class="go">进入 →</span></div>
+      <div class="card jump anim" style="--i:4;--pc:#a695ae" onclick="go(16)"><span class="num">04</span><h4>参考答案</h4><div class="cn">60 词范文 · 要点对照自检</div><span class="go">进入 →</span></div>
+    </div>
+    <div class="note anim" style="--i:5;margin-top:20px">
+      <span class="ico">🧭</span>
+      <div>这一讲是<b>单篇精练</b>：只用《An Unforgettable Experience》一篇记叙文，把「<b>划关键句 → 逐句改写 → 串成 60 词</b>」完整走一遍。方法在第一块快速回顾，重头在第三块的<b>改写</b>。</div>
+    </div>
+  </section>
+
+  <!-- ===== PART 01 回顾 ===== -->
+  <!-- 2 回顾 骨架 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8593a3">PART 01 · 回顾方法</span><h2>记叙文概要的骨架</h2><span class="en">The Skeleton</span></div>
+    <div class="note anim" style="--i:1;margin-top:0">
+      <span class="ico">💡</span>
+      <div>记叙文概要，一句话说清：<b>谁 + 做了什么 + 结果与意义</b>。抓住这条主线，其余全是枝叶。</div>
+    </div>
+    <div class="lead anim" style="--i:2;margin-top:20px">情节五阶段 · 一块留一句</div>
+    <div class="grid g5">
+      <div class="card anim" style="--i:3;--pc:#96a4b4"><span class="num">①</span><h4>引入</h4><div class="cn">时间 · 地点 · 人物登场</div></div>
+      <div class="card anim" style="--i:4;--pc:#93a894"><span class="num">②</span><h4>发展</h4><div class="cn">事件向前推进</div></div>
+      <div class="card anim" style="--i:5;--pc:#be9490"><span class="num">③</span><h4>高潮</h4><div class="cn">冲突 / 反转</div></div>
+      <div class="card anim" style="--i:6;--pc:#c2a87f"><span class="num">④</span><h4>结局</h4><div class="cn">事件收束</div></div>
+      <div class="card anim" style="--i:7;--pc:#a695ae"><span class="num">⑤</span><h4>尾声</h4><div class="cn">主题 / 意义</div></div>
+    </div>
+    <div class="tip anim" style="--i:8;margin-top:18px">
+      <span>🔎</span>
+      <div>写完后用 <b>5W1H</b> 自检：<b>Who / What / When / Where / Why / How</b> 是否都点到。少一个"谁"或"为什么"，就丢一个要点。</div>
+    </div>
+  </section>
+
+  <!-- 3 回顾 改写工具箱 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8593a3">PART 01 · 回顾方法</span><h2>改写工具箱 · 六大技巧</h2><span class="en">Six Techniques</span></div>
+    <div class="grid g3" style="margin-top:6px">
+      <div class="card anim" style="--i:1;--pc:#96a4b4"><span class="num">1</span><h4>句式转换</h4><div class="cn">被动改主动、长句改短语、疑问改陈述</div></div>
+      <div class="card anim" style="--i:2;--pc:#93a894"><span class="num">2</span><h4>同义替换</h4><div class="cn">用近义词、更简的词替换原词</div></div>
+      <div class="card anim" style="--i:3;--pc:#be9490"><span class="num">3</span><h4>词性转换</h4><div class="cn">名词 / 动词 / 形容词 / 副词互转</div></div>
+      <div class="card anim" style="--i:4;--pc:#c2a87f"><span class="num">4</span><h4>句子整合</h4><div class="cn">多个简单句合成一句（非谓语 / 从句）</div></div>
+      <div class="card anim" style="--i:5;--pc:#a695ae"><span class="num">5</span><h4>长句缩短</h4><div class="cn">删掉修饰，只留主干</div></div>
+      <div class="card anim" style="--i:6;--pc:#8593a3"><span class="num">6</span><h4>信息概括</h4><div class="cn">把零散细节概括成上位词 / 副词</div></div>
+    </div>
+    <div class="note anim" style="--i:7;margin-top:18px">
+      <span class="ico">🧩</span>
+      <div>这六招常<b>组合使用</b>，是第三块「逐句改写」的工具箱。改写时先想「用哪几招」，再动笔。</div>
+    </div>
+    <div class="motto anim" style="--i:8">三条红线 —— <span>不照抄原句 · 不加评论 · 不超字数（本课 60 词）</span></div>
+  </section>
+
+  <!-- ===== PART 02 精读划关键句 ===== -->
+  <!-- 4 任务页 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93a894">PART 02 · 精读</span><h2>任务 · 先自己划一遍</h2><span class="en">Mark It Yourself</span></div>
+    <div class="passage anim" style="--i:1">
+      <p>It was a hot Sunday morning. John was sitting on a bus. Sitting in front of him was a girl in red. At one stop, an old man got on and walked straight towards them. "I will give my seat to him if he stands beside me," John thought to himself. But he stopped beside the girl in red. She stood up immediately and helped him into her seat. The old man thanked her and she said with a smile, "My pleasure." Then nobody ever noticed them anymore.</p>
+      <p>The bus went on smoothly. Suddenly, the driver skidded to a stop to avoid a cyclist, and the girl in red fell heavily onto the floor. John dashed over to help her up. But, to his great surprise, he saw a wooden stick where her left leg should have been. A handicapped girl who desperately needed a seat herself gave her seat to the old man! Quickly covering her wooden leg, the girl in red stood up.</p>
+      <p>"Your leg!" murmured John. "Oh, it's okay. It's been a part of me for a long time." She smiled as if nothing had happened. "Please take my seat," John said and reached out to let her sit down.</p>
+      <p>For the rest of the journey, John could think of nothing but the girl's consideration, confidence, and courage.</p>
+    </div>
+    <div class="tip anim" style="--i:2">
+      <span>✍️</span>
+      <div>请你先按<b>情节五阶段</b>，把每阶段最关键的那句话划出来（想好：<b>为什么划它、为什么不划别的</b>），再翻到下一页对照。判断标准两条：① 是否<b>推动情节</b>（时间、事件）② 是否<b>承载主题</b>（反转、意义）。</div>
+    </div>
+  </section>
+
+  <!-- 5 切块 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93a894">PART 02 · 精读</span><h2>第一步 · 把故事切成五块</h2><span class="en">Five Stages</span></div>
+    <div class="step anim" style="--i:1;--pc:#96a4b4"><span class="sn">①</span><span class="st"><b>引入</b> · 第 1 段开头 —— 时间（a hot Sunday morning）、地点（on a bus）、人物（John、a girl in red）登场</span></div>
+    <div class="step anim" style="--i:2;--pc:#93a894"><span class="sn">②</span><span class="st"><b>发展</b> · 第 1 段后半 —— 老人上车，红衣女孩起身<b>让座</b></span></div>
+    <div class="step anim" style="--i:3;--pc:#be9490"><span class="sn">③</span><span class="st"><b>高潮</b> · 第 2 段 —— 急刹车、女孩摔倒、John 发现<b>假肢</b>（反转）</span></div>
+    <div class="step anim" style="--i:4;--pc:#c2a87f"><span class="sn">④</span><span class="st"><b>结局</b> · 第 3 段 —— 女孩平静微笑，John 把座位让给她</span></div>
+    <div class="step anim" style="--i:5;--pc:#a695ae"><span class="sn">⑤</span><span class="st"><b>尾声</b> · 第 4 段 —— John 难忘她的体贴、自信、勇气（<b>主题</b>）</span></div>
+    <div class="tip anim" style="--i:6">
+      <span>🧩</span>
+      <div>为什么这样切？——记叙文按<b>情节推进</b>走，一块对应一个「事件节点」。切好了块，每块最后只留<b>一句话</b>，概要的骨架就出来了。</div>
+    </div>
+  </section>
+
+  <!-- 6 划关键句 12 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93a894">PART 02 · 精读</span><h2>关键句 ①② · 引入与发展</h2><span class="en">Stage 1–2</span></div>
+    <div class="mk anim" style="--i:1;--pc:#96a4b4"><span class="mtag">① 引入</span><div><b>It was a hot Sunday morning.</b> John was sitting on a bus. <b>Sitting in front of him was a girl in red.</b><span class="why">▸ 为何划：时间、地点、人物一次到位——「红衣女孩」是主角，必须登场。</span></div></div>
+    <div class="mk anim" style="--i:2;--pc:#93a894"><span class="mtag">② 发展</span><div>At one stop, an old man got on… <b>She stood up immediately and helped him into her seat.</b><span class="why">▸ 为何划：这是核心事件「让座」，没有它故事就无从发生。</span></div></div>
+    <div class="mk sec anim" style="--i:3"><span class="mtag" style="background:#b9b0a0">✂ 删</span><div>“I will give my seat to him if he stands beside me,” John thought to himself. · “My pleasure.” · Then nobody ever noticed them anymore.<span class="why">▸ 为何删：John 的心理独白只说明「他也想让座」，不推进情节；对话和过渡句都是细节。</span></div></div>
+    <div class="tip anim" style="--i:4">
+      <span>📌</span>
+      <div>原则：<b>心理独白、对话、过渡句</b>，一律不划。它们描写的是「感受和过程」，不是「事件」。</div>
+    </div>
+  </section>
+
+  <!-- 7 划关键句 3 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93a894">PART 02 · 精读</span><h2>关键句 ③ · 高潮反转</h2><span class="en">Stage 3 — The Twist</span></div>
+    <div class="mk anim" style="--i:1;--pc:#be9490"><span class="mtag">③ 高潮</span><div>Suddenly, the driver skidded to a stop to avoid a cyclist, and <b>the girl in red fell heavily onto the floor.</b> John dashed over to help her up. But, to his great surprise, <b>he saw a wooden stick where her left leg should have been.</b> <b>A handicapped girl who desperately needed a seat herself gave her seat to the old man!</b><span class="why">▸ 为何划：这是全篇的<b>反转</b>——一个最需要座位的残疾女孩让了座。删掉它，故事就没了灵魂。</span></div></div>
+    <div class="mk sec anim" style="--i:2"><span class="mtag" style="background:#b9b0a0">✂ 删</span><div>the driver <b style="color:#8a8177">skidded to a stop to avoid a cyclist</b> · John <b style="color:#8a8177">dashed over to help her up</b> · Quickly covering her wooden leg, the girl in red stood up.<span class="why">▸ 为何删：过程细节和次要动作。「急刹车」可概括成一个词 braked，不必写避让骑车人。</span></div></div>
+    <div class="tip anim" style="--i:3">
+      <span>⚠️</span>
+      <div><b>易漏点</b>：很多同学会把「假肢 / 残疾」这一句漏掉，只写「女孩摔倒，John 扶她」。但<b>反转才是这篇概要的得分核心</b>，务必保留。</div>
+    </div>
+  </section>
+
+  <!-- 8 划关键句 45 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93a894">PART 02 · 精读</span><h2>关键句 ④⑤ · 结局与尾声</h2><span class="en">Stage 4–5</span></div>
+    <div class="mk anim" style="--i:1;--pc:#c2a87f"><span class="mtag">④ 结局</span><div>“Oh, it's okay. It's been a part of me for a long time.” <b>She smiled as if nothing had happened.</b> <b>“Please take my seat,” John said</b> and reached out to let her sit down.<span class="why">▸ 为何划：女孩的平静反应 + John 让座，是事件的收束。</span></div></div>
+    <div class="mk anim" style="--i:2;--pc:#a695ae"><span class="mtag">⑤ 尾声</span><div><b>For the rest of the journey, John could think of nothing but the girl's consideration, confidence, and courage.</b><span class="why">▸ 为何划：主题句必留——consideration、confidence、courage 三个词就是全文主旨，也是标题 An Unforgettable Experience 的落点。</span></div></div>
+    <div class="mk sec anim" style="--i:3"><span class="mtag" style="background:#b9b0a0">✂ 删</span><div>“Your leg!” murmured John. · “It's been a part of me for a long time.” · as if nothing had happened<span class="why">▸ 为何删：对话和修饰性状语都是细节，只留「平静微笑」这个概括即可。</span></div></div>
+    <div class="tip anim" style="--i:4">
+      <span>📌</span>
+      <div>原则：<b>主题句（尾声）一个字都不能少</b>；对话和神态描写只留最概括的一层。</div>
+    </div>
+  </section>
+
+  <!-- 9 汇总 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93a894">PART 02 · 精读</span><h2>汇总 · 留什么，删什么</h2><span class="en">Keep vs. Cut</span></div>
+    <div class="ex-grid">
+      <div class="ex-col">
+        <div class="ex-box anim" style="--i:1">
+          <div class="lead">✅ 留（关键句 · 五条）</div>
+          <div class="mk" style="--pc:#96a4b4"><span class="mtag">①</span><div>On a hot Sunday morning, a girl in red on a bus.</div></div>
+          <div class="mk" style="--pc:#93a894"><span class="mtag">②</span><div>She gave her seat to an old man.</div></div>
+          <div class="mk" style="--pc:#be9490"><span class="mtag">③</span><div>The bus braked; John discovered she had a wooden leg — a handicapped girl had offered her seat.</div></div>
+          <div class="mk" style="--pc:#c2a87f"><span class="mtag">④</span><div>She smiled calmly; John gave her his seat.</div></div>
+          <div class="mk" style="--pc:#a695ae"><span class="mtag">⑤</span><div>John would always remember her consideration, confidence and courage.</div></div>
+        </div>
+      </div>
+      <div class="ex-col">
+        <div class="ex-box anim" style="--i:2">
+          <div class="lead">🗑 删（可删句）</div>
+          <div class="mk sec" style="--pc:#b9b0a0"><span class="mtag" style="background:#b9b0a0">心理</span><div>“I will give my seat to him if he stands beside me,” John thought.</div></div>
+          <div class="mk sec" style="--pc:#b9b0a0"><span class="mtag" style="background:#b9b0a0">对话</span><div>“My pleasure.” · “Your leg!” · “Oh, it's okay…”</div></div>
+          <div class="mk sec" style="--pc:#b9b0a0"><span class="mtag" style="background:#b9b0a0">细节</span><div>skidded to a stop to avoid a cyclist · dashed over to help her up · nobody ever noticed them anymore</div></div>
+          <div class="mk sec" style="--pc:#b9b0a0"><span class="mtag" style="background:#b9b0a0">神态</span><div>as if nothing had happened · reached out to let her sit down</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="motto anim" style="--i:3">口诀 —— 留「<span>推动情节 + 点明主题</span>」，删「<span>心理、对话、修饰细节</span>」</div>
+  </section>
+
+  <!-- ===== PART 03 转写与整合 ===== -->
+  <!-- 10 要点清单 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#be9490">PART 03 · 转写</span><h2>先把关键句提成「要点」</h2><span class="en">Make a Point List</span></div>
+    <div class="note anim" style="--i:1;margin-top:0">
+      <span class="ico">📋</span>
+      <div>动笔前，先把上一步划出的五句关键句，各压成一条<b>要点</b>（先想中文、再想英文）。要点只写「<b>谁 + 做了什么 + 结果</b>」，不写完整句子。</div>
+    </div>
+    <div class="step anim" style="--i:2;--pc:#96a4b4"><span class="sn">①</span><span class="st"><b>引入</b> —— 炎热的周日上午，公交车上，坐着一位红衣女孩（时间 / 地点 / 人物）</span></div>
+    <div class="step anim" style="--i:3;--pc:#93a894"><span class="sn">②</span><span class="st"><b>发展</b> —— 女孩给一位老人让座（核心事件）</span></div>
+    <div class="step anim" style="--i:4;--pc:#be9490"><span class="sn">③</span><span class="st"><b>高潮</b> —— 急刹车女孩摔倒，John 发现她装的是假肢：一个残疾女孩让了座（反转）</span></div>
+    <div class="step anim" style="--i:5;--pc:#c2a87f"><span class="sn">④</span><span class="st"><b>结局</b> —— 女孩平静微笑，John 把座位让给她</span></div>
+    <div class="step anim" style="--i:6;--pc:#a695ae"><span class="sn">⑤</span><span class="st"><b>尾声</b> —— John 难忘她的体贴、自信与勇气（主题）</span></div>
+    <div class="tip anim" style="--i:7">
+      <span>🎯</span>
+      <div>这五条就是全文的<b>骨架</b>。后面每一句改写都对应一条要点，<b>漏一条 = 丢一个得分点</b>。尤其第 ③ 条「反转」，是多数人最容易丢的。</div>
+    </div>
+  </section>
+
+  <!-- 11 转写1 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#be9490">PART 03 · 转写</span><h2>转写 ① · 引入 + 发展</h2><span class="en">Rewrite 1</span></div>
+    <div class="lead anim" style="--i:1"><span class="pill" style="background:#96a4b4;color:#fff">要点 ①+②</span> 炎热的上午，公交车上红衣女孩让座给老人</div>
+    <div class="ex anim" style="--i:2">
+      <div class="lead">原句</div>
+      <div class="en-txt"><b>It was a hot Sunday morning.</b> John was sitting on a bus. Sitting in front of him was a girl in red. At one stop, an old man got on… <b>She stood up immediately and helped him into her seat.</b></div>
+    </div>
+    <div class="anim" style="--i:3"><span class="pill">信息概括</span><span class="pill">句子整合</span><span class="pill">同义替换</span></div>
+    <div class="note anim" style="--i:4">
+      <span class="ico">✍️</span>
+      <div>你来试试：John 是旁观者，先退到幕后；时间、地点、人物压成一句。<b>「让座」用一个动词短语怎么说？</b>（提示：give … to / offer … to）</div>
+    </div>
+    <div class="rv anim" style="--i:5" onclick="this.classList.toggle('on')">
+      <div class="rv-trigger"><span class="rv-label">点此揭晓改写</span><span class="rv-plus">＋</span></div>
+      <div class="rv-body">
+        <div class="sum">On a hot morning, a girl in red on a bus gave her seat to an old man.</div>
+        <div class="how">① 信息概括：删「John 坐车、坐在前面」等细节 ② 句子整合：三句合一 ③ 同义替换：helped him into her seat → <b>gave her seat to</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 转写2 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#be9490">PART 03 · 转写</span><h2>转写 ② · 高潮反转</h2><span class="en">Rewrite 2</span></div>
+    <div class="lead anim" style="--i:1"><span class="pill" style="background:#be9490;color:#fff">要点 ③</span> 急刹车摔倒 → 发现假肢（反转）</div>
+    <div class="ex anim" style="--i:2">
+      <div class="lead">原句</div>
+      <div class="en-txt">Suddenly, the driver <b>skidded to a stop to avoid a cyclist</b>, and the girl in red fell heavily onto the floor. John dashed over to help her up. But… <b>he saw a wooden stick where her left leg should have been.</b> A handicapped girl who desperately needed a seat herself gave her seat to the old man!</div>
+    </div>
+    <div class="anim" style="--i:3"><span class="pill">长句缩短</span><span class="pill">句子整合</span><span class="pill">信息概括</span></div>
+    <div class="note anim" style="--i:4">
+      <span class="ico">✍️</span>
+      <div>你来试试：「急刹车」和「摔倒」用 <b>When</b> 连成一句；「假肢」怎么用最简的方式点破她残疾？（提示：wooden leg / a handicapped girl）</div>
+    </div>
+    <div class="rv anim" style="--i:5" onclick="this.classList.toggle('on')">
+      <div class="rv-trigger"><span class="rv-label">点此揭晓改写</span><span class="rv-plus">＋</span></div>
+      <div class="rv-body">
+        <div class="sum">When the bus braked suddenly, she fell, and John discovered she had a wooden leg — a handicapped girl had offered her seat.</div>
+        <div class="how">① 长句缩短：skidded to a stop to avoid a cyclist → <b>braked suddenly</b> ② 句子整合：用 When… and… 串起「刹车—摔倒—发现」 ③ 信息概括：点破「最需要座位却让座」为 <b>handicapped</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 转写3 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#be9490">PART 03 · 转写</span><h2>转写 ③ · 结局</h2><span class="en">Rewrite 3</span></div>
+    <div class="lead anim" style="--i:1"><span class="pill" style="background:#c2a87f;color:#fff">要点 ④</span> 女孩平静微笑，John 让座</div>
+    <div class="ex anim" style="--i:2">
+      <div class="lead">原句</div>
+      <div class="en-txt">“Oh, it's okay. It's been a part of me for a long time.” <b>She smiled as if nothing had happened.</b> “Please take my seat,” John said and reached out to let her sit down.</div>
+    </div>
+    <div class="anim" style="--i:3"><span class="pill">长句缩短</span><span class="pill">信息概括</span><span class="pill">句式转换</span></div>
+    <div class="note anim" style="--i:4">
+      <span class="ico">✍️</span>
+      <div>你来试试：对话全部删掉；「平静地微笑」压成两个词？「让座」这里换成一个最直白的动词（提示：gave her his seat）。</div>
+    </div>
+    <div class="rv anim" style="--i:5" onclick="this.classList.toggle('on')">
+      <div class="rv-trigger"><span class="rv-label">点此揭晓改写</span><span class="rv-plus">＋</span></div>
+      <div class="rv-body">
+        <div class="sum">She smiled calmly, and John gave her his seat.</div>
+        <div class="how">① 长句缩短：删对话、删「as if nothing had happened」 ② 信息概括：smiled as if nothing had happened → <b>smiled calmly</b> ③ 句式转换：said and reached out… → <b>gave her his seat</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14 转写4 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#be9490">PART 03 · 转写</span><h2>转写 ④ · 尾声</h2><span class="en">Rewrite 4</span></div>
+    <div class="lead anim" style="--i:1"><span class="pill" style="background:#a695ae;color:#fff">要点 ⑤</span> John 难忘她的体贴 / 自信 / 勇气（主题）</div>
+    <div class="ex anim" style="--i:2">
+      <div class="lead">原句</div>
+      <div class="en-txt"><b>For the rest of the journey, John could think of nothing but the girl's consideration, confidence, and courage.</b></div>
+    </div>
+    <div class="anim" style="--i:3"><span class="pill">句式转换</span><span class="pill">同义替换</span></div>
+    <div class="note anim" style="--i:4">
+      <span class="ico">✍️</span>
+      <div>你来试试：「念念不忘」换一个更书面、更短的动词；开头加个分词短语点出「深受触动」（提示：remember / deeply moved）。</div>
+    </div>
+    <div class="rv anim" style="--i:5" onclick="this.classList.toggle('on')">
+      <div class="rv-trigger"><span class="rv-label">点此揭晓改写</span><span class="rv-plus">＋</span></div>
+      <div class="rv-body">
+        <div class="sum">Deeply moved, John would always remember her consideration, confidence and courage.</div>
+        <div class="how">① 句式转换：用分词短语 <b>Deeply moved</b> 作状语 ② 同义替换：could think of nothing but → <b>would always remember</b> ③ 保留三词 consideration, confidence, courage</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15 整合 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#be9490">PART 03 · 转写</span><h2>整合 · 连句成文</h2><span class="en">Put It Together</span></div>
+    <div class="lead anim" style="--i:1">四句改写，按时间线串起来</div>
+    <div class="ex anim" style="--i:2">
+      <div class="en-txt">1. On a hot morning, a girl in red on a bus <b>gave her seat to</b> an old man. <span class="cn-tran">（18 词）</span></div>
+      <div class="en-txt">2. When the bus braked suddenly, she fell, and John discovered she had <b>a wooden leg</b> — a handicapped girl had offered her seat. <span class="cn-tran">（22 词）</span></div>
+      <div class="en-txt">3. She smiled calmly, and John <b>gave her his seat</b>. <span class="cn-tran">（9 词）</span></div>
+      <div class="en-txt">4. Deeply moved, John would always remember her <b>consideration, confidence and courage</b>. <span class="cn-tran">（11 词）</span></div>
+    </div>
+    <div class="tip anim" style="--i:3">
+      <span>🔢</span>
+      <div>数一数：18 + 22 + 9 + 11 = <b>60 词</b>，正好压线。若超了，就从句 1 砍（删 <b>on a bus</b>）或句 4 砍（删 <b>Deeply moved</b>）。</div>
+    </div>
+    <div class="note anim" style="--i:4">
+      <span class="ico">🧵</span>
+      <div>四句按<b>时间线</b>自然衔接，几乎不用额外连接词（句 2 的 When 已承接）。成品就绪，翻到下一页核对参考答案。</div>
+    </div>
+  </section>
+
+  <!-- ===== PART 04 答案 ===== -->
+  <!-- 16 参考答案 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a695ae">PART 04 · 答案</span><h2>参考答案 · 60 词</h2><span class="en">Reference Summary</span></div>
+    <div class="rv gold-on anim" style="--i:1" onclick="this.classList.toggle('on')">
+      <div class="rv-trigger"><span class="rv-label">Reference · about 60 words</span><span class="rv-plus">＋</span></div>
+      <div class="rv-body">
+        <div class="sum">On a hot morning, a girl in red on a bus gave her seat to an old man. When the bus braked suddenly, she fell, and John discovered she had a wooden leg — a handicapped girl had offered her seat. She smiled calmly, and John gave her his seat. Deeply moved, John would always remember her consideration, confidence and courage.</div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:2;margin-top:16px">
+      <span>✅</span>
+      <div>自检三问：① <b>5W1H</b> 齐全吗？② 每个阶段是否<b>只留一句话</b>？③ 是否用了<b>自己的话</b>（gave her seat / braked suddenly / wooden leg）？</div>
+    </div>
+    <div class="motto anim" style="--i:3">三条红线 —— <span>不照抄原句 · 不加评论 · 不超字数</span></div>
+  </section>
+
+  <!-- 17 要点对照 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a695ae">PART 04 · 答案</span><h2>要点对照 · 你漏了哪个？</h2><span class="en">Check Your Points</span></div>
+    <table class="anim" style="--i:1">
+      <thead><tr><th style="width:16%">要点</th><th>范文对应句</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pill" style="background:#96a4b4;color:#fff">① 引入</span></td><td><span class="en">On a hot morning, a girl in red on a bus</span></td></tr>
+        <tr><td><span class="pill" style="background:#93a894;color:#fff">② 发展</span></td><td><span class="en">gave her seat to an old man.</span></td></tr>
+        <tr><td><span class="pill" style="background:#be9490;color:#fff">③ 高潮</span></td><td><span class="en">When the bus braked suddenly… a handicapped girl had offered her seat.</span></td></tr>
+        <tr><td><span class="pill" style="background:#c2a87f;color:#fff">④ 结局</span></td><td><span class="en">She smiled calmly, and John gave her his seat.</span></td></tr>
+        <tr><td><span class="pill" style="background:#a695ae;color:#fff">⑤ 尾声</span></td><td><span class="en">Deeply moved, John would always remember her consideration, confidence and courage.</span></td></tr>
+      </tbody>
+    </table>
+    <div class="tip anim" style="--i:2">
+      <span>🔍</span>
+      <div>对照你的版本，漏了哪一条？<b>第 ③ 条「反转」</b>是多数人最容易丢的——只写「女孩让座、摔倒」，忘了「她是残疾人」这个关键信息。</div>
+    </div>
+    <div class="motto anim" style="--i:3">记叙文概要三步走 —— <span>划要点 → 逐句改 → 串成文</span></div>
+  </section>
+
+</div>
+
+<div id="nav">
+  <button id="home" aria-label="目录" title="回到目录">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+  </button>
+  <button id="prev" aria-label="上一页" title="上一页 (←)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="counter"><b id="cur">1</b> / <span id="total">18</span></div>
+  <button id="next" aria-label="下一页" title="下一页 (→)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <button id="fs" aria-label="全屏" title="全屏 (F)" style="border:none;background:transparent;width:34px">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+  </button>
+</div>
+<div id="hint">← → 翻页 · 空格下一页 · F 全屏 · 点击「＋」揭示答案</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  const curEl = document.getElementById('cur');
+  const totalEl = document.getElementById('total');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const homeBtn = document.getElementById('home');
+  const fsBtn = document.getElementById('fs');
+  const progress = document.getElementById('progress');
+  let idx = 0;
+  totalEl.textContent = total;
+
+  function render(){
+    slides.forEach((s,i)=>{
+      s.classList.toggle('active', i===idx);
+      s.classList.toggle('prev', i<idx);
+    });
+    curEl.textContent = idx+1;
+    progress.style.width = ((idx+1)/total*100) + '%';
+    prevBtn.disabled = idx===0;
+    nextBtn.disabled = idx===total-1;
+  }
+  function go(n){
+    idx = Math.max(0, Math.min(total-1, n));
+    render();
+  }
+  prevBtn.addEventListener('click', ()=>go(idx-1));
+  nextBtn.addEventListener('click', ()=>go(idx+1));
+  homeBtn.addEventListener('click', ()=>go(1));
+  document.addEventListener('keydown', (e)=>{
+    if(e.key==='ArrowRight' || e.key===' ' || e.key==='PageDown'){ e.preventDefault(); go(idx+1); }
+    else if(e.key==='ArrowLeft' || e.key==='PageUp'){ e.preventDefault(); go(idx-1); }
+    else if(e.key==='Home'){ go(0); }
+    else if(e.key==='End'){ go(total-1); }
+    else if(e.key==='f' || e.key==='F'){
+      if(document.fullscreenElement){ document.exitFullscreen(); }
+      else { document.documentElement.requestFullscreen(); }
+    }
+  });
+  fsBtn.addEventListener('click', ()=>{
+    if(document.fullscreenElement){ document.exitFullscreen(); }
+    else { document.documentElement.requestFullscreen(); }
+  });
+  let touchX=null;
+  document.addEventListener('touchstart', e=>{ touchX=e.touches[0].clientX; });
+  document.addEventListener('touchend', e=>{
+    if(touchX===null) return;
+    const dx=e.changedTouches[0].clientX-touchX;
+    if(Math.abs(dx)>50){ dx<0?go(idx+1):go(idx-1); }
+    touchX=null;
+  });
+  render();
+</script>
+</body></html>
