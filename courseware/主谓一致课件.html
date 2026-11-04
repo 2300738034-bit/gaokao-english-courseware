@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高考英语语法 · 主谓一致</title>
+<style>
+  :root{
+    --ink:#46413b;
+    --muted:#8c857b;
+    --line:#e6ded1;
+    --bg:#f4efe6;
+    --paper:#fcf9f3;
+    --paper-2:#f6f0e6;
+    --ink-soft:#5c564f;
+
+    --clay:#c2a18b;  --clay-deep:#9c7d68;  --clay-bg:#f4ece6;   /* 集合名词 */
+    --sage:#9aa98d;  --sage-deep:#75856a;  --sage-bg:#eef1ea;   /* 复数主语 */
+    --blue:#8a9aa8;  --blue-deep:#647887;  --blue-bg:#edf1f3;   /* 数量表达 */
+    --lav:#a49bb0;   --lav-deep:#7d7390;   --lav-bg:#f0edf3;    /* 单数陷阱 */
+    --teal:#8aa8a0;  --teal-deep:#66857d;  --teal-bg:#edf2f0;   /* 就近/就远 */
+    --mauve:#b0909a; --mauve-deep:#8a6f78; --mauve-bg:#f3edf0;  /* 特殊主语 */
+    --rose:#c09892;  --rose-deep:#98706a;  --rose-bg:#f5ecea;   /* 真题精练 */
+
+    --gold:#b99c6a;  --gold-deep:#937a48;  --gold-bg:#f3ecdd;
+    --warn:#b48780;  --warn-deep:#966963;  --warn-bg:#f5e7e4;
+    --tip:#7e96a5;   --tip-bg:#edf1f3;
+
+    --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:var(--font);color:var(--ink);background:var(--bg);overflow:hidden;-webkit-font-smoothing:antialiased}
+
+  #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:58px 44px 96px}
+  .slide{position:absolute;width:min(1200px,100%);max-height:100%;background:var(--paper);border-radius:22px;box-shadow:0 26px 60px -26px rgba(92,82,66,.34), 0 0 0 1px rgba(92,82,66,.05);padding:44px 54px;opacity:0;transform:translateX(42px);pointer-events:none;transition:opacity .45s ease, transform .45s ease;overflow:hidden;display:flex;flex-direction:column}
+  .slide.active{opacity:1;transform:translateX(0);pointer-events:auto}
+  .slide.prev{transform:translateX(-42px)}
+  .slide .anim{opacity:0;transform:translateY(14px)}
+  .slide.active .anim{opacity:1;transform:none;transition:opacity .5s ease, transform .5s ease;transition-delay:calc(var(--i,0)*70ms + 60ms)}
+
+  .head{display:flex;align-items:center;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+  .part-badge{font-size:13px;font-weight:700;letter-spacing:.05em;color:#fff;background:var(--pc,#8a8378);padding:6px 15px;border-radius:99px;white-space:nowrap}
+  .head h2{font-size:28px;font-weight:800;letter-spacing:.01em;color:var(--ink)}
+  .head .en{font-size:14px;color:var(--muted);font-weight:600;margin-left:auto;white-space:nowrap}
+
+  .slide.cover{background:radial-gradient(900px 520px at 88% -10%, rgba(154,169,141,.34), transparent 60%),radial-gradient(720px 540px at -10% 112%, rgba(138,168,160,.36), transparent 55%),linear-gradient(135deg,#6f7f7a 0%,#869289 50%,#9fa8a2 100%);color:#fff;justify-content:center}
+  .cover .brand-line{position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#9aa98d,#8aa8a0,#8a9aa8,#b0909a)}
+  .cover .tag{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#eef1f3;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);padding:7px 16px;border-radius:99px;margin-bottom:26px}
+  .cover h1{font-size:52px;font-weight:900;line-height:1.2;letter-spacing:.01em}
+  .cover h1 .hl{color:#e4d3ad}
+  .cover .sub{margin-top:18px;font-size:20px;color:#e7ebee;font-weight:500;line-height:1.7}
+  .cover .meta{margin-top:40px;display:flex;gap:28px;font-size:14px;color:#c9d3da;font-weight:600}
+  .cover .meta b{color:#fff}
+
+  .grid{display:grid;gap:15px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px 20px;position:relative;overflow:hidden}
+  .card .num{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:34px;border-radius:10px;font-size:16px;font-weight:800;color:#fff;background:var(--pc,#8a8378);margin-bottom:11px;padding:0 10px}
+  .card h4{font-size:19px;font-weight:800;margin-bottom:5px;color:var(--ink)}
+  .card .cn{font-size:13.5px;color:var(--muted);font-weight:600;line-height:1.5}
+  .card .frm{font-size:17px;font-weight:800;color:var(--pc,#8a8378);margin-top:9px;letter-spacing:.02em;font-family:"SF Mono",ui-monospace,monospace}
+  .card .eg{font-size:13.5px;color:#6f6a62;margin-top:8px;line-height:1.6;word-break:break-all}
+  .card .eg b{color:#3f3b35;font-weight:700}
+
+  .key{color:var(--pc-deep,#937a48);font-weight:800}
+  .gold{color:var(--gold-deep);font-weight:800}
+  .red{color:var(--warn-deep);font-weight:800}
+
+  .ex{background:var(--paper-2);border:1px solid var(--line);border-radius:15px;padding:16px 20px;margin-top:8px}
+  .ex + .ex{margin-top:14px}
+  .ex .lead{font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:11px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .ex .lead .pill{background:var(--gold-bg);color:var(--gold-deep)}
+  .cn-src{font-size:16.5px;font-weight:600;color:var(--ink);line-height:1.6}
+  .cn-src b{color:var(--gold-deep)}
+  .en-ref{font-size:16px;font-weight:700;color:var(--pc-deep,#5c7383);margin-top:9px;line-height:1.55;word-break:break-word}
+  .en-ref .mt{display:inline-block;font-size:12px;font-weight:800;color:#fff;background:var(--pc,#8a8378);border-radius:6px;padding:2px 8px;margin-right:8px;vertical-align:2px}
+  .ana{margin-top:10px;font-size:13.5px;color:#6f6a62;line-height:1.65}
+  .ana b{color:var(--gold-deep)}
+
+  .formula{background:var(--paper);border:1px dashed var(--line);border-radius:12px;padding:13px 16px;margin-top:10px;font-size:15px;font-weight:700;color:var(--ink)}
+  .formula .fb{display:inline-block;background:var(--pc,#8a8378);color:#fff;font-size:12px;font-weight:800;border-radius:6px;padding:2px 9px;margin-right:8px}
+
+  .note{display:flex;gap:12px;align-items:flex-start;background:var(--gold-bg);border:1px solid #e6d8ba;border-left:4px solid var(--gold);border-radius:12px;padding:13px 17px;margin-top:15px;font-size:15px;line-height:1.65}
+  .note .ico{font-size:18px;line-height:1.4}
+  .note b{color:var(--gold-deep)}
+
+  .tip{display:flex;gap:10px;align-items:flex-start;background:var(--tip-bg);border:1px solid #d5e0e4;border-left:4px solid var(--tip);border-radius:12px;padding:12px 16px;margin-top:13px;font-size:14.5px;line-height:1.65;color:var(--blue-deep)}
+  .tip b{color:var(--blue-deep)}
+
+  .warn{display:flex;gap:10px;align-items:flex-start;background:var(--warn-bg);border:1px solid #ecd2cd;border-left:4px solid var(--warn);border-radius:12px;padding:12px 16px;margin-top:13px;font-size:14.5px;line-height:1.65;color:var(--warn-deep)}
+  .warn b{color:var(--warn-deep)}
+
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+  .cols .ex{margin-top:0}
+
+  table{width:100%;border-collapse:collapse;font-size:15px}
+  th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:12.5px;letter-spacing:.05em;color:var(--muted);background:var(--paper-2);font-weight:700}
+  td .en{font-weight:700;color:#3f3b35}
+  td .cn{color:var(--muted);font-size:13px}
+
+  .pill{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:var(--tip-bg);color:var(--blue-deep);margin-right:6px}
+
+  .wordlist{font-size:13.5px;color:#5c564f;line-height:1.9;background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-top:10px}
+  .wordlist b{color:var(--pc-deep,#5c7383)}
+
+  .sum-block{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:var(--paper)}
+  .sum-block h4{font-size:15.5px;font-weight:800;margin-bottom:11px;display:flex;align-items:center;gap:8px;color:var(--ink)}
+  .sum-block .dot{width:10px;height:10px;border-radius:3px;background:var(--pc,#8a8378)}
+  .sum-block ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .sum-block li{font-size:13.5px;color:#5c564f;line-height:1.55}
+  .sum-block li b{color:var(--ink)}
+
+  .motto{margin-top:20px;text-align:center;font-size:19px;font-weight:800;color:var(--ink);background:var(--gold-bg);border:1px solid #e6d8ba;border-radius:14px;padding:17px}
+  .motto span{color:var(--warn-deep)}
+
+  .reveal{margin-top:10px;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .reveal summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 15px;font-size:13.5px;font-weight:700;color:var(--pc-deep,#5c7383);background:var(--paper-2);user-select:none}
+  .reveal summary::-webkit-details-marker{display:none}
+  .reveal summary .caret{display:inline-block;transition:transform .2s;font-size:11px}
+  .reveal[open] summary .caret{transform:rotate(90deg)}
+  .reveal .ans{padding:13px 16px 15px;border-top:1px dashed var(--line);font-size:15px}
+  .reveal .ans .en{font-weight:700;color:var(--pc-deep,#5c7383);line-height:1.6}
+  .reveal .ans .mark{margin-top:8px;font-size:13px;color:#6f6a62;line-height:1.6}
+  .reveal .ans .mark b{color:var(--gold-deep)}
+
+  #nav{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);display:flex;align-items:center;gap:12px;z-index:50;background:rgba(252,249,243,.88);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:99px;padding:8px 12px;box-shadow:0 12px 32px -14px rgba(92,82,66,.32)}
+  #nav button{border:none;background:var(--paper);border:1px solid var(--line);width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#5c564f;transition:.15s}
+  #nav button:hover:not(:disabled){background:var(--paper-2);border-color:var(--gold);color:var(--gold-deep)}
+  #nav button:disabled{opacity:.35;cursor:default}
+  #nav .counter{font-size:14px;font-weight:700;color:#5c564f;min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
+  #nav .counter b{color:var(--gold-deep);font-size:16px}
+  #nav #menuBtn{width:auto;border-radius:99px;padding:0 16px;font-size:13px;font-weight:700;gap:7px}
+  #progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#9aa98d,#8aa8a0,#8a9aa8,#b0909a);z-index:60;width:0;transition:width .35s ease}
+  #hint{position:fixed;left:50%;transform:translateX(-50%);bottom:3px;font-size:12px;color:#b3ab9f;z-index:40;white-space:nowrap}
+
+  #drawerTab{position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:80;cursor:pointer;user-select:none;display:flex;align-items:center;gap:6px;padding:16px 10px;background:linear-gradient(180deg,#9aa98d,#75856a);color:#fff;border-radius:0 14px 14px 0;box-shadow:4px 8px 20px -8px rgba(92,82,66,.45);transition:padding .2s ease, box-shadow .2s ease;writing-mode:vertical-rl;letter-spacing:.3em;font-weight:800;font-size:14px}
+  #drawerTab:hover{padding:20px 11px;box-shadow:6px 12px 28px -8px rgba(92,82,66,.55)}
+  #drawerTab .darr{display:inline-block;transition:transform .25s ease;writing-mode:horizontal-tb;font-size:13px}
+
+  #drawerOverlay{position:fixed;inset:0;background:rgba(70,63,55,.34);backdrop-filter:blur(3px);z-index:85;opacity:0;pointer-events:none;transition:opacity .28s ease}
+  #drawerOverlay.open{opacity:1;pointer-events:auto}
+  #drawerPanel{position:fixed;top:0;left:0;bottom:0;width:min(360px,88vw);background:var(--paper);box-shadow:24px 0 50px -30px rgba(92,82,66,.5);z-index:86;transform:translateX(-100%);transition:transform .32s cubic-bezier(.22,.9,.3,1);display:flex;flex-direction:column}
+  #drawerOverlay.open #drawerPanel{transform:translateX(0)}
+  #drawerPanel .dp-head{padding:22px 22px 16px;border-bottom:1px solid var(--line);background:linear-gradient(135deg,#9aa98d 0%,#75856a 100%);color:#fff}
+  #drawerPanel .dp-head .k{font-size:12px;font-weight:700;letter-spacing:.12em;opacity:.8}
+  #drawerPanel .dp-head h3{font-size:19px;font-weight:800;margin-top:4px}
+  #drawerPanel .dp-head .sub{font-size:12px;opacity:.85;margin-top:3px}
+  #drawerPanel .dp-head .close{position:absolute;top:18px;right:18px;border:none;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:15px;color:#fff;line-height:1}
+  #drawerPanel .dp-head .close:hover{background:rgba(255,255,255,.28)}
+  #drawerList{overflow-y:auto;padding:10px 14px 34px;flex:1}
+  .dp-sec{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--muted);margin:18px 6px 6px}
+  .dp-sec .swatch{width:9px;height:9px;border-radius:3px}
+  .dp-item{display:flex;align-items:center;gap:11px;width:100%;text-align:left;padding:10px 12px;border:none;background:transparent;border-radius:10px;cursor:pointer;font-size:14px;color:#4c4740;transition:.13s}
+  .dp-item:hover{background:var(--paper-2)}
+  .dp-item.active{background:var(--gold-bg);color:var(--gold-deep);font-weight:700}
+  .dp-item .n{font-size:12px;font-weight:800;color:#b3ab9f;min-width:22px;text-align:right}
+
+  @media (max-width:900px){
+    #stage{padding:18px 14px 88px}
+    .slide{padding:26px 22px;border-radius:15px}
+    .g2,.g3,.g4,.cols{grid-template-columns:1fr 1fr}
+    .head h2{font-size:21px}
+    .cover h1{font-size:34px}
+    .cover .sub{font-size:16px}
+    .cn-src{font-size:15px}
+    #drawerTab{padding:13px 8px;font-size:12px}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<div id="stage">
+
+  <!-- 1 封面 -->
+  <section class="slide cover active" data-title="封面" data-sec="封面">
+    <div class="brand-line"></div>
+    <div class="anim" style="--i:0"><span class="tag">高考英语 · 语法专项（第23节）</span></div>
+    <h1 class="anim" style="--i:1">主 谓 一 致</h1>
+    <p class="sub anim" style="--i:2">语法一致 · 意义一致 · 就近一致 —— 三原则统领 25 个考点</p>
+    <div class="meta anim" style="--i:3">
+      <span>板块：<b>语法 · 主谓一致</b></span>
+      <span>重点：<b>集合名词 + 数量表达 + 就近/就远</b></span>
+    </div>
+  </section>
+
+  <!-- 2 导读 -->
+  <section class="slide" data-title="本章导读" data-sec="导读">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">导读</span><h2>主谓一致：一条主线 · 三个原则</h2><span class="en">Subject-Verb Agreement</span></div>
+    <p class="anim" style="--i:1;font-size:15.5px;color:#5c564f;line-height:1.75">主谓一致指句子的主语和谓语在<b class="gold">人称</b>和<b class="gold">数</b>方面保持一致。高考考查的核心是：<b>名词单/复数、不可数名词、不定代词、并列结构、特殊名词</b>作主语时，谓语该用单数还是复数。</p>
+    <div class="grid g3" style="margin-top:16px">
+      <div class="card anim" style="--i:2;--pc:#9aa98d"><span class="num">一</span><h4>语法一致</h4><div class="cn">看形式：主语是单数，谓语用单数；主语是复数，谓语用复数。</div></div>
+      <div class="card anim" style="--i:3;--pc:#8a9aa8"><span class="num">二</span><h4>意义一致</h4><div class="cn">看含义：形式上是复数、意义上是单数（或反之）时，按意义定谓语。</div></div>
+      <div class="card anim" style="--i:4;--pc:#8aa8a0"><span class="num">三</span><h4>就近一致</h4><div class="cn">看位置：谓语与最靠近它的那个名词在人称和数上保持一致。</div></div>
+    </div>
+    <div class="note anim" style="--i:5;margin-top:20px">
+      <span class="ico">🧭</span>
+      <div><b>一眼分辨：</b>先看主语<b class="gold">「算一个还是算一群」</b>，再看它<b class="gold">「离谓语近不近」</b>。意义一致决定多数题目，就近/就远原则只在特定句型（either…or、there be、as well as 等）里登场。</div>
+    </div>
+  </section>
+
+  <!-- 3 一 · 复数主语 -->
+  <section class="slide" data-title="永远用复数的主语" data-sec="一 · 复数主语">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#9aa98d">一 · 复数主语</span><h2>「长得不像复数、却永远用复数」</h2><span class="en">Always Plural</span></div>
+    <div class="grid g3">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">考点1 · police / cattle</div>
+        <div class="en-ref"><b>Police</b> <b class="red">are</b> looking for the man.</div>
+        <div class="en-ref">Many <b>cattle are</b> suffering from the disease.</div>
+        <div class="ana">作主语一律用复数，且<b>不能</b>用数字修饰（不能说 two police）；「两名警察」说 <b>two police officers</b>。</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">考点2 · the + 国籍形容词</div>
+        <div class="en-ref">The <b>British / Dutch / English / French</b>… <b class="red">are</b>…</div>
+        <div class="ana">the British 等结构指「全体英国人」，作复数用。「一个荷兰人」用 <b>a Dutchman</b>，不能说 a Dutch。</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">考点3 · 两部分构成的事物</div>
+        <div class="en-ref">Your <b>jeans / trousers / glasses / scissors</b>… <b class="red">are</b>…</div>
+        <div class="ana">由两部分构成的东西作复数；说「一件」用 <b>a pair of + 单数动词</b>。</div>
+      </div>
+    </div>
+    <div class="formula anim" style="--i:4;--pc:#9aa98d"><span class="fb">口诀</span>police、cattle、the+国籍形容词、成双成对物 —— <b>见它们，谓语一律复数</b></div>
+    <div class="warn anim" style="--i:5">
+      <span>⚠️</span>
+      <div><b>易错点：</b><b class="red">a pair of</b> 后面若说的是<b class="gold">两个不同的东西</b>（不是一对），谓语用<b>复数</b>——<b>A pair of nail-scissors <span class="red">is</span></b> necessary.（一把）／ <b>A pair of pumpkins <span class="red">are</span></b> in the window.（两个南瓜）。</div>
+    </div>
+  </section>
+
+  <!-- 4 二 · 集合名词 -->
+  <section class="slide" data-title="集合名词" data-sec="二 · 集合名词">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c2a18b">二 · 集合名词</span><h2>集合名词：重整体 or 重个体</h2><span class="en">Collective Nouns</span></div>
+    <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f">family、team、government、committee、couple 等：<b class="key">被看成「一个单位」用单数，被看成「成员个体」用复数</b>。</p>
+    <div class="grid g2" style="margin-top:12px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">重个体 → 复数</div>
+        <div class="en-ref">His family <b class="red">have decided</b> to move to New York.</div>
+        <div class="en-ref">The team <b class="red">are</b> full of enthusiasm.</div>
+        <div class="ana">强调「每个成员各自参与」（做决定、希望、要求等）时用复数。</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">重整体 → 单数</div>
+        <div class="en-ref">The average British family <b class="red">has</b> 3.6 members.</div>
+        <div class="en-ref">A team which <b class="red">is</b> full of enthusiasm wins.</div>
+        <div class="ana">被看成一个单位、与单数限定词（a、each、every、this、that）连用时用单数。</div>
+      </div>
+    </div>
+    <div class="grid g2" style="margin-top:15px">
+      <div class="ex anim" style="--i:4">
+        <div class="lead">定语从句中 who / which 的分工</div>
+        <div class="en-ref">The committee, <b class="red">who are</b> hoping to announce…（成员）</div>
+        <div class="en-ref">The committee, <b class="red">which is</b> elected at the meeting.（单位）</div>
+      </div>
+      <div class="ex anim" style="--i:5">
+        <div class="lead">couple 的两种用法</div>
+        <div class="en-ref">The couple <b class="red">lives</b> in apartment 9A.（一对夫妻→整体）</div>
+        <div class="en-ref">The couple <b class="red">are</b> going to Shanghai and Beijing.（强调个体）</div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:6">
+      <span>💡</span>
+      <div><b>判断抓手：</b>看<b>谓语后面</b>的动作是「集体一起做」还是「各自分别做」。一起 → 单数；各自 → 复数。<b>写作中</b>用 family/team 时，保持同一句内单复数一致（The team <b>is</b>… <b>It</b> expects…）。</div>
+    </div>
+  </section>
+
+  <!-- 5 三 · 数量表达 -->
+  <section class="slide" data-title="数量与部分表达" data-sec="三 · 数量表达">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">三 · 数量表达</span><h2>a number of / the number of / majority / half</h2><span class="en">Quantity</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">a number of / a couple of / a group of / a total of + 复数名词 → 复数动词</div>
+        <div class="en-ref"><b class="red">A number of</b> people <b class="red">have tried</b> to find the treasure.</div>
+        <div class="en-ref"><b class="red">A total of</b> 15 countries <b class="red">have signed</b> the agreement.</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">the number of / the total (of) + 名词 → 单数动词</div>
+        <div class="en-ref"><b class="red">The number of</b> children who drop out <b class="red">is</b> astounding.</div>
+        <div class="ana">注意：<b>the number of + 名词 + 定语从句</b>，从句里的动词用<b>复数</b>（who drop out），核心谓语用<b>单数</b>（is）。</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">the/a majority of / half of + 可数复数 → 复数</div>
+        <div class="en-ref">The <b class="red">majority of</b> students <b class="red">are</b> interested.</div>
+        <div class="en-ref"><b class="red">Half of</b> the cats <b class="red">have</b> escaped.</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">the/a majority of / half of + 不可数 → 单数</div>
+        <div class="en-ref">The majority of the work <b class="red">has been</b> completed.</div>
+        <div class="en-ref"><b class="red">Half of</b> the milk <b class="red">is</b> drunk.</div>
+      </div>
+    </div>
+    <div class="formula anim" style="--i:5;--pc:#8a9aa8"><span class="fb">规律</span>a number of → 复数 · the number of → 单数 · majority/half <b>看后面名词</b>（可数复数→复数，不可数→单数）</div>
+    <div class="note anim" style="--i:6">
+      <span class="ico">🔑</span>
+      <div><b>写作加分：</b><b class="gold">The number of … is/has been …</b> 是描述「数据/趋势」的高频句式；<b class="gold">A majority of … </b>用来表达「大多数人的看法」。</div>
+    </div>
+  </section>
+
+  <!-- 6 三 · all/度量/计算 -->
+  <section class="slide" data-title="all·度量·计算" data-sec="三 · 数量表达">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">三 · 数量表达</span><h2>all / any · 度量单位 · 计算</h2><span class="en">all · Measure · Math</span></div>
+    <div class="grid g3">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">考点6 · all / any</div>
+        <div class="en-ref">All I eat <b class="red">is</b> lettuce.（指物→单数）</div>
+        <div class="en-ref">All <b class="red">are</b> here.（指人→复数）</div>
+        <div class="ana">all 指事物 = everything（单数）；指人 = all of them（复数）。any 同理。</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">考点7 · 度量单位</div>
+        <div class="en-ref">Twenty miles <b class="red">is</b> a long way to walk.</div>
+        <div class="en-ref">Where <b class="red">is</b> that five pounds I lent you?</div>
+        <div class="ana">数字 + 度量单位（钱、距离、时间等）看作<b>一个整体</b>，用单数。</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">考点8 · 计算</div>
+        <div class="en-ref">Two and two <b class="red">is/are</b> four.</div>
+        <div class="en-ref">Ten times five <b class="red">is/are</b> fifty.</div>
+        <div class="ana">算式作主语，单复数均可，<b>单数更常见</b>。</div>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:4">
+      <span>⚠️</span>
+      <div><b>高频陷阱：</b>「时间/距离/金钱」作主语，即使数字大于一，也是<b class="gold">单数</b>——<b class="red">Three hours is enough.</b>（三小时够了）这是语法填空和单选里最爱考的一类。</div>
+    </div>
+  </section>
+
+  <!-- 7 四 · 单数陷阱 -->
+  <section class="slide" data-title="看似复数实为单数(一)" data-sec="四 · 单数陷阱">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a49bb0">四 · 单数陷阱</span><h2>more than one · and 连接两个名词</h2><span class="en">More than one · and</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">考点9 · more than one + 单数名词 → 单数动词</div>
+        <div class="en-ref"><b class="red">More than one</b> person <b class="red">is</b> going to find a new job.</div>
+        <div class="ana">唯一例外：指「一个词的复数形式」时用复数（more than one <b>are</b> animals）。</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">考点10 · and 连接的两词看成一个概念 → 单数</div>
+        <div class="en-ref">Your <b class="red">toast and marmalade is</b> on the table.</div>
+        <div class="en-ref">The <b class="red">spaghetti and meatballs is</b> comfort food.</div>
+        <div class="ana">bread and butter、fish and chips、law and order、whisky and soda 等固定搭配看作一个整体。</div>
+      </div>
+    </div>
+    <div class="grid g2" style="margin-top:15px">
+      <div class="ex anim" style="--i:3">
+        <div class="lead">and 连接两个不相干的单数名词 → 复数</div>
+        <div class="en-ref">Dedication and industry experience <b class="red">help</b> students succeed.</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">一个抽象名词被两个形容词修饰 → 复数</div>
+        <div class="en-ref">Eastern and Western art <b class="red">differ</b> in many ways.</div>
+        <div class="ana">指「东、西两种不同的艺术」→ 复数。</div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:5">
+      <span>💡</span>
+      <div><b>判断线索：</b>两个名词用 and 连接，<b class="gold">能合成「一件事/一种东西」</b>（一种食物、一个概念）→ 单数；<b class="gold">各指各的</b> → 复数。</div>
+    </div>
+  </section>
+
+  <!-- 8 四 · 国家组织/-ics -->
+  <section class="slide" data-title="看似复数实为单数(二)" data-sec="四 · 单数陷阱">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a49bb0">四 · 单数陷阱</span><h2>国家/组织名称 · 以 -ics 结尾的词</h2><span class="en">Nations & -ics</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">考点11 · 复数形式的国家/组织名 → 单数</div>
+        <div class="en-ref">The United States <b class="red">is</b> anxious to improve its image.</div>
+        <div class="en-ref">Consolidated Fruitgrowers <b class="red">has</b> taken over the company.</div>
+        <div class="ana">The United States、the United Nations 等，形式上复数、意义是「一个国家/组织」→ 单数。</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">考点12 · -ics 结尾的词 → 通常单数</div>
+        <div class="en-ref">Mathematics <b class="red">is</b> a very important subject.</div>
+        <div class="en-ref">Statistics <b class="red">is</b> useful in language testing.</div>
+        <div class="ana">mathematics、physics、politics、athletics 通常不可数单数；被<b>具体化</b>后可作复数（What are your politics?）。</div>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:3">
+      <span>⚠️</span>
+      <div><b>对比记忆：</b><b class="red">The statistics are disturbing.</b>（统计数据，复数）vs <b class="red">Statistics is useful.</b>（统计学，单数）。词本身没变，<b class="gold">意义变了单复数就变</b>——这正是「意义一致」原则。</div>
+    </div>
+  </section>
+
+  <!-- 9 五 · 就近原则 -->
+  <section class="slide" data-title="就近原则" data-sec="五 · 就近就远">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8aa8a0">五 · 就近就远</span><h2>就近原则：either…or · there be</h2><span class="en">Proximity</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">考点13 · either…or / neither…nor / not only…but also</div>
+        <div class="en-ref">Either <b class="red">a table or two chairs have</b> got to be moved.</div>
+        <div class="en-ref"><b class="red">Neither she nor I have</b> arrived.</div>
+        <div class="ana">谓语与 or / nor / but also <b>后面的名词</b>保持一致（就近）。</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">考点14 · there be 句型</div>
+        <div class="en-ref">There <b class="red">is a fly</b> in my soup!</div>
+        <div class="en-ref">There <b class="red">are some trees and a cottage</b> behind our school.</div>
+        <div class="ana">be 与<b>第一个</b>名词保持一致（就近）。倒装句同理：On the table <b>is</b> a cake.</div>
+      </div>
+    </div>
+    <div class="note anim" style="--i:3">
+      <span class="ico">🔑</span>
+      <div><b>但 neither of / either of</b>（后面不跟并列名词）时，动词一律<b class="gold">单数</b>——<b class="red">Neither of my brothers has been</b> outside England. <b class="red">Has either of them been</b> seen recently?</div>
+    </div>
+  </section>
+
+  <!-- 10 五 · one of / as well as -->
+  <section class="slide" data-title="one of·就远原则" data-sec="五 · 就近就远">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8aa8a0">五 · 就近就远</span><h2>one of … · as well as …</h2><span class="en">one of · Distance</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">考点15 · one of + 复数名词 + who/that… → 复数动词</div>
+        <div class="en-ref">She's one of the few women who <b class="red">have climbed</b> Mt. Qomolangma.</div>
+        <div class="en-ref">This is one of those books that <b class="red">are read</b> by everybody.</div>
+        <div class="ana">但 <b>the only one of the…</b> → 单数（就远）：This is the only one of the cars that <b>never breaks</b> down.</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">考点16 · 就远原则（插入成分不影响谓语）</div>
+        <div class="en-ref">The boss, <b>accompanied by</b> his assistants, <b class="red">was</b> coming toward me.</div>
+        <div class="en-ref">The problem, <b>along with</b> its consequences, <b class="red">arises</b>.</div>
+        <div class="ana">along with / as well as / together with / like / no one but / nobody except … 后面的动词看<b>前面的主语</b>。</div>
+      </div>
+    </div>
+    <div class="formula anim" style="--i:3;--pc:#8aa8a0"><span class="fb">口诀</span>as well as、together with、along with、accompanied by、like、but/except —— <b>夹在中间不算数，看主语本身</b></div>
+    <div class="warn anim" style="--i:4">
+      <span>⚠️</span>
+      <div><b>经典陷阱：</b><b class="red">The teacher together with the students is</b>…（就远，看 teacher）—— 千万不要被中间的 students 带跑。这是高考单选题的「送分题也是送命题」。</div>
+    </div>
+  </section>
+
+  <!-- 11 六 · 年代/who/what -->
+  <section class="slide" data-title="特殊主语(一)" data-sec="六 · 特殊主语">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b0909a">六 · 特殊主语</span><h2>年代 · who · what</h2><span class="en">Decades · who · what</span></div>
+    <div class="grid g3">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">考点17 · 年代作主语 → 复数</div>
+        <div class="en-ref">The 1930s <b class="red">were</b> a tough time in America.</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">考点18 · who 对主语提问 → 单数</div>
+        <div class="en-ref"><b class="red">Who is</b> working tomorrow?</div>
+        <div class="ana">即使答案可能是复数，问句也用单数；但 who 对<b>表语</b>提问时看表语（Who <b>are</b> your friends?）。</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">考点19 · what 引导的主语从句</div>
+        <div class="en-ref">What is needed <b class="red">is</b> a return to terms.</div>
+        <div class="en-ref">What worries them <b class="red">are</b> customers like Eric.</div>
+        <div class="ana">what 指单数概念→单数；指复数概念→复数；表抽象整体（含复数义）→ 常单数。</div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:4">
+      <span>💡</span>
+      <div><b>写作抓手：</b>用 <b class="gold">What + 主语 + 谓语 + is/are + 表语</b> 作主语从句，是强调句式的替代写法——<b>What matters most is…</b>（最重要的是……）。</div>
+    </div>
+  </section>
+
+  <!-- 12 六 · each/data -->
+  <section class="slide" data-title="特殊主语(二)" data-sec="六 · 特殊主语">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b0909a">六 · 特殊主语</span><h2>each / everyone · data / media</h2><span class="en">each · data</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">考点20 · each (of) / everyone / every one (of)</div>
+        <div class="en-ref">Each (of them) <b class="red">is</b> required to speak for five minutes.</div>
+        <div class="en-ref">They <b class="red">each are</b> required to speak.（each 在复数名词后→复数）</div>
+        <div class="ana">everyone/every one (of) 永远单数；kind/sort/type 同理（This kind of medicine <b>is</b>… / Medicines of this kind <b>are</b>…）。</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">考点21 · data / media 常用作单数</div>
+        <div class="en-ref">The <b class="red">data is</b> collected.（也可 these data <b>are</b>…）</div>
+        <div class="en-ref">The <b class="red">media is</b>…（the media 常作不可数单数）</div>
+        <div class="ana">data 现多用不可数单数；media 表「不同媒体方式」时才用复数。agenda、opera 等也作单数。</div>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:3">
+      <span>⚠️</span>
+      <div><b>易错点：</b><b class="red">every one of them is</b>（every one 分开写）≠ <b class="red">everyone is</b>（连写）。写成 every one of + 复数名词时，谓语仍用<b class="gold">单数</b>。</div>
+    </div>
+  </section>
+
+  <!-- 13 六 · 单复数同形/none/population -->
+  <section class="slide" data-title="特殊主语(三)" data-sec="六 · 特殊主语">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b0909a">六 · 特殊主语</span><h2>单复数同形 · none · population</h2><span class="en">Invariable · none · population</span></div>
+    <div class="grid g3">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">考点22 · 单复数同形的词</div>
+        <div class="en-ref">The company's headquarters <b class="red">was</b> designed by G.</div>
+        <div class="en-ref">The two companies' headquarters <b class="red">were</b> on opposite sides.</div>
+        <div class="ana">sheep、deer、fish、series、species、headquarters、means 等拼写不变，看「指单个还是多个」定动词。</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">考点23 · none of 结构</div>
+        <div class="en-ref">None of the students <b class="red">is/are</b> absent.</div>
+        <div class="en-ref">None of the information <b class="red">is</b> accurate.</div>
+        <div class="ana">none of + 可数复数：单复数均可（强调「无一」用单数）；none of + 不可数：必须单数。</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">考点24/25 · population · one and a half</div>
+        <div class="en-ref">The population of China <b class="red">is</b> huge.</div>
+        <div class="en-ref">One and a half bananas <b class="red">are</b> left on the table.</div>
+        <div class="ana">population 常作单数；one and a half + 复数名词 通常复数（数量大于一），但作整体概念时也可单数。</div>
+      </div>
+    </div>
+    <div class="note anim" style="--i:4">
+      <span class="ico">🔑</span>
+      <div><b>规律总结：</b>单复数同形、none of、population 这三类，无一例外都要<b class="gold">「看意义」</b>——指一个就单数，指多个就复数。这再次印证了<b>意义一致原则</b>是主谓一致的第一原则。</div>
+    </div>
+  </section>
+
+  <!-- 14 七 · 专项练习(一) -->
+  <section class="slide" data-title="专项练习(一)" data-sec="七 · 真题精练">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">七 · 真题精练</span><h2>单项选择（真题风格）· 上</h2><span class="en">Practice 1</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1"><div class="lead">1</div><div class="cn-src">The factory used 65 percent of the raw materials, the rest of which ____ saved for other purposes.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">D. were</div><div class="mark"><b>考点</b>：the rest of which 指 materials（复数）。</div></div></details></div>
+      <div class="ex anim" style="--i:2"><div class="lead">2</div><div class="cn-src">One third of the country ____ covered with trees and the majority of the citizens ____ black people.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A. is, are</div><div class="mark"><b>考点</b>：country 不可数→is；citizens 复数→are。</div></div></details></div>
+      <div class="ex anim" style="--i:3"><div class="lead">3</div><div class="cn-src">Barbara is easy to recognize as she's the only one of the women who ____ evening dress.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B. wears</div><div class="mark"><b>考点</b>：the only one of… → 定语从句动词单数。</div></div></details></div>
+      <div class="ex anim" style="--i:4"><div class="lead">4</div><div class="cn-src">Listening to loud music at rock concerts ____ caused hearing loss in some teenagers.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">C. has</div><div class="mark"><b>考点</b>：动名词短语作主语→单数。</div></div></details></div>
+      <div class="ex anim" style="--i:5"><div class="lead">5</div><div class="cn-src">Such poets as Shakespeare ____ widely read, of whose works, however, some ____ difficult to understand.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A. are, are</div><div class="mark"><b>考点</b>：such poets as→复数；some (works)→复数。</div></div></details></div>
+      <div class="ex anim" style="--i:6"><div class="lead">6</div><div class="cn-src">The number of foreign students attending Chinese universities ____ rising steadily since 1990.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">C. has been</div><div class="mark"><b>考点</b>：the number of→单数；since 1990→完成时。</div></div></details></div>
+      <div class="ex anim" style="--i:7"><div class="lead">7</div><div class="cn-src">The teacher together with the students ____ discussing Reading Skills that ____ newly published in America.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">D. is, was</div><div class="mark"><b>考点</b>：together with→就远（teacher 单数）；Reading Skills 书名→单数。</div></div></details></div>
+      <div class="ex anim" style="--i:8"><div class="lead">8</div><div class="cn-src">Either you or one of your students ____ to attend the meeting that is due tomorrow.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B. is</div><div class="mark"><b>考点</b>：either…or 就近 → one of your students（单数）。</div></div></details></div>
+      <div class="ex anim" style="--i:9"><div class="lead">9</div><div class="cn-src">Dr. Smith, together with his wife and daughters, ____ visit Beijing this summer.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A. is going to</div><div class="mark"><b>考点</b>：就远原则，看 Dr. Smith（单数）。</div></div></details></div>
+      <div class="ex anim" style="--i:10"><div class="lead">10</div><div class="cn-src">— Did you go to the show last night? — Yeah. Every boy and girl in the area ____ invited.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">D. was</div><div class="mark"><b>考点</b>：every…and every… → 单数。</div></div></details></div>
+      <div class="ex anim" style="--i:11"><div class="lead">11</div><div class="cn-src">Afterwards, we found that an apple and a half ____ on the table.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B. were left</div><div class="mark"><b>考点</b>：one and a half + 名词 → 复数。</div></div></details></div>
+      <div class="ex anim" style="--i:12"><div class="lead">12</div><div class="cn-src">We live day by day, but in terms of history, the time of days and weeks ____ so small that a day is unimportant.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A. is</div><div class="mark"><b>考点</b>：time 作整体概念 → 单数。</div></div></details></div>
+    </div>
+  </section>
+
+  <!-- 15 七 · 专项练习(二) -->
+  <section class="slide" data-title="专项练习(二)" data-sec="七 · 真题精练">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">七 · 真题精练</span><h2>单项选择（真题风格）· 下</h2><span class="en">Practice 2</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1"><div class="lead">13</div><div class="cn-src">As a result of the serious flood, two-thirds of the buildings in the area ____ need repairing.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A. need repairing</div><div class="mark"><b>考点</b>：buildings 复数 → need；need doing = 需要被修。</div></div></details></div>
+      <div class="ex anim" style="--i:2"><div class="lead">14</div><div class="cn-src">A survey of the opinions of experts ____ that three hours of outdoor exercise a week ____ good for one's health.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B. shows, is</div><div class="mark"><b>考点</b>：A survey 单数；three hours 整体单数。</div></div></details></div>
+      <div class="ex anim" style="--i:3"><div class="lead">15</div><div class="cn-src">Professor James will give us a lecture on the Western culture, but when and where ____ yet.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A. hasn't been decided</div><div class="mark"><b>考点</b>：when and where 看成一个整体 → 单数。</div></div></details></div>
+      <div class="ex anim" style="--i:4"><div class="lead">16</div><div class="cn-src">The company had about 20 notebook computers but only one-third ____ used regularly.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">D. were</div><div class="mark"><b>考点</b>：one-third (of computers) 复数 → were。</div></div></details></div>
+      <div class="ex anim" style="--i:5"><div class="lead">17</div><div class="cn-src">In fact, not only Mary and I but also Jane ____ having one exam after another.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">C. is tired of</div><div class="mark"><b>考点</b>：not only…but also 就近 → Jane 单数；be tired of。</div></div></details></div>
+      <div class="ex anim" style="--i:6"><div class="lead">18</div><div class="cn-src">Butter and bread ____ their daily food, but the bread and the butter ____ up now.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">D. is, have been eaten</div><div class="mark"><b>考点</b>：butter and bread 整体→单数；分开（the…and the…）→复数。</div></div></details></div>
+      <div class="ex anim" style="--i:7"><div class="lead">19</div><div class="cn-src">An average of 200 letters a week ____ received by the newspaper's office. Such ____ the case with us at present.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A. are; is</div><div class="mark"><b>考点</b>：an average of + 复数→are；such 作主语→is。</div></div></details></div>
+      <div class="ex anim" style="--i:8"><div class="lead">20</div><div class="cn-src">It's said that the team ____ twelve top European players.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A. consists of</div><div class="mark"><b>考点</b>：team 看作整体→单数；consist of 无被动。</div></div></details></div>
+      <div class="ex anim" style="--i:9"><div class="lead">21</div><div class="cn-src">Sixty miles ____ in a single night, so they were exhausted.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">B. was covered</div><div class="mark"><b>考点</b>：距离作整体→单数。</div></div></details></div>
+      <div class="ex anim" style="--i:10"><div class="lead">22</div><div class="cn-src">____ an English-Chinese dictionary.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">A. The students each have</div><div class="mark"><b>考点</b>：each 在复数名词后→动词用复数 have。</div></div></details></div>
+      <div class="ex anim" style="--i:11"><div class="lead">23</div><div class="cn-src">Every possible means ____ to prevent air pollution, but the sky is still not clear.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">D. has been used</div><div class="mark"><b>考点</b>：means 单复数同形，every 限定时用单数。</div></div></details></div>
+      <div class="ex anim" style="--i:12"><div class="lead">24</div><div class="cn-src">My family ____ all fond of singing English songs and we can sing ____ than others.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">D. are, much more</div><div class="mark"><b>考点</b>：family 重个体（all）→are；much 修饰比较级。</div></div></details></div>
+    </div>
+  </section>
+
+  <!-- 16 七 · 真题回放 -->
+  <section class="slide" data-title="高考真题回放" data-sec="七 · 真题精练">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">七 · 真题精练</span><h2>高考真题回放（上海卷）</h2><span class="en">Real Gaokao</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1"><div class="lead">语法填空 · 主谓一致（真题风格）</div><div class="cn-src">Not only ___ the writers speak with people who study culture and group behavior, but also they talked with animal experts.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">did</div><div class="mark"><b>考点</b>：Not only…but also 前句部分倒装 + 主谓一致，过去时补 did。</div></div></details></div>
+      <div class="ex anim" style="--i:2"><div class="lead">语法填空 · 主谓一致（真题风格）</div><div class="cn-src">Only later ___ scientists develop a theory to explain that succession.</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">did</div><div class="mark"><b>考点</b>：Only + 状语 句首倒装，主语 scientists 复数，补助 did。</div></div></details></div>
+      <div class="ex anim" style="--i:3"><div class="lead">翻译 · 2022 秋考</div><div class="cn-src">每逢节假日，我们都会去郊区露营，为的就是享受悠闲惬意的生活。（so that）</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">On every holiday, we go camping in the suburbs so that we can enjoy a leisurely and comfortable life.</div><div class="mark"><b>考点</b>：主语 we 复数，一般现在时。</div></div></details></div>
+      <div class="ex anim" style="--i:4"><div class="lead">翻译 · 2023 秋考</div><div class="cn-src">这部电视连续剧的剧情围绕某一虚拟的华南城市展开，在剧中汽车工业一直是该城市的骄傲。（where）</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看答案</summary><div class="ans"><div class="en">The plot of this TV series revolves around a fictional city in South China, where the automobile industry has always been the pride of the city.</div><div class="mark"><b>考点</b>：where 引导非限制性定语从句，先行词 city 单数。</div></div></details></div>
+    </div>
+    <div class="tip anim" style="--i:5">
+      <span>💡</span>
+      <div><b>实战提醒：</b>上海卷主谓一致主要藏在<b class="gold">语法填空（Section A）</b>和<b class="gold">翻译</b>里。语法填空靠「找主语 + 判断单复数 + 定谓语形式」三步走；翻译则要确保<b>每个分句的主谓一致</b>，尤其是 where/which 从句的先行词。</div>
+    </div>
+  </section>
+
+  <!-- 17 收尾 -->
+  <section class="slide" data-title="本章小结" data-sec="收尾">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">收尾</span><h2>本章小结</h2><span class="en">Summary</span></div>
+    <div class="grid g2">
+      <div class="sum-block anim" style="--i:1">
+        <h4><span class="dot" style="background:#9aa98d"></span>一看就「永远复数」</h4>
+        <ul>
+          <li><b>police / cattle</b>（不可数修饰）。</li>
+          <li><b>the + 国籍形容词</b>（the British）。</li>
+          <li><b>成双成对物</b>（glasses、scissors、jeans）。</li>
+          <li><b>年代</b>（the 1930s）。</li>
+        </ul>
+      </div>
+      <div class="sum-block anim" style="--i:2">
+        <h4><span class="dot" style="background:#a49bb0"></span>二看就「意义一致」</h4>
+        <ul>
+          <li><b>集合名词</b>：整体单数、个体复数。</li>
+          <li><b>a number of（复数）/ the number of（单数）</b>。</li>
+          <li><b>majority / half / all</b>：看后面名词。</li>
+          <li><b>度量/距离/金钱</b>：整体单数。</li>
+          <li><b>单复数同形、none、population</b>：看含义。</li>
+        </ul>
+      </div>
+      <div class="sum-block anim" style="--i:3">
+        <h4><span class="dot" style="background:#8aa8a0"></span>三看就「就近/就远」</h4>
+        <ul>
+          <li><b>就近</b>：either…or / neither…nor / not only…but also / there be。</li>
+          <li><b>就近</b>：one of + 复数 + who…（用复数）。</li>
+          <li><b>就远</b>：as well as / together with / along with / but / except。</li>
+        </ul>
+      </div>
+      <div class="sum-block anim" style="--i:4">
+        <h4><span class="dot" style="background:#b0909a"></span>四记「特殊主语」</h4>
+        <ul>
+          <li><b>who 问主语</b>：用单数。</li>
+          <li><b>what 从句</b>：看所指代内容。</li>
+          <li><b>each/every</b>：单数；each 在复数名词后→复数。</li>
+          <li><b>the only one of</b>：定语从句单数。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:5">
+      <span>⚠️</span>
+      <div><b>最易失分的五处：</b>① 集合名词「整体/个体」分不清；② the number of 误用复数；③ 度量单位误用复数；④ 就远原则被中间的复数带跑；⑤ the only one of 误用复数。</div>
+    </div>
+    <div class="motto anim" style="--i:6">
+      先问「主语算一个还是一群」· 再问「离谓语近不近」 —— <span>主谓一致，三步定谓语</span>
+    </div>
+  </section>
+
+</div>
+
+<div id="nav">
+  <button id="prev" aria-label="上一页" title="上一页 (←)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="counter"><b id="cur">1</b> / <span id="total">17</span></div>
+  <button id="next" aria-label="下一页" title="下一页 (→)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <button id="menuBtn" aria-label="目录" title="目录">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+    <span>目录</span>
+  </button>
+  <button id="fs" aria-label="全屏" title="全屏 (F)">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+  </button>
+</div>
+<div id="hint">← → 翻页 · 空格下一页 · F 全屏 · 左侧手柄抽拉目录</div>
+
+<div id="drawerTab" title="打开目录">
+  <span class="darr">▸</span><span>目 录</span>
+</div>
+<div id="drawerOverlay">
+  <div id="drawerPanel">
+    <div class="dp-head">
+      <div class="k">目录</div>
+      <h3>主谓一致</h3>
+      <div class="sub">25 个考点 · 专项练习 · 真题回放</div>
+      <button class="close" id="drawerClose" aria-label="关闭">✕</button>
+    </div>
+    <div id="drawerList"></div>
+  </div>
+</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  const curEl = document.getElementById('cur');
+  const totalEl = document.getElementById('total');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const fsBtn = document.getElementById('fs');
+  const menuBtn = document.getElementById('menuBtn');
+  const drawerTab = document.getElementById('drawerTab');
+  const drawerClose = document.getElementById('drawerClose');
+  const drawerOverlay = document.getElementById('drawerOverlay');
+  const drawerList = document.getElementById('drawerList');
+  const progress = document.getElementById('progress');
+  let idx = 0;
+  totalEl.textContent = total;
+
+  const SEC_COLORS = {
+    '封面':'#b99c6a', '导读':'#b99c6a', '收尾':'#b99c6a',
+    '一 · 复数主语':'#9aa98d', '二 · 集合名词':'#c2a18b',
+    '三 · 数量表达':'#8a9aa8', '四 · 单数陷阱':'#a49bb0',
+    '五 · 就近就远':'#8aa8a0', '六 · 特殊主语':'#b0909a',
+    '七 · 真题精练':'#c09892'
+  };
+
+  (function buildMenu(){
+    const groups = [];
+    const map = {};
+    slides.forEach((s,i)=>{
+      const sec = s.dataset.sec || '其他';
+      const title = s.dataset.title || ('第'+(i+1)+'页');
+      if(!map[sec]){ map[sec] = {sec, items:[]}; groups.push(map[sec]); }
+      map[sec].items.push({title, i});
+    });
+    groups.forEach(g=>{
+      const h = document.createElement('div');
+      h.className = 'dp-sec';
+      const c = SEC_COLORS[g.sec] || '#8a8378';
+      h.innerHTML = '<span class="swatch" style="background:'+c+'"></span><span>'+g.sec+'</span>';
+      drawerList.appendChild(h);
+      g.items.forEach(it=>{
+        const b = document.createElement('button');
+        b.className = 'dp-item';
+        b.innerHTML = '<span class="n">'+ (it.i+1) +'</span><span>'+ it.title +'</span>';
+        b.addEventListener('click', ()=>{ go(it.i); closeDrawer(); });
+        drawerList.appendChild(b);
+      });
+    });
+  })();
+
+  function render(){
+    slides.forEach((s,i)=>{
+      s.classList.toggle('active', i===idx);
+      s.classList.toggle('prev', i<idx);
+    });
+    curEl.textContent = idx+1;
+    progress.style.width = ((idx+1)/total*100) + '%';
+    prevBtn.disabled = idx===0;
+    nextBtn.disabled = idx===total-1;
+    Array.from(drawerList.querySelectorAll('.dp-item')).forEach((b,i)=>{
+      b.classList.toggle('active', i===idx);
+    });
+  }
+  function go(n){ idx = Math.max(0, Math.min(total-1, n)); render(); }
+  function closeDrawer(){ drawerOverlay.classList.remove('open'); drawerTab.querySelector('.darr').textContent='▸'; }
+  function openDrawer(){ drawerOverlay.classList.add('open'); drawerTab.querySelector('.darr').textContent='◂'; }
+
+  prevBtn.addEventListener('click', ()=>go(idx-1));
+  nextBtn.addEventListener('click', ()=>go(idx+1));
+  menuBtn.addEventListener('click', openDrawer);
+  drawerTab.addEventListener('click', openDrawer);
+  drawerClose.addEventListener('click', closeDrawer);
+  drawerOverlay.addEventListener('click', (e)=>{ if(e.target===drawerOverlay) closeDrawer(); });
+
+  document.addEventListener('keydown', (e)=>{
+    if(drawerOverlay.classList.contains('open')){
+      if(e.key==='Escape') closeDrawer();
+      return;
+    }
+    if(e.key==='ArrowRight' || e.key===' ' || e.key==='PageDown'){ e.preventDefault(); go(idx+1); }
+    else if(e.key==='ArrowLeft' || e.key==='PageUp'){ e.preventDefault(); go(idx-1); }
+    else if(e.key==='Home'){ go(0); }
+    else if(e.key==='End'){ go(total-1); }
+    else if(e.key==='m' || e.key==='M'){ openDrawer(); }
+    else if(e.key==='f' || e.key==='F'){
+      if(document.fullscreenElement){ document.exitFullscreen(); }
+      else { document.documentElement.requestFullscreen(); }
+    }
+  });
+  fsBtn.addEventListener('click', ()=>{
+    if(document.fullscreenElement){ document.exitFullscreen(); }
+    else { document.documentElement.requestFullscreen(); }
+  });
+  let touchX=null;
+  document.addEventListener('touchstart', e=>{ touchX=e.touches[0].clientX; });
+  document.addEventListener('touchend', e=>{
+    if(touchX===null) return;
+    const dx=e.changedTouches[0].clientX-touchX;
+    if(Math.abs(dx)>50){ dx<0?go(idx+1):go(idx-1); }
+    touchX=null;
+  });
+  render();
+</script>
+</body>
+</html>

@@ -106,6 +106,16 @@ window.CATALOG = {
           title: "否定课件",
           file: "courseware/否定课件.html",
           added: "2026-11-02"
+        },
+        {
+          title: "主谓一致课件",
+          file: "courseware/主谓一致课件.html",
+          added: "2026-11-04"
+        },
+        {
+          title: "语法点补充课件",
+          file: "courseware/语法点补充课件.html",
+          added: "2026-11-04"
         }
       ]
     },

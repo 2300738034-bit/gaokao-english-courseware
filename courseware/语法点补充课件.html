@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高考英语语法 · 语法点补充</title>
+<style>
+  :root{
+    --ink:#46413b;
+    --muted:#8c857b;
+    --line:#e6ded1;
+    --bg:#f4efe6;
+    --paper:#fcf9f3;
+    --paper-2:#f6f0e6;
+    --ink-soft:#5c564f;
+
+    --clay:#c2a18b;  --clay-deep:#9c7d68;  --clay-bg:#f4ece6;   /* 被动语态 */
+    --sage:#9aa98d;  --sage-deep:#75856a;  --sage-bg:#eef1ea;   /* 比较结构 */
+    --blue:#8a9aa8;  --blue-deep:#647887;  --blue-bg:#edf1f3;   /* 问答与否定 */
+    --lav:#a49bb0;   --lav-deep:#7d7390;   --lav-bg:#f0edf3;    /* 定语从句 */
+    --teal:#8aa8a0;  --teal-deep:#66857d;  --teal-bg:#edf2f0;   /* 条件与让步 */
+    --mauve:#b0909a; --mauve-deep:#8a6f78; --mauve-bg:#f3edf0;  /* 不定式/动名词 */
+    --sand:#c9a58b;  --sand-deep:#a38166;  --sand-bg:#f5ede6;   /* 分词 */
+    --slate:#8b9bab; --slate-deep:#6a7a89; --slate-bg:#edf1f4;  /* 虚拟语气 */
+    --rose:#c09892;  --rose-deep:#98706a;  --rose-bg:#f5ecea;   /* 倒装/反意 */
+    --gold2:#b99c6a; --gold-deep:#937a48;  --gold-bg:#f3ecdd;   /* 强调 */
+
+    --gold:#b99c6a;  --gold-deep:#937a48;  --gold-bg:#f3ecdd;
+    --warn:#b48780;  --warn-deep:#966963;  --warn-bg:#f5e7e4;
+    --tip:#7e96a5;   --tip-bg:#edf1f3;
+
+    --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:var(--font);color:var(--ink);background:var(--bg);overflow:hidden;-webkit-font-smoothing:antialiased}
+
+  #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:58px 44px 96px}
+  .slide{position:absolute;width:min(1200px,100%);max-height:100%;background:var(--paper);border-radius:22px;box-shadow:0 26px 60px -26px rgba(92,82,66,.34), 0 0 0 1px rgba(92,82,66,.05);padding:44px 54px;opacity:0;transform:translateX(42px);pointer-events:none;transition:opacity .45s ease, transform .45s ease;overflow:hidden;display:flex;flex-direction:column}
+  .slide.active{opacity:1;transform:translateX(0);pointer-events:auto}
+  .slide.prev{transform:translateX(-42px)}
+  .slide .anim{opacity:0;transform:translateY(14px)}
+  .slide.active .anim{opacity:1;transform:none;transition:opacity .5s ease, transform .5s ease;transition-delay:calc(var(--i,0)*70ms + 60ms)}
+
+  .head{display:flex;align-items:center;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+  .part-badge{font-size:13px;font-weight:700;letter-spacing:.05em;color:#fff;background:var(--pc,#8a8378);padding:6px 15px;border-radius:99px;white-space:nowrap}
+  .head h2{font-size:28px;font-weight:800;letter-spacing:.01em;color:var(--ink)}
+  .head .en{font-size:14px;color:var(--muted);font-weight:600;margin-left:auto;white-space:nowrap}
+
+  .slide.cover{background:radial-gradient(900px 520px at 88% -10%, rgba(138,154,168,.32), transparent 60%),radial-gradient(720px 540px at -10% 112%, rgba(176,144,154,.38), transparent 55%),linear-gradient(135deg,#7a8290 0%,#8a92a0 50%,#a3a9b4 100%);color:#fff;justify-content:center}
+  .cover .brand-line{position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#8a9aa8,#9aa98d,#c9a58b,#b0909a)}
+  .cover .tag{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#eef1f3;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);padding:7px 16px;border-radius:99px;margin-bottom:26px}
+  .cover h1{font-size:50px;font-weight:900;line-height:1.2;letter-spacing:.01em}
+  .cover h1 .hl{color:#e4d3ad}
+  .cover .sub{margin-top:18px;font-size:20px;color:#e7ebee;font-weight:500;line-height:1.7}
+  .cover .meta{margin-top:40px;display:flex;gap:28px;font-size:14px;color:#c9d3da;font-weight:600}
+  .cover .meta b{color:#fff}
+
+  .grid{display:grid;gap:15px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px 20px;position:relative;overflow:hidden}
+  .card .num{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:34px;border-radius:10px;font-size:16px;font-weight:800;color:#fff;background:var(--pc,#8a8378);margin-bottom:11px;padding:0 10px}
+  .card h4{font-size:19px;font-weight:800;margin-bottom:5px;color:var(--ink)}
+  .card .cn{font-size:13.5px;color:var(--muted);font-weight:600;line-height:1.5}
+  .card .frm{font-size:17px;font-weight:800;color:var(--pc,#8a8378);margin-top:9px;letter-spacing:.02em;font-family:"SF Mono",ui-monospace,monospace}
+  .card .eg{font-size:13.5px;color:#6f6a62;margin-top:8px;line-height:1.6;word-break:break-all}
+  .card .eg b{color:#3f3b35;font-weight:700}
+
+  .key{color:var(--pc-deep,#937a48);font-weight:800}
+  .gold{color:var(--gold-deep);font-weight:800}
+  .red{color:var(--warn-deep);font-weight:800}
+
+  .ex{background:var(--paper-2);border:1px solid var(--line);border-radius:15px;padding:16px 20px;margin-top:8px}
+  .ex + .ex{margin-top:14px}
+  .ex .lead{font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:11px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .ex .lead .pill{background:var(--gold-bg);color:var(--gold-deep)}
+  .cn-src{font-size:16.5px;font-weight:600;color:var(--ink);line-height:1.6}
+  .cn-src b{color:var(--gold-deep)}
+  .en-ref{font-size:16px;font-weight:700;color:var(--pc-deep,#5c7383);margin-top:9px;line-height:1.55;word-break:break-word}
+  .en-ref .mt{display:inline-block;font-size:12px;font-weight:800;color:#fff;background:var(--pc,#8a8378);border-radius:6px;padding:2px 8px;margin-right:8px;vertical-align:2px}
+  .ana{margin-top:10px;font-size:13.5px;color:#6f6a62;line-height:1.65}
+  .ana b{color:var(--gold-deep)}
+
+  .formula{background:var(--paper);border:1px dashed var(--line);border-radius:12px;padding:13px 16px;margin-top:10px;font-size:15px;font-weight:700;color:var(--ink)}
+  .formula .fb{display:inline-block;background:var(--pc,#8a8378);color:#fff;font-size:12px;font-weight:800;border-radius:6px;padding:2px 9px;margin-right:8px}
+
+  .note{display:flex;gap:12px;align-items:flex-start;background:var(--gold-bg);border:1px solid #e6d8ba;border-left:4px solid var(--gold);border-radius:12px;padding:13px 17px;margin-top:15px;font-size:15px;line-height:1.65}
+  .note .ico{font-size:18px;line-height:1.4}
+  .note b{color:var(--gold-deep)}
+
+  .tip{display:flex;gap:10px;align-items:flex-start;background:var(--tip-bg);border:1px solid #d5e0e4;border-left:4px solid var(--tip);border-radius:12px;padding:12px 16px;margin-top:13px;font-size:14.5px;line-height:1.65;color:var(--blue-deep)}
+  .tip b{color:var(--blue-deep)}
+
+  .warn{display:flex;gap:10px;align-items:flex-start;background:var(--warn-bg);border:1px solid #ecd2cd;border-left:4px solid var(--warn);border-radius:12px;padding:12px 16px;margin-top:13px;font-size:14.5px;line-height:1.65;color:var(--warn-deep)}
+  .warn b{color:var(--warn-deep)}
+
+  .write{display:flex;gap:10px;align-items:flex-start;background:var(--sage-bg);border:1px solid #d7e0cf;border-left:4px solid var(--sage);border-radius:12px;padding:12px 16px;margin-top:13px;font-size:14.5px;line-height:1.65;color:var(--sage-deep)}
+  .write b{color:var(--sage-deep)}
+
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+  .cols .ex{margin-top:0}
+
+  table{width:100%;border-collapse:collapse;font-size:15px}
+  th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:12.5px;letter-spacing:.05em;color:var(--muted);background:var(--paper-2);font-weight:700}
+  td .en{font-weight:700;color:#3f3b35}
+  td .cn{color:var(--muted);font-size:13px}
+
+  .pill{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:var(--tip-bg);color:var(--blue-deep);margin-right:6px}
+
+  .wordlist{font-size:13.5px;color:#5c564f;line-height:1.9;background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-top:10px}
+  .wordlist b{color:var(--pc-deep,#5c7383)}
+
+  .sum-block{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:var(--paper)}
+  .sum-block h4{font-size:15.5px;font-weight:800;margin-bottom:11px;display:flex;align-items:center;gap:8px;color:var(--ink)}
+  .sum-block .dot{width:10px;height:10px;border-radius:3px;background:var(--pc,#8a8378)}
+  .sum-block ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .sum-block li{font-size:13.5px;color:#5c564f;line-height:1.55}
+  .sum-block li b{color:var(--ink)}
+
+  .motto{margin-top:20px;text-align:center;font-size:19px;font-weight:800;color:var(--ink);background:var(--gold-bg);border:1px solid #e6d8ba;border-radius:14px;padding:17px}
+  .motto span{color:var(--warn-deep)}
+
+  .reveal{margin-top:10px;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .reveal summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 15px;font-size:13.5px;font-weight:700;color:var(--pc-deep,#5c7383);background:var(--paper-2);user-select:none}
+  .reveal summary::-webkit-details-marker{display:none}
+  .reveal summary .caret{display:inline-block;transition:transform .2s;font-size:11px}
+  .reveal[open] summary .caret{transform:rotate(90deg)}
+  .reveal .ans{padding:13px 16px 15px;border-top:1px dashed var(--line);font-size:15px}
+  .reveal .ans .en{font-weight:700;color:var(--pc-deep,#5c7383);line-height:1.6}
+  .reveal .ans .mark{margin-top:8px;font-size:13px;color:#6f6a62;line-height:1.6}
+  .reveal .ans .mark b{color:var(--gold-deep)}
+
+  #nav{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);display:flex;align-items:center;gap:12px;z-index:50;background:rgba(252,249,243,.88);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:99px;padding:8px 12px;box-shadow:0 12px 32px -14px rgba(92,82,66,.32)}
+  #nav button{border:none;background:var(--paper);border:1px solid var(--line);width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#5c564f;transition:.15s}
+  #nav button:hover:not(:disabled){background:var(--paper-2);border-color:var(--gold);color:var(--gold-deep)}
+  #nav button:disabled{opacity:.35;cursor:default}
+  #nav .counter{font-size:14px;font-weight:700;color:#5c564f;min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
+  #nav .counter b{color:var(--gold-deep);font-size:16px}
+  #nav #menuBtn{width:auto;border-radius:99px;padding:0 16px;font-size:13px;font-weight:700;gap:7px}
+  #progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#8a9aa8,#9aa98d,#c9a58b,#b0909a);z-index:60;width:0;transition:width .35s ease}
+  #hint{position:fixed;left:50%;transform:translateX(-50%);bottom:3px;font-size:12px;color:#b3ab9f;z-index:40;white-space:nowrap}
+
+  #drawerTab{position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:80;cursor:pointer;user-select:none;display:flex;align-items:center;gap:6px;padding:16px 10px;background:linear-gradient(180deg,#8a9aa8,#647887);color:#fff;border-radius:0 14px 14px 0;box-shadow:4px 8px 20px -8px rgba(92,82,66,.45);transition:padding .2s ease, box-shadow .2s ease;writing-mode:vertical-rl;letter-spacing:.3em;font-weight:800;font-size:14px}
+  #drawerTab:hover{padding:20px 11px;box-shadow:6px 12px 28px -8px rgba(92,82,66,.55)}
+  #drawerTab .darr{display:inline-block;transition:transform .25s ease;writing-mode:horizontal-tb;font-size:13px}
+
+  #drawerOverlay{position:fixed;inset:0;background:rgba(70,63,55,.34);backdrop-filter:blur(3px);z-index:85;opacity:0;pointer-events:none;transition:opacity .28s ease}
+  #drawerOverlay.open{opacity:1;pointer-events:auto}
+  #drawerPanel{position:fixed;top:0;left:0;bottom:0;width:min(360px,88vw);background:var(--paper);box-shadow:24px 0 50px -30px rgba(92,82,66,.5);z-index:86;transform:translateX(-100%);transition:transform .32s cubic-bezier(.22,.9,.3,1);display:flex;flex-direction:column}
+  #drawerOverlay.open #drawerPanel{transform:translateX(0)}
+  #drawerPanel .dp-head{padding:22px 22px 16px;border-bottom:1px solid var(--line);background:linear-gradient(135deg,#8a9aa8 0%,#647887 100%);color:#fff}
+  #drawerPanel .dp-head .k{font-size:12px;font-weight:700;letter-spacing:.12em;opacity:.8}
+  #drawerPanel .dp-head h3{font-size:19px;font-weight:800;margin-top:4px}
+  #drawerPanel .dp-head .sub{font-size:12px;opacity:.85;margin-top:3px}
+  #drawerPanel .dp-head .close{position:absolute;top:18px;right:18px;border:none;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:15px;color:#fff;line-height:1}
+  #drawerPanel .dp-head .close:hover{background:rgba(255,255,255,.28)}
+  #drawerList{overflow-y:auto;padding:10px 14px 34px;flex:1}
+  .dp-sec{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--muted);margin:18px 6px 6px}
+  .dp-sec .swatch{width:9px;height:9px;border-radius:3px}
+  .dp-item{display:flex;align-items:center;gap:11px;width:100%;text-align:left;padding:10px 12px;border:none;background:transparent;border-radius:10px;cursor:pointer;font-size:14px;color:#4c4740;transition:.13s}
+  .dp-item:hover{background:var(--paper-2)}
+  .dp-item.active{background:var(--gold-bg);color:var(--gold-deep);font-weight:700}
+  .dp-item .n{font-size:12px;font-weight:800;color:#b3ab9f;min-width:22px;text-align:right}
+
+  @media (max-width:900px){
+    #stage{padding:18px 14px 88px}
+    .slide{padding:26px 22px;border-radius:15px}
+    .g2,.g3,.g4,.cols{grid-template-columns:1fr 1fr}
+    .head h2{font-size:21px}
+    .cover h1{font-size:34px}
+    .cover .sub{font-size:16px}
+    .cn-src{font-size:15px}
+    #drawerTab{padding:13px 8px;font-size:12px}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<div id="stage">
+
+  <!-- 1 封面 -->
+  <section class="slide cover active" data-title="封面" data-sec="封面">
+    <div class="brand-line"></div>
+    <div class="anim" style="--i:0"><span class="tag">高考英语 · 语法点补充（你可能不知道的语法）</span></div>
+    <h1 class="anim" style="--i:1">语法点 <span class="hl">补 充</span></h1>
+    <p class="sub anim" style="--i:2">35 个考点 · 按考点讲解 · 真题精练 · 写作加分</p>
+    <div class="meta anim" style="--i:3">
+      <span>板块：<b>语法 · 专题补充</b></span>
+      <span>重点：<b>否定 · 强调 · 虚拟 · 倒装 · 省略</b></span>
+    </div>
+  </section>
+
+  <!-- 2 导读 -->
+  <section class="slide" data-title="本章导读" data-sec="导读">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">导读</span><h2>什么是「语法点补充」</h2><span class="en">Grammar You May Not Know</span></div>
+    <p class="anim" style="--i:1;font-size:15.5px;color:#5c564f;line-height:1.75">这套专题收录了<b class="gold">常规语法书讲不透、高考却常考的「冷门但高频」</b>语法点：否定转移、双重被动、强调的各种手段、虚拟语气特殊结构、the way 的多重用法……按<b>考点</b>逐一讲解，每个考点配<b class="gold">真题精练</b>，并标注<b class="gold">写作加分</b>的句式。</p>
+    <div class="grid g4" style="margin-top:16px">
+      <div class="card anim" style="--i:2;--pc:#8a9aa8"><span class="num">一</span><h4>问答与否定</h4><div class="cn">否定转移 / 虚实移位 / 形式与意义相反</div></div>
+      <div class="card anim" style="--i:3;--pc:#9aa98d"><span class="num">二</span><h4>比较与被动</h4><div class="cn">the more…the more / 双重被动</div></div>
+      <div class="card anim" style="--i:4;--pc:#a49bb0"><span class="num">三</span><h4>从句进阶</h4><div class="cn">定语从句状语化 / 条件 / 让步</div></div>
+      <div class="card anim" style="--i:5;--pc:#b0909a"><span class="num">四</span><h4>非谓语与虚拟</h4><div class="cn">不定式 / 动名词 / 分词 / 虚拟特殊结构</div></div>
+      <div class="card anim" style="--i:6;--pc:#c09892"><span class="num">五</span><h4>倒装与反意</h4><div class="cn">其他倒装 / 反意疑问句特例</div></div>
+      <div class="card anim" style="--i:7;--pc:#b99c6a"><span class="num">六</span><h4>强调与 the way</h4><div class="cn">十种强调手段 / the way 的多重用法</div></div>
+    </div>
+    <div class="note anim" style="--i:8;margin-top:20px">
+      <span class="ico">🧭</span>
+      <div><b>学习方法：</b>每个考点记住<b class="gold">「一个标志词 + 一个例句」</b>即可。翻译题里看到提示词（如 more than、can never、anything but），立刻定位到对应考点。</div>
+    </div>
+  </section>
+
+  <!-- 3 一 · 问答与否定(1) -->
+  <section class="slide" data-title="不用yes/no的回答" data-sec="一 · 问答与否定">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">一 · 问答与否定</span><h2>考点1 · 不用 yes / no 回答的疑问句</h2><span class="en">No Yes/No Answers</span></div>
+    <div class="grid g3">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">① 回答「是否介意」</div>
+        <div class="en-ref">— Would you mind my turning off the radio?<br>— <b>Of course not. / Not at all.</b></div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">② 接受邀请 / 提议</div>
+        <div class="en-ref">— Will you please send her a message?<br>— <b>I'm glad to.</b></div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">③ 主观判断</div>
+        <div class="en-ref">— Is it worth reading?<br>— <b>I think so.</b></div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:4">
+      <span>💡</span>
+      <div><b>口语/听力高频：</b>Would you mind… 的否定回答是<b class="gold">「不介意」</b>（Of course not），肯定回答才表示「介意」（I'm sorry, but I would）。别搞反。</div>
+    </div>
+  </section>
+
+  <!-- 4 一 · 问答与否定(2) -->
+  <section class="slide" data-title="not because 否定转移" data-sec="一 · 问答与否定">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">一 · 问答与否定</span><h2>考点2 · not…because 的否定转移</h2><span class="en">Transferred Negation</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">否定转移（否定 because 从句）</div>
+        <div class="en-ref">The mountain is <b class="red">not</b> famous <b class="red">because</b> it is high.</div>
+        <div class="ana">这座山出名<b>并不是因为</b>高（否定的是原因，不是「出名」）。</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">不发生转移（否定主句）</div>
+        <div class="en-ref">We <b class="red">did not</b> go camping <b class="red">because</b> it was raining hard.</div>
+        <div class="ana">因为雨大，所以我们<b>没去</b>野营（否定的是主句动作）。</div>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:3">
+      <span>⚠️</span>
+      <div><b>歧义处理：</b>「The company didn't fire him because he was elderly.」有两种译法。为避免歧义：否定主句时，把 because 从句<b class="gold">提前或加逗号</b>；否定从句时用 <b class="red">not because…but because</b> 或强调句 <b class="red">It was not because…that…</b>。</div>
+    </div>
+    <div class="reveal anim" style="--i:4">
+      <details><summary><span class="caret">▸</span> 翻译练习（真题风格）</summary><div class="ans"><div class="en">It was not because he was late that he was criticized.</div><div class="mark">正因为他面试迟到，才被批评。（用强调句锁定否定对象）</div></div></details>
+    </div>
+  </section>
+
+  <!-- 5 一 · 问答与否定(3) -->
+  <section class="slide" data-title="否定的虚实移位" data-sec="一 · 问答与否定">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">一 · 问答与否定</span><h2>考点3 · 否定的「虚实移位」</h2><span class="en">Shifted Negation</span></div>
+    <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f">形式否定前半部分、实际否定后半部分，容易理解相反。核心是 <b class="key">not A and B</b>（否定 and 后面的 B）和 <b class="key">not some</b>（部分否定）。</p>
+    <div class="grid g3" style="margin-top:12px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">not A and B（否定 B）</div>
+        <div class="en-ref">Don't <b class="red">drink and drive</b>.（喝酒就别开车）</div>
+        <div class="en-ref">The motel is <b class="red">not big and cozy</b>.（虽大但不舒服）</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">not + 不定式（not 前置）</div>
+        <div class="en-ref">Our monitor <b class="red">didn't happen to be</b> there.（碰巧不在）</div>
+        <div class="en-ref">My friend <b class="red">did not pretend to see</b> me.（假装没看见）</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">not some（部分否定）</div>
+        <div class="en-ref">I don't like <b class="red">some</b> of the paintings.（有些不喜欢）</div>
+        <div class="ana">对比：don't like <b>any</b> = 全部否定（一幅都不喜欢）。</div>
+      </div>
+    </div>
+    <div class="reveal anim" style="--i:5">
+      <details><summary><span class="caret">▸</span> 翻译练习</summary><div class="ans"><div class="en">He is a clever boy, but not hard-working.</div><div class="mark">他是个聪明的孩子，但不勤奋。（not…and 部分否定）</div></div></details>
+    </div>
+  </section>
+
+  <!-- 6 一 · 形式否定意义肯定 -->
+  <section class="slide" data-title="形式否定意义肯定" data-sec="一 · 问答与否定">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">一 · 问答与否定</span><h2>考点4 · 形式否定、意义肯定</h2><span class="en">Negative Form, Positive Meaning</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">① cannot…too…（再…也不为过）</div>
+        <div class="en-ref">I <b class="red">cannot thank you too much</b>.</div>
+        <div class="ana">= 无论怎么感谢都不为过。可用 can hardly/never + too/over/enough 替换。</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">② 否定词 + 比较级（= 最高级）</div>
+        <div class="en-ref">I <b class="red">can't agree more</b>.（非常同意）</div>
+        <div class="en-ref">There is <b class="red">nothing Tom likes more than</b> beer.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">③ cannot but / cannot help doing（不得不/禁不住）</div>
+        <div class="en-ref">We <b class="red">cannot but learn</b> to improve ourselves.</div>
+        <div class="en-ref">Everybody <b class="red">can't help admiring</b> his wisdom.</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">④ no…but（没有…不）</div>
+        <div class="en-ref">There is <b class="red">no rule but</b> has exceptions.</div>
+        <div class="en-ref">There is <b class="red">nobody but knows</b> it.</div>
+      </div>
+    </div>
+    <div class="write anim" style="--i:5">
+      <span>✍️</span>
+      <div><b>写作加分：</b><b class="gold">I can't agree more.</b>（我非常赞同）、<b class="gold">A person can't be too careful.</b>（越谨慎越好）、<b class="gold">You can never praise a child too much.</b>（表扬越多越好）—— 议论文里表达强烈态度的高分句。</div>
+    </div>
+  </section>
+
+  <!-- 7 一 · 形式肯定意义否定 -->
+  <section class="slide" data-title="形式肯定意义否定" data-sec="一 · 问答与否定">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">一 · 问答与否定</span><h2>考点5 · 形式肯定、意义否定</h2><span class="en">Positive Form, Negative Meaning</span></div>
+    <div class="grid g3">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">more than…can（不可能/难以）</div>
+        <div class="en-ref">I love you <b class="red">more than I can say</b>.</div>
+        <div class="en-ref">It was <b class="red">more than his mother could bear</b>.</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">anything but（根本不是）</div>
+        <div class="en-ref">It was <b class="red">anything but safe</b>.（很不安全）</div>
+        <div class="en-ref">He is <b class="red">anything but a scholar</b>.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">比较级 + than + to do（不至于）</div>
+        <div class="en-ref">The boy is <b class="red">older than to ask</b> a stranger for candies.</div>
+        <div class="en-ref">I <b class="red">know better than to go</b> out alone.</div>
+      </div>
+    </div>
+    <div class="write anim" style="--i:4">
+      <span>✍️</span>
+      <div><b>写作加分：</b><b class="gold">…more than I can express / say</b>（难以言表）、<b class="gold">be anything but + adj.</b>（绝非……）是表达强烈情感的正式句式，读后续写、议论文结尾都适用。</div>
+    </div>
+  </section>
+
+  <!-- 8 二 · the more -->
+  <section class="slide" data-title="the more...the more" data-sec="二 · 比较结构">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#9aa98d">二 · 比较结构</span><h2>考点6 · 「the more…, the more…」的变化</h2><span class="en">The more…the more</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">基本结构 + 条件后置</div>
+        <div class="en-ref">The more you eat, <b class="red">the fatter</b> you'll get.</div>
+        <div class="en-ref">You'll get (the) fatter, <b class="red">the more</b> you eat.</div>
+        <div class="ana">主句在前时，比较级前 the 可省略。</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">名词前必须带 the</div>
+        <div class="en-ref">The higher the mountain, <b class="red">the greener the pines</b>.</div>
+        <div class="ana">不能说 The higher mountain, the greener pines。</div>
+      </div>
+    </div>
+    <div class="write anim" style="--i:3">
+      <span>✍️</span>
+      <div><b>写作加分：</b><b class="gold">The more…, the more…</b> 是作文里最省力又拿分的结构——「The more we read, the wiser we become.」「The harder you work, the better you'll get.」开头、论证、结尾都能用。</div>
+    </div>
+  </section>
+
+  <!-- 9 三 · 被动语态 -->
+  <section class="slide" data-title="双重被动" data-sec="三 · 被动语态">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c2a18b">三 · 被动语态</span><h2>考点7-8 · 双重被动 & 不能变被动的结构</h2><span class="en">Double Passive</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">考点7 · 双重被动（动词+sb.+to do sth.）</div>
+        <div class="en-ref">The project <b class="red">was asked to be redesigned</b> at once.</div>
+        <div class="en-ref">Books of this kind <b class="red">are not intended to be read</b> by children.</div>
+        <div class="ana">「请求/禁止某人做某事」转被动有三种，其中双重被动最常见于正式书面语。</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">考点8 · 不能变被动的结构</div>
+        <div class="en-ref">反身代词/相互代词：She <b class="red">dresses herself</b>.</div>
+        <div class="en-ref">同源宾语：Tom <b class="red">smiled a forced smile</b>.</div>
+        <div class="ana">将来进行时/完成进行时、had better/would rather、固定词组（make up one's mind、take office 等）也无被动。</div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:3">
+      <span>💡</span>
+      <div><b>识别点：</b>看到 <b class="gold">be + 过去分词 + to be + 过去分词</b>（was asked to be redesigned）就是双重被动，翻译成「被要求/被希望去被……」，多用于新闻报道和正式文体。</div>
+    </div>
+  </section>
+
+  <!-- 10 四 · 定语从句(1) -->
+  <section class="slide" data-title="定语从句状语化" data-sec="四 · 定语从句">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a49bb0">四 · 定语从句</span><h2>考点9-10 · 状语含义 & 关系代词省略</h2><span class="en">Relative Clauses</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">考点9 · 定语从句的状语含义</div>
+        <div class="en-ref">John, <b class="red">who was ready to take every opportunity</b>, found a well-paid job.（因果）</div>
+        <div class="en-ref">A rescue measure was taken, <b class="red">which brought financial benefits</b>.（结果）</div>
+        <div class="ana">翻译时按时间/条件/因果/目的/让步/结果补连词。</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">考点10 · 关系代词省略</div>
+        <div class="en-ref">Is he the person <b class="red">(whom)</b> you are looking for?</div>
+        <div class="en-ref">That is the man <b class="red">(who)</b> discovered the cause.</div>
+        <div class="ana">作宾语可省；在 there be 从句作主语、That is / It is / There is / Here is + 先行词结构中，主语 that/who 也可省略。</div>
+      </div>
+    </div>
+    <div class="write anim" style="--i:3">
+      <span>✍️</span>
+      <div><b>写作加分：</b>用<b class="gold">非限制性定语从句表结果</b>（…, which made/led to/brought…）是续写和议论文里的高级衔接，比两个短句更流畅。</div>
+    </div>
+  </section>
+
+  <!-- 11 四 · 定语从句(2) -->
+  <section class="slide" data-title="there be定语从句·that让步" data-sec="四 · 定语从句">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a49bb0">四 · 定语从句</span><h2>考点11-12 · there be 定语从句 & that 让步</h2><span class="en">More Relative Clauses</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">考点11 · there be 引导限制性定语从句</div>
+        <div class="en-ref">He has met every difficulty <b class="red">(that) there is</b>.</div>
+        <div class="en-ref">This is the only chance <b class="red">(that) there is</b>.</div>
+        <div class="ana">意为「目前有的/曾经有过的」，that/who 作主语常省略。</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">考点12 · that 表让步/评论/感叹（倒装）</div>
+        <div class="en-ref"><b class="red">Uneducated that I am</b>, I know what's good for me.</div>
+        <div class="en-ref"><b class="red">Hero that you are</b>, you saved the child!</div>
+        <div class="ana">表语提前 + that 引导，相当于 as/though 让步或感叹语气。</div>
+      </div>
+    </div>
+    <div class="reveal anim" style="--i:3">
+      <details><summary><span class="caret">▸</span> 翻译练习</summary><div class="ans"><div class="en">He is the person who claimed to have experienced it.</div><div class="mark">他就是那个声称经历过此事的人。（That is + 先行词 + 定语从句）</div></div></details>
+    </div>
+  </section>
+
+  <!-- 12 五 · 条件 -->
+  <section class="slide" data-title="条件的其他表达" data-sec="五 · 条件与让步">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8aa8a0">五 · 条件与让步</span><h2>考点13 · 条件概念的其他表达</h2><span class="en">Other Conditionals</span></div>
+    <div class="grid g3">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">祈使句 + and/or</div>
+        <div class="en-ref">Come here, <b class="red">and</b> you will get what you want.</div>
+        <div class="en-ref">Conquer your desires, <b class="red">or</b> they will conquer you.</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">but for / but that（要不是）</div>
+        <div class="en-ref"><b class="red">But for</b> your help, I could not have succeeded.</div>
+        <div class="en-ref"><b class="red">But that</b> Tom arrived in time, she might have lost her child.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">must…before…（只有…才…）</div>
+        <div class="en-ref">One <b class="red">must sow before</b> one can reap.</div>
+        <div class="en-ref">Where there is a will, <b class="red">there is</b> a way.</div>
+      </div>
+    </div>
+    <div class="write anim" style="--i:4">
+      <span>✍️</span>
+      <div><b>写作加分：</b><b class="gold">祈使句 + and/or</b>（Believe in yourself, and you will succeed.）、<b class="gold">Without…</b>（Without a cool mind, we can't decide well.）都是议论文万能句。</div>
+    </div>
+  </section>
+
+  <!-- 13 五 · 让步 -->
+  <section class="slide" data-title="让步的其他表达" data-sec="五 · 条件与让步">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8aa8a0">五 · 条件与让步</span><h2>考点14 · 让步概念的其他表达</h2><span class="en">Other Concessions</span></div>
+    <div class="grid g3">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">It is true that…but…</div>
+        <div class="en-ref">It is true that he is a kid, <b class="red">but</b> he respects others.</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">Be + 主语 + ever so + 形容词</div>
+        <div class="en-ref"><b class="red">Be a man ever so rich</b>, he should serve others.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">动词 + what/when/where + may</div>
+        <div class="en-ref"><b class="red">Come when you will</b>, you are always welcome.</div>
+        <div class="en-ref"><b class="red">Be the consequences what they may</b>, we'll move on.</div>
+      </div>
+    </div>
+    <div class="reveal anim" style="--i:4">
+      <details><summary><span class="caret">▸</span> 翻译练习</summary><div class="ans"><div class="en">Young as he is, he knows how to deal with different people.</div><div class="mark">虽然他很年轻，但知道如何与不同的人打交道。（as 让步倒装）</div></div></details>
+    </div>
+  </section>
+
+  <!-- 14 六 · come to do / to have done -->
+  <section class="slide" data-title="come to do·to have done" data-sec="六 · 不定式与动名词">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b0909a">六 · 不定式与动名词</span><h2>考点15-16 · come to do & to have done</h2><span class="en">come to do</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">考点15 · come to do（逐渐）</div>
+        <div class="en-ref">She had <b class="red">come to love</b> him.</div>
+        <div class="en-ref">Five years later, Peter <b class="red">came to be</b> an artist.</div>
+        <div class="ana">表「逐渐」的过程，get to do 同义。</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">考点16 · to have done 作主语（虚拟）</div>
+        <div class="en-ref"><b class="red">To have been told</b> the truth would have given me another chance.</div>
+        <div class="ana">表「假如过去…」，谓语用 would/should + 完成时。</div>
+      </div>
+    </div>
+    <div class="reveal anim" style="--i:3">
+      <details><summary><span class="caret">▸</span> 翻译练习</summary><div class="ans"><div class="en">After years of effort, he came to be an engineer.</div><div class="mark">多年努力之后，他成为一名工程师。（come to do 表渐进）</div></div></details>
+    </div>
+  </section>
+
+  <!-- 15 六 · 接不定式/动名词 -->
+  <section class="slide" data-title="接不定式/动名词" data-sec="六 · 不定式与动名词">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b0909a">六 · 不定式与动名词</span><h2>考点17 · 接不定式 / 动名词含义不同</h2><span class="en">to do vs doing</span></div>
+    <div class="grid g3">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">remember / forget / regret</div>
+        <div class="en-ref">remember <b class="red">to do</b>（记得要做）/<b class="red">doing</b>（记得做过）</div>
+        <div class="en-ref">forget <b class="red">to do</b> / <b class="red">doing</b> · regret <b class="red">to do</b> / <b class="red">doing</b></div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">try / stop / mean</div>
+        <div class="en-ref">try <b class="red">to do</b>（尽力）/ <b class="red">doing</b>（尝试）</div>
+        <div class="en-ref">stop <b class="red">to do</b>（停下做另一件事）/ <b class="red">doing</b>（停止正在做）</div>
+        <div class="en-ref">mean <b class="red">to do</b>（打算）/ <b class="red">doing</b>（意味着）</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">want / need / deserve</div>
+        <div class="en-ref">want <b class="red">to do</b>（想）/ <b class="red">doing</b>（需要被做）</div>
+        <div class="en-ref">deserve <b class="red">to do</b>（值得）/ <b class="red">doing</b>（该被）</div>
+      </div>
+    </div>
+    <div class="reveal anim" style="--i:4">
+      <details><summary><span class="caret">▸</span> 真题回放（2022 秋考）</summary><div class="ans"><div class="en">Mom forgot buying cucumbers for our neighbor two days ago.</div><div class="mark">妈妈忘了两天前刚给邻居买过黄瓜。（forget doing = 忘了做过）</div></div></details>
+    </div>
+  </section>
+
+  <!-- 16 六 · 名词化动名词 -->
+  <section class="slide" data-title="名词化动名词" data-sec="六 · 不定式与动名词">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b0909a">六 · 不定式与动名词</span><h2>考点18-19 · 名词化动名词</h2><span class="en">Nominal Gerunds</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">考点18 · 有复数的名词化动名词</div>
+        <div class="en-ref">Everyone has <b class="red">failings</b>, so don't feel disappointed.</div>
+        <div class="en-ref">The survey's <b class="red">findings</b> are a matter of concern.</div>
+        <div class="ana">comings and goings、doings、sufferings、burnings、cryings 等有复数形式。</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">考点19 · 以动名词形式出现的名词</div>
+        <div class="en-ref">belongings（随身物品）· earnings（收入）· surroundings（环境）· winnings（奖金）</div>
+        <div class="ana">注意：有同根名词时用同根名词（management 不用 managing，refusal 不用 refusing）。</div>
+      </div>
+    </div>
+    <div class="reveal anim" style="--i:3">
+      <details><summary><span class="caret">▸</span> 翻译练习</summary><div class="ans"><div class="en">He described the sufferings his race had gone through in many novels.</div><div class="mark">他在很多小说中描述了他的种族所遭受的种种苦难。（suffering 名词化复数）</div></div></details>
+    </div>
+  </section>
+
+  <!-- 17 七 · 分词悬垂 -->
+  <section class="slide" data-title="分词悬垂结构" data-sec="七 · 分词">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c9a58b">七 · 分词</span><h2>考点20 · 无逻辑主语的分词悬垂结构</h2><span class="en">Dangling Participles</span></div>
+    <div class="grid g3">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">单个分词（已成习惯用语）</div>
+        <div class="en-ref"><b class="red">Considering</b> his health, we asked him to stop.</div>
+        <div class="en-ref"><b class="red">Regarding</b> your request, she said nothing.</div>
+        <div class="ana">considering / including / regarding / concerning / barring / wanting 等。</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">已转介词短语</div>
+        <div class="en-ref"><b class="red">Judging from</b> his look, he is a teacher.</div>
+        <div class="en-ref"><b class="red">Owing to</b> the rain, the match was put off.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">副词 + speaking</div>
+        <div class="en-ref"><b class="red">Frankly speaking</b>, I'm not keen on it.</div>
+        <div class="en-ref"><b class="red">Strictly speaking</b>, that's not a dictionary.</div>
+      </div>
+    </div>
+    <div class="write anim" style="--i:4">
+      <span>✍️</span>
+      <div><b>写作加分：</b><b class="gold">Generally/Frankly/Strictly speaking</b> 是作文开头的万能衔接；<b class="gold">Judging from…</b>、<b class="gold">Considering…</b> 让论证更有层次。</div>
+    </div>
+  </section>
+
+  <!-- 18 八 · 虚拟语气 -->
+  <section class="slide" data-title="虚拟语气其他结构" data-sec="八 · 虚拟语气">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8b9bab">八 · 虚拟语气</span><h2>考点21-22 · 虚拟语气的特殊结构</h2><span class="en">Special Subjunctive</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">It is + adj. + that…（should）do</div>
+        <div class="en-ref">It is <b class="red">necessary/vital/essential</b> that we (should) take action.</div>
+        <div class="ana">necessary、vital、essential、desirable、urgent 等后接虚拟。</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">for fear that / lest / in order that</div>
+        <div class="en-ref">He kept silent <b class="red">for fear that</b> he would disturb the teacher.</div>
+        <div class="en-ref">Father repeated it <b class="red">lest</b> my mother (should) forget it.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">would rather + 从句（过去时/完成时）</div>
+        <div class="en-ref">I'd rather you <b class="red">had a chance</b> to visit now.</div>
+        <div class="en-ref">We'd sooner she <b class="red">had passed</b> the test last time.</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">Be it…or / 祝愿句</div>
+        <div class="en-ref"><b class="red">Be it cheap or not</b>, I will get it.</div>
+        <div class="en-ref"><b class="red">God bless you!</b>（bless 不加 s）</div>
+      </div>
+    </div>
+    <div class="write anim" style="--i:5">
+      <span>✍️</span>
+      <div><b>写作加分：</b><b class="gold">It is essential that we (should)…</b> 是建议类作文的高分句；<b class="gold">I'd rather…</b> 表达愿望。</div>
+    </div>
+  </section>
+
+  <!-- 19 九 · 其他倒装 -->
+  <section class="slide" data-title="其他倒装结构" data-sec="九 · 倒装与反意">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">九 · 倒装与反意</span><h2>考点23 · 其他倒装结构</h2><span class="en">More Inversion</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">① 副词/介词 + with + 名词（命令）</div>
+        <div class="en-ref"><b class="red">In with you</b>, boys!</div>
+        <div class="en-ref"><b class="red">Up with the flowers</b>, Tom!</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">② 行为动词 + 主语 + 情态/助动词（强调）</div>
+        <div class="en-ref">It's my duty to help you, and <b class="red">do it I will</b>.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">③ of 短语 / ever / never 前置</div>
+        <div class="en-ref"><b class="red">Of the thirty students</b>, ten passed.</div>
+        <div class="en-ref">We <b class="red">never have and never will</b> retreat.</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">④ 比较/方式状语从句倒装</div>
+        <div class="en-ref">Mothers give more <b class="red">than will fathers</b>.</div>
+        <div class="en-ref">He is honest, <b class="red">as are most</b> high-achievers.</div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:5">
+      <span>💡</span>
+      <div><b>注意：</b>本节是拔高拓展，看懂即可；但 ④ 的 <b class="gold">as 引导的倒装</b>（as do/are…）在阅读和写作里很实用。</div>
+    </div>
+  </section>
+
+  <!-- 20 九 · 反意疑问句 -->
+  <section class="slide" data-title="反意疑问句特例" data-sec="九 · 倒装与反意">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">九 · 倒装与反意</span><h2>考点24 · 反意疑问句的几种特殊情况</h2><span class="en">Tag Questions</span></div>
+    <div class="grid g3">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">含 only → 肯/否均可</div>
+        <div class="en-ref">There were only five people, <b class="red">weren't/were they</b>?</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">主语 A+B → 视情况</div>
+        <div class="en-ref">You and I designed it, <b class="red">didn't we</b>?</div>
+        <div class="en-ref">Whisky and soda is popular, <b class="red">isn't it</b>?</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">It is the first time…</div>
+        <div class="en-ref">It is the first time you've visited, <b class="red">isn't it</b>?</div>
+        <div class="en-ref">It is high time we left, <b class="red">isn't it</b>?</div>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:4">
+      <span>⚠️</span>
+      <div><b>对比：</b>含 <b class="red">only</b> 的主句，反意疑问部分肯定否定都行；但 <b class="red">It is the first time…</b> 只能用 <b class="gold">isn't it</b>（不随从句走）。</div>
+    </div>
+  </section>
+
+  <!-- 21 十 · 强调(1) -->
+  <section class="slide" data-title="强调手段(一)" data-sec="十 · 强调">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">十 · 强调</span><h2>考点25-30 · 强调手段（一）</h2><span class="en">Emphasis 1</span></div>
+    <div class="grid g3">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">重复名词/动词（很多/种类）</div>
+        <div class="en-ref">There are <b class="red">books and books</b> in his basement.</div>
+        <div class="en-ref">She <b class="red">thought and thought</b>.</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">the last + 名词（最不可能）</div>
+        <div class="en-ref">Tom is <b class="red">the last person</b> to blame.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">shall 表命令/规定</div>
+        <div class="en-ref">You <b class="red">shall be</b> there at 8:00.</div>
+        <div class="en-ref">Children under 10 <b class="red">shall see</b> it with parents.</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">at all / on earth / in the world</div>
+        <div class="en-ref">Where <b class="red">on earth</b> did you see it?</div>
+        <div class="en-ref">Do you know the truth <b class="red">at all</b>?</div>
+      </div>
+      <div class="ex anim" style="--i:5">
+        <div class="lead">nothing but / anything but</div>
+        <div class="en-ref">He is <b class="red">nothing but</b> a novelist.（只是）</div>
+        <div class="en-ref">He is <b class="red">anything but</b> stupid.（绝不）</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 22 十 · 强调(2) -->
+  <section class="slide" data-title="强调手段(二)" data-sec="十 · 强调">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">十 · 强调</span><h2>考点31-34 · 强调手段（二）</h2><span class="en">Emphasis 2</span></div>
+    <div class="grid g3">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">形容词后置</div>
+        <div class="en-ref">Such is Einstein, <b class="red">great and humorous</b>.</div>
+        <div class="en-ref">Everybody, <b class="red">male or female</b>, should obey.</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">as…as 加强语气</div>
+        <div class="en-ref">I have <b class="red">as many as</b> 100 supporters.</div>
+        <div class="en-ref">His explanation is <b class="red">as clear as clear</b> can be.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">do / never do 强调动词</div>
+        <div class="en-ref">Please <b class="red">do come</b>.</div>
+        <div class="en-ref">The real reason <b class="red">never did</b> come to light.</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">none of（绝不是）</div>
+        <div class="en-ref">It's <b class="red">none of</b> your business.</div>
+        <div class="en-ref">Tom is <b class="red">none of</b> my friends.</div>
+      </div>
+    </div>
+    <div class="write anim" style="--i:5">
+      <span>✍️</span>
+      <div><b>写作加分：</b><b class="gold">do + 动词原形</b>（I do believe…）、<b class="gold">形容词后置</b>（…, beautiful and touching）、<b class="gold">as…as 强调</b>都是让句子出彩的手段。</div>
+    </div>
+  </section>
+
+  <!-- 23 十一 · the way -->
+  <section class="slide" data-title="the way 用法" data-sec="十一 · the way">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">十一 · the way</span><h2>考点35 · the way 的四重用法</h2><span class="en">The Way</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">① 名词（= the manner 方式）</div>
+        <div class="en-ref">The way he speaks <b class="red">is</b> impressive.</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">② 副词（= how 如何）</div>
+        <div class="en-ref">That is <b class="red">the way we did</b> the job.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">③ 连词（= as 像 / if 如果）</div>
+        <div class="en-ref">Tom dealt with others <b class="red">the way</b> his mother did.</div>
+        <div class="en-ref"><b class="red">The way</b> you are working, you'll fail.</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">④ in the way（以某种方式）</div>
+        <div class="en-ref">They cooked chicken <b class="red">in the way</b> I appreciated.</div>
+        <div class="ana">注意「in the way + 句子」中 in 不可省略。</div>
+      </div>
+    </div>
+    <div class="reveal anim" style="--i:5">
+      <details><summary><span class="caret">▸</span> 翻译练习</summary><div class="ans"><div class="en">We will love and serve our country the way our fathers did.</div><div class="mark">我们将像父辈那样热爱并服务于国家。（the way = as）</div></div></details>
+    </div>
+  </section>
+
+  <!-- 24 十二 · 真题精练 -->
+  <section class="slide" data-title="真题精练" data-sec="十二 · 真题精练">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">十二 · 真题精练</span><h2>高考真题回放（上海卷）</h2><span class="en">Real Gaokao</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1"><div class="lead">翻译 · 2022 秋考</div><div class="cn-src">妈妈忘了两天前刚给邻居买过黄瓜。（forget）</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">Mom forgot buying cucumbers for our neighbor two days ago.</div><div class="mark"><b>考点</b>：forget doing（忘了做过）。</div></div></details></div>
+      <div class="ex anim" style="--i:2"><div class="lead">翻译 · 2022 秋考</div><div class="cn-src">这条运河历经数百年才修建而成，如今虽无昔日繁荣之景，但仍然是横跨东西的重要水路。（as…as）</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">The canal took hundreds of years to build, and though it is no longer as prosperous as before, it is still an important waterway running across the east and the west.</div><div class="mark"><b>考点</b>：as…as 比较 + 让步。</div></div></details></div>
+      <div class="ex anim" style="--i:3"><div class="lead">翻译 · 2023 秋考</div><div class="cn-src">正如预期的那样，艺术节引起了学生对于民俗文化的兴趣。（generate）</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">As was expected, the art festival generated students' interest in folk culture.</div><div class="mark"><b>考点</b>：As was expected 定语从句。</div></div></details></div>
+      <div class="ex anim" style="--i:4"><div class="lead">翻译 · 2023 秋考</div><div class="cn-src">你是否意识到这个地区的每一个部落有自己的不成文的规则？（aware）</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">Are you aware that every tribe in this region has its own unwritten rules?</div><div class="mark"><b>考点</b>：be aware that + 宾语从句 + 主谓一致（every tribe → has）。</div></div></details></div>
+    </div>
+    <div class="tip anim" style="--i:5">
+      <span>💡</span>
+      <div><b>实战提醒：</b>上海卷翻译题的<b class="gold">括号提示词</b>是定位考点的钥匙——forget→动名词、so that→目的、as…as→比较、where→定语从句、aware→宾语从句。先锁定提示词对应的结构，再组织句子。</div>
+    </div>
+  </section>
+
+  <!-- 25 收尾 -->
+  <section class="slide" data-title="本章小结" data-sec="收尾">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">收尾</span><h2>本章小结</h2><span class="en">Summary</span></div>
+    <div class="grid g2">
+      <div class="sum-block anim" style="--i:1">
+        <h4><span class="dot" style="background:#8a9aa8"></span>否定（形式 ↔ 意义）</h4>
+        <ul>
+          <li><b>not…because</b>：否定转移 / 不转移。</li>
+          <li><b>not A and B</b>：否定 B；<b>not some</b>：部分否定。</li>
+          <li><b>cannot…too / 否定词+比较级</b>：意义肯定。</li>
+          <li><b>more than…can / anything but</b>：意义否定。</li>
+        </ul>
+      </div>
+      <div class="sum-block anim" style="--i:2">
+        <h4><span class="dot" style="background:#b99c6a"></span>强调（十种手段）</h4>
+        <ul>
+          <li><b>重复名词/动词</b>、<b>the last</b>、<b>shall</b>。</li>
+          <li><b>at all / on earth / nothing but / anything but</b>。</li>
+          <li><b>形容词后置 / as…as / do+原形 / none of</b>。</li>
+        </ul>
+      </div>
+      <div class="sum-block anim" style="--i:3">
+        <h4><span class="dot" style="background:#b0909a"></span>非谓语 & 虚拟</h4>
+        <ul>
+          <li><b>come to do</b>（逐渐）、<b>to have done</b>（虚拟主语）。</li>
+          <li><b>remember/forget/stop/mean + to do / doing</b>。</li>
+          <li><b>名词化动名词</b>（有复数）。</li>
+          <li><b>It is essential that…(should)</b>、<b>lest/for fear that</b>。</li>
+        </ul>
+      </div>
+      <div class="sum-block anim" style="--i:4">
+        <h4><span class="dot" style="background:#a49bb0"></span>从句 & 其他</h4>
+        <ul>
+          <li><b>定语从句状语化</b>（因果/结果/让步）。</li>
+          <li><b>there be 定语从句</b>、<b>that 让步倒装</b>。</li>
+          <li><b>条件的其他表达</b>（祈使句+and/or、but for）。</li>
+          <li><b>the way</b>（名词/副词/连词）。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="motto anim" style="--i:5">
+      翻译题先看「括号提示词」锁定考点 · 写作里主动用「cannot too / the more / 定语从句状语化 / do 强调」—— <span>考点在手，翻译写作都加分</span>
+    </div>
+  </section>
+
+</div>
+
+<div id="nav">
+  <button id="prev" aria-label="上一页" title="上一页 (←)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="counter"><b id="cur">1</b> / <span id="total">25</span></div>
+  <button id="next" aria-label="下一页" title="下一页 (→)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <button id="menuBtn" aria-label="目录" title="目录">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+    <span>目录</span>
+  </button>
+  <button id="fs" aria-label="全屏" title="全屏 (F)">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+  </button>
+</div>
+<div id="hint">← → 翻页 · 空格下一页 · F 全屏 · 左侧手柄抽拉目录</div>
+
+<div id="drawerTab" title="打开目录">
+  <span class="darr">▸</span><span>目 录</span>
+</div>
+<div id="drawerOverlay">
+  <div id="drawerPanel">
+    <div class="dp-head">
+      <div class="k">目录</div>
+      <h3>语法点补充</h3>
+      <div class="sub">35 个考点 · 真题精练 · 写作加分</div>
+      <button class="close" id="drawerClose" aria-label="关闭">✕</button>
+    </div>
+    <div id="drawerList"></div>
+  </div>
+</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  const curEl = document.getElementById('cur');
+  const totalEl = document.getElementById('total');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const fsBtn = document.getElementById('fs');
+  const menuBtn = document.getElementById('menuBtn');
+  const drawerTab = document.getElementById('drawerTab');
+  const drawerClose = document.getElementById('drawerClose');
+  const drawerOverlay = document.getElementById('drawerOverlay');
+  const drawerList = document.getElementById('drawerList');
+  const progress = document.getElementById('progress');
+  let idx = 0;
+  totalEl.textContent = total;
+
+  const SEC_COLORS = {
+    '封面':'#b99c6a', '导读':'#b99c6a', '收尾':'#b99c6a',
+    '一 · 问答与否定':'#8a9aa8', '二 · 比较结构':'#9aa98d',
+    '三 · 被动语态':'#c2a18b', '四 · 定语从句':'#a49bb0',
+    '五 · 条件与让步':'#8aa8a0', '六 · 不定式与动名词':'#b0909a',
+    '七 · 分词':'#c9a58b', '八 · 虚拟语气':'#8b9bab',
+    '九 · 倒装与反意':'#c09892', '十 · 强调':'#b99c6a',
+    '十一 · the way':'#8a9aa8', '十二 · 真题精练':'#c09892'
+  };
+
+  (function buildMenu(){
+    const groups = [];
+    const map = {};
+    slides.forEach((s,i)=>{
+      const sec = s.dataset.sec || '其他';
+      const title = s.dataset.title || ('第'+(i+1)+'页');
+      if(!map[sec]){ map[sec] = {sec, items:[]}; groups.push(map[sec]); }
+      map[sec].items.push({title, i});
+    });
+    groups.forEach(g=>{
+      const h = document.createElement('div');
+      h.className = 'dp-sec';
+      const c = SEC_COLORS[g.sec] || '#8a8378';
+      h.innerHTML = '<span class="swatch" style="background:'+c+'"></span><span>'+g.sec+'</span>';
+      drawerList.appendChild(h);
+      g.items.forEach(it=>{
+        const b = document.createElement('button');
+        b.className = 'dp-item';
+        b.innerHTML = '<span class="n">'+ (it.i+1) +'</span><span>'+ it.title +'</span>';
+        b.addEventListener('click', ()=>{ go(it.i); closeDrawer(); });
+        drawerList.appendChild(b);
+      });
+    });
+  })();
+
+  function render(){
+    slides.forEach((s,i)=>{
+      s.classList.toggle('active', i===idx);
+      s.classList.toggle('prev', i<idx);
+    });
+    curEl.textContent = idx+1;
+    progress.style.width = ((idx+1)/total*100) + '%';
+    prevBtn.disabled = idx===0;
+    nextBtn.disabled = idx===total-1;
+    Array.from(drawerList.querySelectorAll('.dp-item')).forEach((b,i)=>{
+      b.classList.toggle('active', i===idx);
+    });
+  }
+  function go(n){ idx = Math.max(0, Math.min(total-1, n)); render(); }
+  function closeDrawer(){ drawerOverlay.classList.remove('open'); drawerTab.querySelector('.darr').textContent='▸'; }
+  function openDrawer(){ drawerOverlay.classList.add('open'); drawerTab.querySelector('.darr').textContent='◂'; }
+
+  prevBtn.addEventListener('click', ()=>go(idx-1));
+  nextBtn.addEventListener('click', ()=>go(idx+1));
+  menuBtn.addEventListener('click', openDrawer);
+  drawerTab.addEventListener('click', openDrawer);
+  drawerClose.addEventListener('click', closeDrawer);
+  drawerOverlay.addEventListener('click', (e)=>{ if(e.target===drawerOverlay) closeDrawer(); });
+
+  document.addEventListener('keydown', (e)=>{
+    if(drawerOverlay.classList.contains('open')){
+      if(e.key==='Escape') closeDrawer();
+      return;
+    }
+    if(e.key==='ArrowRight' || e.key===' ' || e.key==='PageDown'){ e.preventDefault(); go(idx+1); }
+    else if(e.key==='ArrowLeft' || e.key==='PageUp'){ e.preventDefault(); go(idx-1); }
+    else if(e.key==='Home'){ go(0); }
+    else if(e.key==='End'){ go(total-1); }
+    else if(e.key==='m' || e.key==='M'){ openDrawer(); }
+    else if(e.key==='f' || e.key==='F'){
+      if(document.fullscreenElement){ document.exitFullscreen(); }
+      else { document.documentElement.requestFullscreen(); }
+    }
+  });
+  fsBtn.addEventListener('click', ()=>{
+    if(document.fullscreenElement){ document.exitFullscreen(); }
+    else { document.documentElement.requestFullscreen(); }
+  });
+  let touchX=null;
+  document.addEventListener('touchstart', e=>{ touchX=e.touches[0].clientX; });
+  document.addEventListener('touchend', e=>{
+    if(touchX===null) return;
+    const dx=e.changedTouches[0].clientX-touchX;
+    if(Math.abs(dx)>50){ dx<0?go(idx+1):go(idx-1); }
+    touchX=null;
+  });
+  render();
+</script>
+</body>
+</html>
