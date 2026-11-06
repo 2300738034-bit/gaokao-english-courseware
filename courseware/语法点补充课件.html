@@ -6,57 +6,50 @@
 <title>高考英语语法 · 语法点补充</title>
 <style>
   :root{
-    --ink:#46413b;
-    --muted:#8c857b;
-    --line:#e6ded1;
-    --bg:#f4efe6;
-    --paper:#fcf9f3;
-    --paper-2:#f6f0e6;
-    --ink-soft:#5c564f;
-
-    --clay:#c2a18b;  --clay-deep:#9c7d68;  --clay-bg:#f4ece6;   /* 被动语态 */
-    --sage:#9aa98d;  --sage-deep:#75856a;  --sage-bg:#eef1ea;   /* 比较结构 */
-    --blue:#8a9aa8;  --blue-deep:#647887;  --blue-bg:#edf1f3;   /* 问答与否定 */
-    --lav:#a49bb0;   --lav-deep:#7d7390;   --lav-bg:#f0edf3;    /* 定语从句 */
-    --teal:#8aa8a0;  --teal-deep:#66857d;  --teal-bg:#edf2f0;   /* 条件与让步 */
-    --mauve:#b0909a; --mauve-deep:#8a6f78; --mauve-bg:#f3edf0;  /* 不定式/动名词 */
-    --sand:#c9a58b;  --sand-deep:#a38166;  --sand-bg:#f5ede6;   /* 分词 */
-    --slate:#8b9bab; --slate-deep:#6a7a89; --slate-bg:#edf1f4;  /* 虚拟语气 */
-    --rose:#c09892;  --rose-deep:#98706a;  --rose-bg:#f5ecea;   /* 倒装/反意 */
-    --gold2:#b99c6a; --gold-deep:#937a48;  --gold-bg:#f3ecdd;   /* 强调 */
-
+    --ink:#46413b; --muted:#8c857b; --line:#e6ded1; --bg:#f4efe6; --paper:#fcf9f3; --paper-2:#f6f0e6; --ink-soft:#5c564f;
+    --clay:#c2a18b;  --clay-deep:#9c7d68;  --clay-bg:#f4ece6;
+    --sage:#9aa98d;  --sage-deep:#75856a;  --sage-bg:#eef1ea;
+    --blue:#8a9aa8;  --blue-deep:#647887;  --blue-bg:#edf1f3;
+    --lav:#a49bb0;   --lav-deep:#7d7390;   --lav-bg:#f0edf3;
+    --teal:#8aa8a0;  --teal-deep:#66857d;  --teal-bg:#edf2f0;
+    --mauve:#b0909a; --mauve-deep:#8a6f78; --mauve-bg:#f3edf0;
+    --sand:#c9a58b;  --sand-deep:#a38166;  --sand-bg:#f5ede6;
+    --slate:#8b9bab; --slate-deep:#6a7a89; --slate-bg:#edf1f4;
+    --rose:#c09892;  --rose-deep:#98706a;  --rose-bg:#f5ecea;
     --gold:#b99c6a;  --gold-deep:#937a48;  --gold-bg:#f3ecdd;
     --warn:#b48780;  --warn-deep:#966963;  --warn-bg:#f5e7e4;
     --tip:#7e96a5;   --tip-bg:#edf1f3;
-
     --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
   body{font-family:var(--font);color:var(--ink);background:var(--bg);overflow:hidden;-webkit-font-smoothing:antialiased}
-
   #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:58px 44px 96px}
-  .slide{position:absolute;width:min(1200px,100%);max-height:100%;background:var(--paper);border-radius:22px;box-shadow:0 26px 60px -26px rgba(92,82,66,.34), 0 0 0 1px rgba(92,82,66,.05);padding:44px 54px;opacity:0;transform:translateX(42px);pointer-events:none;transition:opacity .45s ease, transform .45s ease;overflow:hidden;display:flex;flex-direction:column}
+  .slide{position:absolute;width:min(1200px,100%);max-height:100%;background:var(--paper);border-radius:22px;box-shadow:0 26px 60px -26px rgba(92,82,66,.34), 0 0 0 1px rgba(92,82,66,.05);padding:40px 54px 46px;opacity:0;transform:translateX(42px);pointer-events:none;transition:opacity .45s ease, transform .45s ease;overflow-y:auto;overflow-x:hidden;display:block}
+  .slide::-webkit-scrollbar{width:9px}
+  .slide::-webkit-scrollbar-thumb{background:#e0d7c6;border-radius:99px}
+  .slide::-webkit-scrollbar-thumb:hover{background:#cfc3ac}
+  .slide::-webkit-scrollbar-track{background:transparent}
   .slide.active{opacity:1;transform:translateX(0);pointer-events:auto}
   .slide.prev{transform:translateX(-42px)}
   .slide .anim{opacity:0;transform:translateY(14px)}
-  .slide.active .anim{opacity:1;transform:none;transition:opacity .5s ease, transform .5s ease;transition-delay:calc(var(--i,0)*70ms + 60ms)}
+  .slide.active .anim{opacity:1;transform:none;transition:opacity .5s ease, transform .5s ease;transition-delay:calc(var(--i,0)*60ms + 40ms)}
 
-  .head{display:flex;align-items:center;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+  .head{display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap}
   .part-badge{font-size:13px;font-weight:700;letter-spacing:.05em;color:#fff;background:var(--pc,#8a8378);padding:6px 15px;border-radius:99px;white-space:nowrap}
-  .head h2{font-size:28px;font-weight:800;letter-spacing:.01em;color:var(--ink)}
+  .head h2{font-size:25px;font-weight:800;letter-spacing:.01em;color:var(--ink)}
   .head .en{font-size:14px;color:var(--muted);font-weight:600;margin-left:auto;white-space:nowrap}
 
-  .slide.cover{background:radial-gradient(900px 520px at 88% -10%, rgba(138,154,168,.32), transparent 60%),radial-gradient(720px 540px at -10% 112%, rgba(176,144,154,.38), transparent 55%),linear-gradient(135deg,#7a8290 0%,#8a92a0 50%,#a3a9b4 100%);color:#fff;justify-content:center}
+  .slide.cover{background:radial-gradient(900px 520px at 88% -10%, rgba(138,154,168,.32), transparent 60%),radial-gradient(720px 540px at -10% 112%, rgba(176,144,154,.38), transparent 55%),linear-gradient(135deg,#7a8290 0%,#8a92a0 50%,#a3a9b4 100%);color:#fff;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
   .cover .brand-line{position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#8a9aa8,#9aa98d,#c9a58b,#b0909a)}
   .cover .tag{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#eef1f3;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);padding:7px 16px;border-radius:99px;margin-bottom:26px}
   .cover h1{font-size:50px;font-weight:900;line-height:1.2;letter-spacing:.01em}
   .cover h1 .hl{color:#e4d3ad}
   .cover .sub{margin-top:18px;font-size:20px;color:#e7ebee;font-weight:500;line-height:1.7}
-  .cover .meta{margin-top:40px;display:flex;gap:28px;font-size:14px;color:#c9d3da;font-weight:600}
+  .cover .meta{margin-top:40px;display:flex;gap:28px;font-size:14px;color:#c9d3da;font-weight:600;flex-wrap:wrap}
   .cover .meta b{color:#fff}
 
-  .grid{display:grid;gap:15px}
+  .grid{display:grid;gap:13px}
   .g2{grid-template-columns:1fr 1fr}
   .g3{grid-template-columns:repeat(3,1fr)}
   .g4{grid-template-columns:repeat(4,1fr)}
@@ -64,76 +57,71 @@
   .card .num{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:34px;border-radius:10px;font-size:16px;font-weight:800;color:#fff;background:var(--pc,#8a8378);margin-bottom:11px;padding:0 10px}
   .card h4{font-size:19px;font-weight:800;margin-bottom:5px;color:var(--ink)}
   .card .cn{font-size:13.5px;color:var(--muted);font-weight:600;line-height:1.5}
-  .card .frm{font-size:17px;font-weight:800;color:var(--pc,#8a8378);margin-top:9px;letter-spacing:.02em;font-family:"SF Mono",ui-monospace,monospace}
-  .card .eg{font-size:13.5px;color:#6f6a62;margin-top:8px;line-height:1.6;word-break:break-all}
-  .card .eg b{color:#3f3b35;font-weight:700}
 
   .key{color:var(--pc-deep,#937a48);font-weight:800}
   .gold{color:var(--gold-deep);font-weight:800}
   .red{color:var(--warn-deep);font-weight:800}
 
-  .ex{background:var(--paper-2);border:1px solid var(--line);border-radius:15px;padding:16px 20px;margin-top:8px}
-  .ex + .ex{margin-top:14px}
-  .ex .lead{font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:11px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-  .ex .lead .pill{background:var(--gold-bg);color:var(--gold-deep)}
-  .cn-src{font-size:16.5px;font-weight:600;color:var(--ink);line-height:1.6}
-  .cn-src b{color:var(--gold-deep)}
-  .en-ref{font-size:16px;font-weight:700;color:var(--pc-deep,#5c7383);margin-top:9px;line-height:1.55;word-break:break-word}
-  .en-ref .mt{display:inline-block;font-size:12px;font-weight:800;color:#fff;background:var(--pc,#8a8378);border-radius:6px;padding:2px 8px;margin-right:8px;vertical-align:2px}
-  .ana{margin-top:10px;font-size:13.5px;color:#6f6a62;line-height:1.65}
+  .ex{background:var(--paper-2);border:1px solid var(--line);border-radius:15px;padding:14px 18px}
+  .ex .lead{font-size:12.5px;font-weight:800;color:var(--pc-deep,#5c7383);letter-spacing:.02em;margin-bottom:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .en-ref{font-size:15px;font-weight:700;color:var(--pc-deep,#5c7383);line-height:1.55;word-break:break-word;margin:3px 0}
+  .en-ref b.red{color:var(--warn-deep)}
+  .en-ref .cn{display:inline-block;font-size:12.5px;font-weight:600;color:#6f6a62;margin-left:6px}
+  .ana{margin-top:7px;font-size:13px;color:#6f6a62;line-height:1.6}
   .ana b{color:var(--gold-deep)}
 
-  .formula{background:var(--paper);border:1px dashed var(--line);border-radius:12px;padding:13px 16px;margin-top:10px;font-size:15px;font-weight:700;color:var(--ink)}
-  .formula .fb{display:inline-block;background:var(--pc,#8a8378);color:#fff;font-size:12px;font-weight:800;border-radius:6px;padding:2px 9px;margin-right:8px}
+  .formula{background:var(--paper);border:1px dashed var(--line);border-radius:12px;padding:11px 14px;margin-top:9px;font-size:14px;font-weight:700;color:var(--ink);line-height:1.6}
+  .formula .fb{display:inline-block;background:var(--pc,#8a8378);color:#fff;font-size:11.5px;font-weight:800;border-radius:6px;padding:2px 9px;margin-right:8px}
 
-  .note{display:flex;gap:12px;align-items:flex-start;background:var(--gold-bg);border:1px solid #e6d8ba;border-left:4px solid var(--gold);border-radius:12px;padding:13px 17px;margin-top:15px;font-size:15px;line-height:1.65}
+  .note{display:flex;gap:12px;align-items:flex-start;background:var(--gold-bg);border:1px solid #e6d8ba;border-left:4px solid var(--gold);border-radius:12px;padding:12px 16px;margin-top:14px;font-size:14px;line-height:1.65}
   .note .ico{font-size:18px;line-height:1.4}
   .note b{color:var(--gold-deep)}
-
-  .tip{display:flex;gap:10px;align-items:flex-start;background:var(--tip-bg);border:1px solid #d5e0e4;border-left:4px solid var(--tip);border-radius:12px;padding:12px 16px;margin-top:13px;font-size:14.5px;line-height:1.65;color:var(--blue-deep)}
+  .tip{display:flex;gap:10px;align-items:flex-start;background:var(--tip-bg);border:1px solid #d5e0e4;border-left:4px solid var(--tip);border-radius:12px;padding:11px 15px;margin-top:12px;font-size:13.5px;line-height:1.65;color:var(--blue-deep)}
   .tip b{color:var(--blue-deep)}
-
-  .warn{display:flex;gap:10px;align-items:flex-start;background:var(--warn-bg);border:1px solid #ecd2cd;border-left:4px solid var(--warn);border-radius:12px;padding:12px 16px;margin-top:13px;font-size:14.5px;line-height:1.65;color:var(--warn-deep)}
+  .warn{display:flex;gap:10px;align-items:flex-start;background:var(--warn-bg);border:1px solid #ecd2cd;border-left:4px solid var(--warn);border-radius:12px;padding:11px 15px;margin-top:12px;font-size:13.5px;line-height:1.65;color:var(--warn-deep)}
   .warn b{color:var(--warn-deep)}
-
-  .write{display:flex;gap:10px;align-items:flex-start;background:var(--sage-bg);border:1px solid #d7e0cf;border-left:4px solid var(--sage);border-radius:12px;padding:12px 16px;margin-top:13px;font-size:14.5px;line-height:1.65;color:var(--sage-deep)}
+  .write{display:flex;gap:10px;align-items:flex-start;background:var(--sage-bg);border:1px solid #d7e0cf;border-left:4px solid var(--sage);border-radius:12px;padding:11px 15px;margin-top:12px;font-size:13.5px;line-height:1.65;color:var(--sage-deep)}
   .write b{color:var(--sage-deep)}
 
-  .cols{display:grid;grid-template-columns:1fr 1fr;gap:15px}
-  .cols .ex{margin-top:0}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:12px;letter-spacing:.05em;color:var(--muted);background:var(--paper-2);font-weight:700}
 
-  table{width:100%;border-collapse:collapse;font-size:15px}
-  th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
-  th{font-size:12.5px;letter-spacing:.05em;color:var(--muted);background:var(--paper-2);font-weight:700}
-  td .en{font-weight:700;color:#3f3b35}
-  td .cn{color:var(--muted);font-size:13px}
+  .wl{display:grid;grid-template-columns:repeat(3,1fr);gap:3px 18px;font-size:13px;color:#5c564f;line-height:1.75;background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:10px 15px;margin-top:9px}
+  .wl b{color:var(--pc-deep,#5c7383);font-weight:700}
+  .wl .cn{color:#8c857b}
+  .wl2{grid-template-columns:repeat(2,1fr)}
+  .wl4{grid-template-columns:repeat(4,1fr)}
 
-  .pill{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:var(--tip-bg);color:var(--blue-deep);margin-right:6px}
+  /* 翻译练习 */
+  .quiz{margin-top:16px;border:1.5px solid var(--line);border-radius:14px;overflow:hidden;background:var(--paper)}
+  .quiz .q-head{display:flex;align-items:center;gap:10px;padding:11px 16px;background:var(--paper-2);font-size:13.5px;font-weight:800;color:var(--pc-deep,#5c7383);border-bottom:1px solid var(--line)}
+  .quiz .q-head .cnt{color:#b3ab9f;font-weight:700}
+  .quiz ol.q{margin:0;padding:12px 18px 14px 42px;display:flex;flex-direction:column;gap:7px}
+  .quiz ol.q li{font-size:14px;line-height:1.65;color:#46413b}
+  .quiz ol.q li .hint{display:inline-block;font-size:12px;font-weight:700;color:var(--gold-deep);background:var(--gold-bg);border:1px solid #e6d8ba;border-radius:6px;padding:1px 8px;margin-left:7px;white-space:nowrap}
+  details.ans{border-top:1px dashed var(--line);margin:0 16px 14px;padding-top:9px}
+  details.ans summary{cursor:pointer;list-style:none;font-size:13px;font-weight:700;color:var(--sage-deep);user-select:none;display:flex;align-items:center;gap:7px}
+  details.ans summary::-webkit-details-marker{display:none}
+  details.ans summary .caret{display:inline-block;transition:transform .2s;font-size:11px}
+  details.ans[open] summary .caret{transform:rotate(90deg)}
+  details.ans .ans-body{padding:9px 0 2px}
+  details.ans .ans-body ol{margin:0;padding-left:22px}
+  details.ans .ans-body li{font-size:13.5px;color:#5c564f;line-height:1.65;margin:4px 0}
+  details.ans .ans-body li b{color:var(--pc-deep,#5c7383)}
+  details.ans .ans-body li .cn{color:#8c857b;font-size:12.5px}
 
-  .wordlist{font-size:13.5px;color:#5c564f;line-height:1.9;background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-top:10px}
-  .wordlist b{color:var(--pc-deep,#5c7383)}
-
-  .sum-block{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:var(--paper)}
-  .sum-block h4{font-size:15.5px;font-weight:800;margin-bottom:11px;display:flex;align-items:center;gap:8px;color:var(--ink)}
+  .sum-block{border:1px solid var(--line);border-radius:16px;padding:16px 18px;background:var(--paper)}
+  .sum-block h4{font-size:15px;font-weight:800;margin-bottom:10px;display:flex;align-items:center;gap:8px;color:var(--ink)}
   .sum-block .dot{width:10px;height:10px;border-radius:3px;background:var(--pc,#8a8378)}
-  .sum-block ul{list-style:none;display:flex;flex-direction:column;gap:7px}
-  .sum-block li{font-size:13.5px;color:#5c564f;line-height:1.55}
+  .sum-block ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+  .sum-block li{font-size:13px;color:#5c564f;line-height:1.55}
   .sum-block li b{color:var(--ink)}
-
-  .motto{margin-top:20px;text-align:center;font-size:19px;font-weight:800;color:var(--ink);background:var(--gold-bg);border:1px solid #e6d8ba;border-radius:14px;padding:17px}
+  .motto{margin-top:16px;text-align:center;font-size:17px;font-weight:800;color:var(--ink);background:var(--gold-bg);border:1px solid #e6d8ba;border-radius:14px;padding:15px}
   .motto span{color:var(--warn-deep)}
 
-  .reveal{margin-top:10px;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden}
-  .reveal summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 15px;font-size:13.5px;font-weight:700;color:var(--pc-deep,#5c7383);background:var(--paper-2);user-select:none}
-  .reveal summary::-webkit-details-marker{display:none}
-  .reveal summary .caret{display:inline-block;transition:transform .2s;font-size:11px}
-  .reveal[open] summary .caret{transform:rotate(90deg)}
-  .reveal .ans{padding:13px 16px 15px;border-top:1px dashed var(--line);font-size:15px}
-  .reveal .ans .en{font-weight:700;color:var(--pc-deep,#5c7383);line-height:1.6}
-  .reveal .ans .mark{margin-top:8px;font-size:13px;color:#6f6a62;line-height:1.6}
-  .reveal .ans .mark b{color:var(--gold-deep)}
-
-  #nav{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);display:flex;align-items:center;gap:12px;z-index:50;background:rgba(252,249,243,.88);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:99px;padding:8px 12px;box-shadow:0 12px 32px -14px rgba(92,82,66,.32)}
+  #nav{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);display:flex;align-items:center;gap:12px;z-index:50;background:rgba(252,249,243,.9);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:99px;padding:8px 12px;box-shadow:0 12px 32px -14px rgba(92,82,66,.32)}
   #nav button{border:none;background:var(--paper);border:1px solid var(--line);width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#5c564f;transition:.15s}
   #nav button:hover:not(:disabled){background:var(--paper-2);border-color:var(--gold);color:var(--gold-deep)}
   #nav button:disabled{opacity:.35;cursor:default}
@@ -146,12 +134,11 @@
   #drawerTab{position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:80;cursor:pointer;user-select:none;display:flex;align-items:center;gap:6px;padding:16px 10px;background:linear-gradient(180deg,#8a9aa8,#647887);color:#fff;border-radius:0 14px 14px 0;box-shadow:4px 8px 20px -8px rgba(92,82,66,.45);transition:padding .2s ease, box-shadow .2s ease;writing-mode:vertical-rl;letter-spacing:.3em;font-weight:800;font-size:14px}
   #drawerTab:hover{padding:20px 11px;box-shadow:6px 12px 28px -8px rgba(92,82,66,.55)}
   #drawerTab .darr{display:inline-block;transition:transform .25s ease;writing-mode:horizontal-tb;font-size:13px}
-
   #drawerOverlay{position:fixed;inset:0;background:rgba(70,63,55,.34);backdrop-filter:blur(3px);z-index:85;opacity:0;pointer-events:none;transition:opacity .28s ease}
   #drawerOverlay.open{opacity:1;pointer-events:auto}
   #drawerPanel{position:fixed;top:0;left:0;bottom:0;width:min(360px,88vw);background:var(--paper);box-shadow:24px 0 50px -30px rgba(92,82,66,.5);z-index:86;transform:translateX(-100%);transition:transform .32s cubic-bezier(.22,.9,.3,1);display:flex;flex-direction:column}
   #drawerOverlay.open #drawerPanel{transform:translateX(0)}
-  #drawerPanel .dp-head{padding:22px 22px 16px;border-bottom:1px solid var(--line);background:linear-gradient(135deg,#8a9aa8 0%,#647887 100%);color:#fff}
+  #drawerPanel .dp-head{padding:22px 22px 16px;border-bottom:1px solid var(--line);background:linear-gradient(135deg,#8a9aa8 0%,#647887 100%);color:#fff;position:relative}
   #drawerPanel .dp-head .k{font-size:12px;font-weight:700;letter-spacing:.12em;opacity:.8}
   #drawerPanel .dp-head h3{font-size:19px;font-weight:800;margin-top:4px}
   #drawerPanel .dp-head .sub{font-size:12px;opacity:.85;margin-top:3px}
@@ -160,19 +147,21 @@
   #drawerList{overflow-y:auto;padding:10px 14px 34px;flex:1}
   .dp-sec{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--muted);margin:18px 6px 6px}
   .dp-sec .swatch{width:9px;height:9px;border-radius:3px}
-  .dp-item{display:flex;align-items:center;gap:11px;width:100%;text-align:left;padding:10px 12px;border:none;background:transparent;border-radius:10px;cursor:pointer;font-size:14px;color:#4c4740;transition:.13s}
+  .dp-item{display:flex;align-items:center;gap:11px;width:100%;text-align:left;padding:10px 12px;border:none;background:transparent;border-radius:10px;cursor:pointer;font-size:13.5px;color:#4c4740;transition:.13s}
   .dp-item:hover{background:var(--paper-2)}
   .dp-item.active{background:var(--gold-bg);color:var(--gold-deep);font-weight:700}
   .dp-item .n{font-size:12px;font-weight:800;color:#b3ab9f;min-width:22px;text-align:right}
 
   @media (max-width:900px){
-    #stage{padding:18px 14px 88px}
-    .slide{padding:26px 22px;border-radius:15px}
+    #stage{padding:16px 14px 88px}
+    .slide{padding:22px 18px;border-radius:15px}
     .g2,.g3,.g4,.cols{grid-template-columns:1fr 1fr}
-    .head h2{font-size:21px}
+    .wl{grid-template-columns:1fr 1fr}
+    .wl4{grid-template-columns:1fr 1fr}
+    .head h2{font-size:20px}
     .cover h1{font-size:34px}
     .cover .sub{font-size:16px}
-    .cn-src{font-size:15px}
+    .en-ref{font-size:14px}
     #drawerTab{padding:13px 8px;font-size:12px}
   }
 </style>
@@ -182,638 +171,1290 @@
 
 <div id="stage">
 
-  <!-- 1 封面 -->
+  <!-- 封面 -->
   <section class="slide cover active" data-title="封面" data-sec="封面">
     <div class="brand-line"></div>
     <div class="anim" style="--i:0"><span class="tag">高考英语 · 语法点补充（你可能不知道的语法）</span></div>
     <h1 class="anim" style="--i:1">语法点 <span class="hl">补 充</span></h1>
-    <p class="sub anim" style="--i:2">35 个考点 · 按考点讲解 · 真题精练 · 写作加分</p>
+    <p class="sub anim" style="--i:2">35 个考点 · 逐一讲透 · 例句全保留 · 22 组翻译练习</p>
     <div class="meta anim" style="--i:3">
       <span>板块：<b>语法 · 专题补充</b></span>
       <span>重点：<b>否定 · 强调 · 虚拟 · 倒装 · 省略</b></span>
     </div>
   </section>
 
-  <!-- 2 导读 -->
+  <!-- 导读 -->
   <section class="slide" data-title="本章导读" data-sec="导读">
     <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">导读</span><h2>什么是「语法点补充」</h2><span class="en">Grammar You May Not Know</span></div>
-    <p class="anim" style="--i:1;font-size:15.5px;color:#5c564f;line-height:1.75">这套专题收录了<b class="gold">常规语法书讲不透、高考却常考的「冷门但高频」</b>语法点：否定转移、双重被动、强调的各种手段、虚拟语气特殊结构、the way 的多重用法……按<b>考点</b>逐一讲解，每个考点配<b class="gold">真题精练</b>，并标注<b class="gold">写作加分</b>的句式。</p>
-    <div class="grid g4" style="margin-top:16px">
-      <div class="card anim" style="--i:2;--pc:#8a9aa8"><span class="num">一</span><h4>问答与否定</h4><div class="cn">否定转移 / 虚实移位 / 形式与意义相反</div></div>
-      <div class="card anim" style="--i:3;--pc:#9aa98d"><span class="num">二</span><h4>比较与被动</h4><div class="cn">the more…the more / 双重被动</div></div>
-      <div class="card anim" style="--i:4;--pc:#a49bb0"><span class="num">三</span><h4>从句进阶</h4><div class="cn">定语从句状语化 / 条件 / 让步</div></div>
-      <div class="card anim" style="--i:5;--pc:#b0909a"><span class="num">四</span><h4>非谓语与虚拟</h4><div class="cn">不定式 / 动名词 / 分词 / 虚拟特殊结构</div></div>
-      <div class="card anim" style="--i:6;--pc:#c09892"><span class="num">五</span><h4>倒装与反意</h4><div class="cn">其他倒装 / 反意疑问句特例</div></div>
-      <div class="card anim" style="--i:7;--pc:#b99c6a"><span class="num">六</span><h4>强调与 the way</h4><div class="cn">十种强调手段 / the way 的多重用法</div></div>
+    <p class="anim" style="--i:1;font-size:15px;color:#5c564f;line-height:1.75">这套专题收录了<b class="gold">常规语法书讲不透、高考却常考的「冷门但高频」</b>语法点：否定转移、双重被动、强调的各种手段、虚拟语气特殊结构、the way 的多重用法……按<b>考点</b>逐一讲解，共 <b class="gold">35 个考点</b>，每个考点给出<b>知识点</b>与<b class="gold">精选例句</b>，并配套 <b class="gold">22 组翻译练习</b>（附参考答案）。</p>
+    <div class="grid g3" style="margin-top:16px">
+      <div class="card anim" style="--i:2;--pc:#8a9aa8"><span class="num">一</span><h4>问答与否定</h4><div class="cn">考点1–5 · 否定转移 / 虚实移位 / 形式与意义相反</div></div>
+      <div class="card anim" style="--i:3;--pc:#9aa98d"><span class="num">二</span><h4>比较·被动</h4><div class="cn">考点6–8 · the more…the more / 双重被动</div></div>
+      <div class="card anim" style="--i:4;--pc:#a49bb0"><span class="num">三</span><h4>从句进阶</h4><div class="cn">考点9–14 · 定语从句状语化 / 条件 / 让步</div></div>
+      <div class="card anim" style="--i:5;--pc:#b0909a"><span class="num">四</span><h4>非谓语·分词</h4><div class="cn">考点15–20 · 不定式 / 动名词 / 分词悬垂</div></div>
+      <div class="card anim" style="--i:6;--pc:#8b9bab"><span class="num">五</span><h4>虚拟·倒装·反意</h4><div class="cn">考点21–24 · 虚拟特殊结构 / 其他倒装 / 反意特例</div></div>
+      <div class="card anim" style="--i:7;--pc:#b99c6a"><span class="num">六</span><h4>强调·the way</h4><div class="cn">考点25–35 · 十种强调手段 / the way 多重用法</div></div>
     </div>
-    <div class="note anim" style="--i:8;margin-top:20px">
+    <div class="note anim" style="--i:8;margin-top:18px">
       <span class="ico">🧭</span>
-      <div><b>学习方法：</b>每个考点记住<b class="gold">「一个标志词 + 一个例句」</b>即可。翻译题里看到提示词（如 more than、can never、anything but），立刻定位到对应考点。</div>
+      <div><b>学习方法：</b>每个考点记住<b class="gold">「一个标志词 + 一个例句」</b>。做翻译题时先看<b class="gold">括号里的提示词</b>（如 more than、can never、anything but），立刻定位到对应考点。</div>
     </div>
   </section>
 
-  <!-- 3 一 · 问答与否定(1) -->
-  <section class="slide" data-title="不用yes/no的回答" data-sec="一 · 问答与否定">
+  <!-- 考点1 -->
+  <section class="slide" data-title="考点1 · 不用 yes/no 回答的疑问句" data-sec="一 · 问答与否定">
     <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">一 · 问答与否定</span><h2>考点1 · 不用 yes / no 回答的疑问句</h2><span class="en">No Yes/No Answers</span></div>
-    <div class="grid g3">
-      <div class="ex anim" style="--i:1">
-        <div class="lead">① 回答「是否介意」</div>
-        <div class="en-ref">— Would you mind my turning off the radio?<br>— <b>Of course not. / Not at all.</b></div>
-      </div>
+    <p class="anim" style="--i:1;font-size:14px;color:#5c564f">一般疑问句通常要求作肯定/否定回答，但以下几种情况不需要用 yes/no。</p>
+    <div class="grid g2" style="margin-top:10px">
       <div class="ex anim" style="--i:2">
-        <div class="lead">② 接受邀请 / 提议</div>
-        <div class="en-ref">— Will you please send her a message?<br>— <b>I'm glad to.</b></div>
+        <div class="lead">1. 回答「是否介意」</div>
+        <div class="en-ref">— Would you mind my turning off the radio now？<span class="cn">你介意我关掉收音机吗？</span></div>
+        <div class="en-ref">— <b class="red">Of course not.</b> / Not at all. / Certainly not. <span class="cn">不介意，请关。</span></div>
+        <div class="en-ref">— I'm sorry, but I would. <span class="cn">不好意思，请不要关。</span></div>
       </div>
       <div class="ex anim" style="--i:3">
-        <div class="lead">③ 主观判断</div>
-        <div class="en-ref">— Is it worth reading?<br>— <b>I think so.</b></div>
-      </div>
-    </div>
-    <div class="tip anim" style="--i:4">
-      <span>💡</span>
-      <div><b>口语/听力高频：</b>Would you mind… 的否定回答是<b class="gold">「不介意」</b>（Of course not），肯定回答才表示「介意」（I'm sorry, but I would）。别搞反。</div>
-    </div>
-  </section>
-
-  <!-- 4 一 · 问答与否定(2) -->
-  <section class="slide" data-title="not because 否定转移" data-sec="一 · 问答与否定">
-    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">一 · 问答与否定</span><h2>考点2 · not…because 的否定转移</h2><span class="en">Transferred Negation</span></div>
-    <div class="grid g2">
-      <div class="ex anim" style="--i:1">
-        <div class="lead">否定转移（否定 because 从句）</div>
-        <div class="en-ref">The mountain is <b class="red">not</b> famous <b class="red">because</b> it is high.</div>
-        <div class="ana">这座山出名<b>并不是因为</b>高（否定的是原因，不是「出名」）。</div>
-      </div>
-      <div class="ex anim" style="--i:2">
-        <div class="lead">不发生转移（否定主句）</div>
-        <div class="en-ref">We <b class="red">did not</b> go camping <b class="red">because</b> it was raining hard.</div>
-        <div class="ana">因为雨大，所以我们<b>没去</b>野营（否定的是主句动作）。</div>
-      </div>
-    </div>
-    <div class="warn anim" style="--i:3">
-      <span>⚠️</span>
-      <div><b>歧义处理：</b>「The company didn't fire him because he was elderly.」有两种译法。为避免歧义：否定主句时，把 because 从句<b class="gold">提前或加逗号</b>；否定从句时用 <b class="red">not because…but because</b> 或强调句 <b class="red">It was not because…that…</b>。</div>
-    </div>
-    <div class="reveal anim" style="--i:4">
-      <details><summary><span class="caret">▸</span> 翻译练习（真题风格）</summary><div class="ans"><div class="en">It was not because he was late that he was criticized.</div><div class="mark">正因为他面试迟到，才被批评。（用强调句锁定否定对象）</div></div></details>
-    </div>
-  </section>
-
-  <!-- 5 一 · 问答与否定(3) -->
-  <section class="slide" data-title="否定的虚实移位" data-sec="一 · 问答与否定">
-    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">一 · 问答与否定</span><h2>考点3 · 否定的「虚实移位」</h2><span class="en">Shifted Negation</span></div>
-    <p class="anim" style="--i:1;font-size:14.5px;color:#5c564f">形式否定前半部分、实际否定后半部分，容易理解相反。核心是 <b class="key">not A and B</b>（否定 and 后面的 B）和 <b class="key">not some</b>（部分否定）。</p>
-    <div class="grid g3" style="margin-top:12px">
-      <div class="ex anim" style="--i:2">
-        <div class="lead">not A and B（否定 B）</div>
-        <div class="en-ref">Don't <b class="red">drink and drive</b>.（喝酒就别开车）</div>
-        <div class="en-ref">The motel is <b class="red">not big and cozy</b>.（虽大但不舒服）</div>
-      </div>
-      <div class="ex anim" style="--i:3">
-        <div class="lead">not + 不定式（not 前置）</div>
-        <div class="en-ref">Our monitor <b class="red">didn't happen to be</b> there.（碰巧不在）</div>
-        <div class="en-ref">My friend <b class="red">did not pretend to see</b> me.（假装没看见）</div>
+        <div class="lead">2. 接受邀请 / 提议，或致歉</div>
+        <div class="en-ref">— Shall we go to the seaside this weekend？<span class="cn">周末去海边好吗？</span></div>
+        <div class="en-ref">— <b class="red">That's a good idea</b>, but you see I am too busy.</div>
+        <div class="en-ref">— Will you please send her a message for me？ — <b class="red">I'm glad to.</b></div>
+        <div class="en-ref">— Can I keep the book for a few days？ — <b class="red">Sorry, but</b> you have to return it tomorrow.</div>
       </div>
       <div class="ex anim" style="--i:4">
-        <div class="lead">not some（部分否定）</div>
-        <div class="en-ref">I don't like <b class="red">some</b> of the paintings.（有些不喜欢）</div>
-        <div class="ana">对比：don't like <b>any</b> = 全部否定（一幅都不喜欢）。</div>
+        <div class="lead">3. 回答带有责备意味的句子</div>
+        <div class="en-ref">— Do you remember what you promised me to do？<span class="cn">记得答应过我什么吗？</span></div>
+        <div class="en-ref">— <b class="red">I am sorry</b>, sir.</div>
+      </div>
+      <div class="ex anim" style="--i:5">
+        <div class="lead">4. 回答含主观判断的问题</div>
+        <div class="en-ref">— Is it worth reading？ — <b class="red">I think so.</b></div>
+        <div class="en-ref">— Are the trousers too short？ — <b class="red">I think they are all right.</b></div>
+      </div>
+      <div class="ex anim" style="--i:6">
+        <div class="lead">5. 对选择疑问句的回答</div>
+        <div class="en-ref">— Shall we see her in the morning or in the evening？</div>
+        <div class="en-ref">— <b class="red">I prefer</b> in the morning.</div>
       </div>
     </div>
-    <div class="reveal anim" style="--i:5">
-      <details><summary><span class="caret">▸</span> 翻译练习</summary><div class="ans"><div class="en">He is a clever boy, but not hard-working.</div><div class="mark">他是个聪明的孩子，但不勤奋。（not…and 部分否定）</div></div></details>
+    <div class="tip anim" style="--i:7">
+      <span>💡</span>
+      <div><b>口语/听力高频：</b>Would you mind… 的否定回答是<b class="gold">「不介意」</b>（Of course not.），肯定回答才表示「介意」。</div>
     </div>
   </section>
 
-  <!-- 6 一 · 形式否定意义肯定 -->
-  <section class="slide" data-title="形式否定意义肯定" data-sec="一 · 问答与否定">
+  <!-- 考点2 -->
+  <section class="slide" data-title="考点2 · not…because 否定转移" data-sec="一 · 问答与否定">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">一 · 问答与否定</span><h2>考点2 · 主句含有 not 的 because 从句</h2><span class="en">Transferred Negation</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">1. 否定转移（not 实则否定 because 从句）</div>
+        <div class="en-ref">The mountain is <b class="red">not</b> famous <b class="red">because</b> it is high.<span class="cn">这座山出名并不是因为它高。</span></div>
+        <div class="en-ref">The machine did <b class="red">not</b> stop <b class="red">because</b> there was no fuel.<span class="cn">机器停并不是因为没油。</span></div>
+        <div class="en-ref">We play basketball <b class="red">not because</b> the teacher asks us to <b class="red">but because</b> we want to.<span class="cn">不是老师要我们打，而是我们想打。</span></div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">2. 不发生否定转移（not 否定主句动词）</div>
+        <div class="en-ref">We <b class="red">did not</b> go camping <b class="red">because</b> it was raining hard.<span class="cn">因雨大，没去野营。</span></div>
+        <div class="en-ref">I <b class="red">did not</b> lend money to him <b class="red">because</b> I was hard up myself.<span class="cn">因自己拮据，没借钱给他。</span></div>
+      </div>
+    </div>
+    <div class="ex anim" style="--i:3">
+      <div class="lead">3. 两种情况皆可（The company didn't fire him because he was elderly.）</div>
+      <div class="en-ref">Because he was elderly, the company didn't fire him.<span class="cn">因他年纪大，公司没解雇他。</span></div>
+      <div class="en-ref">It was <b class="red">not because</b> he was elderly <b class="red">that</b> the company fired him.<span class="cn">公司解雇他，不是因为他年纪大。</span></div>
+      <div class="ana">避免歧义：否定主句时把 because 从句<b>提前</b>或<b>加逗号</b>；否定从句时用 <b class="red">not because</b> 或强调句 <b class="red">It is/was…that…</b>。</div>
+    </div>
+    <div class="note anim" style="--i:4">
+      <span class="ico">📌</span>
+      <div><b>只能用 because 的场合：</b>not…but…结构、强调句、原因从句作表语、有副词修饰状语从句时——都不能用 for/since/as 替代。如 That is <b class="gold">because</b> he is wise. / Father lost his temper <b class="gold">just because</b> the son failed twice.</div>
+    </div>
+    <div class="quiz anim" style="--i:5">
+      <div class="q-head">翻译练习 1 <span class="cnt">（考点2）</span></div>
+      <ol class="q">
+        <li>正是因为他努力工作，他才取得了成功。<span class="hint">It</span></li>
+        <li>我之所以选择他不是因为他毕业于一所著名大学，而是因为他交际能力强。<span class="hint">not because</span></li>
+        <li>仅仅是因为他未被大学录取，你就对他失去了信心？<span class="hint">simply because</span></li>
+        <li>—他们为什么相处得很好？<span class="hint">It</span><br>—那是因为他们彼此之间有了进一步的了解。</li>
+      </ol>
+      <details class="ans"><summary><span class="caret">▸</span>参考答案</summary><div class="ans-body"><ol>
+        <li><b>It was because he worked hard that</b> he succeeded.</li>
+        <li>I chose him <b>not because he graduated from a famous university but because</b> he has strong communication skills.</li>
+        <li>Did you lose confidence in him <b>simply because</b> he was not admitted to a university?</li>
+        <li>— Why do they get along so well? — <b>It is because</b> they have come to understand each other better.</li>
+      </ol></div></details>
+    </div>
+  </section>
+
+  <!-- 考点3 -->
+  <section class="slide" data-title="考点3 · 否定的虚实移位" data-sec="一 · 问答与否定">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">一 · 问答与否定</span><h2>考点3 · 否定的「虚实移位」</h2><span class="en">Shifted Negation</span></div>
+    <p class="anim" style="--i:1;font-size:14px;color:#5c564f">形式上否定前半部分、实际上否定后半部分。核心结构：<b class="key">not A and B</b>、<b class="key">not + 不定式</b>、<b class="key">not some</b>。</p>
+    <div class="grid g2" style="margin-top:10px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">1. not A and B（否定 and 后的 B）</div>
+        <div class="en-ref">Don't <b class="red">drink and drive</b>.<span class="cn">酒后不开车，开车不喝酒。</span></div>
+        <div class="en-ref">The motel is <b class="red">not big and cozy</b>.<span class="cn">虽大，但不舒服。</span></div>
+        <div class="en-ref">He is <b class="red">not rich and kind</b>.<span class="cn">他为富不仁。</span></div>
+        <div class="en-ref">He does <b class="red">not speak Chinese and German</b>.<span class="cn">说汉语，不说德语。</span></div>
+        <div class="en-ref">We cannot <b class="red">put on airs and make</b> people like us.<span class="cn">摆架子，别人就不喜欢我们。</span></div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">2. happen / prove / pretend + 不定式被否定时 not 前置</div>
+        <div class="en-ref">Our monitor <b class="red">didn't happen to be</b> there.<span class="cn">碰巧班长不在。</span></div>
+        <div class="en-ref">My friend <b class="red">did not pretend to see</b> me.<span class="cn">假装没看见我。</span></div>
+        <div class="en-ref">This <b class="red">did not prove to be</b> a problem.<span class="cn">证明这不是问题。</span></div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">3. not some（部分否定）</div>
+        <div class="en-ref">I don't like <b class="red">some</b> of the paintings.<span class="cn">有些画不喜欢。</span></div>
+        <div class="en-ref">I won't invite <b class="red">some</b> of them.<span class="cn">有些人就不邀请了。</span></div>
+        <div class="ana">比较：I don't like <b class="red">any</b> of the paintings.（一幅都不喜欢）</div>
+      </div>
+      <div class="ex anim" style="--i:5">
+        <div class="lead">全部否定 vs 部分否定</div>
+        <div class="en-ref">I don't know <b class="red">anything</b> about him.（全部否定）</div>
+        <div class="en-ref">I don't know <b class="red">everything</b> about him.（部分否定）</div>
+        <div class="en-ref"><b class="red">All</b> the answers are not right.（部分否定）</div>
+        <div class="en-ref"><b class="red">None</b> of the answers is right.（全部否定）</div>
+        <div class="ana">前后两部分都用否定时，可用 <b class="red">neither…nor…</b> 或用 or 连接：He is neither active nor creative. / There is no air or water on the moon.</div>
+      </div>
+    </div>
+    <div class="quiz anim" style="--i:6">
+      <div class="q-head">翻译练习 2 <span class="cnt">（考点3）</span></div>
+      <ol class="q">
+        <li>他是个聪明的孩子，但不勤奋。<span class="hint">not…and</span></li>
+        <li>她说得正确但不够清楚，所以她还得努力提高一下技巧。<span class="hint">not…and</span></li>
+        <li>我看着陈列柜，有些物品我不喜欢。<span class="hint">not some</span></li>
+        <li>由于时间不够，这些书我不可能全看。<span class="hint">not some</span></li>
+        <li>这匹马不能既驮你的行李又驮他的行李，它毕竟是匹小马。<span class="hint">not…and</span></li>
+        <li>当听到声响的时候，这个小男孩假装没在打游戏。<span class="hint">pretend</span></li>
+        <li>我的班长假装不知道该项目，把机会留给了其他人。<span class="hint">pretend</span></li>
+        <li>他碰巧当时不在邮局，否则的话，他就会帮我捎带几张纪念邮票了。<span class="hint">happen</span></li>
+      </ol>
+      <details class="ans"><summary><span class="caret">▸</span>参考答案</summary><div class="ans-body"><ol>
+        <li>He is a clever boy, but <b>not diligent</b>.</li>
+        <li>What she said was right <b>but not clear enough</b>, so she has to improve her skills.</li>
+        <li>Looking at the display case, I don't like <b>some of</b> the items.</li>
+        <li>As time is short, I can't read <b>all</b> of these books / I can't read <b>some of</b> these books.</li>
+        <li>The horse can't carry <b>both your luggage and his luggage</b>; after all, it is a pony.</li>
+        <li>Hearing the sound, the boy <b>pretended not to be playing</b> games.</li>
+        <li>My monitor <b>pretended not to know</b> about the project, leaving the chance to others.</li>
+        <li>He <b>happened not to be</b> at the post office then; otherwise he would have brought me some commemorative stamps.</li>
+      </ol></div></details>
+    </div>
+  </section>
+
+  <!-- 考点4 -->
+  <section class="slide" data-title="考点4 · 形式否定、意义肯定" data-sec="一 · 问答与否定">
     <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">一 · 问答与否定</span><h2>考点4 · 形式否定、意义肯定</h2><span class="en">Negative Form, Positive Meaning</span></div>
     <div class="grid g2">
       <div class="ex anim" style="--i:1">
-        <div class="lead">① cannot…too…（再…也不为过）</div>
+        <div class="lead">1. cannot…too / over / enough（再…也不为过）</div>
         <div class="en-ref">I <b class="red">cannot thank you too much</b>.</div>
-        <div class="ana">= 无论怎么感谢都不为过。可用 can hardly/never + too/over/enough 替换。</div>
+        <div class="en-ref">A person <b class="red">can't be too cautious</b>.</div>
+        <div class="en-ref">A kid <b class="red">can't see his mother soon enough</b>.</div>
+        <div class="en-ref">A teacher <b class="red">can never praise</b> a student's progress <b class="red">too much</b>.</div>
       </div>
       <div class="ex anim" style="--i:2">
-        <div class="lead">② 否定词 + 比较级（= 最高级）</div>
-        <div class="en-ref">I <b class="red">can't agree more</b>.（非常同意）</div>
+        <div class="lead">2. 否定词 + 比较级（= 最高级）</div>
+        <div class="en-ref">I <b class="red">can't agree more</b>.<span class="cn">非常同意。</span></div>
+        <div class="en-ref">I <b class="red">couldn't feel better</b>.<span class="cn">好极了。</span></div>
         <div class="en-ref">There is <b class="red">nothing Tom likes more than</b> beer.</div>
+        <div class="en-ref"><b class="red">Nobody</b> is <b class="red">more</b> brutal than a dictator.</div>
+        <div class="en-ref">You <b class="red">can't find a better</b> motel than mine here.</div>
       </div>
       <div class="ex anim" style="--i:3">
-        <div class="lead">③ cannot but / cannot help doing（不得不/禁不住）</div>
+        <div class="lead">3. 不得不 / 禁不住</div>
         <div class="en-ref">We <b class="red">cannot but learn</b> to improve ourselves.</div>
+        <div class="en-ref">I <b class="red">can't help but feel</b> saddened for his failure.</div>
         <div class="en-ref">Everybody <b class="red">can't help admiring</b> his wisdom.</div>
       </div>
       <div class="ex anim" style="--i:4">
-        <div class="lead">④ no…but（没有…不）</div>
-        <div class="en-ref">There is <b class="red">no rule but</b> has exceptions.</div>
+        <div class="lead">4. but 引导定语从句（没有…不）</div>
         <div class="en-ref">There is <b class="red">nobody but knows</b> it.</div>
+        <div class="en-ref">There is <b class="red">no rule but has</b> exceptions.</div>
+        <div class="en-ref">Nobody sees the film <b class="red">but will be</b> moved.</div>
+        <div class="en-ref">No materials exist <b class="red">but deform</b> under force.</div>
+      </div>
+      <div class="ex anim" style="--i:5">
+        <div class="lead">5. more often than not（常常）</div>
+        <div class="en-ref">He wins <b class="red">more often than not</b> in competitions.</div>
+        <div class="lead" style="margin-top:8px">6. 否定感叹句（= 肯定感叹）</div>
+        <div class="en-ref"><b class="red">Isn't he</b> brave and generous！</div>
+        <div class="en-ref"><b class="red">What bad deeds would he not do</b>！</div>
+      </div>
+      <div class="ex anim" style="--i:6">
+        <div class="lead">7. not a little / not a bit 等</div>
+        <div class="en-ref">not a <b class="red">little</b> = 很 · not a <b class="red">bit</b> = 一点也不</div>
+        <div class="wl wl2" style="margin-top:6px">
+          <span><b>no little</b> = much 很多</span><span><b>no few</b> = many 许多</span>
+          <span><b>no small</b> = great 很大</span><span><b>quite a little</b> = much 相当多</span>
+          <span><b>quite a few</b> = many 相当多</span>
+        </div>
+        <div class="en-ref">The young artist is <b class="red">not a little</b> experienced.</div>
+        <div class="en-ref">My brother spent <b class="red">no small</b> amount on sneakers.</div>
+        <div class="en-ref">Not once or twice have I told him to give up smoking.</div>
       </div>
     </div>
-    <div class="write anim" style="--i:5">
-      <span>✍️</span>
-      <div><b>写作加分：</b><b class="gold">I can't agree more.</b>（我非常赞同）、<b class="gold">A person can't be too careful.</b>（越谨慎越好）、<b class="gold">You can never praise a child too much.</b>（表扬越多越好）—— 议论文里表达强烈态度的高分句。</div>
+    <div class="quiz anim" style="--i:7">
+      <div class="q-head">翻译练习 3 <span class="cnt">（考点4）</span></div>
+      <ol class="q">
+        <li>朋友再多都不嫌多，因为出门靠朋友嘛。<span class="hint">can never</span></li>
+        <li>牛顿对现代科学的贡献无论怎么评价都不为过。<span class="hint">can scarcely</span></li>
+        <li>一个人的世界观必然会在他的言行中表现出来。<span class="hint">cannot but</span></li>
+        <li>没有人一生不犯错误的。<span class="hint">no…but</span></li>
+        <li>那条大街经常拥挤，我还是避开吧。<span class="hint">more often than not</span></li>
+        <li>我从没见过如此美丽的景色！<span class="hint">than</span></li>
+        <li>他需要的是保护、鼓励和支持。<span class="hint">than</span></li>
+        <li>今天真是个可以出去走走的好天气！<span class="hint">Isn't</span></li>
+        <li>他有很多书，其中有些都没有读过。<span class="hint">not a few</span></li>
+        <li>让我非常好奇的是，我发现这个抽屉一直锁着。<span class="hint">no small</span></li>
+      </ol>
+      <details class="ans"><summary><span class="caret">▸</span>参考答案</summary><div class="ans-body"><ol>
+        <li>One <b>can never have too many</b> friends, because friends are a help when you are away from home.</li>
+        <li>Newton's contribution to modern science <b>can scarcely be overestimated</b>.</li>
+        <li>One's outlook on life <b>cannot but</b> show itself in his words and deeds.</li>
+        <li><b>No man but</b> makes mistakes in his life.</li>
+        <li>That street is crowded <b>more often than not</b>, so I'd better avoid it.</li>
+        <li>Never have I seen <b>a more beautiful view than</b> this.</li>
+        <li>He needs <b>nothing more than</b> protection, encouragement and support.</li>
+        <li><b>Isn't it</b> a lovely day to go out for a walk!</li>
+        <li>He has <b>not a few</b> books, some of which he has never read.</li>
+        <li>To my <b>no small</b> curiosity, I found the drawer kept locked all along.</li>
+      </ol></div></details>
     </div>
   </section>
 
-  <!-- 7 一 · 形式肯定意义否定 -->
-  <section class="slide" data-title="形式肯定意义否定" data-sec="一 · 问答与否定">
-    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">一 · 问答与否定</span><h2>考点5 · 形式肯定、意义否定</h2><span class="en">Positive Form, Negative Meaning</span></div>
-    <div class="grid g3">
+  <!-- 考点5 上 -->
+  <section class="slide" data-title="考点5(上) · 形式肯定、意义否定 1–6" data-sec="一 · 问答与否定">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">一 · 问答与否定</span><h2>考点5(上) · 形式肯定、意义否定（1–6）</h2><span class="en">Positive Form, Negative Meaning</span></div>
+    <div class="grid g2">
       <div class="ex anim" style="--i:1">
-        <div class="lead">more than…can（不可能/难以）</div>
-        <div class="en-ref">I love you <b class="red">more than I can say</b>.</div>
+        <div class="lead">1. more than…can（不可能 / 难以）</div>
+        <div class="en-ref">I love you <b class="red">more than I can say</b>.<span class="cn">爱你在心口难开。</span></div>
+        <div class="en-ref">This is <b class="red">more than I can tell</b>.<span class="cn">这件事我不能讲。</span></div>
         <div class="en-ref">It was <b class="red">more than his mother could bear</b>.</div>
       </div>
       <div class="ex anim" style="--i:2">
-        <div class="lead">anything but（根本不是）</div>
-        <div class="en-ref">It was <b class="red">anything but safe</b>.（很不安全）</div>
-        <div class="en-ref">He is <b class="red">anything but a scholar</b>.</div>
+        <div class="lead">2. more A than B（与其说 B 不如说 A）</div>
+        <div class="en-ref">Zhang Fei-like heroes are <b class="red">more brave than wise</b>.<span class="cn">有勇无谋。</span></div>
+        <div class="en-ref">I left because I was <b class="red">more annoyed than frightened</b>.</div>
+        <div class="en-ref">It is <b class="red">more a dictionary than</b> a grammar book.</div>
       </div>
       <div class="ex anim" style="--i:3">
-        <div class="lead">比较级 + than + to do（不至于）</div>
+        <div class="lead">3. 比较级 + than + to do（不至于 / 懂得不该）</div>
         <div class="en-ref">The boy is <b class="red">older than to ask</b> a stranger for candies.</div>
+        <div class="en-ref">Each of us is <b class="red">wiser than to believe</b> his words.</div>
         <div class="en-ref">I <b class="red">know better than to go</b> out alone.</div>
       </div>
-    </div>
-    <div class="write anim" style="--i:4">
-      <span>✍️</span>
-      <div><b>写作加分：</b><b class="gold">…more than I can express / say</b>（难以言表）、<b class="gold">be anything but + adj.</b>（绝非……）是表达强烈情感的正式句式，读后续写、议论文结尾都适用。</div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">4. anything but（根本不是）</div>
+        <div class="en-ref">The wooden bridge was <b class="red">anything but safe</b>.</div>
+        <div class="en-ref">He is <b class="red">anything but a scholar</b>.</div>
+      </div>
+      <div class="ex anim" style="--i:5">
+        <div class="lead">5. might / may as well（最好 / 不如）</div>
+        <div class="en-ref">You <b class="red">might as well buy</b> the tickets right now.<span class="cn">最好现在买（建议）。</span></div>
+        <div class="en-ref">We <b class="red">might as well stay</b> indoors.<span class="cn">不如待在室内（否定）。</span></div>
+        <div class="en-ref">You <b class="red">may as well throw</b> the money into the sea as lend it to him.</div>
+      </div>
+      <div class="ex anim" style="--i:6">
+        <div class="lead">6. It is…since…（瞬间动词→肯定 / 延续动词→否定）</div>
+        <div class="en-ref">It is five years <b class="red">since he started</b> to work here.<span class="cn">工作已五年（瞬间→肯定）。</span></div>
+        <div class="en-ref">It is five years <b class="red">since he worked</b> here.<span class="cn">五年不在此工作（延续→否定）。</span></div>
+        <div class="en-ref">It has been two years <b class="red">since he fell ill</b>.<span class="cn">病了两年。</span></div>
+        <div class="en-ref">It has been two years <b class="red">since he was ill</b>.<span class="cn">病好两年了。</span></div>
+      </div>
     </div>
   </section>
 
-  <!-- 8 二 · the more -->
-  <section class="slide" data-title="the more...the more" data-sec="二 · 比较结构">
+  <!-- 考点5 下 -->
+  <section class="slide" data-title="考点5(下) · 带有否定意义的词 7–12" data-sec="一 · 问答与否定">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">一 · 问答与否定</span><h2>考点5(下) · 带有否定意义的词（7–12）</h2><span class="en">Negative Words</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">7. 否定连词 rather than / sooner than / unless</div>
+        <div class="en-ref">Unless you tell me the truth, I won't contact you.<span class="cn">除非…否则…</span></div>
+        <div class="en-ref">Sooner than stay home, he preferred to travel alone.</div>
+        <div class="en-ref">…in favor of the banks <b class="red">rather than</b> the customer.</div>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">8. 否定副词短语</div>
+        <div class="wl wl2" style="margin-top:4px">
+          <span><b>by no means</b> 绝不</span><span><b>under no circumstances</b> 绝不</span>
+          <span><b>in no way</b> 绝不</span><span><b>on no account</b> 绝不</span>
+          <span><b>in no case</b> 绝不</span><span><b>not in the least</b> 一点也不</span>
+          <span><b>not at all</b> 一点也不</span><span><b>no longer</b> 不再</span>
+          <span><b>let alone</b> 更不用说</span><span><b>in vain</b> 徒劳</span>
+        </div>
+        <div class="en-ref">Under no circumstances can we give up half way.</div>
+        <div class="en-ref">The baby can't even crawl yet, <b class="red">let alone</b> walk.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">9. 否定介词短语</div>
+        <div class="wl wl2" style="margin-top:4px">
+          <span><b>at a loss</b> 不知所措</span><span><b>at fault</b> 出错</span>
+          <span><b>at one's wit's end</b> 不知所措</span><span><b>in the dark about</b> 对…不知情</span>
+          <span><b>aside from</b> 除…以外</span><span><b>beneath one's notice</b> 不值得理睬</span>
+          <span><b>at the end of one's rope</b> 山穷水尽</span><span><b>out of</b> 不在…状态</span>
+          <span><b>out of place</b> 不相称</span><span><b>out of the question</b> 不可能</span>
+        </div>
+        <div class="en-ref">My memory is <b class="red">at fault</b>.<span class="cn">我想不起来了。</span></div>
+        <div class="en-ref">Antique clocks can seem <b class="red">out of place</b> in modern homes.</div>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">10. 否定动词 / 动词短语</div>
+        <div class="wl wl2" style="margin-top:4px">
+          <span><b>cease</b> 终止 · <b>decline</b> 拒绝 · <b>doubt</b> 不相信</span>
+          <span><b>escape</b> 逃过注意 · <b>exclude</b> 不包括 · <b>fail</b> 没做成</span>
+          <span><b>forbid</b> 不许 · <b>neglect</b> 忽视 · <b>overlook</b> 忽略</span>
+          <span><b>resist</b> 拒受影响 · <b>reject</b> 不同意 · <b>spare</b> 用不着</span>
+          <span><b>wonder</b> 不知道 · <b>miss</b> 错过 · <b>differ from</b> 与…不同</span>
+          <span><b>keep…dark</b> 不说出去 · <b>keep up with</b> 不落后于</span>
+          <span><b>live up to</b> 不辜负 · <b>save…from</b> 使…不受</span>
+          <span><b>to say nothing of</b> 更不用说 · <b>turn a deaf ear to</b> 充耳不闻</span>
+          <span><b>fall short of</b> 未达到</span>
+        </div>
+        <div class="en-ref">All the bombs <b class="red">missed</b> the target.<span class="cn">都没击中目标。</span></div>
+        <div class="en-ref">The experiment <b class="red">fell short of</b> our expectations.</div>
+      </div>
+      <div class="ex anim" style="--i:5">
+        <div class="lead">11. 否定形容词短语</div>
+        <div class="wl wl2" style="margin-top:4px">
+          <span><b>absent from</b> 未出席</span><span><b>alien to</b> 不相容</span>
+          <span><b>alike to</b> 没有区别</span><span><b>blind to</b> 熟视无睹</span>
+          <span><b>clear of</b> 无障碍</span><span><b>dead to</b> 无反应</span>
+          <span><b>different from</b> 不同于</span><span><b>foreign to</b> 与…无关</span>
+          <span><b>far from</b> 一点也不</span><span><b>free from</b> 不受影响</span>
+          <span><b>free of</b> 没有</span><span><b>ignorant of</b> 不知道</span>
+          <span><b>impatient of</b> 不耐烦</span><span><b>independent of</b> 不受支配</span>
+          <span><b>safe from</b> 免于</span><span><b>reluctant to do</b> 不情愿做</span>
+          <span><b>short of</b> 缺少</span><span><b>far and few between</b> 稀少</span>
+        </div>
+        <div class="en-ref">The salary was <b class="red">far from</b> satisfactory.</div>
+      </div>
+      <div class="ex anim" style="--i:6">
+        <div class="lead">12. 否定名词</div>
+        <div class="wl wl2" style="margin-top:4px">
+          <span><b>absence</b> 缺少 · <b>denial</b> 否认 · <b>exclusion</b> 排除</span>
+          <span><b>loss</b> 失去 · <b>ignorance</b> 无知 · <b>lack</b> 缺少</span>
+          <span><b>failure</b> 失败 · <b>refusal</b> 拒绝 · <b>reluctance</b> 不情愿</span>
+          <span><b>shortage</b> 缺少 · <b>want</b> 缺少 · <b>zero</b> 没有</span>
+        </div>
+        <div class="en-ref">The old man showed <b class="red">zero</b> interest in what the expert said.</div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:7">
+      <span>💡</span>
+      <div><b>翻译提示：</b>遇到这些词，即使句子没有 not，也要译出<b class="gold">否定含义</b>。如 far from satisfactory（远不能令人满意）、free of jealousy（没有嫉妒心）。</div>
+    </div>
+  </section>
+
+  <!-- 考点5 练习 -->
+  <section class="slide" data-title="考点5 · 翻译练习4" data-sec="一 · 问答与否定">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">一 · 问答与否定</span><h2>考点5 · 翻译练习 4</h2><span class="en">Practice 4</span></div>
+    <div class="quiz anim" style="--i:1">
+      <div class="q-head">翻译练习 4 <span class="cnt">（考点5）</span></div>
+      <ol class="q">
+        <li>这个瘦弱的男孩承担了力所不及的事情。<span class="hint">more than</span></li>
+        <li>世间万物都应该被认为处于运动中，而不是处于静止状态。<span class="hint">more than</span></li>
+        <li>你应该知道运动之后不能马上就喝冰水。<span class="hint">know better than to</span></li>
+        <li>我绝对不干那种事。<span class="hint">anything but</span></li>
+        <li>你的解释一点儿也不清楚，换种方法吧。<span class="hint">anything but</span></li>
+        <li>你与其幻想如何成功，还不如现在就开始行动。<span class="hint">might as well</span></li>
+        <li>她本来可以待在自己的房间里而不去侵犯他的隐私。<span class="hint">rather than</span></li>
+        <li>青春一去不复返。<span class="hint">no more</span></li>
+        <li>我到最后也没盼到他来。<span class="hint">in vain</span></li>
+        <li>如何解决这件事，我真的一点儿没辙。<span class="hint">in the dark</span></li>
+        <li>我们决不辜负人们对我们的期望。<span class="hint">live up to</span></li>
+        <li>那个人说了那么多谎，不管他说什么都没人听。<span class="hint">turn a deaf ear to</span></li>
+        <li>Jane 天生没有嫉妒心。<span class="hint">free of</span></li>
+        <li>关于丈夫的活动，她一直被蒙在鼓里。<span class="hint">in ignorance</span></li>
+        <li>英格兰国家队没有要他，他很失望。<span class="hint">exclusion</span></li>
+        <li>我离开农村已经20年了。<span class="hint">since</span></li>
+      </ol>
+      <details class="ans"><summary><span class="caret">▸</span>参考答案</summary><div class="ans-body"><ol>
+        <li>The thin weak boy took on <b>more than he could</b> do.</li>
+        <li>Everything should be regarded as being in motion <b>more than</b> at rest.</li>
+        <li>You should <b>know better than to</b> drink ice water right after exercise.</li>
+        <li>I'll do <b>anything but</b> that.</li>
+        <li>Your explanation is <b>anything but</b> clear; try another way.</li>
+        <li>You <b>might as well</b> start acting now rather than daydream about success.</li>
+        <li>She could have stayed in her own room <b>rather than</b> invade his privacy.</li>
+        <li>Youth is <b>no more</b>.</li>
+        <li>I waited <b>in vain</b> for his arrival till the very end.</li>
+        <li>I am completely <b>in the dark</b> about how to solve this matter.</li>
+        <li>We will by no means fail to <b>live up to</b> people's expectations.</li>
+        <li>He has told so many lies that people <b>turn a deaf ear to</b> whatever he says.</li>
+        <li>Jane is born <b>free of</b> jealousy.</li>
+        <li>She has been kept <b>in ignorance of</b> her husband's activities.</li>
+        <li>He was disappointed at his <b>exclusion</b> from the England national team.</li>
+        <li>It is 20 years <b>since</b> I left the countryside.</li>
+      </ol></div></details>
+    </div>
+  </section>
+
+  <!-- 考点6 -->
+  <section class="slide" data-title="考点6 · the more…the more 的变化" data-sec="二 · 比较结构">
     <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#9aa98d">二 · 比较结构</span><h2>考点6 · 「the more…, the more…」的变化</h2><span class="en">The more…the more</span></div>
     <div class="grid g2">
       <div class="ex anim" style="--i:1">
-        <div class="lead">基本结构 + 条件后置</div>
+        <div class="lead">1. 条件后置（主句在前，the 可省）</div>
         <div class="en-ref">The more you eat, <b class="red">the fatter</b> you'll get.</div>
-        <div class="en-ref">You'll get (the) fatter, <b class="red">the more</b> you eat.</div>
-        <div class="ana">主句在前时，比较级前 the 可省略。</div>
+        <div class="en-ref">You'll get <b class="red">(the) fatter</b>, the more you eat.</div>
+        <div class="en-ref">The more learned a man is, the more modest he usually is.<br>→ The man is usually <b class="red">(the) more modest</b>, the more learned he is.</div>
+        <div class="en-ref">The result is better, the harder you practise.</div>
       </div>
       <div class="ex anim" style="--i:2">
-        <div class="lead">名词前必须带 the</div>
+        <div class="lead">2. 名词前必须有 the</div>
         <div class="en-ref">The higher the mountain, <b class="red">the greener the pines</b>.</div>
-        <div class="ana">不能说 The higher mountain, the greener pines。</div>
+        <div class="ana">不能说 The higher mountain, the greener pines.</div>
+        <div class="en-ref">The bigger the apples, the bigger the sales.</div>
+        <div class="en-ref">The higher the price, the better the quality.</div>
+        <div class="en-ref">The nearer the dawn, the darker the night.</div>
+        <div class="en-ref">The higher the mountain, the purer the air.</div>
       </div>
     </div>
-    <div class="write anim" style="--i:3">
-      <span>✍️</span>
-      <div><b>写作加分：</b><b class="gold">The more…, the more…</b> 是作文里最省力又拿分的结构——「The more we read, the wiser we become.」「The harder you work, the better you'll get.」开头、论证、结尾都能用。</div>
+    <div class="formula anim" style="--i:3">
+      <span class="fb">同义</span><b>By how much</b> the higher you climb, <b>by so much</b> the more scenery you will see.（登得越高，看到的风景越多）<br>
+      <b>To what extent</b> you study harder, <b>to that extent</b> you get more.（学习越努力，获得越多）
+    </div>
+    <div class="quiz anim" style="--i:4">
+      <div class="q-head">翻译练习 5 <span class="cnt">（考点6）</span></div>
+      <ol class="q">
+        <li>单词记得越多，你就会发现英语越容易学。</li>
+        <li>树越多，环境越好。</li>
+        <li>在岛上逗留的时间越长，你越舍不得回家。</li>
+        <li>越接近黎明，夜晚就越黑暗。</li>
+        <li>越多越好。</li>
+        <li>走得有多快，你就会变得多敏捷。</li>
+        <li>你在多大程度上积极主动，就有多大可能获得这个职位。</li>
+      </ol>
+      <details class="ans"><summary><span class="caret">▸</span>参考答案</summary><div class="ans-body"><ol>
+        <li><b>The more words you memorize, the easier</b> you will find English to learn.</li>
+        <li><b>The more trees there are, the better</b> the environment is.</li>
+        <li><b>The longer you stay on the island, the less willing</b> you are to go home.</li>
+        <li><b>The nearer the dawn, the darker</b> the night.</li>
+        <li><b>The more, the better.</b></li>
+        <li><b>The faster you walk, the more agile</b> you will become.</li>
+        <li><b>To what extent</b> you are proactive, <b>to that extent</b> you are likely to get the position.</li>
+      </ol></div></details>
     </div>
   </section>
 
-  <!-- 9 三 · 被动语态 -->
-  <section class="slide" data-title="双重被动" data-sec="三 · 被动语态">
-    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c2a18b">三 · 被动语态</span><h2>考点7-8 · 双重被动 & 不能变被动的结构</h2><span class="en">Double Passive</span></div>
-    <div class="grid g2">
-      <div class="ex anim" style="--i:1">
-        <div class="lead">考点7 · 双重被动（动词+sb.+to do sth.）</div>
-        <div class="en-ref">The project <b class="red">was asked to be redesigned</b> at once.</div>
-        <div class="en-ref">Books of this kind <b class="red">are not intended to be read</b> by children.</div>
-        <div class="ana">「请求/禁止某人做某事」转被动有三种，其中双重被动最常见于正式书面语。</div>
+  <!-- 考点7 -->
+  <section class="slide" data-title="考点7 · 被动语态的转移与双重被动" data-sec="三 · 被动语态">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c2a18b">三 · 被动语态</span><h2>考点7 · 被动语态的转移与双重被动</h2><span class="en">Double Passive</span></div>
+    <div class="ex anim" style="--i:1">
+      <div class="lead">They asked us to redesign the project at once. → 三种被动</div>
+      <div class="grid g3" style="margin-top:6px">
+        <div class="formula" style="margin-top:0">(1) <b>We were asked</b> to redesign the project.</div>
+        <div class="formula" style="margin-top:0">(2) They asked <b>the project to be redesigned</b>.</div>
+        <div class="formula" style="margin-top:0">(3) The project <b class="red">was asked to be redesigned</b>.<span class="cn" style="font-weight:400;font-size:12px">（双重被动）</span></div>
       </div>
+      <div class="ana">「动词 + sb. + to do sth.」（请求/禁止某人做）转被动：① 把 sb. 变主语；② 把 sth. 变主语；③ 把 sth. 变宾语后接不定式被动式——即<b>双重被动</b>。</div>
+    </div>
+    <div class="grid g2" style="margin-top:10px">
       <div class="ex anim" style="--i:2">
-        <div class="lead">考点8 · 不能变被动的结构</div>
-        <div class="en-ref">反身代词/相互代词：She <b class="red">dresses herself</b>.</div>
-        <div class="en-ref">同源宾语：Tom <b class="red">smiled a forced smile</b>.</div>
-        <div class="ana">将来进行时/完成进行时、had better/would rather、固定词组（make up one's mind、take office 等）也无被动。</div>
+        <div class="lead">更多双重被动对照</div>
+        <div class="en-ref">The headmaster <b class="red">persuaded the program to be supported</b> by the parents.<br>→ The program <b class="red">was persuaded to be supported</b>.</div>
+        <div class="en-ref">The desk is not meant <b class="red">to be stood on</b> by the boy.</div>
+        <div class="en-ref">Books of this kind are not intended <b class="red">to be read</b> by children.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">第二个被动式可直接用过去分词</div>
+        <div class="en-ref">All the shops are <b class="red">ordered closed</b>.</div>
+        <div class="en-ref">They were <b class="red">found surrounded</b> by wild animals.</div>
+        <div class="en-ref">The cave was <b class="red">reported found</b> by farmers last week.</div>
       </div>
     </div>
-    <div class="tip anim" style="--i:3">
-      <span>💡</span>
-      <div><b>识别点：</b>看到 <b class="gold">be + 过去分词 + to be + 过去分词</b>（was asked to be redesigned）就是双重被动，翻译成「被要求/被希望去被……」，多用于新闻报道和正式文体。</div>
+    <div class="grid g3" style="margin-top:10px">
+      <div class="ex anim" style="--i:4"><div class="lead">① 主语+谓语+不定式+宾语</div><div class="en-ref">A computer <b class="red">was offered to be bought</b> for me.</div></div>
+      <div class="ex anim" style="--i:5"><div class="lead">② 主语+谓语+that 从句</div><div class="en-ref">The event <b class="red">is thought to have been experienced</b> by my family.</div></div>
+      <div class="ex anim" style="--i:6"><div class="lead">③ 主语+谓语+宾语+不定式被动式</div><div class="en-ref">The tree <b class="red">is wanted to be moved</b> to Mr. Lee.</div></div>
+    </div>
+    <div class="quiz anim" style="--i:7">
+      <div class="q-head">翻译练习 6 <span class="cnt">（考点7）</span></div>
+      <ol class="q">
+        <li>大家都希望简能嫁给 Tom。<span class="hint">expect</span></li>
+        <li>他们原谅了 Kevin 的迟到。<span class="hint">excuse</span></li>
+        <li>老师们原谅了她的小错误。<span class="hint">pardon</span></li>
+        <li>警察因为他超速而罚了他50美元。<span class="hint">fine</span></li>
+        <li>学校准许学生们放一天假。<span class="hint">grant</span></li>
+        <li>我们希望能为这些贫穷的孩子建一所新学校。<span class="hint">expect</span></li>
+        <li>我相信政府已经为我们设计好了一个现代化的城市。<span class="hint">believe</span></li>
+        <li>这些玫瑰花需要每天浇两次水。<span class="hint">require</span></li>
+      </ol>
+      <details class="ans"><summary><span class="caret">▸</span>参考答案</summary><div class="ans-body"><ol>
+        <li>Jane <b>is expected to marry</b> Tom.</li>
+        <li>Kevin <b>was excused for</b> being late.</li>
+        <li>She <b>was pardoned for</b> her small mistake.</li>
+        <li>He <b>was fined</b> 50 dollars <b>for speeding</b>.</li>
+        <li>The students <b>were granted</b> a day off.</li>
+        <li>A new school <b>is expected to be built</b> for these poor children.</li>
+        <li>A modern city <b>is believed to have been designed</b> for us by the government.</li>
+        <li>These roses <b>require to be watered / require watering</b> twice a day.</li>
+      </ol></div></details>
     </div>
   </section>
 
-  <!-- 10 四 · 定语从句(1) -->
-  <section class="slide" data-title="定语从句状语化" data-sec="四 · 定语从句">
-    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a49bb0">四 · 定语从句</span><h2>考点9-10 · 状语含义 & 关系代词省略</h2><span class="en">Relative Clauses</span></div>
-    <div class="grid g2">
-      <div class="ex anim" style="--i:1">
-        <div class="lead">考点9 · 定语从句的状语含义</div>
-        <div class="en-ref">John, <b class="red">who was ready to take every opportunity</b>, found a well-paid job.（因果）</div>
-        <div class="en-ref">A rescue measure was taken, <b class="red">which brought financial benefits</b>.（结果）</div>
-        <div class="ana">翻译时按时间/条件/因果/目的/让步/结果补连词。</div>
+  <!-- 考点8 -->
+  <section class="slide" data-title="考点8 · 不能变被动的常见结构" data-sec="三 · 被动语态">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c2a18b">三 · 被动语态</span><h2>考点8 · 不能变被动的常见结构</h2><span class="en">No Passive</span></div>
+    <div class="grid g3">
+      <div class="ex anim" style="--i:1"><div class="lead">1. 将来进行时 / 完成进行时</div><div class="en-ref">He <b class="red">will be watching</b> TV at home this time tomorrow.</div><div class="en-ref">The children <b class="red">have been painting</b> the house since 2 o'clock.</div></div>
+      <div class="ex anim" style="--i:2"><div class="lead">2. had better / would rather / dare</div><div class="en-ref">I <b class="red">would rather go</b> to the cinema to relax myself.</div><div class="en-ref">He <b class="red">dare not say</b> a word to his father.</div></div>
+      <div class="ex anim" style="--i:3"><div class="lead">3. 反身 / 相互代词作宾语</div><div class="en-ref">The girl is old enough to <b class="red">dress herself</b>.</div><div class="en-ref">We must <b class="red">learn from each other</b> and <b class="red">help each other</b>.</div></div>
+      <div class="ex anim" style="--i:4"><div class="lead">4. 宾语是身体的一部分</div><div class="en-ref">I could not <b class="red">believe my eyes</b>.</div><div class="en-ref">He <b class="red">rubbed his hands</b> to warm them up.</div><div class="en-ref">She <b class="red">cried her eyes out</b> at the sad news.</div></div>
+      <div class="ex anim" style="--i:5"><div class="lead">5. 同源宾语</div><div class="en-ref">Tom <b class="red">smiled a forced smile</b>.</div><div class="en-ref">The boy has been <b class="red">dreaming horrible dreams</b>.</div></div>
+      <div class="ex anim" style="--i:6">
+        <div class="lead">6. 固定词组（无被动）</div>
+        <div class="wl wl2" style="margin-top:4px">
+          <span><b>do one's best</b> 尽最大努力</span><span><b>make a face</b> 做鬼脸</span>
+          <span><b>make bed</b> 整理床铺</span><span><b>keep silent</b> 保持沉默</span>
+          <span><b>make up one's mind</b> 下定决心</span><span><b>take one's leave</b> 告辞</span>
+          <span><b>change trains</b> 换乘火车</span><span><b>change color</b> 脸色大变</span>
+          <span><b>take office</b> 就职</span><span><b>keep watch</b> 放哨</span>
+          <span><b>lose patience</b> 失去耐心</span><span><b>set foot on</b> 踏上</span>
+          <span><b>set eyes on</b> 看到</span><span><b>give ear to</b> 倾听</span>
+          <span><b>join hands with</b> 携手合作</span>
+        </div>
       </div>
+    </div>
+    <div class="quiz anim" style="--i:7">
+      <div class="q-head">翻译练习 7 <span class="cnt">（考点8）</span></div>
+      <ol class="q">
+        <li>他宁愿放弃这个机会也不愿违背自己的原则。<span class="hint">would rather</span></li>
+        <li>大家情绪低落时，要努力相互打气。<span class="hint">each other</span></li>
+        <li>给你以及你的家人美好的祝愿——生活快乐，万事如意！<span class="hint">give</span></li>
+        <li>我们都无法忍受 Tom，因为他失言了。<span class="hint">lose patience</span></li>
+        <li>我们必须倾听人民群众的批评。<span class="hint">give ear to</span></li>
+      </ol>
+      <details class="ans"><summary><span class="caret">▸</span>参考答案</summary><div class="ans-body"><ol>
+        <li>He <b>would rather</b> give up the chance than go against his principles.</li>
+        <li>When everyone is down, we should cheer <b>each other</b> up.</li>
+        <li>I <b>give</b> you and your family my best wishes — live happily and everything go well!</li>
+        <li>We all <b>lost patience with</b> Tom because he broke his word.</li>
+        <li>We must <b>give ear to</b> the criticism of the people.</li>
+      </ol></div></details>
+    </div>
+  </section>
+
+  <!-- 考点9 -->
+  <section class="slide" data-title="考点9 · 定语从句的状语含义" data-sec="四 · 定语从句">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a49bb0">四 · 定语从句</span><h2>考点9 · 定语从句的状语含义</h2><span class="en">Adverbial Relatives</span></div>
+    <p class="anim" style="--i:1;font-size:14px;color:#5c564f">定语从句在功能上可表<b class="key">时间、条件、因果、目的、让步、结果</b>，翻译时按上下文补出连词。</p>
+    <div class="grid g3" style="margin-top:10px">
+      <div class="ex anim" style="--i:2"><div class="lead">时间</div><div class="en-ref">I met my former manager, <b class="red">who was visiting my city</b> then.</div></div>
+      <div class="ex anim" style="--i:3"><div class="lead">条件</div><div class="en-ref">He will succeed <b class="red">who does not give up</b>.</div></div>
+      <div class="ex anim" style="--i:4"><div class="lead">因果</div><div class="en-ref">John, <b class="red">who was ready to take advantage of every opportunity</b>, found a well-paid job.</div></div>
+      <div class="ex anim" style="--i:5"><div class="lead">目的</div><div class="en-ref">A delegation was sent <b class="red">that should settle the conflict</b>.</div></div>
+      <div class="ex anim" style="--i:6"><div class="lead">让步</div><div class="en-ref">My friend, <b class="red">who was physically challenged</b>, preferred to do everything by himself.</div></div>
+      <div class="ex anim" style="--i:7"><div class="lead">结果</div><div class="en-ref">A rescue measure was taken, <b class="red">which brought about financial benefits</b>.</div></div>
+    </div>
+    <div class="quiz anim" style="--i:8">
+      <div class="q-head">翻译练习 8 <span class="cnt">（考点9）</span></div>
+      <ol class="q">
+        <li>虽然他只有5岁，但是他成功地说服了我。<span class="hint">时间</span></li>
+        <li>这种流行病，尽管导致了50起病例，但还是在上周被控制住了。<span class="hint">结果</span></li>
+        <li>猫的眼睛比我们的眼睛能够吸收更多的光线，所以它们在夜里也能看得清楚。<span class="hint">因果</span></li>
+        <li>只要坚持就一定会有收获。<span class="hint">条件</span></li>
+        <li>我们大家被分配了一项任务，目的是为这些贫困的孩子集资募捐。<span class="hint">目的</span></li>
+        <li>他考试作弊被李老师当场抓到，当时李老师刚好路过。<span class="hint">时间</span></li>
+        <li>我建议他每天记10个单词，结果他的成绩真的提高了。<span class="hint">结果</span></li>
+      </ol>
+      <details class="ans"><summary><span class="caret">▸</span>参考答案</summary><div class="ans-body"><ol>
+        <li>The boy, <b>who was only five years old</b>, succeeded in persuading me.</li>
+        <li>The epidemic, <b>which caused 50 cases</b>, was brought under control last week.</li>
+        <li>Cats, <b>whose eyes can absorb more light than ours</b>, can see clearly at night.</li>
+        <li>He <b>who persists</b> will surely be rewarded.</li>
+        <li>We were assigned a task, <b>which was to raise money</b> for these poor children.</li>
+        <li>He was caught cheating by Mr. Li, <b>who happened to pass by</b>.</li>
+        <li>I advised him to memorize ten words a day, <b>which really improved</b> his grades.</li>
+      </ol></div></details>
+    </div>
+  </section>
+
+  <!-- 考点10 -->
+  <section class="slide" data-title="考点10 · 关系代词的省略" data-sec="四 · 定语从句">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a49bb0">四 · 定语从句</span><h2>考点10 · 关系代词的省略</h2><span class="en">Omission of Relatives</span></div>
+    <div class="ex anim" style="--i:1">
+      <div class="lead">作宾语的关系代词可省略</div>
+      <div class="en-ref">Is he the person <b class="red">(whom)</b> you are looking for?</div>
+      <div class="en-ref">This is the right stuff <b class="red">(that)</b> I want very much.</div>
+    </div>
+    <div class="grid g2" style="margin-top:10px">
       <div class="ex anim" style="--i:2">
-        <div class="lead">考点10 · 关系代词省略</div>
-        <div class="en-ref">Is he the person <b class="red">(whom)</b> you are looking for?</div>
+        <div class="lead">1. there be 从句中作主语的关系代词</div>
+        <div class="en-ref">That is the right trolley bus <b class="red">(that)</b> there is to City Hall.</div>
+        <div class="en-ref">I knew how to place my money in the best investment <b class="red">(that)</b> there was.</div>
+        <div class="en-ref">The scientist made full use of the time <b class="red">(that)</b> there was left.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">2. That is / It is / There is / Here is + 先行词</div>
         <div class="en-ref">That is the man <b class="red">(who)</b> discovered the cause.</div>
-        <div class="ana">作宾语可省；在 there be 从句作主语、That is / It is / There is / Here is + 先行词结构中，主语 that/who 也可省略。</div>
+        <div class="en-ref">It is a thing <b class="red">(that)</b> actually happens.</div>
+        <div class="en-ref">There is somebody <b class="red">(who)</b> wants to see you.</div>
+        <div class="en-ref">Here is the book <b class="red">(that)</b> is recommendable.</div>
       </div>
     </div>
-    <div class="write anim" style="--i:3">
-      <span>✍️</span>
-      <div><b>写作加分：</b>用<b class="gold">非限制性定语从句表结果</b>（…, which made/led to/brought…）是续写和议论文里的高级衔接，比两个短句更流畅。</div>
+    <div class="quiz anim" style="--i:4">
+      <div class="q-head">翻译练习 9 <span class="cnt">（考点10）</span></div>
+      <ol class="q">
+        <li>能给你的就这么多了。<span class="hint">This is</span></li>
+        <li>你不应该相信他已经离开的传言。<span class="hint">there is</span></li>
+        <li>这世界上有很多值得做的事情。<span class="hint">There is</span></li>
+        <li>他就是那个声称经历过此事的人。<span class="hint">That is</span></li>
+        <li>据说这台机器对任何信号都非常敏感。<span class="hint">Here is</span></li>
+      </ol>
+      <details class="ans"><summary><span class="caret">▸</span>参考答案</summary><div class="ans-body"><ol>
+        <li><b>This is</b> all (that) I can give you.</li>
+        <li>You shouldn't believe the rumor <b>(that) there is</b> that he has left.</li>
+        <li><b>There are</b> many things (that) are worth doing in this world.</li>
+        <li><b>That is</b> the man (who) claimed to have experienced it.</li>
+        <li><b>Here is</b> the machine (that) is said to be very sensitive to any signal.</li>
+      </ol></div></details>
     </div>
   </section>
 
-  <!-- 11 四 · 定语从句(2) -->
-  <section class="slide" data-title="there be定语从句·that让步" data-sec="四 · 定语从句">
-    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a49bb0">四 · 定语从句</span><h2>考点11-12 · there be 定语从句 & that 让步</h2><span class="en">More Relative Clauses</span></div>
-    <div class="grid g2">
-      <div class="ex anim" style="--i:1">
-        <div class="lead">考点11 · there be 引导限制性定语从句</div>
-        <div class="en-ref">He has met every difficulty <b class="red">(that) there is</b>.</div>
+  <!-- 考点11 -->
+  <section class="slide" data-title="考点11 · there be 引导的限制性定语从句" data-sec="四 · 定语从句">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a49bb0">四 · 定语从句</span><h2>考点11 · there be 引导的限制性定语从句</h2><span class="en">there be + Relative</span></div>
+    <p class="anim" style="--i:1;font-size:14px;color:#5c564f">there be 常出现在重要名词后引导限制性定语从句，意为<b class="key">「目前有的 / 曾经有过的」</b>，常用现在时或完成时；that/who 作主语时<b class="gold">常可省略</b>。</p>
+    <div class="grid g2" style="margin-top:10px">
+      <div class="ex anim" style="--i:2">
+        <div class="en-ref">He has met every difficulty <b class="red">(that) there is</b>.<span class="cn">什么困难都遇到了。</span></div>
         <div class="en-ref">This is the only chance <b class="red">(that) there is</b>.</div>
-        <div class="ana">意为「目前有的/曾经有过的」，that/who 作主语常省略。</div>
       </div>
-      <div class="ex anim" style="--i:2">
-        <div class="lead">考点12 · that 表让步/评论/感叹（倒装）</div>
-        <div class="en-ref"><b class="red">Uneducated that I am</b>, I know what's good for me.</div>
-        <div class="en-ref"><b class="red">Hero that you are</b>, you saved the child!</div>
-        <div class="ana">表语提前 + that 引导，相当于 as/though 让步或感叹语气。</div>
+      <div class="ex anim" style="--i:3">
+        <div class="en-ref">John was the person <b class="red">(who) there was</b> to witness the robbery.</div>
+        <div class="en-ref">That is all <b class="red">(that) there is</b> and there has been.</div>
       </div>
     </div>
-    <div class="reveal anim" style="--i:3">
-      <details><summary><span class="caret">▸</span> 翻译练习</summary><div class="ans"><div class="en">He is the person who claimed to have experienced it.</div><div class="mark">他就是那个声称经历过此事的人。（That is + 先行词 + 定语从句）</div></div></details>
+    <div class="quiz anim" style="--i:4">
+      <div class="q-head">翻译练习 10 <span class="cnt">（考点11）</span></div>
+      <ol class="q">
+        <li>你想看什么就可以看什么。</li>
+        <li>犯错是世界上最平常不过的事。</li>
+        <li>这部插图精美的小说里有很多印刷错误，多得惊人。</li>
+        <li>这部车可能比任何已有的同类车都快。</li>
+      </ol>
+      <details class="ans"><summary><span class="caret">▸</span>参考答案</summary><div class="ans-body"><ol>
+        <li>You can see all <b>(that) there is</b> to see.</li>
+        <li>Making mistakes is the most common thing <b>(that) there is</b> in the world.</li>
+        <li>This beautifully illustrated novel has surprisingly many printing mistakes <b>(that) there are</b>.</li>
+        <li>This car may be faster than any car <b>(that) there is</b> of its kind.</li>
+      </ol></div></details>
     </div>
   </section>
 
-  <!-- 12 五 · 条件 -->
-  <section class="slide" data-title="条件的其他表达" data-sec="五 · 条件与让步">
+  <!-- 考点12 -->
+  <section class="slide" data-title="考点12 · that 引导让步/评论/感叹" data-sec="四 · 定语从句">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a49bb0">四 · 定语从句</span><h2>考点12 · that 引导的让步 / 评论 / 感叹</h2><span class="en">that-Clause of Concession</span></div>
+    <p class="anim" style="--i:1;font-size:14px;color:#5c564f">that 引导从句表<b class="key">让步、评论、感叹</b>，须用<b class="gold">倒装</b>（表语提前），that 在从句中作表语；表让步时相当于 as/though。</p>
+    <div class="grid g3" style="margin-top:10px">
+      <div class="ex anim" style="--i:2"><div class="lead">让步（= as / though）</div><div class="en-ref"><b class="red">Uneducated that I am</b>, I know what's good for me.</div><div class="ana">虽然没上过学，但我知道好歹。</div></div>
+      <div class="ex anim" style="--i:3"><div class="lead">评论</div><div class="en-ref">You refuse to pay back the money, <b class="red">shameless that you are</b>.</div><div class="ana">你拒绝还钱，真无耻！</div></div>
+      <div class="ex anim" style="--i:4"><div class="lead">感叹 / 评论</div><div class="en-ref">You saved the child in the water, <b class="red">hero that you are</b>.</div><div class="ana">你真是个英雄！</div></div>
+    </div>
+    <div class="quiz anim" style="--i:5">
+      <div class="q-head">翻译练习 11 <span class="cnt">（考点12）</span></div>
+      <ol class="q">
+        <li>尽管餐馆里挤满了人，他们还是设法找到了一个桌位。<span class="hint">让步</span></li>
+        <li>尽管他已经精疲力尽，但还是设法摆脱了追赶他的人。<span class="hint">让步</span></li>
+        <li>虽然公司很困难，但他们还是捐钱给慈善事业。<span class="hint">让步</span></li>
+        <li>虽然他头脑简单，但是他是个能挣钱养家的人。<span class="hint">让步</span></li>
+      </ol>
+      <details class="ans"><summary><span class="caret">▸</span>参考答案</summary><div class="ans-body"><ol>
+        <li><b>Crowded that the restaurant was</b>, they managed to find a table.</li>
+        <li><b>Exhausted that he was</b>, he managed to get rid of his pursuers.</li>
+        <li><b>Difficult that the company was</b>, they still donated money to charity.</li>
+        <li><b>Simple-minded that he is</b>, he is a good breadwinner.</li>
+      </ol></div></details>
+    </div>
+  </section>
+
+  <!-- 考点13 -->
+  <section class="slide" data-title="考点13 · 条件概念的其他表达" data-sec="五 · 条件与让步">
     <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8aa8a0">五 · 条件与让步</span><h2>考点13 · 条件概念的其他表达</h2><span class="en">Other Conditionals</span></div>
-    <div class="grid g3">
-      <div class="ex anim" style="--i:1">
-        <div class="lead">祈使句 + and/or</div>
-        <div class="en-ref">Come here, <b class="red">and</b> you will get what you want.</div>
-        <div class="en-ref">Conquer your desires, <b class="red">or</b> they will conquer you.</div>
-      </div>
-      <div class="ex anim" style="--i:2">
-        <div class="lead">but for / but that（要不是）</div>
-        <div class="en-ref"><b class="red">But for</b> your help, I could not have succeeded.</div>
-        <div class="en-ref"><b class="red">But that</b> Tom arrived in time, she might have lost her child.</div>
-      </div>
-      <div class="ex anim" style="--i:3">
-        <div class="lead">must…before…（只有…才…）</div>
-        <div class="en-ref">One <b class="red">must sow before</b> one can reap.</div>
-        <div class="en-ref">Where there is a will, <b class="red">there is</b> a way.</div>
-      </div>
+    <p class="anim" style="--i:1;font-size:13.5px;color:#5c564f">常用引导词：if / unless / when(ever) / providing(provided) that / on condition that / as long as / assuming that / in case / suppose(supposing) that / without。此外还有：</p>
+    <div class="grid g3" style="margin-top:10px">
+      <div class="ex anim" style="--i:2"><div class="lead">1. 分词</div><div class="en-ref"><b class="red">Born in a rich family</b>, he would have had a different life.</div><div class="en-ref"><b class="red">Living as I do</b>, I'll have plenty of time with my family.</div></div>
+      <div class="ex anim" style="--i:3"><div class="lead">2. 不定式</div><div class="en-ref"><b class="red">To take the chance</b>, you may make a fortune.</div><div class="en-ref">One would be a fool <b class="red">not to do</b> like this.</div></div>
+      <div class="ex anim" style="--i:4"><div class="lead">3. 祈使句 + and / or</div><div class="en-ref">Come here, <b class="red">and</b> (then) you will get what you want.</div><div class="en-ref">Conquer your desires, <b class="red">or</b> they will conquer you.</div><div class="en-ref">Stir <b class="red">and</b> you are a dead man.</div></div>
+      <div class="ex anim" style="--i:5"><div class="lead">4. where…there…</div><div class="en-ref"><b class="red">Where there is a will</b>, there is a way.</div><div class="en-ref"><b class="red">Where there is fire</b>, there is smoke.</div></div>
+      <div class="ex anim" style="--i:6"><div class="lead">5. once / when / while</div><div class="en-ref"><b class="red">Once bit</b>, twice shy.</div><div class="en-ref">No one can run <b class="red">when</b> they haven't learned to walk.</div><div class="en-ref"><b class="red">While I breathe</b>, I hope.</div></div>
+      <div class="ex anim" style="--i:7"><div class="lead">6. but for / but that / so that / only that</div><div class="en-ref"><b class="red">But for</b> your help, I could not have succeeded.</div><div class="en-ref"><b class="red">But that</b> Tom arrived in time, she could have lost her child.</div><div class="en-ref"><b class="red">So that</b> it be done, I don't care who does it.</div><div class="en-ref">The sunset is charming, <b class="red">only that</b> it is near dusk.</div></div>
+      <div class="ex anim" style="--i:8"><div class="lead">7. must…before…can（只有…才）</div><div class="en-ref">One <b class="red">must sow before</b> one can reap.</div><div class="en-ref">The machine <b class="red">must be charged before</b> it can work.</div></div>
+      <div class="ex anim" style="--i:9"><div class="lead">8. 介词短语 apart from / without / with</div><div class="en-ref">There can be no knowledge <b class="red">apart from</b> practice.</div><div class="en-ref"><b class="red">Without a cool mind</b>, we can't decide well.</div><div class="en-ref"><b class="red">With a TV set</b> at home, you can know more about the world.</div></div>
+      <div class="ex anim" style="--i:10"><div class="lead">9. 谚语</div><div class="en-ref"><b class="red">No pains, no gains.</b></div><div class="en-ref"><b class="red">Sound in body, sound in mind.</b></div><div class="en-ref"><b class="red">Waste not, want not.</b></div></div>
     </div>
-    <div class="write anim" style="--i:4">
-      <span>✍️</span>
-      <div><b>写作加分：</b><b class="gold">祈使句 + and/or</b>（Believe in yourself, and you will succeed.）、<b class="gold">Without…</b>（Without a cool mind, we can't decide well.）都是议论文万能句。</div>
+    <div class="quiz anim" style="--i:11">
+      <div class="q-head">翻译练习 12 <span class="cnt">（考点13）</span></div>
+      <ol class="q">
+        <li>这个机会一旦失去，你可能再也没有更多机会了。<span class="hint">losing</span></li>
+        <li>看他的外貌，我们都觉得他是当老师的。<span class="hint">to look</span></li>
+        <li>欲穷千里目，更上一层楼。<span class="hint">and</span></li>
+        <li>相信自己能成功，你就能成功。<span class="hint">and</span></li>
+        <li>要不是亲眼所见，我是不会相信的。<span class="hint">but that</span></li>
+        <li>要不是缺钱，他会每年和家人出国旅游的。<span class="hint">but that</span></li>
+        <li>电子计算机要编好程序才能更好地为人类工作。<span class="hint">before</span></li>
+        <li>如果不冷静，我们就容易出现工作失误。<span class="hint">without</span></li>
+        <li>你不努力，怎么能够成功呢？<span class="hint">when</span></li>
+        <li>只要活着就有希望。<span class="hint">while</span></li>
+        <li>你的奉献在哪里，你的关爱就在哪里。<span class="hint">where</span></li>
+      </ol>
+      <details class="ans"><summary><span class="caret">▸</span>参考答案</summary><div class="ans-body"><ol>
+        <li><b>Losing</b> this chance, you may not have more chances.</li>
+        <li><b>To look at</b> his appearance, we all think he is a teacher.</li>
+        <li>Climb one more storey, <b>and</b> you'll see a thousand more li.</li>
+        <li>Believe you can succeed, <b>and</b> you will succeed.</li>
+        <li><b>But that</b> I saw it with my own eyes, I would not believe it.</li>
+        <li><b>But that</b> he lacked money, he would travel abroad with his family every year.</li>
+        <li>A computer must be programmed <b>before</b> it can serve humans better.</li>
+        <li><b>Without</b> a cool mind, we are likely to make mistakes in our work.</li>
+        <li>How can you succeed <b>when</b> you don't work hard?</li>
+        <li><b>While</b> there is life, there is hope.</li>
+        <li><b>Where</b> your devotion is, there your love is.</li>
+      </ol></div></details>
     </div>
   </section>
 
-  <!-- 13 五 · 让步 -->
-  <section class="slide" data-title="让步的其他表达" data-sec="五 · 条件与让步">
+  <!-- 考点14 -->
+  <section class="slide" data-title="考点14 · 让步概念的其他表达" data-sec="五 · 条件与让步">
     <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8aa8a0">五 · 条件与让步</span><h2>考点14 · 让步概念的其他表达</h2><span class="en">Other Concessions</span></div>
-    <div class="grid g3">
-      <div class="ex anim" style="--i:1">
-        <div class="lead">It is true that…but…</div>
-        <div class="en-ref">It is true that he is a kid, <b class="red">but</b> he respects others.</div>
-      </div>
-      <div class="ex anim" style="--i:2">
-        <div class="lead">Be + 主语 + ever so + 形容词</div>
-        <div class="en-ref"><b class="red">Be a man ever so rich</b>, he should serve others.</div>
-      </div>
-      <div class="ex anim" style="--i:3">
-        <div class="lead">动词 + what/when/where + may</div>
-        <div class="en-ref"><b class="red">Come when you will</b>, you are always welcome.</div>
-        <div class="en-ref"><b class="red">Be the consequences what they may</b>, we'll move on.</div>
-      </div>
+    <p class="anim" style="--i:1;font-size:13.5px;color:#5c564f">常用连词 though / although / even if / no matter what；as、though、that 可用<b class="gold">倒装</b>引导让步。</p>
+    <div class="grid g3" style="margin-top:10px">
+      <div class="ex anim" style="--i:2"><div class="lead">1. It is a wise man that never makes mistakes.</div><div class="en-ref"><b class="red">It is a wise man that</b> never makes mistakes.<span class="cn">智者也会犯错。</span></div><div class="en-ref">I am <b class="red">not that stupid but</b> I can see through his tricks.</div></div>
+      <div class="ex anim" style="--i:3"><div class="lead">2. It is true that…but…</div><div class="en-ref"><b class="red">It is true that</b> he is a kid, <b class="red">but</b> he respects others well.</div></div>
+      <div class="ex anim" style="--i:4"><div class="lead">3. 句子 + and + 句子</div><div class="en-ref">We tried to cross the river <b class="red">and</b> we failed each time.</div><div class="en-ref">I can't keep the cats alive <b class="red">and</b> I have fed them well.</div></div>
+      <div class="ex anim" style="--i:5"><div class="lead">4. 动词 + what/when/where + will/may</div><div class="en-ref"><b class="red">Come when you will</b>, you are always welcome.</div><div class="en-ref"><b class="red">Be the consequences what they may</b>, we'll move on.</div></div>
+      <div class="ex anim" style="--i:6"><div class="lead">5. Be + 主语 + ever so + 形容词</div><div class="en-ref"><b class="red">Be a man ever so rich</b>, he should serve others.</div><div class="en-ref"><b class="red">Be the snowstorm ever so heavy</b>, John would deliver food.</div></div>
+      <div class="ex anim" style="--i:7"><div class="lead">6. the + 最高级</div><div class="en-ref"><b class="red">The best director</b> incidentally makes an embarrassing film.</div><div class="en-ref"><b class="red">The most successful scientist</b> sometimes makes a false judgment.</div></div>
+      <div class="ex anim" style="--i:8"><div class="lead">7. 分词 / 形容词 / 名词</div><div class="en-ref"><b class="red">Born of German parents</b>, he speaks English well.</div><div class="en-ref"><b class="red">Raised in a poor family</b>, he kept a noble heart.</div><div class="en-ref"><b class="red">Physically challenged</b>, he never gave up.</div><div class="en-ref"><b class="red">A little boy</b>, he tries hard to help his mom.</div></div>
     </div>
-    <div class="reveal anim" style="--i:4">
-      <details><summary><span class="caret">▸</span> 翻译练习</summary><div class="ans"><div class="en">Young as he is, he knows how to deal with different people.</div><div class="mark">虽然他很年轻，但知道如何与不同的人打交道。（as 让步倒装）</div></div></details>
+    <div class="quiz anim" style="--i:9">
+      <div class="q-head">翻译练习 13 <span class="cnt">（考点14）</span></div>
+      <ol class="q">
+        <li>虽然是一母同胞，但是他和他的兄弟姐妹性格迥异。<span class="hint">born</span></li>
+        <li>虽然他并不聪明，但是他还是能识破 Anson 的用意，于是就回绝了他的邀请。<span class="hint">but</span></li>
+        <li>最伟大的公司领导，也会犯你我那样的错误。<span class="hint">最高级</span></li>
+        <li>无论你怎么来，安全是你要想到的第一要素。<span class="hint">动词+how+may</span></li>
+        <li>我很幸运地通过了驾考，尽管那是我第一次参加。<span class="hint">and</span></li>
+        <li>尽管每周他都是那么繁忙，但是从来不停止体育活动。<span class="hint">true</span></li>
+        <li>不管发生什么，我都不会放弃，而是继续前进。<span class="hint">动词+what+may</span></li>
+        <li>一个人不管多有学问，也不应该骄傲。<span class="hint">Be+主语+ever so+形容词</span></li>
+        <li>这些任务虽然很有挑战性，但是，用知识武装起来的我们一定能实现我们的目标。<span class="hint">Be+主语+ever so+形容词</span></li>
+        <li>诚然，在能力上他很普通，但是在精神上他是高尚的。<span class="hint">true</span></li>
+      </ol>
+      <details class="ans"><summary><span class="caret">▸</span>参考答案</summary><div class="ans-body"><ol>
+        <li><b>Born of the same parents</b>, he is quite different in character from his brothers and sisters.</li>
+        <li>He is <b>not that stupid but</b> he could see through Anson's intention, so he declined his invitation.</li>
+        <li><b>The greatest company leader</b> will make mistakes like you and me.</li>
+        <li><b>Come however you may</b>, safety is the first thing to think of.</li>
+        <li>I was lucky to pass the driving test, <b>and</b> it was my first time.</li>
+        <li><b>It is true that</b> he is very busy every week, <b>but</b> he never stops doing sports.</li>
+        <li><b>Be what may happen</b>, I will not give up but keep moving forward.</li>
+        <li><b>Be a man ever so learned</b>, he should not be proud.</li>
+        <li><b>Be the tasks ever so challenging</b>, we, armed with knowledge, can surely achieve our goals.</li>
+        <li><b>It is true that</b> he is ordinary in ability, but noble in spirit.</li>
+      </ol></div></details>
     </div>
   </section>
 
-  <!-- 14 六 · come to do / to have done -->
-  <section class="slide" data-title="come to do·to have done" data-sec="六 · 不定式与动名词">
-    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b0909a">六 · 不定式与动名词</span><h2>考点15-16 · come to do & to have done</h2><span class="en">come to do</span></div>
+  <!-- 考点15+16 -->
+  <section class="slide" data-title="考点15-16 · come to do / to have done 作主语" data-sec="六 · 不定式与动名词">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b0909a">六 · 不定式与动名词</span><h2>考点15-16 · come to do & to have done 作主语</h2><span class="en">come to do / to have done</span></div>
     <div class="grid g2">
       <div class="ex anim" style="--i:1">
-        <div class="lead">考点15 · come to do（逐渐）</div>
-        <div class="en-ref">She had <b class="red">come to love</b> him.</div>
-        <div class="en-ref">Five years later, Peter <b class="red">came to be</b> an artist.</div>
-        <div class="ana">表「逐渐」的过程，get to do 同义。</div>
+        <div class="lead">考点15 · come to do（逐渐；发生/发展过程）</div>
+        <div class="en-ref">She had <b class="red">come to love</b> him and later they got married.</div>
+        <div class="en-ref">How did you <b class="red">get to know</b> your boyfriend?</div>
+        <div class="en-ref">Five years later, Peter <b class="red">came to be</b> a professional artist.</div>
+        <div class="en-ref">You will <b class="red">come/get to understand</b> it in the end.</div>
       </div>
       <div class="ex anim" style="--i:2">
-        <div class="lead">考点16 · to have done 作主语（虚拟）</div>
+        <div class="lead">考点16 · to have done 作主语（对过去的假设/虚拟）</div>
         <div class="en-ref"><b class="red">To have been told</b> the truth would have given me another chance.</div>
-        <div class="ana">表「假如过去…」，谓语用 would/should + 完成时。</div>
+        <div class="en-ref"><b class="red">To have been with</b> you should not have disappointed me last week.</div>
+        <div class="ana">谓语用 <b class="red">would/should + 现在完成时</b>，意为「假如过去…」。</div>
       </div>
     </div>
-    <div class="reveal anim" style="--i:3">
-      <details><summary><span class="caret">▸</span> 翻译练习</summary><div class="ans"><div class="en">After years of effort, he came to be an engineer.</div><div class="mark">多年努力之后，他成为一名工程师。（come to do 表渐进）</div></div></details>
+    <div class="quiz anim" style="--i:3">
+      <div class="q-head">翻译练习 14 <span class="cnt">（考点15-16）</span></div>
+      <ol class="q">
+        <li>终有一天你会为你做的这一切感到羞愧的。<span class="hint">come to do</span></li>
+        <li>多年努力之后，他成为一名工程师。<span class="hint">come to do</span></li>
+        <li>你是怎么喜欢上摄影的？<span class="hint">come to do</span></li>
+        <li>假如以前有过这样的训练，那么我对此任务就会有备而来。<span class="hint">to have done 作主语</span></li>
+        <li>如果说出那个秘密，当时就会把我出卖了。<span class="hint">to have done 作主语</span></li>
+      </ol>
+      <details class="ans"><summary><span class="caret">▸</span>参考答案</summary><div class="ans-body"><ol>
+        <li>One day you will <b>come to feel</b> ashamed of all this you have done.</li>
+        <li>After years of effort, he <b>came to be</b> an engineer.</li>
+        <li>How did you <b>come to like</b> photography?</li>
+        <li><b>To have had</b> such training before, I would have been well prepared for this task.</li>
+        <li><b>To have told</b> the secret would have given me away at the time.</li>
+      </ol></div></details>
     </div>
   </section>
 
-  <!-- 15 六 · 接不定式/动名词 -->
-  <section class="slide" data-title="接不定式/动名词" data-sec="六 · 不定式与动名词">
+  <!-- 考点17 -->
+  <section class="slide" data-title="考点17 · 接不定式/动名词含义不同" data-sec="六 · 不定式与动名词">
     <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b0909a">六 · 不定式与动名词</span><h2>考点17 · 接不定式 / 动名词含义不同</h2><span class="en">to do vs doing</span></div>
     <div class="grid g3">
-      <div class="ex anim" style="--i:1">
-        <div class="lead">remember / forget / regret</div>
-        <div class="en-ref">remember <b class="red">to do</b>（记得要做）/<b class="red">doing</b>（记得做过）</div>
-        <div class="en-ref">forget <b class="red">to do</b> / <b class="red">doing</b> · regret <b class="red">to do</b> / <b class="red">doing</b></div>
-      </div>
-      <div class="ex anim" style="--i:2">
-        <div class="lead">try / stop / mean</div>
-        <div class="en-ref">try <b class="red">to do</b>（尽力）/ <b class="red">doing</b>（尝试）</div>
-        <div class="en-ref">stop <b class="red">to do</b>（停下做另一件事）/ <b class="red">doing</b>（停止正在做）</div>
-        <div class="en-ref">mean <b class="red">to do</b>（打算）/ <b class="red">doing</b>（意味着）</div>
-      </div>
-      <div class="ex anim" style="--i:3">
-        <div class="lead">want / need / deserve</div>
-        <div class="en-ref">want <b class="red">to do</b>（想）/ <b class="red">doing</b>（需要被做）</div>
-        <div class="en-ref">deserve <b class="red">to do</b>（值得）/ <b class="red">doing</b>（该被）</div>
-      </div>
+      <div class="ex anim" style="--i:1"><div class="lead">try / remember / forget / regret / stop</div><div class="en-ref">try <b class="red">to do</b>（尽力）/<b class="red">doing</b>（尝试）</div><div class="en-ref">remember <b class="red">to do</b>（记得要做）/<b class="red">doing</b>（记得做过）</div><div class="en-ref">forget <b class="red">to do</b> / <b class="red">doing</b> · regret <b class="red">to do</b>（遗憾地做）/ <b class="red">doing</b>（后悔做过）</div><div class="en-ref">stop <b class="red">to do</b>（停下做另一件）/ <b class="red">doing</b>（停止正在做）</div></div>
+      <div class="ex anim" style="--i:2"><div class="lead">want / can't help / mean</div><div class="en-ref">want <b class="red">to do</b>（想）/ <b class="red">doing</b>（需要被做）</div><div class="en-ref">can't help <b class="red">doing</b>（忍不住）/ help <b class="red">to do</b>（帮忙）</div><div class="en-ref">mean <b class="red">to do</b>（打算）/ <b class="red">doing</b>（意味着）</div></div>
+      <div class="ex anim" style="--i:3"><div class="lead">cease / propose / quit / leave off</div><div class="en-ref">cease <b class="red">to do</b>（永久）/ <b class="red">doing</b>（暂时）</div><div class="en-ref">propose <b class="red">to do</b>（打算）/ <b class="red">doing</b>（建议）</div><div class="en-ref">quit <b class="red">to do</b>（停下去做另一件）/ <b class="red">doing</b>（停止正在做）</div><div class="en-ref">leave off <b class="red">to do</b> / <b class="red">doing</b>（同上）</div></div>
+      <div class="ex anim" style="--i:4"><div class="lead">deserve / learn / chance</div><div class="en-ref">deserve <b class="red">to do</b>（值得/配）/ <b class="red">doing</b>（该被）</div><div class="en-ref">learn <b class="red">to do</b>（学会）/ <b class="red">doing</b>（学习过程）</div><div class="en-ref">chance <b class="red">to do</b>（碰巧）/ <b class="red">doing</b>（冒险尝试）</div></div>
+      <div class="ex anim" style="--i:5"><div class="lead">经典对照</div><div class="en-ref">We want <b class="red">to paint</b> the fence.（打算）<br>The fence wants <b class="red">painting</b>.（需要）</div><div class="en-ref">The class meant <b class="red">to have</b> a picnic.（打算）<br>Genius only means <b class="red">striving</b> all one's life.（意味着）</div><div class="en-ref">The bus has ceased <b class="red">running</b>.（暂时）<br>…has ceased <b class="red">to run</b>.（永久）</div></div>
+      <div class="ex anim" style="--i:6"><div class="lead">更多对照</div><div class="en-ref">The criminal deserved <b class="red">shooting</b>.（该被枪毙）<br>The student deserved <b class="red">to shoot</b> first.（该第一个射击）</div><div class="en-ref">We have learned <b class="red">to speak</b> skillfully.（学会了）<br>We have been learning <b class="red">skiing</b> for some time.（学习）</div><div class="en-ref">Peter chanced <b class="red">to find</b> the necklace.（碰巧）<br>Peter chanced <b class="red">swimming</b> across the river.（冒险）</div></div>
     </div>
-    <div class="reveal anim" style="--i:4">
-      <details><summary><span class="caret">▸</span> 真题回放（2022 秋考）</summary><div class="ans"><div class="en">Mom forgot buying cucumbers for our neighbor two days ago.</div><div class="mark">妈妈忘了两天前刚给邻居买过黄瓜。（forget doing = 忘了做过）</div></div></details>
-    </div>
-  </section>
-
-  <!-- 16 六 · 名词化动名词 -->
-  <section class="slide" data-title="名词化动名词" data-sec="六 · 不定式与动名词">
-    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b0909a">六 · 不定式与动名词</span><h2>考点18-19 · 名词化动名词</h2><span class="en">Nominal Gerunds</span></div>
-    <div class="grid g2">
-      <div class="ex anim" style="--i:1">
-        <div class="lead">考点18 · 有复数的名词化动名词</div>
-        <div class="en-ref">Everyone has <b class="red">failings</b>, so don't feel disappointed.</div>
-        <div class="en-ref">The survey's <b class="red">findings</b> are a matter of concern.</div>
-        <div class="ana">comings and goings、doings、sufferings、burnings、cryings 等有复数形式。</div>
-      </div>
-      <div class="ex anim" style="--i:2">
-        <div class="lead">考点19 · 以动名词形式出现的名词</div>
-        <div class="en-ref">belongings（随身物品）· earnings（收入）· surroundings（环境）· winnings（奖金）</div>
-        <div class="ana">注意：有同根名词时用同根名词（management 不用 managing，refusal 不用 refusing）。</div>
-      </div>
-    </div>
-    <div class="reveal anim" style="--i:3">
-      <details><summary><span class="caret">▸</span> 翻译练习</summary><div class="ans"><div class="en">He described the sufferings his race had gone through in many novels.</div><div class="mark">他在很多小说中描述了他的种族所遭受的种种苦难。（suffering 名词化复数）</div></div></details>
+    <div class="quiz anim" style="--i:7">
+      <div class="q-head">翻译练习 15 <span class="cnt">（考点17）</span></div>
+      <ol class="q">
+        <li>不要冒险爬那座山，即使它不太高。<span class="hint">chance</span></li>
+        <li>婴儿看到妈妈时立刻停止了哭泣。<span class="hint">cease / leave off / quit</span></li>
+        <li>这个警察多次违法，该被处罚。<span class="hint">deserve</span></li>
+        <li>我碰巧遇到了多年不见的一位朋友。<span class="hint">chance</span></li>
+        <li>下周末你打算做什么？<span class="hint">mean / propose</span></li>
+        <li>看到那个小丑，我们都忍不住哈哈大笑。<span class="hint">can't help doing</span></li>
+      </ol>
+      <details class="ans"><summary><span class="caret">▸</span>参考答案</summary><div class="ans-body"><ol>
+        <li>Don't <b>chance climbing</b> that mountain, even though it is not very high.</li>
+        <li>The baby <b>ceased / left off / quit crying</b> the moment it saw its mother.</li>
+        <li>This policeman has broken the law many times and <b>deserves to be punished / deserves punishing</b>.</li>
+        <li>I <b>chanced to meet</b> a friend I had not seen for years.</li>
+        <li>What do you <b>mean / propose to do</b> next weekend?</li>
+        <li>Seeing the clown, we all <b>couldn't help laughing</b>.</li>
+      </ol></div></details>
     </div>
   </section>
 
-  <!-- 17 七 · 分词悬垂 -->
-  <section class="slide" data-title="分词悬垂结构" data-sec="七 · 分词">
+  <!-- 考点18+19 -->
+  <section class="slide" data-title="考点18-19 · 名词化动名词 / 动名词形式的名词" data-sec="六 · 不定式与动名词">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b0909a">六 · 不定式与动名词</span><h2>考点18-19 · 名词化动名词 & 动名词形式的名词</h2><span class="en">Nominal Gerunds</span></div>
+    <div class="ex anim" style="--i:1">
+      <div class="lead">考点18 · 名词化动名词（有复数、冠词、限定词；无时态语态变化）</div>
+      <div class="wl wl4" style="margin-top:4px">
+        <span><b>coming</b> 到来</span><span><b>going</b> 离开</span><span><b>failing</b> 失败</span><span><b>gasping</b> 喘息</span>
+        <span><b>moaning</b> 呻吟</span><span><b>coloring</b> 上色</span><span><b>killing</b> 杀害</span><span><b>finding</b> 调查结果</span>
+        <span><b>burning</b> 燃烧</span><span><b>saving</b> 节省/挽救</span><span><b>crying</b> 哭泣</span><span><b>beginning</b> 开始</span>
+        <span><b>ending</b> 结束</span><span><b>doing</b> 所做的事</span><span><b>clapping</b> 鼓掌</span><span><b>imagining</b> 想象</span>
+        <span><b>shouting</b> 喊叫</span><span><b>sobbing</b> 抽泣</span><span><b>suffering</b> 苦难</span>
+      </div>
+      <div class="en-ref">Everyone has <b class="red">failings</b>, so don't feel disappointed.</div>
+      <div class="en-ref">The survey's <b class="red">findings</b> are a matter of great concern.</div>
+      <div class="en-ref">A good <b class="red">beginning</b> makes a good <b class="red">ending</b>.</div>
+      <div class="ana">注意：①「名词+名词化动名词」只作定语（night-landing、hand-writing、day-dreaming、house-building、job-hunting）；② 有同根名词时用同根名词（management 不用 managing、refusal 不用 refusing）。</div>
+    </div>
+    <div class="ex anim" style="--i:2">
+      <div class="lead">考点19 · 以动名词形式出现的名词</div>
+      <div class="wl wl4" style="margin-top:4px">
+        <span><b>belongings</b> 随身物品</span><span><b>bowling</b> 保龄球</span><span><b>earnings</b> 收入</span><span><b>feeling</b> 感觉</span>
+        <span><b>fishing</b> 钓鱼</span><span><b>greetings</b> 问候</span><span><b>learning</b> 学识</span><span><b>leavings</b> 残留物</span>
+        <span><b>meaning</b> 意思</span><span><b>mountaineering</b> 爬山</span><span><b>painting</b> 绘画</span><span><b>sewing</b> 缝纫</span>
+        <span><b>sightseeing</b> 观光</span><span><b>shooting</b> 射击</span><span><b>surfing</b> 冲浪</span><span><b>surroundings</b> 环境</span>
+        <span><b>takings</b> 收入</span><span><b>tidings</b> 消息</span><span><b>winnings</b> 奖金</span><span><b>warning</b> 警告</span>
+      </div>
+    </div>
+    <div class="quiz anim" style="--i:3">
+      <div class="q-head">翻译练习 16 <span class="cnt">（考点18-19）</span></div>
+      <ol class="q">
+        <li>如果没有摄像头的话，没人知道宠物在家都干了些什么。<span class="hint">doing</span></li>
+        <li>他在很多小说中描述了他的种族所遭受的种种苦难。<span class="hint">suffering</span></li>
+        <li>很显然，本来就很遥远的喊叫声，现在听起来更远了。<span class="hint">shouting</span></li>
+        <li>他的丰富想象力已经引起极富特色的科幻文学的写作热潮。<span class="hint">imagining</span></li>
+        <li>她建议你先估算一下自己的收入和开销。<span class="hint">outgoing</span></li>
+        <li>我认为山姆在为自己私底下的两面派行为而心生愧疚。<span class="hint">dealing</span></li>
+        <li>冰箱发明之前，我们都是充分利用吃剩下的食物的。<span class="hint">leaving</span></li>
+        <li>车站工作人员通过广播告知乘客火车到站了。<span class="hint">arrival</span></li>
+      </ol>
+      <details class="ans"><summary><span class="caret">▸</span>参考答案</summary><div class="ans-body"><ol>
+        <li>Without a camera, nobody knows all the <b>doings</b> of the pet at home.</li>
+        <li>He described in many novels the <b>sufferings</b> his race had gone through.</li>
+        <li>Obviously, the <b>shoutings</b>, already far away, now sounded farther.</li>
+        <li>His rich <b>imaginings</b> have set off a writing craze of distinctive science fiction.</li>
+        <li>She suggests that you first estimate your income and <b>outgoings</b>.</li>
+        <li>I think Sam feels guilty about his secret double-<b>dealings</b>.</li>
+        <li>Before the fridge was invented, we made full use of the <b>leavings</b>.</li>
+        <li>The station staff announced the <b>arrival</b> of the train to passengers over the broadcast.</li>
+      </ol></div></details>
+    </div>
+  </section>
+
+  <!-- 考点20 -->
+  <section class="slide" data-title="考点20 · 无逻辑主语的分词悬垂结构" data-sec="七 · 分词">
     <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c9a58b">七 · 分词</span><h2>考点20 · 无逻辑主语的分词悬垂结构</h2><span class="en">Dangling Participles</span></div>
     <div class="grid g3">
       <div class="ex anim" style="--i:1">
-        <div class="lead">单个分词（已成习惯用语）</div>
-        <div class="en-ref"><b class="red">Considering</b> his health, we asked him to stop.</div>
-        <div class="en-ref"><b class="red">Regarding</b> your request, she said nothing.</div>
-        <div class="ana">considering / including / regarding / concerning / barring / wanting 等。</div>
+        <div class="lead">1. 单个分词（已成习惯用语）</div>
+        <div class="wl" style="margin-top:4px">
+          <span><b>beginning</b> 从…开始</span><span><b>following</b> 在…后</span><span><b>considering</b> 考虑到</span>
+          <span><b>including</b> 包括</span><span><b>counting</b> 包括</span><span><b>concerning</b> 关于</span>
+          <span><b>regarding</b> 关于</span><span><b>respecting</b> 关于</span><span><b>touching</b> 关于</span>
+          <span><b>wanting</b> 没有</span><span><b>failing</b> 没有</span><span><b>excepting</b> 除了</span>
+          <span><b>barring</b> 除了</span>
+        </div>
+        <div class="en-ref">It became steeper <b class="red">beginning in 2000</b>.</div>
+        <div class="en-ref"><b class="red">Barring</b> accidents, they will succeed.</div>
       </div>
       <div class="ex anim" style="--i:2">
-        <div class="lead">已转介词短语</div>
-        <div class="en-ref"><b class="red">Judging from</b> his look, he is a teacher.</div>
-        <div class="en-ref"><b class="red">Owing to</b> the rain, the match was put off.</div>
+        <div class="lead">2. 已转介词短语的分词</div>
+        <div class="wl" style="margin-top:4px">
+          <span><b>coming to</b> 说到</span><span><b>talking of</b> 谈到</span><span><b>setting aside</b> 除开</span>
+          <span><b>no excepting</b> 无例外</span><span><b>judging from</b> 从…判断</span><span><b>owing to</b> 由于</span>
+          <span><b>according to</b> 根据</span><span><b>allowing for</b> 考虑到</span><span><b>getting back to</b> 回到</span>
+          <span><b>viewing it from this point</b> 从这一点讲</span>
+        </div>
+        <div class="en-ref"><b class="red">Coming to</b> lawmaking, the president was a layman.</div>
+        <div class="en-ref"><b class="red">Setting aside</b> what I think, what would you like to do?</div>
       </div>
       <div class="ex anim" style="--i:3">
-        <div class="lead">副词 + speaking</div>
-        <div class="en-ref"><b class="red">Frankly speaking</b>, I'm not keen on it.</div>
-        <div class="en-ref"><b class="red">Strictly speaking</b>, that's not a dictionary.</div>
+        <div class="lead">3. 副词 + speaking</div>
+        <div class="wl" style="margin-top:4px">
+          <span><b>generally</b> 总的来说</span><span><b>frankly</b> 坦率地</span><span><b>politically</b> 从政治角度</span>
+          <span><b>properly</b> 确切地</span><span><b>roughly</b> 粗略地</span><span><b>strictly</b> 严格地</span>
+          <span><b>theoretically</b> 理论上</span>
+        </div>
+        <div class="en-ref"><b class="red">Frankly speaking</b>, I am not keen on this meal.</div>
+        <div class="en-ref">That is not, <b class="red">properly speaking</b>, a dictionary, but a grammar.</div>
       </div>
     </div>
-    <div class="write anim" style="--i:4">
-      <span>✍️</span>
-      <div><b>写作加分：</b><b class="gold">Generally/Frankly/Strictly speaking</b> 是作文开头的万能衔接；<b class="gold">Judging from…</b>、<b class="gold">Considering…</b> 让论证更有层次。</div>
+    <div class="quiz anim" style="--i:4">
+      <div class="q-head">翻译练习 17 <span class="cnt">（考点20）</span></div>
+      <ol class="q">
+        <li>鱼儿离不开水。<span class="hint">failing</span></li>
+        <li>在就医学研究专题讨论一天后，会议接下来的主题集中在教学实践上。<span class="hint">following</span></li>
+        <li>我们到现在也没有获得关于孩子下落的任何消息。<span class="hint">respecting</span></li>
+        <li>如果不是猛烈的顶头风，飞机会准点到达。<span class="hint">barring</span></li>
+        <li>我们都必须遵守法律，国王也不例外。<span class="hint">no excepting</span></li>
+        <li>他们考虑到他身体不好，请他别做了。<span class="hint">considering</span></li>
+        <li>把路上的耽搁算进去，你要用半小时才能到车站。<span class="hint">allowing for</span></li>
+        <li>回到正题，我怎么才能满足你？<span class="hint">getting back to</span></li>
+        <li>从政治角度来说，你认为这些举措有效吗？<span class="hint">politically speaking</span></li>
+        <li>简单来讲，科学人道主义者是相信科学和人道主义的人。<span class="hint">roughly speaking</span></li>
+      </ol>
+      <details class="ans"><summary><span class="caret">▸</span>参考答案</summary><div class="ans-body"><ol>
+        <li><b>Failing</b> water, fish cannot live.</li>
+        <li><b>Following</b> a day's discussion on medical research, the meeting turned to teaching practice.</li>
+        <li>We have got no news <b>respecting</b> the child's whereabouts up to now.</li>
+        <li><b>Barring</b> strong headwinds, the plane will arrive on time.</li>
+        <li>We must all obey the law, <b>no excepting</b> the king.</li>
+        <li><b>Considering</b> his poor health, they asked him to stop.</li>
+        <li><b>Allowing for</b> delays on the way, you'll need half an hour to get to the station.</li>
+        <li><b>Getting back to</b> the point, how can I satisfy you?</li>
+        <li><b>Politically speaking</b>, do you think these measures are effective?</li>
+        <li><b>Roughly speaking</b>, a scientific humanist is one who believes in science and humanism.</li>
+      </ol></div></details>
     </div>
   </section>
 
-  <!-- 18 八 · 虚拟语气 -->
-  <section class="slide" data-title="虚拟语气其他结构" data-sec="八 · 虚拟语气">
-    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8b9bab">八 · 虚拟语气</span><h2>考点21-22 · 虚拟语气的特殊结构</h2><span class="en">Special Subjunctive</span></div>
+  <!-- 考点21 上 -->
+  <section class="slide" data-title="考点21(上) · 虚拟语气其他结构" data-sec="八 · 虚拟语气">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8b9bab">八 · 虚拟语气</span><h2>考点21(上) · 虚拟语气的其他结构</h2><span class="en">Special Subjunctive</span></div>
     <div class="grid g2">
       <div class="ex anim" style="--i:1">
-        <div class="lead">It is + adj. + that…（should）do</div>
-        <div class="en-ref">It is <b class="red">necessary/vital/essential</b> that we (should) take action.</div>
-        <div class="ana">necessary、vital、essential、desirable、urgent 等后接虚拟。</div>
+        <div class="lead">1. It is + adj. + that…（should）do</div>
+        <div class="wl wl2" style="margin-top:4px">
+          <span><b>necessary</b> 有必要</span><span><b>good</b> 是好的</span><span><b>vital</b> 至关重要</span><span><b>appropriate</b> 恰当</span>
+          <span><b>advisable</b> 建议</span><span><b>anxious</b> 令人焦虑</span><span><b>better</b> 更好</span><span><b>careful</b> 需谨慎</span>
+          <span><b>compulsory</b> 强制性</span><span><b>concerned</b> 令人关切</span><span><b>desirable</b> 可取</span><span><b>eager</b> 急切</span>
+          <span><b>essential</b> 必不可少</span><span><b>fitting</b> 合适</span><span><b>funny</b> 滑稽</span><span><b>insistent</b> 坚决要求</span>
+          <span><b>keen</b> 热切</span><span><b>pitiful</b> 遗憾</span><span><b>preferable</b> 更可取</span><span><b>ridiculous</b> 荒谬</span>
+          <span><b>right</b> 正确</span><span><b>urgent</b> 紧急</span><span><b>unthinkable</b> 难以想象</span>
+        </div>
+        <div class="en-ref">It is necessary that we <b class="red">(should) take</b> action.</div>
+        <div class="en-ref">It is vital that a child <b class="red">(should) be taught</b> to obey rules.</div>
       </div>
       <div class="ex anim" style="--i:2">
-        <div class="lead">for fear that / lest / in order that</div>
+        <div class="lead">2. 用 I / we / he 作主语</div>
+        <div class="en-ref">We were anxious that he <b class="red">(should) do</b> his bit.</div>
+        <div class="en-ref">He is careful that nobody <b class="red">(should) disturb</b> her.</div>
+        <div class="lead" style="margin-top:8px">3. should 不可省（意为「竟然」）</div>
+        <div class="en-ref">It is amazing that the boy <b class="red">should have learned</b> 500 words within one month.</div>
+        <div class="en-ref">It is incredible that the shy lady <b class="red">should be</b> working as a TV host.</div>
+        <div class="en-ref">It is a pity that you <b class="red">should be</b> so careless.</div>
+        <div class="en-ref">I was shocked that he <b class="red">should have</b> such food every day.</div>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">4. for fear that / lest / in order that / so that</div>
         <div class="en-ref">He kept silent <b class="red">for fear that</b> he would disturb the teacher.</div>
-        <div class="en-ref">Father repeated it <b class="red">lest</b> my mother (should) forget it.</div>
+        <div class="en-ref">Father repeated the time <b class="red">lest</b> my mother (should) forget it.</div>
+        <div class="en-ref">I took the job <b class="red">so that</b> I might have more time to look after my child.</div>
+        <div class="en-ref">I did this <b class="red">in order that</b> you should understand me.</div>
       </div>
-      <div class="ex anim" style="--i:3">
-        <div class="lead">would rather + 从句（过去时/完成时）</div>
-        <div class="en-ref">I'd rather you <b class="red">had a chance</b> to visit now.</div>
-        <div class="en-ref">We'd sooner she <b class="red">had passed</b> the test last time.</div>
-      </div>
-      <div class="ex anim" style="--i:4">
-        <div class="lead">Be it…or / 祝愿句</div>
-        <div class="en-ref"><b class="red">Be it cheap or not</b>, I will get it.</div>
-        <div class="en-ref"><b class="red">God bless you!</b>（bless 不加 s）</div>
-      </div>
-    </div>
-    <div class="write anim" style="--i:5">
-      <span>✍️</span>
-      <div><b>写作加分：</b><b class="gold">It is essential that we (should)…</b> 是建议类作文的高分句；<b class="gold">I'd rather…</b> 表达愿望。</div>
     </div>
   </section>
 
-  <!-- 19 九 · 其他倒装 -->
-  <section class="slide" data-title="其他倒装结构" data-sec="九 · 倒装与反意">
+  <!-- 考点21 下 -->
+  <section class="slide" data-title="考点21(下) · 虚拟语气其他结构" data-sec="八 · 虚拟语气">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8b9bab">八 · 虚拟语气</span><h2>考点21(下) · 虚拟语气的其他结构</h2><span class="en">Special Subjunctive</span></div>
+    <div class="grid g3">
+      <div class="ex anim" style="--i:1"><div class="lead">5. imagine（非现实的臆想用虚拟）</div><div class="en-ref">Imagine that you <b class="red">were</b> the president.<span class="cn">设想你是校长。</span></div><div class="en-ref">Imagine that he <b class="red">had not arrived</b> in time…</div><div class="ana">现在/将来设想用过去时（be 用 were）；过去设想用 had + 过去分词。</div></div>
+      <div class="ex anim" style="--i:2"><div class="lead">6. dream / believe / expect（should/could）</div><div class="en-ref">She never dreamed that she <b class="red">could see</b> her mother at 60.</div><div class="en-ref">I don't expect that you <b class="red">should have told</b> her the truth.</div><div class="ana">否定/疑问句中表惊讶、怀疑等，should/could 不可省。</div></div>
+      <div class="ex anim" style="--i:3"><div class="lead">7. would rather / would sooner / had better + 从句</div><div class="en-ref">I'd rather (that) I <b class="red">had a chance</b> to visit you now.</div><div class="en-ref">We'd sooner she <b class="red">had passed</b> the test last time.</div><div class="en-ref">I <b class="red">had better</b> he were not.</div><div class="ana">现在/将来愿望用过去时；过去愿望用过去完成时。</div></div>
+      <div class="ex anim" style="--i:4"><div class="lead">8. Be it…or / though…be</div><div class="en-ref"><b class="red">Be it cheap or not</b>, I will get it for my parents.</div><div class="en-ref"><b class="red">Be it true or not</b>, I should keep some distance from him.</div><div class="en-ref"><b class="red">Though all the world be cold</b>, I must be kind to all.</div><div class="en-ref"><b class="red">Though a merchant be nice</b>, yet he never changes his intention of making money.</div></div>
+    </div>
+  </section>
+
+  <!-- 考点22 + 练习18 -->
+  <section class="slide" data-title="考点22 · 虚拟语气其他场合 + 翻译练习18" data-sec="八 · 虚拟语气">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8b9bab">八 · 虚拟语气</span><h2>考点22 · 虚拟语气用于其他场合</h2><span class="en">Subjunctive Uses</span></div>
+    <p class="anim" style="--i:1;font-size:14px;color:#5c564f">用于<b class="key">祝愿、诅咒、祈使</b>，提出<b class="key">建议、劝告</b>，提出<b class="key">请求、邀请</b>。</p>
+    <div class="grid g3" style="margin-top:10px">
+      <div class="ex anim" style="--i:2"><div class="en-ref"><b class="red">God bless</b> you!<span class="cn">（bless 不加 s）</span></div></div>
+      <div class="ex anim" style="--i:3"><div class="en-ref"><b class="red">Heaven help</b> us!<span class="cn">（help 不加 s）</span></div></div>
+      <div class="ex anim" style="--i:4"><div class="en-ref"><b class="red">May</b> all you be healthy and happy.</div></div>
+      <div class="ex anim" style="--i:5"><div class="en-ref"><b class="red">Liars be hanged!</b></div></div>
+      <div class="ex anim" style="--i:6"><div class="en-ref"><b class="red">So be it</b> then!</div></div>
+    </div>
+    <div class="quiz anim" style="--i:7">
+      <div class="q-head">翻译练习 18 <span class="cnt">（考点21-22）</span></div>
+      <ol class="q">
+        <li>我很吃惊他竟然那样对你。<span class="hint">surprised</span></li>
+        <li>提前通知学生们比较好。<span class="hint">better</span></li>
+        <li>他十分小心，不让整个学校知道这件事。<span class="hint">careful</span></li>
+        <li>孩子变得如此虚弱，这让我很担心。<span class="hint">worry</span></li>
+        <li>我们应该不要说话，以免打扰这些孩子们。<span class="hint">lest</span></li>
+        <li>我之所以给他打电话，是为了能够提前了解一下那个职位的情况。<span class="hint">in order that</span></li>
+        <li>设想一下，我们现在在一个偏僻的山村。<span class="hint">imagine</span></li>
+        <li>设想一下，他没有读过大学会有什么结果？<span class="hint">imagine</span></li>
+        <li>我做梦也没想到他竟然把门漆成了红色。<span class="hint">dream</span></li>
+        <li>我真希望他们没有犯过那个错误。<span class="hint">had rather</span></li>
+        <li>我们希望你自己的食物你自己付钱。<span class="hint">would sooner</span></li>
+        <li>不管好与不好，这都是我的家。<span class="hint">be…or</span></li>
+        <li>不管明天是否晴天，他每天都去看他年迈的父母。<span class="hint">be…or</span></li>
+        <li>尽管 Mr. Lee 很有钱，但他还是保持着高尚和谦逊的品格。<span class="hint">though…be</span></li>
+        <li>你们不妨把会议往后推迟两天。<span class="hint">might</span></li>
+      </ol>
+      <details class="ans"><summary><span class="caret">▸</span>参考答案</summary><div class="ans-body"><ol>
+        <li>I was <b>surprised</b> that he <b>should</b> treat you like that.</li>
+        <li>It is <b>better</b> that the students (should) be notified in advance.</li>
+        <li>He is <b>careful</b> that the whole school should not know about it.</li>
+        <li>I am <b>worried</b> that the child should have become so weak.</li>
+        <li>We should not speak <b>lest</b> we (should) disturb these children.</li>
+        <li>I phoned him <b>in order that</b> I might learn about the position in advance.</li>
+        <li><b>Imagine that</b> we are now in a remote mountain village.</li>
+        <li><b>Imagine that</b> he had not gone to college; what would have happened?</li>
+        <li>Little did I <b>dream</b> that he should paint the door red.</li>
+        <li>I <b>had rather</b> (that) they had not made that mistake.</li>
+        <li>We <b>would sooner</b> (that) you paid for your own food.</li>
+        <li><b>Be it</b> good or bad, this is my home.</li>
+        <li><b>Be it</b> fine or rainy tomorrow, he goes to see his aged parents every day.</li>
+        <li>Rich <b>though</b> Mr. Lee <b>be</b>, he keeps a noble and modest character.</li>
+        <li>You <b>might</b> as well postpone the meeting by two days.</li>
+      </ol></div></details>
+    </div>
+  </section>
+
+  <!-- 考点23 -->
+  <section class="slide" data-title="考点23 · 其他倒装结构" data-sec="九 · 倒装与反意">
     <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">九 · 倒装与反意</span><h2>考点23 · 其他倒装结构</h2><span class="en">More Inversion</span></div>
-    <div class="grid g2">
-      <div class="ex anim" style="--i:1">
-        <div class="lead">① 副词/介词 + with + 名词（命令）</div>
-        <div class="en-ref"><b class="red">In with you</b>, boys!</div>
-        <div class="en-ref"><b class="red">Up with the flowers</b>, Tom!</div>
-      </div>
-      <div class="ex anim" style="--i:2">
-        <div class="lead">② 行为动词 + 主语 + 情态/助动词（强调）</div>
-        <div class="en-ref">It's my duty to help you, and <b class="red">do it I will</b>.</div>
-      </div>
-      <div class="ex anim" style="--i:3">
-        <div class="lead">③ of 短语 / ever / never 前置</div>
-        <div class="en-ref"><b class="red">Of the thirty students</b>, ten passed.</div>
-        <div class="en-ref">We <b class="red">never have and never will</b> retreat.</div>
-      </div>
-      <div class="ex anim" style="--i:4">
-        <div class="lead">④ 比较/方式状语从句倒装</div>
-        <div class="en-ref">Mothers give more <b class="red">than will fathers</b>.</div>
-        <div class="en-ref">He is honest, <b class="red">as are most</b> high-achievers.</div>
-      </div>
+    <div class="grid g3">
+      <div class="ex anim" style="--i:1"><div class="lead">1. 副词/介词 + with + 名词（命令）</div><div class="en-ref"><b class="red">In with you</b>, boys!</div><div class="en-ref"><b class="red">Up with the flowers</b>, Tom!</div><div class="en-ref"><b class="red">Out with your ideas!</b></div></div>
+      <div class="ex anim" style="--i:2"><div class="lead">2. 行为动词 + 主语 + 情态/助动词（强调）</div><div class="en-ref">It's my duty to help you, and <b class="red">do it I will</b>.</div><div class="en-ref"><b class="red">Go ahead I must</b>.</div><div class="en-ref"><b class="red">Sing a song I cannot</b>; let me give you a dance instead.</div></div>
+      <div class="ex anim" style="--i:3"><div class="lead">3. of 短语在句首</div><div class="en-ref"><b class="red">Of the thirty students</b>, as many as ten passed.</div><div class="en-ref"><b class="red">Of how to protect animals</b>…, the question remained unsettled.</div></div>
+      <div class="ex anim" style="--i:4"><div class="lead">4. ever / never 等前置（句末为 be/情态/助动词时）</div><div class="en-ref">We <b class="red">never have and never will</b> retreat.</div><div class="en-ref">Adults <b class="red">all are</b>. · The husband <b class="red">never is</b>.</div></div>
+      <div class="ex anim" style="--i:5"><div class="lead">5. 比较/方式状语从句倒装</div><div class="en-ref">Mothers give more <b class="red">than will fathers</b>.</div><div class="en-ref">He is honest, <b class="red">as are most</b> high-achieving students.</div><div class="en-ref">Chinese students like to travel, <b class="red">as do</b> foreign students.</div></div>
     </div>
-    <div class="tip anim" style="--i:5">
-      <span>💡</span>
-      <div><b>注意：</b>本节是拔高拓展，看懂即可；但 ④ 的 <b class="gold">as 引导的倒装</b>（as do/are…）在阅读和写作里很实用。</div>
+    <div class="quiz anim" style="--i:6">
+      <div class="q-head">翻译练习 19 <span class="cnt">（考点23）</span></div>
+      <ol class="q">
+        <li>请把答案页撕下来！<span class="hint">down with</span></li>
+        <li>在纪念碑前请脱帽！<span class="hint">off with</span></li>
+        <li>穿上外套吧！<span class="hint">on with</span></li>
+        <li>带她走吧！我不想再见到她了。<span class="hint">away with</span></li>
+        <li>去掉那些陈旧的观念吧！<span class="hint">away with</span></li>
+        <li>装，我是办不到的，因为我是个诚实的人。<span class="hint">行为动词+主语+情态动词</span></li>
+        <li>他真的待在那里守着。<span class="hint">行为动词+主语+情态动词</span></li>
+        <li>在20世纪的人类发明中，方便面是最受欢迎的发明之一。<span class="hint">of 短语至句首</span></li>
+        <li>聪明人会改变主意，但傻子不会。<span class="hint">never 前置</span></li>
+        <li>—你会游泳吗？—当然会了。<span class="hint">certainly 前置</span></li>
+        <li>我们这儿没有人被提名为候选人，尽管我觉得有些人应该可以被提名的。<span class="hint">surely 前置</span></li>
+        <li>江山如画，一时多少豪杰！<span class="hint">once 前置</span></li>
+        <li>你的工作做完了？我不知道我是否能完成。<span class="hint">ever 前置</span></li>
+        <li>他相信，全部同学也都相信，是 Tom 为这扇窗户上的漆。<span class="hint">as</span></li>
+        <li>飞行比大多数其他交通工具需要更多的能量。<span class="hint">than</span></li>
+      </ol>
+      <details class="ans"><summary><span class="caret">▸</span>参考答案</summary><div class="ans-body"><ol>
+        <li><b>Down with</b> the answer page!</li>
+        <li><b>Off with</b> your hats before the monument!</li>
+        <li><b>On with</b> your coat!</li>
+        <li><b>Away with</b> her! I don't want to see her again.</li>
+        <li><b>Away with</b> those outdated ideas!</li>
+        <li><b>Pretend I cannot</b>, for I am an honest man.</li>
+        <li><b>Stay there he did</b>, keeping guard.</li>
+        <li><b>Of the inventions of the 20th century</b>, instant noodles are among the most popular.</li>
+        <li>A wise man changes his mind, while a fool <b>never does</b>.</li>
+        <li>— Can you swim? — <b>Certainly I can</b>.</li>
+        <li>None of us here was nominated, though <b>surely</b> some should have been.</li>
+        <li><b>Once</b>, how many heroes the land had!</li>
+        <li><b>Ever</b> have you finished your work? I don't know if I can finish mine.</li>
+        <li>He believes, <b>as do all</b> the classmates, that it was Tom who painted the window.</li>
+        <li>Flying needs more energy <b>than do</b> most other means of transport.</li>
+      </ol></div></details>
     </div>
   </section>
 
-  <!-- 20 九 · 反意疑问句 -->
-  <section class="slide" data-title="反意疑问句特例" data-sec="九 · 倒装与反意">
+  <!-- 考点24 -->
+  <section class="slide" data-title="考点24 · 反意疑问句的特殊情况" data-sec="九 · 倒装与反意">
     <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">九 · 倒装与反意</span><h2>考点24 · 反意疑问句的几种特殊情况</h2><span class="en">Tag Questions</span></div>
     <div class="grid g3">
-      <div class="ex anim" style="--i:1">
-        <div class="lead">含 only → 肯/否均可</div>
-        <div class="en-ref">There were only five people, <b class="red">weren't/were they</b>?</div>
-      </div>
-      <div class="ex anim" style="--i:2">
-        <div class="lead">主语 A+B → 视情况</div>
-        <div class="en-ref">You and I designed it, <b class="red">didn't we</b>?</div>
-        <div class="en-ref">Whisky and soda is popular, <b class="red">isn't it</b>?</div>
-      </div>
-      <div class="ex anim" style="--i:3">
-        <div class="lead">It is the first time…</div>
-        <div class="en-ref">It is the first time you've visited, <b class="red">isn't it</b>?</div>
-        <div class="en-ref">It is high time we left, <b class="red">isn't it</b>?</div>
-      </div>
+      <div class="ex anim" style="--i:1"><div class="lead">1. 陈述句含 only → 肯/否均可</div><div class="en-ref">There were only five people, <b class="red">weren't / were they</b>?</div><div class="en-ref">Mr. Smith is the only person, <b class="red">isn't / is he</b>?</div></div>
+      <div class="ex anim" style="--i:2"><div class="lead">2. 主语是 A+B → 视情况而定</div><div class="en-ref">You and I designed it, <b class="red">didn't we</b>?<span class="cn">（含 I 用 we）</span></div><div class="en-ref">Whisky and soda is popular, <b class="red">isn't it</b>?<span class="cn">（混合饮料看单数）</span></div><div class="en-ref">The love and care we feel…, <b class="red">isn't it</b>?<span class="cn">（同一概念看单数）</span></div></div>
+      <div class="ex anim" style="--i:3"><div class="lead">3. It is the first time that… → isn't it</div><div class="en-ref">It is the first time you've visited, <b class="red">isn't it</b>?</div><div class="en-ref">It was the second time you had read the novel, <b class="red">wasn't it</b>?</div><div class="en-ref">It is (high) time that we left, <b class="red">isn't it</b>?</div></div>
     </div>
-    <div class="warn anim" style="--i:4">
-      <span>⚠️</span>
-      <div><b>对比：</b>含 <b class="red">only</b> 的主句，反意疑问部分肯定否定都行；但 <b class="red">It is the first time…</b> 只能用 <b class="gold">isn't it</b>（不随从句走）。</div>
+    <div class="quiz anim" style="--i:4">
+      <div class="q-head">翻译练习 20 <span class="cnt">（考点24）</span></div>
+      <ol class="q">
+        <li>我们的老板是唯一一个能够解决所有问题的人，是吗？<span class="hint">only</span></li>
+        <li>刀叉是外国人吃饭的餐具，对吗？<span class="hint">a knife and fork</span></li>
+        <li>你和我合作就能把它做成，不是吗？<span class="hint">you and I</span></li>
+        <li>这是你第一次看到大熊猫，是吗？<span class="hint">It is the first time that</span></li>
+        <li>我们该工作了，不是吗？<span class="hint">It is high time that</span></li>
+      </ol>
+      <details class="ans"><summary><span class="caret">▸</span>参考答案</summary><div class="ans-body"><ol>
+        <li>Our boss is the only one who can solve all the problems, <b>isn't/is he</b>?</li>
+        <li><b>A knife and fork</b> is the tableware foreigners eat with, <b>isn't it</b>?</li>
+        <li><b>You and I</b> can make it by working together, <b>can't we</b>?</li>
+        <li><b>It is the first time that</b> you have seen a panda, <b>isn't it</b>?</li>
+        <li><b>It is high time that</b> we worked, <b>isn't it</b>?</li>
+      </ol></div></details>
     </div>
   </section>
 
-  <!-- 21 十 · 强调(1) -->
-  <section class="slide" data-title="强调手段(一)" data-sec="十 · 强调">
-    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">十 · 强调</span><h2>考点25-30 · 强调手段（一）</h2><span class="en">Emphasis 1</span></div>
+  <!-- 考点25-27 -->
+  <section class="slide" data-title="考点25-27 · 重复 / the last / shall" data-sec="十 · 强调">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">十 · 强调</span><h2>考点25-27 · 重复 · the last · shall</h2><span class="en">Repetition / the last / shall</span></div>
     <div class="grid g3">
       <div class="ex anim" style="--i:1">
-        <div class="lead">重复名词/动词（很多/种类）</div>
-        <div class="en-ref">There are <b class="red">books and books</b> in his basement.</div>
-        <div class="en-ref">She <b class="red">thought and thought</b>.</div>
+        <div class="lead">考点25 · 重复名词/动词/数词</div>
+        <div class="en-ref">There are <b class="red">books and books</b> in his basement.<span class="cn">很多很多书。</span></div>
+        <div class="en-ref">There are <b class="red">doctors and doctors</b>.<span class="cn">有良医也有庸医。</span></div>
+        <div class="en-ref">She <b class="red">thought and thought and thought</b>.</div>
+        <div class="en-ref">We received <b class="red">twenty and twenty</b> letters.</div>
       </div>
       <div class="ex anim" style="--i:2">
-        <div class="lead">the last + 名词（最不可能）</div>
-        <div class="en-ref">Tom is <b class="red">the last person</b> to blame.</div>
+        <div class="lead">考点26 · the last + 名词（强烈否定）</div>
+        <div class="en-ref">Tom is <b class="red">the last person to blame</b>.<span class="cn">最不该受责备。</span></div>
+        <div class="en-ref">Not to keep his promise will be <b class="red">the last thing</b> for him to do.</div>
+        <div class="en-ref">He is <b class="red">the last person to consult</b>.<span class="cn">根本不会找他商量。</span></div>
       </div>
       <div class="ex anim" style="--i:3">
-        <div class="lead">shall 表命令/规定</div>
-        <div class="en-ref">You <b class="red">shall be</b> there at 8:00.</div>
-        <div class="en-ref">Children under 10 <b class="red">shall see</b> it with parents.</div>
-      </div>
-      <div class="ex anim" style="--i:4">
-        <div class="lead">at all / on earth / in the world</div>
-        <div class="en-ref">Where <b class="red">on earth</b> did you see it?</div>
-        <div class="en-ref">Do you know the truth <b class="red">at all</b>?</div>
-      </div>
-      <div class="ex anim" style="--i:5">
-        <div class="lead">nothing but / anything but</div>
-        <div class="en-ref">He is <b class="red">nothing but</b> a novelist.（只是）</div>
-        <div class="en-ref">He is <b class="red">anything but</b> stupid.（绝不）</div>
+        <div class="lead">考点27 · shall 用于二/三人称（命令/规定）</div>
+        <div class="en-ref">You <b class="red">shall be</b> there at 8:00 tomorrow.<span class="cn">（命令）</span></div>
+        <div class="en-ref">Children under 10 <b class="red">shall see</b> this movie with parents.<span class="cn">（规定）</span></div>
       </div>
     </div>
   </section>
 
-  <!-- 22 十 · 强调(2) -->
-  <section class="slide" data-title="强调手段(二)" data-sec="十 · 强调">
-    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">十 · 强调</span><h2>考点31-34 · 强调手段（二）</h2><span class="en">Emphasis 2</span></div>
+  <!-- 考点28-30 -->
+  <section class="slide" data-title="考点28-30 · at all / on earth / nothing-anything but" data-sec="十 · 强调">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">十 · 强调</span><h2>考点28-30 · at all · on earth · nothing/anything but</h2><span class="en">at all / on earth</span></div>
     <div class="grid g3">
-      <div class="ex anim" style="--i:1">
-        <div class="lead">形容词后置</div>
-        <div class="en-ref">Such is Einstein, <b class="red">great and humorous</b>.</div>
-        <div class="en-ref">Everybody, <b class="red">male or female</b>, should obey.</div>
-      </div>
-      <div class="ex anim" style="--i:2">
-        <div class="lead">as…as 加强语气</div>
-        <div class="en-ref">I have <b class="red">as many as</b> 100 supporters.</div>
-        <div class="en-ref">His explanation is <b class="red">as clear as clear</b> can be.</div>
-      </div>
-      <div class="ex anim" style="--i:3">
-        <div class="lead">do / never do 强调动词</div>
-        <div class="en-ref">Please <b class="red">do come</b>.</div>
-        <div class="en-ref">The real reason <b class="red">never did</b> come to light.</div>
-      </div>
-      <div class="ex anim" style="--i:4">
-        <div class="lead">none of（绝不是）</div>
-        <div class="en-ref">It's <b class="red">none of</b> your business.</div>
-        <div class="en-ref">Tom is <b class="red">none of</b> my friends.</div>
-      </div>
-    </div>
-    <div class="write anim" style="--i:5">
-      <span>✍️</span>
-      <div><b>写作加分：</b><b class="gold">do + 动词原形</b>（I do believe…）、<b class="gold">形容词后置</b>（…, beautiful and touching）、<b class="gold">as…as 强调</b>都是让句子出彩的手段。</div>
+      <div class="ex anim" style="--i:1"><div class="lead">考点28 · at all（根本 / 毕竟）</div><div class="en-ref">There is no side to him <b class="red">at all</b>.</div><div class="en-ref">Do you know the truth <b class="red">at all</b>?</div><div class="en-ref">If you remember anything <b class="red">at all</b>, please let us know.</div><div class="ana">用于否定句、疑问句、条件句。</div></div>
+      <div class="ex anim" style="--i:2"><div class="lead">考点29 · on earth / in the world / under the sun / the hell</div><div class="en-ref">Where <b class="red">on earth</b> did you see the victim last?</div><div class="en-ref">We talked about everything <b class="red">under the sun</b>.</div><div class="en-ref">Thank you for the most beautiful day <b class="red">in the world</b>.</div><div class="en-ref">Who <b class="red">the hell</b> is the girl over there?</div></div>
+      <div class="ex anim" style="--i:3"><div class="lead">考点30 · nothing but / anything but</div><div class="en-ref">He was <b class="red">nothing but</b> a novelist.<span class="cn">只是个写小说的（肯定）。</span></div><div class="en-ref">He is <b class="red">anything but</b> stupid.<span class="cn">绝对不笨（否定）。</span></div></div>
     </div>
   </section>
 
-  <!-- 23 十一 · the way -->
-  <section class="slide" data-title="the way 用法" data-sec="十一 · the way">
+  <!-- 考点31-34 -->
+  <section class="slide" data-title="考点31-34 · 形容词后置 / as…as / do / none of" data-sec="十 · 强调">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">十 · 强调</span><h2>考点31-34 · 形容词后置 · as…as · do · none of</h2><span class="en">More Emphasis</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1"><div class="lead">考点31 · 形容词后置</div><div class="en-ref">Such is Einstein, <b class="red">great and humorous, learned and simple-minded</b>.</div><div class="en-ref">Everybody, <b class="red">male or female, old or young</b>, should obey the rules.</div></div>
+      <div class="ex anim" style="--i:2"><div class="lead">考点32 · as…as 加强语气</div><div class="en-ref">I have <b class="red">as many as</b> 100 supporters.</div><div class="en-ref">Earning <b class="red">as little as</b> 300 dollars each month.</div><div class="en-ref">I became <b class="red">as thirsty as thirsty</b> might be.</div><div class="en-ref">His explanation is <b class="red">as clear as clear</b> can be.</div></div>
+      <div class="ex anim" style="--i:3"><div class="lead">考点33 · 动词前放助动词 do / never do</div><div class="en-ref">Please <b class="red">do come</b>.</div><div class="en-ref">The world <b class="red">did have</b> to be conquered.</div><div class="en-ref">The real reason <b class="red">never did come</b> to light.</div></div>
+      <div class="ex anim" style="--i:4"><div class="lead">考点34 · 用 none of 表示（绝不是）</div><div class="en-ref">It's <b class="red">none of</b> your business.</div><div class="en-ref">You can do <b class="red">none of</b> that.</div><div class="en-ref">Tom is <b class="red">none of</b> my friends.</div><div class="en-ref">He is <b class="red">none of</b> the richest.</div></div>
+    </div>
+  </section>
+
+  <!-- 考点25-34 练习21 -->
+  <section class="slide" data-title="考点25-34 · 翻译练习21" data-sec="十 · 强调">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">十 · 强调</span><h2>考点25-34 · 翻译练习 21</h2><span class="en">Practice 21</span></div>
+    <div class="quiz anim" style="--i:1">
+      <div class="q-head">翻译练习 21 <span class="cnt">（考点25-34）</span></div>
+      <ol class="q">
+        <li>这位科学家是属于全世界的，但是他首先是属于中国的。<span class="hint">do</span></li>
+        <li>世界上没有阳光，我们就根本无法生活。<span class="hint">at all</span></li>
+        <li>毫无疑问我们做得很对。<span class="hint">at all</span></li>
+        <li>真的没有想到会在这儿遇到你。<span class="hint">last</span></li>
+        <li>我认为 Matthew 是最不喜欢跳舞的人。<span class="hint">last</span></li>
+        <li>我最不想让他保管钥匙了。<span class="hint">last</span></li>
+        <li>这台电脑拥有天底下最全的功能。<span class="hint">under the sun</span></li>
+        <li>世界上本来就没有什么新鲜事，都是前人做过的。<span class="hint">on earth</span></li>
+        <li>你到底为什么那样做？<span class="hint">the hell</span></li>
+        <li>我不会去看这部电影，它太差了。<span class="hint">none</span></li>
+        <li>这位教师是孩子成长的目击者，有耐心，客观，富有爱心。<span class="hint">形容词后置</span></li>
+        <li>这位政客的非洲之行根本不成功。<span class="hint">anything but</span></li>
+        <li>他早在1932年就开始作曲了，当时他在法国。<span class="hint">as…as</span></li>
+        <li>这故事背后的事实清楚得不能再清楚了。<span class="hint">as…as</span></li>
+        <li>学生得穿校服，否则不得进入。<span class="hint">shall</span></li>
+        <li>艺术家很多，良莠不齐，在选择谁的时候你得谨慎。<span class="hint">名词重复</span></li>
+        <li>当搬开石头的时候，我们发现到处都是蚂蚁。<span class="hint">名词重复</span></li>
+        <li>生物体，无论是动物还是人，都是电能的存储器。<span class="hint">形容词后置</span></li>
+      </ol>
+      <details class="ans"><summary><span class="caret">▸</span>参考答案</summary><div class="ans-body"><ol>
+        <li>The scientist belongs to the world, but he <b>does</b> first belong to China.</li>
+        <li>Without sunlight in the world, we could not live <b>at all</b>.</li>
+        <li>There is no doubt <b>at all</b> that we did the right thing.</li>
+        <li>I really didn't expect to meet you here — you are <b>the last person</b> (I expected to meet here).</li>
+        <li>I think Matthew is <b>the last person</b> to like dancing.</li>
+        <li>He is <b>the last person</b> I want to keep the key.</li>
+        <li>This computer has the most complete functions <b>under the sun</b>.</li>
+        <li>There is nothing new <b>on earth</b>; it has all been done by predecessors.</li>
+        <li>Why <b>the hell</b> did you do that?</li>
+        <li>I won't go to see this movie; it is <b>none</b> too good.</li>
+        <li>The teacher, <b>patient, objective and loving</b>, is a witness to the children's growth.</li>
+        <li>The politician's trip to Africa was <b>anything but</b> successful.</li>
+        <li>He began composing <b>as early as</b> 1932, when he was in France.</li>
+        <li>The truth behind the story is <b>as clear as clear</b> can be.</li>
+        <li>Students <b>shall</b> wear school uniforms, or they shall not be allowed to enter.</li>
+        <li>There are <b>artists and artists</b>; you must be careful in choosing one.</li>
+        <li>When we moved the stone, we found <b>ants and ants</b> everywhere.</li>
+        <li>Living things, <b>animals or humans</b>, are storehouses of electric energy.</li>
+      </ol></div></details>
+    </div>
+  </section>
+
+  <!-- 考点35 -->
+  <section class="slide" data-title="考点35 · the way 的四重用法" data-sec="十一 · the way">
     <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a9aa8">十一 · the way</span><h2>考点35 · the way 的四重用法</h2><span class="en">The Way</span></div>
     <div class="grid g2">
-      <div class="ex anim" style="--i:1">
-        <div class="lead">① 名词（= the manner 方式）</div>
-        <div class="en-ref">The way he speaks <b class="red">is</b> impressive.</div>
-      </div>
-      <div class="ex anim" style="--i:2">
-        <div class="lead">② 副词（= how 如何）</div>
-        <div class="en-ref">That is <b class="red">the way we did</b> the job.</div>
-      </div>
-      <div class="ex anim" style="--i:3">
-        <div class="lead">③ 连词（= as 像 / if 如果）</div>
-        <div class="en-ref">Tom dealt with others <b class="red">the way</b> his mother did.</div>
-        <div class="en-ref"><b class="red">The way</b> you are working, you'll fail.</div>
-      </div>
-      <div class="ex anim" style="--i:4">
-        <div class="lead">④ in the way（以某种方式）</div>
-        <div class="en-ref">They cooked chicken <b class="red">in the way</b> I appreciated.</div>
-        <div class="ana">注意「in the way + 句子」中 in 不可省略。</div>
-      </div>
+      <div class="ex anim" style="--i:1"><div class="lead">1. 名词（= the manner 方式）</div><div class="en-ref">The way he speaks <b class="red">is</b> very impressive.</div><div class="en-ref">I like the way she walks, lithe and graceful.</div></div>
+      <div class="ex anim" style="--i:2"><div class="lead">2. 副词（= how）</div><div class="en-ref">That is <b class="red">the way we did</b> the job.</div><div class="en-ref">We want to know the way you learned the skill.</div></div>
+      <div class="ex anim" style="--i:3"><div class="lead">3. 连词（= as 像 / if 如果照这样下去）</div><div class="en-ref">Tom dealt with others <b class="red">the way</b> his mother did.</div><div class="en-ref">The girl doesn't speak the way the boy does.</div><div class="en-ref"><b class="red">The way</b> you are learning, you won't read like a native.</div></div>
+      <div class="ex anim" style="--i:4"><div class="lead">4. in the way + 句子（以某种方式）</div><div class="en-ref">They cooked chicken <b class="red">in the way</b> that reminded me of my grandma.</div><div class="ana">「in the way + 句子」中 in 不可省略。</div></div>
     </div>
-    <div class="reveal anim" style="--i:5">
-      <details><summary><span class="caret">▸</span> 翻译练习</summary><div class="ans"><div class="en">We will love and serve our country the way our fathers did.</div><div class="mark">我们将像父辈那样热爱并服务于国家。（the way = as）</div></div></details>
-    </div>
-  </section>
-
-  <!-- 24 十二 · 真题精练 -->
-  <section class="slide" data-title="真题精练" data-sec="十二 · 真题精练">
-    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">十二 · 真题精练</span><h2>高考真题回放（上海卷）</h2><span class="en">Real Gaokao</span></div>
-    <div class="grid g2">
-      <div class="ex anim" style="--i:1"><div class="lead">翻译 · 2022 秋考</div><div class="cn-src">妈妈忘了两天前刚给邻居买过黄瓜。（forget）</div>
-        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">Mom forgot buying cucumbers for our neighbor two days ago.</div><div class="mark"><b>考点</b>：forget doing（忘了做过）。</div></div></details></div>
-      <div class="ex anim" style="--i:2"><div class="lead">翻译 · 2022 秋考</div><div class="cn-src">这条运河历经数百年才修建而成，如今虽无昔日繁荣之景，但仍然是横跨东西的重要水路。（as…as）</div>
-        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">The canal took hundreds of years to build, and though it is no longer as prosperous as before, it is still an important waterway running across the east and the west.</div><div class="mark"><b>考点</b>：as…as 比较 + 让步。</div></div></details></div>
-      <div class="ex anim" style="--i:3"><div class="lead">翻译 · 2023 秋考</div><div class="cn-src">正如预期的那样，艺术节引起了学生对于民俗文化的兴趣。（generate）</div>
-        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">As was expected, the art festival generated students' interest in folk culture.</div><div class="mark"><b>考点</b>：As was expected 定语从句。</div></div></details></div>
-      <div class="ex anim" style="--i:4"><div class="lead">翻译 · 2023 秋考</div><div class="cn-src">你是否意识到这个地区的每一个部落有自己的不成文的规则？（aware）</div>
-        <details class="reveal"><summary><span class="caret">▸</span> 答案</summary><div class="ans"><div class="en">Are you aware that every tribe in this region has its own unwritten rules?</div><div class="mark"><b>考点</b>：be aware that + 宾语从句 + 主谓一致（every tribe → has）。</div></div></details></div>
-    </div>
-    <div class="tip anim" style="--i:5">
-      <span>💡</span>
-      <div><b>实战提醒：</b>上海卷翻译题的<b class="gold">括号提示词</b>是定位考点的钥匙——forget→动名词、so that→目的、as…as→比较、where→定语从句、aware→宾语从句。先锁定提示词对应的结构，再组织句子。</div>
+    <div class="quiz anim" style="--i:5">
+      <div class="q-head">翻译练习 22 <span class="cnt">（考点35）</span></div>
+      <ol class="q">
+        <li>你是如何在截止日期之前就完成工作的，能和我们说说吗？<span class="hint">the way</span></li>
+        <li>我们将像我们的父辈那样热爱并服务于我们的国家。<span class="hint">the way</span></li>
+        <li>如果不和你的同事分享数据的话，你就大错特错了。<span class="hint">the way</span></li>
+        <li>我真的很欣赏我们老板的做事风格。<span class="hint">the way</span></li>
+        <li>这位年轻艺术家画向日葵的方式让我联想到梵高。<span class="hint">in the way</span></li>
+      </ol>
+      <details class="ans"><summary><span class="caret">▸</span>参考答案</summary><div class="ans-body"><ol>
+        <li>Can you tell us <b>the way</b> you finished the work before the deadline?</li>
+        <li>We will love and serve our country <b>the way</b> our fathers did.</li>
+        <li><b>The way</b> you don't share data with your colleagues, you are quite wrong.</li>
+        <li>I really appreciate <b>the way</b> our boss does things.</li>
+        <li>The young artist paints sunflowers <b>in the way</b> that reminds me of Van Gogh.</li>
+      </ol></div></details>
     </div>
   </section>
 
-  <!-- 25 收尾 -->
+  <!-- 小结 -->
   <section class="slide" data-title="本章小结" data-sec="收尾">
     <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">收尾</span><h2>本章小结</h2><span class="en">Summary</span></div>
     <div class="grid g2">
-      <div class="sum-block anim" style="--i:1">
-        <h4><span class="dot" style="background:#8a9aa8"></span>否定（形式 ↔ 意义）</h4>
-        <ul>
-          <li><b>not…because</b>：否定转移 / 不转移。</li>
-          <li><b>not A and B</b>：否定 B；<b>not some</b>：部分否定。</li>
-          <li><b>cannot…too / 否定词+比较级</b>：意义肯定。</li>
-          <li><b>more than…can / anything but</b>：意义否定。</li>
-        </ul>
-      </div>
-      <div class="sum-block anim" style="--i:2">
-        <h4><span class="dot" style="background:#b99c6a"></span>强调（十种手段）</h4>
-        <ul>
-          <li><b>重复名词/动词</b>、<b>the last</b>、<b>shall</b>。</li>
-          <li><b>at all / on earth / nothing but / anything but</b>。</li>
-          <li><b>形容词后置 / as…as / do+原形 / none of</b>。</li>
-        </ul>
-      </div>
-      <div class="sum-block anim" style="--i:3">
-        <h4><span class="dot" style="background:#b0909a"></span>非谓语 & 虚拟</h4>
-        <ul>
-          <li><b>come to do</b>（逐渐）、<b>to have done</b>（虚拟主语）。</li>
-          <li><b>remember/forget/stop/mean + to do / doing</b>。</li>
-          <li><b>名词化动名词</b>（有复数）。</li>
-          <li><b>It is essential that…(should)</b>、<b>lest/for fear that</b>。</li>
-        </ul>
-      </div>
-      <div class="sum-block anim" style="--i:4">
-        <h4><span class="dot" style="background:#a49bb0"></span>从句 & 其他</h4>
-        <ul>
-          <li><b>定语从句状语化</b>（因果/结果/让步）。</li>
-          <li><b>there be 定语从句</b>、<b>that 让步倒装</b>。</li>
-          <li><b>条件的其他表达</b>（祈使句+and/or、but for）。</li>
-          <li><b>the way</b>（名词/副词/连词）。</li>
-        </ul>
-      </div>
+      <div class="sum-block anim" style="--i:1"><h4><span class="dot" style="background:#8a9aa8"></span>否定（形式 ↔ 意义）</h4><ul><li><b>not…because</b>：否定转移 / 不转移。</li><li><b>not A and B</b>：否定 B；<b>not some</b>：部分否定。</li><li><b>cannot…too / 否定词+比较级 / no…but</b>：意义肯定。</li><li><b>more than…can / anything but</b>：意义否定。</li></ul></div>
+      <div class="sum-block anim" style="--i:2"><h4><span class="dot" style="background:#b99c6a"></span>强调（十种手段）</h4><ul><li><b>重复名词/动词/数词</b>、<b>the last</b>、<b>shall</b>。</li><li><b>at all / on earth / nothing but / anything but</b>。</li><li><b>形容词后置 / as…as / do+原形 / none of</b>。</li></ul></div>
+      <div class="sum-block anim" style="--i:3"><h4><span class="dot" style="background:#b0909a"></span>非谓语 & 虚拟</h4><ul><li><b>come to do</b>（逐渐）、<b>to have done</b>（虚拟主语）。</li><li><b>remember/forget/stop/mean + to do / doing</b>。</li><li><b>名词化动名词</b>（有复数）。</li><li><b>It is essential that…(should)</b>、<b>lest / for fear that</b>。</li></ul></div>
+      <div class="sum-block anim" style="--i:4"><h4><span class="dot" style="background:#a49bb0"></span>从句 & 其他</h4><ul><li><b>定语从句状语化</b>（因果/结果/让步）。</li><li><b>there be 定语从句</b>、<b>that 让步倒装</b>。</li><li><b>条件的其他表达</b>（祈使句+and/or、but for）。</li><li><b>the way</b>（名词/副词/连词）。</li></ul></div>
     </div>
-    <div class="motto anim" style="--i:5">
-      翻译题先看「括号提示词」锁定考点 · 写作里主动用「cannot too / the more / 定语从句状语化 / do 强调」—— <span>考点在手，翻译写作都加分</span>
-    </div>
+    <div class="motto anim" style="--i:5">翻译题先看「括号提示词」锁定考点 · 写作里主动用「cannot too / the more / 定语从句状语化 / do 强调」—— <span>考点在手，翻译写作都加分</span></div>
   </section>
 
 </div>
@@ -822,7 +1463,7 @@
   <button id="prev" aria-label="上一页" title="上一页 (←)">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
   </button>
-  <div class="counter"><b id="cur">1</b> / <span id="total">25</span></div>
+  <div class="counter"><b id="cur">1</b> / <span id="total">33</span></div>
   <button id="next" aria-label="下一页" title="下一页 (→)">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
   </button>
@@ -834,7 +1475,7 @@
     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
   </button>
 </div>
-<div id="hint">← → 翻页 · 空格下一页 · F 全屏 · 左侧手柄抽拉目录</div>
+<div id="hint">← → 翻页 · 空格下一页 · F 全屏 · 左侧手柄抽拉目录 · 内容较长可滚动</div>
 
 <div id="drawerTab" title="打开目录">
   <span class="darr">▸</span><span>目 录</span>
@@ -844,7 +1485,7 @@
     <div class="dp-head">
       <div class="k">目录</div>
       <h3>语法点补充</h3>
-      <div class="sub">35 个考点 · 真题精练 · 写作加分</div>
+      <div class="sub">35 个考点 · 22 组翻译练习 · 附参考答案</div>
       <button class="close" id="drawerClose" aria-label="关闭">✕</button>
     </div>
     <div id="drawerList"></div>
@@ -875,7 +1516,7 @@
     '五 · 条件与让步':'#8aa8a0', '六 · 不定式与动名词':'#b0909a',
     '七 · 分词':'#c9a58b', '八 · 虚拟语气':'#8b9bab',
     '九 · 倒装与反意':'#c09892', '十 · 强调':'#b99c6a',
-    '十一 · the way':'#8a9aa8', '十二 · 真题精练':'#c09892'
+    '十一 · the way':'#8a9aa8'
   };
 
   (function buildMenu(){
