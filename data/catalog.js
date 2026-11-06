@@ -27,6 +27,11 @@ window.CATALOG = {
           title: "高考翻译常用复合句课件（第四章）",
           file: "courseware/高考翻译常用复合句课件.html",
           added: "2026-10-12"
+        },
+        {
+          title: "it 在翻译中的运用课件（第五章）",
+          file: "courseware/it在翻译中的运用课件.html",
+          added: "2026-11-06"
         }
       ]
     },

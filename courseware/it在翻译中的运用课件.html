@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高考英语翻译 · 第五章 it 在翻译中的运用</title>
+<style>
+  :root{
+    --ink:#46413b;          /* 主文字 暖灰棕 */
+    --muted:#8c857b;        /* 次要文字 */
+    --line:#e6ded1;         /* 边框 */
+    --bg:#f4efe6;           /* 背景 燕麦米色 */
+    --paper:#fcf9f3;        /* 卡片纸面 暖白 */
+    --paper-2:#f6f0e6;      /* 二级纸面 */
+    --ink-soft:#5c564f;
+
+    /* 四节主题色（莫兰迪） */
+    --blue:#7e96a5;  --blue-deep:#5c7383;  --blue-bg:#edf1f3;
+    --sage:#93aa92;  --sage-deep:#6e856d;  --sage-bg:#eff2ec;
+    --rose:#c09892;  --rose-deep:#98706a;  --rose-bg:#f5ecea;
+    --lav:#a69cb4;   --lav-deep:#7f7590;   --lav-bg:#f0edf3;
+
+    /* 功能色 */
+    --gold:#b99c6a;  --gold-deep:#937a48;  --gold-bg:#f3ecdd;
+    --warn:#b48780;  --warn-deep:#966963;  --warn-bg:#f5e7e4;
+    --tip:#7e96a5;   --tip-bg:#edf1f3;
+
+    --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:var(--font);
+    color:var(--ink);
+    background:var(--bg);
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ===== 舞台 ===== */
+  #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:58px 44px 96px}
+
+  .slide{
+    position:absolute;
+    width:min(1200px,100%);
+    max-height:100%;
+    background:var(--paper);
+    border-radius:22px;
+    box-shadow:0 26px 60px -26px rgba(92,82,66,.34), 0 0 0 1px rgba(92,82,66,.05);
+    padding:44px 54px;
+    opacity:0;
+    transform:translateX(42px);
+    pointer-events:none;
+    transition:opacity .45s ease, transform .45s ease;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+  .slide.active{opacity:1;transform:translateX(0);pointer-events:auto}
+  .slide.prev{transform:translateX(-42px)}
+
+  /* 入场动画 */
+  .slide .anim{opacity:0;transform:translateY(14px)}
+  .slide.active .anim{
+    opacity:1;transform:none;
+    transition:opacity .5s ease, transform .5s ease;
+    transition-delay:calc(var(--i,0)*70ms + 60ms);
+  }
+
+  /* ===== 页头 ===== */
+  .head{display:flex;align-items:center;gap:14px;margin-bottom:24px;flex-wrap:wrap}
+  .part-badge{
+    font-size:13px;font-weight:700;letter-spacing:.05em;
+    color:#fff;background:var(--pc,#8a8378);
+    padding:6px 15px;border-radius:99px;white-space:nowrap;
+  }
+  .head h2{font-size:29px;font-weight:800;letter-spacing:.01em;color:var(--ink)}
+  .head .en{font-size:14px;color:var(--muted);font-weight:600;margin-left:auto;white-space:nowrap}
+
+  .kicker{font-size:13px;font-weight:700;letter-spacing:.14em;color:var(--pc-deep,#937a48);text-transform:uppercase;margin-bottom:8px}
+
+  /* ===== 封面 ===== */
+  .slide.cover{
+    background:
+      radial-gradient(900px 520px at 88% -10%, rgba(185,156,106,.30), transparent 60%),
+      radial-gradient(720px 540px at -10% 112%, rgba(166,156,180,.32), transparent 55%),
+      linear-gradient(135deg,#66788a 0%,#7f8fa0 50%,#99a3ae 100%);
+    color:#fff;
+    justify-content:center;
+  }
+  .cover .brand-line{position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#b99c6a,#c9b88f,#93aa92,#a69cb4)}
+  .cover .tag{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#eef1f3;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);padding:7px 16px;border-radius:99px;margin-bottom:26px}
+  .cover h1{font-size:52px;font-weight:900;line-height:1.2;letter-spacing:.01em}
+  .cover h1 .hl{color:#e4d3ad}
+  .cover .sub{margin-top:18px;font-size:20px;color:#e7ebee;font-weight:500;line-height:1.7}
+  .cover .meta{margin-top:40px;display:flex;gap:28px;font-size:14px;color:#c9d3da;font-weight:600}
+  .cover .meta b{color:#fff}
+
+  /* ===== 卡片 & 列表 ===== */
+  .grid{display:grid;gap:15px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .card{
+    background:var(--paper);border:1px solid var(--line);border-radius:16px;
+    padding:18px 20px;position:relative;overflow:hidden;
+  }
+  .card .num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:34px;height:34px;border-radius:10px;font-size:16px;font-weight:800;
+    color:#fff;background:var(--pc,#8a8378);margin-bottom:11px;
+  }
+  .card h4{font-size:19px;font-weight:800;margin-bottom:5px;color:var(--ink)}
+  .card .cn{font-size:13.5px;color:var(--muted);font-weight:600;line-height:1.5}
+  .card .frm{font-size:17px;font-weight:800;color:var(--pc,#8a8378);margin-top:9px;letter-spacing:.02em;font-family:"SF Mono",ui-monospace,monospace}
+  .card .eg{font-size:13.5px;color:#6f6a62;margin-top:8px;line-height:1.6;word-break:break-all}
+
+  /* 高亮关键词 */
+  .key{color:var(--pc-deep,#937a48);font-weight:800}
+  .gold{color:var(--gold-deep);font-weight:800}
+
+  /* it 高亮（本课重点：加粗运用 it 的部分） */
+  .it-hl{
+    font-weight:800;color:var(--gold-deep,#937a48);
+    background:linear-gradient(transparent 55%, rgba(185,156,106,.32) 55%);
+    border-radius:2px;padding:0 2px;
+  }
+
+  /* 例句区 */
+  .ex{
+    background:var(--paper-2);border:1px solid var(--line);border-radius:15px;
+    padding:16px 20px;margin-top:8px;
+  }
+  .ex + .ex{margin-top:14px}
+  .ex .lead{font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:11px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .ex .lead .pill{background:var(--gold-bg);color:var(--gold-deep)}
+
+  .cn-src{font-size:17px;font-weight:600;color:var(--ink);line-height:1.6}
+  .cn-src b{color:var(--gold-deep)}
+  .en-ref{font-size:16.5px;font-weight:700;color:var(--pc-deep,#5c7383);margin-top:9px;line-height:1.55;word-break:break-word}
+  .en-ref .mt{display:inline-block;font-size:12px;font-weight:800;color:#fff;background:var(--pc,#8a8378);border-radius:6px;padding:2px 8px;margin-right:8px;vertical-align:2px}
+  .ana{margin-top:10px;font-size:13.5px;color:#6f6a62;line-height:1.65}
+  .ana b{color:var(--gold-deep)}
+
+  .formula{
+    background:var(--paper);border:1px dashed var(--line);border-radius:12px;
+    padding:13px 16px;margin-top:10px;font-size:15.5px;font-weight:700;color:var(--ink);
+  }
+  .formula .fb{display:inline-block;background:var(--pc,#8a8378);color:#fff;font-size:12px;font-weight:800;border-radius:6px;padding:2px 9px;margin-right:8px}
+
+  /* 重点框 */
+  .note{
+    display:flex;gap:12px;align-items:flex-start;
+    background:var(--gold-bg);border:1px solid #e6d8ba;border-left:4px solid var(--gold);
+    border-radius:12px;padding:13px 17px;margin-top:15px;font-size:15px;line-height:1.65;
+  }
+  .note .ico{font-size:18px;line-height:1.4}
+  .note b{color:var(--gold-deep)}
+
+  .tip{
+    display:flex;gap:10px;align-items:flex-start;
+    background:var(--tip-bg);border:1px solid #d5e0e4;border-left:4px solid var(--tip);
+    border-radius:12px;padding:12px 16px;margin-top:13px;font-size:14.5px;line-height:1.65;color:var(--blue-deep);
+  }
+  .tip b{color:var(--blue-deep)}
+
+  .warn{
+    display:flex;gap:10px;align-items:flex-start;
+    background:var(--warn-bg);border:1px solid #ecd2cd;border-left:4px solid var(--warn);
+    border-radius:12px;padding:12px 16px;margin-top:13px;font-size:14.5px;line-height:1.65;color:var(--warn-deep);
+  }
+  .warn b{color:var(--warn-deep)}
+
+  /* 两栏例句 */
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+  .cols .ex{margin-top:0}
+
+  /* 表 */
+  table{width:100%;border-collapse:collapse;font-size:15px}
+  th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:12.5px;letter-spacing:.05em;color:var(--muted);background:var(--paper-2);font-weight:700}
+  td .en{font-weight:700;color:#3f3b35}
+  td .cn{color:var(--muted);font-size:13px}
+
+  .pill{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;background:var(--tip-bg);color:var(--blue-deep);margin-right:6px}
+
+  /* 小结 */
+  .sum-block{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:var(--paper)}
+  .sum-block h4{font-size:15.5px;font-weight:800;margin-bottom:11px;display:flex;align-items:center;gap:8px;color:var(--ink)}
+  .sum-block .dot{width:10px;height:10px;border-radius:3px;background:var(--pc,#8a8378)}
+  .sum-block ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .sum-block li{font-size:13.5px;color:#5c564f;line-height:1.5}
+  .sum-block li b{color:var(--ink)}
+
+  .motto{
+    margin-top:20px;text-align:center;font-size:19px;font-weight:800;color:var(--ink);
+    background:var(--gold-bg);border:1px solid #e6d8ba;border-radius:14px;padding:17px;
+  }
+  .motto span{color:var(--warn-deep)}
+
+  /* ===== 答案折叠 ===== */
+  .reveal{margin-top:10px;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .reveal summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 15px;font-size:13.5px;font-weight:700;color:var(--pc-deep,#5c7383);background:var(--paper-2);user-select:none}
+  .reveal summary::-webkit-details-marker{display:none}
+  .reveal summary .caret{display:inline-block;transition:transform .2s;font-size:11px}
+  .reveal[open] summary .caret{transform:rotate(90deg)}
+  .reveal .ans{padding:13px 16px 15px;border-top:1px dashed var(--line);font-size:15.5px}
+  .reveal .ans .en{font-weight:700;color:var(--pc-deep,#5c7383);line-height:1.65;word-break:break-word}
+  .reveal .ans .mark{margin-top:8px;font-size:13px;color:#6f6a62;line-height:1.6}
+  .reveal .ans .mark b{color:var(--gold-deep)}
+
+  /* 讲解案例：译文正文常规字重，只有 it 部分加粗高亮 */
+  .reveal.lecture .ans .en{font-weight:500;color:var(--ink,#46413b)}
+
+  /* ===== 导航 ===== */
+  #nav{
+    position:fixed;left:50%;bottom:24px;transform:translateX(-50%);
+    display:flex;align-items:center;gap:12px;z-index:50;
+    background:rgba(252,249,243,.88);backdrop-filter:blur(10px);
+    border:1px solid var(--line);border-radius:99px;padding:8px 12px;
+    box-shadow:0 12px 32px -14px rgba(92,82,66,.32);
+  }
+  #nav button{
+    border:none;background:var(--paper);border:1px solid var(--line);
+    width:40px;height:40px;border-radius:50%;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;color:#5c564f;
+    transition:.15s;
+  }
+  #nav button:hover:not(:disabled){background:var(--paper-2);border-color:var(--gold);color:var(--gold-deep)}
+  #nav button:disabled{opacity:.35;cursor:default}
+  #nav .counter{font-size:14px;font-weight:700;color:#5c564f;min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
+  #nav .counter b{color:var(--gold-deep);font-size:16px}
+  #nav #menuBtn{width:auto;border-radius:99px;padding:0 16px;font-size:13px;font-weight:700;gap:7px}
+  #progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#7e96a5,#93aa92,#c09892,#a69cb4);z-index:60;width:0;transition:width .35s ease}
+  #hint{position:fixed;left:50%;transform:translateX(-50%);bottom:3px;font-size:12px;color:#b3ab9f;z-index:40;white-space:nowrap}
+
+  /* ===== 目录浮层（抽拉式） ===== */
+  #menuOverlay{
+    position:fixed;inset:0;background:rgba(70,63,55,.34);backdrop-filter:blur(3px);
+    z-index:70;opacity:0;pointer-events:none;transition:opacity .25s ease;
+  }
+  #menuOverlay.open{opacity:1;pointer-events:auto}
+  #menuPanel{
+    position:fixed;top:0;right:0;bottom:0;width:min(360px,88vw);
+    background:var(--paper);box-shadow:-24px 0 50px -30px rgba(92,82,66,.5);
+    z-index:71;transform:translateX(100%);transition:transform .3s ease;
+    display:flex;flex-direction:column;
+  }
+  #menuOverlay.open #menuPanel{transform:translateX(0)}
+  #menuPanel .mp-head{padding:22px 22px 14px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+  #menuPanel .mp-head h3{font-size:17px;font-weight:800;color:var(--ink)}
+  #menuPanel .mp-head .close{margin-left:auto;border:none;background:var(--paper-2);border:1px solid var(--line);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:16px;color:#5c564f}
+  #menuList{overflow-y:auto;padding:10px 14px 30px;flex:1}
+  .mp-sec{font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--muted);margin:16px 6px 6px;text-transform:uppercase}
+  .mp-item{
+    display:flex;align-items:center;gap:11px;width:100%;text-align:left;
+    padding:10px 12px;border:none;background:transparent;border-radius:10px;cursor:pointer;
+    font-size:14px;color:#4c4740;transition:.13s;
+  }
+  .mp-item:hover{background:var(--paper-2)}
+  .mp-item.active{background:var(--gold-bg);color:var(--gold-deep);font-weight:700}
+  .mp-item .n{font-size:12px;font-weight:800;color:#b3ab9f;min-width:22px;text-align:right}
+
+  /* ===== 响应式 ===== */
+  @media (max-width:900px){
+    #stage{padding:18px 14px 88px}
+    .slide{padding:26px 22px;border-radius:15px}
+    .g2,.g3,.g4,.cols{grid-template-columns:1fr}
+    .head h2{font-size:21px}
+    .cover h1{font-size:32px}
+    .cover .sub{font-size:16px}
+    .cn-src{font-size:15.5px}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<div id="stage">
+
+  <!-- 1 封面 -->
+  <section class="slide cover active" data-title="封面" data-sec="封面">
+    <div class="brand-line"></div>
+    <div class="anim" style="--i:0"><span class="tag">高考英语 · 翻译专项训练（修订版）</span></div>
+    <h1 class="anim" style="--i:1">第五章 <span class="hl">it 在翻译中的运用</span></h1>
+    <p class="sub anim" style="--i:2">it 的指代 · 形式主语 · 形式宾语 · 强调句 —— 一对一精讲</p>
+    <div class="meta anim" style="--i:3">
+      <span>主讲：<b>杨老师</b></span>
+      <span>对象：<b>高三</b></span>
+      <span>板块：<b>翻译 · 语法</b></span>
+    </div>
+  </section>
+
+  <!-- 2 本章导读 -->
+  <section class="slide" data-title="本章导读" data-sec="导读">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">导读</span><h2>本章要讲什么</h2><span class="en">Overview</span></div>
+    <p class="anim" style="--i:1;font-size:15.5px;color:#5c564f;line-height:1.75">it 可以<b class="gold">指代人或物</b>，可以<b class="gold">表示时间、距离、天气</b>，可以作<b class="gold">形式主语、形式宾语</b>，也可用于构成<b class="gold">强调句</b>。高考翻译的主要考查点集中在 it 作<b>形式主语、形式宾语</b>以及<b>强调句</b>。本章分四块逐一讲解：</p>
+    <div class="grid g4" style="margin-top:16px">
+      <div class="card anim" style="--i:2;--pc:#7e96a5"><span class="num">一</span><h4>it 的指代</h4><div class="cn">天气 · 时间 · 距离</div></div>
+      <div class="card anim" style="--i:3;--pc:#93aa92"><span class="num">二</span><h4>形式主语</h4><div class="cn">for / of + sb. + to do</div></div>
+      <div class="card anim" style="--i:4;--pc:#c09892"><span class="num">三</span><h4>形式宾语</h4><div class="cn">think / make it + 宾补</div></div>
+      <div class="card anim" style="--i:5;--pc:#a69cb4"><span class="num">四</span><h4>强调结构</h4><div class="cn">It is / was … that / who</div></div>
+    </div>
+    <div class="note anim" style="--i:6;margin-top:24px">
+      <span class="ico">🧭</span>
+      <div><b>一条主线：</b>翻译时<b>先看提示词</b>（圈定考查的 it 用法）→ <b>再判断功能</b>（指代 / 形式主语 / 形式宾语 / 强调）→ <b>套固定句型</b> → <b>核对 that / who / to 等不遗漏</b>。</div>
+    </div>
+    <div class="tip anim" style="--i:7">
+      <span>💡</span>
+      <div>讲解部分的案例<b>先不显示译文</b>，点开「点击查看」后，句中<b class="gold">运用 it 的部分已加粗高亮</b>；每节后附「真题自测」，先遮住答案自行翻译。</div>
+    </div>
+  </section>
+
+  <!-- 3 一 it 的指代作用 -->
+  <section class="slide" data-title="一 · it 的指代作用" data-sec="一 · it 的指代作用">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7e96a5">一 · it 的指代</span><h2>it 的指代作用</h2><span class="en">Referential it</span></div>
+    <p class="anim" style="--i:1;font-size:15.5px;color:#5c564f;line-height:1.75">it 可<b class="key">指代天气、时间、距离</b>等，翻译时中文往往没有对应的「它」，需按英语习惯补出 it。</p>
+    <div class="ex anim" style="--i:2">
+      <div class="lead">案例 · 提示词 <span class="pill">rain</span></div>
+      <div class="cn-src">天要下雨了。</div>
+      <details class="reveal lecture">
+        <summary><span class="caret">▸</span> 点击查看译文与讲解</summary>
+        <div class="ans">
+          <div class="en"><b class="it-hl">It</b> is going to rain.</div>
+          <div class="mark"><b>分析：</b>「天气」这里译成 <b>it</b>，不能直译为 weather。平时要注意积累 it 的习惯用法。</div>
+        </div>
+      </details>
+    </div>
+    <div class="grid g3 anim" style="--i:3;margin-top:14px">
+      <div class="card" style="--pc:#7e96a5"><span class="num">天</span><h4>指代天气</h4><div class="cn">It is going to rain.</div></div>
+      <div class="card" style="--pc:#8aa0ae"><span class="num">时</span><h4>指代时间</h4><div class="cn">It is five o'clock.</div></div>
+      <div class="card" style="--pc:#8aa0ae"><span class="num">距</span><h4>指代距离</h4><div class="cn">It is 20 minutes' walk.</div></div>
+    </div>
+  </section>
+
+  <!-- 4 一 与时间相关的 it 句型 -->
+  <section class="slide" data-title="一 · 与时间相关的 it 句型" data-sec="一 · it 的指代作用">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#7e96a5">一 · it 的指代</span><h2>与时间相关的 it 句型</h2><span class="en">Time Patterns</span></div>
+    <div style="margin-top:4px">
+      <table class="anim" style="--i:1">
+        <thead><tr><th style="width:40%">句型</th><th style="width:26%">含义</th><th>例</th></tr></thead>
+        <tbody>
+          <tr><td><span class="en"><b class="it-hl">It is time</b> for sb. to do sth.</span></td><td><span class="cn">是某人做某事的时间了</span></td><td><span class="en"><b class="it-hl">It is time</b> for us to take measures.</span></td></tr>
+          <tr><td><span class="en"><b class="it-hl">It is</b> + 一段时间 + <b class="it-hl">since</b>…</span></td><td><span class="cn">从……起已有多久了</span></td><td><span class="en"><b class="it-hl">It is</b> over 20 years <b class="it-hl">since</b> I came here.</span></td></tr>
+          <tr><td><span class="en"><b class="it-hl">It was / will be</b> + 一段时间 + <b class="it-hl">before</b>…</span></td><td><span class="cn">过了多久才……</span></td><td><span class="en"><b class="it-hl">It will be</b> long <b class="it-hl">before</b> he comes back.</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">案例 1 · 提示词 <span class="pill">address</span></div>
+        <div class="cn-src">是该我们采取有效措施解决全球变暖问题的时候了。</div>
+        <details class="reveal lecture">
+          <summary><span class="caret">▸</span> 点击查看译文与讲解</summary>
+          <div class="ans">
+            <div class="en"><b class="it-hl">It is time</b> for us to take effective measures to address global warming.</div>
+            <div class="mark"><b>分析：</b>「是该……的时候了」用固定句型 <b>It is time for sb. to do sth.</b></div>
+          </div>
+        </details>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">案例 2 · 提示词 <span class="pill">It</span></div>
+        <div class="cn-src">自从我开始教英语至今已有 20 多年了。</div>
+        <details class="reveal lecture">
+          <summary><span class="caret">▸</span> 点击查看译文与讲解</summary>
+          <div class="ans">
+            <div class="en"><b class="it-hl">It is</b> over 20 years <b class="it-hl">since</b> I started teaching English.</div>
+            <div class="mark"><b>分析：</b>「自从……已……」用 <b>It is + 时间段 + since</b>，since 从句用<b>一般过去时</b> started。</div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 二 it 作形式主语 -->
+  <section class="slide" data-title="二 · it 作形式主语" data-sec="二 · it 作形式主语">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 形式主语</span><h2>it 作形式主语</h2><span class="en">Formal Subject</span></div>
+    <p class="anim" style="--i:1;font-size:15px;color:#5c564f;line-height:1.7">当<b class="key">动词不定式（短语）或动名词</b>作主语时，通常用 it 作形式主语，把真正的主语放在<b>谓语之后</b>。</p>
+    <div class="ex anim" style="--i:2">
+      <div class="lead">案例 · 提示词 <span class="pill">easy</span></div>
+      <div class="cn-src">由于缺乏社会经验，大学生很容易遭受诈骗。</div>
+      <details class="reveal lecture">
+        <summary><span class="caret">▸</span> 点击查看译文与讲解</summary>
+        <div class="ans">
+          <div class="en"><b class="it-hl">It</b> is easy <b class="it-hl">for</b> college students <b class="it-hl">to</b> fall victim to fraud for lack of social experience.</div>
+          <div class="mark"><b>分析：</b>真正的主语是 to fall victim…（太长），用 it 作形式主语顶到句首，构成 <b>It is + adj + for sb. + to do</b>。</div>
+        </div>
+      </details>
+    </div>
+    <div class="formula anim" style="--i:3"><span class="fb">句式 1</span><b class="it-hl">It is</b> + 形容词 + <b class="it-hl">for</b> + sb. + <b class="it-hl">to</b> do sth.</div>
+    <div class="formula anim" style="--i:4"><span class="fb">句式 2</span><b class="it-hl">It is</b> + 形容词 + <b class="it-hl">of</b> + sb. + <b class="it-hl">to</b> do sth.</div>
+    <div class="note anim" style="--i:5">
+      <span class="ico">🔑</span>
+      <div><b>两条注意：</b>① 这两个句型中的 it 一般<b>不译出来</b>；② 二者含义接近、通常用 <b>for</b>，但当形容词是<b>修饰人的属性</b>时（如 nice、kind、polite）用 <b>of</b>。</div>
+    </div>
+  </section>
+
+  <!-- 6 二 for/of 案例 + 其它句型 -->
+  <section class="slide" data-title="二 · for / of 案例与其它句型" data-sec="二 · it 作形式主语">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#93aa92">二 · 形式主语</span><h2>for / of 的案例 · 其它句型</h2><span class="en">Formal Subject</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1">
+        <div class="lead">案例 1 · 提示词 <span class="pill">kind</span></div>
+        <div class="cn-src">你开车送我们回家，真是太客气了。</div>
+        <details class="reveal lecture">
+          <summary><span class="caret">▸</span> 点击查看译文与讲解</summary>
+          <div class="ans">
+            <div class="en"><b class="it-hl">It</b> is kind <b class="it-hl">of</b> you <b class="it-hl">to</b> send us home in your car.</div>
+            <div class="mark"><b>分析：</b>kind 修饰「你」这个人 → 用 <b>of</b>。</div>
+          </div>
+        </details>
+      </div>
+      <div class="ex anim" style="--i:2">
+        <div class="lead">案例 2 · 提示词 <span class="pill">necessary</span></div>
+        <div class="cn-src">我们每个人参与志愿者工作，是很有必要的。</div>
+        <details class="reveal lecture">
+          <summary><span class="caret">▸</span> 点击查看译文与讲解</summary>
+          <div class="ans">
+            <div class="en"><b class="it-hl">It</b> is necessary <b class="it-hl">for</b> every one of us <b class="it-hl">to</b> participate in volunteer work.</div>
+            <div class="mark"><b>分析：</b>necessary 修饰「参与志愿工作」这件事 → 用 <b>for</b>。</div>
+          </div>
+        </details>
+      </div>
+    </div>
+    <div style="margin-top:14px">
+      <table class="anim" style="--i:3">
+        <thead><tr><th style="width:44%">其它需记忆的 it 句型</th><th>含义</th></tr></thead>
+        <tbody>
+          <tr><td><span class="en"><b class="it-hl">It takes</b> sb. some time <b class="it-hl">to</b> do sth.</span></td><td><span class="cn">某人用了……时间做某事</span></td></tr>
+          <tr><td><span class="en"><b class="it-hl">It is</b> no use / no good <b class="it-hl">doing</b> sth.</span></td><td><span class="cn">做……是没有用的</span></td></tr>
+          <tr><td><span class="en"><b class="it-hl">It is</b> up to you <b class="it-hl">to</b> decide…</span></td><td><span class="cn">由你决定做……</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tip anim" style="--i:4">
+      <span>💡</span>
+      <div>it 在<b>主语从句</b>中的使用（It is said / claimed that…）见第四章「主语从句」一节。</div>
+    </div>
+  </section>
+
+  <!-- 7 三 it 作形式宾语 -->
+  <section class="slide" data-title="三 · it 作形式宾语" data-sec="三 · it 作形式宾语">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">三 · 形式宾语</span><h2>it 作形式宾语</h2><span class="en">Formal Object</span></div>
+    <div class="formula anim" style="--i:1"><span class="fb">基本结构</span>主语 + believe / consider / feel / find / imagine / make / regard / suppose / think + <b class="it-hl">it</b> + 宾补（形容词/名词）+ 不定式 / 动名词 / 从句</div>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="ex anim" style="--i:2">
+        <div class="lead">案例 1 · 提示词 <span class="pill">it</span></div>
+        <div class="cn-src">我发现在这么短的时间内很难完成这项艰巨的任务。</div>
+        <details class="reveal lecture">
+          <summary><span class="caret">▸</span> 点击查看译文与讲解</summary>
+          <div class="ans">
+            <div class="en">I find <b class="it-hl">it</b> hard <b class="it-hl">to</b> finish this difficult task in such a short time.</div>
+            <div class="mark"><b>分析：</b>find 可接宾语从句，也可接复合宾语。用 it 作形式宾语时构成 <b>find it + adj + to do</b>；真正宾语是 to finish…。也可译成宾语从句：I find (that) it is hard to…，两种都对。</div>
+          </div>
+        </details>
+      </div>
+      <div class="ex anim" style="--i:3">
+        <div class="lead">案例 2 · 提示词 <span class="pill">it</span></div>
+        <div class="cn-src">学校定了一条规则，开始上课时学生要起立。</div>
+        <details class="reveal lecture">
+          <summary><span class="caret">▸</span> 点击查看译文与讲解</summary>
+          <div class="ans">
+            <div class="en">The school made <b class="it-hl">it</b> a rule <b class="it-hl">that</b> students should stand up at the beginning of the class.</div>
+            <div class="mark"><b>分析：</b>make 后<b>不可直接跟宾语从句</b>，但可用复合宾语，所以这句<b>只能用 it 作形式宾语</b>：make it + 名词 + that 从句。</div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 三 其它形式宾语固定句式 -->
+  <section class="slide" data-title="三 · 其它形式宾语固定句式" data-sec="三 · it 作形式宾语">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#c09892">三 · 形式宾语</span><h2>其它常见固定句式</h2><span class="en">Formal Object</span></div>
+    <div style="margin-top:6px">
+      <table class="anim" style="--i:1">
+        <thead><tr><th style="width:40%">句式</th><th>含义</th></tr></thead>
+        <tbody>
+          <tr><td><span class="en">sb. will see to <b class="it-hl">it</b> <b class="it-hl">that</b>…</span></td><td><span class="cn">某人将确保……</span></td></tr>
+          <tr><td><span class="en">sb. would appreciate <b class="it-hl">it</b> <b class="it-hl">if</b>…</span></td><td><span class="cn">如果……某人将不胜感激</span></td></tr>
+          <tr><td><span class="en">take <b class="it-hl">it</b> for granted <b class="it-hl">that</b>…</span></td><td><span class="cn">想当然地认为……</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="ex anim" style="--i:2">
+      <div class="lead">例 · 提示词 <span class="pill">favour</span></div>
+      <div class="cn-src">如果你能帮我个忙，我将不胜感激。</div>
+      <details class="reveal lecture">
+        <summary><span class="caret">▸</span> 点击查看译文与讲解</summary>
+        <div class="ans">
+          <div class="en">I would appreciate <b class="it-hl">it</b> <b class="it-hl">if</b> you can do me a favour.</div>
+          <div class="mark"><b>分析：</b>appreciate 后接名词/代词作宾语，再接 if 从句表示条件；这里的 it 不能省略。</div>
+        </div>
+      </details>
+    </div>
+    <div class="note anim" style="--i:3">
+      <span class="ico">⭐</span>
+      <div><b>记法：</b>这几个固定搭配里的 it 都是<b>形式宾语</b>，后面紧跟 that / if 从句才是真正的内容，考试中 it <b>不可遗漏</b>。</div>
+    </div>
+  </section>
+
+  <!-- 9 四 it 强调结构 -->
+  <section class="slide" data-title="四 · it 强调结构" data-sec="四 · it 强调结构">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a69cb4">四 · 强调结构</span><h2>it 用于强调结构</h2><span class="en">Emphatic it</span></div>
+    <div class="formula anim" style="--i:1"><span class="fb">强调句结构</span><b class="it-hl">It</b> + be + 被强调部分 + <b class="it-hl">that / who</b> + 剩余部分</div>
+    <p class="anim" style="--i:2;font-size:14px;color:#6f6a62;margin-top:10px;line-height:1.7">强调句可强调<b>主语、宾语、状语和从句</b>。用强调句翻译要注意两点：① that / who <b>不能遗漏</b>；② 强调句<b>不影响句子成分</b>，只是强调某一部分，要注意被强调部分的完整性。</p>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="ex anim" style="--i:3">
+        <div class="lead">案例 1 · 强调主语 · 提示词 <span class="pill">It</span></div>
+        <div class="cn-src">正是他们把事故中受伤的人送进医院。</div>
+        <details class="reveal lecture">
+          <summary><span class="caret">▸</span> 点击查看译文与讲解</summary>
+          <div class="ans">
+            <div class="en"><b class="it-hl">It</b> was they <b class="it-hl">that / who</b> sent the people injured in the accident to the hospital.</div>
+            <div class="mark"><b>分析：</b>强调的是<b>主语</b>，不能用宾格 them，要用主格 they；还要注意不要遗漏 that / who。</div>
+          </div>
+        </details>
+      </div>
+      <div class="ex anim" style="--i:4">
+        <div class="lead">案例 2 · 强调地点状语 · 提示词 <span class="pill">It</span></div>
+        <div class="cn-src">就在这个公园将进行唱歌比赛。</div>
+        <details class="reveal lecture">
+          <summary><span class="caret">▸</span> 点击查看译文与讲解</summary>
+          <div class="ans">
+            <div class="en"><b class="it-hl">It</b> is in this park <b class="it-hl">that</b> the singing competition will be held.</div>
+            <div class="mark"><b>分析：</b>强调的是<b>地点状语</b>，被强调部分要完整，不能遗漏介词 in。</div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 四 强调句注意点 -->
+  <section class="slide" data-title="四 · 强调句（原因状语与注意点）" data-sec="四 · it 强调结构">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a69cb4">四 · 强调结构</span><h2>强调原因状语 · 三点注意</h2><span class="en">Emphatic it</span></div>
+    <div class="ex anim" style="--i:1">
+      <div class="lead">案例 3 · 强调原因状语 · 提示词 <span class="pill">It</span></div>
+      <div class="cn-src">正是因为听取了专家的意见，我们才取得这么大的进步。</div>
+      <details class="reveal lecture">
+        <summary><span class="caret">▸</span> 点击查看译文与讲解</summary>
+        <div class="ans">
+          <div class="en"><b class="it-hl">It</b> was because we took the advice of the specialists <b class="it-hl">that</b> we made such great progress.</div>
+          <div class="mark"><b>分析：</b>强调<b>原因状语</b>要用 because（不用 since / as），且不要漏掉后面的 that。</div>
+        </div>
+      </details>
+    </div>
+    <div class="grid g3" style="margin-top:14px">
+      <div class="card anim" style="--i:2;--pc:#a69cb4"><span class="num">1</span><h4>不能漏 that / who</h4><div class="cn">连接词是强调句的标志，漏了就错。</div></div>
+      <div class="card anim" style="--i:3;--pc:#b0a6be"><span class="num">2</span><h4>强调主语用主格</h4><div class="cn">强调人作主语用主格，不能用宾格。</div></div>
+      <div class="card anim" style="--i:4;--pc:#b0a6be"><span class="num">3</span><h4>被强调部分要完整</h4><div class="cn">强调状语时介词（in / by / for）不能丢。</div></div>
+    </div>
+    <div class="tip anim" style="--i:5">
+      <span>💡</span>
+      <div><b>判断方法：</b>把 It is / was … that / who 去掉后，若句子<b>依然完整、语序通顺</b>，就是强调句；否则不是。</div>
+    </div>
+  </section>
+
+  <!-- 11 真题自测（一） -->
+  <section class="slide" data-title="真题自测（一）· 指代 & 形式主语" data-sec="真题自测">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">真题自测 · 一</span><h2>真题自测（8 选 · 上）</h2><span class="en">Practice</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1"><div class="lead">1 · 提示词 <span class="pill">break</span> <span class="pill" style="background:var(--blue-bg);color:var(--blue-deep)">指代时间</span></div><div class="cn-src">现在是休息的时间了。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en"><b class="it-hl">It is time</b> to take a break now.</div><div class="mark"><b>考点</b>：it 指代时间 · It is time to do。</div></div></details></div>
+      <div class="ex anim" style="--i:2"><div class="lead">2 · 提示词 <span class="pill">walk</span> <span class="pill" style="background:var(--blue-bg);color:var(--blue-deep)">指代距离</span></div><div class="cn-src">从我家到地铁站走路要 20 分钟。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en"><b class="it-hl">It</b> is 20 minutes' walk from my home to the subway station.</div><div class="mark"><b>考点</b>：it 指代距离。</div></div></details></div>
+      <div class="ex anim" style="--i:3"><div class="lead">3 · 提示词 <span class="pill">habit</span> <span class="pill" style="background:var(--sage-bg);color:var(--sage-deep)">形式主语</span></div><div class="cn-src">熬一整夜看书不是一个好习惯。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en"><b class="it-hl">It</b> is not a good habit <b class="it-hl">to</b> stay up all night reading.</div><div class="mark"><b>考点</b>：it 作形式主语 · 不定式作真正主语。</div></div></details></div>
+      <div class="ex anim" style="--i:4"><div class="lead">4 · 提示词 <span class="pill">take</span> <span class="pill" style="background:var(--sage-bg);color:var(--sage-deep)">It takes</span></div><div class="cn-src">这名画家用了两年时间完成了这幅杰出的作品。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en"><b class="it-hl">It took</b> the painter two years <b class="it-hl">to</b> complete the masterpiece.</div><div class="mark"><b>考点</b>：It takes sb. some time to do。</div></div></details></div>
+    </div>
+  </section>
+
+  <!-- 12 真题自测（二） -->
+  <section class="slide" data-title="真题自测（二）· 形式宾语 & 强调句" data-sec="真题自测">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">真题自测 · 二</span><h2>真题自测（8 选 · 下）</h2><span class="en">Practice</span></div>
+    <div class="grid g2">
+      <div class="ex anim" style="--i:1"><div class="lead">5 · 提示词 <span class="pill">bring up</span> <span class="pill" style="background:var(--rose-bg);color:var(--rose-deep)">形式宾语</span></div><div class="cn-src">很多年轻的夫妇认为靠自己抚养孩子很吃力。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">Many young couples think <b class="it-hl">it</b> very tiring <b class="it-hl">to</b> bring up children on their own.</div><div class="mark"><b>考点</b>：it 作形式宾语 · think it + adj + to do。</div></div></details></div>
+      <div class="ex anim" style="--i:2"><div class="lead">6 · 提示词 <span class="pill">it</span> <span class="pill" style="background:var(--rose-bg);color:var(--rose-deep)">形式宾语</span></div><div class="cn-src">我们学校规定学生不可以将智能手机带进校园。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en">Our school makes <b class="it-hl">it</b> a rule <b class="it-hl">that</b> students mustn't bring their smartphones to campus.</div><div class="mark"><b>考点</b>：it 作形式宾语 · make it a rule that。</div></div></details></div>
+      <div class="ex anim" style="--i:3"><div class="lead">7 · 提示词 <span class="pill">practise</span> <span class="pill" style="background:var(--lav-bg);color:var(--lav-deep)">强调句</span></div><div class="cn-src">正是通过多年的苦练，他才获得了冠军。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en"><b class="it-hl">It</b> was by practising hard for years <b class="it-hl">that</b> he won the championship.</div><div class="mark"><b>考点</b>：强调句 · 强调方式状语 by…。</div></div></details></div>
+      <div class="ex anim" style="--i:4"><div class="lead">8 · 提示词 <span class="pill">It</span> <span class="pill" style="background:var(--lav-bg);color:var(--lav-deep)">强调句</span></div><div class="cn-src">正因为她一步步地实现了一个又一个短期目标，她才会在科学领域获得不断的突破。</div>
+        <details class="reveal"><summary><span class="caret">▸</span> 点击查看参考答案</summary><div class="ans"><div class="en"><b class="it-hl">It</b> was because she achieved her short-term goals one after another step by step <b class="it-hl">that</b> she was able to make constant breakthroughs in science.</div><div class="mark"><b>考点</b>：强调句 · 强调原因状语，用 because。</div></div></details></div>
+    </div>
+  </section>
+
+  <!-- 13 本章小结 -->
+  <section class="slide" data-title="本章小结 · 易错点" data-sec="小结">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b99c6a">小结</span><h2>本章小结 · 高频易错点</h2><span class="en">Recap</span></div>
+    <div class="grid g4" style="margin-top:6px">
+      <div class="sum-block anim" style="--i:1;--pc:#7e96a5">
+        <h4><span class="dot"></span>it 的指代</h4>
+        <ul><li>天气 / 时间 / 距离 → <b>it</b></li><li><b>It is time</b> for sb. to do</li><li><b>It is + 时间 + since</b>（从句用过去时）</li></ul>
+      </div>
+      <div class="sum-block anim" style="--i:2;--pc:#93aa92">
+        <h4><span class="dot"></span>形式主语</h4>
+        <ul><li>It is + adj + <b>for / of</b> + sb. + to do</li><li>修饰人 → <b>of</b>（kind/nice）</li><li><b>It takes</b> sb. time to do</li></ul>
+      </div>
+      <div class="sum-block anim" style="--i:3;--pc:#98a5b2">
+        <h4><span class="dot"></span>形式宾语</h4>
+        <ul><li>think / find / make + <b>it</b> + 宾补</li><li>make it a rule <b>that</b>…</li><li>appreciate <b>it</b> if / see to <b>it</b> that</li></ul>
+      </div>
+      <div class="sum-block anim" style="--i:4;--pc:#a69cb4">
+        <h4><span class="dot"></span>强调结构</h4>
+        <ul><li>It is / was … <b>that / who</b></li><li>强调主语用<b>主格</b></li><li>状语介词（in/by/for）<b>不能丢</b></li></ul>
+      </div>
+    </div>
+    <div class="warn anim" style="--i:5">
+      <span>⚠️</span>
+      <div><b>最易失分的四处：</b>① 强调句漏掉 that / who；② 强调主语误用宾格（they 写成 them）；③ 强调状语漏介词（in this park 写成 this park）；④ make it a rule that 中漏掉 it。</div>
+    </div>
+    <div class="motto anim" style="--i:6">
+      看提示词 · 判功能 · 套句型 · 核对 that/to —— <span>it 的翻译不丢分</span>
+    </div>
+  </section>
+
+</div>
+
+<div id="nav">
+  <button id="prev" aria-label="上一页" title="上一页 (←)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="counter"><b id="cur">1</b> / <span id="total">13</span></div>
+  <button id="next" aria-label="下一页" title="下一页 (→)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <button id="menuBtn" aria-label="目录" title="目录">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+    <span>目录</span>
+  </button>
+  <button id="fs" aria-label="全屏" title="全屏 (F)">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+  </button>
+</div>
+<div id="hint">← → 翻页 · 空格下一页 · F 全屏 · 「目录」快速跳转</div>
+
+<!-- 目录浮层（抽拉式） -->
+<div id="menuOverlay">
+  <div id="menuPanel">
+    <div class="mp-head">
+      <h3>本章目录</h3>
+      <button class="close" id="menuClose" aria-label="关闭">✕</button>
+    </div>
+    <div id="menuList"></div>
+  </div>
+</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  const curEl = document.getElementById('cur');
+  const totalEl = document.getElementById('total');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const fsBtn = document.getElementById('fs');
+  const menuBtn = document.getElementById('menuBtn');
+  const menuClose = document.getElementById('menuClose');
+  const menuOverlay = document.getElementById('menuOverlay');
+  const menuList = document.getElementById('menuList');
+  const progress = document.getElementById('progress');
+  let idx = 0;
+  totalEl.textContent = total;
+
+  // 构建目录（按 data-sec 分组）
+  (function buildMenu(){
+    const groups = [];
+    const map = {};
+    slides.forEach((s,i)=>{
+      const sec = s.dataset.sec || '其他';
+      const title = s.dataset.title || ('第'+(i+1)+'页');
+      if(!map[sec]){ map[sec] = {sec, items:[]}; groups.push(map[sec]); }
+      map[sec].items.push({title, i});
+    });
+    groups.forEach(g=>{
+      const h = document.createElement('div');
+      h.className = 'mp-sec';
+      h.textContent = g.sec;
+      menuList.appendChild(h);
+      g.items.forEach(it=>{
+        const b = document.createElement('button');
+        b.className = 'mp-item';
+        b.innerHTML = '<span class="n">'+ (it.i+1) +'</span><span>'+ it.title +'</span>';
+        b.addEventListener('click', ()=>{ go(it.i); closeMenu(); });
+        menuList.appendChild(b);
+      });
+    });
+  })();
+
+  function render(){
+    slides.forEach((s,i)=>{
+      s.classList.toggle('active', i===idx);
+      s.classList.toggle('prev', i<idx);
+    });
+    curEl.textContent = idx+1;
+    progress.style.width = ((idx+1)/total*100) + '%';
+    prevBtn.disabled = idx===0;
+    nextBtn.disabled = idx===total-1;
+    Array.from(menuList.querySelectorAll('.mp-item')).forEach((b,i)=>{
+      b.classList.toggle('active', i===idx);
+    });
+  }
+  function go(n){
+    idx = Math.max(0, Math.min(total-1, n));
+    render();
+  }
+  function closeMenu(){ menuOverlay.classList.remove('open'); }
+  function openMenu(){ menuOverlay.classList.add('open'); }
+
+  prevBtn.addEventListener('click', ()=>go(idx-1));
+  nextBtn.addEventListener('click', ()=>go(idx+1));
+  menuBtn.addEventListener('click', openMenu);
+  menuClose.addEventListener('click', closeMenu);
+  menuOverlay.addEventListener('click', (e)=>{ if(e.target===menuOverlay) closeMenu(); });
+
+  document.addEventListener('keydown', (e)=>{
+    if(menuOverlay.classList.contains('open')){
+      if(e.key==='Escape') closeMenu();
+      return;
+    }
+    if(e.key==='ArrowRight' || e.key===' ' || e.key==='PageDown'){ e.preventDefault(); go(idx+1); }
+    else if(e.key==='ArrowLeft' || e.key==='PageUp'){ e.preventDefault(); go(idx-1); }
+    else if(e.key==='Home'){ go(0); }
+    else if(e.key==='End'){ go(total-1); }
+    else if(e.key==='m' || e.key==='M'){ openMenu(); }
+    else if(e.key==='f' || e.key==='F'){
+      if(document.fullscreenElement){ document.exitFullscreen(); }
+      else { document.documentElement.requestFullscreen(); }
+    }
+  });
+  fsBtn.addEventListener('click', ()=>{
+    if(document.fullscreenElement){ document.exitFullscreen(); }
+    else { document.documentElement.requestFullscreen(); }
+  });
+  // 触屏滑动
+  let touchX=null;
+  document.addEventListener('touchstart', e=>{ touchX=e.touches[0].clientX; });
+  document.addEventListener('touchend', e=>{
+    if(touchX===null) return;
+    const dx=e.changedTouches[0].clientX-touchX;
+    if(Math.abs(dx)>50){ dx<0?go(idx+1):go(idx-1); }
+    touchX=null;
+  });
+  render();
+</script>
+</body>
+</html>
