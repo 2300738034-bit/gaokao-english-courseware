@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>作文开篇·信息描述句型（图片·图表·现象评论）</title>
+<style>
+  :root{
+    --bg:#EFEBE4;
+    --paper:#FBF9F5;
+    --card:#FFFFFF;
+    --ink:#4A463F;
+    --muted:#8C8578;
+    --line:#E3DDD3;
+    --line-soft:#EDE8DF;
+    --brand:#A8B5A0;
+    --brand-deep:#7E8F76;
+    --rose:#C4A79E;
+    --rose-deep:#B18C7F;
+    --blue:#8FA6B0;
+    --blue-deep:#6E8A96;
+    --tan:#C9B08A;
+    --shadow:0 2px 6px rgba(90,80,60,.06), 0 10px 28px -12px rgba(90,80,60,.16);
+    --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--font);
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ===== 顶部导航 ===== */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:center;gap:14px;
+    padding:14px 22px;
+    background:rgba(251,249,245,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .menu-btn{
+    width:42px;height:42px;flex:0 0 auto;
+    border:1px solid var(--line);border-radius:12px;
+    background:var(--card);color:var(--ink);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+    cursor:pointer;transition:.2s;
+  }
+  .menu-btn:hover{background:var(--brand);color:#fff;border-color:var(--brand)}
+  .menu-btn span{display:block;width:18px;height:2px;background:currentColor;border-radius:2px;transition:.25s}
+  .menu-btn.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .menu-btn.open span:nth-child(2){opacity:0}
+  .menu-btn.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .topbar .titles{min-width:0}
+  .topbar .titles h1{font-size:17px;font-weight:800;letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .topbar .titles .sub{font-size:12px;color:var(--muted)}
+  .topbar .badge{
+    margin-left:auto;flex:0 0 auto;
+    font-size:11px;font-weight:700;letter-spacing:.06em;
+    color:#fff;background:var(--rose-deep);
+    padding:5px 12px;border-radius:99px;
+  }
+
+  /* ===== 目录侧滑 ===== */
+  .overlay{position:fixed;inset:0;z-index:60;background:rgba(70,60,48,.28);opacity:0;pointer-events:none;transition:opacity .3s}
+  .overlay.show{opacity:1;pointer-events:auto}
+  .drawer{
+    position:fixed;top:0;left:0;bottom:0;z-index:70;
+    width:min(340px,86vw);background:var(--paper);border-right:1px solid var(--line);
+    transform:translateX(-102%);transition:transform .32s cubic-bezier(.4,0,.2,1);
+    display:flex;flex-direction:column;box-shadow:12px 0 40px -20px rgba(70,60,48,.3);
+  }
+  .drawer.open{transform:translateX(0)}
+  .drawer .d-head{padding:22px 24px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px}
+  .drawer .d-head .dot{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--blue));color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .drawer .d-head h2{font-size:16px;font-weight:800}
+  .drawer .d-head p{font-size:11px;color:var(--muted)}
+  .drawer nav{flex:1;overflow-y:auto;padding:14px 0 30px}
+  .drawer .grp-title{font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--muted);padding:16px 24px 8px;display:flex;align-items:center;gap:8px}
+  .drawer .grp-title::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--brand)}
+  .drawer .grp-title.p2::before{background:var(--blue)}
+  .drawer .grp-title.p3::before{background:var(--rose)}
+  .drawer a{display:flex;align-items:center;gap:10px;padding:9px 24px;color:var(--ink);text-decoration:none;font-size:14px;transition:.15s;border-left:3px solid transparent}
+  .drawer a:hover{background:#F1EDE5;border-left-color:var(--brand)}
+  .drawer a .idx{font-size:11px;color:var(--muted);min-width:22px;font-weight:600}
+
+  /* ===== 内容区 ===== */
+  main{max-width:1060px;margin:0 auto;padding:26px 20px 90px}
+
+  /* 封面 */
+  .hero{
+    background:linear-gradient(135deg,#E9E4DA 0%,#E3DCD0 55%,#DCD4C6 100%);
+    border:1px solid var(--line);border-radius:22px;
+    padding:46px 40px;margin-bottom:30px;position:relative;overflow:hidden;
+  }
+  .hero::after{content:"";position:absolute;right:-70px;top:-70px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(196,167,158,.5),rgba(196,167,158,0) 70%)}
+  .hero .kicker{font-size:12px;font-weight:800;letter-spacing:.22em;color:var(--brand-deep);text-transform:uppercase}
+  .hero h1{font-size:32px;font-weight:900;margin:10px 0 8px;letter-spacing:.01em}
+  .hero h1 em{font-style:normal;color:var(--rose-deep)}
+  .hero p.desc{font-size:15px;color:#6E675C;max-width:660px}
+  .hero .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+  .hero .chip{font-size:12.5px;font-weight:600;color:#5E584D;background:rgba(255,255,255,.65);border:1px solid var(--line);padding:6px 14px;border-radius:99px}
+
+  /* 板块标题 */
+  .section{margin-top:14px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin:40px 0 18px;flex-wrap:wrap}
+  .sec-head .num{font-size:13px;font-weight:800;color:#fff;background:var(--brand);padding:4px 12px;border-radius:8px;letter-spacing:.05em}
+  .sec-head h2{font-size:25px;font-weight:900;letter-spacing:.01em}
+  .sec-head .en{font-size:13px;color:var(--muted);font-weight:600}
+  .sec-head .hint{width:100%;font-size:13px;color:var(--muted);margin-top:2px}
+  .sec-head.g2 .num{background:var(--blue-deep)}
+  .sec-head.g3 .num{background:var(--rose-deep)}
+
+  /* 共通点导语 */
+  .common{
+    background:var(--paper);border:1px solid var(--line);border-radius:16px;
+    padding:22px 24px;margin-bottom:8px;
+  }
+  .common h3{font-size:16px;font-weight:800;margin-bottom:10px;display:flex;align-items:center;gap:9px}
+  .common h3::before{content:"✦";color:var(--rose-deep)}
+  .common p{font-size:14px;color:#6E675C;margin-bottom:8px}
+  .common .pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+  .common .pill{font-size:12.5px;font-weight:600;background:#F1EDE5;border:1px solid var(--line-soft);padding:5px 12px;border-radius:99px;color:#5E584D}
+
+  /* 万能公式 */
+  .formula{
+    background:linear-gradient(180deg,#F6F2EA,#F1ECE2);
+    border:1px solid var(--line);border-left:4px solid var(--brand);
+    border-radius:14px;padding:18px 20px;margin:16px 0 22px;
+  }
+  .formula h4{font-size:13px;font-weight:800;letter-spacing:.06em;color:var(--brand-deep);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+  .formula h4::before{content:"◆"}
+  .formula .f-en{font-size:15.5px;font-weight:700;line-height:1.6;color:#3F3A33}
+  .formula .f-en b{color:var(--brand-deep);font-weight:800}
+  .formula .f-en .slot{color:var(--rose-deep);font-weight:700;border-bottom:2px dashed var(--rose-deep);padding:0 2px}
+  .formula .f-zh{font-size:13px;color:var(--muted);margin-top:6px}
+
+  /* 句型列表 */
+  .p-list{display:flex;flex-direction:column;gap:12px}
+  .pcard{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+  .pcard .p-head{display:flex;align-items:center;gap:13px;padding:15px 20px;cursor:pointer;user-select:none}
+  .pcard .p-no{width:38px;height:38px;flex:0 0 auto;border-radius:12px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px}
+  .pcard .p-main{min-width:0;flex:1}
+  .pcard .p-en{font-size:15px;font-weight:700;line-height:1.5}
+  .pcard .p-en b{color:var(--brand-deep)}
+  .pcard .p-zh{font-size:13px;color:var(--muted);margin-top:3px;line-height:1.55}
+  .pcard .arrow{margin-left:auto;color:#B8AF9F;transition:.25s;font-size:14px;flex:0 0 auto}
+  .pcard.open .arrow{transform:rotate(180deg)}
+  .pcard .p-body{display:none;padding:2px 20px 18px;border-top:1px solid var(--line-soft)}
+  .pcard.open .p-body{display:block;animation:fadeUp .3s ease}
+  .p-tip{font-size:13px;color:#6E675C;background:#FBF8F3;border-left:3px solid var(--blue);padding:10px 14px;border-radius:6px;margin-top:4px}
+  .p-tip b{color:var(--blue-deep)}
+  .p-mem{font-size:13px;color:#5E584D;background:#F6F0E6;border-left:3px solid var(--tan);padding:10px 14px;border-radius:6px;margin-top:10px}
+  .p-mem b{color:#8B6F47}
+  .p-ex{margin-top:12px}
+  .p-ex h6{font-size:11.5px;font-weight:800;letter-spacing:.06em;color:var(--rose-deep);margin-bottom:8px;display:flex;align-items:center;gap:7px}
+  .p-ex h6::before{content:"✎";font-size:13px}
+  .ex-line{display:flex;flex-direction:column;gap:3px;padding:8px 12px;background:#FBF8F3;border:1px solid var(--line-soft);border-radius:9px;margin-bottom:7px}
+  .ex-line:last-child{margin-bottom:0}
+  .ex-line .en{font-size:13.5px;font-weight:600;line-height:1.6}
+  .ex-line .en b{color:var(--brand-deep)}
+  .ex-line .zh{font-size:12.5px;color:var(--muted)}
+
+  /* 例题实战 */
+  .ex-list{display:flex;flex-direction:column;gap:22px;margin-top:6px}
+  .ex-card{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
+  .ex-card .ex-top{display:flex;align-items:center;gap:10px;padding:16px 22px 0}
+  .ex-card .ex-tag{font-size:12px;font-weight:800;color:#fff;padding:4px 12px;border-radius:8px;letter-spacing:.04em}
+  .ex-card .ex-title{font-size:15.5px;font-weight:800}
+  .ex-card .ex-dir{font-size:12.5px;color:var(--muted)}
+  .ex-media{display:flex;justify-content:center;align-items:center;padding:18px 22px 6px}
+  .ex-media svg{max-width:100%;height:auto;border-radius:14px}
+  .ex-media .text-passage{
+    background:#FBF8F3;border:1px solid var(--line-soft);border-left:4px solid var(--rose);
+    border-radius:12px;padding:18px 22px;font-size:15px;line-height:1.85;color:#4A463F;max-width:760px;
+  }
+  .ex-media .text-passage .zh{color:#6E675C}
+  .ex-media .text-passage .en{font-weight:700;margin-bottom:8px}
+  .ex-prompt{
+    margin:10px 22px 4px;background:#F4F0E8;border:1px dashed var(--line);
+    border-radius:12px;padding:12px 16px;font-size:14px;color:#5E584D;
+  }
+  .ex-prompt b{color:var(--rose-deep)}
+  .ex-answers{padding:10px 22px 20px}
+  .ans-item{padding:11px 0;border-bottom:1px solid var(--line-soft)}
+  .ans-item:last-child{border-bottom:none}
+  .ans-item .q{display:flex;align-items:center;gap:10px;font-size:14px;cursor:pointer;user-select:none}
+  .ans-item .q .tag{flex:0 0 auto;font-size:11px;font-weight:800;color:var(--brand-deep);background:#EDE8DF;padding:3px 9px;border-radius:7px}
+  .ans-item .q .show{margin-left:auto;font-size:11.5px;font-weight:700;color:#A99A7F;background:#F1EDE5;padding:3px 10px;border-radius:99px;transition:.15s;flex:0 0 auto}
+  .ans-item .q:hover .show{background:#E5DED0}
+  .ans-item .a{display:none;margin-top:8px;font-size:14px;color:#3F3A33;background:#F6F2EA;padding:11px 15px;border-radius:10px;line-height:1.7}
+  .ans-item .a b{color:var(--brand-deep)}
+  .ans-item .a .zh{display:block;font-size:12.5px;color:var(--muted);margin-top:4px}
+  .ans-item.open .a{display:block;animation:fadeUp .25s ease}
+
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:4px 0 6px}
+  .toolbar button{font-family:var(--font);font-size:12.5px;font-weight:700;cursor:pointer;color:#6E675C;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:7px 15px;transition:.15s}
+  .toolbar button:hover{background:#F1EDE5}
+
+  /* 学法建议 */
+  .advice{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px 26px;margin-top:10px}
+  .advice h3{font-size:16px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:9px}
+  .advice h3::before{content:"✦";color:var(--brand-deep)}
+  .advice .a-item{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--line-soft)}
+  .advice .a-item:last-child{border-bottom:none}
+  .advice .a-item .no{flex:0 0 auto;width:26px;height:26px;border-radius:8px;background:var(--brand);color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+  .advice .a-item .txt{font-size:14px;color:#5E584D;line-height:1.7}
+  .advice .a-item .txt b{color:var(--ink)}
+
+  .footer{text-align:center;color:var(--muted);font-size:12px;margin-top:44px;padding-top:22px;border-top:1px solid var(--line)}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  @media (max-width:640px){
+    .hero{padding:30px 22px}
+    .hero h1{font-size:25px}
+    .sec-head h2{font-size:21px}
+    .topbar .titles h1{font-size:15px}
+    .pcard .p-head{padding:13px 15px}
+  }
+</style>
+</head>
+<body>
+
+<!-- 顶部导航 -->
+<div class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="目录"><span></span><span></span><span></span></button>
+  <div class="titles">
+    <h1>作文开篇 · 信息描述句型</h1>
+    <div class="sub">图片描述 · 图表描述 · 现象评论</div>
+  </div>
+  <div class="badge">3 组 · 30 句型 · 6 例题</div>
+</div>
+
+<!-- 侧滑目录 -->
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer">
+  <div class="d-head">
+    <div class="dot">目</div>
+    <div><h2>目录</h2><p>作文开篇·信息描述句型</p></div>
+  </div>
+  <nav id="tocNav"></nav>
+</aside>
+
+<main>
+  <!-- 封面 -->
+  <section class="hero">
+    <div class="kicker">Gaokao English · Writing Openers</div>
+    <h1>作文开篇·<em>信息描述</em>句型</h1>
+    <p class="desc">一、图片描述　二、图表描述　三、现象评论 —— 三组句型共同解决同一件事：<b>在作文开头，把题目给出的「图片 / 图表 / 文字信息」准确、生动地描述出来。</b>先描述，再评论，是高考英语作文最常见的开篇方式。</p>
+    <div class="meta">
+      <span class="chip">📖 出处：《名校名师高考英语作文全攻略（第3版）》分类句型 1–3 组</span>
+      <span class="chip">🎯 强基篇 · 语言储备</span>
+    </div>
+  </section>
+
+  <!-- 共通点 -->
+  <section class="section" id="common">
+    <div class="common">
+      <h3>三组句型的共同点</h3>
+      <p>它们都站在<b>「作文第一句」</b>的位置，任务是把题目给的<b>已有信息</b>用英文复述出来。写得好，等于给阅卷老师一个漂亮的开门红；写得差，只会重复题目、浪费字数。三组的共同套路是：</p>
+      <div class="pill-row">
+        <span class="pill">① 先「指认」信息 —— The picture / chart / survey shows…</span>
+        <span class="pill">② 再「概括」内容 —— 描述画面、读出趋势、点出现象</span>
+        <span class="pill">③ 最后「带出」寓意或观点 —— conveying / meaning / I maintain that…</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 一、图片描述 ================= -->
+  <section class="section" id="pic">
+    <div class="sec-head">
+      <span class="num">一</span>
+      <h2>图片描述</h2>
+      <span class="en">Picture Description</span>
+      <div class="hint">针对漫画、两图对比、场景图。核心：描述「画了什么」→ 点出「寓意是什么」。</div>
+    </div>
+
+    <div class="formula">
+      <h4>万能开头公式</h4>
+      <div class="f-en">The picture <b>shows / depicts</b> <span class="slot">画面内容</span>, <b>conveying the message that</b> <span class="slot">寓意</span>.</div>
+      <div class="f-zh">图片展示了「画面内容」，传递了「寓意」这一信息。 → 先描画面，再点寓意。</div>
+    </div>
+
+    <div class="p-list">
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--brand-deep)">1</div><div class="p-main"><div class="p-en">The two pictures <b>depict</b> two totally different scenes, serving as a <b>sharp contrast</b>.</div><div class="p-zh">两张图片描绘了完全不同的场景，形成了鲜明的对比。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>用在「两图对比」题：</b>先用一句话把两幅图的对立关系点破，下文再分别写两幅图。</div>
+          <div class="p-mem"><b>记忆</b>　关键词「<b>contrast 对比</b>」—— 看到"两图对比"题，第一句就用它。口诀：两图一对比，先抛 contrast。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>The two pictures depict two totally different scenes, serving as a sharp contrast:</b> one shows a boy littering while the other shows him picking up rubbish.</span><span class="zh">两张图片描绘了完全不同的场景，形成鲜明对比：一幅是一个男孩乱扔垃圾，另一幅是他在捡垃圾。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--brand-deep)">2</div><div class="p-main"><div class="p-en">The <b>thought-provoking</b> cartoon <b>tells / warns</b> us that …</div><div class="p-zh">这幅引人深思的漫画告诉 / 警告我们……</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>单幅漫画最常用开头：</b>「thought-provoking」是高分词，直接接寓意从句。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>thought-provoking 发人深省</b>」是单幅漫画题的高分开场词；看到单图先想它。口诀：单图先想 thought-provoking。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>The thought-provoking cartoon warns us that</b> blind worship of online celebrities may lead young people astray.</span><span class="zh">这幅引人深思的漫画警告我们：盲目崇拜网红可能会让年轻人误入歧途。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--brand-deep)">3</div><div class="p-main"><div class="p-en">The <b>symbolic meaning</b> of the picture is …</div><div class="p-zh">这张图片的标志性意义在于……</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>点「寓意」专用：</b>描述完画面后，用这句把抽象含义说出来。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>symbolic meaning 象征意义</b>」—— 用在描述完画面之后，专门"点寓意"。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>The symbolic meaning of the picture is</b> that we should value inner quality over outward appearance.</span><span class="zh">这张图片的象征意义在于，我们应当重视内在品质而非外表。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--brand-deep)">4</div><div class="p-main"><div class="p-en"><b>Laughable at first glance</b>, the drawing actually <b>conveys the message</b> to us that …</div><div class="p-zh">尽管第一眼看上去很可笑，漫画其实传递了这样的信息……</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>先扬后抑：</b>「看起来可笑 → 其实意味深长」的转折，让开头有层次感。</div>
+          <div class="p-mem"><b>记忆</b>　先扬后抑公式「先可笑，后深刻」—— 「<b>Laughable at first glance</b>」起头，转折用 actually。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>Laughable at first glance, the drawing actually conveys the message to us that</b> convenience should never come at the cost of health.</span><span class="zh">尽管第一眼看上去很可笑，漫画其实传递了这样的信息：便利绝不应以牺牲健康为代价。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--brand-deep)">5</div><div class="p-main"><div class="p-en"><b>It is most likely that</b> by drawing the picture, the artist <b>intends to</b> …</div><div class="p-zh">很有可能通过画这样的漫画，艺术家想要……</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>猜作者意图：</b>「the artist intends to」把描述升级为对创作目的的分析。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>the artist intends to 作者意图</b>」—— 从"画面"升级到"意图"，显得有分析力。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>It is most likely that by drawing the picture, the artist intends to</b> remind us to put down our phones and reconnect with the people around us.</span><span class="zh">很有可能通过画这样的漫画，艺术家想要提醒我们放下手机，重新和身边的人交流。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--brand-deep)">6</div><div class="p-main"><div class="p-en"><b>What is conveyed</b> in the picture is <b>realistic and most meaningful</b>.</div><div class="p-zh">图片所传递的信息现实而又非常有意义。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>总评式开头：</b>不细描画面，直接对「信息」定性（现实、有意义）。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>What is conveyed 所传递的信息</b>」—— 主语从句开头，直接对信息"定性"。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>What is conveyed in the picture is realistic and most meaningful:</b> small acts of kindness can make the world warmer.</span><span class="zh">图片所传递的信息现实而又非常有意义：小小的善举能让世界更温暖。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--brand-deep)">7</div><div class="p-main"><div class="p-en">The picture <b>metaphorically depicts</b> a real-life scenario. <b>It is ironic that</b> …</div><div class="p-zh">图片比喻性地描绘了现实生活的场景。讽刺的是……</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>带讽刺/反差的漫画：</b>「metaphorically」「ironic」是描述讽刺类漫画的利器。</div>
+          <div class="p-mem"><b>记忆</b>　讽刺类漫画专属——「<b>metaphorically 比喻地</b>」+「<b>ironic 讽刺的</b>」两个词一起记。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>The picture metaphorically depicts a real-life scenario. It is ironic that</b> the more "friends" we have online, the lonelier we feel.</span><span class="zh">图片比喻性地描绘了现实生活的场景。讽刺的是，我们线上"朋友"越多，却越觉得孤独。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--brand-deep)">8</div><div class="p-main"><div class="p-en">This set of pictures is amusing, giving us <b>some food for thought</b> as we start to relate the story to our own experience.</div><div class="p-zh">这组图画很有趣，也给了我们一些深思，因为我们把故事和自己的经历联系起来。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>「food for thought」是高频亮点：</b>把画面与自身经历挂钩，为下文议论铺垫。</div>
+          <div class="p-mem"><b>记忆</b>　亮点词组「<b>food for thought 引人深思</b>」—— 记这个词，比记整句更有用。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>This set of pictures is amusing, giving us some food for thought</b> as we start to relate the story to our own experience.</span><span class="zh">这组图画很有趣，也给了我们一些深思，因为我们把故事和自己的经历联系起来。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--brand-deep)">9</div><div class="p-main"><div class="p-en">Clearly, the picture itself is a <b>criticism / reminder</b> of …</div><div class="p-zh">很明显，图片本身就是对……的批评 / 提醒。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>一句话定性：</b>「a criticism / reminder of」后接被批评的现象。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>a criticism / reminder of + 现象</b>」—— 一句话定性：批评题用 criticism，提醒题用 reminder。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>Clearly, the picture itself is a criticism of</b> our throwaway culture, in which things are replaced long before they are worn out.</span><span class="zh">很明显，图片本身就是对"用完即弃"文化的批评——东西还没用坏就被换掉了。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--brand-deep)">10</div><div class="p-main"><div class="p-en">Simple pictures hold the most profound meanings, and sometimes life-long lessons. <b>Depicted in the picture is / are</b> …</div><div class="p-zh">简单的图片蕴含着深远的意义，有时也有受益终生的教训。这里图片描绘的是……</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>倒装句加分：</b>「Depicted in the picture is / are …」是漂亮的完全倒装，直接引出画面内容。</div>
+          <div class="p-mem"><b>记忆</b>　倒装加分句「<b>Depicted in the picture is / are…</b>」—— 主语在最后，阅卷老师眼前一亮。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>Depicted in the picture is</b> a boy helping an elderly woman carry a heavy bag across the street.</span><span class="zh">图片描绘的是一个男孩帮一位老妇人提着沉重的袋子过马路。</span></div>
+          </div></div>
+      </div>
+    </div>
+
+    <div class="toolbar" style="margin-top:20px">
+      <button data-act="show">显示全部例题答案</button>
+      <button data-act="hide">隐藏全部例题答案</button>
+    </div>
+
+    <div class="ex-list">
+      <!-- 例题 1 -->
+      <div class="ex-card" id="ex1">
+        <div class="ex-top"><span class="ex-tag" style="background:var(--brand-deep)">例题 1 · 单幅漫画</span><span class="ex-dir">先描述画面，再点寓意</span></div>
+        <div class="ex-media">
+          <svg viewBox="0 0 620 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="一家人在餐桌旁各自低头看手机">
+            <rect x="0" y="0" width="620" height="380" fill="#F6F2EA" rx="14"/>
+            <!-- 餐桌 -->
+            <rect x="140" y="250" width="340" height="22" rx="10" fill="#C9B08A"/>
+            <rect x="165" y="272" width="14" height="70" rx="4" fill="#B89A6E"/>
+            <rect x="441" y="272" width="14" height="70" rx="4" fill="#B89A6E"/>
+            <!-- 餐盘 -->
+            <ellipse cx="245" cy="240" rx="30" ry="9" fill="#FFFFFF" stroke="#D8CFC0"/>
+            <ellipse cx="375" cy="240" rx="30" ry="9" fill="#FFFFFF" stroke="#D8CFC0"/>
+            <!-- 人物：头部 + 身体 + 手臂举手机 -->
+            <!-- 左1 -->
+            <circle cx="200" cy="120" r="34" fill="#D9B99B" stroke="#B89A6E" stroke-width="2"/>
+            <path d="M200 92 q4 -6 10 -6" stroke="#6B5A43" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <rect x="170" y="158" width="60" height="86" rx="16" fill="#8FA6B0"/>
+            <line x1="186" y1="176" x2="168" y2="200" stroke="#D9B99B" stroke-width="7" stroke-linecap="round"/>
+            <line x1="214" y1="176" x2="232" y2="200" stroke="#D9B99B" stroke-width="7" stroke-linecap="round"/>
+            <rect x="180" y="196" width="40" height="58" rx="7" fill="#3F3A33"/>
+            <rect x="183" y="200" width="34" height="50" rx="4" fill="#A8D3E8"/>
+            <!-- 左1 眼睛向下 -->
+            <circle cx="189" cy="126" r="3" fill="#4A463F"/><circle cx="211" cy="126" r="3" fill="#4A463F"/>
+            <!-- 右1 -->
+            <circle cx="420" cy="120" r="34" fill="#E3C3A0" stroke="#B89A6E" stroke-width="2"/>
+            <path d="M420 92 q-4 -6 -10 -6" stroke="#6B5A43" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <rect x="390" y="158" width="60" height="86" rx="16" fill="#C4A79E"/>
+            <line x1="406" y1="176" x2="388" y2="200" stroke="#E3C3A0" stroke-width="7" stroke-linecap="round"/>
+            <line x1="434" y1="176" x2="452" y2="200" stroke="#E3C3A0" stroke-width="7" stroke-linecap="round"/>
+            <rect x="400" y="196" width="40" height="58" rx="7" fill="#3F3A33"/>
+            <rect x="403" y="200" width="34" height="50" rx="4" fill="#A8D3E8"/>
+            <circle cx="409" cy="126" r="3" fill="#4A463F"/><circle cx="431" cy="126" r="3" fill="#4A463F"/>
+            <!-- 下方 2 人（正面，坐） -->
+            <circle cx="260" cy="150" r="30" fill="#E8CFAE" stroke="#B89A6E" stroke-width="2"/>
+            <rect x="230" y="182" width="60" height="70" rx="14" fill="#A8B5A0"/>
+            <line x1="244" y1="198" x2="226" y2="218" stroke="#E8CFAE" stroke-width="7" stroke-linecap="round"/>
+            <line x1="276" y1="198" x2="294" y2="218" stroke="#E8CFAE" stroke-width="7" stroke-linecap="round"/>
+            <rect x="240" y="214" width="40" height="54" rx="7" fill="#3F3A33"/>
+            <rect x="243" y="218" width="34" height="46" rx="4" fill="#A8D3E8"/>
+            <circle cx="250" cy="152" r="3" fill="#4A463F"/><circle cx="270" cy="152" r="3" fill="#4A463F"/>
+            <circle cx="360" cy="150" r="30" fill="#D9B99B" stroke="#B89A6E" stroke-width="2"/>
+            <rect x="330" y="182" width="60" height="70" rx="14" fill="#7E8F76"/>
+            <line x1="344" y1="198" x2="326" y2="218" stroke="#D9B99B" stroke-width="7" stroke-linecap="round"/>
+            <line x1="376" y1="198" x2="394" y2="218" stroke="#D9B99B" stroke-width="7" stroke-linecap="round"/>
+            <rect x="340" y="214" width="40" height="54" rx="7" fill="#3F3A33"/>
+            <rect x="343" y="218" width="34" height="46" rx="4" fill="#A8D3E8"/>
+            <circle cx="350" cy="152" r="3" fill="#4A463F"/><circle cx="370" cy="152" r="3" fill="#4A463F"/>
+            <!-- 提示文字 -->
+            <text x="310" y="345" text-anchor="middle" font-size="15" fill="#8C8578" font-weight="600">一家人围坐餐桌，却各自低头看手机</text>
+          </svg>
+        </div>
+        <div class="ex-prompt">🗣 和学生互动：请用 <b>句型 2 / 7 / 9</b> 描述这张漫画（先描画面 → 再点寓意），说完点击下方查看参考答案。</div>
+        <div class="ex-answers">
+          <div class="ans-item"><div class="q"><span class="tag">句型 2</span><span>The thought-provoking cartoon …</span><span class="show">查看答案</span></div><div class="a"><b>The thought-provoking cartoon warns us that</b> the cellphone, which is meant to bring people closer, is actually driving family members apart.<span class="zh">这幅引人深思的漫画警告我们：本应拉近人与人距离的手机，实际上却让家人彼此疏远。</span></div></div>
+          <div class="ans-item"><div class="q"><span class="tag">句型 7</span><span>The picture metaphorically depicts … It is ironic that …</span><span class="show">查看答案</span></div><div class="a"><b>The picture metaphorically depicts</b> a real-life scenario. <b>It is ironic that</b> the whole family sits around one table yet talks to nobody.<span class="zh">图片比喻性地描绘了现实生活的场景。讽刺的是，全家人围坐一桌，却谁也不和谁说话。</span></div></div>
+          <div class="ans-item"><div class="q"><span class="tag">句型 9</span><span>Clearly, the picture itself is a criticism / reminder of …</span><span class="show">查看答案</span></div><div class="a"><b>Clearly, the picture itself is a criticism of</b> our addiction to the virtual world at the cost of real communication.<span class="zh">很明显，图片本身就是对「以牺牲真实交流为代价、沉迷虚拟世界」这一现象的批评。</span></div></div>
+        </div>
+      </div>
+
+      <!-- 例题 2 -->
+      <div class="ex-card" id="ex2">
+        <div class="ex-top"><span class="ex-tag" style="background:var(--brand-deep)">例题 2 · 两图对比</span><span class="ex-dir">先点对立，再分别描述</span></div>
+        <div class="ex-media">
+          <svg viewBox="0 0 620 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="两幅图对比：一人种树，一人砍树">
+            <rect x="0" y="0" width="620" height="340" fill="#F6F2EA" rx="14"/>
+            <!-- 左图：种树 -->
+            <rect x="40" y="28" width="250" height="250" rx="14" fill="#FFFFFF" stroke="#D8CFC0"/>
+            <text x="165" y="54" text-anchor="middle" font-size="14" fill="#8C8578" font-weight="700">图一</text>
+            <circle cx="165" cy="175" r="26" fill="#E8CFAE" stroke="#B89A6E" stroke-width="2"/>
+            <rect x="143" y="205" width="44" height="60" rx="12" fill="#8FA6B0"/>
+            <line x1="150" y1="214" x2="136" y2="232" stroke="#E8CFAE" stroke-width="6" stroke-linecap="round"/>
+            <line x1="180" y1="214" x2="194" y2="232" stroke="#E8CFAE" stroke-width="6" stroke-linecap="round"/>
+            <line x1="194" y1="232" x2="206" y2="150" stroke="#7E8F76" stroke-width="6" stroke-linecap="round"/>
+            <line x1="136" y1="232" x2="124" y2="150" stroke="#7E8F76" stroke-width="6" stroke-linecap="round"/>
+            <!-- 小树 -->
+            <rect x="246" y="210" width="8" height="52" rx="3" fill="#8B6F47"/>
+            <circle cx="250" cy="196" r="18" fill="#A8B5A0"/>
+            <circle cx="238" cy="206" r="12" fill="#7E8F76"/>
+            <circle cx="262" cy="206" r="12" fill="#7E8F76"/>
+            <text x="250" y="140" text-anchor="middle" font-size="13" fill="#7E8F76" font-weight="700">种下一棵树</text>
+            <!-- 右图：砍树 -->
+            <rect x="330" y="28" width="250" height="250" rx="14" fill="#FFFFFF" stroke="#D8CFC0"/>
+            <text x="455" y="54" text-anchor="middle" font-size="14" fill="#8C8578" font-weight="700">图二</text>
+            <circle cx="455" cy="175" r="26" fill="#D9B99B" stroke="#B89A6E" stroke-width="2"/>
+            <rect x="433" y="205" width="44" height="60" rx="12" fill="#C4A79E"/>
+            <line x1="440" y1="214" x2="426" y2="232" stroke="#D9B99B" stroke-width="6" stroke-linecap="round"/>
+            <line x1="470" y1="214" x2="484" y2="232" stroke="#D9B99B" stroke-width="6" stroke-linecap="round"/>
+            <line x1="484" y1="232" x2="470" y2="150" stroke="#7E8F76" stroke-width="6" stroke-linecap="round"/>
+            <line x1="426" y1="232" x2="440" y2="150" stroke="#7E8F76" stroke-width="6" stroke-linecap="round"/>
+            <!-- 斧头 -->
+            <path d="M456 150 L470 120 L480 132 Z" fill="#8C8578"/>
+            <!-- 倒下的大树 + 树桩 -->
+            <rect x="352" y="196" width="9" height="66" rx="3" fill="#8B6F47" transform="rotate(-24 356 229)"/>
+            <circle cx="342" cy="250" r="16" fill="#A8B5A0"/>
+            <circle cx="392" cy="186" r="14" fill="#7E8F76"/>
+            <ellipse cx="540" cy="248" rx="16" ry="7" fill="#B89A6E"/>
+            <text x="455" y="140" text-anchor="middle" font-size="13" fill="#B18C7F" font-weight="700">砍倒一棵树</text>
+            <text x="310" y="320" text-anchor="middle" font-size="15" fill="#8C8578" font-weight="600">同一片土地，两种截然相反的态度</text>
+          </svg>
+        </div>
+        <div class="ex-prompt">🗣 和学生互动：请用 <b>句型 1 / 8 / 10</b> 描述这组「两图对比」，说完点击查看参考答案。</div>
+        <div class="ex-answers">
+          <div class="ans-item"><div class="q"><span class="tag">句型 1</span><span>The two pictures depict … serving as a sharp contrast.</span><span class="show">查看答案</span></div><div class="a"><b>The two pictures depict two totally different scenes, serving as a sharp contrast:</b> one man is planting a tree while another is cutting one down.<span class="zh">两张图片描绘了完全不同的场景，形成了鲜明的对比：一个人在种树，另一个人却在砍树。</span></div></div>
+          <div class="ans-item"><div class="q"><span class="tag">句型 8</span><span>This set of pictures is amusing, giving us some food for thought …</span><span class="show">查看答案</span></div><div class="a"><b>This set of pictures is amusing, giving us some food for thought</b> as we relate the contrast to our own treatment of the environment.<span class="zh">这组图画很有趣，也给了我们一些深思，因为我们把它和我们对环境的态度联系起来。</span></div></div>
+          <div class="ans-item"><div class="q"><span class="tag">句型 10</span><span>Simple pictures hold the most profound meanings. Depicted in the pictures are …</span><span class="show">查看答案</span></div><div class="a"><b>Simple pictures hold the most profound meanings. Depicted in the pictures are</b> two opposite attitudes towards nature.<span class="zh">简单的图片蕴含着深远的意义。这里图片描绘的是对待自然的两种截然相反的态度。</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 二、图表描述 ================= -->
+  <section class="section" id="chart">
+    <div class="sec-head g2">
+      <span class="num">二</span>
+      <h2>图表描述</h2>
+      <span class="en">Chart / Graph Description</span>
+      <div class="hint">针对柱状图、饼状图、表格、折线图。核心：读出「趋势 + 数字」，再比较「多少 / 快慢」。</div>
+    </div>
+
+    <div class="formula" style="border-left-color:var(--blue-deep)">
+      <h4 style="color:var(--blue-deep)">万能开头公式</h4>
+      <div class="f-en"><b>As is shown in</b> <span class="slot">图表</span>, the number / percentage of <span class="slot">指标</span> has <b>increased / dropped</b> <span class="slot">程度</span> from <span class="slot">A</span> to <span class="slot">B</span>.</div>
+      <div class="f-zh">正如图表所示，〈指标〉的数量 / 比例从 A〈上升 / 下降〉到 B。 → 指图表 + 指标 + 趋势 + 数字。</div>
+    </div>
+
+    <div class="p-list">
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--blue-deep)">1</div><div class="p-main"><div class="p-en"><b>As is clearly / vividly described / shown / displayed / presented</b> in the table / chart / graph / diagram, there is a(n) <b>marked / significant / slight increase / drop / change</b> in …</div><div class="p-zh">正如图表所清晰 / 生动地描述，在……时有明显的 / 巨大的 / 微小的增长 / 下降 / 变化。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>替换词库：</b>描述（shown/described/displayed/presented）· 程度（marked 明显 / significant 巨大 / slight 微小）· 变化（increase 增 / drop 降 / change 变）。背下来，图表题开头不重样。</div>
+          <div class="p-mem"><b>记忆</b>　万能公式「<b>As is shown in + 图表, there has been a + 程度 + 变化 + in + 指标</b>」。背熟这一句 = 图表题开头全拿下。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>As is clearly shown in the bar chart, there is a marked increase in</b> the number of students who exercise regularly.</span><span class="zh">正如图表清晰所示，经常锻炼的学生人数有明显增长。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--blue-deep)">2</div><div class="p-main"><div class="p-en">In the chart, data <b>fluctuate from day to day</b>. … We can see a <b>growing trend</b>, namely …</div><div class="p-zh">在图表中，数据每天都在波动…… 我们可以看到一个明显的趋势，即……</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>「fluctuate」是高分动词：</b>先提波动，再用「namely」把趋势一句话点破。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>fluctuate 波动</b>」是高分动词；「<b>namely 即</b>」用来把趋势一句话说清。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en">In the chart, we can see a <b>growing trend, namely</b> that more people are choosing to pay by mobile phone.</span><span class="zh">从图表中我们可以看到明显的趋势，即越来越多的人选择用手机支付。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--blue-deep)">3</div><div class="p-main"><div class="p-en"><b>According to the survey / analysis / statistics / report</b> made / released / issued by …, there are signs that …</div><div class="p-zh">根据由……发布的调查 / 分析 / 数据 / 报告，种种迹象表明……</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>「有数据来源」的开头：</b>适用于题干给了「某机构调查」的图表题，显得有据可依。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>According to + 来源</b>」开头—— 题干给"某机构调查"时用它，最显"有据可依"。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>According to the survey released by a local newspaper, there are signs that</b> reading e-books is becoming increasingly popular.</span><span class="zh">根据当地一家报纸发布的调查，种种迹象表明读电子书正变得越来越流行。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--blue-deep)">4</div><div class="p-main"><div class="p-en">There has been a <b>five-fold increase</b> in … The bar chart / pie chart displays a serious problem of …</div><div class="p-zh">……的数量翻了五倍。这个柱状图 / 饼状图显示了……的严重问题。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>倍数表达：</b>「five-fold increase 翻了五倍」「double 翻番」「triple 三倍」，比「increase a lot」高级。</div>
+          <div class="p-mem"><b>记忆</b>　倍数表达「<b>five-fold 翻了五倍</b>」比「increase a lot」高级；顺带记 double / triple / five-fold。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>There has been a five-fold increase in</b> plastic waste over the past decade, and the chart displays a serious problem of pollution.</span><span class="zh">过去十年塑料垃圾的数量翻了五倍，这个图表显示了污染的严重问题。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--blue-deep)">5</div><div class="p-main"><div class="p-en">The above table <b>reveals</b> … by <b>comparing two key factors</b> — … and …</div><div class="p-zh">以上表格通过对比两个重要的因素……和……，揭示了……</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>对比式开头：</b>先点出「对比的是哪两个因素」，再讲结论，适合表格 / 双柱图。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>comparing two key factors 对比两个因素</b>」—— 表格 / 双柱题先点出"比的是哪两项"。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>The above table reveals</b> the gap between urban and rural students <b>by comparing two key factors —</b> access to the Internet and time spent studying.</span><span class="zh">以上表格通过对比"网络接入"和"学习时长"两个关键因素，揭示了城乡学生之间的差距。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--blue-deep)">6</div><div class="p-main"><div class="p-en"><b>To my delight / surprise</b>, the figure has nearly <b>doubled</b>, reaching …</div><div class="p-zh">使我高兴 / 吃惊的是，数值几乎翻了一番，达到了……</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>带态度的开头：</b>「To my delight / surprise」把主观态度融入客观数据，开头更有个性。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>To my delight / surprise</b>」带主观态度，让数据题开头不再冷冰冰。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>To my surprise, the figure has nearly doubled, reaching</b> 80 percent in just three years.</span><span class="zh">使我吃惊的是，这个数字几乎翻了一番，短短三年就达到了 80%。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--blue-deep)">7</div><div class="p-main"><div class="p-en">A <b>sharp contrast</b> is clearly presented in the graph. The number of … is … <b>times as much as</b> that of …</div><div class="p-zh">图表清晰地呈现了鲜明的对比。……的数字是……，是……的……倍。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>倍数比较：</b>「A is … times as much as B」是「A 是 B 的几倍」的标准表达。</div>
+          <div class="p-mem"><b>记忆</b>　倍数比较句「<b>A is … times as much as B</b>」= "A 是 B 的几倍"。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>A sharp contrast is clearly presented in the graph. The number of male readers is three times as much as that of</b> female readers.</span><span class="zh">图表清晰呈现了鲜明对比：男性读者的人数是女性读者的三倍。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--blue-deep)">8</div><div class="p-main"><div class="p-en"><b>On the top / At the bottom of the list</b> is … which <b>takes up / accounts for</b> a surprising … % of all.</div><div class="p-zh">列表顶部 / 底部的是……，占据了令人吃惊的……%。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>饼图 / 排名题：</b>「accounts for 占……比例」是描述占比的核心动词。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>account for 占比例</b>」是饼图核心动词；「<b>on the top / at the bottom of the list</b>」记头尾。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>On the top of the list is</b> online shopping, which <b>accounts for a surprising 60 percent</b> of all consumption.</span><span class="zh">排在首位的是网购，占了全部消费令人吃惊的 60%。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--blue-deep)">9</div><div class="p-main"><div class="p-en">… <b>is ranked first, (closely) followed by</b> …, … <b>falls far behind</b>.</div><div class="p-zh">排列第一位的是……，（紧）跟在其后的是……，……远远落在后面。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>排位三步走：</b>「ranked first → followed by → falls far behind」，把名次关系讲清楚。</div>
+          <div class="p-mem"><b>记忆</b>　排位三步「<b>ranked first → followed by → falls far behind</b>」。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>Reading is ranked first, closely followed by</b> sports, while watching TV <b>falls far behind</b>.</span><span class="zh">阅读排在第一位，紧跟着的是运动，而看电视远远落在后面。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--blue-deep)">10</div><div class="p-main"><div class="p-en">… <b>truthfully reflects</b> … An <b>overwhelming percentage</b> (…%) choose (a). A rather uncommon figure (…%) choose (b). Moreover, (c) wins fewer hearts, a shockingly small percentage (…%) choose (d).</div><div class="p-zh">……真实地反映了……，绝大部分（……%）选择（a），部分人（……%）不同寻常地选择了（b），此外，更少的人选择（c），只有少得可怜的人（……%）选择（d）。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>多选项全景描述：</b>按「从多到少」逐个报数，用 overwhelming / uncommon / shockingly small 等形容词体现层次。</div>
+          <div class="p-mem"><b>记忆</b>　多选项全景：形容词层层递进「<b>overwhelming → rather uncommon → shockingly small</b>」。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en">The chart <b>truthfully reflects</b> students' reading habits. <b>An overwhelming percentage (70%) choose</b> novels, while <b>a shockingly small percentage (8%) choose</b> newspapers.</span><span class="zh">图表真实地反映了学生的阅读习惯：绝大部分（70%）选择小说，只有少得可怜的人（8%）选择报纸。</span></div>
+          </div></div>
+      </div>
+    </div>
+
+    <div class="toolbar" style="margin-top:20px">
+      <button data-act="show">显示全部例题答案</button>
+      <button data-act="hide">隐藏全部例题答案</button>
+    </div>
+
+    <div class="ex-list">
+      <!-- 例题 3 柱状图 -->
+      <div class="ex-card" id="ex3">
+        <div class="ex-top"><span class="ex-tag" style="background:var(--blue-deep)">例题 3 · 柱状图</span><span class="ex-dir">读趋势 + 报数字</span></div>
+        <div class="ex-media">
+          <svg viewBox="0 0 620 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="柱状图：2019至2023年高中生日均上网时长上升">
+            <rect x="0" y="0" width="620" height="360" fill="#F6F2EA" rx="14"/>
+            <text x="310" y="34" text-anchor="middle" font-size="16" fill="#4A463F" font-weight="800">高中生日均上网时长（小时 / 天）</text>
+            <!-- 坐标轴 -->
+            <line x1="70" y1="300" x2="560" y2="300" stroke="#B8AF9F" stroke-width="2"/>
+            <line x1="70" y1="40" x2="70" y2="300" stroke="#B8AF9F" stroke-width="2"/>
+            <!-- y 轴刻度 -->
+            <text x="58" y="300" text-anchor="end" font-size="12" fill="#8C8578">0</text>
+            <text x="58" y="234" text-anchor="end" font-size="12" fill="#8C8578">1</text>
+            <text x="58" y="168" text-anchor="end" font-size="12" fill="#8C8578">2</text>
+            <text x="58" y="102" text-anchor="end" font-size="12" fill="#8C8578">3</text>
+            <text x="58" y="52" text-anchor="end" font-size="12" fill="#8C8578">4</text>
+            <line x1="70" y1="234" x2="560" y2="234" stroke="#EDE8DF" stroke-width="1"/>
+            <line x1="70" y1="168" x2="560" y2="168" stroke="#EDE8DF" stroke-width="1"/>
+            <line x1="70" y1="102" x2="560" y2="102" stroke="#EDE8DF" stroke-width="1"/>
+            <!-- 柱：0.8 / 1.5 / 2.3 / 3.1 / 3.8 小时，每单位 66px -->
+            <rect x="110" y="247" width="54" height="53" rx="6" fill="#A8B5A0"/>
+            <text x="137" y="240" text-anchor="middle" font-size="13" fill="#4A463F" font-weight="700">0.8</text>
+            <rect x="210" y="201" width="54" height="99" rx="6" fill="#A8B5A0"/>
+            <text x="237" y="194" text-anchor="middle" font-size="13" fill="#4A463F" font-weight="700">1.5</text>
+            <rect x="310" y="148" width="54" height="152" rx="6" fill="#7E8F76"/>
+            <text x="337" y="141" text-anchor="middle" font-size="13" fill="#4A463F" font-weight="700">2.3</text>
+            <rect x="410" y="95" width="54" height="205" rx="6" fill="#7E8F76"/>
+            <text x="437" y="88" text-anchor="middle" font-size="13" fill="#4A463F" font-weight="700">3.1</text>
+            <rect x="510" y="49" width="54" height="251" rx="6" fill="#8FA6B0"/>
+            <text x="537" y="42" text-anchor="middle" font-size="13" fill="#4A463F" font-weight="700">3.8</text>
+            <!-- x 轴标签 -->
+            <text x="137" y="322" text-anchor="middle" font-size="13" fill="#8C8578">2019</text>
+            <text x="237" y="322" text-anchor="middle" font-size="13" fill="#8C8578">2020</text>
+            <text x="337" y="322" text-anchor="middle" font-size="13" fill="#8C8578">2021</text>
+            <text x="437" y="322" text-anchor="middle" font-size="13" fill="#8C8578">2022</text>
+            <text x="537" y="322" text-anchor="middle" font-size="13" fill="#8C8578">2023</text>
+            <text x="310" y="348" text-anchor="middle" font-size="13" fill="#B18C7F" font-weight="700">↗ 持续上升</text>
+          </svg>
+        </div>
+        <div class="ex-prompt">🗣 和学生互动：请用 <b>句型 1 / 2 / 6</b> 描述这张柱状图（趋势 + 数字），说完点击查看参考答案。</div>
+        <div class="ex-answers">
+          <div class="ans-item"><div class="q"><span class="tag">句型 1</span><span>As is clearly shown in the bar chart, there has been a marked increase in …</span><span class="show">查看答案</span></div><div class="a"><b>As is clearly shown in the bar chart, there has been a marked increase in</b> the average time senior high students spend online, rising from 0.8 hour in 2019 to 3.8 hours in 2023.<span class="zh">正如图表清晰所示，高中生日均上网时长有明显增长，从 2019 年的 0.8 小时上升到 2023 年的 3.8 小时。</span></div></div>
+          <div class="ans-item"><div class="q"><span class="tag">句型 2</span><span>We can see a growing trend, namely …</span><span class="show">查看答案</span></div><div class="a">In the chart, we can see a <b>growing trend, namely</b> that students are devoting more and more of their daily life to the Internet.<span class="zh">从图表中我们可以看到明显的趋势，即学生把越来越多的日常时间花在网络上。</span></div></div>
+          <div class="ans-item"><div class="q"><span class="tag">句型 6</span><span>To my surprise, the figure has nearly doubled, reaching …</span><span class="show">查看答案</span></div><div class="a"><b>To my surprise, the figure has nearly doubled, reaching</b> 3.8 hours per day in 2023.<span class="zh">使我吃惊的是，这个数字几乎翻了两番，2023 年达到了每天 3.8 小时。</span></div></div>
+        </div>
+      </div>
+
+      <!-- 例题 4 饼状图 -->
+      <div class="ex-card" id="ex4">
+        <div class="ex-top"><span class="ex-tag" style="background:var(--blue-deep)">例题 4 · 饼状图</span><span class="ex-dir">排位 + 占比</span></div>
+        <div class="ex-media">
+          <svg viewBox="0 0 620 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="饼状图：学生上网用途占比，社交聊天40%、看视频30%、查资料20%、玩游戏10%">
+            <rect x="0" y="0" width="620" height="360" fill="#F6F2EA" rx="14"/>
+            <text x="310" y="34" text-anchor="middle" font-size="16" fill="#4A463F" font-weight="800">学生上网都在做什么？</text>
+            <!-- 饼图 -->
+            <g transform="translate(210,205)">
+              <path d="M0,0 L0,-100 A100,100 0 0 1 80.9,-58.8 Z" fill="#7E8F76"/>
+              <path d="M0,0 L80.9,-58.8 A100,100 0 0 1 30.9,95.1 Z" fill="#8FA6B0"/>
+              <path d="M0,0 L30.9,95.1 A100,100 0 0 1 -80.9,58.8 Z" fill="#C4A79E"/>
+              <path d="M0,0 L-80.9,58.8 A100,100 0 0 1 -100,0 Z" fill="#C9B08A"/>
+              <text x="30" y="-52" font-size="13" fill="#fff" font-weight="800">40%</text>
+              <text x="52" y="36" font-size="12" fill="#fff" font-weight="800">30%</text>
+              <text x="-52" y="30" font-size="12" fill="#fff" font-weight="800">20%</text>
+              <text x="-64" y="-30" font-size="11" fill="#fff" font-weight="800">10%</text>
+            </g>
+            <!-- 图例 -->
+            <g font-size="13.5" fill="#4A463F">
+              <rect x="430" y="120" width="14" height="14" rx="3" fill="#7E8F76"/><text x="452" y="132">社交聊天　40%</text>
+              <rect x="430" y="158" width="14" height="14" rx="3" fill="#8FA6B0"/><text x="452" y="170">看视频　30%</text>
+              <rect x="430" y="196" width="14" height="14" rx="3" fill="#C4A79E"/><text x="452" y="208">查资料　20%</text>
+              <rect x="430" y="234" width="14" height="14" rx="3" fill="#C9B08A"/><text x="452" y="246">玩游戏　10%</text>
+            </g>
+            <text x="310" y="345" text-anchor="middle" font-size="13" fill="#B18C7F" font-weight="700">从多到少，逐项报数</text>
+          </svg>
+        </div>
+        <div class="ex-prompt">🗣 和学生互动：请用 <b>句型 8 / 9 / 10</b> 描述这张饼状图（排名 + 占比），说完点击查看参考答案。</div>
+        <div class="ex-answers">
+          <div class="ans-item"><div class="q"><span class="tag">句型 8</span><span>On the top of the list is … which accounts for …</span><span class="show">查看答案</span></div><div class="a"><b>On the top of the list is</b> social networking, which <b>accounts for a surprising 40%</b> of all online activities.<span class="zh">排在首位的是社交聊天，占了全部上网活动令人吃惊的 40%。</span></div></div>
+          <div class="ans-item"><div class="q"><span class="tag">句型 9</span><span>… is ranked first, closely followed by …, … falls far behind.</span><span class="show">查看答案</span></div><div class="a"><b>Social networking is ranked first, closely followed by</b> watching videos, while online games <b>fall far behind</b> at only 10%.<span class="zh">社交聊天排在第一位，紧跟着的是看视频，而网络游戏远远落后，仅占 10%。</span></div></div>
+          <div class="ans-item"><div class="q"><span class="tag">句型 10</span><span>… truthfully reflects … An overwhelming percentage …</span><span class="show">查看答案</span></div><div class="a">The pie chart <b>truthfully reflects</b> how students spend their time online. <b>An overwhelming percentage (40%) choose</b> social networking, <b>a rather uncommon figure (10%) choose</b> online games.<span class="zh">这张饼状图真实地反映了学生如何花掉上网时间：绝大部分（40%）选择社交聊天，只有少得可怜的人（10%）选择网络游戏。</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 三、现象评论 ================= -->
+  <section class="section" id="phen">
+    <div class="sec-head g3">
+      <span class="num">三</span>
+      <h2>现象评论</h2>
+      <span class="en">Commenting on a Phenomenon</span>
+      <div class="hint">题目给出一段文字（描述一个现象），要求学生「作评论 + 发表意见」。核心：先概括现象，再表态 / 分析影响。</div>
+    </div>
+
+    <div class="formula" style="border-left-color:var(--rose-deep)">
+      <h4 style="color:var(--rose-deep)">万能开头公式</h4>
+      <div class="f-en"><span class="slot">现象</span> <b>has become a common occurrence / has drawn wide attention</b>, and <b>I maintain that</b> <span class="slot">我的观点</span>.</div>
+      <div class="f-zh">〈现象〉已变得很普遍 / 已引起广泛关注，我认为〈我的观点〉。 → 点现象 + 亮观点。</div>
+    </div>
+
+    <div class="p-list">
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--rose-deep)">1</div><div class="p-main"><div class="p-en">There is a <b>definite link / great divide</b> between A and B.</div><div class="p-zh">A 和 B 之间有确定的联系 / 巨大的分歧。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>摆关系：</b>「link 联系 / divide 分歧」二选一，快速点明两个事物的关系。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>link 联系 / divide 分歧</b>」二选一，快速点明两事物关系。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>There is a definite link between</b> regular exercise and good academic performance.</span><span class="zh">经常锻炼与良好的学习成绩之间有确定的联系。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--rose-deep)">2</div><div class="p-main"><div class="p-en"><b>Nothing is more … than …</b> It generates intense interest among the public / provokes a strong feeling of …</div><div class="p-zh">没有……比……更……。它使公众产生了浓厚的兴趣 / 激起了……的强烈情绪。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>「Nothing is more … than …」是强调式金句：</b>用最高级反向表达，比「very」有力得多。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>Nothing is more … than …</b>」是强调金句，比 very 有力；顺带记 provoke 激起。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>Nothing is more worrying than</b> the decline in young people's reading. <b>It generates intense interest among the public.</b></span><span class="zh">没有什么比年轻人阅读量的下降更令人担忧了。它引起了公众的浓厚兴趣。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--rose-deep)">3</div><div class="p-main"><div class="p-en"><b>With regard to the purpose of</b> … <b>As to the content</b> … <b>For the outcome</b> …</div><div class="p-zh">关于目的……，关于内容……，关于结果……。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>多角度展开：</b>「目的 / 内容 / 结果」三个角度各用一句，适合评论型作文分段。</div>
+          <div class="p-mem"><b>记忆</b>　三个角度「<b>目的 / 内容 / 结果</b>」各一句，适合评论型作文分段展开。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>With regard to the purpose of</b> the campaign, it aims to raise awareness. <b>As to the content,</b> it includes lectures and games. <b>For the outcome,</b> students have become more environmentally conscious.</span><span class="zh">关于这项活动的目的，旨在提高意识；关于内容，包括讲座和游戏；关于结果，学生的环保意识增强了。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--rose-deep)">4</div><div class="p-main"><div class="p-en">… will exert / produce a <b>profound (far-reaching) / undesirable / unimaginable / disastrous effect</b> on …</div><div class="p-zh">……对……会产生深远 / 不尽如人意 / 难以想象 / 灾难性的影响。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>论「影响」的核心句：</b>形容词库 profound（深远）/ undesirable（不良）/ disastrous（灾难性），按好坏取舍。</div>
+          <div class="p-mem"><b>记忆</b>　论"影响"核心句；形容词库 <b>profound 深远 / undesirable 不良 / disastrous 灾难性</b>。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en">The Internet <b>will exert a profound effect on</b> the way we learn and communicate.</span><span class="zh">互联网会对我们学习和交流的方式产生深远的影响。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--rose-deep)">5</div><div class="p-main"><div class="p-en">Many of us have been <b>under the illusion that</b> … A close examination would reveal how ridiculous it is to …</div><div class="p-zh">我们中的许多人一直有错误的印象……。仔细研究后就会发现……是很可笑的。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>「打破误区」开头：</b>「under the illusion that 误以为」先立后破，论证更有说服力。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>under the illusion that 误以为</b>」先立后破，论证更有力。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>Many of us have been under the illusion that</b> success depends on talent alone. <b>A close examination would reveal</b> how ridiculous it is to ignore hard work.</span><span class="zh">我们中的许多人一直误以为成功只靠天赋。仔细研究后就会发现，忽视努力是多么可笑。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--rose-deep)">6</div><div class="p-main"><div class="p-en"><b>It makes no sense to argue for</b> …</div><div class="p-zh">说……是没什么道理的。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>反驳对方观点：</b>「It makes no sense to argue for …」比「I disagree」更书面、更有力。</div>
+          <div class="p-mem"><b>记忆</b>　反驳利器，比「<b>I disagree</b>」更书面。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>It makes no sense to argue for</b> banning smartphones from campus altogether.</span><span class="zh">说要把智能手机完全逐出校园是没什么道理的。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--rose-deep)">7</div><div class="p-main"><div class="p-en"><b>Too much stress (emphasis) placed on</b> … inevitably will <b>lead to (give rise to / result in)</b> …</div><div class="p-zh">对……的过分重视不可避免地将会导致……。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>论「过度」的危害：</b>「Too much stress placed on …」+ 结果动词 lead to / result in，因果链清晰。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>Too much stress placed on…</b>」论"过度"之害，因果链清晰。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>Too much stress placed on</b> exam scores <b>will inevitably lead to</b> anxiety among students.</span><span class="zh">对考试分数的过分重视不可避免地会导致学生的焦虑。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--rose-deep)">8</div><div class="p-main"><div class="p-en"><b>Contrary to what is widely accepted</b>, I maintain that …</div><div class="p-zh">和大家普遍持有的观点相反，我认为……</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>「与众不同」表态：</b>「Contrary to what is widely accepted」先亮出反主流立场，观点鲜明。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>Contrary to…</b>」先亮反主流立场，观点鲜明，是议论文加分开头。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>Contrary to what is widely accepted, I maintain that</b> online learning can be just as effective as classroom teaching.</span><span class="zh">和大家普遍持有的观点相反，我认为在线学习可以和课堂教学一样有效。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--rose-deep)">9</div><div class="p-main"><div class="p-en">… <b>is not an isolated phenomenon</b>. Many examples could serve as proofs of the serious problem.</div><div class="p-zh">……不是个孤立的现象。有许多例子都能证明这个严重的问题。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>「普遍性」论证：</b>「not an isolated phenomenon 不是孤立现象」把个案上升到普遍问题，为下文举例铺路。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>not an isolated phenomenon 不是孤立现象</b>」把个案上升为普遍问题，为举例铺路。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en">The waste of food in school canteens <b>is not an isolated phenomenon</b>. Many examples could serve as proofs of the serious problem.</span><span class="zh">学校食堂的浪费现象不是个孤立的现象，许多例子都能证明这个严重的问题。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--rose-deep)">10</div><div class="p-main"><div class="p-en">… <b>raised a question. What if / How come</b> …? Probably, the answer lies in …</div><div class="p-zh">……提出了一个问题。要是 / 怎么会……？也许答案就在于……</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>设问式开头：</b>「What if … / How come …」用问题引出思考，再用「the answer lies in」自问自答。</div>
+          <div class="p-mem"><b>记忆</b>　设问式「<b>自问自答</b>」—— 用 What if / How come 提问，the answer lies in 作答。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en">The growing popularity of short videos <b>raised a question: How come</b> people are willing to spend hours on them? <b>Probably, the answer lies in</b> our desire for instant pleasure.</span><span class="zh">短视频的日益流行提出了一个问题：为什么人们愿意花几小时刷它？也许答案就在于我们对即时快感的渴望。</span></div>
+          </div></div>
+      </div>
+    </div>
+
+    <div class="toolbar" style="margin-top:20px">
+      <button data-act="show">显示全部例题答案</button>
+      <button data-act="hide">隐藏全部例题答案</button>
+    </div>
+
+    <div class="ex-list">
+      <!-- 例题 5 现象：短视频 -->
+      <div class="ex-card" id="ex5">
+        <div class="ex-top"><span class="ex-tag" style="background:var(--rose-deep)">例题 5 · 现象评论</span><span class="ex-dir">题目给一段文字 → 作评论 + 发表意见</span></div>
+        <div class="ex-media">
+          <div class="text-passage">
+            <div class="en">Topic: Short-video addiction among teenagers</div>
+            <div class="zh">如今，许多青少年沉迷于刷短视频，一刷就是几个小时，甚至挤占了学习和睡眠时间。请对此现象作出评论，并谈谈你的看法。</div>
+          </div>
+        </div>
+        <div class="ex-prompt">🗣 和学生互动：先用一句话<b>概括这个现象</b>，再用 <b>句型 4 / 7 / 8</b> 发表评论和意见，说完点击查看参考答案。</div>
+        <div class="ex-answers">
+          <div class="ans-item"><div class="q"><span class="tag">句型 4</span><span>… will exert an undesirable effect on …</span><span class="show">查看答案</span></div><div class="a">Excessive indulgence in short videos <b>will exert an undesirable effect on</b> teenagers' study and health.<span class="zh">过度沉迷短视频会对青少年的学习和健康产生不良影响。</span></div></div>
+          <div class="ans-item"><div class="q"><span class="tag">句型 7</span><span>Too much emphasis placed on … will lead to …</span><span class="show">查看答案</span></div><div class="a"><b>Too much emphasis placed on</b> instant entertainment <b>will inevitably lead to</b> a loss of concentration and even poor eyesight.<span class="zh">对即时娱乐的过分重视，不可避免地会导致注意力下降，甚至视力变差。</span></div></div>
+          <div class="ans-item"><div class="q"><span class="tag">句型 8</span><span>Contrary to what is widely accepted, I maintain that …</span><span class="show">查看答案</span></div><div class="a"><b>Contrary to what is widely accepted, I maintain that</b> short videos, if used wisely, can be a source of knowledge rather than a waste of time.<span class="zh">和大家普遍持有的观点相反，我认为短视频若善加利用，可以成为知识的来源，而非浪费时间。</span></div></div>
+        </div>
+      </div>
+
+      <!-- 例题 6 现象：人工智能 -->
+      <div class="ex-card" id="ex6">
+        <div class="ex-top"><span class="ex-tag" style="background:var(--rose-deep)">例题 6 · 现象评论</span><span class="ex-dir">题目给一段文字 → 作评论 + 发表意见</span></div>
+        <div class="ex-media">
+          <div class="text-passage">
+            <div class="en">Topic: The rise of artificial intelligence (AI)</div>
+            <div class="zh">近年来，人工智能正越来越多地进入我们的学习和生活。一些人担心，它会使我们变得懒惰、失去独立思考的能力。请对此现象发表你的看法。</div>
+          </div>
+        </div>
+        <div class="ex-prompt">🗣 和学生互动：先用一句话<b>点出这个现象</b>，再用 <b>句型 2 / 8 / 10</b> 发表评论，说完点击查看参考答案。</div>
+        <div class="ex-answers">
+          <div class="ans-item"><div class="q"><span class="tag">句型 2</span><span>Nothing is more … than … It generates intense interest …</span><span class="show">查看答案</span></div><div class="a"><b>Nothing is more heatedly debated than</b> the rise of artificial intelligence. <b>It generates intense interest among the public and provokes a strong feeling of</b> both excitement and anxiety.<span class="zh">没有什么比人工智能的兴起更能引发热议了。它使公众产生了浓厚的兴趣，也激起了既兴奋又担忧的强烈情绪。</span></div></div>
+          <div class="ans-item"><div class="q"><span class="tag">句型 8</span><span>Contrary to what is widely accepted, I maintain that …</span><span class="show">查看答案</span></div><div class="a"><b>Contrary to what is widely accepted, I maintain that</b> AI, if properly used, will free us from repetitive work and allow us to think more deeply.<span class="zh">和大家普遍担心的相反，我认为人工智能若使用得当，会把我们从重复劳动中解放出来，让我们得以更深入地思考。</span></div></div>
+          <div class="ans-item"><div class="q"><span class="tag">句型 10</span><span>… raised a question. Probably, the answer lies in …</span><span class="show">查看答案</span></div><div class="a">The rapid spread of AI <b>raised a question: How come</b> so many people feel threatened by it? <b>Probably, the answer lies in</b> our fear of losing control.<span class="zh">人工智能的迅速普及提出了一个问题：为什么这么多人感到威胁？也许答案就在于我们害怕失去控制感。</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 学法建议 -->
+  <section class="section" id="advice">
+    <div class="sec-head">
+      <span class="num">✦</span>
+      <h2>更好的学习方法</h2>
+      <span class="en">How to Learn This Better</span>
+    </div>
+    <div class="advice">
+      <h3>四个建议，比「死背句型」更有效</h3>
+      <div class="a-item"><div class="no">1</div><div class="txt"><b>记「骨架」，不记「整句」。</b>每个句型其实只有前半句是固定的（如 As is shown in … / Contrary to … / The thought-provoking cartoon …），后半句填自己的内容。把每组的「万能公式」背熟，比背 30 个整句省力得多。</div></div>
+      <div class="a-item"><div class="no">2</div><div class="txt"><b>攒「替换词」，让句子不重样。</b>图表题最明显：shown 可换成 described / presented，increase 可换成 rise / drop，marked 可换成 significant / slight。每组准备 3–4 个同义替换，作文里就不会反复用同一个词。</div></div>
+      <div class="a-item"><div class="no">3</div><div class="txt"><b>三组打通，练「信息 → 句子」的转化。</b>图片、图表、文字是三种「输入」，但开篇的写法是同一件事：先指认信息，再概括内容，最后带出寓意 / 观点。多练「看到信息 → 立刻说出一句」，而不是先想中文再逐字翻译。</div></div>
+      <div class="a-item"><div class="no">4</div><div class="txt"><b>倒推练习：给出满分句子，让学生「还原画面 / 图表」。</b>把答案句子读给学生，让学生反推出题目信息（画了什么、数字是多少、现象是什么）。这样能训练「英文表达 ↔ 信息」的双向对应，比单向背诵记得牢。</div></div>
+    </div>
+  </section>
+
+  <div class="footer">高考英语作文 · 强基篇｜句型出处：《名校名师高考英语作文全攻略（第3版）》分类句型 1–3 组</div>
+</main>
+
+<script>
+function $(s){return document.querySelector(s)}
+function $$(s){return Array.from(document.querySelectorAll(s))}
+
+/* ===== 目录 ===== */
+const TOC = [
+  {id:"common", t:"三组句型的共同点"},
+  {id:"pic", cls:"p1", t:"一、图片描述", sub:[
+    {id:"ex1", t:"例题 1 · 单幅漫画"},
+    {id:"ex2", t:"例题 2 · 两图对比"}
+  ]},
+  {id:"chart", cls:"p2", t:"二、图表描述", sub:[
+    {id:"ex3", t:"例题 3 · 柱状图"},
+    {id:"ex4", t:"例题 4 · 饼状图"}
+  ]},
+  {id:"phen", cls:"p3", t:"三、现象评论", sub:[
+    {id:"ex5", t:"例题 5 · 短视频沉迷"},
+    {id:"ex6", t:"例题 6 · 人工智能"}
+  ]},
+  {id:"advice", t:"✦ 更好的学习方法"}
+];
+function buildToc(){
+  const nav = $("#tocNav");
+  let html = '<div class="grp-title">本课内容</div>';
+  TOC.forEach(g=>{
+    if(g.sub){
+      html += `<div class="grp-title ${g.cls||''}">${g.t}</div>`;
+      g.sub.forEach(s=>{ html += `<a href="#${s.id}" data-close><span class="idx">›</span>${s.t}</a>`; });
+    } else {
+      html += `<a href="#${g.id}" data-close><span class="idx">${g.t.slice(0,1)==='✦'?'✦':''}</span>${g.t.replace(/^✦\s*/,'')}</a>`;
+    }
+  });
+  nav.innerHTML = html;
+}
+buildToc();
+
+/* ===== 侧滑目录 ===== */
+const drawer = $("#drawer"), overlay = $("#overlay"), menuBtn = $("#menuBtn");
+function openDrawer(){ drawer.classList.add("open"); overlay.classList.add("show"); menuBtn.classList.add("open"); }
+function closeDrawer(){ drawer.classList.remove("open"); overlay.classList.remove("show"); menuBtn.classList.remove("open"); }
+$("#menuBtn").addEventListener("click", ()=> drawer.classList.contains("open") ? closeDrawer() : openDrawer());
+overlay.addEventListener("click", closeDrawer);
+document.addEventListener("click", e=>{ if(e.target.closest("[data-close]")) closeDrawer(); });
+
+/* ===== 句型卡片折叠 ===== */
+$$(".pcard .p-head").forEach(h=>{
+  h.addEventListener("click", ()=> h.parentElement.classList.toggle("open"));
+});
+
+/* ===== 例题答案点击显示 ===== */
+$$(".ans-item .q").forEach(q=>{
+  q.addEventListener("click", ()=> q.parentElement.classList.toggle("open"));
+});
+
+/* ===== 显示/隐藏全部例题答案 ===== */
+$$(".toolbar button").forEach(b=>{
+  b.addEventListener("click", ()=>{
+    const act = b.dataset.act;
+    $$(".ans-item").forEach(i=> act==="show" ? i.classList.add("open") : i.classList.remove("open"));
+  });
+});
+</script>
+</body>
+</html>

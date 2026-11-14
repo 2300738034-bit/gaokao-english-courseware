@@ -138,6 +138,11 @@ window.CATALOG = {
           title: "艺术节专场·提议信范文精析（摄影专场）",
           file: "courseware/艺术节专场·提议信范文精析课件.html",
           added: "2026-11-02"
+        },
+        {
+          title: "作文开篇·信息描述句型（图片·图表·现象评论）",
+          file: "courseware/图片·图表·现象描述句型课件.html",
+          added: "2026-11-14"
         }
       ]
     },
