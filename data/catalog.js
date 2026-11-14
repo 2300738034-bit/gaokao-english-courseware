@@ -32,6 +32,11 @@ window.CATALOG = {
           title: "it 在翻译中的运用课件（第五章）",
           file: "courseware/it在翻译中的运用课件.html",
           added: "2026-11-06"
+        },
+        {
+          title: "倒装句在翻译中的运用课件（第六章）",
+          file: "courseware/倒装句在翻译中的运用课件.html",
+          added: "2026-11-14"
         }
       ]
     },

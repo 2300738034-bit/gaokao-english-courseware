@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>倒装句在翻译中的运用</title>
+<style>
+  :root{
+    --bg:#EFEBE4;
+    --paper:#FBF9F5;
+    --card:#FFFFFF;
+    --ink:#4A463F;
+    --muted:#8C8578;
+    --line:#E3DDD3;
+    --line-soft:#EDE8DF;
+    --brand:#A8B5A0;
+    --brand-deep:#7E8F76;
+    --rose:#C4A79E;
+    --rose-deep:#B18C7F;
+    --blue:#8FA6B0;
+    --blue-deep:#6E8A96;
+    --tan:#C9B08A;
+    --gold:#C9B08A;
+    --shadow:0 2px 6px rgba(90,80,60,.06), 0 10px 28px -12px rgba(90,80,60,.16);
+    --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--font);
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ===== 顶部导航 ===== */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:center;gap:14px;
+    padding:14px 22px;
+    background:rgba(251,249,245,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .menu-btn{
+    width:42px;height:42px;flex:0 0 auto;
+    border:1px solid var(--line);border-radius:12px;
+    background:var(--card);color:var(--ink);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+    cursor:pointer;transition:.2s;
+  }
+  .menu-btn:hover{background:var(--brand);color:#fff;border-color:var(--brand)}
+  .menu-btn span{display:block;width:18px;height:2px;background:currentColor;border-radius:2px;transition:.25s}
+  .menu-btn.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .menu-btn.open span:nth-child(2){opacity:0}
+  .menu-btn.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .topbar .titles{min-width:0}
+  .topbar .titles h1{font-size:17px;font-weight:800;letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .topbar .titles .sub{font-size:12px;color:var(--muted)}
+  .topbar .badge{
+    margin-left:auto;flex:0 0 auto;
+    font-size:11px;font-weight:700;letter-spacing:.06em;
+    color:#fff;background:var(--rose-deep);
+    padding:5px 12px;border-radius:99px;
+  }
+
+  /* ===== 目录侧滑 ===== */
+  .overlay{position:fixed;inset:0;z-index:60;background:rgba(70,60,48,.28);opacity:0;pointer-events:none;transition:opacity .3s}
+  .overlay.show{opacity:1;pointer-events:auto}
+  .drawer{
+    position:fixed;top:0;left:0;bottom:0;z-index:70;
+    width:min(340px,86vw);background:var(--paper);border-right:1px solid var(--line);
+    transform:translateX(-102%);transition:transform .32s cubic-bezier(.4,0,.2,1);
+    display:flex;flex-direction:column;box-shadow:12px 0 40px -20px rgba(70,60,48,.3);
+  }
+  .drawer.open{transform:translateX(0)}
+  .drawer .d-head{padding:22px 24px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px}
+  .drawer .d-head .dot{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--blue));color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .drawer .d-head h2{font-size:16px;font-weight:800}
+  .drawer .d-head p{font-size:11px;color:var(--muted)}
+  .drawer nav{flex:1;overflow-y:auto;padding:14px 0 30px}
+  .drawer .grp-title{font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--muted);padding:16px 24px 8px;display:flex;align-items:center;gap:8px}
+  .drawer .grp-title::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--brand)}
+  .drawer .grp-title.p2::before{background:var(--blue)}
+  .drawer .grp-title.p3::before{background:var(--rose)}
+  .drawer a{display:flex;align-items:center;gap:10px;padding:9px 24px;color:var(--ink);text-decoration:none;font-size:14px;transition:.15s;border-left:3px solid transparent}
+  .drawer a:hover{background:#F1EDE5;border-left-color:var(--brand)}
+  .drawer a .idx{font-size:11px;color:var(--muted);min-width:22px;font-weight:600}
+
+  /* ===== 内容区 ===== */
+  main{max-width:1060px;margin:0 auto;padding:26px 20px 90px}
+
+  .hero{
+    background:linear-gradient(135deg,#E9E4DA 0%,#E3DCD0 55%,#DCD4C6 100%);
+    border:1px solid var(--line);border-radius:22px;
+    padding:46px 40px;margin-bottom:30px;position:relative;overflow:hidden;
+  }
+  .hero::after{content:"";position:absolute;right:-70px;top:-70px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(196,167,158,.5),rgba(196,167,158,0) 70%)}
+  .hero .kicker{font-size:12px;font-weight:800;letter-spacing:.22em;color:var(--brand-deep);text-transform:uppercase}
+  .hero h1{font-size:32px;font-weight:900;margin:10px 0 8px;letter-spacing:.01em}
+  .hero h1 em{font-style:normal;color:var(--rose-deep)}
+  .hero p.desc{font-size:15px;color:#6E675C;max-width:720px}
+  .hero p.desc b{color:var(--ink)}
+  .hero .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+  .hero .chip{font-size:12.5px;font-weight:600;color:#5E584D;background:rgba(255,255,255,.65);border:1px solid var(--line);padding:6px 14px;border-radius:99px}
+
+  .section{margin-top:14px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin:40px 0 18px;flex-wrap:wrap}
+  .sec-head .num{font-size:13px;font-weight:800;color:#fff;background:var(--brand);padding:4px 12px;border-radius:8px;letter-spacing:.05em}
+  .sec-head h2{font-size:25px;font-weight:900;letter-spacing:.01em}
+  .sec-head .en{font-size:13px;color:var(--muted);font-weight:600}
+  .sec-head .hint{width:100%;font-size:13px;color:var(--muted);margin-top:2px}
+  .sec-head.g2 .num{background:var(--blue-deep)}
+  .sec-head.g3 .num{background:var(--rose-deep)}
+
+  .common{
+    background:var(--paper);border:1px solid var(--line);border-radius:16px;
+    padding:22px 24px;margin-bottom:8px;
+  }
+  .common h3{font-size:16px;font-weight:800;margin-bottom:10px;display:flex;align-items:center;gap:9px}
+  .common h3::before{content:"✦";color:var(--rose-deep)}
+  .common p{font-size:14px;color:#6E675C;margin-bottom:8px}
+  .common p b{color:var(--ink)}
+  .common .pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+  .common .pill{font-size:12.5px;font-weight:600;background:#F1EDE5;border:1px solid var(--line-soft);padding:5px 12px;border-radius:99px;color:#5E584D}
+
+  .formula{
+    background:linear-gradient(180deg,#F6F2EA,#F1ECE2);
+    border:1px solid var(--line);border-left:4px solid var(--brand);
+    border-radius:14px;padding:18px 20px;margin:16px 0 22px;
+  }
+  .formula h4{font-size:13px;font-weight:800;letter-spacing:.06em;color:var(--brand-deep);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+  .formula h4::before{content:"◆"}
+  .formula .f-en{font-size:15.5px;font-weight:700;line-height:1.7;color:#3F3A33}
+  .formula .f-en b{color:var(--brand-deep);font-weight:800}
+  .formula .f-en .slot{color:var(--rose-deep);font-weight:700;border-bottom:2px dashed var(--rose-deep);padding:0 2px}
+  .formula .f-zh{font-size:13px;color:var(--muted);margin-top:6px}
+
+  /* 怎么想到 + 好处 */
+  .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 10px}
+  .why-box{border-radius:14px;padding:18px 20px;border:1px solid var(--line)}
+  .why-box h4{font-size:13.5px;font-weight:800;letter-spacing:.04em;margin-bottom:9px;display:flex;align-items:center;gap:8px}
+  .why-box p,.why-box li{font-size:13.5px;color:#5E584D;line-height:1.75}
+  .why-box ul{list-style:none;margin-top:2px}
+  .why-box li{padding-left:18px;position:relative;margin-bottom:4px}
+  .why-box li::before{content:"·";position:absolute;left:4px;color:var(--rose-deep);font-weight:800}
+  .why-box.trigger{background:#F6F2EC}
+  .why-box.trigger h4{color:var(--rose-deep)}
+  .why-box.trigger h4::before{content:"🧭"}
+  .why-box.benefit{background:#EEF2EC}
+  .why-box.benefit h4{color:var(--brand-deep)}
+  .why-box.benefit h4::before{content:"✨"}
+  .why-box.warn{grid-column:1/-1;background:#FBF6EE;border-left:4px solid var(--tan)}
+  .why-box.warn h4{color:#8B6F47}
+  .why-box.warn h4::before{content:"⚠️"}
+  @media(max-width:720px){.why-grid{grid-template-columns:1fr}}
+
+  /* 案例 */
+  .case-list{display:flex;flex-direction:column;gap:12px;margin-top:8px}
+  .ans-item{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 18px;box-shadow:var(--shadow)}
+  .ans-item .q{display:flex;align-items:center;gap:12px;font-size:14.5px;cursor:pointer;user-select:none;flex-wrap:wrap}
+  .ans-item .q .tag{flex:0 0 auto;font-size:11px;font-weight:800;color:#fff;background:var(--brand-deep);padding:3px 10px;border-radius:7px}
+  .ans-item .q .kw{font-weight:800;color:var(--rose-deep);flex:0 0 auto}
+  .ans-item .q .show{margin-left:auto;font-size:11.5px;font-weight:700;color:#A99A7F;background:#F1EDE5;padding:3px 10px;border-radius:99px;transition:.15s;flex:0 0 auto}
+  .ans-item .q:hover .show{background:#E5DED0}
+  .ans-item .a{display:none;margin-top:10px;padding-top:12px;border-top:1px dashed var(--line-soft)}
+  .ans-item.open .a{display:block;animation:fadeUp .25s ease}
+  .ans-item .a .en{font-size:14.5px;font-weight:700;color:#3F3A33;line-height:1.7}
+  .ans-item .a .en b{color:var(--brand-deep)}
+  .ans-item .a .zh{display:block;font-size:12.5px;color:var(--muted);margin-top:4px}
+  .ans-item .a .why-line{display:block;margin-top:9px;font-size:13px;color:#5E584D;background:#F4F0E8;border-left:3px solid var(--blue);padding:8px 12px;border-radius:6px;line-height:1.7}
+  .ans-item .a .why-line b{color:var(--blue-deep)}
+
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 6px}
+  .toolbar button{font-family:var(--font);font-size:12.5px;font-weight:700;cursor:pointer;color:#6E675C;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:7px 15px;transition:.15s}
+  .toolbar button:hover{background:#F1EDE5}
+
+  .grp-note{
+    font-size:13px;color:#5E584D;background:#F6F2EC;border:1px solid var(--line-soft);border-left:4px solid var(--rose);
+    border-radius:12px;padding:12px 16px;margin:6px 0 14px;line-height:1.75;
+  }
+  .grp-note b{color:var(--rose-deep)}
+
+  .advice{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px 26px;margin-top:10px}
+  .advice h3{font-size:16px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:9px}
+  .advice h3::before{content:"✦";color:var(--brand-deep)}
+  .advice .a-item{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--line-soft)}
+  .advice .a-item:last-child{border-bottom:none}
+  .advice .a-item .no{flex:0 0 auto;width:26px;height:26px;border-radius:8px;background:var(--brand);color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+  .advice .a-item .txt{font-size:14px;color:#5E584D;line-height:1.7}
+  .advice .a-item .txt b{color:var(--ink)}
+
+  .footer{text-align:center;color:var(--muted);font-size:12px;margin-top:44px;padding-top:22px;border-top:1px solid var(--line)}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  @media (max-width:640px){
+    .hero{padding:30px 22px}
+    .hero h1{font-size:25px}
+    .sec-head h2{font-size:21px}
+    .topbar .titles h1{font-size:15px}
+  }
+</style>
+</head>
+<body>
+
+<!-- 顶部导航 -->
+<div class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="目录"><span></span><span></span><span></span></button>
+  <div class="titles">
+    <h1>倒装句在翻译中的运用</h1>
+    <div class="sub">部分倒装 7 大句型 · 20 道自测</div>
+  </div>
+  <div class="badge">7 句型 · 20 自测</div>
+</div>
+
+<!-- 侧滑目录 -->
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer">
+  <div class="d-head">
+    <div class="dot">目</div>
+    <div><h2>目录</h2><p>倒装句在翻译中的运用</p></div>
+  </div>
+  <nav id="tocNav"></nav>
+</aside>
+
+<main>
+  <!-- 封面 -->
+  <section class="hero">
+    <div class="kicker">Gaokao English · Translation</div>
+    <h1>倒装句在<em>翻译</em>中的运用</h1>
+    <p class="desc">高考翻译里的倒装，不是"炫技"，而是<b>条件反射</b>：题目括号里给出一个触发词（Never / Only / Not until…），这个词一旦放到句首，英语语法就<b>强制要求倒装</b>。本章先分清「完全倒装 / 部分倒装」，再逐个拿下 <b>7 大倒装句型</b>，最后用 <b>20 道真题级自测</b>练到"见词即倒"。</p>
+    <div class="meta">
+      <span class="chip">📖 出处：《高考英语翻译专项训练（修订版）》第六章</span>
+      <span class="chip">🎯 7 句型 · 20 道自测 · 逐题讲"为什么"</span>
+    </div>
+  </section>
+
+  <!-- 翻译思维核心 -->
+  <section class="section" id="common">
+    <div class="common">
+      <h3>先想清楚：翻译里"为什么要倒装"</h3>
+      <p>翻译题和语法选择题最大的不同是——<b>括号词是"给定"的</b>。看到括号里是 Never、Only、Not until、Not only、No sooner、Hardly、So、Such、as 这类词时，你几乎没有选择：把它放到句首（这是最自然、最地道的做法），英语语法就会<b>自动触发倒装</b>。所以翻译里的倒装，本质是"<b>触发词 + 语法强制</b>"。</p>
+      <p>用了倒装，能得到三个实实在在的好处：</p>
+      <div class="pill-row">
+        <span class="pill">① 满足题意 —— 括号词必须用，放句首最自然</span>
+        <span class="pill">② 强调 —— 把"否定 / 唯一 / 程度"顶到句首，语气更强</span>
+        <span class="pill">③ 地道加分 —— 书面语高级表达，比平铺直叙更有"翻译味"</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 一、概念 ================= -->
+  <section class="section" id="concept">
+    <div class="sec-head">
+      <span class="num">一</span>
+      <h2>概念</h2>
+      <span class="en">什么是倒装</span>
+      <div class="hint">把某些句子成分移到句首，引起主语和谓语词序颠倒，就是倒装。分「完全倒装」和「部分倒装」两类，高考翻译主要考后者。</div>
+    </div>
+
+    <div class="formula">
+      <h4>倒装的两大类型</h4>
+      <div class="f-en"><b>完全倒装</b>：整个谓语动词提到主语前 —— <span class="slot">谓语动词</span> + 主语</div>
+      <div class="f-en" style="margin-top:8px"><b>部分倒装</b>：只把<b>助动词 / 情态动词</b>提到主语前 —— <span class="slot">助动词 / 情态动词</span> + 主语 + 主要动词</div>
+      <div class="f-zh">本章按高考翻译要求，重点讲「部分倒装」的翻译。</div>
+    </div>
+
+    <div class="case-list">
+      <div class="ans-item">
+        <div class="q"><span class="tag">案例</span><span>他从来没有预料到竟然会在这么多竞争对手中脱颖而出，获得冠军。<span class="kw">(Never)</span></span><span class="show">看答案</span></div>
+        <div class="a">
+          <span class="en"><b>Never has he expected</b> that he should stand out among all these competitors and win the championship.</span>
+          <span class="zh">分析：所给词 Never 首字母大写、要求放在句首；Never 是否定副词，放句首要部分倒装（has 提到主语 he 前）。</span>
+          <span class="why-line">💡 <b>怎么想到倒装？</b>括号词 Never 是否定副词 + 要求放句首 → 触发部分倒装。这就是"<b>触发词 → 强制倒装</b>"的典型。</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 二、部分倒装的结构 ================= -->
+  <section class="section" id="structure">
+    <div class="sec-head g2">
+      <span class="num">二</span>
+      <h2>部分倒装的结构</h2>
+      <span class="en">Structure</span>
+      <div class="hint">把情态动词、助动词等放到主语前面，其余部分语序不变。</div>
+    </div>
+
+    <div class="formula">
+      <h4>部分倒装结构</h4>
+      <div class="f-en"><span class="slot">助动词 / 情态动词</span> + 主语 + 主要动词（剩余语序不变）</div>
+      <div class="f-zh">例：Never <b>shall we</b> do this again.（情态动词 shall 提到主语 we 前，其余语序不变）</div>
+    </div>
+
+    <div class="case-list">
+      <div class="ans-item">
+        <div class="q"><span class="tag">案例</span><span>我们再也不会这样做了。<span class="kw">(Never)</span></span><span class="show">看答案</span></div>
+        <div class="a">
+          <span class="en"><b>Never shall we</b> do this again.</span>
+          <span class="zh">分析：情态动词 shall 放在主语 we 的前面，剩余句子的语序不变。</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 三、7 大句型 ================= -->
+  <section class="section" id="patterns">
+    <div class="sec-head g3">
+      <span class="num">三</span>
+      <h2>部分倒装的 7 大句型</h2>
+      <span class="en">7 Inversion Patterns</span>
+      <div class="hint">每个句型都按「结构公式 → 怎么想到用它 → 用了有什么好处 → 案例」来展开，把"为什么"讲透。</div>
+    </div>
+
+    <!-- 句型1 only -->
+    <div class="sec-head" id="pat1" style="margin-top:8px">
+      <span class="num" style="background:var(--rose-deep)">句型 1</span>
+      <h2 style="font-size:22px">only 在句首</h2>
+      <span class="en">Only + 状语 + 助动词/情态动词 + 主语 + 谓语</span>
+      <div class="hint">中文对应"只有……才……"。</div>
+    </div>
+
+    <div class="formula">
+      <h4>结构公式</h4>
+      <div class="f-en"><b>Only</b> + <span class="slot">介词短语 / 时间副词 / 状语从句</span> + 助动词/情态动词 + 主语 + 主要动词</div>
+      <div class="f-zh">Only 后面跟一个状语（不是主谓完整句），把它提到句首后，主句用部分倒装。</div>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-box trigger">
+        <h4>怎么想到用它</h4>
+        <ul><li>括号词是 <b>Only</b>，中文是"<b>只有……才……</b>"。</li>
+        <li>把 "Only + 状语" 提到句首 → 主句部分倒装。</li></ul>
+      </div>
+      <div class="why-box benefit">
+        <h4>用了有什么好处</h4>
+        <ul><li>把"<b>唯一的条件</b>"顶到最显眼的位置，语气强烈。</li>
+        <li>是"只有……才……"最地道的书面译法，阅卷老师一眼看到亮点。</li></ul>
+      </div>
+      <div class="why-box warn">
+        <h4>陷阱：only 修饰主语时<b>不倒装</b></h4>
+        <ul><li>只有你才可以驾驶那辆卡车。(Only) → <b>Only you can drive that truck.</b>（only 修饰主语 you，主谓正常语序）</li></ul>
+      </div>
+    </div>
+
+    <div class="case-list">
+      <div class="ans-item">
+        <div class="q"><span class="tag">案例 1</span><span>只有经过大量的努力，我们才能取得成功。<span class="kw">(Only)</span></span><span class="show">看答案</span></div>
+        <div class="a">
+          <span class="en"><b>Only by making great efforts can we succeed.</b></span>
+          <span class="zh">或：Only with great efforts can we succeed.</span>
+          <span class="why-line">💡 Only 后接介词短语 "by making great efforts"（方式状语），提前后主句倒装：can 提到主语 we 前。</span>
+        </div>
+      </div>
+      <div class="ans-item">
+        <div class="q"><span class="tag">案例 2</span><span>只有今天早晨他出去慢跑了。<span class="kw">(Only)</span></span><span class="show">看答案</span></div>
+        <div class="a">
+          <span class="en"><b>Only this morning did he go jogging.</b></span>
+          <span class="zh">Only + 时间副词 "this morning"，主句倒装：did 提到主语 he 前。</span>
+        </div>
+      </div>
+      <div class="ans-item">
+        <div class="q"><span class="tag">案例 3</span><span>只有在你细看完这个设计后，你才会明白它的真正意图。<span class="kw">(Only)</span></span><span class="show">看答案</span></div>
+        <div class="a">
+          <span class="en"><b>Only after you study the design will you understand its real purpose.</b></span>
+          <span class="zh">Only + 状语从句 "after you study the design"（从句不倒装），主句倒装：will 提到主语 you 前。</span>
+          <span class="why-line">💡 关键：Only 引导的状语从句本身用<b>陈述语序</b>，倒装只发生在<b>主句</b>。</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 句型2 否定词 -->
+    <div class="sec-head" id="pat2">
+      <span class="num" style="background:var(--rose-deep)">句型 2</span>
+      <h2 style="font-size:22px">否定词 / 含 no 的短语在句首</h2>
+      <span class="en">否定词 + 助动词/情态动词 + 主语 + 谓语</span>
+      <div class="hint">中文对应"决不 / 几乎不 / 很少 / 在任何情况下都不"等强烈否定。</div>
+    </div>
+
+    <div class="formula">
+      <h4>结构公式</h4>
+      <div class="f-en"><span class="slot">否定词 / 含 no 的短语</span> + 助动词/情态动词 + 主语 + 主要动词</div>
+      <div class="f-zh">常用否定词：<b>hardly, barely, no, not, never, nowhere, rarely, seldom, little, few, no longer</b> 等。含 no 的短语：<b>by no means, in no case, on no account, under/in no circumstances, in no way</b>（都可译作"决不 / 在任何情况下都不"）。</div>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-box trigger">
+        <h4>怎么想到用它</h4>
+        <ul><li>括号词是 <b>Never / Seldom / Little / No longer / In no case / Under no circumstances</b> 等。</li>
+        <li>这类词本身是否定或含否定意义，放句首 → 部分倒装。</li></ul>
+      </div>
+      <div class="why-box benefit">
+        <h4>用了有什么好处</h4>
+        <ul><li>否定词前置，把"<b>决不 / 几乎不 / 很少</b>"的否定力度拉满。</li>
+        <li>比 "We will never…" 更有气势、更书面，是高考翻译高频考点。</li></ul>
+      </div>
+      <div class="why-box warn">
+        <h4>记忆：含 no 的短语都可译成"决不 / 在任何情况下都不"</h4>
+        <ul><li>in no case = 决不；under no circumstances = 在任何情况下都不；by no means = 决不；in no way = 决不。</li></ul>
+      </div>
+    </div>
+
+    <div class="case-list">
+      <div class="ans-item">
+        <div class="q"><span class="tag">案例</span><span>我对这件事听说得极少。<span class="kw">(Little)</span></span><span class="show">看答案</span></div>
+        <div class="a">
+          <span class="en"><b>Little have I heard</b> of it.</span>
+          <span class="zh">Little 含否定意义"几乎不"，放句首 → 部分倒装：have 提到主语 I 前。</span>
+          <span class="why-line">💡 联想：Little / Few / Seldom / Never 等"<b>半否定/全否定词</b>"放句首，一律倒装。</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 句型3 so/such -->
+    <div class="sec-head" id="pat3">
+      <span class="num" style="background:var(--rose-deep)">句型 3</span>
+      <h2 style="font-size:22px">so / such 在句首</h2>
+      <span class="en">So / Such … + that 从句</span>
+      <div class="hint">中文对应"如此……以致……"。</div>
+    </div>
+
+    <div class="formula">
+      <h4>结构公式</h4>
+      <div class="f-en"><b>So</b> + <span class="slot">形容词 / 副词</span> + 助动词/情态动词 + 主语 + 谓语 + <b>that</b> 从句（陈述语序）</div>
+      <div class="f-en" style="margin-top:8px"><b>Such</b> + <span class="slot">名词 / 名词短语</span> + 助动词/情态动词 + 主语 + 谓语 + <b>that</b> 从句（陈述语序）</div>
+      <div class="f-zh">so 修饰形容词或副词，such 修饰名词或名词短语；倒装时把被修饰的词<b>一起提前</b>。</div>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-box trigger">
+        <h4>怎么想到用它</h4>
+        <ul><li>括号词是 <b>So / Such</b>，中文是"<b>如此……以致……</b>"。</li>
+        <li>把 "so + 形容词/副词" 或 "such + 名词" 一起提前 → 主句倒装，that 从句陈述语序。</li></ul>
+      </div>
+      <div class="why-box benefit">
+        <h4>用了有什么好处</h4>
+        <ul><li>把"<b>程度之深</b>"顶到句首，气势极强。</li>
+        <li>书面语里比 "light travels so fast that…" 更有力度，是高分翻译的亮点句式。</li></ul>
+      </div>
+      <div class="why-box warn">
+        <h4>陷阱：so / such 修饰主语时<b>不倒装</b></h4>
+        <ul><li>如此多的人向他伸出援助之手。(So) → <b>So many people gave him a helping hand.</b>（so 修饰主语 people，不倒装）</li></ul>
+      </div>
+    </div>
+
+    <div class="case-list">
+      <div class="ans-item">
+        <div class="q"><span class="tag">案例</span><span>光传播得如此之快，以致人们难以想象出它的速度。<span class="kw">(So)</span></span><span class="show">看答案</span></div>
+        <div class="a">
+          <span class="en"><b>So fast does light travel</b> that it is hard for us to imagine its speed.</span>
+          <span class="zh">"so + 副词 fast" 提前，主句倒装：does 提到主语 light 前；that 从句陈述语序。</span>
+          <span class="why-line">💡 so 修饰副词 fast（说明 travel 的方式），提前时"so fast"整体前置，主句才倒装。</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 句型4 hardly/scarcely...when / no sooner...than -->
+    <div class="sec-head" id="pat4">
+      <span class="num" style="background:var(--rose-deep)">句型 4</span>
+      <h2 style="font-size:22px">hardly/scarcely…when 与 no sooner…than</h2>
+      <span class="en">"一……就……" / "刚……就……"</span>
+      <div class="hint">两个动作紧接发生，用过去完成时 + 部分倒装。</div>
+    </div>
+
+    <div class="formula">
+      <h4>结构公式</h4>
+      <div class="f-en"><b>Hardly / Scarcely</b> + <b>had</b> + 主语 + 过去分词 + <b>when</b> + 陈述句（过去时）</div>
+      <div class="f-en" style="margin-top:8px"><b>No sooner</b> + <b>had</b> + 主语 + 过去分词 + <b>than</b> + 陈述句（过去时）</div>
+      <div class="f-zh">主句用过去完成时（had + done）并倒装，when/than 后面的从句用一般过去时。</div>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-box trigger">
+        <h4>怎么想到用它</h4>
+        <ul><li>括号词是 <b>Hardly…when / No sooner…than</b>，中文是"<b>一……就…… / 刚……就……</b>"。</li>
+        <li>主句（先发生的动作）用过去完成时 + 部分倒装。</li></ul>
+      </div>
+      <div class="why-box benefit">
+        <h4>用了有什么好处</h4>
+        <ul><li>这是"一……就……"的高阶书面表达，比 <b>as soon as</b> 更高级、更紧凑。</li>
+        <li>高考翻译明确加分项，出现频率高。</li></ul>
+      </div>
+      <div class="why-box warn">
+        <h4>陷阱：时态分工</h4>
+        <ul><li>主句 = 过去完成时（<b>had done</b>）；when / than 从句 = 一般过去时。</li></ul>
+      </div>
+    </div>
+
+    <div class="case-list">
+      <div class="ans-item">
+        <div class="q"><span class="tag">案例</span><span>小偷一看到警察就跑了。<span class="kw">(No sooner…than)</span></span><span class="show">看答案</span></div>
+        <div class="a">
+          <span class="en"><b>No sooner had the thief seen the policeman than he took to his heels.</b></span>
+          <span class="zh">主句倒装：had 提到主语 the thief 前；than 从句用一般过去时 took。</span>
+          <span class="why-line">💡 "看到警察"发生在先（过去完成），"跑"发生在后（过去时）；No sooner 句首强制主句倒装。</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 句型5 not until -->
+    <div class="sec-head" id="pat5">
+      <span class="num" style="background:var(--rose-deep)">句型 5</span>
+      <h2 style="font-size:22px">not until</h2>
+      <span class="en">Not until + 状语 + 助动词/情态动词 + 主语 + 谓语</span>
+      <div class="hint">中文对应"直到……才……"。</div>
+    </div>
+
+    <div class="formula">
+      <h4>结构公式</h4>
+      <div class="f-en"><b>Not until</b> + <span class="slot">句子（陈述语序）/ 时间状语</span> + 助动词/情态动词 + 主语 + 主要动词</div>
+      <div class="f-zh">Not until 放句首，<b>主句</b>部分倒装；Not until 后面的从句 / 时间状语仍用陈述语序。</div>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-box trigger">
+        <h4>怎么想到用它</h4>
+        <ul><li>括号词是 <b>Not until</b>，中文是"<b>直到……才……</b>"。</li>
+        <li>把 "Not until + 时间/从句" 提到句首 → 主句部分倒装。</li></ul>
+      </div>
+      <div class="why-box benefit">
+        <h4>用了有什么好处</h4>
+        <ul><li>突出"<b>直到……才……</b>"的转折点，强调动作发生之晚、之关键。</li>
+        <li>主句信息被推到最前，重点突出。</li></ul>
+      </div>
+      <div class="why-box warn">
+        <h4>陷阱：倒装的是<b>主句</b>，不是 Not until 后面的部分</h4>
+        <ul><li>"Not until 从句" 本身用陈述语序，只有后面的<b>主句</b>倒装。</li></ul>
+      </div>
+    </div>
+
+    <div class="case-list">
+      <div class="ans-item">
+        <div class="q"><span class="tag">案例 1</span><span>直到报纸报道了这一事故，他才了解了真相。<span class="kw">(Not until)</span></span><span class="show">看答案</span></div>
+        <div class="a">
+          <span class="en"><b>Not until the newspaper reported the accident did he know about the truth.</b></span>
+          <span class="zh">Not until 引导从句（陈述语序），主句倒装：did 提到主语 he 前。</span>
+          <span class="why-line">💡 牢记：倒装的是<b>主句</b>（did he know），Not until 后面的从句 "the newspaper reported…" 不倒装。</span>
+        </div>
+      </div>
+      <div class="ans-item">
+        <div class="q"><span class="tag">案例 2</span><span>直到昨天，她的申请才得以批准。<span class="kw">(Not until)</span></span><span class="show">看答案</span></div>
+        <div class="a">
+          <span class="en"><b>Not until yesterday was her application approved.</b></span>
+          <span class="zh">Not until + 时间状语 yesterday，主句倒装：was 提到主语 her application 前。</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 句型6 not only...but also -->
+    <div class="sec-head" id="pat6">
+      <span class="num" style="background:var(--rose-deep)">句型 6</span>
+      <h2 style="font-size:22px">not only…but also</h2>
+      <span class="en">Not only + 助动词/情态动词 + 主语 + 谓语 + but (also)…</span>
+      <div class="hint">中文对应"不仅……而且……"。</div>
+    </div>
+
+    <div class="formula">
+      <h4>结构公式</h4>
+      <div class="f-en"><b>Not only</b> + 助动词/情态动词 + 主语 + 主要动词 + <b>but (also)</b> + 主语 + 陈述语序</div>
+      <div class="f-zh">只有 Not only 部分引起部分倒装，but also 部分仍是陈述语序、不倒装。</div>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-box trigger">
+        <h4>怎么想到用它</h4>
+        <ul><li>括号词是 <b>Not only…but also</b>，中文是"<b>不仅……而且……</b>"。</li>
+        <li>Not only 放句首 → 前半句部分倒装，后半句陈述语序。</li></ul>
+      </div>
+      <div class="why-box benefit">
+        <h4>用了有什么好处</h4>
+        <ul><li>Not only 前置强调"<b>不仅</b>"，使递进关系更有力、更书面。</li>
+        <li>比平铺 "sb not only does…" 更显高级。</li></ul>
+      </div>
+      <div class="why-box warn">
+        <h4>陷阱：只有 Not only 部分倒装</h4>
+        <ul><li>but (also) 后面的句子用<b>陈述语序</b>，别跟着倒装。</li></ul>
+      </div>
+    </div>
+
+    <div class="case-list">
+      <div class="ans-item">
+        <div class="q"><span class="tag">案例</span><span>橙色不仅让人感到愉快，而且还能增进食欲。<span class="kw">(Not only…but also)</span></span><span class="show">看答案</span></div>
+        <div class="a">
+          <span class="en"><b>Not only does orange make people feel pleased but it also stimulates one's appetite.</b></span>
+          <span class="zh">Not only 部分倒装：does 提到主语 orange 前；but also 部分陈述语序。</span>
+          <span class="why-line">💡 对照：前半句 "does orange make…"（倒装），后半句 "it also stimulates…"（不倒装）。</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 句型7 as 让步 -->
+    <div class="sec-head" id="pat7">
+      <span class="num" style="background:var(--rose-deep)">句型 7</span>
+      <h2 style="font-size:22px">as 引导让步状语从句</h2>
+      <span class="en">形容词/副词/名词 + as + 主语 + 谓语</span>
+      <div class="hint">中文对应"尽管……（还是）……"。</div>
+    </div>
+
+    <div class="formula">
+      <h4>结构公式</h4>
+      <div class="f-en"><span class="slot">形容词 / 副词 / 名词（不加冠词）</span> + <b>as</b> + 主语 + 谓语，主句（陈述语序）</div>
+      <div class="f-zh">as 引导的从句要倒装（把表语/状语提到 as 前），主句仍用陈述语序。</div>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-box trigger">
+        <h4>怎么想到用它</h4>
+        <ul><li>括号词是 <b>as</b>，中文是"<b>尽管……（还是）……</b>"。</li>
+        <li>把表语（形容词/名词/副词）提到 as 前面 → 构成 "adj./adv./n. + as + 主语 + 谓语"。</li></ul>
+      </div>
+      <div class="why-box benefit">
+        <h4>用了有什么好处</h4>
+        <ul><li>这是"尽管……"最精炼高级的书面表达，比 <b>although</b> 更紧凑、更有文采。</li>
+        <li>名词提前不加冠词是它的特色标志。</li></ul>
+      </div>
+      <div class="why-box warn">
+        <h4>陷阱：名词提前<b>不加冠词</b></h4>
+        <ul><li>尽管她是个女孩… → <b>Girl as she is, …</b>（girl 前不加 a）</li>
+        <li>这个"倒装"其实是<b>表语/状语前置</b>，主句仍用陈述语序。</li></ul>
+      </div>
+    </div>
+
+    <div class="case-list">
+      <div class="ans-item">
+        <div class="q"><span class="tag">案例 1</span><span>尽管他很努力，还是失败了。<span class="kw">(as)</span></span><span class="show">看答案</span></div>
+        <div class="a">
+          <span class="en"><b>Hard as he worked, he failed.</b></span>
+          <span class="zh">副词 hard 提到 as 前；整句相当于 Although he worked hard, he failed.</span>
+          <span class="why-line">💡 思路：把表语/状语 hard 顶到最前 + as，语气更凝练；主句 "he failed" 保持陈述语序。</span>
+        </div>
+      </div>
+      <div class="ans-item">
+        <div class="q"><span class="tag">案例 2</span><span>尽管她是个女孩，但非常勇敢。<span class="kw">(as)</span></span><span class="show">看答案</span></div>
+        <div class="a">
+          <span class="en"><b>Girl as she is, she is courageous.</b></span>
+          <span class="zh">名词 girl 提前，<b>不加冠词 a</b>；主句 she is courageous 陈述语序。</span>
+          <span class="why-line">💡 关键易错点：名词提前时<b>省略冠词</b>——是 "Girl as she is" 而不是 "A girl as she is"。</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 四、自测练习 ================= -->
+  <section class="section" id="practice">
+    <div class="sec-head">
+      <span class="num">四</span>
+      <h2>倒装句自测练习</h2>
+      <span class="en">20 道真题级翻译</span>
+      <div class="hint">按句型分组，先自己做、再点开对答案。每题标注了它考的是哪个句型，帮你练成"见词即倒"的条件反射。</div>
+    </div>
+
+    <div class="toolbar">
+      <button data-act="show">显示全部答案</button>
+      <button data-act="hide">隐藏全部答案</button>
+    </div>
+
+    <!-- 组：only -->
+    <div class="grp-note"><b>组 A · 句型 1（only 在句首）</b>　—— 看到 Only，先把"Only + 状语"提到句首，主句倒装。</div>
+    <div class="case-list">
+      <div class="ans-item">
+        <div class="q"><span class="tag">1</span><span>只有你失去健康的时候，才知道它的价值。<span class="kw">(Only)</span></span><span class="show">看答案</span></div>
+        <div class="a"><span class="en"><b>Only when you lose your health do you realize its value.</b></span></div>
+      </div>
+      <div class="ans-item">
+        <div class="q"><span class="tag">4</span><span>只有通过更多的实践，我们的英语才能取得更大的进步。<span class="kw">(Only)</span></span><span class="show">看答案</span></div>
+        <div class="a"><span class="en"><b>Only by having more practice can we make more progress in English.</b></span></div>
+      </div>
+      <div class="ans-item">
+        <div class="q"><span class="tag">20</span><span>只有当农业充分发展，工业才有足够的原料和市场。<span class="kw">(Only)</span></span><span class="show">看答案</span></div>
+        <div class="a"><span class="en"><b>Only when agriculture is fully developed can industry have sufficient materials and markets.</b></span></div>
+      </div>
+    </div>
+
+    <!-- 组：否定词/含no -->
+    <div class="grp-note"><b>组 B · 句型 2（否定词 / 含 no 的短语）</b>　—— 看到 In no case / No longer / Seldom / Under no circumstances，放句首就倒装。</div>
+    <div class="case-list">
+      <div class="ans-item">
+        <div class="q"><span class="tag">2</span><span>我们任何时候都不能放弃希望。<span class="kw">(In no case)</span></span><span class="show">看答案</span></div>
+        <div class="a"><span class="en"><b>In no case shall we give up our hope.</b></span></div>
+      </div>
+      <div class="ans-item">
+        <div class="q"><span class="tag">10</span><span>自从出国留学后，她就不再和我们保持联系了。<span class="kw">(No longer)</span>（2011 上海）</span><span class="show">看答案</span></div>
+        <div class="a"><span class="en"><b>No longer has she kept in touch with us since she went abroad for further study / education.</b></span></div>
+      </div>
+      <div class="ans-item">
+        <div class="q"><span class="tag">15</span><span>我们很少有机会接待这么一位贵客。<span class="kw">(Seldom)</span></span><span class="show">看答案</span></div>
+        <div class="a"><span class="en"><b>Seldom do we have the opportunity of receiving such a distinguished guest.</b></span></div>
+      </div>
+      <div class="ans-item">
+        <div class="q"><span class="tag">18</span><span>他向朋友保证，在任何情况下他都不会违背要做一个诚实守信之人的承诺。<span class="kw">(under no circumstances)</span></span><span class="show">看答案</span></div>
+        <div class="a"><span class="en"><b>He assured his friends that under no circumstances would he break his promise that he would be an honest and trustworthy person.</b></span></div>
+      </div>
+    </div>
+
+    <!-- 组：so/such -->
+    <div class="grp-note"><b>组 C · 句型 3（so / such … that）</b>　—— 把 "so + 形容词/副词" 或 "such + 名词" 一起提前，主句倒装。</div>
+    <div class="case-list">
+      <div class="ans-item">
+        <div class="q"><span class="tag">3</span><span>他非常喜欢这份工作，所以决定把它作为终生的事业。<span class="kw">(So)</span></span><span class="show">看答案</span></div>
+        <div class="a"><span class="en"><b>So much did he like this job that he chose it as his life-long career.</b></span></div>
+      </div>
+      <div class="ans-item">
+        <div class="q"><span class="tag">14</span><span>我家乡的景色如此美丽，每年吸引成千上万名中外游客。<span class="kw">(So)</span></span><span class="show">看答案</span></div>
+        <div class="a"><span class="en"><b>So beautiful is the scenery of my hometown that each year it attracts tens of thousands of tourists from both home and abroad.</b></span></div>
+      </div>
+      <div class="ans-item">
+        <div class="q"><span class="tag">17</span><span>外面机器制造出如此大的噪音，以致他们没法专心工作。<span class="kw">(Such)</span></span><span class="show">看答案</span></div>
+        <div class="a"><span class="en"><b>Such loud noises did the machine outside make that they found it hard to be absorbed in their work.</b></span><span class="zh">such + 名词短语 "loud noises" 整体提前，主句倒装：did 提到主语 the machine 前。</span></div>
+      </div>
+    </div>
+
+    <!-- 组：hardly/no sooner -->
+    <div class="grp-note"><b>组 D · 句型 4（hardly…when / no sooner…than）</b>　—— 主句过去完成时 + 倒装（had 提到主语前），从句一般过去时。</div>
+    <div class="case-list">
+      <div class="ans-item">
+        <div class="q"><span class="tag">6</span><span>我刚坐下，上课铃就响了。<span class="kw">(Hardly…when)</span></span><span class="show">看答案</span></div>
+        <div class="a"><span class="en"><b>Hardly had I taken my seat when the bell for class rang.</b></span></div>
+      </div>
+      <div class="ans-item">
+        <div class="q"><span class="tag">11</span><span>她一看完那个关于已灭绝物种的电视节目，就立志加入野生动物保护组织。<span class="kw">(No sooner)</span>（2013 上海）</span><span class="show">看答案</span></div>
+        <div class="a"><span class="en"><b>No sooner had she watched the TV programme on the extinct species than she made up her mind to join the wildlife protection / conservation organization.</b></span></div>
+      </div>
+    </div>
+
+    <!-- 组：not until -->
+    <div class="grp-note"><b>组 E · 句型 5（not until）</b>　—— 倒装的是<b>主句</b>，Not until 后面的从句/状语不倒装。</div>
+    <div class="case-list">
+      <div class="ans-item">
+        <div class="q"><span class="tag">5</span><span>直到上周收到你的来信时，我们才如释重负。<span class="kw">(Not until)</span></span><span class="show">看答案</span></div>
+        <div class="a"><span class="en"><b>Not until we heard from you last week were we relieved.</b></span></div>
+      </div>
+      <div class="ans-item">
+        <div class="q"><span class="tag">7</span><span>直到我们开始使用电脑时才发现它出毛病了。<span class="kw">(Not until)</span></span><span class="show">看答案</span></div>
+        <div class="a"><span class="en"><b>Not until we started to use the computer did we find something wrong with it.</b></span></div>
+      </div>
+      <div class="ans-item">
+        <div class="q"><span class="tag">12</span><span>直到拿到考试结果，他才后悔没有充分利用在校时间来实现自己的抱负。<span class="kw">(Not until)</span></span><span class="show">看答案</span></div>
+        <div class="a"><span class="en"><b>Not until he got the test result did he regret not making full use of time at school to realize his ambition.</b></span></div>
+      </div>
+      <div class="ans-item">
+        <div class="q"><span class="tag">19</span><span>直到咖啡传入欧洲，才引起有关它的巨大争议。<span class="kw">(Not until)</span></span><span class="show">看答案</span></div>
+        <div class="a"><span class="en"><b>Not until coffee was introduced into Europe did it arouse a great deal of controversy about it.</b></span></div>
+      </div>
+    </div>
+
+    <!-- 组：not only -->
+    <div class="grp-note"><b>组 F · 句型 6（not only…but also）</b>　—— 只有 Not only 部分倒装，but also 部分陈述语序。</div>
+    <div class="case-list">
+      <div class="ans-item">
+        <div class="q"><span class="tag">9</span><span>背景音乐不仅影响人们的心情，还能促进销售。<span class="kw">(Not only…but also)</span></span><span class="show">看答案</span></div>
+        <div class="a"><span class="en"><b>Not only does background music influence one's mood but it also promotes sales.</b></span></div>
+      </div>
+    </div>
+
+    <!-- 组：as 让步 -->
+    <div class="grp-note"><b>组 G · 句型 7（as 引导让步状语从句）</b>　—— 表语/状语提到 as 前，名词不加冠词，主句陈述语序。</div>
+    <div class="case-list">
+      <div class="ans-item">
+        <div class="q"><span class="tag">8</span><span>尽管他贫穷，但他乐于助人，而且享受生活。<span class="kw">(as)</span></span><span class="show">看答案</span></div>
+        <div class="a"><span class="en"><b>Poor as he is, he is ready to help others and enjoys his life.</b></span></div>
+      </div>
+    </div>
+
+    <!-- 组：完全倒装 -->
+    <div class="grp-note"><b>组 H · 附：完全倒装（表语前置）</b>　—— 这两题把表语（Such / Gone）整个提到句首，属于"完全倒装"，是 7 大句型之外的补充考点。</div>
+    <div class="case-list">
+      <div class="ans-item">
+        <div class="q"><span class="tag">13</span><span>这就是爱因斯坦，一个拥有智慧并获得伟大成就的人。<span class="kw">(Such)</span></span><span class="show">看答案</span></div>
+        <div class="a">
+          <span class="en"><b>Such was Einstein, a man of wisdom and great achievements.</b></span>
+          <span class="zh">Such 作表语提前，后接系动词 was + 主语 Einstein（完全倒装，不是 such…that 结构）。</span>
+        </div>
+      </div>
+      <div class="ans-item">
+        <div class="q"><span class="tag">16</span><span>一考定终身的日子一去不复返了，但是考试越多，学生的压力越大。<span class="kw">(Gone)</span></span><span class="show">看答案</span></div>
+        <div class="a">
+          <span class="en"><b>Gone are the days when a student's fate was determined by one single exam; but the more exams there are, the more stressful they will feel.</b></span>
+          <span class="zh">Gone 作表语前置 + are + 主语 the days（完全倒装）。</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 五、学法建议 ================= -->
+  <section class="section" id="advice">
+    <div class="sec-head g2">
+      <span class="num">五</span>
+      <h2>更好的学习方法</h2>
+      <span class="en">How to Practise</span>
+    </div>
+
+    <div class="advice">
+      <h3>把倒装练成"条件反射"</h3>
+      <div class="a-item"><span class="no">1</span><span class="txt"><b>先认词，再动笔。</b>翻译前先圈出括号里的触发词，判断它属于 7 大句型中的哪一个——这一步决定了要不要倒装、倒装哪一半。</span></div>
+      <div class="a-item"><span class="no">2</span><span class="txt"><b>牢记"倒装的是主句"。</b>not until、only + 从句、as 让步、not only 这几种，倒装都发生在主句（或前半句），从句 / 后半句保持陈述语序。</span></div>
+      <div class="a-item"><span class="no">3</span><span class="txt"><b>警惕三个"不倒装"陷阱</b>：only 修饰主语、so/such 修饰主语、as 引导的名词不加冠词——这三处最容易被倒装惯性带偏。</span></div>
+      <div class="a-item"><span class="no">4</span><span class="txt"><b>翻译后自查时态</b>：hardly…when / no sooner…than 的主句必须是过去完成时（had done）。</span></div>
+      <div class="a-item"><span class="no">5</span><span class="txt"><b>做完 20 题对答案，逐题说一句"为什么"</b>——能说清"看到这个词→该用这个句型→好处是强调/地道"，才算真会。</span></div>
+    </div>
+  </section>
+
+  <div class="footer">倒装句在翻译中的运用 · 高考英语翻译专项训练（修订版）第六章</div>
+</main>
+
+<script>
+function $(s){return document.querySelector(s)}
+function $$(s){return Array.from(document.querySelectorAll(s))}
+
+/* ===== 目录 ===== */
+const TOC = [
+  {id:"common", t:"翻译里为什么要倒装"},
+  {id:"concept", cls:"p2", t:"一、概念", sub:[
+    {id:"concept", t:"什么是倒装"},
+  ]},
+  {id:"structure", cls:"p2", t:"二、部分倒装的结构"},
+  {id:"patterns", cls:"p3", t:"三、7 大句型", sub:[
+    {id:"pat1", t:"句型 1 · only 在句首"},
+    {id:"pat2", t:"句型 2 · 否定词在句首"},
+    {id:"pat3", t:"句型 3 · so / such…that"},
+    {id:"pat4", t:"句型 4 · hardly…when / no sooner…than"},
+    {id:"pat5", t:"句型 5 · not until"},
+    {id:"pat6", t:"句型 6 · not only…but also"},
+    {id:"pat7", t:"句型 7 · as 引导让步"},
+  ]},
+  {id:"practice", cls:"p2", t:"四、自测练习（20 题）"},
+  {id:"advice", t:"✦ 更好的学习方法"},
+];
+function buildToc(){
+  const nav = $("#tocNav");
+  let html = '<div class="grp-title">本课内容</div>';
+  TOC.forEach(g=>{
+    if(g.sub){
+      html += `<div class="grp-title ${g.cls||''}">${g.t}</div>`;
+      g.sub.forEach(s=>{ html += `<a href="#${s.id}" data-close><span class="idx">›</span>${s.t}</a>`; });
+    } else {
+      html += `<a href="#${g.id}" data-close><span class="idx">${g.t.slice(0,1)==='✦'?'✦':''}</span>${g.t.replace(/^✦\s*/,'')}</a>`;
+    }
+  });
+  nav.innerHTML = html;
+}
+buildToc();
+
+/* ===== 侧滑目录 ===== */
+const drawer = $("#drawer"), overlay = $("#overlay"), menuBtn = $("#menuBtn");
+function openDrawer(){ drawer.classList.add("open"); overlay.classList.add("show"); menuBtn.classList.add("open"); }
+function closeDrawer(){ drawer.classList.remove("open"); overlay.classList.remove("show"); menuBtn.classList.remove("open"); }
+$("#menuBtn").addEventListener("click", ()=> drawer.classList.contains("open") ? closeDrawer() : openDrawer());
+overlay.addEventListener("click", closeDrawer);
+document.addEventListener("click", e=>{ if(e.target.closest("[data-close]")) closeDrawer(); });
+
+/* ===== 案例/自测答案点击显示 ===== */
+$$(".ans-item .q").forEach(q=>{
+  q.addEventListener("click", ()=> q.parentElement.classList.toggle("open"));
+});
+
+/* ===== 显示/隐藏全部答案 ===== */
+$$(".toolbar button").forEach(b=>{
+  b.addEventListener("click", ()=>{
+    const act = b.dataset.act;
+    const scope = b.closest("section") || document;
+    scope.querySelectorAll(".ans-item").forEach(i=> act==="show" ? i.classList.add("open") : i.classList.remove("open"));
+  });
+});
+</script>
+</body>
+</html>
