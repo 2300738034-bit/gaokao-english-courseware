@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>作文主体·原因与对策句型（原因结果·方法措施）</title>
+<style>
+  :root{
+    --bg:#EFEBE4;
+    --paper:#FBF9F5;
+    --card:#FFFFFF;
+    --ink:#4A463F;
+    --muted:#8C8578;
+    --line:#E3DDD3;
+    --line-soft:#EDE8DF;
+    --brand:#A8B5A0;
+    --brand-deep:#7E8F76;
+    --rose:#C4A79E;
+    --rose-deep:#B18C7F;
+    --blue:#8FA6B0;
+    --blue-deep:#6E8A96;
+    --tan:#C9B08A;
+    --tan-deep:#A8865C;
+    --plum:#8E82A8;
+    --plum-deep:#6E6288;
+    --shadow:0 2px 6px rgba(90,80,60,.06), 0 10px 28px -12px rgba(90,80,60,.16);
+    --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--font);
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ===== 顶部导航 ===== */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:center;gap:14px;
+    padding:14px 22px;
+    background:rgba(251,249,245,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .menu-btn{
+    width:42px;height:42px;flex:0 0 auto;
+    border:1px solid var(--line);border-radius:12px;
+    background:var(--card);color:var(--ink);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+    cursor:pointer;transition:.2s;
+  }
+  .menu-btn:hover{background:var(--brand);color:#fff;border-color:var(--brand)}
+  .menu-btn span{display:block;width:18px;height:2px;background:currentColor;border-radius:2px;transition:.25s}
+  .menu-btn.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .menu-btn.open span:nth-child(2){opacity:0}
+  .menu-btn.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .topbar .titles{min-width:0}
+  .topbar .titles h1{font-size:17px;font-weight:800;letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .topbar .titles .sub{font-size:12px;color:var(--muted)}
+  .topbar .badge{
+    margin-left:auto;flex:0 0 auto;
+    font-size:11px;font-weight:700;letter-spacing:.06em;
+    color:#fff;background:var(--rose-deep);
+    padding:5px 12px;border-radius:99px;
+  }
+
+  /* ===== 目录侧滑 ===== */
+  .overlay{position:fixed;inset:0;z-index:60;background:rgba(70,60,48,.28);opacity:0;pointer-events:none;transition:opacity .3s}
+  .overlay.show{opacity:1;pointer-events:auto}
+  .drawer{
+    position:fixed;top:0;left:0;bottom:0;z-index:70;
+    width:min(340px,86vw);background:var(--paper);border-right:1px solid var(--line);
+    transform:translateX(-102%);transition:transform .32s cubic-bezier(.4,0,.2,1);
+    display:flex;flex-direction:column;box-shadow:12px 0 40px -20px rgba(70,60,48,.3);
+  }
+  .drawer.open{transform:translateX(0)}
+  .drawer .d-head{padding:22px 24px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px}
+  .drawer .d-head .dot{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--blue));color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .drawer .d-head h2{font-size:16px;font-weight:800}
+  .drawer .d-head p{font-size:11px;color:var(--muted)}
+  .drawer nav{flex:1;overflow-y:auto;padding:14px 0 30px}
+  .drawer .grp-title{font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--muted);padding:16px 24px 8px;display:flex;align-items:center;gap:8px}
+  .drawer .grp-title::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--brand)}
+  .drawer .grp-title.p2::before{background:var(--blue)}
+  .drawer .grp-title.p3::before{background:var(--rose)}
+  .drawer .grp-title.p4::before{background:var(--tan-deep)}
+  .drawer .grp-title.p5::before{background:var(--plum-deep)}
+  .drawer a{display:flex;align-items:center;gap:10px;padding:9px 24px;color:var(--ink);text-decoration:none;font-size:14px;transition:.15s;border-left:3px solid transparent}
+  .drawer a:hover{background:#F1EDE5;border-left-color:var(--brand)}
+  .drawer a .idx{font-size:11px;color:var(--muted);min-width:22px;font-weight:600}
+
+  /* ===== 内容区 ===== */
+  main{max-width:1060px;margin:0 auto;padding:26px 20px 90px}
+
+  /* 封面 */
+  .hero{
+    background:linear-gradient(135deg,#E9E4DA 0%,#E3DCD0 55%,#DCD4C6 100%);
+    border:1px solid var(--line);border-radius:22px;
+    padding:46px 40px;margin-bottom:30px;position:relative;overflow:hidden;
+  }
+  .hero::after{content:"";position:absolute;right:-70px;top:-70px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(196,167,158,.5),rgba(196,167,158,0) 70%)}
+  .hero .kicker{font-size:12px;font-weight:800;letter-spacing:.22em;color:var(--brand-deep);text-transform:uppercase}
+  .hero h1{font-size:32px;font-weight:900;margin:10px 0 8px;letter-spacing:.01em}
+  .hero h1 em{font-style:normal;color:var(--rose-deep)}
+  .hero p.desc{font-size:15px;color:#6E675C;max-width:660px}
+  .hero .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+  .hero .chip{font-size:12.5px;font-weight:600;color:#5E584D;background:rgba(255,255,255,.65);border:1px solid var(--line);padding:6px 14px;border-radius:99px}
+
+  /* 板块标题 */
+  .section{margin-top:14px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin:40px 0 18px;flex-wrap:wrap}
+  .sec-head .num{font-size:13px;font-weight:800;color:#fff;background:var(--brand);padding:4px 12px;border-radius:8px;letter-spacing:.05em}
+  .sec-head h2{font-size:25px;font-weight:900;letter-spacing:.01em}
+  .sec-head .en{font-size:13px;color:var(--muted);font-weight:600}
+  .sec-head .hint{width:100%;font-size:13px;color:var(--muted);margin-top:2px}
+  .sec-head.g2 .num{background:var(--blue-deep)}
+  .sec-head.g3 .num{background:var(--rose-deep)}
+  .sec-head.g4 .num{background:var(--tan-deep)}
+  .sec-head.g5 .num{background:var(--plum-deep)}
+
+  /* 共通点导语 */
+  .common{
+    background:var(--paper);border:1px solid var(--line);border-radius:16px;
+    padding:22px 24px;margin-bottom:8px;
+  }
+  .common h3{font-size:16px;font-weight:800;margin-bottom:10px;display:flex;align-items:center;gap:9px}
+  .common h3::before{content:"✦";color:var(--rose-deep)}
+  .common p{font-size:14px;color:#6E675C;margin-bottom:8px}
+  .common .pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+  .common .pill{font-size:12.5px;font-weight:600;background:#F1EDE5;border:1px solid var(--line-soft);padding:5px 12px;border-radius:99px;color:#5E584D}
+
+  /* 万能公式 */
+  .formula{
+    background:linear-gradient(180deg,#F6F2EA,#F1ECE2);
+    border:1px solid var(--line);border-left:4px solid var(--brand);
+    border-radius:14px;padding:18px 20px;margin:16px 0 22px;
+  }
+  .formula h4{font-size:13px;font-weight:800;letter-spacing:.06em;color:var(--brand-deep);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+  .formula h4::before{content:"◆"}
+  .formula .f-en{font-size:15.5px;font-weight:700;line-height:1.6;color:#3F3A33}
+  .formula .f-en b{color:var(--brand-deep);font-weight:800}
+  .formula .f-en .slot{color:var(--rose-deep);font-weight:700;border-bottom:2px dashed var(--rose-deep);padding:0 2px}
+  .formula .f-zh{font-size:13px;color:var(--muted);margin-top:6px}
+
+  /* 句型列表 */
+  .p-list{display:flex;flex-direction:column;gap:12px}
+  .pcard{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+  .pcard .p-head{display:flex;align-items:center;gap:13px;padding:15px 20px;cursor:pointer;user-select:none}
+  .pcard .p-no{width:38px;height:38px;flex:0 0 auto;border-radius:12px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px}
+  .pcard .p-main{min-width:0;flex:1}
+  .pcard .p-en{font-size:15px;font-weight:700;line-height:1.5}
+  .pcard .p-en b{color:var(--brand-deep)}
+  .pcard .p-zh{font-size:13px;color:var(--muted);margin-top:3px;line-height:1.55}
+  .pcard .arrow{margin-left:auto;color:#B8AF9F;transition:.25s;font-size:14px;flex:0 0 auto}
+  .pcard.open .arrow{transform:rotate(180deg)}
+  .pcard .p-body{display:none;padding:2px 20px 18px;border-top:1px solid var(--line-soft)}
+  .pcard.open .p-body{display:block;animation:fadeUp .3s ease}
+  .p-tip{font-size:13px;color:#6E675C;background:#FBF8F3;border-left:3px solid var(--blue);padding:10px 14px;border-radius:6px;margin-top:4px}
+  .p-tip b{color:var(--blue-deep)}
+  .p-mem{font-size:13px;color:#5E584D;background:#F6F0E6;border-left:3px solid var(--tan);padding:10px 14px;border-radius:6px;margin-top:10px}
+  .p-mem b{color:#8B6F47}
+  .p-ex{margin-top:12px}
+  .p-ex h6{font-size:11.5px;font-weight:800;letter-spacing:.06em;color:var(--rose-deep);margin-bottom:8px;display:flex;align-items:center;gap:7px}
+  .p-ex h6::before{content:"✎";font-size:13px}
+  .ex-line{display:flex;flex-direction:column;gap:3px;padding:8px 12px;background:#FBF8F3;border:1px solid var(--line-soft);border-radius:9px;margin-bottom:7px}
+  .ex-line:last-child{margin-bottom:0}
+  .ex-line .en{font-size:13.5px;font-weight:600;line-height:1.6}
+  .ex-line .en b{color:var(--brand-deep)}
+  .ex-line .zh{font-size:12.5px;color:var(--muted)}
+
+  /* 例题实战 */
+  .ex-list{display:flex;flex-direction:column;gap:22px;margin-top:6px}
+  .ex-card{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
+  .ex-card .ex-top{display:flex;align-items:center;gap:10px;padding:16px 22px 0}
+  .ex-card .ex-tag{font-size:12px;font-weight:800;color:#fff;padding:4px 12px;border-radius:8px;letter-spacing:.04em}
+  .ex-card .ex-title{font-size:15.5px;font-weight:800}
+  .ex-card .ex-dir{font-size:12.5px;color:var(--muted)}
+  .ex-media{display:flex;justify-content:center;align-items:center;padding:18px 22px 6px}
+  .ex-media svg{max-width:100%;height:auto;border-radius:14px}
+  .ex-media .text-passage{
+    background:#FBF8F3;border:1px solid var(--line-soft);border-left:4px solid var(--rose);
+    border-radius:12px;padding:18px 22px;font-size:15px;line-height:1.85;color:#4A463F;max-width:760px;
+  }
+  .ex-media .text-passage .zh{color:#6E675C}
+  .ex-media .text-passage .en{font-weight:700;margin-bottom:8px}
+  .ex-prompt{
+    margin:10px 22px 4px;background:#F4F0E8;border:1px dashed var(--line);
+    border-radius:12px;padding:12px 16px;font-size:14px;color:#5E584D;
+  }
+  .ex-prompt b{color:var(--rose-deep)}
+  .ex-answers{padding:10px 22px 20px}
+  .ans-item{padding:11px 0;border-bottom:1px solid var(--line-soft)}
+  .ans-item:last-child{border-bottom:none}
+  .ans-item .q{display:flex;align-items:center;gap:10px;font-size:14px;cursor:pointer;user-select:none}
+  .ans-item .q .tag{flex:0 0 auto;font-size:11px;font-weight:800;color:var(--brand-deep);background:#EDE8DF;padding:3px 9px;border-radius:7px}
+  .ans-item .q .show{margin-left:auto;font-size:11.5px;font-weight:700;color:#A99A7F;background:#F1EDE5;padding:3px 10px;border-radius:99px;transition:.15s;flex:0 0 auto}
+  .ans-item .q:hover .show{background:#E5DED0}
+  .ans-item .a{display:none;margin-top:8px;font-size:14px;color:#3F3A33;background:#F6F2EA;padding:11px 15px;border-radius:10px;line-height:1.7}
+  .ans-item .a b{color:var(--brand-deep)}
+  .ans-item .a .zh{display:block;font-size:12.5px;color:var(--muted);margin-top:4px}
+  .ans-item.open .a{display:block;animation:fadeUp .25s ease}
+
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:4px 0 6px}
+  .toolbar button{font-family:var(--font);font-size:12.5px;font-weight:700;cursor:pointer;color:#6E675C;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:7px 15px;transition:.15s}
+  .toolbar button:hover{background:#F1EDE5}
+
+  /* 学法建议 */
+  .advice{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px 26px;margin-top:10px}
+  .advice h3{font-size:16px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:9px}
+  .advice h3::before{content:"✦";color:var(--brand-deep)}
+  .advice .a-item{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--line-soft)}
+  .advice .a-item:last-child{border-bottom:none}
+  .advice .a-item .no{flex:0 0 auto;width:26px;height:26px;border-radius:8px;background:var(--brand);color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+  .advice .a-item .txt{font-size:14px;color:#5E584D;line-height:1.7}
+  .advice .a-item .txt b{color:var(--ink)}
+
+  .footer{text-align:center;color:var(--muted);font-size:12px;margin-top:44px;padding-top:22px;border-top:1px solid var(--line)}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  @media (max-width:640px){
+    .hero{padding:30px 22px}
+    .hero h1{font-size:25px}
+    .sec-head h2{font-size:21px}
+    .topbar .titles h1{font-size:15px}
+    .pcard .p-head{padding:13px 15px}
+  }
+</style>
+</head>
+<body>
+
+<!-- 顶部导航 -->
+<div class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="目录"><span></span><span></span><span></span></button>
+  <div class="titles">
+    <h1>作文主体 · 原因与对策句型</h1>
+    <div class="sub">原因结果 · 方法措施</div>
+  </div>
+  <div class="badge">2 组 · 20 句型 · 4 例题</div>
+</div>
+
+<!-- 侧滑目录 -->
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer">
+  <div class="d-head">
+    <div class="dot">目</div>
+    <div><h2>目录</h2><p>作文主体·原因与对策句型</p></div>
+  </div>
+  <nav id="tocNav"></nav>
+</aside>
+
+<main>
+  <!-- 封面 -->
+  <section class="hero">
+    <div class="kicker">Gaokao English · Causes &amp; Solutions</div>
+    <h1>作文主体·<em>原因与对策</em>句型</h1>
+    <p class="desc">四、原因结果　五、方法措施 —— 两组句型共同解决同一件事：<b>在作文主体部分，把「为什么这样」分析清楚，再把「该怎么办」说具体。</b>先析因，后献策，是高考英语议论文最常用的主体结构。</p>
+    <div class="meta">
+      <span class="chip">📖 出处：《名校名师高考英语作文全攻略（第3版）》分类句型 4–5 组</span>
+      <span class="chip">🎯 强基篇 · 语言储备</span>
+    </div>
+  </section>
+
+  <!-- 共通点 -->
+  <section class="section" id="common">
+    <div class="common">
+      <h3>两组句型的共同点</h3>
+      <p>它们都站在<b>「作文主体」</b>的位置：<b>第四组</b>负责回答「<b>为什么</b>」—— 分析原因、推导结果；<b>第五组</b>负责回答「<b>怎么办</b>」—— 提出措施、呼吁行动。两组连起来，就是议论文最经典的一条逻辑链：</p>
+      <div class="pill-row">
+        <span class="pill">① 先「析因」—— … is the root cause of … / A number of reasons contribute to …</span>
+        <span class="pill">② 再「推论」—— … brings about serious consequences …</span>
+        <span class="pill">③ 最后「献策」—— Effective measures must be taken … / priority should be given to …</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 四、原因结果 ================= -->
+  <section class="section" id="cause">
+    <div class="sec-head g4">
+      <span class="num">四</span>
+      <h2>原因结果</h2>
+      <span class="en">Cause &amp; Effect</span>
+      <div class="hint">针对「为什么」类问题。核心：指原因 → 连结果 → 点表现，把「来龙去脉」讲清楚。</div>
+    </div>
+
+    <div class="formula" style="border-left-color:var(--tan-deep)">
+      <h4 style="color:var(--tan-deep)">万能开头公式</h4>
+      <div class="f-en"><span class="slot">原因</span> <b>is the root / underlying cause of</b> <span class="slot">结果</span>, <b>and it accounts for why</b> <span class="slot">表现</span>.</div>
+      <div class="f-zh">〈原因〉是〈结果〉的根本 / 潜在原因，这也能解释为什么〈表现〉。 → 指原因 + 连结果 + 点表现。</div>
+    </div>
+
+    <div class="p-list">
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--tan-deep)">1</div><div class="p-main"><div class="p-en">… <b>is the root / underlying / leading cause of</b> …</div><div class="p-zh">……是……的根本 / 潜在 / 主要原因。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>论「根本原因」的核心句：</b>主语是「原因」，of 后接「结果」。root 根、underlying 潜在、leading 主要，三个词按程度换着用。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>root / underlying / leading cause</b> 根本/潜在/主要原因」—— 三选一，of 后接结果。口诀：说原因，先想 cause of。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>Lack of regular exercise is the leading cause of</b> the decline in students' physical fitness.</span><span class="zh">缺乏经常锻炼是学生体质下降的主要原因。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--tan-deep)">2</div><div class="p-main"><div class="p-en"><b>A number of reasons contribute to</b> … <b>One reason is</b> … <b>another chief reason is</b> … connected with …</div><div class="p-zh">几个原因导致了……。一条理由是……，另一条理由则关于……</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>「多原因列举」专用：</b>先用 contribute to 总起，再用 One reason…another… 分列两条，适合作文里要写两三个原因的段落。</div>
+          <div class="p-mem"><b>记忆</b>　列举原因三步「<b>contribute to 总起 → One reason 其一 → another chief reason 其二</b>」。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>A number of reasons contribute to</b> the popularity of online courses. <b>One reason is</b> their flexibility, <b>another chief reason is</b> connected with the lower cost.</span><span class="zh">几个原因导致了网课的流行。一条理由是它很灵活，另一条主要理由则与成本更低有关。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--tan-deep)">3</div><div class="p-main"><div class="p-en">… <b>is also partly responsible for</b> the problem.</div><div class="p-zh">……也应该为该问题负部分责任。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>「次要原因」补充句：</b>当主因已说完，用这句把另一个因素补上，显得分析全面。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>partly responsible for 负部分责任</b>」—— 主因说完补次因，用 also 连接。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en">The lack of supervision at home <b>is also partly responsible for the problem.</b></span><span class="zh">家庭监督的缺失也该为这个问题负部分责任。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--tan-deep)">4</div><div class="p-main"><div class="p-en"><b>Among all the reasons / factors / causes</b>, … <b>plays a leading / decisive role</b>.</div><div class="p-zh">在所有的理由 / 因素 / 原因中，……起到了主要的 / 决定性的作用。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>「最重要的原因」强调句：</b>先「Among all the reasons」总览，再点出最关键的一条，用 leading 主要 / decisive 决定性。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>Among all the reasons, … plays a decisive role</b>」—— 从「多因」里拎出「主因」。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>Among all the reasons, self-discipline plays a decisive role</b> in a student's academic progress.</span><span class="zh">在所有的因素中，自律在学生的学业进步中起决定性作用。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--tan-deep)">5</div><div class="p-main"><div class="p-en"><b>Actually, the fault is with</b> …</div><div class="p-zh">事实上，错误在于……</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>「直指症结」句：</b>Actually 先转折，把真正的过错方点出来，语气直率有力。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>the fault is with + 责任方</b>」—— Actually 转折，直指症结。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>Actually, the fault is with</b> those who keep silent instead of speaking up.</span><span class="zh">事实上，错误在于那些保持沉默而不发声的人。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--tan-deep)">6</div><div class="p-main"><div class="p-en"><b>In most cases, people tend to blame</b> … <b>for</b> …</div><div class="p-zh">大多数情况下，人们倾向于指责……导致了……</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>「归因于」句：</b>blame A for B（因 B 而责怪 A），写「把责任推给某人/某事」时用。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>blame A for B 因 B 责怪 A</b>」—— 注意 for 后接「被责怪的事」，别把位置写反。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>In most cases, people tend to blame the Internet for</b> teenagers' poor eyesight.</span><span class="zh">大多数情况下，人们倾向于把青少年视力下降归咎于网络。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--tan-deep)">7</div><div class="p-main"><div class="p-en"><b>The primary cause is</b> … <b>and it can account for why</b> …</div><div class="p-zh">主要原因是……，它能解释为什么……</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>「主因 + 解释」组合句：</b>前半句点主因，后半句 account for why 解释「为什么会出现某现象」，因果链条完整。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>account for why 解释为什么</b>」—— 前半给主因，后半用它把现象解释清楚。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>The primary cause is</b> heavy academic pressure, <b>and it can account for why</b> so many students stay up late.</span><span class="zh">主要原因是沉重的学业压力，这能解释为什么这么多学生熬夜。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--tan-deep)">8</div><div class="p-main"><div class="p-en">… <b>bring(s) about some serious consequences / an unexpected outcome</b>.</div><div class="p-zh">……导致了严重 / 未曾预料的后果。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>「论后果」句：</b>主语是「原因」，bring about 导致，后可接 serious consequences（严重后果）或 unexpected outcome（意外结果）。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>bring about 导致</b>」—— 论后果的高分动词，比 cause 更书面。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en">Overusing electronic devices <b>brings about some serious consequences</b>, such as neck pain and poor sleep.</span><span class="zh">过度使用电子设备会导致严重后果，如颈椎痛和睡眠差。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--tan-deep)">9</div><div class="p-main"><div class="p-en"><b>It is noteworthy that</b> … <b>doesn't necessarily result in</b> … <b>It is actually</b> … <b>that tips the scales</b>.</div><div class="p-zh">值得注意的是……未必导致……。是……最终改变了局面。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>「澄清误区」句：</b>先用 doesn't necessarily result in 否定一个常见因果，再用强调句 It is … that tips the scales 指出真正关键的因素。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>tips the scales 起决定性作用</b>」—— 前半「未必导致」，后半强调句点出真正关键。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>It is noteworthy that</b> more homework <b>doesn't necessarily result in</b> better grades. <b>It is actually</b> efficient learning <b>that tips the scales.</b></span><span class="zh">值得注意的是，更多作业未必带来更好成绩。真正起决定作用的是高效学习。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--tan-deep)">10</div><div class="p-main"><div class="p-en"><b>It is commonly believed that</b> … <b>is the immediate / inevitable result of</b> …</div><div class="p-zh">人们普遍认为……是……直接的 / 不可避免的后果。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>「公认的因果」句：</b>It is commonly believed that 引出普遍看法，is the result of 点出「结果是……造成的」，适合下结论。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>immediate 直接的 / inevitable 不可避免的</b>」—— result of 后接原因，注意前后位置。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>It is commonly believed that</b> poor health <b>is the inevitable result of</b> a sedentary lifestyle.</span><span class="zh">人们普遍认为，久坐不动的生活方式不可避免地导致健康受损。</span></div>
+          </div></div>
+      </div>
+    </div>
+
+    <div class="toolbar" style="margin-top:20px">
+      <button data-act="show">显示全部例题答案</button>
+      <button data-act="hide">隐藏全部例题答案</button>
+    </div>
+
+    <div class="ex-list">
+      <!-- 例题 1 -->
+      <div class="ex-card" id="ex1">
+        <div class="ex-top"><span class="ex-tag" style="background:var(--tan-deep)">例题 1 · 分析原因</span><span class="ex-dir">给出现象 → 分析原因</span></div>
+        <div class="ex-media">
+          <div class="text-passage">
+            <div class="en">Topic: Why do teenagers stay up late?</div>
+            <div class="zh">如今许多高中生经常熬夜，第二天上课无精打采。请分析造成这一现象的原因。</div>
+          </div>
+        </div>
+        <div class="ex-prompt">🗣 和学生互动：先用一句话<b>点出主因</b>，再用 <b>句型 2 / 4 / 7</b> 分析原因，说完点击查看参考答案。</div>
+        <div class="ex-answers">
+          <div class="ans-item"><div class="q"><span class="tag">句型 2</span><span>A number of reasons contribute to …</span><span class="show">查看答案</span></div><div class="a"><b>A number of reasons contribute to</b> students' staying up late. <b>One reason is</b> the heavy homework load, <b>another chief reason is</b> connected with the pull of short videos.<span class="zh">几个原因导致了学生熬夜。一条理由是作业负担重，另一条主要理由则与短视频的吸引有关。</span></div></div>
+          <div class="ans-item"><div class="q"><span class="tag">句型 4</span><span>Among all the reasons, … plays a leading role.</span><span class="show">查看答案</span></div><div class="a"><b>Among all the reasons, the lack of time management plays a leading role</b> in teenagers' staying up late.<span class="zh">在所有的原因中，缺乏时间管理在青少年熬夜中起主要作用。</span></div></div>
+          <div class="ans-item"><div class="q"><span class="tag">句型 7</span><span>The primary cause is … and it can account for why …</span><span class="show">查看答案</span></div><div class="a"><b>The primary cause is</b> poor self-discipline, <b>and it can account for why</b> so many students stay up even when they have little to do.<span class="zh">主要原因是自控力差，这能解释为什么很多学生即便没什么事也熬夜。</span></div></div>
+        </div>
+      </div>
+
+      <!-- 例题 2 -->
+      <div class="ex-card" id="ex2">
+        <div class="ex-top"><span class="ex-tag" style="background:var(--tan-deep)">例题 2 · 分析后果</span><span class="ex-dir">给出原因 → 推导结果</span></div>
+        <div class="ex-media">
+          <div class="text-passage">
+            <div class="en">Topic: The consequences of overusing smartphones</div>
+            <div class="zh">现在很多人一有空就低头刷手机。请谈谈过度使用智能手机可能带来哪些后果。</div>
+          </div>
+        </div>
+        <div class="ex-prompt">🗣 和学生互动：先点出「过度刷手机」这一现象，再用 <b>句型 8 / 9 / 10</b> 分析后果，说完点击查看参考答案。</div>
+        <div class="ex-answers">
+          <div class="ans-item"><div class="q"><span class="tag">句型 8</span><span>… brings about some serious consequences …</span><span class="show">查看答案</span></div><div class="a">Overuse of smartphones <b>brings about some serious consequences</b>, such as poor eyesight, sleep loss and weakened real-life relationships.<span class="zh">过度使用智能手机会导致严重后果，如视力下降、睡眠不足和现实人际关系的疏远。</span></div></div>
+          <div class="ans-item"><div class="q"><span class="tag">句型 9</span><span>It is noteworthy that … doesn't necessarily result in …</span><span class="show">查看答案</span></div><div class="a"><b>It is noteworthy that</b> more screen time <b>doesn't necessarily result in</b> closer friendship. <b>It is actually</b> face-to-face communication <b>that tips the scales.</b><span class="zh">值得注意的是，更多屏幕时间未必带来更亲密的友谊。真正起决定作用的是面对面交流。</span></div></div>
+          <div class="ans-item"><div class="q"><span class="tag">句型 10</span><span>It is commonly believed that … is the immediate result of …</span><span class="show">查看答案</span></div><div class="a"><b>It is commonly believed that</b> poor sleep <b>is the immediate result of</b> using phones late into the night.<span class="zh">人们普遍认为，熬夜玩手机直接导致睡眠质量差。</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 五、方法措施 ================= -->
+  <section class="section" id="measure">
+    <div class="sec-head g5">
+      <span class="num">五</span>
+      <h2>方法措施</h2>
+      <span class="en">Measures &amp; Solutions</span>
+      <div class="hint">针对「怎么办」类问题。核心：指问题 → 提措施 → 加呼吁，把「该怎么做」说具体。</div>
+    </div>
+
+    <div class="formula" style="border-left-color:var(--plum-deep)">
+      <h4 style="color:var(--plum-deep)">万能开头公式</h4>
+      <div class="f-en"><b>To solve the problem of</b> <span class="slot">问题</span>, <b>priority should be given to</b> <span class="slot">措施</span>, and <b>effective measures must be taken before</b> <span class="slot">后果</span>.</div>
+      <div class="f-zh">要解决〈问题〉，应优先〈措施〉，并须在〈后果〉出现前采取有效措施。 → 指问题 + 提措施 + 加紧迫。</div>
+    </div>
+
+    <div class="p-list">
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--plum-deep)">1</div><div class="p-main"><div class="p-en"><b>Effective measures such as</b> … <b>must be taken before things get worse</b>.</div><div class="p-zh">在事情恶化之前，诸如……的有效措施必须被采取。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>「提措施总起句」：</b>Effective measures such as 引出具体措施，before things get worse 强调紧迫性，适合措施段开头。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>before things get worse 在事态恶化前</b>」—— 强调紧迫，是措施段的万能起手。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>Effective measures such as</b> limiting screen time <b>must be taken before things get worse.</b></span><span class="zh">在事态恶化之前，诸如限制屏幕时间这样的有效措施必须被采取。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--plum-deep)">2</div><div class="p-main"><div class="p-en"><b>The full-scale investigation brings home the necessity of</b> … … <b>is worth a try</b>.</div><div class="p-zh">全面的调研突显了……的必要性；……值得一试。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>「先强调必要，再给建议」句：</b>brings home the necessity of（让人认清必要性）先铺垫，is worth a try 再具体建议。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>bring home the necessity of 让人认清……的必要性</b>」—— 强调必要性，后接 is worth a try 给建议。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>The full-scale investigation brings home the necessity of</b> saving water. A "water-saving week" <b>is worth a try.</b></span><span class="zh">全面调研突显了节水的必要性，举办"节水周"值得一试。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--plum-deep)">3</div><div class="p-main"><div class="p-en"><b>There is no immediate solution to the problem of</b> … <b>but</b> … <b>may be helpful</b>.</div><div class="p-zh">关于……的问题并没有即刻的解决方案，但是……也许是有用的。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>「务实建议」句：</b>先承认没有立竿见影的办法（显得客观），再用 but 转出可行的做法。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>There is no immediate solution to …, but … may be helpful</b>」—— 先退后进，建议更显实在。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>There is no immediate solution to the problem of</b> traffic jams, <b>but</b> taking public transport <b>may be helpful.</b></span><span class="zh">交通拥堵的问题并没有即刻的解决方案，但乘坐公共交通也许是有用的。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--plum-deep)">4</div><div class="p-main"><div class="p-en"><b>To change the current situation</b>, … <b>is required (called for)</b>.</div><div class="p-zh">要改变现状，……是必须的。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>「点出必要条件」句：</b>To change the current situation 先亮目的，is required / called for 指出「必须做什么」。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>is required / called for 是必须的</b>」—— To change the current situation 起头，点出必要条件。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>To change the current situation,</b> closer cooperation between home and school <b>is required.</b></span><span class="zh">要改变现状，家校之间更紧密的合作是必须的。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--plum-deep)">5</div><div class="p-main"><div class="p-en"><b>No effective solution is at hand now, but the general awareness of the value of</b> … <b>must be enhanced at first</b>.</div><div class="p-zh">现在手头并没有有效的解决方案，但是首先公众关于……的价值的意识必须被提高。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>「先提意识」句：</b>在具体措施之前，先强调「提高意识」这一步，适用于环保、健康等话题。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>enhance the awareness of 提高……的意识</b>」—— 谈环保/健康话题，先想到「意识先行」。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>No effective solution is at hand now, but the general awareness of the value of</b> reading <b>must be enhanced at first.</b></span><span class="zh">现在手头并没有有效方案，但首先公众关于阅读价值的意识必须被提高。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--plum-deep)">6</div><div class="p-main"><div class="p-en"><b>Facing / Faced with / Confronted with</b> …, one should … <b>instead of</b> …</div><div class="p-zh">面对……，……应该……，而不是……</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>「面对 + 选择」句：</b>Facing / Faced with / Confronted with 三选一开头，should…instead of… 给出正反两种做法。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>Faced with + 困境, should … instead of …</b>」—— 三个「面对」开头可换着用，正反对比更有力。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>Faced with</b> setbacks, <b>we should</b> learn from them <b>instead of</b> giving up easily.</span><span class="zh">面对挫折，我们应该从中学习，而不是轻易放弃。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--plum-deep)">7</div><div class="p-main"><div class="p-en"><b>To solve the problem, priority should be given to</b> …</div><div class="p-zh">要解决问题，应该优先……</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>「优先措施」句：</b>priority should be given to（应优先考虑）点出「最该先做的一件事」。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>priority should be given to 应优先</b>」—— 措施不只一条时，用它点出「首要任务」。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>To solve the problem, priority should be given to</b> raising public awareness of food safety.</span><span class="zh">要解决问题，应该优先提高公众的食品安全意识。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--plum-deep)">8</div><div class="p-main"><div class="p-en"><b>If we turn a blind eye to the issue, it is very likely that</b> … <b>Therefore, considerable attention should be paid to</b> …</div><div class="p-zh">如果我们对此问题熟视无睹，很有可能……。因此，应该充分关注……</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>「警示 + 呼吁」句：</b>turn a blind eye to（熟视无睹）先警示后果，Therefore 再呼吁关注。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>turn a blind eye to 对……熟视无睹</b>」—— 先警示，后呼吁，语气层层加强。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>If we turn a blind eye to the issue, it is very likely that</b> the gap will widen. <b>Therefore, considerable attention should be paid to</b> rural education.</span><span class="zh">如果我们对此问题熟视无睹，差距很可能会拉大。因此，应该充分关注乡村教育。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--plum-deep)">9</div><div class="p-main"><div class="p-en"><b>It is high time that we put an end to</b> … <b>It is reasonable and sensible to</b> …</div><div class="p-zh">是时候不再……。……是理智和明智的做法。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>「郑重呼吁」句：</b>It is high time that（是时候了）后接虚拟语气 put an end to，第二句给出明智做法。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>It is high time that we + 过去式</b>」—— 注意 put 用过去式（虚拟语气），是高级句型。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>It is high time that we put an end to</b> wasting food. <b>It is reasonable and sensible to</b> order just enough at every meal.</span><span class="zh">是时候不再浪费食物了。每餐只点适量是理智和明智的做法。</span></div>
+          </div></div>
+      </div>
+      <div class="pcard">
+        <div class="p-head"><div class="p-no" style="background:var(--plum-deep)">10</div><div class="p-main"><div class="p-en"><b>It is urgent that proper measures like</b> … <b>be taken to end / correct / improve</b> …</div><div class="p-zh">要想结束 / 纠正 / 改善……，像……那样恰当的措施是必要的。</div></div><span class="arrow">▾</span></div>
+        <div class="p-body"><div class="p-tip"><b>「紧迫措施」句：</b>It is urgent that（迫切的是）+ 虚拟语气 be taken，后接 end / correct / improve 点出目的。</div>
+          <div class="p-mem"><b>记忆</b>　「<b>It is urgent that … be taken</b>」—— 虚拟语气用 be 原形，是亮点；end 结束 / correct 纠正 / improve 改善。</div>
+          <div class="p-ex"><h6>例句</h6>
+            <div class="ex-line"><span class="en"><b>It is urgent that proper measures like</b> recycling waste <b>be taken to improve</b> our environment.</span><span class="zh">迫切的是，像回收废弃物这样的恰当措施应被采取，以改善环境。</span></div>
+          </div></div>
+      </div>
+    </div>
+
+    <div class="toolbar" style="margin-top:20px">
+      <button data-act="show">显示全部例题答案</button>
+      <button data-act="hide">隐藏全部例题答案</button>
+    </div>
+
+    <div class="ex-list">
+      <!-- 例题 3 -->
+      <div class="ex-card" id="ex3">
+        <div class="ex-top"><span class="ex-tag" style="background:var(--plum-deep)">例题 3 · 提出措施</span><span class="ex-dir">给出问题 → 提出办法</span></div>
+        <div class="ex-media">
+          <div class="text-passage">
+            <div class="en">Topic: How to reduce food waste in the canteen</div>
+            <div class="zh">学校食堂每天都有大量饭菜被倒掉，浪费严重。请你提出几条解决办法。</div>
+          </div>
+        </div>
+        <div class="ex-prompt">🗣 和学生互动：先用一句话<b>点出问题</b>，再用 <b>句型 1 / 7 / 9</b> 提出解决办法，说完点击查看参考答案。</div>
+        <div class="ex-answers">
+          <div class="ans-item"><div class="q"><span class="tag">句型 1</span><span>Effective measures such as … must be taken …</span><span class="show">查看答案</span></div><div class="a"><b>Effective measures such as</b> launching a "clean plate" campaign <b>must be taken before things get worse.</b><span class="zh">在事态恶化之前，诸如开展"光盘行动"这样的有效措施必须被采取。</span></div></div>
+          <div class="ans-item"><div class="q"><span class="tag">句型 7</span><span>To solve the problem, priority should be given to …</span><span class="show">查看答案</span></div><div class="a"><b>To solve the problem, priority should be given to</b> raising students' awareness of saving food.<span class="zh">要解决问题，应该优先提高学生节约粮食的意识。</span></div></div>
+          <div class="ans-item"><div class="q"><span class="tag">句型 9</span><span>It is high time that we put an end to …</span><span class="show">查看答案</span></div><div class="a"><b>It is high time that we put an end to</b> food waste in the canteen. <b>It is reasonable and sensible to</b> encourage students to take only what they can eat.<span class="zh">是时候不再在食堂浪费食物了。鼓励学生只取自己能吃完的量，是理智和明智的做法。</span></div></div>
+        </div>
+      </div>
+
+      <!-- 例题 4 -->
+      <div class="ex-card" id="ex4">
+        <div class="ex-top"><span class="ex-tag" style="background:var(--plum-deep)">例题 4 · 呼吁行动</span><span class="ex-dir">给出议题 → 呼吁行动</span></div>
+        <div class="ex-media">
+          <div class="text-passage">
+            <div class="en">Topic: Protecting the environment</div>
+            <div class="zh">面对日益严重的环境污染，作为中学生，我们该如何从身边小事做起？请提出你的建议。</div>
+          </div>
+        </div>
+        <div class="ex-prompt">🗣 和学生互动：先承认「环境问题没有捷径」，再用 <b>句型 3 / 6 / 10</b> 提出建议和呼吁，说完点击查看参考答案。</div>
+        <div class="ex-answers">
+          <div class="ans-item"><div class="q"><span class="tag">句型 3</span><span>There is no immediate solution to …, but … may be helpful.</span><span class="show">查看答案</span></div><div class="a"><b>There is no immediate solution to the problem of</b> pollution, <b>but</b> small daily actions <b>may be helpful.</b><span class="zh">污染问题并没有即刻的解决方案，但日常小事也许是有用的。</span></div></div>
+          <div class="ans-item"><div class="q"><span class="tag">句型 6</span><span>Faced with …, we should … instead of …</span><span class="show">查看答案</span></div><div class="a"><b>Faced with</b> environmental problems, <b>we should</b> live a low-carbon life <b>instead of</b> wasting resources.<span class="zh">面对环境问题，我们应该过低碳生活，而不是浪费资源。</span></div></div>
+          <div class="ans-item"><div class="q"><span class="tag">句型 10</span><span>It is urgent that proper measures like … be taken to …</span><span class="show">查看答案</span></div><div class="a"><b>It is urgent that proper measures like</b> saving water and sorting rubbish <b>be taken to improve</b> our environment.<span class="zh">迫切的是，像节约用水、垃圾分类这样的恰当措施应被采取，以改善环境。</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 学法建议 -->
+  <section class="section" id="advice">
+    <div class="sec-head">
+      <span class="num">✦</span>
+      <h2>更好的学习方法</h2>
+      <span class="en">How to Learn This Better</span>
+    </div>
+    <div class="advice">
+      <h3>四个建议，比「死背句型」更有效</h3>
+      <div class="a-item"><div class="no">1</div><div class="txt"><b>记「骨架」，不记「整句」。</b>原因组只记前半（… is the root cause of / A number of reasons contribute to …），措施组只记开头（Effective measures … / It is high time that …），后半填自己的内容。把每组的「万能公式」背熟，比背 20 个整句省力得多。</div></div>
+      <div class="a-item"><div class="no">2</div><div class="txt"><b>分清「原因」和「结果」谁在前。</b>cause of / result of 里「of 后面接的是另一头」最容易搞反：A is the cause of B（A 是 B 的原因），A is the result of B（A 是 B 的结果）。写前先问自己一句：谁导致谁？</div></div>
+      <div class="a-item"><div class="no">3</div><div class="txt"><b>原因 + 措施连成一条链。</b>遇到问题题，先析因（第四组挑 1–2 句），再献策（第五组挑 1–2 句），全文立刻有了「问题 → 原因 → 对策」的骨架，比空喊口号扎实得多。</div></div>
+      <div class="a-item"><div class="no">4</div><div class="txt"><b>抓「虚拟语气」的加分点。</b>第五组里 It is high time that we put …、It is urgent that … be taken 都是虚拟语气（be / 过去式），是阅卷老师一眼能认出的高分结构，务必背熟。</div></div>
+    </div>
+  </section>
+
+  <div class="footer">高考英语作文 · 强基篇｜句型出处：《名校名师高考英语作文全攻略（第3版）》分类句型 4–5 组</div>
+</main>
+
+<script>
+function $(s){return document.querySelector(s)}
+function $$(s){return Array.from(document.querySelectorAll(s))}
+
+/* ===== 目录 ===== */
+const TOC = [
+  {id:"common", t:"两组句型的共同点"},
+  {id:"cause", cls:"p4", t:"四、原因结果", sub:[
+    {id:"ex1", t:"例题 1 · 分析原因"},
+    {id:"ex2", t:"例题 2 · 分析后果"}
+  ]},
+  {id:"measure", cls:"p5", t:"五、方法措施", sub:[
+    {id:"ex3", t:"例题 3 · 提出措施"},
+    {id:"ex4", t:"例题 4 · 呼吁行动"}
+  ]},
+  {id:"advice", t:"✦ 更好的学习方法"}
+];
+function buildToc(){
+  const nav = $("#tocNav");
+  let html = '<div class="grp-title">本课内容</div>';
+  TOC.forEach(g=>{
+    if(g.sub){
+      html += `<div class="grp-title ${g.cls||''}">${g.t}</div>`;
+      g.sub.forEach(s=>{ html += `<a href="#${s.id}" data-close><span class="idx">›</span>${s.t}</a>`; });
+    } else {
+      html += `<a href="#${g.id}" data-close><span class="idx">${g.t.slice(0,1)==='✦'?'✦':''}</span>${g.t.replace(/^✦\s*/,'')}</a>`;
+    }
+  });
+  nav.innerHTML = html;
+}
+buildToc();
+
+/* ===== 侧滑目录 ===== */
+const drawer = $("#drawer"), overlay = $("#overlay"), menuBtn = $("#menuBtn");
+function openDrawer(){ drawer.classList.add("open"); overlay.classList.add("show"); menuBtn.classList.add("open"); }
+function closeDrawer(){ drawer.classList.remove("open"); overlay.classList.remove("show"); menuBtn.classList.remove("open"); }
+$("#menuBtn").addEventListener("click", ()=> drawer.classList.contains("open") ? closeDrawer() : openDrawer());
+overlay.addEventListener("click", closeDrawer);
+document.addEventListener("click", e=>{ if(e.target.closest("[data-close]")) closeDrawer(); });
+
+/* ===== 句型卡片折叠 ===== */
+$$(".pcard .p-head").forEach(h=>{
+  h.addEventListener("click", ()=> h.parentElement.classList.toggle("open"));
+});
+
+/* ===== 例题答案点击显示 ===== */
+$$(".ans-item .q").forEach(q=>{
+  q.addEventListener("click", ()=> q.parentElement.classList.toggle("open"));
+});
+
+/* ===== 显示/隐藏全部例题答案 ===== */
+$$(".toolbar button").forEach(b=>{
+  b.addEventListener("click", ()=>{
+    const act = b.dataset.act;
+    $$(".ans-item").forEach(i=> act==="show" ? i.classList.add("open") : i.classList.remove("open"));
+  });
+});
+</script>
+</body>
+</html>

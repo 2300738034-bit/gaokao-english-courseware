@@ -148,6 +148,11 @@ window.CATALOG = {
           title: "作文开篇·信息描述句型（图片·图表·现象评论）",
           file: "courseware/图片·图表·现象描述句型课件.html",
           added: "2026-11-14"
+        },
+        {
+          title: "作文主体·原因与对策句型（原因结果·方法措施）",
+          file: "courseware/原因结果·方法措施句型课件.html",
+          added: "2026-11-16"
         }
       ]
     },
