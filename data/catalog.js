@@ -8,12 +8,6 @@ window.CATALOG = {
 
   books: [
     {
-      id: "ciku",
-      name: "高考英语词汇",
-      color: "rose",
-      coursewares: []
-    },
-    {
       id: "fanyi",
       name: "高考英语翻译专项训练",
       color: "sage",

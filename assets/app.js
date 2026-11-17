@@ -27,7 +27,7 @@
       '<header class="site-header">' +
         '<h1 class="site-title">' + esc(C.siteTitle) + '</h1>' +
       '</header>' +
-      '<div class="section-label">七大板块</div>' +
+      '<div class="section-label">六大板块</div>' +
       '<main class="grid">' + cards + '</main>' +
       '<footer class="site-footer">共收录 ' + totalCount() + ' 个课件</footer>';
   }
