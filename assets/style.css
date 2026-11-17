@@ -20,6 +20,7 @@
 .c-lilac { --accent: #b3aac0; --accent-soft: #ede8f1; --accent-deep: #877c96; }
 .c-clay  { --accent: #cbaa93; --accent-soft: #f3e7de; --accent-deep: #a07f67; }
 .c-mist  { --accent: #9aadb4; --accent-soft: #e4ebee; --accent-deep: #6f858d; }
+.c-sand  { --accent: #cdbd9a; --accent-soft: #f3ede0; --accent-deep: #a08a5f; }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 

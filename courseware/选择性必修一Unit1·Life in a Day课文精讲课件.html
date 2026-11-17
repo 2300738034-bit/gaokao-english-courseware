@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>选择性必修一 · Unit 1 Our World · Life in a Day 课文精讲</title>
+<style>
+  :root{
+    --ink:#4a433c;
+    --muted:#8a8177;
+    --line:#ddd6ca;
+    --bg:#ece8df;
+    --paper:#faf7f1;
+    --brand:#66746f;
+    --brand-2:#8593a3;
+    --gold:#b39b72;
+    --cwd:#6f8a6f;   /* 好词好句 · 绿 */
+    --cgr:#5a7bb0;   /* 语法点 · 蓝 */
+    --cph:#b3925a;   /* 固定搭配/衔接 · 金 */
+    --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:var(--font);
+    color:var(--ink);
+    background:var(--bg);
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ===== 舞台 ===== */
+  #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:56px 44px 96px}
+
+  .slide{
+    position:absolute;
+    width:min(1240px,100%);
+    max-height:100%;
+    background:var(--paper);
+    border-radius:20px;
+    box-shadow:0 24px 60px -24px rgba(74,67,60,.35), 0 0 0 1px rgba(74,67,60,.05);
+    padding:40px 52px;
+    opacity:0;
+    transform:translateX(40px);
+    pointer-events:none;
+    transition:opacity .45s ease, transform .45s ease;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+  .slide.active{opacity:1;transform:translateX(0);pointer-events:auto}
+  .slide.prev{transform:translateX(-40px)}
+
+  .slide .anim{opacity:0;transform:translateY(14px)}
+  .slide.active .anim{
+    opacity:1;transform:none;
+    transition:opacity .5s ease, transform .5s ease;
+    transition-delay:calc(var(--i,0)*70ms + 60ms);
+  }
+
+  /* ===== 页头 ===== */
+  .head{display:flex;align-items:center;gap:14px;margin-bottom:18px;flex:none}
+  .part-badge{
+    font-size:12.5px;font-weight:700;letter-spacing:.05em;
+    color:#fff;background:var(--pc,#8593a3);
+    padding:6px 13px;border-radius:99px;white-space:nowrap;
+  }
+  .head h2{font-size:25px;font-weight:800;letter-spacing:.01em;color:var(--ink)}
+  .head .en{font-size:13.5px;color:var(--muted);font-weight:600;margin-left:auto;white-space:nowrap}
+
+  .kicker{font-size:13px;font-weight:700;letter-spacing:.14em;color:var(--brand-2);text-transform:uppercase;margin-bottom:8px}
+  .lead{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:10px}
+
+  /* ===== 封面 ===== */
+  .slide.cover{
+    background:
+      radial-gradient(900px 500px at 85% -10%, rgba(106,143,168,.42), transparent 60%),
+      radial-gradient(700px 500px at -10% 110%, rgba(111,138,111,.38), transparent 55%),
+      linear-gradient(135deg,#4f5a60 0%,#5c676d 55%,#6b756f 100%);
+    color:#fff;
+    justify-content:center;
+  }
+  .cover .brand-line{position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#6f8a6f,#5a7bb0,#b3925a,#6f8a6f)}
+  .cover .tag{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#e9e4d8;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);padding:7px 16px;border-radius:99px;margin-bottom:26px}
+  .cover h1{font-size:50px;font-weight:900;line-height:1.16;letter-spacing:.01em}
+  .cover h1 .hl{color:#dcc79a}
+  .cover .sub{margin-top:18px;font-size:19px;color:#d4cbbd;font-weight:500;line-height:1.5}
+  .cover .meta{margin-top:38px;display:flex;gap:26px;font-size:14px;color:#bdb4a2;font-weight:600;flex-wrap:wrap}
+  .cover .meta b{color:#fff}
+  .cover .src{margin-top:16px;font-size:12.5px;color:#a99f8e;font-weight:600;letter-spacing:.03em}
+
+  /* ===== 卡片 & 列表 ===== */
+  .grid{display:grid;gap:13px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:16px;
+    padding:18px 20px;position:relative;overflow:hidden;
+  }
+  .card .num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:32px;height:32px;border-radius:10px;font-size:15px;font-weight:800;
+    color:#fff;background:var(--pc,#8593a3);margin-bottom:10px;
+  }
+  .card h4{font-size:18px;font-weight:800;margin-bottom:5px}
+  .card .cn{font-size:13px;color:var(--muted);font-weight:600;line-height:1.55}
+
+  .key{color:var(--brand-2);font-weight:800}
+  .gold{color:#7a5c2e;font-weight:800}
+
+  /* 例句区 */
+  .ex{background:#f5f2ea;border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-top:8px}
+  .ex .en-txt{font-size:15px;color:#4a433c;line-height:1.65;font-weight:500}
+  .ex .en-txt b{color:#7a5c2e;font-weight:800}
+
+  /* 重点框 */
+  .note{
+    display:flex;gap:12px;align-items:flex-start;
+    background:#f2ead9;border:1px solid #dccca4;border-left:4px solid #b39b72;
+    border-radius:12px;padding:13px 16px;margin-top:14px;font-size:15px;line-height:1.6;
+  }
+  .note .ico{font-size:18px;line-height:1.4}
+  .note b{color:#6b5230}
+
+  .tip{
+    display:flex;gap:10px;align-items:flex-start;
+    background:#eef0f1;border:1px solid #c8cfd4;border-left:4px solid #8593a3;
+    border-radius:12px;padding:11px 15px;margin-top:12px;font-size:14px;line-height:1.6;color:#465057;flex:none;
+  }
+  .tip b{color:#3a454c}
+
+  /* ===== 点击揭示 ===== */
+  .rv{margin-top:8px;border:1px dashed #cfc7b8;border-radius:12px;overflow:hidden;background:#fff}
+  .rv-trigger{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    padding:9px 14px;cursor:pointer;user-select:none;background:#f5f2ea;transition:.15s;
+  }
+  .rv-trigger:hover{background:#efece2}
+  .rv-label{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.02em;transition:.15s}
+  .rv.on .rv-label{color:var(--brand-2)}
+  .rv-plus{font-size:19px;color:var(--brand-2);transition:transform .3s;font-weight:700;line-height:1;flex:none}
+  .rv.on .rv-plus{transform:rotate(45deg)}
+  .rv-body{max-height:0;opacity:0;overflow:hidden;transition:max-height .5s ease, opacity .35s ease;padding:0 14px}
+  .rv.on .rv-body{max-height:900px;opacity:1;padding:12px 14px 13px}
+  .rv.gold-on .rv-trigger{background:#f2ead9}
+  .rv.gold-on.on{border-color:#b39b72;background:#fbf7ee}
+
+  /* 高亮与图例 */
+  .wd{background:linear-gradient(transparent 52%, #d9e3d2 52%);color:#3f6b3f;font-weight:700;border-radius:2px}
+  .gr{background:linear-gradient(transparent 52%, #d6dfee 52%);color:#35548a;font-weight:700;border-radius:2px}
+  .ph{border-bottom:2px solid #c2a87f;color:#7a5c2e;font-weight:700}
+  .legend{display:flex;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--muted);font-weight:600}
+  .legend .sw{display:inline-block;width:14px;height:13px;border-radius:3px;margin-right:6px;vertical-align:-2px}
+  .legend .sw.ul{width:14px;height:6px;border-bottom:2px solid #c2a87f;border-radius:0}
+
+  /* 课文文本 */
+  .essay{background:#f5f2ea;border:1px solid var(--line);border-radius:14px;padding:20px 26px;overflow-y:auto;font-size:15.5px;line-height:2;color:#4a433c;min-height:0;flex:1}
+  .essay p{margin-bottom:14px}
+  .essay p:last-child{margin-bottom:0}
+  .essay .pn{display:inline-block;font-size:11px;font-weight:800;color:#fff;background:#8a8177;border-radius:99px;padding:1px 9px;margin-right:8px;vertical-align:2px}
+
+  /* 精讲：段落 + 标注 */
+  .para{background:#f5f2ea;border:1px solid var(--line);border-radius:14px;padding:16px 22px;font-size:15px;line-height:1.95;color:#4a433c;overflow-y:auto;flex:none;max-height:30vh}
+  .para .pn{display:inline-block;font-size:11px;font-weight:800;color:#fff;background:#8a8177;border-radius:99px;padding:1px 9px;margin-right:8px;vertical-align:2px}
+  .mn{font-size:10px;font-weight:800;color:#fff;border-radius:99px;padding:1px 6px;margin-left:3px;vertical-align:super;white-space:nowrap;font-style:normal}
+
+  .anno-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-content:start;flex:1;min-height:0;overflow-y:auto;margin-top:13px;padding-right:4px}
+
+  .anno{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;align-self:start;border-top:3px solid var(--pc,#8593a3)}
+  .anno .a-top{display:flex;align-items:flex-start;gap:8px}
+  .anno .a-n{width:22px;height:22px;border-radius:50%;color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;background:var(--pc,#8593a3);margin-top:2px}
+  .anno .a-phrase{font-weight:800;font-size:14.5px;color:var(--ink);line-height:1.45;flex:1}
+  .anno .a-tag{margin-left:auto;font-size:10.5px;font-weight:800;color:#fff;padding:2px 9px;border-radius:99px;white-space:nowrap;flex:none;background:var(--pc,#8593a3);margin-top:2px}
+
+  .seg{font-size:13.5px;line-height:1.62;color:#4a433c;margin-top:7px}
+  .seg .sl{display:inline-block;font-size:11px;font-weight:800;color:#fff;background:var(--pc,#8593a3);border-radius:6px;padding:1px 7px;margin-right:6px;vertical-align:1px}
+  .seg .en{font-weight:600;color:#3a433c}
+  .seg .zh{color:var(--muted);font-size:12.5px}
+  .seg b{color:var(--ink)}
+  .seg.gk{background:#f7ecea;border-left:3px solid #c0564f;border-radius:8px;padding:7px 10px;margin-top:8px}
+  .seg.gk .sl{background:#c0564f}
+  .seg.gk b{color:#8a3a34}
+
+  /* 目录跳转卡 */
+  .jump{cursor:pointer;transition:.18s;border:1px solid var(--line)}
+  .jump:hover{transform:translateY(-4px);box-shadow:0 16px 34px -18px rgba(74,67,60,.4);border-color:var(--pc,#8593a3)}
+  .jump .go{position:absolute;right:14px;top:14px;font-size:12px;font-weight:700;color:var(--pc,#8593a3);opacity:0;transition:.18s}
+  .jump:hover .go{opacity:1}
+
+  /* 表格 */
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{padding:10px 13px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.55}
+  th{font-size:12.5px;letter-spacing:.05em;color:var(--muted);background:#f5f2ea;font-weight:700}
+  td .en{font-weight:700}
+  td .cn{color:var(--muted);font-size:13px}
+
+  /* 小结 */
+  .sum-block{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:#fff}
+  .sum-block h4{font-size:15.5px;font-weight:800;margin-bottom:11px;display:flex;align-items:center;gap:8px}
+  .sum-block .dot{width:10px;height:10px;border-radius:3px;background:var(--pc,#8593a3)}
+  .sum-block ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .sum-block li{font-size:13.8px;color:#4a433c;line-height:1.5}
+  .sum-block li b{color:var(--ink)}
+
+  .motto{
+    margin-top:18px;text-align:center;font-size:20px;font-weight:800;color:var(--brand);
+    background:#e9eee7;border-radius:14px;padding:18px;flex:none;
+  }
+  .motto span{color:#a06a6a}
+
+  .mk{
+    display:flex;gap:10px;align-items:flex-start;padding:9px 12px;
+    border-left:3px solid var(--pc,#8593a3);background:#fff;border-radius:8px;
+    margin-top:8px;font-size:14px;line-height:1.55;color:#4a433c;
+  }
+  .mk .mtag{
+    flex:none;font-size:11px;font-weight:800;color:#fff;background:var(--pc,#8593a3);
+    padding:2px 8px;border-radius:99px;margin-top:1px;white-space:nowrap;
+  }
+  .mk b{color:var(--ink)}
+
+  /* 两栏 */
+  .ex-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;min-height:0;flex:1}
+  .ex-col{display:flex;flex-direction:column;min-height:0}
+  .ex-box{background:#f5f2ea;border:1px solid var(--line);border-radius:14px;padding:14px 16px;overflow-y:auto;min-height:0}
+
+  /* 概要填空 */
+  .fb{
+    display:inline-block;min-width:54px;text-align:center;border-bottom:2px solid #c2a87f;color:#7a5c2e;
+    font-weight:800;cursor:pointer;padding:0 6px;margin:0 2px;transition:.15s;font-size:13px;border-radius:3px 3px 0 0;
+  }
+  .fb:hover{background:#f2ead9}
+  .fb.shown{background:#f2ead9;border-bottom-color:#b3925a;color:#6b5230}
+  .fb .fn{font-size:10px;color:#b9b0a0;font-weight:700;vertical-align:super}
+
+  .qa{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 18px;align-self:start;border-top:3px solid var(--pc,#5a7bb0)}
+  .qa .q{font-size:15px;font-weight:800;color:var(--ink);line-height:1.55}
+  .qa .q .qn{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--pc,#5a7bb0);color:#fff;font-size:12.5px;font-weight:800;margin-right:8px;vertical-align:-4px}
+  .qa .ans{font-size:14px;color:#3f5a8a;font-weight:700;line-height:1.6}
+  .qa .how{font-size:13px;color:var(--muted);line-height:1.6;font-weight:600}
+
+  /* 导航 */
+  #nav{
+    position:fixed;left:50%;bottom:26px;transform:translateX(-50%);
+    display:flex;align-items:center;gap:12px;z-index:50;
+    background:rgba(250,247,241,.88);backdrop-filter:blur(10px);
+    border:1px solid var(--line);border-radius:99px;padding:9px 12px;
+    box-shadow:0 10px 30px -12px rgba(74,67,60,.3);
+  }
+  #nav button{
+    border:none;background:#fff;border:1px solid var(--line);
+    width:40px;height:40px;border-radius:50%;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;color:#4a433c;
+    transition:.15s;
+  }
+  #nav button:hover:not(:disabled){background:#eef0f1;border-color:#c8cfd4;color:var(--brand-2)}
+  #nav button:disabled{opacity:.35;cursor:default}
+  #nav .counter{font-size:14px;font-weight:700;color:#4a433c;min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
+  #nav .counter b{color:var(--brand-2);font-size:16px}
+  #progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#6f8a6f,#5a7bb0,#b3925a);z-index:60;width:0;transition:width .35s ease}
+  #hint{position:fixed;left:50%;transform:translateX(-50%);bottom:4px;font-size:12px;color:#a49a8a;z-index:40;white-space:nowrap}
+
+  @media (max-width:900px){
+    #stage{padding:20px 16px 90px}
+    .slide{padding:26px 22px;border-radius:14px}
+    .g2,.g3,.ex-grid{grid-template-columns:1fr 1fr}
+    .head h2{font-size:22px}
+    .cover h1{font-size:34px}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<div id="stage">
+
+  <!-- 0 封面 -->
+  <section class="slide cover active">
+    <div class="brand-line"></div>
+    <div class="anim" style="--i:0"><span class="tag">选择性必修一 · Unit 1 · Our World</span></div>
+    <h1 class="anim" style="--i:1">Life in a Day <span class="hl">课文精讲</span></h1>
+    <p class="sub anim" style="--i:2">好词好句 · 语法点 · 逐段精读 → 阅读理解讲评</p>
+    <div class="meta anim" style="--i:3">
+      <span>文体 <b>说明文</b></span>
+      <span>话题 <b>电影《一天》· 人间百态</b></span>
+      <span>重点 <b>好词好句 + 语法点</b></span>
+    </div>
+    <div class="src anim" style="--i:4">上海教育出版社《英语·选择性必修第一册》Unit 1 Our World · A Reading and interaction</div>
+  </section>
+
+  <!-- 1 目录 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a8177">CONTENTS</span><h2>本节内容 · 目录</h2><span class="en">Roadmap · 点击卡片跳转</span></div>
+    <div class="grid g3" style="margin-top:6px">
+      <div class="card jump anim" style="--i:1;--pc:#8a8177" onclick="go(2)"><span class="num">01</span><h4>课文全文</h4><div class="cn">带颜色标注 · 先通读一遍</div><span class="go">进入 →</span></div>
+      <div class="card jump anim" style="--i:2;--pc:#6f8a6f" onclick="go(3)"><span class="num">02</span><h4>逐段精读</h4><div class="cn">第①–⑤段 · 点击讲解</div><span class="go">进入 →</span></div>
+      <div class="card jump anim" style="--i:3;--pc:#5a7bb0" onclick="go(8)"><span class="num">03</span><h4>语法点总结</h4><div class="cn">9 个核心语法结构</div><span class="go">进入 →</span></div>
+      <div class="card jump anim" style="--i:4;--pc:#b3925a" onclick="go(9)"><span class="num">04</span><h4>好词好句积累</h4><div class="cn">按主题分类 · 背诵清单</div><span class="go">进入 →</span></div>
+      <div class="card jump anim" style="--i:5;--pc:#5a7bb0" onclick="go(10)"><span class="num">05</span><h4>阅读理解讲评</h4><div class="cn">5 道问答 + 概要填空</div><span class="go">进入 →</span></div>
+      <div class="card jump anim" style="--i:6;--pc:#a695ae" onclick="go(12)"><span class="num">06</span><h4>本课小结</h4><div class="cn">主题升华 · 一课一得</div><span class="go">进入 →</span></div>
+    </div>
+    <div class="note anim" style="--i:7;margin-top:20px">
+      <span class="ico">🧭</span>
+      <div>这一讲<b>直接进入课文分析</b>：先把全文<b>通读</b>一遍（好词好句、语法点已用不同颜色标出），再<b>逐段精读</b>，点击每一处标注即可看到<b>讲解、例句与拓展</b>；最后用课后的<b>Comprehension work</b>（问答 + 概要填空）检验理解、巩固运用。三色标注：<span class="wd">绿色＝好词好句</span>、<span class="gr">蓝色＝语法点</span>、<span class="ph">金色下划线＝固定搭配·衔接词</span>；点击标注展开后，还附有<span style="color:#c0564f;font-weight:800">红色「高考考点」</span>提示。</div>
+    </div>
+  </section>
+
+  <!-- 2 课文全文 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a8177">FULL TEXT</span><h2>课文全文 · 先通读一遍</h2><span class="en">Life in a Day</span></div>
+    <div class="legend anim" style="--i:1;margin-bottom:12px">
+      <span><span class="sw" style="background:#d9e3d2"></span>绿色高亮 = 好词好句</span>
+      <span><span class="sw" style="background:#d6dfee"></span>蓝色高亮 = 语法点</span>
+      <span><span class="sw ul"></span>金色下划线 = 固定搭配 · 衔接词</span>
+    </div>
+    <div class="essay anim" style="--i:2">
+      <p><span class="pn">Para 1</span>What do you love? What do you fear? What's in your pocket? These are the questions from the film <i>Life in a Day</i>. Director Kevin Macdonald asked people around the world to answer the questions and <span class="ph">send in</span> a <span class="wd">video clip</span> from a <span class="wd">typical</span> day. He was interested in creating a picture of the world, a <span class="wd">digital time capsule</span> for the future. On 24 July 2010, people from Africa, Europe, America, Antarctica and Asia <span class="wd">recorded</span> events on their mobile phones and <span class="wd">digital</span> cameras and <span class="wd">uploaded</span> them <span class="ph">onto</span> the Internet. <span class="ph">In all</span> there were 81,000 video clips. <span class="gr">It took Macdonald and a team of researchers seven weeks to make them into a film.</span></p>
+      <p><span class="pn">Para 2</span>The film starts at midnight. <span class="wd">The moon is high in the sky</span>, elephants are washing themselves in a river in Africa and a baby is sleeping. <span class="ph">At the same time</span>, in other parts of the world, people are getting up, brushing their teeth and making breakfast. In the next minutes of <span class="gr">the one-and-a-half-hour-long film</span>, we watch <span class="wd">everyday routines</span> from more than 140 different countries and see the <span class="wd">connections</span> between them. In one short scene an American girl is playing with her hula hoop. In another, a child is working at a shoeshine stand in Peru. <span class="gr">One looks well off, the other is poor</span>, but then the shoeshine boy shows us his favourite thing—his notebook computer. He's very <span class="wd">proud of</span> it because he <span class="wd">earned the money to pay for</span> it.</p>
+      <p><span class="pn">Para 3</span>"We all <span class="wd">care about</span> the same things," says the director and <span class="ph">in some ways</span> he's right. <span class="gr">Family and friends are the things most people love</span> and many of them are <span class="wd">keen on</span> sports, like football. But then one man says he loves his cat and another loves his fridge because it doesn't <span class="wd">talk back</span>!</p>
+      <p><span class="pn">Para 4</span>Monsters, dogs and death are the things most people fear. One young girl is <span class="gr">worried about growing up</span> and a man in Antarctica says, "I'm <span class="gr">afraid of losing</span> this place." But <span class="gr">when asked</span>, "What's in your pocket?", the answers are surprising. We don't see an ID card, a shopping list, or a bus ticket. <span class="ph">Instead</span>, one person has a paper towel, and another shows us a button. A poor man says he has nothing. He's not <span class="wd">ashamed of</span> his <span class="wd">poverty</span>—he's simply <span class="wd">happy to be alive</span>.</p>
+      <p><span class="pn">Para 5</span>The film ends just before midnight, <span class="gr">with a young woman in her car</span>. It's raining outside and she's recording a short clip on her phone. "I just want people to know that I'm here," she says. <span class="ph">In other words</span>, she wants to show that her life <span class="wd">matters</span>. <span class="gr">Even though their lives are very different</span>, the people in <i>Life in a Day</i> have <span class="wd">one thing in common</span>: each of them is able to find meaning and happiness, <span class="gr">no matter what his or her life is like</span>.</p>
+    </div>
+    <div class="tip anim" style="--i:3">
+      <span>👀</span>
+      <div>先<b>通读</b>把握主线：导演 Kevin Macdonald 请全世界的人在 2010 年 7 月 24 日这天拍下自己的日常，把 8.1 万段视频剪成电影《一天》，从而呈现<b>「不同的生活，同样的意义与幸福」</b>这一主题。留意三种颜色的标注，翻页进入<b>逐段精读</b>。</div>
+    </div>
+  </section>
+
+  <!-- 3 Para 1 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#6f8a6f">PART 02 · 逐段精读 ①</span><h2>Para 1 · 三个问题，一部电影如何诞生</h2><span class="en">How the film was made</span></div>
+    <div class="para anim" style="--i:1">
+      What do you love? What do you fear? What's in your pocket? These are the questions from the film <i>Life in a Day</i>. Director Kevin Macdonald asked people around the world to answer the questions and <span class="ph">send in<sup class="mn" style="background:#b3925a">①</sup></span> a video clip from a typical day. He was interested in creating a picture of the world, a <span class="wd">digital time capsule<sup class="mn" style="background:#6f8a6f">②</sup></span> for the future. On 24 July 2010, people from Africa, Europe, America, Antarctica and Asia <span class="wd">recorded events … and uploaded them onto the Internet<sup class="mn" style="background:#6f8a6f">③</sup></span>. <span class="ph">In all<sup class="mn" style="background:#b3925a">④</sup></span> there were 81,000 video clips. <span class="gr">It took Macdonald and a team of researchers seven weeks to make them into a film.<sup class="mn" style="background:#5a7bb0">⑤</sup></span>
+    </div>
+    <div class="anno-grid anim" style="--i:2">
+      <div class="anno" style="--pc:#b3925a">
+        <div class="a-top"><span class="a-n">①</span><span class="a-phrase">send in a video clip</span><span class="a-tag">固定搭配</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>send in</b> 提交、寄出（把材料/作品交给某人）；<b>clip</b> 片段、剪辑，此处指<b>视频片段</b>。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Students should send in their application forms before the deadline.</span><div class="zh">学生们应在截止日期前提交申请表。</div></div>
+            <div class="seg"><span class="sl">拓展</span>send in = hand in / submit；a film clip 电影片段；a paper clip 回形针。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>clip 一词多义（片段 / 剪辑 / 回形针）；send in = hand in = submit（翻译常考「提交」）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">②</span><span class="a-phrase">a digital time capsule</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>digital</b> 数字的、数码的；<b>time capsule</b> 时间胶囊（封存某个时代的事物留给未来）。把电影比作「数字时间胶囊」，很形象。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Smartphones have become a digital archive of our daily lives.</span><div class="zh">智能手机已成为我们日常生活的数字档案。</div></div>
+            <div class="seg"><span class="sl">拓展</span>a digital camera 数码相机；the digital age 数字时代；digitalize v. 数字化。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>词形转换 digital → digitally(adv.) / digitalize(v.)；-al 形容词后缀（语法填空 / 词性转换常考）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">③</span><span class="a-phrase">recorded events … uploaded them onto the Internet</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>record</b> 记录、录制；<b>upload</b> 上传（反义 <b>download</b> 下载）；<b>onto</b> 到……之上，强调动作方向。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">He recorded the lecture and uploaded it onto the school website.</span><div class="zh">他录下讲座并上传到学校网站。</div></div>
+            <div class="seg"><span class="sl">拓展</span>upload sth. onto / to the Internet；download sth. from the Internet。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>upload 反义 download；record 一词多义（记录 v. / 唱片 n. / 纪录 n.）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#b3925a">
+        <div class="a-top"><span class="a-n">④</span><span class="a-phrase">In all there were 81,000 video clips.</span><span class="a-tag">衔接词</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>in all</b> 总共、合计（= in total / altogether）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">In all, more than 300 students took part in the activity.</span><div class="zh">总共有 300 多名学生参加了这项活动。</div></div>
+            <div class="seg"><span class="sl">拓展</span>in all = in total = altogether；注意与 <b>all in all</b>（总而言之）区分。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>in all = in total = altogether；与 all in all（总而言之）区分（完形 / 单选常设干扰项）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">⑤</span><span class="a-phrase">It took Macdonald … seven weeks to make them into a film.</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>It takes / took + sb. + 一段时间 + to do sth.</b> 做某事花费某人多少时间。it 是<b>形式主语</b>，真正主语是后面的 <b>to do</b>。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">It took me two hours to finish the report.</span><div class="zh">写这份报告花了我两个小时。</div></div>
+            <div class="seg"><span class="sl">拓展</span>同义：sb. <b>spend</b>(s) time (in) doing sth. → <b>I spent two hours finishing</b> the report. 注意 take 主语是「事」，spend 主语是「人」；另 <b>make … into</b> 把……制成。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>it 作形式主语；take / spend / cost 辨析（高考翻译、语法填空高频）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">⑥</span><span class="a-phrase">He was interested in creating a picture of the world</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>be interested in</b> 中的 <b>in</b> 是介词，后接<b>名词 / 动名词</b>，故用 creating。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">She is interested in learning foreign languages.</span><div class="zh">她对学外语感兴趣。</div></div>
+            <div class="seg"><span class="sl">拓展</span>介词 + 动名词 常见组合：be good <b>at</b> / be fond <b>of</b> / look forward <b>to</b> + doing。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>介词 + 动名词：语法填空看到介词后必接 doing（非谓语动词考点）。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 Para 2 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#6f8a6f">PART 02 · 逐段精读 ②</span><h2>Para 2 · 同一时刻，世界各个角落</h2><span class="en">A day around the world</span></div>
+    <div class="para anim" style="--i:1">
+      The film starts at midnight. <span class="wd">The moon is high in the sky<sup class="mn" style="background:#6f8a6f">①</sup></span>, elephants are washing themselves in a river in Africa and a baby is sleeping. <span class="ph">At the same time<sup class="mn" style="background:#b3925a">②</sup></span>, in other parts of the world, people are getting up, brushing their teeth and making breakfast. In the next minutes of <span class="gr">the one-and-a-half-hour-long film<sup class="mn" style="background:#5a7bb0">③</sup></span>, we watch <span class="wd">everyday routines<sup class="mn" style="background:#6f8a6f">④</sup></span> from more than 140 different countries and see the connections between them. In one short scene an American girl is playing with her hula hoop. In another, a child is working at a shoeshine stand in Peru. <span class="gr">One looks well off, the other is poor<sup class="mn" style="background:#5a7bb0">⑤</sup></span>, but then the shoeshine boy shows us his favourite thing—his notebook computer. He's very <span class="wd">proud of it because he earned the money to pay for it<sup class="mn" style="background:#6f8a6f">⑥</sup></span>.
+    </div>
+    <div class="anno-grid anim" style="--i:2">
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">①</span><span class="a-phrase">The moon is high in the sky</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span>简洁的画面描写，<b>high in the sky</b> 高悬天空，为下文铺开全世界同一时刻的画卷。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">The sun was high in the sky and there was not a cloud to be seen.</span><div class="zh">烈日当空，万里无云。</div></div>
+            <div class="seg"><span class="sl">拓展</span>用于描写环境/场景的常用句型：The sun / moon rises / hangs high in the sky.</div>
+            <div class="seg gk"><span class="sl">高考考点</span>环境描写句型，读后续写 / 看图作文开头可直接套用。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#b3925a">
+        <div class="a-top"><span class="a-n">②</span><span class="a-phrase">At the same time, in other parts of the world</span><span class="a-tag">衔接词</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>at the same time</b> 同时（也可表「不过、然而」）；<b>in other parts of the world</b> 世界其他地方，点出「同一时刻、不同角落」的对比。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">At the same time, we should remember that every coin has two sides.</span><div class="zh">同时，我们应记住凡事都有两面性。</div></div>
+            <div class="seg"><span class="sl">拓展</span>at the same time 表转折时相当于 however / nevertheless。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>衔接词，写作与七选五 / 完形逻辑题高频。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">③</span><span class="a-phrase">the one-and-a-half-hour-long film</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>复合形容词</b>作定语：各词用连字符连接，中间名词用<b>单数</b>。结构：数词 - 名词(单数) - 形容词。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">She gave a ten-minute-long speech at the meeting.</span><div class="zh">她在会上作了一个十分钟的演讲。</div></div>
+            <div class="seg"><span class="sl">拓展</span>同类：a five-year-old boy 五岁的男孩；a 200-word essay 一篇 200 词的短文；a three-day trip 三日游。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>复合形容词中名词用单数（语法填空 / 改错常考）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">④</span><span class="a-phrase">everyday routines … the connections between them</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>routine</b> 惯例、常规；<b>everyday routines</b> 日常作息。注意 <b>everyday</b>（adj. 每天的）与 <b>every day</b>（adv. 每天）的区别。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Exercise is part of my everyday routine.</span><div class="zh">锻炼是我日常作息的一部分。</div></div>
+            <div class="seg"><span class="sl">拓展</span>connection 联系（connect v.；be connected with 与……有关）；break the routine 打破常规。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>everyday(adj.) 与 every day(adv.) 辨析；routine → routinely(adv.) 词性转换常考。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">⑤</span><span class="a-phrase">One looks well off, the other is poor</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>one … the other …</b> 一个……另一个……（两者中的另一个）；<b>look + adj.</b> 看起来（系动词）；<b>well off</b> 富裕的。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">He has two daughters. One is a teacher and the other is a doctor.</span><div class="zh">他有两个女儿，一个是老师，另一个是医生。</div></div>
+            <div class="seg"><span class="sl">拓展</span>well off 反义 badly off / poor；look + adj. 系动词，同类有 feel / sound / seem / taste。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>one…the other 结构；well off 熟词生义「富裕」；look 系动词（高考单选高频）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">⑥</span><span class="a-phrase">He's very proud of it … earned the money to pay for it</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>be proud of</b> 为……自豪；<b>earn</b> 挣（钱）；<b>pay for</b> 为……付款。破折号后 his notebook computer 是对 favourite thing 的<b>解释说明</b>。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">He earns money by teaching English to pay for his tuition.</span><div class="zh">他靠教英语挣钱来付学费。</div></div>
+            <div class="seg"><span class="sl">拓展</span>be proud to do sth.；take pride in（为……自豪）。破折号(—)常用来引出解释。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>be proud of = take pride in（翻译同义替换常考）；pay for 为……付款。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 Para 3 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#6f8a6f">PART 02 · 逐段精读 ③</span><h2>Para 3 · 我们都关心的同一件事</h2><span class="en">What we all care about</span></div>
+    <div class="para anim" style="--i:1">
+      "We all <span class="wd">care about<sup class="mn" style="background:#6f8a6f">①</sup></span> the same things," says the director and <span class="ph">in some ways<sup class="mn" style="background:#b3925a">②</sup></span> he's right. <span class="gr">Family and friends are the things most people love<sup class="mn" style="background:#5a7bb0">③</sup></span> and many of them are <span class="wd">keen on<sup class="mn" style="background:#6f8a6f">④</sup></span> sports, like football. But then one man says he loves his cat and another loves his fridge because it doesn't <span class="wd">talk back<sup class="mn" style="background:#6f8a6f">⑤</sup></span>!
+    </div>
+    <div class="anno-grid anim" style="--i:2">
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">①</span><span class="a-phrase">care about</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>care about</b> 在乎、关心（某事/某人）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Good friends are those who care about you.</span><div class="zh">好朋友是在乎你的人。</div></div>
+            <div class="seg"><span class="sl">拓展</span>care about 在乎；care for 照顾 / 喜欢；take care of 照料。三者易混，注意区分。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>care about(在乎) / care for(照顾·喜欢) / take care of(照料) 辨析（高考高频易混）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#b3925a">
+        <div class="a-top"><span class="a-n">②</span><span class="a-phrase">in some ways</span><span class="a-tag">衔接词</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>in some ways</b> 在某些方面。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">In some ways, online learning is more flexible than classroom learning.</span><div class="zh">在某些方面，线上学习比课堂学习更灵活。</div></div>
+            <div class="seg"><span class="sl">拓展</span>in a way 在某种程度上；in many ways 在许多方面；in no way 决不。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>in a way / in some ways / in no way 辨析（单选、翻译常考）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">③</span><span class="a-phrase">Family and friends are the things most people love</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>定语从句省略关系代词</b>：most people love 前省略了作宾语的关系代词 <b>that / which</b>。关系代词在从句中作<b>宾语</b>时可省略。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">The book (that) I bought yesterday is very interesting.</span><div class="zh">我昨天买的那本书很有趣。</div></div>
+            <div class="seg"><span class="sl">拓展</span>关系代词作<b>主语</b>时不可省略；作宾语时才可省。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>定语从句关系代词作宾语可省略（语法填空 / 单选高频）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">④</span><span class="a-phrase">be keen on sports</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>be keen on</b> 热衷于、喜爱。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">She is keen on photography and spends weekends taking photos.</span><div class="zh">她热爱摄影，周末都在拍照。</div></div>
+            <div class="seg"><span class="sl">拓展</span>be keen on = be fond of = be crazy about = be into；be keen to do sth. 渴望做某事。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>be keen on = be fond of = be crazy about（写作替换词，避免重复）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">⑤</span><span class="a-phrase">talk back</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>talk back</b> 顶嘴、回嘴。此处说「冰箱不会回嘴」，幽默地解释为何有人最爱冰箱。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Don't talk back to your parents.</span><div class="zh">别和父母顶嘴。</div></div>
+            <div class="seg"><span class="sl">拓展</span>answer back 回嘴；talk back to sb. 与某人顶嘴。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>talk back to sb. 顶嘴；含 back 的短语（bring back / turn back 等）常考。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">⑥</span><span class="a-phrase">"…" says the director</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>直接引语的倒装</b>：引语置于句首时，可把 says / said 置于主语前（says the director）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">"I'm ready," said Tom.</span><div class="zh">「我准备好了。」汤姆说。</div></div>
+            <div class="seg"><span class="sl">拓展</span>主语是<b>人称代词</b>时通常不倒装："I'm ready," <b>he</b> said.（he 不放 said 之后）。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>直接引语倒装；主语为人称代词时不倒装（语法填空 / 改错易错点）。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 Para 4 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#6f8a6f">PART 02 · 逐段精读 ④</span><h2>Para 4 · 恐惧与口袋里的秘密</h2><span class="en">Fears & what's in the pocket</span></div>
+    <div class="para anim" style="--i:1">
+      Monsters, dogs and death are the things most people fear. One young girl is <span class="gr">worried about growing up<sup class="mn" style="background:#5a7bb0">①</sup></span> and a man in Antarctica says, "I'm <span class="gr">afraid of losing<sup class="mn" style="background:#5a7bb0">①</sup></span> this place." But <span class="gr">when asked<sup class="mn" style="background:#5a7bb0">②</sup></span>, "What's in your pocket?", the answers are surprising. We don't see an ID card, a shopping list, or a bus ticket. <span class="ph">Instead<sup class="mn" style="background:#b3925a">③</sup></span>, one person has a paper towel, and another shows us a button. A poor man says he has nothing. He's not <span class="wd">ashamed of<sup class="mn" style="background:#6f8a6f">④</sup></span> his poverty—he's simply <span class="wd">happy to be alive<sup class="mn" style="background:#6f8a6f">⑤</sup></span>.
+    </div>
+    <div class="anno-grid anim" style="--i:2">
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">①</span><span class="a-phrase">be worried about growing up / be afraid of losing</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>be worried about</b> 担心；<b>be afraid of</b> 害怕，均属「<b>介词 + 动名词</b>」结构，后接 doing。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">He is afraid of losing his job.</span><div class="zh">他害怕失去工作。</div></div>
+            <div class="seg"><span class="sl">拓展</span>be afraid to do sth. 不敢做（强调「不敢」）；be worried about = worry about。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>be afraid of doing 与 be afraid to do 辨析（高考高频）；介词 + 动名词。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">②</span><span class="a-phrase">when asked</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>状语从句的省略</b>：when asked = when (they were) asked。从句主语与主句主语一致、且含 be 动词时，可省略主语和 be。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">When asked about his plan, he kept silent.</span><div class="zh">被问到计划时，他保持沉默。</div></div>
+            <div class="seg"><span class="sl">拓展</span>同理：if / unless / while + 过去分词（If invited, I will go. 如果被邀请，我就去。）</div>
+            <div class="seg gk"><span class="sl">高考考点</span>状语从句省略：when / if / unless + 过去分词（非谓语考点，语法填空常考）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#b3925a">
+        <div class="a-top"><span class="a-n">③</span><span class="a-phrase">Instead</span><span class="a-tag">衔接词</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>instead</b> 反而、却，副词，表转折 / 替代。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">He didn't complain. Instead, he smiled.</span><div class="zh">他没有抱怨，反而笑了。</div></div>
+            <div class="seg"><span class="sl">拓展</span>instead <b>of</b> + doing / n. 代替、而不是：We walked <b>instead of taking</b> a bus.</div>
+            <div class="seg gk"><span class="sl">高考考点</span>instead(adv.) 与 instead of(+ doing / n.) 辨析（高考高频）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">④</span><span class="a-phrase">be ashamed of his poverty</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>be ashamed of</b> 为……感到羞愧；<b>poverty</b> 贫困（poor 的名词形式）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">He is not ashamed of his humble origin.</span><div class="zh">他不因出身卑微而羞愧。</div></div>
+            <div class="seg"><span class="sl">拓展</span>be ashamed to do sth. 羞于做；What a shame! 真遗憾！</div>
+            <div class="seg gk"><span class="sl">高考考点</span>词形 shame(n.) / ashamed(adj.) / shameful(adj.)；be ashamed of（翻译常考）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">⑤</span><span class="a-phrase">he's simply happy to be alive</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>happy to be alive</b> 因活着而快乐。破折号前后形成强烈对比——不因贫穷羞愧，只因活着而快乐，点明「知足」的主题。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">After the accident, he is simply grateful to be alive.</span><div class="zh">事故之后，他只为自己还活着而感恩。</div></div>
+            <div class="seg"><span class="sl">拓展</span>be + adj. + to do：be glad / lucky / grateful to do sth.</div>
+            <div class="seg gk"><span class="sl">高考考点</span>be + adj. + to do（be glad / lucky / grateful to do），写作 / 翻译常用。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 Para 5 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#6f8a6f">PART 02 · 逐段精读 ⑤</span><h2>Para 5 · 不同的生活，同样的意义</h2><span class="en">Different lives, same meaning</span></div>
+    <div class="para anim" style="--i:1">
+      The film ends just before midnight, <span class="gr">with a young woman in her car<sup class="mn" style="background:#5a7bb0">①</sup></span>. It's raining outside and she's recording a short clip on her phone. "I just want people to know that I'm here," she says. <span class="ph">In other words<sup class="mn" style="background:#b3925a">②</sup></span>, she wants to show that her life <span class="wd">matters<sup class="mn" style="background:#6f8a6f">③</sup></span>. <span class="gr">Even though their lives are very different<sup class="mn" style="background:#5a7bb0">④</sup></span>, the people in <i>Life in a Day</i> have <span class="wd">one thing in common<sup class="mn" style="background:#6f8a6f">⑤</sup></span>: each of them is able to find meaning and happiness, <span class="gr">no matter what his or her life is like<sup class="mn" style="background:#5a7bb0">⑥</sup></span>.
+    </div>
+    <div class="anno-grid anim" style="--i:2">
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">①</span><span class="a-phrase">with a young woman in her car</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>with 复合结构</b>：with + 宾语 + 介词短语，作伴随状语，表示「……处于某种状态」。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">He sat there, with a book in his hand.</span><div class="zh">他坐在那里，手里拿着一本书。</div></div>
+            <div class="seg"><span class="sl">拓展</span>with + 宾语 + 形容词/现在分词/过去分词：with the door open / with the machine running / with his eyes fixed on…</div>
+            <div class="seg gk"><span class="sl">高考考点</span>with 复合结构（with + 宾语 + 宾补），非谓语 / 独立主格考点，写作高分句式。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#b3925a">
+        <div class="a-top"><span class="a-n">②</span><span class="a-phrase">In other words</span><span class="a-tag">衔接词</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>in other words</b> 换句话说（= that is to say），用于解释说明。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">He is really busy. In other words, he has no time for you now.</span><div class="zh">他真的很忙，换句话说，他现在没空理你。</div></div>
+            <div class="seg"><span class="sl">拓展</span>同义：that is (to say) / namely / to put it another way。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>解释说明衔接词（= that is to say），概要写作 / 作文常用。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">③</span><span class="a-phrase">her life matters</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>matter</b> v. 要紧、重要（= be important）。matter 作动词不用于进行时。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">What really matters is not the result but the effort you make.</span><div class="zh">真正重要的不是结果，而是你付出的努力。</div></div>
+            <div class="seg"><span class="sl">拓展</span>It doesn't matter. 没关系；No matter what… 无论……（见本段⑥）。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>matter 熟词生义（动词「要紧」）；It doesn't matter / no matter（高频）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">④</span><span class="a-phrase">Even though their lives are very different</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>even though</b> 尽管、即使（= although），引导<b>让步状语从句</b>，语气比 though 更强，<b>不能与 but 连用</b>。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Even though it was raining, they kept on working.</span><div class="zh">尽管下着雨，他们仍继续工作。</div></div>
+            <div class="seg"><span class="sl">拓展</span>though / although / even though 均可引导让步；汉英差异：中文「虽然……但是」，英语只用其一。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>让步状语从句不与 but 连用（高考写作高频错误点）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">⑤</span><span class="a-phrase">have one thing in common</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>in common</b> 共同、共有；<b>have sth. in common (with sb.)</b> 与……有共同之处。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">The two sisters have a lot in common.</span><div class="zh">这两姐妹有很多共同点。</div></div>
+            <div class="seg"><span class="sl">拓展</span>share sth. in common 拥有共同之处；common sense 常识。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>have sth. in common (with sb.)（翻译 / 写作常考）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">⑥</span><span class="a-phrase">no matter what his or her life is like</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>no matter what</b> = whatever，引导<b>让步状语从句</b>，「无论……」。可接 who / which / when / where / how 等。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">No matter what happens, I will stand by you.</span><div class="zh">无论发生什么，我都会支持你。</div></div>
+            <div class="seg"><span class="sl">拓展</span>no matter <b>how</b> + adj./adv.：No matter how hard it is, don't give up.（无论多难，都别放弃。）</div>
+            <div class="seg gk"><span class="sl">高考考点</span>no matter + 疑问词 = whatever 等，引导让步状语从句（语法填空 / 单选高频）。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 语法点总结 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#5a7bb0">PART 03 · 语法点</span><h2>本课 9 个核心语法结构</h2><span class="en">Grammar Review</span></div>
+    <div class="anno-grid" style="grid-template-columns:1fr 1fr 1fr;flex:1">
+      <div class="anno anim" style="--i:1;--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">1</span><span class="a-phrase">It takes sb. + 时间 + to do</span></div>
+        <div class="seg"><span class="sl">说明</span>it 作形式主语，真正主语是 to do。做某事花某人多久。</div>
+        <div class="seg"><span class="en">It took me two hours to finish it.</span></div>
+      </div>
+      <div class="anno anim" style="--i:2;--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">2</span><span class="a-phrase">介词 + 动名词</span></div>
+        <div class="seg"><span class="sl">说明</span>be interested <b>in</b> / afraid <b>of</b> / worried <b>about</b> / keen <b>on</b> + doing。</div>
+        <div class="seg"><span class="en">She is keen on dancing.</span></div>
+      </div>
+      <div class="anno anim" style="--i:3;--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">3</span><span class="a-phrase">复合形容词作定语</span></div>
+        <div class="seg"><span class="sl">说明</span>数词-名词(单数)-形容词，各词用连字符连接。</div>
+        <div class="seg"><span class="en">a one-and-a-half-hour-long film</span></div>
+      </div>
+      <div class="anno anim" style="--i:4;--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">4</span><span class="a-phrase">one … the other …</span></div>
+        <div class="seg"><span class="sl">说明</span>一个……另一个……（两者中的另一个）。</div>
+        <div class="seg"><span class="en">One looks well off, the other is poor.</span></div>
+      </div>
+      <div class="anno anim" style="--i:5;--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">5</span><span class="a-phrase">定语从句省略关系代词</span></div>
+        <div class="seg"><span class="sl">说明</span>关系代词作从句宾语时可省略。</div>
+        <div class="seg"><span class="en">the things (that) most people love</span></div>
+      </div>
+      <div class="anno anim" style="--i:6;--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">6</span><span class="a-phrase">直接引语倒装</span></div>
+        <div class="seg"><span class="sl">说明</span>引语在前，可说 says the director；人称代词主语不倒装。</div>
+        <div class="seg"><span class="en">"I'm ready," said Tom.</span></div>
+      </div>
+      <div class="anno anim" style="--i:7;--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">7</span><span class="a-phrase">状语从句的省略</span></div>
+        <div class="seg"><span class="sl">说明</span>when asked = when (they were) asked。</div>
+        <div class="seg"><span class="en">When asked, he kept silent.</span></div>
+      </div>
+      <div class="anno anim" style="--i:8;--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">8</span><span class="a-phrase">with 复合结构</span></div>
+        <div class="seg"><span class="sl">说明</span>with + 宾语 + 介词短语，作伴随状语。</div>
+        <div class="seg"><span class="en">with a young woman in her car</span></div>
+      </div>
+      <div class="anno anim" style="--i:9;--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">9</span><span class="a-phrase">让步状语从句</span></div>
+        <div class="seg"><span class="sl">说明</span>even though / no matter what，均不与 but 连用。</div>
+        <div class="seg"><span class="en">No matter what happens, I'll be there.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 好词好句积累 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b3925a">PART 04 · 好词好句</span><h2>好词好句 · 按主题分类积累</h2><span class="en">Vocabulary Bank</span></div>
+    <div class="ex-grid">
+      <div class="ex-col">
+        <div class="ex-box anim" style="--i:1">
+          <div class="lead">🎬 描述电影 / 影片</div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">短语</span><div>send in a video clip · a digital time capsule</div></div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">动词</span><div>record · upload … onto · make … into</div></div>
+          <div class="mk" style="--pc:#b3925a"><span class="mtag">衔接</span><div>In all · At the same time · In one short scene</div></div>
+        </div>
+        <div class="ex-box anim" style="--i:2;margin-top:14px">
+          <div class="lead">🌍 描述日常 / 场景</div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">短语</span><div>everyday routines · a typical day · at midnight</div></div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">描写</span><div>The moon is high in the sky. · well off</div></div>
+          <div class="mk" style="--pc:#b3925a"><span class="mtag">衔接</span><div>in other parts of the world · Instead</div></div>
+        </div>
+      </div>
+      <div class="ex-col">
+        <div class="ex-box anim" style="--i:3">
+          <div class="lead">❤️ 描述情感 / 态度</div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">动词短语</span><div>care about · be keen on · be proud of · be ashamed of</div></div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">情感</span><div>be worried about · be afraid of · happy to be alive</div></div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">名词</span><div>poverty · connection · meaning · happiness</div></div>
+        </div>
+        <div class="ex-box anim" style="--i:4;margin-top:14px">
+          <div class="lead">🔗 逻辑 / 高频表达</div>
+          <div class="mk" style="--pc:#b3925a"><span class="mtag">衔接</span><div>in some ways · In other words · Instead · Even though</div></div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">高频动词</span><div>matter (v.) · earn the money to pay for · talk back</div></div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">句型</span><div>have one thing in common · be able to · no matter what</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="motto anim" style="--i:5">背诵口诀 —— <span>视频胶囊·日常作息</span>，<span>在乎热衷·自豪羞愧</span>，<span>换句话说·无论怎样</span></div>
+  </section>
+
+  <!-- 10 阅读理解讲评 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#5a7bb0">PART 05 · Comprehension ①</span><h2>阅读理解 · 5 道问答讲评</h2><span class="en">Comprehension Q&A</span></div>
+    <div class="anno-grid" style="flex:1">
+      <div class="qa anim" style="--i:1;--pc:#5a7bb0">
+        <div class="q"><span class="qn">1</span>What did Kevin ask people around the world to do?</div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看答案 · 解析</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="ans">He asked them to answer the questions (what they love, what they fear and what's in their pocket) and send in a video clip from a typical day.</div>
+            <div class="how">【定位】第一段。<b>直接信息题</b>——原文 "asked people around the world to answer the questions and send in a video clip"。</div>
+          </div>
+        </div>
+      </div>
+      <div class="qa anim" style="--i:2;--pc:#5a7bb0">
+        <div class="q"><span class="qn">2</span>What is Kevin's film like according to the information in the first paragraph?</div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看答案 · 解析</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="ans">It is a picture of the world, a digital time capsule for the future, made up of 81,000 video clips from people around the world.</div>
+            <div class="how">【定位】第一段。<b>细节归纳题</b>——抓住 "a picture of the world, a digital time capsule" 与 81,000 video clips 概括影片。</div>
+          </div>
+        </div>
+      </div>
+      <div class="qa anim" style="--i:3;--pc:#5a7bb0">
+        <div class="q"><span class="qn">3</span>What type of thing do people have in common about what they love?</div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看答案 · 解析</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="ans">Family and friends are the things most people love; many of them are also keen on sports, like football.</div>
+            <div class="how">【定位】第三段。<b>细节题</b>——问「共同点」，对应 "Family and friends are the things most people love"。</div>
+          </div>
+        </div>
+      </div>
+      <div class="qa anim" style="--i:4;--pc:#5a7bb0">
+        <div class="q"><span class="qn">4</span>What are the things that most people fear?</div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看答案 · 解析</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="ans">Monsters, dogs and death.</div>
+            <div class="how">【定位】第四段。<b>细节题</b>——注意问的是 fear 而非 love，别与第 3 题混淆。</div>
+          </div>
+        </div>
+      </div>
+      <div class="qa anim" style="--i:5;--pc:#5a7bb0">
+        <div class="q"><span class="qn">5</span>What do people want according to the final scene of the film?</div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看答案 · 解析</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="ans">They want to be known / to show that their lives matter — "I just want people to know that I'm here".</div>
+            <div class="how">【定位】最后一段。<b>推断题</b>——借助 "In other words" 找出真意：show that her life matters。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:6">
+      <span>🎯</span>
+      <div>答问技巧：<b>先定位再答题</b>。抓住题目关键词（who / what / how），回原文找对应句子；<b>推断题</b>留意 <b>In other words</b>、破折号等解释标志。</div>
+    </div>
+  </section>
+
+  <!-- 11 概要填空讲评 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#5a7bb0">PART 05 · Comprehension ②</span><h2>概要填空 · 点击空格显示答案</h2><span class="en">Summary Cloze</span></div>
+    <div class="essay anim" style="--i:1;flex:none;max-height:42vh;font-size:14.5px;line-height:2.1">
+      Life in a Day is a film about the everyday lives of people in different countries. The director Kevin Macdonald is interested in
+      <span class="fb" data-answer="creating" data-num="1"></span>
+      a picture of the world as a
+      <span class="fb" data-answer="digital" data-num="2"></span>
+      time capsule for the future. He asked people around the world to film a short
+      <span class="fb" data-answer="video (clip)" data-num="3"></span>
+      of their daily routines on a
+      <span class="fb" data-answer="typical" data-num="4"></span>
+      day. He also asked them to answer three questions about what they love, what they fear, and what they have in their pockets. He received 81,000 video
+      <span class="fb" data-answer="clips" data-num="5"></span>
+      , which were recorded on mobile phones or
+      <span class="fb" data-answer="digital" data-num="6"></span>
+      cameras. Then, he and his team turned them into a film. The scenes are well
+      <span class="fb" data-answer="organized" data-num="7"></span>
+      and deal with topics, such as people's cares and worries, their fears and their feelings about some seemingly
+      <span class="fb" data-answer="small" data-num="8"></span>
+      and unimportant things in life. The film expresses a clear message: people around the world are living different lives, and each of them is unique. But they have one thing in common: they all try to find meanings in those everyday
+      <span class="fb" data-answer="moments" data-num="9"></span>
+      — this is what really
+      <span class="fb" data-answer="matters" data-num="10"></span>
+      .
+    </div>
+    <div class="grid g2 anim" style="--i:2;margin-top:13px;overflow-y:auto;min-height:0;flex:1">
+      <div class="anno" style="--pc:#5a7bb0"><div class="a-top"><span class="a-n">1</span><span class="a-phrase">creating</span></div><div class="seg">原文 "interested in <b>creating</b> a picture of the world"，介词 in 后接动名词。</div></div>
+      <div class="anno" style="--pc:#5a7bb0"><div class="a-top"><span class="a-n">2</span><span class="a-phrase">digital</span></div><div class="seg">原文 "a <b>digital</b> time capsule"，数码的。</div></div>
+      <div class="anno" style="--pc:#5a7bb0"><div class="a-top"><span class="a-n">3</span><span class="a-phrase">video (clip)</span></div><div class="seg">原文 "send in a <b>video clip</b>"，此处 "film a short video of their daily routines"。clip 亦可。</div></div>
+      <div class="anno" style="--pc:#5a7bb0"><div class="a-top"><span class="a-n">4</span><span class="a-phrase">typical</span></div><div class="seg">原文 "from a <b>typical</b> day"，典型的、平常的。</div></div>
+      <div class="anno" style="--pc:#5a7bb0"><div class="a-top"><span class="a-n">5</span><span class="a-phrase">clips</span></div><div class="seg">原文 "81,000 video <b>clips</b>"，注意复数。</div></div>
+      <div class="anno" style="--pc:#5a7bb0"><div class="a-top"><span class="a-n">6</span><span class="a-phrase">digital</span></div><div class="seg">原文 "<b>digital</b> cameras"，数码相机。</div></div>
+      <div class="anno" style="--pc:#5a7bb0"><div class="a-top"><span class="a-n">7</span><span class="a-phrase">organized</span></div><div class="seg">概括：影片场景组织得<b>井然有序</b>（well organized）。</div></div>
+      <div class="anno" style="--pc:#5a7bb0"><div class="a-top"><span class="a-n">8</span><span class="a-phrase">small</span></div><div class="seg">"seemingly <b>small</b> and unimportant things" 看似琐碎无关紧要之物。trivial / insignificant 亦可。</div></div>
+      <div class="anno" style="--pc:#5a7bb0"><div class="a-top"><span class="a-n">9</span><span class="a-phrase">moments</span></div><div class="seg">"find meanings in those everyday <b>moments</b>" 在日常瞬间中寻找意义。routines / lives 亦可。</div></div>
+      <div class="anno" style="--pc:#5a7bb0"><div class="a-top"><span class="a-n">10</span><span class="a-phrase">matters</span></div><div class="seg">"this is what really <b>matters</b>" 这才是真正重要的（matter 作动词）。</div></div>
+    </div>
+  </section>
+
+  <!-- 12 小结 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a695ae">本课小结</span><h2>课文要点 · 一课一得</h2><span class="en">Takeaway</span></div>
+    <div class="ex-grid">
+      <div class="ex-col">
+        <div class="ex-box anim" style="--i:1">
+          <div class="lead">📖 文章结构 · 一条主线</div>
+          <div class="step" style="--pc:#8a8177;border-bottom:1px dashed var(--line);padding:9px 0"><span class="sn" style="display:inline-flex;width:24px;height:24px;border-radius:50%;background:#8a8177;color:#fff;font-weight:800;font-size:12px;align-items:center;justify-content:center;margin-right:10px">1</span><b>提出问题</b>：what do you love / fear / in your pocket → 电影缘起</div>
+          <div class="step" style="--pc:#6f8a6f;border-bottom:1px dashed var(--line);padding:9px 0"><span class="sn" style="display:inline-flex;width:24px;height:24px;border-radius:50%;background:#6f8a6f;color:#fff;font-weight:800;font-size:12px;align-items:center;justify-content:center;margin-right:10px">2</span><b>展示日常</b>：同一时刻世界各地的 everyday routines</div>
+          <div class="step" style="--pc:#b3925a;border-bottom:1px dashed var(--line);padding:9px 0"><span class="sn" style="display:inline-flex;width:24px;height:24px;border-radius:50%;background:#b3925a;color:#fff;font-weight:800;font-size:12px;align-items:center;justify-content:center;margin-right:10px">3</span><b>爱与恐惧</b>：care about / keen on / fear</div>
+          <div class="step" style="--pc:#5a7bb0;border-bottom:1px dashed var(--line);padding:9px 0"><span class="sn" style="display:inline-flex;width:24px;height:24px;border-radius:50%;background:#5a7bb0;color:#fff;font-weight:800;font-size:12px;align-items:center;justify-content:center;margin-right:10px">4</span><b>结尾升华</b>：life matters · find meaning and happiness</div>
+        </div>
+      </div>
+      <div class="ex-col">
+        <div class="ex-box anim" style="--i:2">
+          <div class="lead">⭐ 必背好词好句 · 5 条</div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">1</span><div>send in a video clip from a <b>typical</b> day · a <b>digital</b> time capsule</div></div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">2</span><div>It <b>took</b> … seven weeks <b>to make</b> them into a film.</div></div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">3</span><div>One <b>looks well off</b>, the other is poor.</div></div>
+          <div class="mk" style="--pc:#5a7bb0"><span class="mtag">4</span><div><b>Even though</b> their lives are very different, … <b>have one thing in common</b></div></div>
+          <div class="mk" style="--pc:#5a7bb0"><span class="mtag">5</span><div>… find meaning and happiness, <b>no matter what</b> his or her life is like.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="motto anim" style="--i:3">一课一得 —— <span>不同的生活 · 同样的意义与幸福</span> Every life <span>matters</span>.</div>
+  </section>
+
+</div>
+
+<div id="nav">
+  <button id="home" aria-label="目录" title="回到目录">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+  </button>
+  <button id="prev" aria-label="上一页" title="上一页 (←)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="counter"><b id="cur">1</b> / <span id="total">13</span></div>
+  <button id="next" aria-label="下一页" title="下一页 (→)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <button id="fs" aria-label="全屏" title="全屏 (F)" style="border:none;background:transparent;width:34px">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+  </button>
+</div>
+<div id="hint">← → 翻页 · 空格下一页 · F 全屏 · 点击「＋」或空格处揭示答案</div>
+
+<script>
+  /* ===== 翻页 ===== */
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  const curEl = document.getElementById('cur');
+  const totalEl = document.getElementById('total');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const homeBtn = document.getElementById('home');
+  const fsBtn = document.getElementById('fs');
+  const progress = document.getElementById('progress');
+  let idx = 0;
+  totalEl.textContent = total;
+
+  function render(){
+    slides.forEach((s,i)=>{
+      s.classList.toggle('active', i===idx);
+      s.classList.toggle('prev', i<idx);
+    });
+    curEl.textContent = idx+1;
+    progress.style.width = ((idx+1)/total*100) + '%';
+    prevBtn.disabled = idx===0;
+    nextBtn.disabled = idx===total-1;
+  }
+  function go(n){
+    idx = Math.max(0, Math.min(total-1, n));
+    render();
+  }
+  prevBtn.addEventListener('click', ()=>go(idx-1));
+  nextBtn.addEventListener('click', ()=>go(idx+1));
+  homeBtn.addEventListener('click', ()=>go(1));
+  document.addEventListener('keydown', (e)=>{
+    if(e.key==='ArrowRight' || e.key===' ' || e.key==='PageDown'){ e.preventDefault(); go(idx+1); }
+    else if(e.key==='ArrowLeft' || e.key==='PageUp'){ e.preventDefault(); go(idx-1); }
+    else if(e.key==='Home'){ go(0); }
+    else if(e.key==='End'){ go(total-1); }
+    else if(e.key==='f' || e.key==='F'){
+      if(document.fullscreenElement){ document.exitFullscreen(); }
+      else { document.documentElement.requestFullscreen(); }
+    }
+  });
+  fsBtn.addEventListener('click', ()=>{
+    if(document.fullscreenElement){ document.exitFullscreen(); }
+    else { document.documentElement.requestFullscreen(); }
+  });
+  let touchX=null;
+  document.addEventListener('touchstart', e=>{ touchX=e.touches[0].clientX; });
+  document.addEventListener('touchend', e=>{
+    if(touchX===null) return;
+    const dx=e.changedTouches[0].clientX-touchX;
+    if(Math.abs(dx)>50){ dx<0?go(idx+1):go(idx-1); }
+    touchX=null;
+  });
+  render();
+
+  /* ===== 概要填空：点击空格显示答案 ===== */
+  document.querySelectorAll('.fb').forEach(el=>{
+    const num = el.dataset.num;
+    const ans = el.dataset.answer;
+    el.innerHTML = `<span class="fn">${num}</span>`;
+    el.addEventListener('click', ()=>{
+      const shown = el.classList.toggle('shown');
+      if(shown){ el.textContent = ans; }
+      else { el.innerHTML = `<span class="fn">${num}</span>`; }
+    });
+  });
+</script>
+</body></html>

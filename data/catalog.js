@@ -172,6 +172,18 @@ window.CATALOG = {
           added: "2026-10-12"
         }
       ]
+    },
+    {
+      id: "kewen",
+      name: "高中英语课文精讲",
+      color: "sand",
+      coursewares: [
+        {
+          title: "选择性必修一 Unit 1 · Life in a Day 课文精讲",
+          file: "courseware/选择性必修一Unit1·Life in a Day课文精讲课件.html",
+          added: "2026-11-17"
+        }
+      ]
     }
   ]
 };
