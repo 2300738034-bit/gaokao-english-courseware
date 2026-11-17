@@ -182,6 +182,11 @@ window.CATALOG = {
           title: "选择性必修一 Unit 1 · Life in a Day 课文精讲",
           file: "courseware/选择性必修一Unit1·Life in a Day课文精讲课件.html",
           added: "2026-11-17"
+        },
+        {
+          title: "选修一 Unit 1 · Feeling good 课文精讲",
+          file: "courseware/选修一Unit1·Feeling good课文精讲课件.html",
+          added: "2026-11-17"
         }
       ]
     }

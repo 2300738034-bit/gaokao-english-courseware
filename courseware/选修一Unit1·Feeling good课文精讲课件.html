@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>选修一 · Unit 1 Feeling good · Is chocolate the answer? 课文精讲</title>
+<style>
+  :root{
+    --ink:#4a433c;
+    --muted:#8a8177;
+    --line:#ddd6ca;
+    --bg:#ece8df;
+    --paper:#faf7f1;
+    --brand:#66746f;
+    --brand-2:#8593a3;
+    --gold:#b39b72;
+    --cwd:#6f8a6f;   /* 好词好句 · 绿 */
+    --cgr:#5a7bb0;   /* 语法点 · 蓝 */
+    --cph:#b3925a;   /* 固定搭配/衔接 · 金 */
+    --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:var(--font);
+    color:var(--ink);
+    background:var(--bg);
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:56px 44px 96px}
+
+  .slide{
+    position:absolute;
+    width:min(1240px,100%);
+    max-height:100%;
+    background:var(--paper);
+    border-radius:20px;
+    box-shadow:0 24px 60px -24px rgba(74,67,60,.35), 0 0 0 1px rgba(74,67,60,.05);
+    padding:40px 52px;
+    opacity:0;
+    transform:translateX(40px);
+    pointer-events:none;
+    transition:opacity .45s ease, transform .45s ease;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+  .slide.active{opacity:1;transform:translateX(0);pointer-events:auto}
+  .slide.prev{transform:translateX(-40px)}
+
+  .slide .anim{opacity:0;transform:translateY(14px)}
+  .slide.active .anim{
+    opacity:1;transform:none;
+    transition:opacity .5s ease, transform .5s ease;
+    transition-delay:calc(var(--i,0)*70ms + 60ms);
+  }
+
+  .head{display:flex;align-items:center;gap:14px;margin-bottom:18px;flex:none}
+  .part-badge{
+    font-size:12.5px;font-weight:700;letter-spacing:.05em;
+    color:#fff;background:var(--pc,#8593a3);
+    padding:6px 13px;border-radius:99px;white-space:nowrap;
+  }
+  .head h2{font-size:25px;font-weight:800;letter-spacing:.01em;color:var(--ink)}
+  .head .en{font-size:13.5px;color:var(--muted);font-weight:600;margin-left:auto;white-space:nowrap}
+
+  .lead{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:10px}
+
+  .slide.cover{
+    background:
+      radial-gradient(900px 500px at 85% -10%, rgba(176,137,139,.42), transparent 60%),
+      radial-gradient(700px 500px at -10% 110%, rgba(139,160,138,.40), transparent 55%),
+      linear-gradient(135deg,#544d43 0%,#635a4e 55%,#6f6759 100%);
+    color:#fff;
+    justify-content:center;
+  }
+  .cover .brand-line{position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#6f8a6f,#5a7bb0,#b3925a,#b0898b)}
+  .cover .tag{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#e9e4d8;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);padding:7px 16px;border-radius:99px;margin-bottom:26px}
+  .cover h1{font-size:46px;font-weight:900;line-height:1.16;letter-spacing:.01em}
+  .cover h1 .hl{color:#e0cba0}
+  .cover .sub{margin-top:18px;font-size:19px;color:#d4cbbd;font-weight:500;line-height:1.5}
+  .cover .meta{margin-top:38px;display:flex;gap:26px;font-size:14px;color:#bdb4a2;font-weight:600;flex-wrap:wrap}
+  .cover .meta b{color:#fff}
+  .cover .src{margin-top:16px;font-size:12.5px;color:#a99f8e;font-weight:600;letter-spacing:.03em}
+
+  .grid{display:grid;gap:13px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:16px;
+    padding:18px 20px;position:relative;overflow:hidden;
+  }
+  .card .num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:32px;height:32px;border-radius:10px;font-size:15px;font-weight:800;
+    color:#fff;background:var(--pc,#8593a3);margin-bottom:10px;
+  }
+  .card h4{font-size:18px;font-weight:800;margin-bottom:5px}
+  .card .cn{font-size:13px;color:var(--muted);font-weight:600;line-height:1.55}
+
+  .note{
+    display:flex;gap:12px;align-items:flex-start;
+    background:#f2ead9;border:1px solid #dccca4;border-left:4px solid #b39b72;
+    border-radius:12px;padding:13px 16px;margin-top:14px;font-size:15px;line-height:1.6;
+  }
+  .note .ico{font-size:18px;line-height:1.4}
+  .note b{color:#6b5230}
+
+  .tip{
+    display:flex;gap:10px;align-items:flex-start;
+    background:#eef0f1;border:1px solid #c8cfd4;border-left:4px solid #8593a3;
+    border-radius:12px;padding:11px 15px;margin-top:12px;font-size:14px;line-height:1.6;color:#465057;flex:none;
+  }
+  .tip b{color:#3a454c}
+
+  .rv{margin-top:8px;border:1px dashed #cfc7b8;border-radius:12px;overflow:hidden;background:#fff}
+  .rv-trigger{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    padding:9px 14px;cursor:pointer;user-select:none;background:#f5f2ea;transition:.15s;
+  }
+  .rv-trigger:hover{background:#efece2}
+  .rv-label{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.02em;transition:.15s}
+  .rv.on .rv-label{color:var(--brand-2)}
+  .rv-plus{font-size:19px;color:var(--brand-2);transition:transform .3s;font-weight:700;line-height:1;flex:none}
+  .rv.on .rv-plus{transform:rotate(45deg)}
+  .rv-body{max-height:0;opacity:0;overflow:hidden;transition:max-height .5s ease, opacity .35s ease;padding:0 14px}
+  .rv.on .rv-body{max-height:900px;opacity:1;padding:12px 14px 13px}
+
+  .wd{background:linear-gradient(transparent 52%, #d9e3d2 52%);color:#3f6b3f;font-weight:700;border-radius:2px}
+  .gr{background:linear-gradient(transparent 52%, #d6dfee 52%);color:#35548a;font-weight:700;border-radius:2px}
+  .ph{border-bottom:2px solid #c2a87f;color:#7a5c2e;font-weight:700}
+  .legend{display:flex;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--muted);font-weight:600}
+  .legend .sw{display:inline-block;width:14px;height:13px;border-radius:3px;margin-right:6px;vertical-align:-2px}
+  .legend .sw.ul{width:14px;height:6px;border-bottom:2px solid #c2a87f;border-radius:0}
+
+  .essay{background:#f5f2ea;border:1px solid var(--line);border-radius:14px;padding:20px 26px;overflow-y:auto;font-size:15.5px;line-height:2;color:#4a433c;min-height:0;flex:1}
+  .essay p{margin-bottom:14px}
+  .essay p:last-child{margin-bottom:0}
+  .essay .pn{display:inline-block;font-size:11px;font-weight:800;color:#fff;background:#8a8177;border-radius:99px;padding:1px 9px;margin-right:8px;vertical-align:2px}
+
+  .para{background:#f5f2ea;border:1px solid var(--line);border-radius:14px;padding:16px 22px;font-size:15px;line-height:1.95;color:#4a433c;overflow-y:auto;flex:none;max-height:30vh}
+  .para .pn{display:inline-block;font-size:11px;font-weight:800;color:#fff;background:#8a8177;border-radius:99px;padding:1px 9px;margin-right:8px;vertical-align:2px}
+  .mn{font-size:10px;font-weight:800;color:#fff;border-radius:99px;padding:1px 6px;margin-left:3px;vertical-align:super;white-space:nowrap;font-style:normal}
+
+  .anno-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-content:start;flex:1;min-height:0;overflow-y:auto;margin-top:13px;padding-right:4px}
+
+  .anno{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;align-self:start;border-top:3px solid var(--pc,#8593a3)}
+  .anno .a-top{display:flex;align-items:flex-start;gap:8px}
+  .anno .a-n{width:22px;height:22px;border-radius:50%;color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;background:var(--pc,#8593a3);margin-top:2px}
+  .anno .a-phrase{font-weight:800;font-size:14.5px;color:var(--ink);line-height:1.45;flex:1}
+  .anno .a-tag{margin-left:auto;font-size:10.5px;font-weight:800;color:#fff;padding:2px 9px;border-radius:99px;white-space:nowrap;flex:none;background:var(--pc,#8593a3);margin-top:2px}
+
+  .seg{font-size:13.5px;line-height:1.62;color:#4a433c;margin-top:7px}
+  .seg .sl{display:inline-block;font-size:11px;font-weight:800;color:#fff;background:var(--pc,#8593a3);border-radius:6px;padding:1px 7px;margin-right:6px;vertical-align:1px}
+  .seg .en{font-weight:600;color:#3a433c}
+  .seg .zh{color:var(--muted);font-size:12.5px}
+  .seg b{color:var(--ink)}
+  .seg.gk{background:#f7ecea;border-left:3px solid #c0564f;border-radius:8px;padding:7px 10px;margin-top:8px}
+  .seg.gk .sl{background:#c0564f}
+  .seg.gk b{color:#8a3a34}
+
+  .jump{cursor:pointer;transition:.18s;border:1px solid var(--line)}
+  .jump:hover{transform:translateY(-4px);box-shadow:0 16px 34px -18px rgba(74,67,60,.4);border-color:var(--pc,#8593a3)}
+  .jump .go{position:absolute;right:14px;top:14px;font-size:12px;font-weight:700;color:var(--pc,#8593a3);opacity:0;transition:.18s}
+  .jump:hover .go{opacity:1}
+
+  .sum-block{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:#fff}
+  .sum-block h4{font-size:15.5px;font-weight:800;margin-bottom:11px;display:flex;align-items:center;gap:8px}
+  .sum-block .dot{width:10px;height:10px;border-radius:3px;background:var(--pc,#8593a3)}
+  .sum-block ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .sum-block li{font-size:13.8px;color:#4a433c;line-height:1.5}
+  .sum-block li b{color:var(--ink)}
+
+  .motto{
+    margin-top:18px;text-align:center;font-size:20px;font-weight:800;color:var(--brand);
+    background:#e9eee7;border-radius:14px;padding:18px;flex:none;
+  }
+  .motto span{color:#a06a6a}
+
+  .mk{
+    display:flex;gap:10px;align-items:flex-start;padding:9px 12px;
+    border-left:3px solid var(--pc,#8593a3);background:#fff;border-radius:8px;
+    margin-top:8px;font-size:14px;line-height:1.55;color:#4a433c;
+  }
+  .mk .mtag{
+    flex:none;font-size:11px;font-weight:800;color:#fff;background:var(--pc,#8593a3);
+    padding:2px 8px;border-radius:99px;margin-top:1px;white-space:nowrap;
+  }
+  .mk b{color:var(--ink)}
+
+  .ex-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;min-height:0;flex:1}
+  .ex-col{display:flex;flex-direction:column;min-height:0}
+  .ex-box{background:#f5f2ea;border:1px solid var(--line);border-radius:14px;padding:14px 16px;overflow-y:auto;min-height:0}
+
+  .fb{
+    display:inline-block;min-width:54px;text-align:center;border-bottom:2px solid #c2a87f;color:#7a5c2e;
+    font-weight:800;cursor:pointer;padding:0 6px;margin:0 2px;transition:.15s;font-size:13px;border-radius:3px 3px 0 0;
+  }
+  .fb:hover{background:#f2ead9}
+  .fb.shown{background:#f2ead9;border-bottom-color:#b3925a;color:#6b5230}
+  .fb .fn{font-size:10px;color:#b9b0a0;font-weight:700;vertical-align:super}
+
+  .qa{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 18px;align-self:start;border-top:3px solid var(--pc,#5a7bb0)}
+  .qa .q{font-size:15px;font-weight:800;color:var(--ink);line-height:1.55}
+  .qa .q .qn{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--pc,#5a7bb0);color:#fff;font-size:12.5px;font-weight:800;margin-right:8px;vertical-align:-4px}
+  .qa .ans{font-size:14px;color:#3f5a8a;font-weight:700;line-height:1.6}
+  .qa .how{font-size:13px;color:var(--muted);line-height:1.6;font-weight:600}
+
+  #nav{
+    position:fixed;left:50%;bottom:26px;transform:translateX(-50%);
+    display:flex;align-items:center;gap:12px;z-index:50;
+    background:rgba(250,247,241,.88);backdrop-filter:blur(10px);
+    border:1px solid var(--line);border-radius:99px;padding:9px 12px;
+    box-shadow:0 10px 30px -12px rgba(74,67,60,.3);
+  }
+  #nav button{
+    border:none;background:#fff;border:1px solid var(--line);
+    width:40px;height:40px;border-radius:50%;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;color:#4a433c;
+    transition:.15s;
+  }
+  #nav button:hover:not(:disabled){background:#eef0f1;border-color:#c8cfd4;color:var(--brand-2)}
+  #nav button:disabled{opacity:.35;cursor:default}
+  #nav .counter{font-size:14px;font-weight:700;color:#4a433c;min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
+  #nav .counter b{color:var(--brand-2);font-size:16px}
+  #progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#6f8a6f,#5a7bb0,#b3925a);z-index:60;width:0;transition:width .35s ease}
+  #hint{position:fixed;left:50%;transform:translateX(-50%);bottom:4px;font-size:12px;color:#a49a8a;z-index:40;white-space:nowrap}
+
+  @media (max-width:900px){
+    #stage{padding:20px 16px 90px}
+    .slide{padding:26px 22px;border-radius:14px}
+    .g2,.g3,.ex-grid{grid-template-columns:1fr 1fr}
+    .head h2{font-size:22px}
+    .cover h1{font-size:32px}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<div id="stage">
+
+  <!-- 0 封面 -->
+  <section class="slide cover active">
+    <div class="brand-line"></div>
+    <div class="anim" style="--i:0"><span class="tag">选修一 · Unit 1 · Feeling good</span></div>
+    <h1 class="anim" style="--i:1">Is chocolate <span class="hl">the answer?</span></h1>
+    <p class="sub anim" style="--i:2">好词好句 · 语法点 · 情绪习语专题 → 阅读理解讲评</p>
+    <div class="meta anim" style="--i:3">
+      <span>文体 <b>说明文</b></span>
+      <span>话题 <b>幸福 · 健康 · 睡眠</b></span>
+      <span>重点 <b>情绪习语 + 语法点</b></span>
+    </div>
+    <div class="src anim" style="--i:4">上海教育出版社《英语·选修第一册》Unit 1 Feeling good · A Reading and interaction</div>
+  </section>
+
+  <!-- 1 目录 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a8177">CONTENTS</span><h2>本节内容 · 目录</h2><span class="en">Roadmap · 点击卡片跳转</span></div>
+    <div class="grid g3" style="margin-top:6px">
+      <div class="card jump anim" style="--i:1;--pc:#8a8177" onclick="go(2)"><span class="num">01</span><h4>课文全文</h4><div class="cn">带颜色标注 · 先通读一遍</div><span class="go">进入 →</span></div>
+      <div class="card jump anim" style="--i:2;--pc:#6f8a6f" onclick="go(3)"><span class="num">02</span><h4>逐段精读</h4><div class="cn">第①–⑥段 · 点击讲解</div><span class="go">进入 →</span></div>
+      <div class="card jump anim" style="--i:3;--pc:#5a7bb0" onclick="go(9)"><span class="num">03</span><h4>语法点总结</h4><div class="cn">9 个核心语法结构</div><span class="go">进入 →</span></div>
+      <div class="card jump anim" style="--i:4;--pc:#b3925a" onclick="go(10)"><span class="num">04</span><h4>好词好句积累</h4><div class="cn">情绪习语专题 · 背诵清单</div><span class="go">进入 →</span></div>
+      <div class="card jump anim" style="--i:5;--pc:#5a7bb0" onclick="go(11)"><span class="num">05</span><h4>阅读理解讲评</h4><div class="cn">6 道问答 + 概要填空</div><span class="go">进入 →</span></div>
+      <div class="card jump anim" style="--i:6;--pc:#a695ae" onclick="go(13)"><span class="num">06</span><h4>本课小结</h4><div class="cn">主题升华 · 一课一得</div><span class="go">进入 →</span></div>
+    </div>
+    <div class="note anim" style="--i:7;margin-top:20px">
+      <span class="ico">🧭</span>
+      <div>这一讲<b>直接进入课文分析</b>：先<b>通读</b>全文（好词好句、语法点已用颜色标出），再<b>逐段精读</b>，点击每处标注即可看到<b>讲解、例句与拓展</b>；最后用课后 <b>Comprehension work</b>（问答 + 概要填空）检验理解。三色标注：<span class="wd">绿色＝好词好句</span>、<span class="gr">蓝色＝语法点</span>、<span class="ph">金色下划线＝固定搭配·衔接词</span>；点击展开后还附有<span style="color:#c0564f;font-weight:800">红色「高考考点」</span>。本篇最大的宝藏是<b>一组描写情绪的地道习语</b>，详见「好词好句积累」。</div>
+    </div>
+  </section>
+
+  <!-- 2 课文全文 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a8177">FULL TEXT</span><h2>课文全文 · 先通读一遍</h2><span class="en">Is chocolate the answer?</span></div>
+    <div class="legend anim" style="--i:1;margin-bottom:12px">
+      <span><span class="sw" style="background:#d9e3d2"></span>绿色高亮 = 好词好句</span>
+      <span><span class="sw" style="background:#d6dfee"></span>蓝色高亮 = 语法点</span>
+      <span><span class="sw ul"></span>金色下划线 = 固定搭配 · 衔接词</span>
+    </div>
+    <div class="essay anim" style="--i:2">
+      <p><span class="pn">Para 1</span>Have you ever wondered what makes people happy? Why are some people <span class="wd">on cloud nine</span> while others are always <span class="wd">down in the dumps</span>? What's the secret? Is it <span class="wd">pots of money</span>, good health, <span class="wd">loving relationships</span>, owning <span class="wd">the latest gadget</span> or simply chocolate?</p>
+      <p><span class="pn">Para 2</span>The latest World Happiness Report says that <span class="wd">prosperity</span> is not <span class="wd">the main reason</span> for happiness. If you <span class="wd">suffer real hardship</span>, you are unlikely to be happy, but <span class="gr">once your basic needs are met</span>, money and material things become <span class="wd">less of a necessity</span>. <span class="gr">Happiness depends more on recognizing the things you have and appreciating them, rather than getting more things.</span> Yes, money can buy you the latest smartphone, tablet or fashion item, and you might <span class="wd">get a kick out of</span> owning these material objects, but this enjoyment is usually <span class="wd">short-lived</span>.</p>
+      <p><span class="pn">Para 3</span>Remember all those presents you got for your birthday when you were little? You were <span class="wd">over the moon</span> when you opened them, but not for long. A month later, they were <span class="wd">lying abandoned at the bottom of a drawer</span>. And have you forgotten those delicious chocolates <span class="gr">that made you feel really happy</span> when you were eating them, but ill after you'd finished them all?</p>
+      <p><span class="pn">Para 4</span><span class="gr">It seems that</span> deep, long-lasting happiness comes from <span class="wd">intangible</span> things, rather than things like chocolates and smartphones. One <span class="wd">essential factor</span> is human relationships. People who have the support of family members and also have strong friendships <span class="gr">are more likely to be happy</span>. <span class="gr">Feeling protected and respected and knowing you can trust in the people around you is vital.</span> But happiness means you have to <span class="wd">give and take</span>. <span class="gr">Performing acts of kindness and generosity on a regular basis</span>, for example, listening to <span class="wd">a friend in need</span> or carrying a neighbour's shopping, will make you feel <span class="wd">on top of the world</span>. Even a simple smile can <span class="wd">work wonders</span>. In fact, they say that one smile makes a person feel as good as eating 2,000 bars of chocolate (not all at once, of course!).</p>
+      <p><span class="pn">Para 5</span><span class="gr">It's not surprising that</span> health is another <span class="wd">key contributor</span> to happiness. Poor health will certainly make you feel <span class="wd">down in the mouth</span>. But being healthy and staying healthy require some effort. A healthy diet is <span class="wd">crucial</span> and <span class="gr">so is regular exercise</span>. Laziness will not make you happy. <span class="gr">Exercising for 20 to 30 minutes a day helps to reduce</span> stress and anxiety and makes you feel more <span class="wd">positive and optimistic</span> because it releases <span class="wd">endorphins</span> (feel-good chemicals). So, if you've been <span class="wd">feeling blue</span> and worrying too much about your exams, get exercising. You'll also find that you sleep better.</p>
+      <p><span class="pn">Para 6</span><span class="gr">Talking of sleep</span>, do you often wake up feeling <span class="wd">miserable</span>? If so, it's probably because you haven't had enough of it. Teenagers <span class="wd">tend to</span> go to bed too late and have to get up early, so many suffer from <span class="wd">a lack of sleep</span>. Tiredness will certainly affect your happiness levels and <span class="wd">put you in a bad mood</span>. It also affects your ability to <span class="wd">concentrate</span> and may slow your growth. So if you want to be happy and do well at school, try to get at least eight hours of sleep a night. <span class="gr">Now that you know the theory</span>, it's time to <span class="wd">put it all into practice</span>. Smile, everyone!</p>
+    </div>
+    <div class="tip anim" style="--i:3">
+      <span>👀</span>
+      <div>先<b>通读</b>把握主线：物质带来的快乐往往<b>短暂</b>，真正的幸福来自<b>无形的</b>东西——<b>人际关系、给予与善意、健康（饮食＋运动＋睡眠）</b>。留意三色标注，翻页进入<b>逐段精读</b>。</div>
+    </div>
+  </section>
+
+  <!-- 3 Para 1 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#6f8a6f">PART 02 · 逐段精读 ①</span><h2>Para 1 · 什么让人幸福？</h2><span class="en">What makes people happy?</span></div>
+    <div class="para anim" style="--i:1">
+      Have you ever wondered what makes people happy? Why are some people <span class="wd">on cloud nine<sup class="mn" style="background:#6f8a6f">①</sup></span> while others are always <span class="wd">down in the dumps<sup class="mn" style="background:#6f8a6f">②</sup></span>? What's the secret? Is it <span class="wd">pots of money<sup class="mn" style="background:#6f8a6f">③</sup></span>, good health, <span class="wd">loving relationships<sup class="mn" style="background:#6f8a6f">④</sup></span>, owning <span class="wd">the latest gadget<sup class="mn" style="background:#6f8a6f">③</sup></span> or simply chocolate?
+    </div>
+    <div class="anno-grid anim" style="--i:2">
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">①</span><span class="a-phrase">on cloud nine</span><span class="a-tag">习语</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span>习语，<b>欣喜若狂、非常开心</b>（仿佛飘上九重云霄）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">She was on cloud nine when she heard the good news.</span><div class="zh">她听到这个好消息时欣喜若狂。</div></div>
+            <div class="seg"><span class="sl">拓展</span>近义：over the moon / on top of the world（见下文）。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>情绪描写高频习语，读后续写 / 作文「表达喜悦」直接可用。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">②</span><span class="a-phrase">down in the dumps</span><span class="a-tag">习语</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span>习语，<b>情绪低落、垂头丧气</b>。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">He's been down in the dumps since he failed the exam.</span><div class="zh">考试失利后他一直情绪低落。</div></div>
+            <div class="seg"><span class="sl">拓展</span>近义：feel blue / down in the mouth / in a bad mood（见下文）。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>情绪描写高频习语，与「开心」类习语对比记忆，作文词汇升级必备。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">③</span><span class="a-phrase">pots of money / the latest gadget</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>pots of money</b> 大量金钱；<b>gadget</b> 小器具、小装置，<b>the latest gadget</b> 最新潮的小装置。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">He always wants the latest gadget.</span><div class="zh">他总想要最新潮的小装置。</div></div>
+            <div class="seg"><span class="sl">拓展</span>pots of money = a lot of money；gadget 常指电子小玩意。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>gadget 为课标词，词形 gadgets；「大量金钱」的多样表达（a large amount of money 等）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">④</span><span class="a-phrase">loving relationships</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>loving relationships</b> 相亲相爱的关系；relationship 关系（常与 build / maintain 搭配）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">A loving relationship is built on trust and respect.</span><div class="zh">亲密的关系建立在信任与尊重之上。</div></div>
+            <div class="seg"><span class="sl">拓展</span>human relationships 人际关系；build / maintain a relationship。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>relationship 一词多义（关系 / 血缘），高考阅读高频；relationships 复数表「各种关系」。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 Para 2 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#6f8a6f">PART 02 · 逐段精读 ②</span><h2>Para 2 · 物质带来的快乐很短暂</h2><span class="en">Money isn't the main reason</span></div>
+    <div class="para anim" style="--i:1">
+      The latest World Happiness Report says that <span class="wd">prosperity<sup class="mn" style="background:#6f8a6f">①</sup></span> is not the main reason for happiness. If you <span class="wd">suffer real hardship<sup class="mn" style="background:#6f8a6f">②</sup></span>, you are unlikely to be happy, but <span class="gr">once your basic needs are met<sup class="mn" style="background:#5a7bb0">③</sup></span>, money and material things become <span class="wd">less of a necessity<sup class="mn" style="background:#6f8a6f">④</sup></span>. <span class="gr">Happiness depends more on recognizing the things you have and appreciating them, rather than getting more things.<sup class="mn" style="background:#5a7bb0">⑤</sup></span> Yes, money can buy you the latest smartphone, tablet or fashion item, and you might <span class="wd">get a kick out of<sup class="mn" style="background:#6f8a6f">⑥</sup></span> owning these material objects, but this enjoyment is usually <span class="wd">short-lived<sup class="mn" style="background:#6f8a6f">⑦</sup></span>.
+    </div>
+    <div class="anno-grid anim" style="--i:2">
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">①</span><span class="a-phrase">prosperity / the main reason</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>prosperity</b> 成功、繁荣（prosperous adj. 繁荣的）；<b>the main reason for</b> ……的主要原因。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">The country enjoys growing prosperity.</span><div class="zh">这个国家日益繁荣。</div></div>
+            <div class="seg"><span class="sl">拓展</span>prosper → prosperous → prosperity 词形；the reason for sth. / the reason why。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>词形转换 prosperity / prosperous / prosper（语法填空、词性转换常考）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">②</span><span class="a-phrase">suffer real hardship</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>suffer</b> 遭受、蒙受；<b>hardship</b> 困苦、艰难。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Many families suffered real hardship during the war.</span><div class="zh">战争期间许多家庭遭受了真正的困苦。</div></div>
+            <div class="seg"><span class="sl">拓展</span>suffer from 患（病）、因……受苦；hardship 为不可数名词。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>suffer / suffer from 辨析（翻译、完形高频）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">③</span><span class="a-phrase">once your basic needs are met</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>once</b> 一旦……（引导时间状语从句）；<b>basic needs are met</b> 基本需求被满足（被动语态）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Once you start, you'll find it easy.</span><div class="zh">一旦开始，你就会发现它很容易。</div></div>
+            <div class="seg"><span class="sl">拓展</span>once 表「一旦」时从句常用一般现在时表将来；meet needs 满足需求。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>once 引导的状语从句（语法填空、翻译高频）；meet one's needs 固定搭配。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">④</span><span class="a-phrase">less of a necessity</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>necessity</b> 必需品、必要性；<b>less of a necessity</b> 不那么必需。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Once you have enough, money becomes less of a necessity.</span><div class="zh">一旦你有了足够的钱，钱就没那么必需了。</div></div>
+            <div class="seg"><span class="sl">拓展</span>necessary adj. → necessity n.；necessities of life 生活必需品。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>词形转换 necessary / necessity（语法填空常考）；less of a + n. 结构。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">⑤</span><span class="a-phrase">depend more on … rather than …</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>depend on</b> 取决于、依赖；<b>rather than</b> 而不是，连接两个并列的 doing 结构。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">I prefer tea rather than coffee.</span><div class="zh">我宁愿喝茶也不喝咖啡。</div></div>
+            <div class="seg"><span class="sl">拓展</span>rather than 前后结构平行（此处 recognizing…rather than getting…）。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>rather than 连接并列成分（语法填空、翻译高频）；depend on = rely on。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">⑥</span><span class="a-phrase">get a kick out of</span><span class="a-tag">习语</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span>习语，<b>从……中获得乐趣</b>（后接 doing）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">He gets a kick out of playing football.</span><div class="zh">他从踢足球中获得乐趣。</div></div>
+            <div class="seg"><span class="sl">拓展</span>近义：enjoy / take pleasure in / delight in doing。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>「从……中得到乐趣」的多样表达，作文替换词避免重复。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">⑦</span><span class="a-phrase">short-lived</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>short-lived</b> 短暂的、昙花一现的（live 作动词时的过去分词 -lived 构成复合形容词）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Their happiness was short-lived.</span><div class="zh">他们的幸福是短暂的。</div></div>
+            <div class="seg"><span class="sl">拓展</span>反义：long-lasting 持久的；近义：temporary 临时的。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>复合形容词（short-lived / long-lasting）阅读、写作高频。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 Para 3 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#6f8a6f">PART 02 · 逐段精读 ③</span><h2>Para 3 · 礼物与巧克力：快乐转瞬即逝</h2><span class="en">Presents & chocolate</span></div>
+    <div class="para anim" style="--i:1">
+      Remember all those presents you got for your birthday when you were little? You were <span class="wd">over the moon<sup class="mn" style="background:#6f8a6f">①</sup></span> when you opened them, but not for long. A month later, they were <span class="wd">lying abandoned at the bottom of a drawer<sup class="mn" style="background:#6f8a6f">②</sup></span>. And have you forgotten those delicious chocolates <span class="gr">that made you feel really happy<sup class="mn" style="background:#5a7bb0">③</sup></span> when you were eating them, but ill after you'd finished them all?
+    </div>
+    <div class="anno-grid anim" style="--i:2">
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">①</span><span class="a-phrase">over the moon</span><span class="a-tag">习语</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span>习语，<b>欣喜若狂</b>（比 on cloud nine 更口语）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">The children were over the moon when they saw the presents.</span><div class="zh">孩子们看到礼物时欣喜若狂。</div></div>
+            <div class="seg"><span class="sl">拓展</span>be over the moon about / at sth. 为……狂喜。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>「开心」类习语三连（on cloud nine / over the moon / on top of the world），作文词汇升级。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">②</span><span class="a-phrase">lying abandoned at the bottom of a drawer</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>lie + abandoned</b>（过去分词作主语补足语）被遗弃地躺在……；<b>at the bottom of</b> 在……底部。画面感极强的描写。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">The old toys lay forgotten at the bottom of the box.</span><div class="zh">旧玩具被遗忘在箱子底部。</div></div>
+            <div class="seg"><span class="sl">拓展</span>lie / sit / stand + 形容词/过去分词，表状态；at the bottom of / at the top of。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>lie 与 lay 辨析（高考高频易错）；「lie + 形容词」系动词用法。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">③</span><span class="a-phrase">that made you feel really happy … but ill</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>that</b> 引导<b>定语从句</b>修饰 chocolates；<b>make + 宾语 + 形容词</b>（make you feel happy / make you ill）使……感到……。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">The news made everyone happy.</span><div class="zh">这个消息让所有人都高兴。</div></div>
+            <div class="seg"><span class="sl">拓展</span>make + 宾语 + adj./do/done；make sb. feel + adj. 让某人感到……。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>make + 宾语 + 宾补（形容词/do）——语法填空、翻译高频。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 Para 4 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#6f8a6f">PART 02 · 逐段精读 ④</span><h2>Para 4 · 真正的幸福：关系与给予</h2><span class="en">Relationships & giving</span></div>
+    <div class="para anim" style="--i:1">
+      <span class="gr">It seems that<sup class="mn" style="background:#5a7bb0">①</sup></span> deep, long-lasting happiness comes from <span class="wd">intangible<sup class="mn" style="background:#6f8a6f">②</sup></span> things, rather than things like chocolates and smartphones. One <span class="wd">essential factor<sup class="mn" style="background:#6f8a6f">③</sup></span> is human relationships. People who have the support of family members and also have strong friendships <span class="gr">are more likely to be happy<sup class="mn" style="background:#5a7bb0">④</sup></span>. <span class="gr">Feeling protected and respected and knowing you can trust in the people around you is vital.<sup class="mn" style="background:#5a7bb0">⑤</sup></span> But happiness means you have to <span class="wd">give and take<sup class="mn" style="background:#6f8a6f">⑥</sup></span>. <span class="gr">Performing acts of kindness and generosity on a regular basis<sup class="mn" style="background:#5a7bb0">⑦</sup></span>, for example, listening to a friend in need or carrying a neighbour's shopping, will make you feel <span class="wd">on top of the world<sup class="mn" style="background:#6f8a6f">⑧</sup></span>. Even a simple smile can <span class="wd">work wonders<sup class="mn" style="background:#6f8a6f">⑨</sup></span>.
+    </div>
+    <div class="anno-grid anim" style="--i:2">
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">①</span><span class="a-phrase">It seems that …</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>it 作形式主语</b>，真正主语是 that 从句；It seems that … 似乎……。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">It seems that he knows nothing about it.</span><div class="zh">似乎他对此一无所知。</div></div>
+            <div class="seg"><span class="sl">拓展</span>同结构：It's not surprising that … / It is said that …。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>it 作形式主语（语法填空、翻译高频）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">②</span><span class="a-phrase">intangible</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>intangible</b> 难以形容的、无形的（tangible 有形的、可触摸的）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Trust is an intangible asset.</span><div class="zh">信任是一种无形的资产。</div></div>
+            <div class="seg"><span class="sl">拓展</span>in- 否定前缀 + tangible；intangible things 无形之物。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>构词法：in- 否定前缀（invisible / independent），阅读推断词义常考。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">③</span><span class="a-phrase">essential factor</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>essential</b> 至关重要的、必不可少的；<b>factor</b> 因素。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Hard work is an essential factor in success.</span><div class="zh">努力是成功的关键因素。</div></div>
+            <div class="seg"><span class="sl">拓展</span>essential = vital = crucial；be essential to / for 对……至关重要。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>essential / vital / crucial 同义替换（写作、完形高频）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">④</span><span class="a-phrase">be more likely to be happy</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>be likely to do</b> 很可能做某事；more likely 可能性更大。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">He is likely to pass the exam.</span><div class="zh">他很可能通过考试。</div></div>
+            <div class="seg"><span class="sl">拓展</span>It is likely that …；反义 be unlikely to do。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>be likely to do（单选、翻译高频）；likely / possible / probable 辨析。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">⑤</span><span class="a-phrase">Feeling … and knowing … is vital.</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>动名词短语作主语</b>：Feeling… and knowing… 并列作主语，谓语用单数 is。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Reading widely helps improve your writing.</span><div class="zh">广泛阅读有助于提高写作。</div></div>
+            <div class="seg"><span class="sl">拓展</span>动名词(短语)作主语，谓语动词用单数；本课出现多处（Performing / Exercising 等）。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>动名词作主语（语法填空、改错高频）；主谓一致用单数。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">⑥</span><span class="a-phrase">give and take</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>give and take</b> 有来有往、互谅互让（幸福需要付出也需要收获）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">A good friendship requires give and take.</span><div class="zh">好的友谊需要有来有往。</div></div>
+            <div class="seg"><span class="sl">拓展</span>作名词或动词短语；give-and-take（连字符）也可作名词。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>give and take 为固定表达，理解其在语境中的含义（阅读）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">⑦</span><span class="a-phrase">Performing acts of kindness … on a regular basis</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>Performing … 动名词作主语</b>（谓语 will make）；<b>acts of kindness</b> 善举；<b>on a regular basis</b> 定期地。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Small acts of kindness can brighten someone's day.</span><div class="zh">小小的善举能照亮某人的一天。</div></div>
+            <div class="seg"><span class="sl">拓展</span>on a … basis 以……方式/频率（on a daily basis 每天）；act of + n.。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>on a regular basis 固定搭配（翻译、写作高频）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">⑧</span><span class="a-phrase">on top of the world</span><span class="a-tag">习语</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span>习语，<b>非常幸福、心满意足</b>（仿佛站在世界之巅）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Winning the game made him feel on top of the world.</span><div class="zh">赢得比赛让他感觉好极了。</div></div>
+            <div class="seg"><span class="sl">拓展</span>feel on top of the world 感觉棒极了。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>「开心」类习语（on cloud nine / over the moon / on top of the world）作文必备。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">⑨</span><span class="a-phrase">work wonders</span><span class="a-tag">习语</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span>习语，<b>产生奇效、创造奇迹</b>。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">A few kind words can work wonders.</span><div class="zh">几句暖心的话能产生奇效。</div></div>
+            <div class="seg"><span class="sl">拓展</span>do/work wonders for 对……大有好处。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>wonder 一词多义（奇迹 n. / 想知道 v. / 难怪 no wonder）。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 Para 5 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#6f8a6f">PART 02 · 逐段精读 ⑤</span><h2>Para 5 · 健康与运动带来的快乐</h2><span class="en">Health & exercise</span></div>
+    <div class="para anim" style="--i:1">
+      <span class="gr">It's not surprising that<sup class="mn" style="background:#5a7bb0">①</sup></span> health is another <span class="wd">key contributor<sup class="mn" style="background:#6f8a6f">②</sup></span> to happiness. Poor health will certainly make you feel <span class="wd">down in the mouth<sup class="mn" style="background:#6f8a6f">③</sup></span>. But being healthy and staying healthy require some effort. A healthy diet is <span class="wd">crucial<sup class="mn" style="background:#6f8a6f">④</sup></span> and <span class="gr">so is regular exercise<sup class="mn" style="background:#5a7bb0">⑤</sup></span>. Laziness will not make you happy. <span class="gr">Exercising for 20 to 30 minutes a day helps to reduce<sup class="mn" style="background:#5a7bb0">⑥</sup></span> stress and anxiety and makes you feel more <span class="wd">positive and optimistic<sup class="mn" style="background:#6f8a6f">⑦</sup></span> because it releases <span class="wd">endorphins<sup class="mn" style="background:#6f8a6f">⑧</sup></span>. So, if you've been <span class="wd">feeling blue<sup class="mn" style="background:#6f8a6f">⑨</sup></span> and worrying too much about your exams, get exercising.
+    </div>
+    <div class="anno-grid anim" style="--i:2">
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">①</span><span class="a-phrase">It's not surprising that …</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>it 作形式主语</b>，that 从句为真正主语；not surprising 不足为奇。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">It's not surprising that he won the prize.</span><div class="zh">他获奖不足为奇。</div></div>
+            <div class="seg"><span class="sl">拓展</span>同结构：It's obvious / clear / true that …。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>it 作形式主语（与①处 It seems that 呼应，本课反复出现）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">②</span><span class="a-phrase">key contributor</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>contributor</b> 促成因素、贡献者；<b>key</b> 关键的（= important）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Regular exercise is a key contributor to good health.</span><div class="zh">经常锻炼是健康的关键促成因素。</div></div>
+            <div class="seg"><span class="sl">拓展</span>contribute to 促成、导致（to 为介词）；contributor 构成者。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>contribute to（to 为介词，后接 doing）——语法填空、翻译高频。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">③</span><span class="a-phrase">down in the mouth</span><span class="a-tag">习语</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span>习语，<b>垂头丧气、沮丧</b>。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">He looked down in the mouth after hearing the bad news.</span><div class="zh">听到坏消息后他垂头丧气。</div></div>
+            <div class="seg"><span class="sl">拓展</span>近义：down in the dumps / feel blue。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>「难过」类习语（down in the mouth / down in the dumps）作文必备。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">④</span><span class="a-phrase">crucial</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>crucial</b> 至关重要的（= vital / essential）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Sleep is crucial for teenagers.</span><div class="zh">睡眠对青少年至关重要。</div></div>
+            <div class="seg"><span class="sl">拓展</span>be crucial to / for 对……至关重要；crucial moment 关键时刻。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>crucial / vital / essential / significant 同义替换（写作、阅读高频）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">⑤</span><span class="a-phrase">so is regular exercise</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>so + 助动词 + 主语</b>（倒装），表示「……也是如此」。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">He is tired, and so am I.</span><div class="zh">他累了，我也是。</div></div>
+            <div class="seg"><span class="sl">拓展</span>neither / nor + 助动词 + 主语 表示「也不」；so + 主语 + 助动词 表示「确实如此」。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>so / neither / nor 的倒装（语法填空、单选高频）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">⑥</span><span class="a-phrase">Exercising … helps to reduce stress and anxiety</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>动名词作主语</b>（Exercising…helps）；<b>help (to) do</b> 有助于；<b>reduce stress and anxiety</b> 减轻压力与焦虑。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Music helps reduce stress and anxiety.</span><div class="zh">音乐有助于减轻压力和焦虑。</div></div>
+            <div class="seg"><span class="sl">拓展</span>reduce = relieve = ease 缓解；stress 与 pressure 辨析。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>动名词作主语（本课高频语法点，语法填空必考）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">⑦</span><span class="a-phrase">positive and optimistic</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>positive</b> 积极的、乐观的；<b>optimistic</b> 乐观的（反义 pessimistic）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Try to stay positive and optimistic.</span><div class="zh">尽量保持积极乐观。</div></div>
+            <div class="seg"><span class="sl">拓展</span>be optimistic about 对……乐观；a positive attitude 积极态度。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>positive / optimistic 为话题写作（人生观）高频词。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">⑧</span><span class="a-phrase">endorphins (feel-good chemicals)</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>endorphin</b> 内啡肽（让人愉悦的化学物质）；<b>release</b> 释放。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Exercise releases endorphins, which make you feel good.</span><div class="zh">运动释放内啡肽，让你感觉良好。</div></div>
+            <div class="seg"><span class="sl">拓展</span>feel-good 令人愉悦的（复合形容词）；release v. 释放/发布。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>release 一词多义（释放/发布/松开）——阅读高频。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">⑨</span><span class="a-phrase">feeling blue</span><span class="a-tag">习语</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span>习语，<b>感到忧郁、情绪低落</b>（blue 忧郁的）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">She always feels blue on rainy days.</span><div class="zh">雨天她总是感到忧郁。</div></div>
+            <div class="seg"><span class="sl">拓展</span>the blues 忧郁（音乐「布鲁斯」由此而来）。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>blue 熟词生义（忧郁的）——阅读推断词义常考。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 Para 6 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#6f8a6f">PART 02 · 逐段精读 ⑥</span><h2>Para 6 · 睡眠：别忽视的快乐密码</h2><span class="en">Sleep matters</span></div>
+    <div class="para anim" style="--i:1">
+      <span class="gr">Talking of sleep<sup class="mn" style="background:#5a7bb0">①</sup></span>, do you often wake up feeling <span class="wd">miserable<sup class="mn" style="background:#6f8a6f">②</sup></span>? If so, it's probably because you haven't had enough of it. Teenagers <span class="wd">tend to<sup class="mn" style="background:#6f8a6f">③</sup></span> go to bed too late and have to get up early, so many suffer from <span class="wd">a lack of sleep<sup class="mn" style="background:#6f8a6f">④</sup></span>. Tiredness will certainly affect your happiness levels and <span class="wd">put you in a bad mood<sup class="mn" style="background:#6f8a6f">⑤</sup></span>. It also affects your ability to <span class="wd">concentrate<sup class="mn" style="background:#6f8a6f">⑥</sup></span> and may slow your growth. So if you want to be happy and do well at school, try to get at least eight hours of sleep a night. <span class="gr">Now that you know the theory<sup class="mn" style="background:#5a7bb0">⑦</sup></span>, it's time to <span class="wd">put it all into practice<sup class="mn" style="background:#6f8a6f">⑧</sup></span>. Smile, everyone!
+    </div>
+    <div class="anno-grid anim" style="--i:2">
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">①</span><span class="a-phrase">Talking of sleep</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>Talking of …</b> 谈到……（现在分词作状语 / 固定表达，引出话题）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Talking of travel, have you been to Beijing?</span><div class="zh">说到旅行，你去过北京吗？</div></div>
+            <div class="seg"><span class="sl">拓展</span>同义：Speaking of / When it comes to。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>非谓语动词作状语（现在分词），阅读、语法填空高频。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">②</span><span class="a-phrase">feel miserable</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>miserable</b> 痛苦的、悲惨的、难受的。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">He felt miserable after the argument.</span><div class="zh">争吵之后他感到很难受。</div></div>
+            <div class="seg"><span class="sl">拓展</span>misery n. 痛苦；miserable weather 糟糕的天气。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>词形转换 misery / miserable（语法填空常考）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">③</span><span class="a-phrase">tend to</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>tend to do</b> 往往会、倾向于做某事。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Teenagers tend to stay up late.</span><div class="zh">青少年往往熬夜。</div></div>
+            <div class="seg"><span class="sl">拓展</span>tendency n. 倾向；have a tendency to do。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>tend to do（阅读、写作高频）；tendency 词形转换。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">④</span><span class="a-phrase">a lack of sleep</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>a lack of</b> 缺乏、缺少；suffer from a lack of sleep 睡眠不足。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">A lack of sleep affects your health.</span><div class="zh">缺乏睡眠影响健康。</div></div>
+            <div class="seg"><span class="sl">拓展</span>lack v./n.；be lacking in 缺乏……；lack of confidence 缺乏自信。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>lack 作名词/动词的用法（单选、翻译高频）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">⑤</span><span class="a-phrase">put you in a bad mood</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>put sb. in a bad mood</b> 让某人情绪低落；<b>mood</b> 情绪、心情。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Rain always puts me in a bad mood.</span><div class="zh">下雨总让我心情不好。</div></div>
+            <div class="seg"><span class="sl">拓展</span>in a good mood 心情好；moody adj. 喜怒无常的。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>mood 相关短语（in a … mood）——写作、完形高频。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">⑥</span><span class="a-phrase">concentrate / slow your growth</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>concentrate</b> 集中注意力（on）；<b>slow your growth</b> 延缓发育。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">I can't concentrate with so much noise.</span><div class="zh">这么吵我无法集中注意力。</div></div>
+            <div class="seg"><span class="sl">拓展</span>concentrate on = focus on 专注于；growth 成长（grow v.）。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>concentrate on / focus on 同义（翻译、写作高频）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">⑦</span><span class="a-phrase">Now that you know the theory</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>now that</b> 既然、由于（引导原因状语从句，常放句首）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Now that you're here, let's begin.</span><div class="zh">既然你来了，我们开始吧。</div></div>
+            <div class="seg"><span class="sl">拓展</span>now that = since（既然）；与 because 相比语气较弱。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>now that / since 引导原因状语从句（单选、翻译高频）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">⑧</span><span class="a-phrase">put it all into practice</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>put … into practice</b> 把……付诸实践。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">It's time to put your ideas into practice.</span><div class="zh">是时候把你的想法付诸实践了。</div></div>
+            <div class="seg"><span class="sl">拓展</span>in theory 理论上；in practice 实际上、在实践中。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>put … into practice / in practice 固定搭配（翻译、写作高频）。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 语法点总结 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#5a7bb0">PART 03 · 语法点</span><h2>本课 9 个核心语法结构</h2><span class="en">Grammar Review</span></div>
+    <div class="anno-grid" style="grid-template-columns:1fr 1fr 1fr;flex:1">
+      <div class="anno anim" style="--i:1;--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">1</span><span class="a-phrase">动名词(短语)作主语</span></div>
+        <div class="seg"><span class="sl">说明</span>Feeling / Performing / Exercising … + 单数谓语。</div>
+        <div class="seg"><span class="en">Exercising helps to reduce stress.</span></div>
+      </div>
+      <div class="anno anim" style="--i:2;--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">2</span><span class="a-phrase">it 作形式主语</span></div>
+        <div class="seg"><span class="sl">说明</span>It seems that … / It's not surprising that …</div>
+        <div class="seg"><span class="en">It seems that he knows it.</span></div>
+      </div>
+      <div class="anno anim" style="--i:3;--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">3</span><span class="a-phrase">once 引导时间状语从句</span></div>
+        <div class="seg"><span class="sl">说明</span>once 一旦……（从句常用一般现在时）。</div>
+        <div class="seg"><span class="en">Once your basic needs are met.</span></div>
+      </div>
+      <div class="anno anim" style="--i:4;--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">4</span><span class="a-phrase">rather than 而不是</span></div>
+        <div class="seg"><span class="sl">说明</span>连接并列成分，前后结构平行。</div>
+        <div class="seg"><span class="en">recognizing … rather than getting …</span></div>
+      </div>
+      <div class="anno anim" style="--i:5;--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">5</span><span class="a-phrase">the + 比较级, the + 比较级</span></div>
+        <div class="seg"><span class="sl">说明</span>越……越……（概要填空首句）。</div>
+        <div class="seg"><span class="en">The more you practise, the better you get.</span></div>
+      </div>
+      <div class="anno anim" style="--i:6;--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">6</span><span class="a-phrase">make + 宾语 + 宾补</span></div>
+        <div class="seg"><span class="sl">说明</span>make sb. feel happy / make you ill / make you feel …</div>
+        <div class="seg"><span class="en">The news made everyone happy.</span></div>
+      </div>
+      <div class="anno anim" style="--i:7;--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">7</span><span class="a-phrase">be likely to do</span></div>
+        <div class="seg"><span class="sl">说明</span>很可能做某事；more likely 可能性更大。</div>
+        <div class="seg"><span class="en">People with friends are more likely to be happy.</span></div>
+      </div>
+      <div class="anno anim" style="--i:8;--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">8</span><span class="a-phrase">now that 既然</span></div>
+        <div class="seg"><span class="sl">说明</span>引导原因状语从句（= since）。</div>
+        <div class="seg"><span class="en">Now that you know it, act on it.</span></div>
+      </div>
+      <div class="anno anim" style="--i:9;--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">9</span><span class="a-phrase">so + 助动词 + 主语（倒装）</span></div>
+        <div class="seg"><span class="sl">说明</span>……也是如此（否定用 neither / nor）。</div>
+        <div class="seg"><span class="en">A healthy diet is crucial, and so is exercise.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 好词好句积累 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b3925a">PART 04 · 好词好句</span><h2>情绪习语专题 · 作文提分宝藏</h2><span class="en">Idioms for Feelings</span></div>
+    <div class="ex-grid">
+      <div class="ex-col">
+        <div class="ex-box anim" style="--i:1">
+          <div class="lead">😊 表达「开心 / 幸福」</div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">习语</span><div><b>on cloud nine</b> 欣喜若狂</div></div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">习语</span><div><b>over the moon</b> 欣喜若狂</div></div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">习语</span><div><b>on top of the world</b> 非常幸福</div></div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">习语</span><div><b>get a kick out of</b> 从……获得乐趣</div></div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">习语</span><div><b>work wonders</b> 产生奇效</div></div>
+        </div>
+        <div class="ex-box anim" style="--i:2;margin-top:14px">
+          <div class="lead">😞 表达「难过 / 低落」</div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">习语</span><div><b>down in the dumps</b> 情绪低落</div></div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">习语</span><div><b>down in the mouth</b> 垂头丧气</div></div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">习语</span><div><b>feel blue</b> 感到忧郁</div></div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">搭配</span><div><b>in a bad mood</b> 心情不好 · <b>feel miserable</b> 感到痛苦</div></div>
+        </div>
+      </div>
+      <div class="ex-col">
+        <div class="ex-box anim" style="--i:3">
+          <div class="lead">📌 幸福主题 · 核心表达</div>
+          <div class="mk" style="--pc:#b3925a"><span class="mtag">名词</span><div>prosperity · intangible things · essential factor · key contributor</div></div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">动词短语</span><div>suffer hardship · get a kick out of · give and take · put into practice</div></div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">形容词</span><div>short-lived · essential · crucial · positive · optimistic · miserable</div></div>
+          <div class="mk" style="--pc:#b3925a"><span class="mtag">搭配</span><div>a lack of sleep · on a regular basis · reduce stress and anxiety</div></div>
+        </div>
+        <div class="ex-box anim" style="--i:4;margin-top:14px">
+          <div class="lead">✍️ 一句话背诵（写作可套）</div>
+          <div class="mk" style="--pc:#5a7bb0"><span class="mtag">句1</span><div>Material happiness is often <b>short-lived</b>; true happiness comes from <b>intangible</b> things.</div></div>
+          <div class="mk" style="--pc:#5a7bb0"><span class="mtag">句2</span><div>Small acts of kindness can <b>work wonders</b> and make you feel <b>on top of the world</b>.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="motto anim" style="--i:5">背诵口诀 —— <span>开心：云端·月宫·世界之巅</span>；<span>难过：垃圾堆·嘴垂·忧郁蓝</span>；<span>有效：出奇效</span></div>
+  </section>
+
+  <!-- 11 阅读理解讲评 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#5a7bb0">PART 05 · Comprehension ①</span><h2>阅读理解 · 6 道问答讲评</h2><span class="en">Comprehension Q&A</span></div>
+    <div class="anno-grid" style="flex:1">
+      <div class="qa anim" style="--i:1;--pc:#5a7bb0">
+        <div class="q"><span class="qn">1</span>What are the three basic needs that are essential for happiness?</div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看答案 · 解析</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="ans">Loving human relationships, kindness/generosity (giving to others), and good health.</div>
+            <div class="how">【归纳题】对应第四、五段：人际关系（家人朋友）、给予与善意（give and take）、健康（饮食＋运动＋睡眠）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="qa anim" style="--i:2;--pc:#5a7bb0">
+        <div class="q"><span class="qn">2</span>What kind of happiness do material objects provide?</div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看答案 · 解析</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="ans">They provide short-lived / short-term enjoyment — you may get a kick out of owning them, but the pleasure soon fades.</div>
+            <div class="how">【定位】第二段末 "this enjoyment is usually short-lived"；第三段礼物与巧克力是例证。</div>
+          </div>
+        </div>
+      </div>
+      <div class="qa anim" style="--i:3;--pc:#5a7bb0">
+        <div class="q"><span class="qn">3</span>What does "happiness means you have to give and take" imply?</div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看答案 · 解析</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="ans">Happiness is a two-way exchange: you not only receive support and respect, but also need to give back by performing acts of kindness and generosity.</div>
+            <div class="how">【推断题】结合后文 "Performing acts of kindness and generosity … will make you feel on top of the world"。</div>
+          </div>
+        </div>
+      </div>
+      <div class="qa anim" style="--i:4;--pc:#5a7bb0">
+        <div class="q"><span class="qn">4</span>What effect does regular exercise have on a person's mood?</div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看答案 · 解析</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="ans">Exercising 20–30 minutes a day reduces stress and anxiety, makes you more positive and optimistic (because it releases endorphins), and helps you sleep better.</div>
+            <div class="how">【定位】第五段 "Exercising for 20 to 30 minutes a day helps to reduce … makes you feel more positive and optimistic"。</div>
+          </div>
+        </div>
+      </div>
+      <div class="qa anim" style="--i:5;--pc:#5a7bb0">
+        <div class="q"><span class="qn">5</span>What happens if you do not get enough sleep? Is this true in your experience?</div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看答案 · 解析</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="ans">Tiredness affects your happiness levels and puts you in a bad mood; it also affects your ability to concentrate and may slow your growth.（第二问结合自身经历回答，言之成理即可。）</div>
+            <div class="how">【定位】第六段 "Tiredness will certainly affect your happiness levels and put you in a bad mood. It also affects …"。</div>
+          </div>
+        </div>
+      </div>
+      <div class="qa anim" style="--i:6;--pc:#5a7bb0">
+        <div class="q"><span class="qn">6</span>Is there anything you would like to challenge the writer about? What is it?</div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看参考思路</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="ans">开放性批判思维题，无标准答案。可质疑如：金钱到底重不重要？幸福是否真的完全与物质无关？「睡满八小时」是否对每个人都适用？</div>
+            <div class="how">【答题技巧】先表态（I partly disagree / I'd challenge the idea that…），再给理由 + 例子，用 I think / In my opinion 组织。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:7">
+      <span>🎯</span>
+      <div>答问技巧：<b>先定位再答题</b>；<b>归纳题</b>抓段落主旨，<b>推断题</b>看上下文（如 give and take 要结合后文善举理解），<b>开放题</b>要有观点 + 理由。</div>
+    </div>
+  </section>
+
+  <!-- 12 概要填空讲评 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#5a7bb0">PART 05 · Comprehension ②</span><h2>概要填空 · 点击空格显示答案</h2><span class="en">Summary Cloze</span></div>
+    <div class="essay anim" style="--i:1;flex:none;max-height:42vh;font-size:14.5px;line-height:2.1">
+      People often believe that the more
+      <span class="fb" data-answer="material" data-num="1"></span>
+      objects we own, the happier we would become. However, experts tell us we may get a
+      <span class="fb" data-answer="kick" data-num="2"></span>
+      out of owning things like a new dress, a new smartphone or a new tablet, but this kind of happiness is often
+      <span class="fb" data-answer="short-lived" data-num="3"></span>
+      . According to the latest World Happiness Report, what makes people happy is not material objects, but intangible things such as loving relationships,
+      <span class="fb" data-answer="kindness" data-num="4"></span>
+      , and good health. Loving relationships are
+      <span class="fb" data-answer="vital" data-num="5"></span>
+      to our feelings of happiness. We need our family members and friends to
+      <span class="fb" data-answer="support" data-num="6"></span>
+      and respect us in our everyday life. Good relationships are based on mutual understanding and
+      <span class="fb" data-answer="trust" data-num="7"></span>
+      . In order to build love and trust, we should also perform acts of kindness and generosity on a
+      <span class="fb" data-answer="regular" data-num="8"></span>
+      basis. Health is another important
+      <span class="fb" data-answer="contributor" data-num="9"></span>
+      to happiness. We need to maintain a healthy diet and do regular exercise. Laziness or lack of sleep will often result in tiredness which may put us in a bad
+      <span class="fb" data-answer="mood" data-num="10"></span>
+      .
+    </div>
+    <div class="grid g2 anim" style="--i:2;margin-top:13px;overflow-y:auto;min-height:0;flex:1">
+      <div class="anno" style="--pc:#5a7bb0"><div class="a-top"><span class="a-n">1</span><span class="a-phrase">material</span></div><div class="seg">the more <b>material</b> objects we own 我们拥有的物质越多（material 物质的）。</div></div>
+      <div class="anno" style="--pc:#5a7bb0"><div class="a-top"><span class="a-n">2</span><span class="a-phrase">kick</span></div><div class="seg">原文 get a <b>kick</b> out of 从……中获得乐趣。</div></div>
+      <div class="anno" style="--pc:#5a7bb0"><div class="a-top"><span class="a-n">3</span><span class="a-phrase">short-lived</span></div><div class="seg">原文 this enjoyment is usually <b>short-lived</b> 短暂的。</div></div>
+      <div class="anno" style="--pc:#5a7bb0"><div class="a-top"><span class="a-n">4</span><span class="a-phrase">kindness</span></div><div class="seg">无形之物：loving relationships, <b>kindness</b>, and good health。</div></div>
+      <div class="anno" style="--pc:#5a7bb0"><div class="a-top"><span class="a-n">5</span><span class="a-phrase">vital</span></div><div class="seg">原文 …is <b>vital</b>；be vital to 对……至关重要（essential / crucial 亦可）。</div></div>
+      <div class="anno" style="--pc:#5a7bb0"><div class="a-top"><span class="a-n">6</span><span class="a-phrase">support</span></div><div class="seg">原文 the <b>support</b> of family members；家人朋友的支持与尊重。</div></div>
+      <div class="anno" style="--pc:#5a7bb0"><div class="a-top"><span class="a-n">7</span><span class="a-phrase">trust</span></div><div class="seg">mutual understanding and <b>trust</b> 相互理解与信任。</div></div>
+      <div class="anno" style="--pc:#5a7bb0"><div class="a-top"><span class="a-n">8</span><span class="a-phrase">regular</span></div><div class="seg">on a <b>regular</b> basis 定期地。</div></div>
+      <div class="anno" style="--pc:#5a7bb0"><div class="a-top"><span class="a-n">9</span><span class="a-phrase">contributor</span></div><div class="seg">原文 key <b>contributor</b> to happiness 幸福的关键促成因素。</div></div>
+      <div class="anno" style="--pc:#5a7bb0"><div class="a-top"><span class="a-n">10</span><span class="a-phrase">mood</span></div><div class="seg">put us in a bad <b>mood</b> 让我们情绪低落。</div></div>
+    </div>
+  </section>
+
+  <!-- 13 小结 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a695ae">本课小结</span><h2>课文要点 · 一课一得</h2><span class="en">Takeaway</span></div>
+    <div class="ex-grid">
+      <div class="ex-col">
+        <div class="ex-box anim" style="--i:1">
+          <div class="lead">📖 文章结构 · 一条主线</div>
+          <div class="mk" style="--pc:#8a8177"><span class="mtag">1</span><div><b>提出问题</b>：什么让人幸福？（on cloud nine / down in the dumps）</div></div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">2</span><div><b>批驳物质</b>：物质快乐 short-lived（礼物、巧克力）</div></div>
+          <div class="mk" style="--pc:#5a7bb0"><span class="mtag">3</span><div><b>真正的幸福</b>：intangible things —— 人际关系 + 给予善意</div></div>
+          <div class="mk" style="--pc:#b3925a"><span class="mtag">4</span><div><b>健康与睡眠</b>：diet + exercise + sleep → 好心情</div></div>
+        </div>
+      </div>
+      <div class="ex-col">
+        <div class="ex-box anim" style="--i:2">
+          <div class="lead">⭐ 必背好词好句 · 5 条</div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">1</span><div>She was <b>on cloud nine</b> when she heard the good news.</div></div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">2</span><div>Material happiness is often <b>short-lived</b>.</div></div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">3</span><div>True happiness comes from <b>intangible</b> things, like loving relationships.</div></div>
+          <div class="mk" style="--pc:#5a7bb0"><span class="mtag">4</span><div><b>Now that</b> you know the theory, <b>put it into practice</b>.</div></div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">5</span><div>A simple smile can <b>work wonders</b>.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="motto anim" style="--i:3">一课一得 —— <span>物质快乐短暂 · 幸福源于关系、善意与健康</span> Happiness comes from <span>within</span>.</div>
+  </section>
+
+</div>
+
+<div id="nav">
+  <button id="home" aria-label="目录" title="回到目录">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+  </button>
+  <button id="prev" aria-label="上一页" title="上一页 (←)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="counter"><b id="cur">1</b> / <span id="total">14</span></div>
+  <button id="next" aria-label="下一页" title="下一页 (→)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <button id="fs" aria-label="全屏" title="全屏 (F)" style="border:none;background:transparent;width:34px">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+  </button>
+</div>
+<div id="hint">← → 翻页 · 空格下一页 · F 全屏 · 点击「＋」或空格处揭示答案</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  const curEl = document.getElementById('cur');
+  const totalEl = document.getElementById('total');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const homeBtn = document.getElementById('home');
+  const fsBtn = document.getElementById('fs');
+  const progress = document.getElementById('progress');
+  let idx = 0;
+  totalEl.textContent = total;
+
+  function render(){
+    slides.forEach((s,i)=>{
+      s.classList.toggle('active', i===idx);
+      s.classList.toggle('prev', i<idx);
+    });
+    curEl.textContent = idx+1;
+    progress.style.width = ((idx+1)/total*100) + '%';
+    prevBtn.disabled = idx===0;
+    nextBtn.disabled = idx===total-1;
+  }
+  function go(n){
+    idx = Math.max(0, Math.min(total-1, n));
+    render();
+  }
+  prevBtn.addEventListener('click', ()=>go(idx-1));
+  nextBtn.addEventListener('click', ()=>go(idx+1));
+  homeBtn.addEventListener('click', ()=>go(1));
+  document.addEventListener('keydown', (e)=>{
+    if(e.key==='ArrowRight' || e.key===' ' || e.key==='PageDown'){ e.preventDefault(); go(idx+1); }
+    else if(e.key==='ArrowLeft' || e.key==='PageUp'){ e.preventDefault(); go(idx-1); }
+    else if(e.key==='Home'){ go(0); }
+    else if(e.key==='End'){ go(total-1); }
+    else if(e.key==='f' || e.key==='F'){
+      if(document.fullscreenElement){ document.exitFullscreen(); }
+      else { document.documentElement.requestFullscreen(); }
+    }
+  });
+  fsBtn.addEventListener('click', ()=>{
+    if(document.fullscreenElement){ document.exitFullscreen(); }
+    else { document.documentElement.requestFullscreen(); }
+  });
+  let touchX=null;
+  document.addEventListener('touchstart', e=>{ touchX=e.touches[0].clientX; });
+  document.addEventListener('touchend', e=>{
+    if(touchX===null) return;
+    const dx=e.changedTouches[0].clientX-touchX;
+    if(Math.abs(dx)>50){ dx<0?go(idx+1):go(idx-1); }
+    touchX=null;
+  });
+  render();
+
+  document.querySelectorAll('.fb').forEach(el=>{
+    const num = el.dataset.num;
+    const ans = el.dataset.answer;
+    el.innerHTML = `<span class="fn">${num}</span>`;
+    el.addEventListener('click', ()=>{
+      const shown = el.classList.toggle('shown');
+      if(shown){ el.textContent = ans; }
+      else { el.innerHTML = `<span class="fn">${num}</span>`; }
+    });
+  });
+</script>
+</body></html>
