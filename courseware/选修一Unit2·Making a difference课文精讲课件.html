@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>选修一 · Unit 2 Making a difference · Island story 课文精讲</title>
+<style>
+  :root{
+    --ink:#4a433c;
+    --muted:#8a8177;
+    --line:#ddd6ca;
+    --bg:#ece8df;
+    --paper:#faf7f1;
+    --brand:#66746f;
+    --brand-2:#8593a3;
+    --gold:#b39b72;
+    --cwd:#6f8a6f;   /* 好词好句 · 绿 */
+    --cgr:#5a7bb0;   /* 语法点 · 蓝 */
+    --cph:#b3925a;   /* 固定搭配/衔接 · 金 */
+    --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:var(--font);
+    color:var(--ink);
+    background:var(--bg);
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:56px 44px 96px}
+
+  .slide{
+    position:absolute;
+    width:min(1240px,100%);
+    max-height:100%;
+    background:var(--paper);
+    border-radius:20px;
+    box-shadow:0 24px 60px -24px rgba(74,67,60,.35), 0 0 0 1px rgba(74,67,60,.05);
+    padding:40px 52px;
+    opacity:0;
+    transform:translateX(40px);
+    pointer-events:none;
+    transition:opacity .45s ease, transform .45s ease;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+  .slide.active{opacity:1;transform:translateX(0);pointer-events:auto}
+  .slide.prev{transform:translateX(-40px)}
+
+  .slide .anim{opacity:0;transform:translateY(14px)}
+  .slide.active .anim{
+    opacity:1;transform:none;
+    transition:opacity .5s ease, transform .5s ease;
+    transition-delay:calc(var(--i,0)*70ms + 60ms);
+  }
+
+  .head{display:flex;align-items:center;gap:14px;margin-bottom:18px;flex:none}
+  .part-badge{
+    font-size:12.5px;font-weight:700;letter-spacing:.05em;
+    color:#fff;background:var(--pc,#8593a3);
+    padding:6px 13px;border-radius:99px;white-space:nowrap;
+  }
+  .head h2{font-size:25px;font-weight:800;letter-spacing:.01em;color:var(--ink)}
+  .head .en{font-size:13.5px;color:var(--muted);font-weight:600;margin-left:auto;white-space:nowrap}
+
+  .lead{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:10px}
+
+  .slide.cover{
+    background:
+      radial-gradient(900px 500px at 85% -10%, rgba(90,123,176,.45), transparent 60%),
+      radial-gradient(700px 500px at -10% 110%, rgba(111,138,111,.42), transparent 55%),
+      linear-gradient(135deg,#3d4a5c 0%,#44566a 55%,#4c6076 100%);
+    color:#fff;
+    justify-content:center;
+  }
+  .cover .brand-line{position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#6f8a6f,#5a7bb0,#b3925a,#b0898b)}
+  .cover .tag{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#e9e4d8;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);padding:7px 16px;border-radius:99px;margin-bottom:26px}
+  .cover h1{font-size:46px;font-weight:900;line-height:1.16;letter-spacing:.01em}
+  .cover h1 .hl{color:#e0cba0}
+  .cover .sub{margin-top:18px;font-size:19px;color:#d4cbbd;font-weight:500;line-height:1.5}
+  .cover .meta{margin-top:38px;display:flex;gap:26px;font-size:14px;color:#bdb4a2;font-weight:600;flex-wrap:wrap}
+  .cover .meta b{color:#fff}
+  .cover .src{margin-top:16px;font-size:12.5px;color:#a99f8e;font-weight:600;letter-spacing:.03em}
+
+  .grid{display:grid;gap:13px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:16px;
+    padding:18px 20px;position:relative;overflow:hidden;
+  }
+  .card .num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:32px;height:32px;border-radius:10px;font-size:15px;font-weight:800;
+    color:#fff;background:var(--pc,#8593a3);margin-bottom:10px;
+  }
+  .card h4{font-size:18px;font-weight:800;margin-bottom:5px}
+  .card .cn{font-size:13px;color:var(--muted);font-weight:600;line-height:1.55}
+
+  .note{
+    display:flex;gap:12px;align-items:flex-start;
+    background:#f2ead9;border:1px solid #dccca4;border-left:4px solid #b39b72;
+    border-radius:12px;padding:13px 16px;margin-top:14px;font-size:15px;line-height:1.6;
+  }
+  .note .ico{font-size:18px;line-height:1.4}
+  .note b{color:#6b5230}
+
+  .tip{
+    display:flex;gap:10px;align-items:flex-start;
+    background:#eef0f1;border:1px solid #c8cfd4;border-left:4px solid #8593a3;
+    border-radius:12px;padding:11px 15px;margin-top:12px;font-size:14px;line-height:1.6;color:#465057;flex:none;
+  }
+  .tip b{color:#3a454c}
+
+  .rv{margin-top:8px;border:1px dashed #cfc7b8;border-radius:12px;overflow:hidden;background:#fff}
+  .rv-trigger{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    padding:9px 14px;cursor:pointer;user-select:none;background:#f5f2ea;transition:.15s;
+  }
+  .rv-trigger:hover{background:#efece2}
+  .rv-label{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.02em;transition:.15s}
+  .rv.on .rv-label{color:var(--brand-2)}
+  .rv-plus{font-size:19px;color:var(--brand-2);transition:transform .3s;font-weight:700;line-height:1;flex:none}
+  .rv.on .rv-plus{transform:rotate(45deg)}
+  .rv-body{max-height:0;opacity:0;overflow:hidden;transition:max-height .5s ease, opacity .35s ease;padding:0 14px}
+  .rv.on .rv-body{max-height:900px;opacity:1;padding:12px 14px 13px}
+
+  .wd{background:linear-gradient(transparent 52%, #d9e3d2 52%);color:#3f6b3f;font-weight:700;border-radius:2px}
+  .gr{background:linear-gradient(transparent 52%, #d6dfee 52%);color:#35548a;font-weight:700;border-radius:2px}
+  .ph{border-bottom:2px solid #c2a87f;color:#7a5c2e;font-weight:700}
+  .legend{display:flex;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--muted);font-weight:600}
+  .legend .sw{display:inline-block;width:14px;height:13px;border-radius:3px;margin-right:6px;vertical-align:-2px}
+  .legend .sw.ul{width:14px;height:6px;border-bottom:2px solid #c2a87f;border-radius:0}
+
+  .essay{background:#f5f2ea;border:1px solid var(--line);border-radius:14px;padding:20px 26px;overflow-y:auto;font-size:15.5px;line-height:2;color:#4a433c;min-height:0;flex:1}
+  .essay p{margin-bottom:14px}
+  .essay p:last-child{margin-bottom:0}
+  .essay .pn{display:inline-block;font-size:11px;font-weight:800;color:#fff;background:#8a8177;border-radius:99px;padding:1px 9px;margin-right:8px;vertical-align:2px}
+
+  .para{background:#f5f2ea;border:1px solid var(--line);border-radius:14px;padding:16px 22px;font-size:15px;line-height:1.95;color:#4a433c;overflow-y:auto;flex:none;max-height:30vh}
+  .para .pn{display:inline-block;font-size:11px;font-weight:800;color:#fff;background:#8a8177;border-radius:99px;padding:1px 9px;margin-right:8px;vertical-align:2px}
+  .mn{font-size:10px;font-weight:800;color:#fff;border-radius:99px;padding:1px 6px;margin-left:3px;vertical-align:super;white-space:nowrap;font-style:normal}
+
+  .anno-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-content:start;flex:1;min-height:0;overflow-y:auto;margin-top:13px;padding-right:4px}
+
+  .anno{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;align-self:start;border-top:3px solid var(--pc,#8593a3)}
+  .anno .a-top{display:flex;align-items:flex-start;gap:8px}
+  .anno .a-n{width:22px;height:22px;border-radius:50%;color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;background:var(--pc,#8593a3);margin-top:2px}
+  .anno .a-phrase{font-weight:800;font-size:14.5px;color:var(--ink);line-height:1.45;flex:1}
+  .anno .a-tag{margin-left:auto;font-size:10.5px;font-weight:800;color:#fff;padding:2px 9px;border-radius:99px;white-space:nowrap;flex:none;background:var(--pc,#8593a3);margin-top:2px}
+
+  .seg{font-size:13.5px;line-height:1.62;color:#4a433c;margin-top:7px}
+  .seg .sl{display:inline-block;font-size:11px;font-weight:800;color:#fff;background:var(--pc,#8593a3);border-radius:6px;padding:1px 7px;margin-right:6px;vertical-align:1px}
+  .seg .en{font-weight:600;color:#3a433c}
+  .seg .zh{color:var(--muted);font-size:12.5px}
+  .seg b{color:var(--ink)}
+  .seg.gk{background:#f7ecea;border-left:3px solid #c0564f;border-radius:8px;padding:7px 10px;margin-top:8px}
+  .seg.gk .sl{background:#c0564f}
+  .seg.gk b{color:#8a3a34}
+
+  .jump{cursor:pointer;transition:.18s;border:1px solid var(--line)}
+  .jump:hover{transform:translateY(-4px);box-shadow:0 16px 34px -18px rgba(74,67,60,.4);border-color:var(--pc,#8593a3)}
+  .jump .go{position:absolute;right:14px;top:14px;font-size:12px;font-weight:700;color:var(--pc,#8593a3);opacity:0;transition:.18s}
+  .jump:hover .go{opacity:1}
+
+  .sum-block{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:#fff}
+  .sum-block h4{font-size:15.5px;font-weight:800;margin-bottom:11px;display:flex;align-items:center;gap:8px}
+  .sum-block .dot{width:10px;height:10px;border-radius:3px;background:var(--pc,#8593a3)}
+  .sum-block ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .sum-block li{font-size:13.8px;color:#4a433c;line-height:1.5}
+  .sum-block li b{color:var(--ink)}
+
+  .motto{
+    margin-top:18px;text-align:center;font-size:20px;font-weight:800;color:var(--brand);
+    background:#e9eee7;border-radius:14px;padding:18px;flex:none;
+  }
+  .motto span{color:#a06a6a}
+
+  .mk{
+    display:flex;gap:10px;align-items:flex-start;padding:9px 12px;
+    border-left:3px solid var(--pc,#8593a3);background:#fff;border-radius:8px;
+    margin-top:8px;font-size:14px;line-height:1.55;color:#4a433c;
+  }
+  .mk .mtag{
+    flex:none;font-size:11px;font-weight:800;color:#fff;background:var(--pc,#8593a3);
+    padding:2px 8px;border-radius:99px;margin-top:1px;white-space:nowrap;
+  }
+  .mk b{color:var(--ink)}
+
+  .ex-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;min-height:0;flex:1}
+  .ex-col{display:flex;flex-direction:column;min-height:0}
+  .ex-box{background:#f5f2ea;border:1px solid var(--line);border-radius:14px;padding:14px 16px;overflow-y:auto;min-height:0}
+
+  .fb{
+    display:inline-block;min-width:54px;text-align:center;border-bottom:2px solid #c2a87f;color:#7a5c2e;
+    font-weight:800;cursor:pointer;padding:0 6px;margin:0 2px;transition:.15s;font-size:13px;border-radius:3px 3px 0 0;
+  }
+  .fb:hover{background:#f2ead9}
+  .fb.shown{background:#f2ead9;border-bottom-color:#b3925a;color:#6b5230}
+  .fb .fn{font-size:10px;color:#b9b0a0;font-weight:700;vertical-align:super}
+
+  .qa{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 18px;align-self:start;border-top:3px solid var(--pc,#5a7bb0)}
+  .qa .q{font-size:15px;font-weight:800;color:var(--ink);line-height:1.55}
+  .qa .q .qn{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--pc,#5a7bb0);color:#fff;font-size:12.5px;font-weight:800;margin-right:8px;vertical-align:-4px}
+  .qa .ans{font-size:14px;color:#3f5a8a;font-weight:700;line-height:1.6}
+  .qa .how{font-size:13px;color:var(--muted);line-height:1.6;font-weight:600}
+
+  #nav{
+    position:fixed;left:50%;bottom:26px;transform:translateX(-50%);
+    display:flex;align-items:center;gap:12px;z-index:50;
+    background:rgba(250,247,241,.88);backdrop-filter:blur(10px);
+    border:1px solid var(--line);border-radius:99px;padding:9px 12px;
+    box-shadow:0 10px 30px -12px rgba(74,67,60,.3);
+  }
+  #nav button{
+    border:none;background:#fff;border:1px solid var(--line);
+    width:40px;height:40px;border-radius:50%;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;color:#4a433c;
+    transition:.15s;
+  }
+  #nav button:hover:not(:disabled){background:#eef0f1;border-color:#c8cfd4;color:var(--brand-2)}
+  #nav button:disabled{opacity:.35;cursor:default}
+  #nav .counter{font-size:14px;font-weight:700;color:#4a433c;min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
+  #nav .counter b{color:var(--brand-2);font-size:16px}
+  #progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#6f8a6f,#5a7bb0,#b3925a);z-index:60;width:0;transition:width .35s ease}
+  #hint{position:fixed;left:50%;transform:translateX(-50%);bottom:4px;font-size:12px;color:#a49a8a;z-index:40;white-space:nowrap}
+
+  @media (max-width:900px){
+    #stage{padding:20px 16px 90px}
+    .slide{padding:26px 22px;border-radius:14px}
+    .g2,.g3,.ex-grid{grid-template-columns:1fr 1fr}
+    .head h2{font-size:22px}
+    .cover h1{font-size:32px}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<div id="stage">
+
+  <!-- 0 封面 -->
+  <section class="slide cover active">
+    <div class="brand-line"></div>
+    <div class="anim" style="--i:0"><span class="tag">选修一 · Unit 2 · Making a difference</span></div>
+    <h1 class="anim" style="--i:1">Island <span class="hl">story</span></h1>
+    <p class="sub anim" style="--i:2">好词好句 · 语法点 · 环境主题词汇 → 阅读理解讲评</p>
+    <div class="meta anim" style="--i:3">
+      <span>文体 <b>记叙文</b></span>
+      <span>话题 <b>气候变化 · 环境 · 文化传承</b></span>
+      <span>重点 <b>环境词汇 + 语法点</b></span>
+    </div>
+    <div class="src anim" style="--i:4">上海教育出版社《英语·选修第一册》Unit 2 Making a difference · A Reading and interaction</div>
+  </section>
+
+  <!-- 1 目录 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a8177">CONTENTS</span><h2>本节内容 · 目录</h2><span class="en">Roadmap · 点击卡片跳转</span></div>
+    <div class="grid g3" style="margin-top:6px">
+      <div class="card jump anim" style="--i:1;--pc:#8a8177" onclick="go(2)"><span class="num">01</span><h4>课文全文</h4><div class="cn">带颜色标注 · 先通读一遍</div><span class="go">进入 →</span></div>
+      <div class="card jump anim" style="--i:2;--pc:#6f8a6f" onclick="go(3)"><span class="num">02</span><h4>逐段精读</h4><div class="cn">第①–⑥段 · 点击讲解</div><span class="go">进入 →</span></div>
+      <div class="card jump anim" style="--i:3;--pc:#5a7bb0" onclick="go(9)"><span class="num">03</span><h4>语法点总结</h4><div class="cn">9 个核心语法结构</div><span class="go">进入 →</span></div>
+      <div class="card jump anim" style="--i:4;--pc:#b3925a" onclick="go(10)"><span class="num">04</span><h4>好词好句积累</h4><div class="cn">环境主题专题 · 背诵清单</div><span class="go">进入 →</span></div>
+      <div class="card jump anim" style="--i:5;--pc:#5a7bb0" onclick="go(11)"><span class="num">05</span><h4>阅读理解讲评</h4><div class="cn">6 道问答 + 概要填空</div><span class="go">进入 →</span></div>
+      <div class="card jump anim" style="--i:6;--pc:#a695ae" onclick="go(13)"><span class="num">06</span><h4>本课小结</h4><div class="cn">主题升华 · 一课一得</div><span class="go">进入 →</span></div>
+    </div>
+    <div class="note anim" style="--i:7;margin-top:20px">
+      <span class="ico">🧭</span>
+      <div>这一讲<b>直接进入课文分析</b>：先<b>通读</b>全文（好词好句、语法点已用颜色标出），再<b>逐段精读</b>，点击每处标注即可看到<b>讲解、例句与拓展</b>；最后用课后 <b>Comprehension work</b>（问答 + 概要填空）检验理解。三色标注：<span class="wd">绿色＝好词好句</span>、<span class="gr">蓝色＝语法点</span>、<span class="ph">金色下划线＝固定搭配·衔接词</span>；点击展开后还附有<span style="color:#c0564f;font-weight:800">红色「高考考点」</span>。本篇最大的宝藏是<b>一组环境·气候主题词汇</b>，详见「好词好句积累」。</div>
+    </div>
+  </section>
+
+  <!-- 2 课文全文 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#8a8177">FULL TEXT</span><h2>课文全文 · 先通读一遍</h2><span class="en">Island story</span></div>
+    <div class="legend anim" style="--i:1;margin-bottom:12px">
+      <span><span class="sw" style="background:#d9e3d2"></span>绿色高亮 = 好词好句</span>
+      <span><span class="sw" style="background:#d6dfee"></span>蓝色高亮 = 语法点</span>
+      <span><span class="sw ul"></span>金色下划线 = 固定搭配 · 衔接词</span>
+    </div>
+    <div class="essay anim" style="--i:2">
+      <p><span class="pn">Para 1</span>"When I was a little boy, I loved to <span class="ph">go fishing</span> in the sea with my <span class="wd">spear</span>," says John Sailike, <span class="wd">sadly</span>. "<span class="gr">When I leave the island</span>, I'll <span class="wd">lose</span> the sea and the happiness of this place. I'll <span class="wd">miss</span> the sound of the waves at night... I won't hear it any more."</p>
+      <p><span class="pn">Para 2</span>John is a fisherman from the Carteret Islands in the South Pacific, a <span class="wd">beautiful and peaceful semicircle of white sand, palm trees and crystal clear waters</span>. Each day, he goes out in a small boat to catch fish for his family, <span class="gr">while his wife looks after the children</span> and grows vegetables in their garden. The family lives in a <span class="wd">wood hut with sand floors</span> and they don't use much electricity, so when the sun goes down, it is usually time for bed. This peaceful, <span class="wd">underdeveloped</span> place has a <span class="wd">tiny population</span> and only one contact with the outside world — a ship <span class="gr">which brings supplies</span> from Bougainville, a large island 86 km away. But all this is about to change, because John, <span class="ph">along with</span> 3,000 other people, <span class="gr">is leaving</span> his island home. The question is, why?</p>
+      <p><span class="pn">Para 3</span><span class="ph">Take a closer look at</span> the islands and the reason becomes clear. The Carterets are the <span class="wd">victim</span> of <span class="wd">global warming</span>. High tides often <span class="wd">flood</span> across the villages and <span class="ph">wash away</span> people's homes. Salt water from the sea is <span class="wd">overflowing</span> into vegetable gardens and <span class="wd">destroying</span> fruit trees. It's <span class="wd">polluting</span> the fresh water <span class="wd">supply</span> too. Islanders are <span class="ph">struggling to survive</span> on coconut milk and fish, and children are <span class="wd">suffering from</span> <span class="wd">malnutrition</span>. The dying trees are <span class="ph">home to</span> mosquitoes that <span class="wd">spread</span> diseases, like <span class="wd">malaria</span>. John and his fellow islanders are facing great <span class="wd">challenges</span>, and they know that life on the island is <span class="ph">coming to an end</span>.</p>
+      <p><span class="pn">Para 4</span>Experts <span class="wd">predict</span> that the Carterets will be under water <span class="ph">in the not-so-distant future</span>. Before then, the islanders will <span class="wd">relocate</span> to places like Bougainville and <span class="wd">rebuild</span> their lives. This move will <span class="ph">provide people with</span> food and shelter, but what will happen to their <span class="wd">culture</span>? The islanders have songs for different everyday activities, and traditions and celebrations <span class="gr">linked to</span> the sea. They also have their own language, <span class="gr">called "Halia"</span>. <span class="gr">If they coexist with other cultures</span>, this may <span class="ph">die out</span>.</p>
+      <p><span class="pn">Para 5</span>"We're losing our home, our <span class="wd">identity</span>, our whole life," says one islander. "We hope the world is listening." It is. In recent years, articles in international newspapers, online videos and an <span class="wd">Oscar-nominated</span> documentary film <span class="gr">called <em>Sun Come Up</em></span> have talked about the Carteret Islands. People have supported the islanders and <span class="ph">as a result</span>, they have <span class="ph">turned their anger and frustration into</span> action. People are also looking for ways to <span class="wd">preserve</span> the islanders' way of life and <span class="wd">record</span> their language and traditions for <span class="wd">future generations</span>.</p>
+      <p><span class="pn">Para 6</span>Back on the island, John Sailike is getting into his boat for the last time. He's <span class="ph">saying goodbye to</span> his home and to his <span class="wd">ancestors</span>. <span class="gr">He does not know what the future will bring</span>; <span class="gr">he does not know if his culture will survive</span>. He is <span class="wd">the human face of climate change</span>.</p>
+    </div>
+    <div class="tip anim" style="--i:3">
+      <span>👀</span>
+      <div>先<b>通读</b>把握主线：<b>卡特里特群岛</b>本是世外桃源，却因<b>全球变暖</b>被海水淹没，岛民被迫<b>迁离家园</b>；更大的痛是<b>文化（语言、传统、身份）的流失</b>。留意三色标注，翻页进入<b>逐段精读</b>。</div>
+    </div>
+  </section>
+
+  <!-- 3 Para 1 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#6f8a6f">PART 02 · 逐段精读 ①</span><h2>Para 1 · 渔夫的不舍与忧伤</h2><span class="en">A fisherman's sorrow</span></div>
+    <div class="para anim" style="--i:1">
+      "When I was a little boy, I loved to <span class="ph">go fishing<sup class="mn" style="background:#b3925a">①</sup></span> in the sea with my <span class="wd">spear<sup class="mn" style="background:#6f8a6f">②</sup></span>," says John Sailike, <span class="wd">sadly<sup class="mn" style="background:#6f8a6f">③</sup></span>. "<span class="gr">When I leave the island<sup class="mn" style="background:#5a7bb0">④</sup></span>, I'll <span class="wd">lose</span> the sea and the happiness of this place. I'll <span class="wd">miss</span> the sound of the waves at night... I won't hear it any more."
+    </div>
+    <div class="anno-grid anim" style="--i:2">
+      <div class="anno" style="--pc:#b3925a">
+        <div class="a-top"><span class="a-n">①</span><span class="a-phrase">go fishing</span><span class="a-tag">固定搭配</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>go fishing</b> 去钓鱼；<b>go + doing</b> 表示从事某项活动（尤其户外/娱乐）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">They often go fishing at weekends.</span><div class="zh">他们周末常去钓鱼。</div></div>
+            <div class="seg"><span class="sl">拓展</span>go swimming / go shopping / go hiking / go camping 等。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>go doing 结构（语法填空、翻译高频）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">②</span><span class="a-phrase">spear</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>spear</b> n. 鱼叉、矛；v. 用矛/鱼叉刺。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">He caught the fish with a spear.</span><div class="zh">他用鱼叉叉住了鱼。</div></div>
+            <div class="seg"><span class="sl">拓展</span>go fishing with my spear 带着鱼叉去捕鱼（传统渔猎方式）。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>spear 为课标词，认识即可（阅读理解推测词义）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">③</span><span class="a-phrase">sadly / miss / the sound of the waves</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>sadly</b> 难过地（副词修饰 says）；<b>miss</b> 想念、怀念；<b>the sound of the waves</b> 海浪声。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">She misses the sound of the waves at night.</span><div class="zh">她怀念夜晚的海浪声。</div></div>
+            <div class="seg"><span class="sl">拓展</span>miss 一词多义：想念 / 错过（miss the bus）/ 漏掉。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>miss 一词多义（阅读、完形高频）；sadly 副词用法。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">④</span><span class="a-phrase">When I leave the island, I'll lose …</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>when</b> 引导时间状语从句，主句用一般将来时（I'll lose），从句用<b>一般现在时表将来</b>（I leave）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">When he arrives, I'll tell him the news.</span><div class="zh">他到了我就告诉他这个消息。</div></div>
+            <div class="seg"><span class="sl">拓展</span>时间/条件状语从句中「主将从现」：if / when / as soon as 等。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>「主将从现」——语法填空、翻译必考。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 Para 2 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#6f8a6f">PART 02 · 逐段精读 ②</span><h2>Para 2 · 海岛上的平静生活</h2><span class="en">A peaceful, underdeveloped place</span></div>
+    <div class="para anim" style="--i:1">
+      John is a fisherman from the Carteret Islands in the South Pacific, a <span class="wd">beautiful and peaceful semicircle of white sand, palm trees and crystal clear waters<sup class="mn" style="background:#6f8a6f">①</sup></span>. Each day, he goes out in a small boat to catch fish for his family, <span class="gr">while his wife looks after the children<sup class="mn" style="background:#5a7bb0">②</sup></span> and grows vegetables in their garden. The family lives in a <span class="wd">wood hut with sand floors<sup class="mn" style="background:#6f8a6f">③</sup></span> and they don't use much electricity, so when the sun goes down, it is usually time for bed. This peaceful, <span class="wd">underdeveloped<sup class="mn" style="background:#6f8a6f">④</sup></span> place has a <span class="wd">tiny population<sup class="mn" style="background:#6f8a6f">④</sup></span> and only one contact with the outside world — a ship <span class="gr">which brings supplies<sup class="mn" style="background:#5a7bb0">⑤</sup></span> from Bougainville, a large island 86 km away. But all this is about to change, because John, <span class="ph">along with<sup class="mn" style="background:#b3925a">⑥</sup></span> 3,000 other people, <span class="gr">is leaving<sup class="mn" style="background:#5a7bb0">⑦</sup></span> his island home. The question is, why?
+    </div>
+    <div class="anno-grid anim" style="--i:2">
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">①</span><span class="a-phrase">a semicircle of white sand, palm trees and crystal clear waters</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>semicircle</b> 半圆形；<b>crystal clear</b> 清澈透明的。整句用三个并列名词短语描绘海岛，画面感极强。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">The island is a semicircle of white sand, palm trees and crystal clear waters.</span><div class="zh">这座岛是白色沙滩、棕榈树和清澈海水的半圆形。</div></div>
+            <div class="seg"><span class="sl">拓展</span>描写景色的排比结构；crystal clear 常形容水、天空。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>景物描写句型（读后续写 / 写作可直接模仿）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">②</span><span class="a-phrase">while his wife looks after the children</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>while</b> 引导时间状语从句，表「与此同时」；前后两个动作同时进行（他出海，妻子照顾孩子）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">He cooked dinner while his wife cleaned the house.</span><div class="zh">他做晚饭，而妻子打扫房子。</div></div>
+            <div class="seg"><span class="sl">拓展</span>while 也可表「尽管/对比」（= although / whereas）。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>while 的多义（当…时 / 然而 / 尽管）——阅读、单选高频。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">③</span><span class="a-phrase">wood hut with sand floors / look after</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>wood hut with sand floors</b> 沙子地面的木屋；<b>look after</b> 照顾、照料（= take care of）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">She looks after her younger brother every day.</span><div class="zh">她每天照顾弟弟。</div></div>
+            <div class="seg"><span class="sl">拓展</span>look after = care for = take care of；「with + 名词」表伴随特征。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>look 相关短语（look after / for / up / forward to）——完形、单选高频。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">④</span><span class="a-phrase">underdeveloped / a tiny population</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>underdeveloped</b> 欠发达的、不发达的（under- 不足 + developed 发达的）；<b>a tiny population</b> 人口稀少。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">It is an underdeveloped region with a tiny population.</span><div class="zh">这是个欠发达、人口稀少的地区。</div></div>
+            <div class="seg"><span class="sl">拓展</span>under- 前缀：underdeveloped / underground / underestimate。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>under- 前缀构词法（阅读推测词义常考）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">⑤</span><span class="a-phrase">a ship which brings supplies</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>which</b> 引导定语从句，修饰 ship；<b>supplies</b>（复数）供应品、补给。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">The ship which brings supplies arrives once a month.</span><div class="zh">运送补给的船每月来一次。</div></div>
+            <div class="seg"><span class="sl">拓展</span>supply v./n. 供应；supply sb. with sth. 为某人提供某物。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>which 引导定语从句（语法填空、翻译高频）；supply 一词多义。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#b3925a">
+        <div class="a-top"><span class="a-n">⑥</span><span class="a-phrase">along with</span><span class="a-tag">固定搭配</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>along with</b> 连同、和……一起（= together with）。注意：<b>along with 后接的成分不影响谓语单复数</b>。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">John, along with 3,000 other people, is leaving the island.</span><div class="zh">约翰连同 3000 名其他人一起离开海岛。</div></div>
+            <div class="seg"><span class="sl">拓展</span>类似结构：together with / as well as / with（就远原则）。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>就远原则——主谓一致（语法填空、改错高频）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">⑦</span><span class="a-phrase">is leaving</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>现在进行时表将来</b>：leave / come / go / arrive 等位移动词，用 be + doing 表示「即将发生」的计划、安排。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">He is leaving for Beijing tomorrow.</span><div class="zh">他明天动身去北京。</div></div>
+            <div class="seg"><span class="sl">拓展</span>be about to do 即将（后文 "is about to change"）。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>现在进行时表将来（单选、翻译高频）。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 Para 3 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#6f8a6f">PART 02 · 逐段精读 ③</span><h2>Para 3 · 全球变暖的灾难</h2><span class="en">The victim of global warming</span></div>
+    <div class="para anim" style="--i:1">
+      <span class="ph">Take a closer look at<sup class="mn" style="background:#b3925a">①</sup></span> the islands and the reason becomes clear. The Carterets are the <span class="wd">victim<sup class="mn" style="background:#6f8a6f">②</sup></span> of <span class="wd">global warming<sup class="mn" style="background:#6f8a6f">②</sup></span>. High tides often <span class="wd">flood<sup class="mn" style="background:#6f8a6f">③</sup></span> across the villages and <span class="ph">wash away<sup class="mn" style="background:#b3925a">③</sup></span> people's homes. Salt water from the sea is <span class="wd">overflowing<sup class="mn" style="background:#6f8a6f">④</sup></span> into vegetable gardens and <span class="wd">destroying<sup class="mn" style="background:#6f8a6f">④</sup></span> fruit trees. It's <span class="wd">polluting<sup class="mn" style="background:#6f8a6f">④</sup></span> the fresh water <span class="wd">supply<sup class="mn" style="background:#6f8a6f">⑤</sup></span> too. Islanders are <span class="ph">struggling to survive<sup class="mn" style="background:#b3925a">⑥</sup></span> on coconut milk and fish, and children are <span class="wd">suffering from<sup class="mn" style="background:#6f8a6f">⑦</sup></span> <span class="wd">malnutrition<sup class="mn" style="background:#6f8a6f">⑦</sup></span>. The dying trees are <span class="ph">home to<sup class="mn" style="background:#b3925a">⑧</sup></span> mosquitoes that <span class="wd">spread<sup class="mn" style="background:#6f8a6f">⑧</sup></span> diseases, like <span class="wd">malaria<sup class="mn" style="background:#6f8a6f">⑧</sup></span>. John and his fellow islanders are facing great <span class="wd">challenges<sup class="mn" style="background:#6f8a6f">⑨</sup></span>, and they know that life on the island is <span class="ph">coming to an end<sup class="mn" style="background:#b3925a">⑨</sup></span>.
+    </div>
+    <div class="anno-grid anim" style="--i:2">
+      <div class="anno" style="--pc:#b3925a">
+        <div class="a-top"><span class="a-n">①</span><span class="a-phrase">take a closer look at</span><span class="a-tag">固定搭配</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>take a closer look at</b> 更仔细地看一看（比较级 closer 修饰）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Take a closer look at the photo and you'll see it.</span><div class="zh">仔细看看照片，你就会发现。</div></div>
+            <div class="seg"><span class="sl">拓展</span>have a look at 看一看；look closely at 仔细看。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>take a look at / have a look at（翻译、写作高频）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">②</span><span class="a-phrase">the victim of global warming</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>victim</b> 受害者、牺牲品；<b>global warming</b> 全球变暖。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">These islands are the victims of global warming.</span><div class="zh">这些岛屿是全球变暖的受害者。</div></div>
+            <div class="seg"><span class="sl">拓展</span>a victim of … ……的受害者；fall victim to 沦为……的牺牲品。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>环境话题核心词（阅读、写作高频）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">③</span><span class="a-phrase">flood across … / wash away</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>flood</b> v. 淹没（n. 洪水）；<b>wash away</b> 冲走。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">High tides flooded the village and washed away people's homes.</span><div class="zh">涨潮淹没了村庄，冲走了人们的家园。</div></div>
+            <div class="seg"><span class="sl">拓展</span>high tide 涨潮 / low tide 退潮；flood n.&v.</div>
+            <div class="seg gk"><span class="sl">高考考点</span>flood 词性活用（名词动词兼用）——语法填空常考。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">④</span><span class="a-phrase">overflow / destroy / pollute</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>overflow</b> 溢出；<b>destroy</b> 毁坏；<b>pollute</b> 污染。三个动词并列，层层递进写海水之害。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Salt water is overflowing into the gardens, destroying the trees and polluting the water.</span><div class="zh">咸水涌入菜园，毁坏树木，污染水源。</div></div>
+            <div class="seg"><span class="sl">拓展</span>pollution n. 污染；destroy = ruin；overflow = flow over。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>pollute → pollution 词形转换（语法填空常考）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">⑤</span><span class="a-phrase">the fresh water supply</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>fresh water supply</b> 淡水供应；supply n. 供应（量）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">The fresh water supply has been polluted.</span><div class="zh">淡水供应已被污染。</div></div>
+            <div class="seg"><span class="sl">拓展</span>fresh water 淡水 / salt water 咸水；supply v. 提供。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>supply 名词/动词用法（概要填空、翻译高频）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#b3925a">
+        <div class="a-top"><span class="a-n">⑥</span><span class="a-phrase">struggle to survive</span><span class="a-tag">固定搭配</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>struggle to do</b> 艰难地做、挣扎着做；<b>survive</b> 生存、幸存。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">They are struggling to survive on limited food.</span><div class="zh">他们靠着有限的食物艰难求生。</div></div>
+            <div class="seg"><span class="sl">拓展</span>struggle for 为……而斗争；survivor n. 幸存者。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>struggle to do（翻译、写作高频）；survive 一词多义。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">⑦</span><span class="a-phrase">suffer from malnutrition</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>suffer from</b> 遭受、患（病）；<b>malnutrition</b> 营养不良（mal- 坏 + nutrition 营养）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Many children are suffering from malnutrition.</span><div class="zh">许多孩子正遭受营养不良之苦。</div></div>
+            <div class="seg"><span class="sl">拓展</span>mal- 前缀（坏）：malnutrition / malfunction；nutrition 营养。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>suffer / suffer from 辨析；mal- 前缀构词。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#b3925a">
+        <div class="a-top"><span class="a-n">⑧</span><span class="a-phrase">be home to / spread diseases / malaria</span><span class="a-tag">固定搭配</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>be home to</b> 是……的家园/栖息地；<b>spread diseases</b> 传播疾病；<b>malaria</b> 疟疾。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">The dying trees are home to mosquitoes that spread malaria.</span><div class="zh">枯死的树木成了传播疟疾的蚊子的栖息地。</div></div>
+            <div class="seg"><span class="sl">拓展</span>be home to（= be the home of）；spread — spread — spread 不规则动词。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>spread 不规则过去式/分词（语法填空常考）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">⑨</span><span class="a-phrase">challenges / come to an end</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>challenge</b> 挑战；<b>face great challenges</b> 面临巨大挑战；<b>come to an end</b> 结束、走到尽头。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">They are facing great challenges, and life on the island is coming to an end.</span><div class="zh">他们面临巨大挑战，岛上的生活即将走到尽头。</div></div>
+            <div class="seg"><span class="sl">拓展</span>challenging adj. 有挑战性的；face / meet a challenge。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>challenge 词形转换（challenging）——语法填空高频。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 Para 4 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#6f8a6f">PART 02 · 逐段精读 ④</span><h2>Para 4 · 迁离与文化的困境</h2><span class="en">Relocation & culture</span></div>
+    <div class="para anim" style="--i:1">
+      Experts <span class="wd">predict<sup class="mn" style="background:#6f8a6f">①</sup></span> that the Carterets will be under water <span class="ph">in the not-so-distant future<sup class="mn" style="background:#b3925a">②</sup></span>. Before then, the islanders will <span class="wd">relocate<sup class="mn" style="background:#6f8a6f">③</sup></span> to places like Bougainville and <span class="wd">rebuild<sup class="mn" style="background:#6f8a6f">③</sup></span> their lives. This move will <span class="ph">provide people with<sup class="mn" style="background:#b3925a">④</sup></span> food and shelter, but what will happen to their <span class="wd">culture<sup class="mn" style="background:#6f8a6f">⑤</sup></span>? The islanders have songs for different everyday activities, and traditions and celebrations <span class="gr">linked to<sup class="mn" style="background:#5a7bb0">⑥</sup></span> the sea. They also have their own language, <span class="gr">called "Halia"<sup class="mn" style="background:#5a7bb0">⑦</sup></span>. <span class="gr">If they coexist with other cultures<sup class="mn" style="background:#5a7bb0">⑧</sup></span>, this may <span class="ph">die out<sup class="mn" style="background:#b3925a">⑨</sup></span>.
+    </div>
+    <div class="anno-grid anim" style="--i:2">
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">①</span><span class="a-phrase">predict / relocate / rebuild</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>predict</b> 预测；<b>relocate</b> 迁移、搬迁；<b>rebuild</b> 重建（re- 再 + build）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Experts predict that the islanders will relocate and rebuild their lives.</span><div class="zh">专家预测岛民将搬迁并重建生活。</div></div>
+            <div class="seg"><span class="sl">拓展</span>prediction n. 预测；re- 前缀：rebuild / return / recall。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>re- 前缀构词（rebuild / relocate）——阅读推断词义。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#b3925a">
+        <div class="a-top"><span class="a-n">②</span><span class="a-phrase">in the not-so-distant future</span><span class="a-tag">固定搭配</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>in the not-so-distant future</b> 在不久的将来（= in the near future）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">The islands will be under water in the not-so-distant future.</span><div class="zh">这些岛屿在不久的将来就会被水淹没。</div></div>
+            <div class="seg"><span class="sl">拓展</span>in the near future / in the distant future 在遥远的将来。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>「在不久的将来」的多样表达（概要填空、写作高频）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#b3925a">
+        <div class="a-top"><span class="a-n">③</span><span class="a-phrase">provide people with food and shelter</span><span class="a-tag">固定搭配</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>provide sb. with sth.</b> 为某人提供某物（= provide sth. for sb.）；<b>shelter</b> 遮蔽、住所。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">The move will provide the islanders with food and shelter.</span><div class="zh">这次搬迁将为岛民提供食物和住所。</div></div>
+            <div class="seg"><span class="sl">拓展</span>provide sb. with sth. / provide sth. for sb. / offer sb. sth.</div>
+            <div class="seg gk"><span class="sl">高考考点</span>provide 的双宾语结构（翻译、语法填空高频）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">④</span><span class="a-phrase">culture / coexist</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>culture</b> 文化；<b>coexist</b> 共存（co- 共同 + exist 存在）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Different cultures can coexist peacefully.</span><div class="zh">不同文化可以和平共存。</div></div>
+            <div class="seg"><span class="sl">拓展</span>co- 前缀：coexist / cooperate / co-worker。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>culture / cultural 词形转换；co- 前缀构词。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">⑤</span><span class="a-phrase">traditions and celebrations linked to the sea</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>linked to the sea</b> 过去分词短语作后置定语，修饰 traditions and celebrations（= which are linked to the sea）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">They have traditions and celebrations linked to the sea.</span><div class="zh">他们有与大海相关的传统和庆典。</div></div>
+            <div class="seg"><span class="sl">拓展</span>过去分词作定语（表被动/完成）：books written in English。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>过去分词作后置定语（语法填空、翻译高频）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">⑥</span><span class="a-phrase">their own language, called "Halia"</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>called "Halia"</b> 过去分词短语作后置定语（= which is called "Halia"）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">They speak their own language, called Halia.</span><div class="zh">他们讲自己的语言，叫哈里亚语。</div></div>
+            <div class="seg"><span class="sl">拓展</span>同结构：a film called Sun Come Up（见 Para 5）。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>过去分词作定语——本课高频语法点。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">⑦</span><span class="a-phrase">If they coexist with other cultures</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>if</b> 引导条件状语从句（一般现在时表将来），主句用情态动词 may 表推测。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">If they coexist with other cultures, their language may die out.</span><div class="zh">如果他们与其他文化共存，他们的语言可能会消亡。</div></div>
+            <div class="seg"><span class="sl">拓展</span>if 从句「主将从现」/「主情从现」。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>if 条件句（主将从现）——语法填空、单选高频。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#b3925a">
+        <div class="a-top"><span class="a-n">⑧</span><span class="a-phrase">die out</span><span class="a-tag">固定搭配</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>die out</b> 灭绝、消失（指物种、语言、文化等逐渐消亡）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Many traditional customs are dying out.</span><div class="zh">许多传统习俗正在消失。</div></div>
+            <div class="seg"><span class="sl">拓展</span>die 相关短语：die out / die off / die down（逐渐平息）。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>die 相关短语辨析（完形、单选高频）。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 Para 5 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#6f8a6f">PART 02 · 逐段精读 ⑤</span><h2>Para 5 · 世界的回应</h2><span class="en">The world is listening</span></div>
+    <div class="para anim" style="--i:1">
+      "We're losing our home, our <span class="wd">identity<sup class="mn" style="background:#6f8a6f">①</sup></span>, our whole life," says one islander. "We hope the world is listening." It is. In recent years, articles in international newspapers, online videos and an <span class="wd">Oscar-nominated<sup class="mn" style="background:#6f8a6f">②</sup></span> documentary film <span class="gr">called <em>Sun Come Up</em><sup class="mn" style="background:#5a7bb0">②</sup></span> have talked about the Carteret Islands. People have supported the islanders and <span class="ph">as a result<sup class="mn" style="background:#b3925a">③</sup></span>, they have <span class="ph">turned their anger and frustration into<sup class="mn" style="background:#b3925a">④</sup></span> action. People are also looking for ways to <span class="wd">preserve<sup class="mn" style="background:#6f8a6f">⑤</sup></span> the islanders' way of life and <span class="wd">record<sup class="mn" style="background:#6f8a6f">⑥</sup></span> their language and traditions for <span class="wd">future generations<sup class="mn" style="background:#6f8a6f">⑥</sup></span>.
+    </div>
+    <div class="anno-grid anim" style="--i:2">
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">①</span><span class="a-phrase">identity</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>identity</b> 身份、认同感；lose our identity 失去我们的身份/认同。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">They fear losing their identity and culture.</span><div class="zh">他们害怕失去自己的身份和文化。</div></div>
+            <div class="seg"><span class="sl">拓展</span>identify v. 识别、认同；cultural identity 文化认同。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>identity / identify 词形转换（语法填空高频）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">②</span><span class="a-phrase">Oscar-nominated … called Sun Come Up</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>Oscar-nominated</b> 获奥斯卡提名的；<b>called Sun Come Up</b> 过去分词作定语（名叫《太阳升起》）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">An Oscar-nominated film called Sun Come Up told their story.</span><div class="zh">一部名为《太阳升起》的奥斯卡提名影片讲述了他们的故事。</div></div>
+            <div class="seg"><span class="sl">拓展</span>nominate v. 提名；documentary film 纪录片。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>过去分词作定语（called）——本课高频；-nominated 复合词。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#b3925a">
+        <div class="a-top"><span class="a-n">③</span><span class="a-phrase">as a result</span><span class="a-tag">衔接词</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>as a result</b> 结果、因此（衔接词，表结果）。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">People supported them, and as a result, they turned anger into action.</span><div class="zh">人们支持他们，结果他们把愤怒化为了行动。</div></div>
+            <div class="seg"><span class="sl">拓展</span>as a result of 由于；therefore / thus 因此。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>as a result / as a result of 辨析（单选、写作高频）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#b3925a">
+        <div class="a-top"><span class="a-n">④</span><span class="a-phrase">turn their anger and frustration into action</span><span class="a-tag">固定搭配</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>turn … into …</b> 把……变成……；<b>anger and frustration</b> 愤怒与挫败感。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">They turned their anger and frustration into positive action.</span><div class="zh">他们把愤怒与挫败化为积极行动。</div></div>
+            <div class="seg"><span class="sl">拓展</span>turn into = change into；frustrate v. → frustration n.</div>
+            <div class="seg gk"><span class="sl">高考考点</span>turn … into（概要填空、翻译高频）；frustration 词形。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">⑤</span><span class="a-phrase">preserve / record … for future generations</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>preserve</b> 保护、保存；<b>record</b> 记录；<b>future generations</b> 子孙后代。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">People are looking for ways to preserve their culture for future generations.</span><div class="zh">人们正设法为子孙后代保存他们的文化。</div></div>
+            <div class="seg"><span class="sl">拓展</span>preserve = protect；preservation n. 保护。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>preserve（概要填空答案词之一）；文化保护话题写作高频。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 Para 6 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#6f8a6f">PART 02 · 逐段精读 ⑥</span><h2>Para 6 · 气候变化的「人类面孔」</h2><span class="en">The human face of climate change</span></div>
+    <div class="para anim" style="--i:1">
+      Back on the island, John Sailike is getting into his boat for the last time. He's <span class="ph">saying goodbye to<sup class="mn" style="background:#b3925a">①</sup></span> his home and to his <span class="wd">ancestors<sup class="mn" style="background:#6f8a6f">②</sup></span>. <span class="gr">He does not know what the future will bring<sup class="mn" style="background:#5a7bb0">③</sup></span>; <span class="gr">he does not know if his culture will survive<sup class="mn" style="background:#5a7bb0">③</sup></span>. He is <span class="wd">the human face of climate change<sup class="mn" style="background:#6f8a6f">④</sup></span>.
+    </div>
+    <div class="anno-grid anim" style="--i:2">
+      <div class="anno" style="--pc:#b3925a">
+        <div class="a-top"><span class="a-n">①</span><span class="a-phrase">say goodbye to</span><span class="a-tag">固定搭配</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>say goodbye to</b> 向……告别。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">He is saying goodbye to his home and to his ancestors.</span><div class="zh">他正向家园和祖先告别。</div></div>
+            <div class="seg"><span class="sl">拓展</span>say goodbye / hello / sorry to sb.。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>say goodbye to（概要填空、写作高频）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">②</span><span class="a-phrase">ancestors</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>ancestors</b> 祖先、先人。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">They honour their ancestors in this festival.</span><div class="zh">在这个节日里他们祭拜祖先。</div></div>
+            <div class="seg"><span class="sl">拓展</span>ancestor 祖先 / descendant 后代。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>ancestors（概要填空答案词之一）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">③</span><span class="a-phrase">what the future will bring / if his culture will survive</span><span class="a-tag">语法点</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span>两个<b>宾语从句</b>：<b>what the future will bring</b>（what 在从句中作宾语）与 <b>if his culture will survive</b>（if 是否），都作 does not know 的宾语。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">Nobody knows what the future will bring.</span><div class="zh">没人知道未来会带来什么。</div></div>
+            <div class="seg"><span class="sl">拓展</span>宾语从句用陈述语序；if/whether 引导宾语从句表「是否」。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>宾语从句语序 + 连接词（语法填空、翻译高频）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="anno" style="--pc:#6f8a6f">
+        <div class="a-top"><span class="a-n">④</span><span class="a-phrase">the human face of climate change</span><span class="a-tag">好词好句</span></div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看 讲解 · 例句 · 拓展</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="seg"><span class="sl">讲解</span><b>the human face of …</b> ……的人类面孔/缩影，指「活生生的见证者」。点题句：John 就是气候变化最具体的受害者。</div>
+            <div class="seg"><span class="sl">例句</span><span class="en">He is the human face of climate change.</span><div class="zh">他是气候变化的人类面孔。</div></div>
+            <div class="seg"><span class="sl">拓展</span>climate change 气候变化（= global warming 相关概念）。</div>
+            <div class="seg gk"><span class="sl">高考考点</span>结尾点题句——读后续写 / 作文升华句式可模仿。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 语法点总结 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#5a7bb0">PART 03 · 语法点</span><h2>本课 9 个核心语法结构</h2><span class="en">Grammar Review</span></div>
+    <div class="anno-grid" style="grid-template-columns:1fr 1fr 1fr;flex:1">
+      <div class="anno anim" style="--i:1;--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">1</span><span class="a-phrase">现在进行时表将来</span></div>
+        <div class="seg"><span class="sl">说明</span>leave / come / go 等位移动词 be doing 表即将。</div>
+        <div class="seg"><span class="en">John is leaving his island home.</span></div>
+      </div>
+      <div class="anno anim" style="--i:2;--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">2</span><span class="a-phrase">when 引导时间状语从句</span></div>
+        <div class="seg"><span class="sl">说明</span>主将从现。</div>
+        <div class="seg"><span class="en">When I leave, I'll lose the sea.</span></div>
+      </div>
+      <div class="anno anim" style="--i:3;--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">3</span><span class="a-phrase">while 引导时间状语从句</span></div>
+        <div class="seg"><span class="sl">说明</span>与此同时 / 然而 / 尽管。</div>
+        <div class="seg"><span class="en">He fishes while his wife works.</span></div>
+      </div>
+      <div class="anno anim" style="--i:4;--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">4</span><span class="a-phrase">which 引导定语从句</span></div>
+        <div class="seg"><span class="sl">说明</span>修饰先行词。</div>
+        <div class="seg"><span class="en">a ship which brings supplies</span></div>
+      </div>
+      <div class="anno anim" style="--i:5;--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">5</span><span class="a-phrase">过去分词作后置定语</span></div>
+        <div class="seg"><span class="sl">说明</span>called / linked to。</div>
+        <div class="seg"><span class="en">a film called Sun Come Up</span></div>
+      </div>
+      <div class="anno anim" style="--i:6;--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">6</span><span class="a-phrase">if 引导条件状语从句</span></div>
+        <div class="seg"><span class="sl">说明</span>主情从现 / 主将从现。</div>
+        <div class="seg"><span class="en">If they coexist, it may die out.</span></div>
+      </div>
+      <div class="anno anim" style="--i:7;--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">7</span><span class="a-phrase">宾语从句</span></div>
+        <div class="seg"><span class="sl">说明</span>what / if 引导，陈述语序。</div>
+        <div class="seg"><span class="en">He doesn't know what will come.</span></div>
+      </div>
+      <div class="anno anim" style="--i:8;--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">8</span><span class="a-phrase">along with 主谓一致</span></div>
+        <div class="seg"><span class="sl">说明</span>就远原则，谓语看 John。</div>
+        <div class="seg"><span class="en">John, along with others, is leaving.</span></div>
+      </div>
+      <div class="anno anim" style="--i:9;--pc:#5a7bb0">
+        <div class="a-top"><span class="a-n">9</span><span class="a-phrase">provide sb. with sth.</span></div>
+        <div class="seg"><span class="sl">说明</span>为某人提供某物。</div>
+        <div class="seg"><span class="en">provide people with food and shelter</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 好词好句积累 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#b3925a">PART 04 · 好词好句</span><h2>环境主题词汇 · 作文提分宝藏</h2><span class="en">Words for Environment</span></div>
+    <div class="ex-grid">
+      <div class="ex-col">
+        <div class="ex-box anim" style="--i:1">
+          <div class="lead">🌍 环境·气候主题词汇</div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">名词</span><div>victim · global warming · climate change · sea level · supply · malnutrition · challenge · shelter</div></div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">动词</span><div>flood · overflow · destroy · pollute · spread · predict · relocate · preserve · record</div></div>
+          <div class="mk" style="--pc:#b3925a"><span class="mtag">短语</span><div>wash away · struggle to survive · suffer from · die out · come to an end</div></div>
+        </div>
+        <div class="ex-box anim" style="--i:2;margin-top:14px">
+          <div class="lead">🏝️ 描写海岛·生活的表达</div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">景色</span><div>a semicircle of white sand, palm trees and <b>crystal clear</b> waters</div></div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">状态</span><div><b>underdeveloped</b> · <b>a tiny population</b> · wood hut with sand floors</div></div>
+        </div>
+      </div>
+      <div class="ex-col">
+        <div class="ex-box anim" style="--i:3">
+          <div class="lead">🔗 固定搭配速记</div>
+          <div class="mk" style="--pc:#b3925a"><span class="mtag">搭配</span><div>go fishing · look after · along with · provide sb. with sth.</div></div>
+          <div class="mk" style="--pc:#b3925a"><span class="mtag">搭配</span><div>take a closer look at · in the not-so-distant future · turn … into …</div></div>
+          <div class="mk" style="--pc:#b3925a"><span class="mtag">衔接</span><div>as a result · be home to · say goodbye to</div></div>
+        </div>
+        <div class="ex-box anim" style="--i:4;margin-top:14px">
+          <div class="lead">✍️ 一句话背诵（写作可套）</div>
+          <div class="mk" style="--pc:#5a7bb0"><span class="mtag">句1</span><div>He is <b>the human face of climate change</b>.</div></div>
+          <div class="mk" style="--pc:#5a7bb0"><span class="mtag">句2</span><div>The Carterets are <b>the victim of global warming</b>.</div></div>
+          <div class="mk" style="--pc:#5a7bb0"><span class="mtag">句3</span><div>People are looking for ways to <b>preserve</b> their way of life and <b>record</b> their traditions <b>for future generations</b>.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="motto anim" style="--i:5">背诵口诀 —— <span>环境：受害者·淹没·污染·灭绝</span>；<span>文化：身份·祖先·保留·记录</span>；<span>结局：气候变化的「人类面孔」</span></div>
+  </section>
+
+  <!-- 11 阅读理解讲评 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#5a7bb0">PART 05 · Comprehension ①</span><h2>阅读理解 · 6 道问答讲评</h2><span class="en">Comprehension Q&A</span></div>
+    <div class="anno-grid" style="flex:1">
+      <div class="qa anim" style="--i:1;--pc:#5a7bb0">
+        <div class="q"><span class="qn">1</span>Why is John Sailike sad?</div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看答案 · 解析</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="ans">Because he has to leave the island where he has lived since childhood. He will lose the sea and the happiness of the place, and he will miss the sound of the waves at night.</div>
+            <div class="how">【定位】第一段 John 的自白：离开小岛＝失去大海、快乐与夜里的海浪声。</div>
+          </div>
+        </div>
+      </div>
+      <div class="qa anim" style="--i:2;--pc:#5a7bb0">
+        <div class="q"><span class="qn">2</span>What is life like on the Carteret Islands?</div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看答案 · 解析</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="ans">Simple, peaceful and underdeveloped: John goes fishing in a small boat, his wife looks after the children and grows vegetables, and the family lives in a wood hut with sand floors, using little electricity.</div>
+            <div class="how">【归纳】第二段：捕鱼、种菜、住沙地木屋、几乎不用电，日出而作日落而息。</div>
+          </div>
+        </div>
+      </div>
+      <div class="qa anim" style="--i:3;--pc:#5a7bb0">
+        <div class="q"><span class="qn">3</span>What first impression of the islands does the writer give?</div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看答案 · 解析</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="ans">A beautiful, peaceful and unspoiled place — a semicircle of white sand, palm trees and crystal clear waters, with a tiny population and little contact with the outside world.</div>
+            <div class="how">【归纳】第二段前半先写「世外桃源」般的美，后文才揭示危机（欲扬先抑的写法）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="qa anim" style="--i:4;--pc:#5a7bb0">
+        <div class="q"><span class="qn">4</span>What might happen when the islanders relocate?</div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看答案 · 解析</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="ans">They will get food and shelter, but their culture — songs, traditions, celebrations and their Halia language — may die out if they coexist with other cultures.</div>
+            <div class="how">【定位】第四段 "what will happen to their culture? … this may die out."</div>
+          </div>
+        </div>
+      </div>
+      <div class="qa anim" style="--i:5;--pc:#5a7bb0">
+        <div class="q"><span class="qn">5</span>How have people helped the islanders?</div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看答案 · 解析</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="ans">Through international newspaper articles, online videos and the Oscar-nominated documentary Sun Come Up, people have raised awareness, supported the islanders, turned their anger and frustration into action, and looked for ways to preserve their way of life and record their language and traditions.</div>
+            <div class="how">【定位】第五段：媒体传播 → 公众支持 → 付诸行动 → 保护文化。</div>
+          </div>
+        </div>
+      </div>
+      <div class="qa anim" style="--i:6;--pc:#5a7bb0">
+        <div class="q"><span class="qn">6</span>How would you respond to John Sailike's worries in the last paragraph?</div>
+        <div class="rv" onclick="this.classList.toggle('on')">
+          <div class="rv-trigger"><span class="rv-label">点此查看参考思路</span><span class="rv-plus">＋</span></div>
+          <div class="rv-body">
+            <div class="ans">开放性题，无标准答案。示例：I would tell him that the world is listening, and that his culture will be recorded and remembered for future generations; though he is leaving home, he is the human face of climate change and his story inspires people to act.</div>
+            <div class="how">【答题技巧】先回应情绪（理解/安慰），再结合课文主旨（行动带来改变 Making a difference）给理由，用 I would tell him / I'd reassure him 组织。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tip anim" style="--i:7">
+      <span>🎯</span>
+      <div>答问技巧：<b>先定位再答题</b>；<b>归纳题</b>抓段落主旨（第 2、3 题），<b>推断题</b>看上下文（第 6 题），<b>开放题</b>要有观点 + 理由。</div>
+    </div>
+  </section>
+
+  <!-- 12 概要填空讲评 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#5a7bb0">PART 05 · Comprehension ②</span><h2>概要填空 · 点击空格显示答案</h2><span class="en">Summary Cloze</span></div>
+    <div class="essay anim" style="--i:1;flex:none;max-height:42vh;font-size:14.5px;line-height:2.1">
+      The people of the Carteret Islands in the South Pacific are the
+      <span class="fb" data-answer="victims" data-num="1"></span>
+      of global warming. The islands are badly affected. Sea water often
+      <span class="fb" data-answer="floods" data-num="2"></span>
+      villages and pollutes the fresh water
+      <span class="fb" data-answer="supply" data-num="3"></span>
+      . As global warming raises the sea levels, the lives of the islanders are threatened. They will have to
+      <span class="fb" data-answer="relocate" data-num="4"></span>
+      to a neighbouring island for food and shelter in the
+      <span class="fb" data-answer="not-so-distant" data-num="5"></span>
+      future. Global warming is also threatening the
+      <span class="fb" data-answer="culture" data-num="6"></span>
+      of the islanders. Their folk songs, traditions, celebrations, language and
+      <span class="fb" data-answer="identity" data-num="7"></span>
+      may be lost forever. Fortunately, the mass media is making great efforts to inform the public of the threat to the Carteret Islands and the local culture. Thus, people are beginning to pay attention to the islanders, helping to turn their anger and
+      <span class="fb" data-answer="frustration" data-num="8"></span>
+      into action, such as finding ways to
+      <span class="fb" data-answer="preserve" data-num="9"></span>
+      their culture. Nevertheless, for the native fishermen, who are saying goodbye to their islands and
+      <span class="fb" data-answer="ancestors" data-num="10"></span>
+      , the future still seems uncertain.
+    </div>
+    <div class="grid g2 anim" style="--i:2;margin-top:13px;overflow-y:auto;min-height:0;flex:1">
+      <div class="anno" style="--pc:#5a7bb0"><div class="a-top"><span class="a-n">1</span><span class="a-phrase">victims</span></div><div class="seg">原文 The Carterets are the <b>victim</b> of global warming（此处主语为复数 the people，用 victims）。</div></div>
+      <div class="anno" style="--pc:#5a7bb0"><div class="a-top"><span class="a-n">2</span><span class="a-phrase">floods</span></div><div class="seg">原文 High tides often <b>flood</b> across the villages（flood 作动词）。</div></div>
+      <div class="anno" style="--pc:#5a7bb0"><div class="a-top"><span class="a-n">3</span><span class="a-phrase">supply</span></div><div class="seg">原文 polluting the fresh water <b>supply</b>。</div></div>
+      <div class="anno" style="--pc:#5a7bb0"><div class="a-top"><span class="a-n">4</span><span class="a-phrase">relocate</span></div><div class="seg">原文 the islanders will <b>relocate</b>（= move）。</div></div>
+      <div class="anno" style="--pc:#5a7bb0"><div class="a-top"><span class="a-n">5</span><span class="a-phrase">not-so-distant</span></div><div class="seg">原文 in the <b>not-so-distant</b> future 在不久的将来。</div></div>
+      <div class="anno" style="--pc:#5a7bb0"><div class="a-top"><span class="a-n">6</span><span class="a-phrase">culture</span></div><div class="seg">原文 what will happen to their <b>culture</b>?</div></div>
+      <div class="anno" style="--pc:#5a7bb0"><div class="a-top"><span class="a-n">7</span><span class="a-phrase">identity</span></div><div class="seg">原文 We're losing our home, our <b>identity</b>, our whole life。</div></div>
+      <div class="anno" style="--pc:#5a7bb0"><div class="a-top"><span class="a-n">8</span><span class="a-phrase">frustration</span></div><div class="seg">原文 turn their anger and <b>frustration</b> into action。</div></div>
+      <div class="anno" style="--pc:#5a7bb0"><div class="a-top"><span class="a-n">9</span><span class="a-phrase">preserve</span></div><div class="seg">原文 ways to <b>preserve</b> the islanders' way of life。</div></div>
+      <div class="anno" style="--pc:#5a7bb0"><div class="a-top"><span class="a-n">10</span><span class="a-phrase">ancestors</span></div><div class="seg">原文 saying goodbye to his home and to his <b>ancestors</b>。</div></div>
+    </div>
+  </section>
+
+  <!-- 13 小结 -->
+  <section class="slide">
+    <div class="head anim" style="--i:0"><span class="part-badge" style="--pc:#a695ae">本课小结</span><h2>课文要点 · 一课一得</h2><span class="en">Takeaway</span></div>
+    <div class="ex-grid">
+      <div class="ex-col">
+        <div class="ex-box anim" style="--i:1">
+          <div class="lead">📖 文章结构 · 一条主线</div>
+          <div class="mk" style="--pc:#8a8177"><span class="mtag">1</span><div><b>引子·引语</b>（Para 1）：John Sailike 的不舍与忧伤</div></div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">2</span><div><b>平静生活</b>（Para 2）：美丽、闭塞、原始的海岛</div></div>
+          <div class="mk" style="--pc:#5a7bb0"><span class="mtag">3</span><div><b>危机</b>（Para 3）：全球变暖 → 海水淹没家园</div></div>
+          <div class="mk" style="--pc:#b3925a"><span class="mtag">4</span><div><b>两难</b>（Para 4–5）：迁走 vs 文化消亡；世界的回应</div></div>
+          <div class="mk" style="--pc:#a695ae"><span class="mtag">5</span><div><b>收尾</b>（Para 6）：John 最后一次出海——气候变化的「人类面孔」</div></div>
+        </div>
+      </div>
+      <div class="ex-col">
+        <div class="ex-box anim" style="--i:2">
+          <div class="lead">⭐ 必背好词好句 · 5 条</div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">1</span><div>He is <b>the human face of climate change</b>.</div></div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">2</span><div>The Carterets are <b>the victim of global warming</b>.</div></div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">3</span><div>High tides <b>flood across</b> the villages and <b>wash away</b> people's homes.</div></div>
+          <div class="mk" style="--pc:#5a7bb0"><span class="mtag">4</span><div><b>If they coexist with other cultures</b>, this may <b>die out</b>.</div></div>
+          <div class="mk" style="--pc:#6f8a6f"><span class="mtag">5</span><div>People are looking for ways to <b>preserve</b> the islanders' way of life.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="motto anim" style="--i:3">一课一得 —— <span>气候之变，家园之殇；行动带来改变</span> Action <span>makes a difference</span>.</div>
+  </section>
+
+</div>
+
+<div id="nav">
+  <button id="home" aria-label="目录" title="回到目录">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+  </button>
+  <button id="prev" aria-label="上一页" title="上一页 (←)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="counter"><b id="cur">1</b> / <span id="total">14</span></div>
+  <button id="next" aria-label="下一页" title="下一页 (→)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <button id="fs" aria-label="全屏" title="全屏 (F)" style="border:none;background:transparent;width:34px">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+  </button>
+</div>
+<div id="hint">← → 翻页 · 空格下一页 · F 全屏 · 点击「＋」或空格处揭示答案</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  const curEl = document.getElementById('cur');
+  const totalEl = document.getElementById('total');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const homeBtn = document.getElementById('home');
+  const fsBtn = document.getElementById('fs');
+  const progress = document.getElementById('progress');
+  let idx = 0;
+  totalEl.textContent = total;
+
+  function render(){
+    slides.forEach((s,i)=>{
+      s.classList.toggle('active', i===idx);
+      s.classList.toggle('prev', i<idx);
+    });
+    curEl.textContent = idx+1;
+    progress.style.width = ((idx+1)/total*100) + '%';
+    prevBtn.disabled = idx===0;
+    nextBtn.disabled = idx===total-1;
+  }
+  function go(n){
+    idx = Math.max(0, Math.min(total-1, n));
+    render();
+  }
+  prevBtn.addEventListener('click', ()=>go(idx-1));
+  nextBtn.addEventListener('click', ()=>go(idx+1));
+  homeBtn.addEventListener('click', ()=>go(1));
+  document.addEventListener('keydown', (e)=>{
+    if(e.key==='ArrowRight' || e.key===' ' || e.key==='PageDown'){ e.preventDefault(); go(idx+1); }
+    else if(e.key==='ArrowLeft' || e.key==='PageUp'){ e.preventDefault(); go(idx-1); }
+    else if(e.key==='Home'){ go(0); }
+    else if(e.key==='End'){ go(total-1); }
+    else if(e.key==='f' || e.key==='F'){
+      if(document.fullscreenElement){ document.exitFullscreen(); }
+      else { document.documentElement.requestFullscreen(); }
+    }
+  });
+  fsBtn.addEventListener('click', ()=>{
+    if(document.fullscreenElement){ document.exitFullscreen(); }
+    else { document.documentElement.requestFullscreen(); }
+  });
+  let touchX=null;
+  document.addEventListener('touchstart', e=>{ touchX=e.touches[0].clientX; });
+  document.addEventListener('touchend', e=>{
+    if(touchX===null) return;
+    const dx=e.changedTouches[0].clientX-touchX;
+    if(Math.abs(dx)>50){ dx<0?go(idx+1):go(idx-1); }
+    touchX=null;
+  });
+  render();
+
+  document.querySelectorAll('.fb').forEach(el=>{
+    const num = el.dataset.num;
+    const ans = el.dataset.answer;
+    el.innerHTML = `<span class="fn">${num}</span>`;
+    el.addEventListener('click', ()=>{
+      const shown = el.classList.toggle('shown');
+      if(shown){ el.textContent = ans; }
+      else { el.innerHTML = `<span class="fn">${num}</span>`; }
+    });
+  });
+</script>
+</body></html>

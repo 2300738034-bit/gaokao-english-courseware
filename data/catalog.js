@@ -176,6 +176,11 @@ window.CATALOG = {
           title: "选修一 Unit 1 · Feeling good 课文精讲",
           file: "courseware/选修一Unit1·Feeling good课文精讲课件.html",
           added: "2026-11-17"
+        },
+        {
+          title: "选修一 Unit 2 · Making a difference 课文精讲",
+          file: "courseware/选修一Unit2·Making a difference课文精讲课件.html",
+          added: "2026-11-18"
         }
       ]
     }
